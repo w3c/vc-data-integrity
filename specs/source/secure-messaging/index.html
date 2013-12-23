@@ -550,7 +550,7 @@ YVBlaUp2Ckg4L1ZWUVU4L3dLZUEyeTQ1TzQ2K2lYTnZsOGErbGg0NjRUS3RabktFb009Cg==",
    "encryptionKey": "uATtey0c4nvZIsDIfpFffuCyMYGPKRLIVJCsvedE013SpEJ+1uO7x6SK9hIG9zLWRlPpwmbar2bt\n↩
 gTX5NBzYC5+c5ZkXtM1O8REwIJ7wmtLdumRYEbr/TghFl3pAgXhv0mVt8XZ+KLWlxMqXnrT+ByNw\n↩
 z7u3IxpqNVcXHExjXQE=",
-   "cipher": "aes-128-cbc-gcm",
+   "cipher": "aes-128-gcm",
    "iv": "vcDU1eWTy8vVGhNOszREhSblFVqVnGpBUm0zMTRmcWtMrRX==",
    "publicKey": "http://keys-r-us.example.com/keys/8472"
 }
@@ -838,7 +838,7 @@ Generate the <tdef>encrypted initialization vector</tdef> by using the
           </li>
           <li>
 Generate the <tdef>encrypted data</tdef> by encrypting the <tref>message</tref>
-using the RSA with AES 128-bit Cipher Block Chaining Galois/Counter Mode (GCM) algorithm, using the
+using the RSA with AES 128-bit Galois/Counter Mode (GCM) algorithm, using the
 <tref>symmetric key</tref> and the <tref>initialization vector</tref>
 generated previously in this algorithm.
           </li>
@@ -861,7 +861,7 @@ The base-64 encoded value of the <tref>encrypted key</tref>.
               </dd>
               <dt><code>cipher</code><dt>
               <dd>
-The value <code>rsa-aes-128-cbc-gcm</code>.
+The value <code>rsa-aes-128-gcm</code>.
               </dd>
               <dt><code>iv</code><dt>
               <dd>
@@ -911,7 +911,7 @@ YVBlaUp2Ckg4L1ZWUVU4L3dLZUEyeTQ1TzQ2K2lYTnZsOGErbGg0NjRUS3RabktFb009Cg==",
    "encryptionKey": "uATtey0c4nvZIsDIfpFffuCyMYGPKRLIVJCsvedE013SpEJ+1uO7x6SK9hIG9zLWRlPpwmbar2bt\n↩
 gTX5NBzYC5+c5ZkXtM1O8REwIJ7wmtLdumRYEbr/TghFl3pAgXhv0mVt8XZ+KLWlxMqXnrT+ByNw\n↩
 z7u3IxpqNVcXHExjXQE=",
-   "cipher": "rsa-aes-128-cbc-gcm",
+   "cipher": "rsa-aes-128-gcm",
    "iv": "vcDU1eWTy8vVGhNOszREhSblFVqVnGpBUm0zMTRmcWtMrRX==",
    "publicKey": "http://payswarm.example.com/i/manu/keys/23"
 }
