@@ -712,7 +712,7 @@ Add a <code>signature</code> key to the <tref>signed message</tref> with
 a JSON object containing the following key-value pairs:
             <dl style="margin-left: 1em;">
               <dt><code>type</code><dt>
-              <dd><code>JsonLdSignature</code></dd>
+              <dd><code>GraphSignature2012</code></dd>
               <dt><code>created</code><dt>
               <dd>
 The string value of the <tref>combined date and time string</tref> generated
@@ -757,7 +757,7 @@ The following example shows an input <tref>message</tref> and the resulting
    "title": "Hello World!",
    "signature":
    {
-      "type": "JsonLdSignature",
+      "type": "GraphSignature2012",
       "created": "2011-09-23T20:21:34Z",
       "signer": "http://payswarm.example.com/i/john/keys/5",
       "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDYMmMzQzNmExMgoYzI43Q3ODIyOWM32NjI="
