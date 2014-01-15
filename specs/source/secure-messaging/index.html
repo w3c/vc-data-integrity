@@ -9,132 +9,8 @@
       out in the same tree and use relative links so that they'll work offline,
      --> 
     <script src='../../respec-w3c-common.js' class='remove'></script> 
+    <script src='../../web-payments-common.js' class='remove'></script> 
     <script type="text/javascript" class="remove">
-    var preProc = {
-          apply:  function(c) {
-                    // extend the bibliography entries
-                    berjon.biblio["HTML-RDFA"] = "Manu Sporny; et al. <a href=\"http://www.w3.org/TR/rdfa-in-html/\"><cite>HTML+RDFa</cite></a> 04 March 2010. W3C Working Draft. URL: <a href=\"http://www.w3.org/TR/rdfa-in-html/\">http://www.w3.org/TR/rdfa-in-html/</a>";
-                    berjon.biblio["JSON-LD"] = "Manu Sporny; Gregg Kellogg; Dave Longley; et al. <a href=\"http://json-ld.org/spec/latest/\"><cite>JSON-LD</cite></a> latest. W3C Community Group Working Draft. URL: <a href=\"http://json-ld.org/spec/latest/\">http://json-ld.org/spec/latest/</a>";
-                    berjon.biblio["HTTP-SIGNATURES"] = "Mark Cavage; Manu Sporny <a href=\"http://tools.ietf.org/html/draft-cavage-http-signatures\"><cite>HTTP Signatures</cite></a> latest. IETF Network Working Group Internet Draft. URL: <a href=\"http://tools.ietf.org/html/draft-cavage-http-signatures\">http://tools.ietf.org/html/draft-cavage-http-signatures</a>";
-                    berjon.biblio["REST"] = "Fielding, Roy Thomas. <a href=\"http://www.ics.uci.edu/~fielding/pubs/dissertation/\"><cite>Architectural Styles and the Design of Network-based Software Architectures</cite></a> 2000. University of California, Irvine. URL: <a href=\"http://www.ics.uci.edu/~fielding/pubs/dissertation/\">http://www.ics.uci.edu/~fielding/pubs/dissertation/</a>";
-                    berjon.biblio["FIPS-197"] = "Information Technology Laboratory. <a href=\"http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf\"><cite>Specification for the ADVANCED ENCRYPTION STANDARD (AES)</cite></a> November 26th, 2001. Department of Commerce, National Institute of Standards and Technology. URL: <a href=\"http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf\">http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf</a>";
-
-
-                    // process the document before anything else is done
-                    var refs = document.querySelectorAll('adef') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var sp = document.createElement( 'dfn' ) ;
-                        var tit = item.getAttribute('title') ;
-                        if (!tit) {
-                            tit = con;
-                        }
-                        sp.className = 'adef' ;
-                        sp.title=tit ;
-                        sp.innerHTML = con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                    refs = document.querySelectorAll('aref') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var sp = document.createElement( 'a' ) ;
-                        sp.className = 'aref' ;
-                        sp.setAttribute('title', con);
-                        sp.innerHTML = '@'+con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                    // local datatype references
-                    refs = document.querySelectorAll('ldtref') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        if (!item) continue ;
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var ref = item.getAttribute('title') ;
-                        if (!ref) {
-                            ref = item.textContent ;
-                        }
-                        if (ref) {
-                            ref = ref.replace(/\n/g, '_') ;
-                            ref = ref.replace(/\s+/g, '_') ;
-                        }
-                        var sp = document.createElement( 'a' ) ;
-                        sp.className = 'datatype';
-                        sp.title = ref ;
-                        sp.innerHTML = con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                    // external datatype references
-                    refs = document.querySelectorAll('dtref') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        if (!item) continue ;
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var ref = item.getAttribute('title') ;
-                        if (!ref) {
-                            ref = item.textContent ;
-                        }
-                        if (ref) {
-                            ref = ref.replace(/\n/g, '_') ;
-                            ref = ref.replace(/\s+/g, '_') ;
-                        }
-                        var sp = document.createElement( 'a' ) ;
-                        sp.className = 'externalDFN';
-                        sp.title = ref ;
-                        sp.innerHTML = con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                    // now do terms
-                    refs = document.querySelectorAll('tdef') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        if (!item) continue ;
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var ref = item.getAttribute('title') ;
-                        if (!ref) {
-                            ref = item.textContent ;
-                        }
-                        if (ref) {
-                            ref = ref.replace(/\n/g, '_') ;
-                            ref = ref.replace(/\s+/g, '_') ;
-                        }
-                        var sp = document.createElement( 'dfn' ) ;
-                        sp.title = ref ;
-                        sp.innerHTML = con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                    // now term references
-                    refs = document.querySelectorAll('tref') ;
-                    for (var i = 0; i < refs.length; i++) {
-                        var item = refs[i];
-                        if (!item) continue ;
-                        var p = item.parentNode ;
-                        var con = item.innerHTML ;
-                        var ref = item.getAttribute('title') ;
-                        if (!ref) {
-                            ref = item.textContent ;
-                        }
-                        if (ref) {
-                            ref = ref.replace(/\n/g, '_') ;
-                            ref = ref.replace(/\s+/g, '_') ;
-                        }
-
-                        var sp = document.createElement( 'a' ) ;
-                        var id = item.textContent ;
-                        sp.className = 'tref' ;
-                        sp.title = ref ;
-                        sp.innerHTML = con ;
-                        p.replaceChild(sp, item) ;
-                    }
-                }
-        } ;
-
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
           specStatus:           "CG-DRAFT",
@@ -166,7 +42,7 @@
               { name: "Manu Sporny", url: "http://digitalbazaar.com/",
                 company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" },
           ],
- 
+
           // authors, add as many as you like. 
           // This is optional, uncomment if you have authors as well as editors.
           // only "name" is required. Same format as editors.
@@ -175,6 +51,9 @@
           //    { name: "Your Name", url: "http://example.org/",
           //      company: "Your Company", companyURL: "http://example.com/" },
           //],
+
+          // extend the bibliography entries
+          localBiblio: webpayments.localBiblio,
           
           // name of the WG
           wg:           "W3C Web Payments Community Group",
@@ -192,7 +71,7 @@
           // Team Contact.
           wgPatentURI:  "",
           maxTocLevel: 4,
-          preProcess: [ preProc ] /*,
+          preProcess: [ webpayments.preProcess ] /*,
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
       };
