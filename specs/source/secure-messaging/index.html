@@ -561,7 +561,7 @@ The following algorithm ensures that the originator of an Web service call
 can be verified as long as the public key can be retrieved by the receiver. A
 <tref>message</tref> is provided as input and, using a
 <tref>private key</tref> and a <tref>public key</tref> IRI, a
-<tref>signed message</tref> is produced as output.
+<tref>signed message</tref> is produced as output. All strings are UTF-8 encoded.
         </p>
         
         <ol class="algorithm">
@@ -589,16 +589,16 @@ Append the <tref>combined date and time string</tref> to the
 <tref>timestamped message</tref>.
               <li>
 If a <tref>nonce</tref> is specified, append the value to the 
-<tref>timestamped message</tref>
+<tref>timestamped message</tref>.
               </li>
-              <li>
-If a <tref>domain</tref> is specified, append the value to the 
-<tref>timestamped message</tref>
-              </li>              
               <li>
 Append the <tref>normalized message</tref> to the 
 <tref>timestamped message</tref>.
               </li>
+              <li>
+If a <tref>domain</tref> is specified, append the character '@' followed
+by the value to the <tref>timestamped message</tref>.
+              </li>              
               <li>
 Digitally sign the <tref>timestamped message</tref> using the 
 <tref>private key</tref> and then base-64 encode the resulting value. The 
@@ -678,7 +678,8 @@ The following example shows an input <tref>message</tref> and the resulting
 In order to ensure a secure communication environment the following algorithm
 SHOULD be used to verify all request signatures. A
 <tref>signed message</tref> is provided as input and an indication of whether
-the signature is valid or a forgery is produced as output.
+the signature is valid or a forgery is produced as output. All strings are
+UTF-8 encoded.
         </p>
         
         <ol class="algorithm">
@@ -700,10 +701,9 @@ Verify the <tdef>original signature value</tdef>:
               <li>
 Generate the <tdef>original timestamped message</tdef> by setting its value to 
 the value of the <code>created</code> key in the 
-<tref>signed message</tref>. Append the <tref>domain</tref> and
-<tref>nonce</tref> values, if specified. Append the
-<tref>original normalized message</tref> to the 
-<tref>original timestamped message</tref>.
+<tref>signed message</tref>. Append the <tref>nonce</tref> value, if specified. Append the <tref>original normalized message</tref> to the
+<tref>original timestamped message</tref>. If a <tref>domain</tref> is
+specified, append the '@' character followed by the value.
               </li>
               <li>
 Retrieve the PEM-encoded <tref>public key</tref> from the
