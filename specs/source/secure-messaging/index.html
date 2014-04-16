@@ -122,10 +122,10 @@ achieve message verifiability, secure messaging, and dynamic access control
 to resources on the Web.
       </p>
       <p class="note">
-Secure Messaging are not a replacement for Transport Layer Security, but are designed 
+Secure Messaging is not a replacement for Transport Layer Security, but is designed 
 to work in concert with the security protocol. Secure Messaging are also capable of 
 operating in environments where TLS is not available to the application.
-Similarly, Secure Messaging are compatible with the HTTP Signatures specification,
+Similarly, Secure Messaging is compatible with the HTTP Signatures specification,
 extending it to support discoverable, machine-readable public keys and
 identity assertions.
       </p>
@@ -395,7 +395,7 @@ US89y0M909ZTj2zDQwIDAQAB%0A↩
 --------------------------------- Step #4 -----------------------------------
 
 *** This step consists of a series of key listing service-specific UI 
-*** interactions and is thus not detailed in this specification.
+*** interactions that are out of scope for this document.
 
 --------------------------------- Step #5 -----------------------------------
 
@@ -484,17 +484,18 @@ public key repository.
 There are certain types of messages where it is important to be able to
 verify the originator of a message. For example, when dealing with a
 financial transaction, it is important to verify that the payment originator
-actually initiated the transaction. It may also be important to encrypt a 
+initiated the transaction. It may also be important to encrypt a 
 message such that only the intended recipient is able to decrypt and read it.
       </p>
 
       <p>
 Two of the more prevalent features of public/private key cryptography are
-1) the ability to encrypt messages intended for a particular recipient, and 
-2) verify the originator of a message via a digital signatures. This 
-specification details a protocol for encrypting and digitally signing 
-messages such that only the intended recipient can decrypt and verify the 
-sender of the message.
+1) the ability to verify the originator of a message via a 
+digital signature, and 2) the ability to encrypt messages intended 
+for a particular recipient. 
+This specification details a protocol for encrypting and digitally signing 
+messages such that only the intended recipient is able to decrypt and 
+verify the sender of the message.
       </p>
 
       <section>
@@ -541,6 +542,14 @@ A type of message that has been obfuscated using a <tref>public key</tref>,
 which is incredibly difficult to decode by any person except for the one
 that holds the associated <tref>private key</tref>.
           </dd>
+          <dt><tdef>domain</tdef></dt>
+          <dd>
+A string value that specifies the operational domain of the signature.
+This may be an Internet domain name like <code>example.com</code>, a
+ad-hoc value such as <code>mycorp-level3-access</code>, or a very
+specific transaction value like <code>8zF6T$mqP</code>. The value provides
+the capability for the signer to specify an intended target such that the
+signed message cannot be used elsewhere.
         </dl>
         
       </section>
@@ -569,7 +578,7 @@ Graph Normalization</a> algorithm.
 <div class="issue">Refer to the exact RDF Graph Normalization algorithm.</div>
           </li>
           <li>
-Generate the <tdef>signature value</tdef> by:
+Generate the <tdef>signature value</tdef>:
             <ol class="algorithm">
               <li>
 Create a <tdef>timestamped message</tdef> and initialize it to the
@@ -577,8 +586,18 @@ emtpy string. Generate an  ISO8601 <tdef>combined date and time string</tdef>
 containing the current date and time, accurate to at least one second, in 
 Universal Time Code format. For example: <code>2011-09-23T20:21:34Z</code>. 
 Append the <tref>combined date and time string</tref> to the 
-<tref>timestamped message</tref>. Append the <tref>normalized message</tref> 
-to the <tref>timestamped message</tref>.
+<tref>timestamped message</tref>.
+              <li>
+If a <tref>nonce</tref> is specified, append the value to the 
+<tref>timestamped message</tref>
+              </li>
+              <li>
+If a <tref>domain</tref> is specified, append the value to the 
+<tref>timestamped message</tref>
+              </li>              
+              <li>
+Append the <tref>normalized message</tref> to the 
+<tref>timestamped message</tref>.
               </li>
               <li>
 Digitally sign the <tref>timestamped message</tref> using the 
@@ -592,24 +611,31 @@ a JSON object containing the following key-value pairs:
             <dl style="margin-left: 1em;">
               <dt><code>type</code><dt>
               <dd><code>GraphSignature2012</code></dd>
+              <dt><code>creator</code><dt>
+              <dd>
+A URL pointing to the <tref>public key</tref> information associated 
+with the <tref>private key</tref> that created the signature.
+              </dd>
               <dt><code>created</code><dt>
               <dd>
 The string value of the <tref>combined date and time string</tref> generated
 by this algorithm.
               </dd>
-              <dt><code>nonce</code><dt>
+              <dt><code>domain</code> (optional)<dt>
+              <dd>
+A string value specifying the intended <tref>domain</tref> of the signature.
+              </dd>
+              <dt><code>nonce</code> (optional, but strongly recommended)<dt>
               <dd>
 A string value that will be encoded in the encrypted response to the requesting
 agent. It is RECOMMENDED that this value is a session identifier that is 
 associated with the user agent that initiated the request, plus a hyphen, 
-plus a cryptographically secure random string used as a one-time pad. 
+plus a cryptographically secure string for use as a nonce. 
 For example, <code>jf793ksj72jkf-78p82qpj87dnd2f839</code>. See 
 <a href="#the-response-nonce">The Response Nonce</a> section to understand 
 more about how this value is used to prevent replay attacks and its accepted
 limitations.
               </dd>
-              <dt><code>publicKey</code><dt>
-              <dd>The value of the input <tref>public key</tref> IRI.</dd>
               <dt><code>signatureValue</code><dt>
               <dd>
 The value of the <tref>signature value</tref> generated by this algorithm.
@@ -637,8 +663,8 @@ The following example shows an input <tref>message</tref> and the resulting
    "signature":
    {
       "type": "GraphSignature2012",
+      "creator": "http://payswarm.example.com/i/john/keys/5",
       "created": "2011-09-23T20:21:34Z",
-      "signer": "http://payswarm.example.com/i/john/keys/5",
       "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDYMmMzQzNmExMgoYzI43Q3ODIyOWM32NjI="
    }
 }
@@ -674,7 +700,8 @@ Verify the <tdef>original signature value</tdef>:
               <li>
 Generate the <tdef>original timestamped message</tdef> by setting its value to 
 the value of the <code>created</code> key in the 
-<tref>signed message</tref>. Append the
+<tref>signed message</tref>. Append the <tref>domain</tref> and
+<tref>nonce</tref> values, if specified. Append the
 <tref>original normalized message</tref> to the 
 <tref>original timestamped message</tref>.
               </li>
@@ -683,7 +710,8 @@ Retrieve the PEM-encoded <tref>public key</tref> from the
 <tref>public key</tref> IRI provided in
 <code>signer</code> value. The <tref>public key</tref> MAY also be retrieved
 from a cache. ???Verify the <tref>original nonced message</tref>
-using the <tref>public key</tref>??? 
+using the <tref>public key</tref> to cryptographically verify the
+<code>signatureValue</code>??? 
 <div class="note">We need to be more explicit about what is happening here.</div>
               </li>
             </ol>
@@ -713,7 +741,8 @@ Generate a
           </li>
           <li>
 Generate the <tdef>encrypted initialization vector</tdef> by using the
-<tref>public key</tref> to encrypt the <tref>initialization vector</tref>.
+recipient's <tref>public key</tref> to encrypt 
+the <tref>initialization vector</tref>.
           </li>
           <li>
 Generate the <tdef>encrypted data</tdef> by encrypting the <tref>message</tref>
@@ -723,7 +752,7 @@ generated previously in this algorithm.
           </li>
           <li>
 Generate the <tdef>encrypted symmetric key</tdef> by using the 
-<tref>public key</tref> to encrypt the <tref>symmetric key</tref>.
+recipient's <tref>public key</tref> to encrypt the <tref>symmetric key</tref>.
           </li>
 Generate the <tref>encrypted message</tref> by creating a JSON object
 containing the following key-value pairs:
@@ -845,8 +874,8 @@ The <code>nonce</code> mechanism is used in order to prevent
 replay attacks, but implementers must be aware that it is not capable of 
 preventing man-in-the-middle attacks. Only a full end-to-end encryption channel
 is capable of accomplishing that feat and if implementers are concerned about
-man-in-the-middle attacks, they are strongly advised to run all callbacks
-over HTTPS.
+man-in-the-middle attacks, they are strongly advised to run all sensitive
+messages that could be compromised by man-in-the-middle attacks over HTTPS.
           </p>
           <p class="issue">
 Detail the nonce mechanism that is used in the current PaySwarm implementations.
