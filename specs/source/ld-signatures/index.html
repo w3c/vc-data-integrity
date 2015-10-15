@@ -454,26 +454,13 @@ Return <var>output</var>.
     <section>
       <h2>Security Considerations</h2>
       <p>
-The following section
-describes security considerations that developers implementing this
-specification should be aware of in order to create secure software.
+The following section describes security considerations that developers
+implementing this specification should be aware of in order to create secure
+software.
       </p>
 
-      <section>
-      <h3>The Response Nonce</h3>
-        <p>
-The <code>nonce</code> mechanism is used in order to prevent
-replay attacks, but implementers must be aware that it is not capable of
-preventing man-in-the-middle attacks. Only a full end-to-end encryption channel
-is capable of accomplishing that feat and if implementers are concerned about
-man-in-the-middle attacks, they are strongly advised to run all sensitive
-messages that could be compromised by man-in-the-middle attacks over HTTPS.
-        </p>
-        <p class="issue">
-Detail the nonce mechanism that is used in the current PaySwarm implementations.
-        </p>
-      </section>
-
+<div class="issue">TODO: We need to add a complete list of security
+considerations.</div>
     </section>
 
     <section class="appendix">
