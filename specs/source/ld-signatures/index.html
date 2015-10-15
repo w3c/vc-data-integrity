@@ -1,66 +1,70 @@
-<!DOCTYPE html> 
-<html> 
-  <head> 
-    <title>Linked Data Signatures 1.0</title> 
-    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/> 
-    <!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linked Data Signatures 1.0</title>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <!--
       === NOTA BENE ===
       For the three scripts below, if your spec resides on dev.w3 you can check them
       out in the same tree and use relative links so that they'll work offline,
-     --> 
-    <script src='../../respec-w3c-common.js' class='remove'></script> 
-    <script src='../../web-payments-common.js' class='remove'></script> 
+     -->
+    <script src='../../respec-w3c-common.js' class='remove'></script>
+    <script src='../../web-payments-common.js' class='remove'></script>
     <script type="text/javascript" class="remove">
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
           specStatus:           "CG-DRAFT",
-          
+
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "ld-signatures",
- 
+
           // if you wish the publication date to be other than today, set this
           // publishDate:  "2009-08-06",
- 
+
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
           // previousMaturity:  "WD",
- 
+
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:           "https://web-payments.org/specs/source/ld-signatures",
- 
+
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
- 
+
           // if you want to have extra CSS, append them to this list
           // it is recommended that the respec.css stylesheet be kept
           extraCSS:             ["spec.css", "prettify.css"],
- 
+
           // editors, add as many as you like
           // only "name" is required
           editors:  [
-              { name: "Manu Sporny", url: "http://digitalbazaar.com/",
+              { name: "Dave Longley", url: "http://digitalbazaar.com/",
                 company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" },
+              { name: "Manu Sporny", url: "http://digitalbazaar.com/",
+                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" }
           ],
 
-          // authors, add as many as you like. 
+          // authors, add as many as you like.
           // This is optional, uncomment if you have authors as well as editors.
           // only "name" is required. Same format as editors.
- 
-          //authors:  [
-          //    { name: "Your Name", url: "http://example.org/",
-          //      company: "Your Company", companyURL: "http://example.com/" },
-          //],
+
+          authors:  [
+              { name: "Dave Longley", url: "http://digitalbazaar.com/",
+                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" },
+              { name: "Manu Sporny", url: "http://digitalbazaar.com/",
+                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" }
+          ],
 
           // extend the bibliography entries
           localBiblio: webpayments.localBiblio,
-          
+
           // name of the WG
           wg:           "W3C Web Payments Community Group",
-          
+
           // URI of the public WG page
           wgURI:        "http://www.w3.org/community/webpayments/",
-          
+
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-webpayments@w3.org",
 
@@ -75,7 +79,7 @@
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
       };
-    </script> 
+    </script>
     <script type="text/javascript" src="prettify.js" class="remove"></script>
     <script type="text/javascript" src="lang-jsonld.js" class="remove"></script>
     <script type="text/javascript" class="remove">
@@ -85,688 +89,381 @@
         prettyPrint();
       };
     </script>
-  </head> 
-  <body> 
-    <section id='abstract'> 
+  </head>
+  <body>
+    <section id='abstract'>
       <p>
-This specification describes a simple, decentralized approach for sending
-and receiving cryptographically verifiable Linked Data messages on the Web. 
-The system described in this document enables Web applications to establish 
-identities for agents on the Web, associate security credentials with those 
-identities, and then use those security credentials to send and receive 
-messages that are cryptographically verifiable via digital signatures.
+This specification describes a mechanism for ensuring the authenticity and
+integrity of Linked Data documents using digital signatures.
       </p>
     </section>
 
     <section>
       <h2>Introduction</h2>
       <p>
-The future of messaging in Web services depends on three key
-features; message extensibility, message verifiability, and dynamic access 
-control to resources. While a number of popular authorization mechanisms provide
-a way of performing dynamic access control to resources, most do not address 
-message extensibility and message verifiability. More advanced Web service 
-systems are being built now that require these extra features. Historically, 
-public/private key cryptography has provided a mechanism to achieve message 
-verifiability via digital signatures. More recently, Linked Data has provided
-a solid foundation for message extensibility, and typically access control to 
-resources are built on top of public/private key cryptography systems.
-      </p>
-      <p>
-The challenge has always been in building an extensible,
-distributed, Public Key Infrastructure for the Web. This specification 
-details how a decentralized Public Key Infrastructure can be built on top of 
-the Web using Linked Data principles. This system can then be used to easily
-achieve message extensibility, message verifiability, and dynamic access control
-to resources on the Web.
-      </p>
-      <p class="note">
-This specification is not a replacement for Transport Layer Security, but is 
-designed to work in concert with the security protocol. This specificaiton is
-also capable of operating in environments where TLS is not available to 
-the application. Similarly, this technology is compatible with the 
-Signing HTTP Messages specification, extending it to support discoverable, 
-machine-readable public keys and agent identity assertions.
+The term Linked Data is used to describe a recommended best practice for
+exposing, sharing, and connecting information on the Web using standards,
+such as URLs, to identify things and their properties. When information
+is presented as Linked Data, other related information can be easily discovered
+and new information can be easily linked to it. Linked Data is extensible in a
+decentralized way, greatly reducing barriers to large scale integration.
+
+With the increase in usage of Linked Data for a variety of applications, there
+is a need to be able to verify the authenticity and integrity of Linked Data
+documents. This specification adds authentication and integrity protection to
+Linked Data documents through the use of public/private key cryptography
+without sacrificing Linked Data features such as extensibility and
+composability.
       </p>
       <section>
          <h3>Key Technologies</h3>
          <p>
 Technologies utilized in this specification include the
-JavaScript Object Notation for Linking Data [[!JSON-LD]], 
-the HyperText Transfer Protocol [[!HTTP11]], the
-Advanced Encryption Standard [[!AES]], and Signing HTTP Messages
-[[!HTTP-SIGNATURES]].
+JavaScript Object Notation for Linking Data [[!JSON-LD]],
+the HyperText Transfer Protocol [[!HTTP11]], RDF Dataset Normalization
+[[!RDF-DATASET-NORMALIZATION]], and Public-Key Cryptography
+Standards (PKCS) #1 [[!PKCS1]].
          <p>
       </section>
 
     </section>
 
     <section>
-      <h2>The Key Registration Process</h2>
+      <h2>Terminology</h2>
       <p>
-The registration process is necessary in order to publish a public key at
-a location on the Web.
+The following terms are used to describe concepts involved in the
+generation and verification of Linked Data digital signatures.
       </p>
 
-      <section>
-        <h2>Key Registration Terms</h2>
-        <p>
-There are a number of terms that are used during the course of the registration
-process.
-        <dl>
-        <dt><tdef>actor</tdef></dt>
-        <dd>An entity, such as a person or organization, that performs actions
-on the Internet.</dd>
-        <dt><tdef>account</tdef></dt>
-        <dd>An identifier with a set of log in credentials that is associated
-with a <tref>key listing service</tref>.</dd>
-        <dt><tdef>user agent</tdef></dt>
-        <dd>The piece of software operating on behalf of the 
-<tref>actor</tref>. This is typically a Web Browser, but could be
-some other piece of Web-aware automated software acting on behalf of an
-<tref>actor</tref>.</dd>
-        <dt><tdef>key agent</tdef></dt>
-        <dd>A piece of software acting on behalf of an <tref>actor</tref> for
-the purposes of utilizing Linked Data Signatures. Typically, this is blogging 
-software, content distribution software, online merchant software or a Web-based
-game.</dd>
-        <dt><tdef>key listing service</tdef></dt>
-        <dd>A Web service that is responsible for registering and publishing
-public keys for an <tref>actor</tref>.</dd>
-        <dt><tdef>configuration service</tdef></dt>
-        <dd>A Web service that is used to publish the public Web service
-end-points and other public configuration information for a
-<tref>key listing service</tref>. A <tref>key listing service</tref> MUST
-publish this service at a top-level IRI named 
-<code>/.well-known/keys</code>. The document MUST be available 
-in JSON-LD compacted form and MUST include the 
-<code>https://w3id.org/security/v1</code> JSON-LD context. The following
-key MUST be present in the published document:
-<code>publicKeyService</code>.</dd>
-        <dt><tdef>public key registration service</tdef></dt>
-        <dd>An interactive Web service used to register PEM-encoded 
-X.509 public keys with the <tref>key listing service</tref>.</dd>
-        </dl>
-        </p>
-      </section>
-
-      <section>
-        <h2>Key Owner Registration</h2>
-        <p>
-In order for an <tref>actor</tref> to register a key, they must have an
-<tref>account</tref> on a <tref>key listing service</tref>. How this 
-<tref>account</tref> is created is outside of the scope of this 
-specification.
-        </p>
-      </section>
-
-      <section>
-        <h2>Web Key Registration</h2>
-        <p>
-In order for an <tref>actor</tref> to take part in the 
-<tref>public key</tref> infrastructure, they MUST register their 
-<tref>public key</tref> with a <tref>key listing service</tref>.
-        </p>
-The registration process is typically performed by a
-<tref>key agent</tref>. The registration is accomplished by executing
-the following algorithm:
-        <ol class="algorithm">
-          <li>
-The <tref>key agent</tref> generates and stores a public/private key-pair 
-that will be used by the <tref>key agent</tref> to digitally sign and/or
-encrypt messages.</li>
-          <li>The <tref>key agent</tref> retrieves the 
-<tref>key listing service</tref> configuration from the 
-<tref>configuration service</tref> IRI</tref>.
-            <ol class="algorithm">
-              <li>The <tref>configuration service</tref> IRI is generated 
-by concatenating a base IRI for the <tref>key listing service</tref>, 
-such as <code>http://example.com/</code> with the 
-<code>/.well-known/keys</code> suffix. 
-For example, the previous <tref>key listing service</tref> IRI concatenated 
-with the configuration suffix would result in the following 
-<tref>configuration service</tref>
-IRI: <code>http://example.com/.well-known/keys</code>.</li>
-              <li>An HTTPS GET is performed on the 
-<tref>configuration service</tref> IRI with the HTTP <code>Accept</code> header 
-set to <code>application/ld+json; form=compacted</code>. The
-<tref>key listing service</tref> MUST respond with a compacted JSON-LD document
-using the context specified at <code>https://w3id.org/security/v1</code>.</li>
-              <li>The result MUST be a JSON-LD document containing a flat set of
-key-value pairs. The data MUST contain at least the properties defined in 
-the <tref>configuration service</tref> section.
-              </li>
-            </ol>
-          </li>
-          <li>
-The <tref>key agent</tref> initiates an HTTP 302 redirect
-for the <tref>user agent</tref>. An HTTPS GET request is performed
-to the <tref>public key registration service</tref> IRI with the addition of 
-two IRI query parameters. The first parameter, <code>public-key</code>, is the 
-URL-encoded X.509 PEM-encoded public key. The second parameter, 
-<code>registration-callback</code>,
-is the URL-encoded <tref>registration callback service</tref> 
-IRI for the <tref>key agent</tref>.</li>
-          <li>
-The <tref>key listing service</tref> associates the 
-<tref>key agent</tref> with the <tref>key listing account</tref> based on the
-provided public key. Note that this process MUST authenticate the 
-<tref>key listing account</tref> via a login process if the 
-<tref>key listing account</tref> does not have an active login session. Other
-configuration steps may be performed at this stage, including the 
-specification of defaults and preferences for the particular 
-<tref>key agent</tref>.</li>
-          <li>
-The <tref>key listing service</tref> specifies a set of 
-<tref>key agent</tref> configuration values and encrypts the 
-<tref>message</tref> according to the steps outlined in
-the <a href="#response-encryption-algorithm">Response Encryption Algorithm</a>
-section. The result is sent 
-back to the <code>registration-callback</code> IRI via a POST 
-initiated by the <tref>user agent</tref>.
-            <ol class="algorithm">
-              <li>The following configuration value MUST be included in the
-JSON-LD response to the <tref>key agent</tref>: <code>publicKey</code>.
-              </li>
-              <li>The JSON-LD response is compacted and encrypted using the
-public key associated with the registration request according to the
-algorithm defined in
-<a href="#response-encryption-algorithm">Response Encryption Algorithm</a>.
-              </li>
-              <li>The <tref>encrypted response</tref> is transmitted to the
-<code>registration-callback</code> via an HTTP POST request that is initiatited
-by the <tref>user agent</tref>. This is most commonly accomplished by having
-the <tref>key listing service</tref> generate an HTML form that can be submitted
-to the <tref>key agent</tref> when a form submission button is clicked
-via the <tref>user agent</tref>.
-              <li>The <tref>key agent</tref> decrypts the base-64
-encoded byte stream, extracts the configuration values and stores the
-location of the <code>publicKey</code> for use when messages are being
-digitally signed or encrypted.</li>
-            </ol>
-          </li>
-        </ol>
-        </p>
-
-        <p>
-The example below shows the full protocol-level exchange between the
-<tref>key agent</tref> and the <tref>key listing service</tref>. For
-the sake of brevity, not every optional parameter is included, just the bare
-minimum necessary to perform the <tref>key listing service</tref> registration.
-        </p>
-
-<pre class="example">
---------------------------------- Step #1 -----------------------------------
-
-*** Request: user agent -> key agent
-
-POST /register-key HTTP/1.1
-Host: my-host.example.org
-Content-Length: 47
-Content-Type: application/x-www-form-urlencoded
-
-key-listing-service=http%3A%2F%2Fkeys-r-us.example.com%2F
-
-*** key agent generates and stores public/private keypair
-
------BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDptIkqrXhx7YVGsBZ5fY/Lz0il
-0LXJrhUY43V/lLWdRf7JXY6tcgA5AmwNGZtJRyH79QXCJn+BAHUtl6gX2gvjs8N2
-B5u4m0LtXyaFWtbQV9+hY3JRLOBiydPeXLgsnLwKiJ9v4CNXSNA5wT8vYGXiqq0B
-US89y0M909ZTj2zDQwIDAQAB
------END PUBLIC KEY-----
-
------BEGIN RSA PRIVATE KEY-----
-MIICXQIBAAKBgQDptIkqrXhx7YVGsBZ5fY/Lz0il0LXJrhUY43V/lLWdRf7JXY6t
-cgA5AmwNGZtJRyH79QXCJn+BAHUtl6gX2gvjs8N2B5u4m0LtXyaFWtbQV9+hY3JR
-LOBiydPeXLgsnLwKiJ9v4CNXSNA5wT8vYGXiqq0BUS89y0M909ZTj2zDQwIDAQAB
-AoGALNmBrVgHEk4T0qH+XihTjThlZ7Tq/h5TXChipy5BwEHriHdU50JGeqpVVBpC
-68gj5Hd8OGss8vPEiRBeqN0mhJlRaX5ijyFp2n8+7DhfOIVhCd1MXCGQPTrdXIo5
-OOQECSplnALZfKr0VC4TBeW+oUZGMoG4rRSM5DfyPFJtlzECQQD8DkWBkhRsP1An
-3qfZR8oUkvbaVg9jsCNvoBazYSS3OhsZ96ZSTyf9hJn28wGJmShuZA2eL5XjuTY4
-m0fQDhj5AkEA7VzAqKOx5zlFTWXMIzn29uB59m4yJ7UwCyc7tisQA16I8B2HzJzZ
-saipkpU2RUYaBrjtWaiVNtyXvZ7mccJpGwJBAMyE4/8bwfiHcwm2z+ktKBqDmUtW
-E0ynKkmz01ef1kPaIQ1z9f/JfMBnrOpFCZVVsgnIo4gcQnox2X4a+S0nkzkCQBre
-xCSTG2Gclx7S5lAakL2T3dqq0Nyz4zNwBo9xwodPHVtpTGU6YF5/RGsGnzUqYWnf
-Z2cd8X5bbIYXxeic5H8CQQCcBOtOdrq9FXsEnyhG5gQXvGdxEAmM2eUs1g8E8kgx
-KBTHOaBRQMgvjsdA/obrs7D0HrEbQqGOy7JBYGWZTsiI
------END RSA PRIVATE KEY-----
-
---------------------------------- Step #2 -----------------------------------
-
-*** Request: key agent -> key listing service
-
-GET /.well-known/keys HTTP/1.1
-Host: keys-r-us.example.com
-Accept: application/ld+json,*/*;q=0.1
-
-*** Response: key agent &lt;- key listing service
-
-HTTP/1.1 200 OK
-Connection: close
-Content-Length: 6075
-Content-Type: application/ld+json
-Date: Wed, 21 Sep 2012 22:30:16 GMT
-Host: keys-r-us.example.com
-Server: Apache/2.2.19 (Debian)
-
-{
-   "@context": "https://w3id.org/keys/v1",
-   "id": "http://keys-r-us.example.com/i/key-master",
-   "publicKeyService": "http://keys-r-us.example.com/keys",
-}
-
---------------------------------- Step #3 -----------------------------------
-
-*** Redirect: user agent &lt;- key agent
-
-HTTP/1.1 303 See Other
-Location: http://keys-r-us.example.com/keys?public-key=↩
------BEGIN+PUBLIC+KEY-----%0A↩
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDptIkqrXhx7YVGsBZ5fY%2FLz0il%0A↩
-0LXJrhUY43V%2FlLWdRf7JXY6tcgA5AmwNGZtJRyH79QXCJn%2BBAHUtl6gX2gvjs8N2%0A↩
-B5u4m0LtXyaFWtbQV9%2BhY3JRLOBiydPeXLgsnLwKiJ9v4CNXSNA5wT8vYGXiqq0B%0A↩
-US89y0M909ZTj2zDQwIDAQAB%0A↩
------END+PUBLIC+KEY-----↩
-&amp;registration-callback=http%3A%2F%2Fmy-host.example.org%2Fregistration-complete?response-nonce=pn9sueh43jefa
-Content-Type: text/html
-Content-Length: 174
-
-&lt;html>
- &lt;head>
-  &lt;title>Identity Registration&lt;/title>
- &lt;/head>
- &lt;body>
-  &lt;h1>Public Key Registration&lt;/h1>
-   &lt;p>You must now go to your identity provider and 
-    &lt;a href="http://keys-r-us.example.com/keys?public-key=↩
------BEGIN+PUBLIC+KEY-----%0A↩
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDptIkqrXhx7YVGsBZ5fY%2FLz0il%0A↩
-0LXJrhUY43V%2FlLWdRf7JXY6tcgA5AmwNGZtJRyH79QXCJn%2BBAHUtl6gX2gvjs8N2%0A↩
-B5u4m0LtXyaFWtbQV9%2BhY3JRLOBiydPeXLgsnLwKiJ9v4CNXSNA5wT8vYGXiqq0B%0A↩
-US89y0M909ZTj2zDQwIDAQAB%0A↩
------END+PUBLIC+KEY-----↩
-&amp;registration-callback=http%3A%2F%2Fmy-host.example.org%2Fregistration-complete?response-nonce=pn9sueh43jefa">
-    register your identification information&lt;/a> 
-    there.&lt;/p>
- &lt;/body>
-&lt;/html>
-
---------------------------------- Step #4 -----------------------------------
-
-*** This step consists of a series of key listing service-specific UI 
-*** interactions that are out of scope for this document.
-
---------------------------------- Step #5 -----------------------------------
-
-*** The key listing service creates a configuration object to return back
-*** to the publishing agent
-
-{
-   "publicKey": "http://keys-r-us.example.com/keys/8472",
-}
-
-*** The configuration object is then encrypted and sent to the 
-*** registration-callback specified in the registration request above.
-
-POST registration-complete?response-nonce=pn9sueh43jefa HTTP/1.1
-Host: my-host.example.org
-Content-Length: 473
-Content-Type: application/ld+json
-
-{
-   "type": "EncryptedMessage",
-   "data": "VTJGc2RHVmtYMThOY3h2dnNVN290Zks1dmxWc3labi9sYkU0TGloRTdxY0dpblE4OHgrUXFNNi9l\n↩
-a1JMWjdXOApRSGtrbzh6UG5XOFo3WWI4djJBUG1abnlRNW5CVGViWkRGdklpMEliczNWSzRQTGdB\n↩
-UFhxYTR2aWFtemwrWGV3Cmw0eFF4ancvOW85dTlEckNURjMrMDBKMVFubGdtci9abkFRSmc5UjdV\n↩
-Rk55ckpYalIxZUJuKytaQ0luUTF2cUwKcm5vcDU1eWk3RFVqVnMrRXZZSkx6RVF1VlBVQ0xxdXR4\n↩
-L3lvTWd4bkdhSksxOG5ZakdiekJxSGxOYm9pVStUNwpwOTJ1Q0Y0Q2RiR1NqL0U3OUp4Vmh6OXQr\n↩
-Mjc2a1V3RUlNY3o2Z3FadXZMU004KzRtWkZiakh6K2N5a1VVQ2xHCi9RcTk3b2o3N2UrYXlhZjhS\n↩
-ZmtEZzlUeWk3Q2szREhSblprcy9WWDJWUGhUOEJ5c3RiYndnMnN4eWc5TXhkbHoKUkVESzFvR0FJ\n↩
-UDZVQ09NeWJLTGpBUm0zMTRmcWtXSFdDY29mWFNzSGNPRmM2cnp1Wko0RnVWTFNQMGROUkFRRgpB\n↩
-bFQ0QUpPbzRBZHpIb2hpTy8vVGhNOTl1U1ZER1NPQ3graFAvY3V4dGNGUFBSRzNrZS8vUk1MVFZO\n↩
-YVBlaUp2Ckg4L1ZWUVU4L3dLZUEyeTQ1TzQ2K2lYTnZsOGErbGg0NjRUS3RabktFb009Cg==",
-   "encryptionKey": "uATtey0c4nvZIsDIfpFffuCyMYGPKRLIVJCsvedE013SpEJ+1uO7x6SK9hIG9zLWRlPpwmbar2bt\n↩
-gTX5NBzYC5+c5ZkXtM1O8REwIJ7wmtLdumRYEbr/TghFl3pAgXhv0mVt8XZ+KLWlxMqXnrT+ByNw\n↩
-z7u3IxpqNVcXHExjXQE=",
-   "cipher": "aes-128-gcm",
-   "iv": "vcDU1eWTy8vVGhNOszREhSblFVqVnGpBUm0zMTRmcWtMrRX==",
-   "publicKey": "http://keys-r-us.example.com/keys/8472"
-}
-</pre>
-      </section>
-
-      <section>
-        <h2>Security Concerns for Registration</h2>
-
-        <ul>
-          <li>
-All requests to the <tref>key listing service</tref> MUST be made using HTTPS
-to ensure configuration data is not tampered with in transit.
-          </li>
-          <li>
-The registration request from the <tref>key agent</tref> to the
-<tref>key listing service</tref> MUST contain a <tref>nonce</tref> value
-for the <code>registration-callback</code> IRI to protect the 
-<tref>key agent</tref> against 
-<a href="http://en.wikipedia.org/wiki/Replay_attack">replay attacks</a>.
-          </li>
-        </ul>
-
-      </section>
-    </section>
-
-    <section>
-      <h2>Discovery</h2>
-      
-      <p>
-All <tref title="key listing service">key listing services</tref> MUST generate
-key URLs that contain machine-readable information when dereferenced. This
-means that <tref title="user agent">user agents</tref> may discover key 
-information, such as the public key parameters and key owner information, 
-by dereferencing the key URLs generated throughout this document. All
-machine-readable information is required to be available in [[!JSON-LD]] format.
-Additional machine-readable formats, like HTML5+RDFa [[!HTML-RDFA]], may be 
-content negotiated by the <tref>user agent</tref>.
-      </p>
-      
-      <p>
-Discovery enables applications running on the Web to verify digital signatures 
-without requiring key information to be looked up via a centralized 
-public key repository. 
-      </p>
-    </section>
-
-    <section>
-      <h2>Messaging</h2>
-
-      <p>
-There are certain types of messages where it is important to be able to
-verify the originator of a message. For example, when dealing with a
-financial transaction, it is important to verify that the payment originator
-initiated the transaction. It may also be important to encrypt a 
-message such that only the intended recipient is able to decrypt and read it.
-      </p>
-
-      <p>
-Two of the more prevalent features of public/private key cryptography are
-1) the ability to verify the originator of a message via a 
-digital signature, and 2) the ability to encrypt messages intended 
-for a particular recipient. 
-This specification details a protocol for encrypting and digitally signing 
-messages such that only the intended recipient is able to decrypt and 
-verify the sender of the message.
-      </p>
-
-      <section>
-        <h2>Messaging Terms</h2>
-        <p>
-The following terminology is used to describe concepts used to generate and 
-secure messages that are sent and received using Secure Messaging. Many of these 
-terms are borrowed from public/private key cryptography. A more complete 
-description of public/private cryptography can be found in 
-The Advanced Encryption Standard [[AES]].
-        </p>
-        
-        <dl>
-          <dt><tdef>message</tdef></dt>
-          <dd>
-A JSON-LD byte stream that is used to convey a request or a response in the 
-system.
-          </dd>
-          <dt><tdef>public key</tdef></dt>
-          <dd>
-A cryptographic mechanism that can be used to verify digital signatures or
-encrypt secrets such that only the software with access to the
-corresponding <tref>private key</tref> can decrypt the secret.
-          </dd>
-          <dt><tdef>private key</tdef></dt>
-          <dd>
-A cryptographic mechanism that can be used to generate digital signatures and
-decrypt encrypted data.
-          </dd>
-          <dt><tdef>signed message</tdef></dt>
-          <dd>
-A type of message that has a digital signature attached to it, generated using
-a <tref>private key</tref>, that is verifiable and incredibly difficult to
-forge.
-          </dd>
-          <dt><tdef>domain</tdef></dt>
-          <dd>
-A string value that specifies the operational domain of the signature.
+      <dl>
+        <dt><tdef>Linked Data Document</tdef></dt>
+        <dd>
+A document comprised of Linked Data.
+        </dd>
+        <dt><tdef>Signed Linked Data Document</tdef></dt>
+        <dd>
+A <tref>Linked Data Document</tref> that has been digitally-signed.
+        </dd>
+        <dt><tdef>Linked Data Signature</tdef></dt>
+        <dd>
+A set of attributes that represent a Linked Data digital signature and
+the parameters required to verify it.
+        </dd>
+        <dt><tdef>public key</tdef></dt>
+        <dd>
+A cryptographic key that can be used to verify digital signatures created
+with a corresponding <tref>private key</tref>.
+        </dd>
+        <dt><tdef>private key</tdef></dt>
+        <dd>
+A cryptographic key that can be used to generate digital signatures.
+        </dd>
+        <dt><tdef>domain</tdef></dt>
+        <dd>
+A string value that specifies the operational domain of a digital signature.
 This may be an Internet domain name like <code>example.com</code>, a
 ad-hoc value such as <code>mycorp-level3-access</code>, or a very
-specific transaction value like <code>8zF6T$mqP</code>. The value provides
-the capability for the signer to specify an intended target such that the
-signed message cannot be used elsewhere.
-        </dl>
-        
-      </section>
+specific transaction value like <code>8zF6T$mqP</code>. A signer may
+include a <tref>domain</tref> in its digital signature to restrict its use
+to particular target, identified by the specified <tref>domain</tref>.
+      </dl>
 
-      <section>
-        <h2>Message Signature Algorithm</h2>
-        <p>
-The following algorithm ensures that the originator of an Web service call 
-can be verified as long as the public key can be retrieved by the receiver. A
-<tref>message</tref> is provided as input and, using a
-<tref>private key</tref> and a <tref>public key</tref> IRI, a
-<tref>signed message</tref> is produced as output. All strings are UTF-8 encoded.
-        </p>
-        
-        <ol class="algorithm">
-          <li>
-Remove any <code>signature</code> key-value pair from the top-level of the
-<tref>message</tref>. Copy the <tref>message</tref> to the 
-<tref>signed message</tref>.
-          </li>
-          <li>
-Generate the <tdef>normalized message</tdef> by normalizing the 
-<tref>message</tref> according to the <em>URDNA2015</em>
-<a href="http://json-ld.org/spec/latest/rdf-dataset-normalization">RDF
-Dataset Normalization</a> algorithm.
-          </li>
-          <li>
-Generate the <tdef>signature value</tdef>:
-            <ol class="algorithm">
-              <li>
-Create a <tdef>timestamped message</tdef> and initialize it to the
-emtpy string. Generate an  ISO8601 <tdef>combined date and time string</tdef> 
-containing the current date and time, accurate to at least one second, in 
-Universal Time Code format. For example: <code>2011-09-23T20:21:34Z</code>. 
-Append the <tref>combined date and time string</tref> to the 
-<tref>timestamped message</tref>.
-              <li>
-If a <tref>nonce</tref> is specified, append the value to the 
-<tref>timestamped message</tref>.
-              </li>
-              <li>
-Append the <tref>normalized message</tref> to the 
-<tref>timestamped message</tref>.
-              </li>
-              <li>
-If a <tref>domain</tref> is specified, append the character '@' followed
-by the value to the <tref>timestamped message</tref>.
-              </li>              
-              <li>
-Digitally sign the <tref>timestamped message</tref> using the 
-<tref>private key</tref> and then base-64 encode the resulting value. The 
-resulting base-64 encoded string is the <tref>signature value</tref>.
-              </li>
-            </ol>
-          <li>
-Add a <code>signature</code> key to the <tref>signed message</tref> with
-a JSON object containing the following key-value pairs:
-            <dl style="margin-left: 1em;">
-              <dt><code>type</code><dt>
-              <dd><code>GraphSignature2012</code></dd>
-              <dt><code>creator</code><dt>
-              <dd>
-A URL pointing to the <tref>public key</tref> information associated 
-with the <tref>private key</tref> that created the signature.
-              </dd>
-              <dt><code>created</code><dt>
-              <dd>
-The string value of the <tref>combined date and time string</tref> generated
-by this algorithm.
-              </dd>
-              <dt><code>domain</code> (optional)<dt>
-              <dd>
-A string value specifying the intended <tref>domain</tref> of the signature.
-              </dd>
-              <dt><code>nonce</code> (optional, but strongly recommended)<dt>
-              <dd>
-A string value that will be encoded in the encrypted response to the requesting
-agent. It is RECOMMENDED that this value is a session identifier that is 
-associated with the user agent that initiated the request, plus a hyphen, 
-plus a cryptographically secure string for use as a nonce. 
-For example, <code>jf793ksj72jkf-78p82qpj87dnd2f839</code>. See 
-<a href="#the-response-nonce">The Response Nonce</a> section to understand 
-more about how this value is used to prevent replay attacks and its accepted
-limitations.
-              </dd>
-              <dt><code>signatureValue</code><dt>
-              <dd>
-The value of the <tref>signature value</tref> generated by this algorithm.
-              </dd>
-            </dl>
-          </li>
-        </ol>
+    </section>
 
-        <p>
-The following example shows an input <tref>message</tref> and the resulting
-<tref>signed message</tref>:
-        </p>
+    <section>
+      <h2>Linked Data Signature Overview</h2>
 
-        <pre class="example prettyprint language-jsonld">
-*** message
+      <p>
+A <tref>Linked Data Signature</tref> is compromised of information about the
+signature, parameters required to verify it, and the signature value itself.
+All of this information is provided using Linked Data vocabularies such as the
+[[!SECURITY-VOCABULARY]].
+      </p>
+
+      <p>
+        At a minimum, a <tref>Linked Data Signature</tref> must have the
+        following attributes:
+      </p>
+
+<div class="issue">Create a separate section detailing an optional mechanism
+for authenticating public key ownership via bi-directional links. How
+to establish trust in key owner entities is out of scope but examples can
+be given.</div>
+
+      <dl style="margin-left: 1em;">
+        <dt><code>type</code><dt>
+        <dd><code>LinkedDataSignature2015</code></dd>
+        <dt><code>creator</code><dt>
+        <dd>
+A URI that identifies the public/private key pair associated with the
+signature. The URI SHOULD be a URL that can be dereferenced to obtain a
+Linked Data document that contains a link identifying the entity that owns
+the key pair. Dereferencing the entity link SHOULD result in a Linked Data
+document that contains a link back to the URL identifier for the
+public/private key pair, thereby proving ownership.
+        </dd>
+        <dt><tdef>created</tdef><dt>
+        <dd>
+The string value of an [[!ISO8601]] combined date and time string generated
+by the <a href="#signature-algorithm">Signature Algorithm</a>.
+        </dd>
+        <dt><code>domain</code> (optional)<dt>
+        <dd>
+A string value specifying the restricted <tref>domain</tref> of the signature.
+        </dd>
+        <dt><tdef>nonce</tdef> (optional, but strongly recommended)<dt>
+        <dd>
+A string value that is included in the digital signature and MUST only be
+used once for a particular <tref>domain</tref> and window of time. This
+value is used to mitigate replay attacks.
+        </dd>
+        <dt><tdef>signatureValue</tdef><dt>
+        <dd>
+The value of the <tref>signature value</tref> generated by the
+<a href="#signature-algorithm">Signature Algorithm</a>.
+        </dd>
+      </dl>
+
+      <pre class="example prettyprint language-jsonld">
+*** Linked Data Document
 {
-   "@context": "https://w3id.org/payswarm/v1",
-   "title": "Hello World!"
+  "@context": "https://w3id.org/identity/v1",
+  "title": "Hello World!"
 }
 
-*** signed message
+*** Signed Linked Data Document
 {
-   "@context": "https://w3id.org/payswarm/v1",
-   "title": "Hello World!",
-   "signature":
-   {
-      "type": "GraphSignature2012",
-      "creator": "http://payswarm.example.com/i/john/keys/5",
-      "created": "2011-09-23T20:21:34Z",
-      "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDYMmMzQzNmExMgoYzI43Q3ODIyOWM32NjI="
-   }
+  "@context": "https://w3id.org/identity/v1",
+  "title": "Hello World!",
+  "signature": {
+    "type": "LinkedDataSignature2015",
+    "creator": "http://example.com/i/pat/keys/5",
+    "created": "2011-09-23T20:21:34Z",
+    "domain": "example.org",
+    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
+    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDYMmMzQzNmExMgoYzI43Q3ODIyOWM32NjI="
+  }
 }
-        </pre>
+      </pre>
 
-      </section>
+    </section>
 
-      <section>
-        <h2>Message Signature Verification Algorithm</h2>
-        <p>
-In order to ensure a secure communication environment the following algorithm
-SHOULD be used to verify all request signatures. A
-<tref>signed message</tref> is provided as input and an indication of whether
-the signature is valid or a forgery is produced as output. All strings are
-UTF-8 encoded.
-        </p>
-        
-        <ol class="algorithm">
-          <li>
-Generate the <tdef>original message</tdef> by copying the 
-<tref>signed message</tref> and removing the <code>signature</code> value
-from the <tref>original message</tref>.
-          </li>
-          <li>
-Generate the <tdef>original normalized message</tdef> by normalizing the 
-<tref>original message</tref> according to the 
-<a href="http://json-ld.org/spec/latest/rdf-graph-normalization">RDF
-Graph Normalization</a> algorithm.
-<div class="issue">Refer to the exact RDF Graph Normalization algorithm.</div>
-          </li>
-          <li>
-Verify the <tdef>original signature value</tdef>:
-            <ol class="algorithm">
-              <li>
-Generate the <tdef>original timestamped message</tdef> by setting its value to 
-the value of the <code>created</code> key in the 
-<tref>signed message</tref>. Append the <tref>nonce</tref> value, if specified. Append the <tref>original normalized message</tref> to the
-<tref>original timestamped message</tref>. If a <tref>domain</tref> is
-specified, append the '@' character followed by the value.
-              </li>
-              <li>
-Retrieve the PEM-encoded <tref>public key</tref> from the
-<tref>public key</tref> IRI provided in
-<code>signer</code> value. The <tref>public key</tref> MAY also be retrieved
-from a cache. ???Verify the <tref>original nonced message</tref>
-using the <tref>public key</tref> to cryptographically verify the
-<code>signatureValue</code>??? 
-<div class="note">We need to be more explicit about what is happening here.</div>
-              </li>
-            </ol>
-        </ol>
-      </section>
+    <section>
+      <h2>Signature Algorithm</h2>
+      <p>
+The following algorithm specifies how to create a digital signature that can
+be later used to verify the authenticity and integrity of a
+<tref>Linked Data Document</tref>. A <tref>Linked Data Document</tref>,
+<var>document</var>, a <tref>private key</tref>, and an identifier for the
+public/private key pair, <var>creator</var>, are required inputs. A
+<tref>nonce</tref> and a <tref>domain</tref> may also be optionally specified
+as inputs. A <tref>Signed Linked Data Document</tref> is produced as output.
+Whenever this algorithm must encode strings, it uses UTF-8 encoding.
+      </p>
 
-      <section>
-        <h2>Security Considerations</h2>
-        <p>
+      <ol class="algorithm">
+        <li>
+Create a copy of <var>document</var>, <var>output</var>.
+        </li>
+        <li>
+Remove any <code>signature</code> nodes from the default graph in
+<var>output</var>.
+        </li>
+        <li>
+Generate a <var>normalized document</var> by normalizing
+<var>document</var> according to the <em>URDNA2015</em>
+[[!RDF-DATASET-NORMALIZATION]] algorithm.
+        </li>
+        <li>
+Generate an ISO8601 combined date and time string, <var>created</var>
+containing the current date and time, accurate to at least one second, in
+Universal Time Code format. For example: <code>2011-09-23T20:21:34Z</code>. Add
+an entry to <var>headers</var> with a key of <code>http://purl.org/dc/elements/1.1/created</code>
+and a value of <var>created</var>.
+        </li>
+        <li>
+Create a value <var>tbs</var> that represents the data to be signed, and
+set it to the result of running the
+<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>.
+        </li>
+        <li>
+Digitally sign <var>tbs</var> using the <tref>private key</tref> and the
+the <em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]] algorithm and base-64 encode the
+resulting value. The resulting base-64 encoded string is the
+<tref>signatureValue</tref>.
+        </li>
+        <li>
+Add a <code>signature</code> node to <var>output</var> containing
+a <tref>Linked Data Signature</tref> using <var>creator</var>,
+<var>created</var>, <tref>signatureValue</tref>, and if given,
+the <tref>nonce</tref>, and <tref>domain</tref>.
+        </li>
+        <li>
+Return <var>output</var> as the <tref>Signed Linked Data Document</tref>.
+        </li>
+      </ol>
+
+    </section>
+
+    <section>
+      <h2>Signature Verification Algorithm</h2>
+      <p>
+The following algorithm specifies how to check the authenticity and
+integrity of a <tref>Signed Linked Data Document</tref> by verifying its
+digital signature. This algorithm takes a
+<tref>Signed Linked Data Document</tref>, <var>signed document</var> and
+outputs a <code>true</code> or </code>false</code> value based on whether or
+not the digital signature on <var>signed document</var> was verified. Whenever
+this algorithm must encode strings, it uses UTF-8 encoding.
+      </p>
+
+<div class="issue">Specify how the public key can be obtained (through
+some out-of-band process and passed in or it can be retrieved by
+derefencing its URL identifier, etc.</div>
+
+      <ol class="algorithm">
+        <li>
+Get the <tref>public key</tref> by dereferencing its URL identifier in
+the <code>signature</code> node of the default graph of
+<var>signed document</var>. Confirm that the <tref>Linked Data Document</tref>
+that describes the <tref>public key</tref> specifies its owner and that its
+owner's URL identifier can be dereferenced to reveal a bi-directional link back
+to the key. Ensure that the key's owner is a trusted entity before proceeding
+to the next step.
+        </li>
+        <li>
+Create a copy of <var>signed document</var>, <var>document</var>.
+        </li>
+        <li>
+Remove any <code>signature</code> nodes from the default graph in
+<var>document</var> and save it as <var>signature</var>.
+        </li>
+        <li>
+Generate a <var>normalized document</var> by normalizing
+<var>document</var> according to the <em>URDNA2015</em>
+[[!RDF-DATASET-NORMALIZATION]] algorithm.
+        </li>
+        <li>
+Create a value <var>tbv</var> that represents the data to be verified, and
+set it to the result of running the
+<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>,
+passing the information in <var>signature</var>.
+        </li>
+        <li>
+Base-64 decode the <tref>signatureValue</tref> and pass it, <var>tbv</var>,
+and the <tref>public key</tref> to the <em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]
+algorithm. Return the resulting boolean value.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Create Verify Hash Algorithm</h2>
+      <p>
+The following algorithm specifies how to create the data that is used
+to generate or verify a digital signature. It takes a normalized
+<tref>Linked Data Document</tref>, <var>normalized document</var>, combined
+date and time string, <var>created</var>, and an optionally, a
+<tref>nonce</tref> and <tref>domain</tref>. Its output is a message digest that
+can be used to generate or verify a digital signature.
+      </p>
+
+      <ol class="algorithm">
+        <li>
+Create an empty map of header names to header values, <var>headers</var>.
+        </li>
+        <li>
+Add an entry to <var>headers</var> with a key of
+<code>http://purl.org/dc/elements/1.1/created</code> and a value of
+<var>created</var>.
+        </li>
+        <li>
+If a <tref>domain</tref> is specified, add an entry to <var>headers</var> with
+a key of <code>https://w3id.org/security#domain</code> and a value of the
+<tref>domain</tref>.
+        </li>
+        <li>
+If a <tref>nonce</tref> is specified, add an entry to <var>headers</var> with
+a key of <code>https://w3id.org/security#nonce</code> and a value of the
+<tref>nonce</tref>.
+        <li>
+Create an empty string <var>output</var> that represents the data to be signed
+or verified.
+        </li>
+        <li>
+For each <var>key</var>-<var>value</var> pair in <var>headers</var>,
+lexicographically sorted by <var>key</var>:
+          <ol class="algorithm">
+            <li>
+Append <var>key</var> to <var>output</var>.
+            </li>
+            <li>
+Append a colon, <code>:</code>, and one space, <code> </code>, to
+<var>output</var>.
+            </li>
+            <li>
+Append <var>value</var> to <var>output</var>.
+            </li>
+            <li>
+Append an end of line character, <code>\n</code>, to <var>output</var>.
+            </li>
+          </ol>
+        </li>
+        <li>
+Append <var>normalized document</var> to <var>output</var>.
+        </li>
+        <li>
+Hash <var>output</var> using the SHA-256 message digest algorithm and replace
+it with the result.
+        </li>
+        <li>
+Return <var>output</var>.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Security Considerations</h2>
+      <p>
 The following section
-describes security considerations that developers implementing this 
+describes security considerations that developers implementing this
 specification should be aware of in order to create secure software.
-        </p>
+      </p>
 
-        <section>
-        <h3>The Response Nonce</h3>        
-          <p>
+      <section>
+      <h3>The Response Nonce</h3>
+        <p>
 The <code>nonce</code> mechanism is used in order to prevent
-replay attacks, but implementers must be aware that it is not capable of 
+replay attacks, but implementers must be aware that it is not capable of
 preventing man-in-the-middle attacks. Only a full end-to-end encryption channel
 is capable of accomplishing that feat and if implementers are concerned about
 man-in-the-middle attacks, they are strongly advised to run all sensitive
 messages that could be compromised by man-in-the-middle attacks over HTTPS.
-          </p>
-          <p class="issue">
+        </p>
+        <p class="issue">
 Detail the nonce mechanism that is used in the current PaySwarm implementations.
-          </p>
-        </section>
-      
+        </p>
       </section>
-      
+
     </section>
 
-    <section>
-      <h2>Permission and Access Rights Delegation</h2>
-      <p>
-During the <a href="#the-key-registration-process">Key Registration Process</a>,
-a <tref>key listing service</tref> MAY ask the <tref>actor</tref> that is
-registering to grant a number of permissions and access rights to any 
-<tref>agent</tref> that digitally signs a message to a Web service using the
-registered key. Note that this mechanism is similar to the OAuth permission
-granting mechanism and can be used in place of OAuth if the system requires
-both Permission and Access Rights Delegation as well as digital signatures. To
-take advantage of this mechanism, a <tref>agent</tref> would digitally sign
-a message requesting that a certain action be performed on behalf of the
-<tref>actor</tref>.
-      </p>
+    <section class="appendix">
+      <h2>GraphSignature2012</h2>
+      <p>A previous version of this specification has light deployment. For
+        purposes of identification, the algorithm is identified as
+        <a href="">GraphSignature2012</a> and its algorithms differ from the
+        stated algorithm in the following ways:</p>
+
+<div class="issue">Specify GraphSignature2012 differences.</div>
+
+      <!--
+      <ul>
+        <li>
+        </li>
+      </ul> -->
+
     </section>
 
-    <section>
-      <h2>Key Revocation and Expiration</h2>
-      <p>
-In order for a <tref>key pair</tref> to be revoked, the 
-<code>revocationDate</code> MUST be associated with the key. In order to
-specify an expiration date for a <tref>key pair</tref>, the 
-<code>validUntil</code> date MUST be associated with the key.
-All software systems utilizing the <tref>key pair</tref> MUST honor the 
-revocation and validity dates and fail to verify any signatures made on 
-or after the date and time specified. Similarly, the 
-<code>validFrom</code> date establishes the date and time on which the
-key can be used to digitally sign and encrypt data.
-All software systems utilizing the <tref>key pair</tref> MUST honor the 
-creation date and fail to verify any signatures made before the date and 
-time specified.
-      </p>
-    </section>
-
-  </body> 
+  </body>
 </html>
 
