@@ -134,8 +134,9 @@ identity assertions.
          <p>
 Technologies utilized in this specification include the
 JavaScript Object Notation for Linking Data [[!JSON-LD]],
-the HyperText Transfer Protocol [[!HTTP11]], the
-Advanced Encryption Standard [[!AES]], and HTTP Signatures [[!HTTP-SIGNATURES]].
+the HyperText Transfer Protocol [[!HTTP11]], the Public-Key Cryptography
+Standards (PKCS) #1 [[!PKCS1]], Advanced Encryption Standard [[!AES]], and
+HTTP Signatures [[!HTTP-SIGNATURES]].
          <p>
       </section>
 
@@ -147,7 +148,7 @@ Advanced Encryption Standard [[!AES]], and HTTP Signatures [[!HTTP-SIGNATURES]].
 The registration process is necessary in order to publish a public key at
 a location on the Web.
       </p>
-      
+
 <div class="issue">Do not use <code>.well-known</code>, instead content
 negotiate for <code>application/ld+json</code> and return a JSON-LD document
 with the service information. Perhaps generalize this in another spec
@@ -510,8 +511,8 @@ verify the sender of the message.
 The following terminology is used to describe concepts used to generate and
 secure messages that are sent and received using Secure Messaging. Many of these
 terms are borrowed from public/private key cryptography. A more complete
-description of public/private cryptography can be found in
-The Advanced Encryption Standard [[AES]].
+description of RSA-based signatures can be found in Public-Key Cryptography
+Standards (PKCS) #1 [[!PKCS1]].
         </p>
 
         <dl>
