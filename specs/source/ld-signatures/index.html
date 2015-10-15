@@ -198,7 +198,12 @@ be given.</div>
 from the security vocab can be used to indicate other signing and hash
 algorithms). Rewrite algorithms to be parameterized on this basis and
 move `LinkedDataSignature2015` definition to a single supported
-mechanism; specify its identifier as a URL.</div>
+mechanism; specify its identifier as a URL. In order to make it easy to
+specify a variety of combinations of algorithms, introduce a core
+type `LinkedDataSignature` that allows for easy filtering/discover of
+signature nodes, but that type on its own doesn't specify any default
+signature or hash algorithms, those must be given via other properties in the
+nodes.</div>
 
       <dl style="margin-left: 1em;">
         <dt><code>type</code><dt>
