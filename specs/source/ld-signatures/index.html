@@ -135,6 +135,10 @@ The following terms are used to describe concepts involved in the
 generation and verification of Linked Data digital signatures.
       </p>
 
+<div class="issue">Fix capitalization of various terms.</div>
+
+<div class="issue">Fix markup style for various terms.</div>
+
       <dl>
         <dt><tdef>Linked Data Document</tdef></dt>
         <dd>
@@ -189,6 +193,12 @@ All of this information is provided using Linked Data vocabularies such as the
 for authenticating public key ownership via bi-directional links. How
 to establish trust in key owner entities is out of scope but examples can
 be given.</div>
+
+<div class="issue">Specify algorithm agility mechanisms (additional attributes
+from the security vocab can be used to indicate other signing and hash
+algorithms). Rewrite algorithms to be parameterized on this basis and
+move `LinkedDataSignature2015` definition to a single supported
+mechanism; specify its identifier as a URL.</div>
 
       <dl style="margin-left: 1em;">
         <dt><code>type</code><dt>
@@ -367,6 +377,8 @@ date and time string, <var>created</var>, and an optionally, a
 <tref>nonce</tref> and <tref>domain</tref>. Its output is a message digest that
 can be used to generate or verify a digital signature.
       </p>
+
+<div class="issue">Specify code points for colon, space, and EOL.</div>
 
       <ol class="algorithm">
         <li>
