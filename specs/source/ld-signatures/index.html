@@ -94,7 +94,7 @@
     <section id='abstract'>
       <p>
 This specification describes a mechanism for ensuring the authenticity and
-integrity of Linked Data documents using digital signatures.
+integrity of linked data documents using digital signatures.
       </p>
     </section>
 
@@ -111,21 +111,10 @@ decentralized way, greatly reducing barriers to large scale integration.
 With the increase in usage of Linked Data for a variety of applications, there
 is a need to be able to verify the authenticity and integrity of Linked Data
 documents. This specification adds authentication and integrity protection to
-Linked Data documents through the use of public/private key cryptography
+linked data documents through the use of public/private key cryptography
 without sacrificing Linked Data features such as extensibility and
 composability.
       </p>
-      <section>
-         <h3>Key Technologies</h3>
-         <p>
-Technologies utilized in this specification include the
-JavaScript Object Notation for Linking Data [[!JSON-LD]],
-the HyperText Transfer Protocol [[!HTTP11]], RDF Dataset Normalization
-[[!RDF-DATASET-NORMALIZATION]], and Public-Key Cryptography
-Standards (PKCS) #1 [[!PKCS1]].
-         <p>
-      </section>
-
     </section>
 
     <section>
@@ -140,36 +129,36 @@ generation and verification of Linked Data digital signatures.
 <div class="issue">Fix markup style for various terms.</div>
 
       <dl>
-        <dt><tdef>Linked Data Document</tdef></dt>
+        <dt><dfn>linked data document</dfn></dt>
         <dd>
 A document comprised of Linked Data.
         </dd>
-        <dt><tdef>Signed Linked Data Document</tdef></dt>
+        <dt><dfn>signed linked data document</dfn></dt>
         <dd>
-A <tref>Linked Data Document</tref> that has been digitally-signed.
+A <a>linked data document</a> that has been digitally signed.
         </dd>
-        <dt><tdef>Linked Data Signature</tdef></dt>
+        <dt><dfn>linked data signature</dfn></dt>
         <dd>
 A set of attributes that represent a Linked Data digital signature and
 the parameters required to verify it.
         </dd>
-        <dt><tdef>public key</tdef></dt>
+        <dt><dfn>public key</dfn></dt>
         <dd>
 A cryptographic key that can be used to verify digital signatures created
-with a corresponding <tref>private key</tref>.
+with a corresponding <a>private key</a>.
         </dd>
-        <dt><tdef>private key</tdef></dt>
+        <dt><dfn>private key</dfn></dt>
         <dd>
 A cryptographic key that can be used to generate digital signatures.
         </dd>
-        <dt><tdef>domain</tdef></dt>
+        <dt><dfn>domain</dfn></dt>
         <dd>
 A string value that specifies the operational domain of a digital signature.
 This may be an Internet domain name like <code>example.com</code>, a
 ad-hoc value such as <code>mycorp-level3-access</code>, or a very
 specific transaction value like <code>8zF6T$mqP</code>. A signer may
-include a <tref>domain</tref> in its digital signature to restrict its use
-to particular target, identified by the specified <tref>domain</tref>.
+include a <a>domain</a> in its digital signature to restrict its use
+to particular target, identified by the specified <a>domain</a>.
       </dl>
 
     </section>
@@ -178,14 +167,14 @@ to particular target, identified by the specified <tref>domain</tref>.
       <h2>Linked Data Signature Overview</h2>
 
       <p>
-A <tref>Linked Data Signature</tref> is compromised of information about the
+A <a>linked data signature</a> is compromised of information about the
 signature, parameters required to verify it, and the signature value itself.
 All of this information is provided using Linked Data vocabularies such as the
 [[!SECURITY-VOCABULARY]].
       </p>
 
       <p>
-        At a minimum, a <tref>Linked Data Signature</tref> must have the
+        At a minimum, a <a>linked data signature</a> must have the
         following attributes:
       </p>
 
@@ -205,7 +194,7 @@ signature nodes, but that type on its own doesn't specify any default
 signature or hash algorithms, those must be given via other properties in the
 nodes.</div>
 
-<div class="issue">Specify that Linked Data documents are syntax agnostic.
+<div class="issue">Specify that linked data documents are syntax agnostic.
 Specify the URLs that property values like <code>signature</code> map to,
 for instance, in the security vocabulary.</div>
 
@@ -224,41 +213,41 @@ considerations.</div>
         <dd>
 A URI that identifies the public/private key pair associated with the
 signature. The URI SHOULD be a URL that can be dereferenced to obtain a
-Linked Data document that contains a link identifying the entity that owns
+linked data document that contains a link identifying the entity that owns
 the key pair. Dereferencing the entity link SHOULD result in a Linked Data
 document that contains a link back to the URL identifier for the
 public/private key pair, thereby proving ownership.
         </dd>
-        <dt><tdef>created</tdef><dt>
+        <dt><dfn>created</dfn><dt>
         <dd>
 The string value of an [[!ISO8601]] combined date and time string generated
 by the <a href="#signature-algorithm">Signature Algorithm</a>.
         </dd>
         <dt><code>domain</code> (optional)<dt>
         <dd>
-A string value specifying the restricted <tref>domain</tref> of the signature.
+A string value specifying the restricted <a>domain</a> of the signature.
         </dd>
-        <dt><tdef>nonce</tdef> (optional, but strongly recommended)<dt>
+        <dt><dfn>nonce</dfn> (optional, but strongly recommended)<dt>
         <dd>
 A string value that is included in the digital signature and MUST only be
-used once for a particular <tref>domain</tref> and window of time. This
+used once for a particular <a>domain</a> and window of time. This
 value is used to mitigate replay attacks.
         </dd>
-        <dt><tdef>signatureValue</tdef><dt>
+        <dt><dfn>signatureValue</dfn><dt>
         <dd>
-The value of the <tref>signature value</tref> generated by the
+The value of the <a>signature value</a> generated by the
 <a href="#signature-algorithm">Signature Algorithm</a>.
         </dd>
       </dl>
 
       <pre class="example prettyprint language-jsonld">
-*** Linked Data Document
+*** linked data document
 {
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!"
 }
 
-*** Signed Linked Data Document
+*** signed linked data document
 {
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
@@ -284,11 +273,11 @@ and values in the data to be signed.</div>
       <p>
 The following algorithm specifies how to create a digital signature that can
 be later used to verify the authenticity and integrity of a
-<tref>Linked Data Document</tref>. A <tref>Linked Data Document</tref>,
-<var>document</var>, a <tref>private key</tref>, and an identifier for the
+<a>linked data document</a>. A <a>linked data document</a>,
+<var>document</var>, a <a>private key</a>, and an identifier for the
 public/private key pair, <var>creator</var>, are required inputs. A
-<tref>nonce</tref> and a <tref>domain</tref> may also be optionally specified
-as inputs. A <tref>Signed Linked Data Document</tref> is produced as output.
+<a>nonce</a> and a <a>domain</a> may also be optionally specified
+as inputs. A <a>signed linked data document</a> is produced as output.
 Whenever this algorithm must encode strings, it uses UTF-8 encoding.
       </p>
 
@@ -318,19 +307,19 @@ set it to the result of running the
 <a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>.
         </li>
         <li>
-Digitally sign <var>tbs</var> using the <tref>private key</tref> and the
+Digitally sign <var>tbs</var> using the <a>private key</a> and the
 the <em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]] algorithm and base-64 encode the
 resulting value. The resulting base-64 encoded string is the
-<tref>signatureValue</tref>.
+<a>signatureValue</a>.
         </li>
         <li>
 Add a <code>signature</code> node to <var>output</var> containing
-a <tref>Linked Data Signature</tref> using <var>creator</var>,
-<var>created</var>, <tref>signatureValue</tref>, and if given,
-the <tref>nonce</tref>, and <tref>domain</tref>.
+a <a>linked data signature</a> using <var>creator</var>,
+<var>created</var>, <a>signatureValue</a>, and if given,
+the <a>nonce</a>, and <a>domain</a>.
         </li>
         <li>
-Return <var>output</var> as the <tref>Signed Linked Data Document</tref>.
+Return <var>output</var> as the <a>signed linked data document</a>.
         </li>
       </ol>
 
@@ -340,9 +329,9 @@ Return <var>output</var> as the <tref>Signed Linked Data Document</tref>.
       <h2>Signature Verification Algorithm</h2>
       <p>
 The following algorithm specifies how to check the authenticity and
-integrity of a <tref>Signed Linked Data Document</tref> by verifying its
+integrity of a <a>signed linked data document</a> by verifying its
 digital signature. This algorithm takes a
-<tref>Signed Linked Data Document</tref>, <var>signed document</var> and
+<a>signed linked data document</a>, <var>signed document</var> and
 outputs a <code>true</code> or </code>false</code> value based on whether or
 not the digital signature on <var>signed document</var> was verified. Whenever
 this algorithm must encode strings, it uses UTF-8 encoding.
@@ -354,10 +343,10 @@ derefencing its URL identifier, etc.</div>
 
       <ol class="algorithm">
         <li>
-Get the <tref>public key</tref> by dereferencing its URL identifier in
+Get the <a>public key</a> by dereferencing its URL identifier in
 the <code>signature</code> node of the default graph of
-<var>signed document</var>. Confirm that the <tref>Linked Data Document</tref>
-that describes the <tref>public key</tref> specifies its owner and that its
+<var>signed document</var>. Confirm that the <a>linked data document</a>
+that describes the <a>public key</a> specifies its owner and that its
 owner's URL identifier can be dereferenced to reveal a bi-directional link back
 to the key. Ensure that the key's owner is a trusted entity before proceeding
 to the next step.
@@ -381,8 +370,8 @@ set it to the result of running the
 passing the information in <var>signature</var>.
         </li>
         <li>
-Base-64 decode the <tref>signatureValue</tref> and pass it, <var>tbv</var>,
-and the <tref>public key</tref> to the <em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]
+Base-64 decode the <a>signatureValue</a> and pass it, <var>tbv</var>,
+and the <a>public key</a> to the <em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]
 algorithm. Return the resulting boolean value.
         </li>
       </ol>
@@ -393,9 +382,9 @@ algorithm. Return the resulting boolean value.
       <p>
 The following algorithm specifies how to create the data that is used
 to generate or verify a digital signature. It takes a normalized
-<tref>Linked Data Document</tref>, <var>normalized document</var>, combined
+<a>linked data document</a>, <var>normalized document</var>, combined
 date and time string, <var>created</var>, and an optionally, a
-<tref>nonce</tref> and <tref>domain</tref>. Its output is a message digest that
+<a>nonce</a> and <a>domain</a>. Its output is a message digest that
 can be used to generate or verify a digital signature.
       </p>
 
@@ -411,14 +400,14 @@ Add an entry to <var>headers</var> with a key of
 <var>created</var>.
         </li>
         <li>
-If a <tref>domain</tref> is specified, add an entry to <var>headers</var> with
+If a <a>domain</a> is specified, add an entry to <var>headers</var> with
 a key of <code>https://w3id.org/security#domain</code> and a value of the
-<tref>domain</tref>.
+<a>domain</a>.
         </li>
         <li>
-If a <tref>nonce</tref> is specified, add an entry to <var>headers</var> with
+If a <a>nonce</a> is specified, add an entry to <var>headers</var> with
 a key of <code>https://w3id.org/security#nonce</code> and a value of the
-<tref>nonce</tref>.
+<a>nonce</a>.
         <li>
 Create an empty string <var>output</var> that represents the data to be signed
 or verified.
