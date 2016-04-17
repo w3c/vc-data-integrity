@@ -73,19 +73,26 @@
           // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
           // Team Contact.
           wgPatentURI:  "",
-          maxTocLevel: 4 /*,
-          preProcess: [ webpayments.preProcess ],
+          maxTocLevel: 4,
+          /*preProcess: [ webpayments.preProcess ],
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
-      };
-    </script>
-    <script type="text/javascript" src="prettify.js" class="remove"></script>
-    <script type="text/javascript" src="lang-jsonld.js" class="remove"></script>
-    <script type="text/javascript" class="remove">
-      var oldonload = window.onload;
-      window.onload = function() {
-        if (oldonload) oldonload();
-        prettyPrint();
+          localBiblio:  {
+            "RDF-DATASET-NORMALIZATION": {
+              title:    "RDF Dataset Normalization",
+              href:     "http://json-ld.github.io/normalization/spec/",
+              authors:  ["David Longley", "Manu Sporny"],
+              status:   "CGDRAFT",
+              publisher:  "JSON-LD Community Group"
+            },
+            "SECURITY-VOCABULARY": {
+              title:    "Security Linked Data Vocabulary",
+              href:     "https://web-payments.org/vocabs/security",
+              authors:  ["Manu Sporny","David Longley"],
+              status:   "CGDRAFT",
+              publisher:  "Web Payments Community Group"
+          }
+        }
       };
     </script>
   </head>
@@ -134,7 +141,7 @@ The Linked Data Signature specification achieves the following design goals:
         <dt>Simple for Developers</dt>
         <dd>
 The signature format is designed to be easy to use for developers that don't
-have significant cryptography training. For example, signature suite identifiers
+have significant cryptography training. For example, <a>signature suite</a> identifiers
 are used instead of specific cryptographic parameters to ensure that it is
 difficult to accidentally produce a weak digital signature.
         </dd>
@@ -208,6 +215,26 @@ a normalization algorithm, a message digest algorithm, and a signature
 algorithm that are bundled together by cryptographers for developers
 for the purposes of safety and convenience.
         </dd>
+        <dt><dfn>normalization algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input document that has more than one possible
+representation and always transforms it into a normal form. This process is
+sometimes also called canonicalization.
+        </dd>
+        <dt><dfn>message digest algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input message and produces a cryptographic
+output message that is often times many orders of magnitude smaller than the
+input message. These algorithms are often 1) very fast, 2)
+non-reversible, 3) change when even one bit of the input message changes, and
+4) produce different outputs for different inputs.
+        </dd>
+        <dt><dfn>signature algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input message and produces an output value where the
+receiver of the message can mathematically verify that the message came from
+a particular sender and has not been modified in transit.
+        </dd>
       </dl>
 
     </section>
@@ -230,7 +257,7 @@ All of this information is provided using Linked Data vocabularies such as the
       <dl style="margin-left: 1em;">
         <dt>type<dt>
         <dd>
-A URI that identifies the digital signature suite that was used to create the
+A URI that identifies the digital <a>signature suite</a> that was used to create the
 signature. For example: <code>LinkedDataSignature2015</code>.</dd>
         <dt>creator<dt>
         <dd>
@@ -246,7 +273,7 @@ public/private key pair, thereby proving ownership.
 The string value of an [[!ISO8601]] combined date and time string generated
 by the <a href="#signature-algorithm">Signature Algorithm</a>.
         </dd>
-        <dt><dfn>domain</dfn> (optional)<dt>
+        <dt>domain (optional)<dt>
         <dd>
 A string value specifying the restricted <a>domain</a> of the signature.
         </dd>
@@ -295,7 +322,7 @@ by adding the parameters outlined in this section:
 
       <p>
 The signature example above uses the <code>LinkedDataSignature2015</code>
-signature suite to produce a verifiable digital signature.
+<a>signature suite</a> to produce a verifiable digital signature.
       </p>
 
 <div class="issue">Create a separate section detailing an optional mechanism
@@ -334,7 +361,7 @@ considerations.</div>
       <p>
 A Linked Data Signature is designed to be easy to use by developers and
 therefore strives to minimize the amount of information one has to remember
-to generate a signature. Often, just the signature suite name (e.g.
+to generate a signature. Often, just the <a>signature suite</a> name (e.g.
 <code>LinkedDataSignature2015</code>) is required
 from developers to initiate the creation of a signature. These signature
 suites are often created by people that do have the cryptographic training
@@ -342,7 +369,7 @@ to ensure that safe combinations of cryptographic primitives are used.
       </p>
       <p>
 This section details the cryptographic primitives that are available to
-signature suite developers.
+<a>signature suite</a> developers.
       </p>
 
       <p>
@@ -362,19 +389,19 @@ The value <code>SignatureSuite</code>.
         </dd>
         <dt>normalizationAlgorithm</dt>
         <dd>
-A URL that identifies the <var>normalization algorithm</var> to use on the
+A URL that identifies the <a>normalization algorithm</a> to use on the
 <var>document</var>. For example:
-<code>https://w3id.org/security#UDNA2015</code>.
+<code>https://w3id.org/security#URDNA2015</code>.
         </dd>
         <dt>digestAlgorithm</dt>
         <dd>
-A URL that identifies the <var>message digest algorithm</var> to use on the
+A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>normalized document</var>. For example:
 <code>http://example.com/digests#sha512</code>
         </dd>
         <dt>signatureAlgorithm</dt>
         <dd>
-A URL that identifies the <var>signature algorithm</var> to use on the
+A URL that identifies the <a>signature algorithm</a> to use on the
 <var>data to be signed</var>. For example:
 <code>http://www.w3.org/2000/09/xmldsig#rsa-sha256</code>
         </dd>
@@ -388,7 +415,7 @@ A complete example of a <a>signature suite</a> is shown in the next example:
 {
   "id": "https://w3id.org/security#LinkedDataSignature2015",
   "type": "SignatureSuite",
-  "normalizationAlgorithm": "https://w3id.org/security#UDNA2015",
+  "normalizationAlgorithm": "https://w3id.org/security#URDNA2015",
   "digestAlgorithm": "http://example.com/digests#sha512",
   "signatureAlgorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha256"
 }
@@ -432,7 +459,7 @@ Remove any <code>signature</code> nodes from the default graph in
           </li>
           <li>
 Generate a <var>normalized document</var> by normalizing
-<var>document</var> according to a <var>normalization algorithm</var>
+<var>document</var> according to a <a>normalization algorithm</a>
 (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
         </li>
           <li>
@@ -501,7 +528,7 @@ Remove any <code>signature</code> nodes from the default graph in
           </li>
           <li>
 Generate a <var>normalized document</var> by normalizing
-<var>document</var> according to the <var>normalization algorithm</var>
+<var>document</var> according to the <a>normalization algorithm</a>
 (e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
           </li>
           <li>
@@ -512,7 +539,7 @@ passing the information in <var>signature</var>.
           </li>
           <li>
 Base-64 decode the <a>signatureValue</a> and pass it, <var>tbv</var>,
-and the <a>public key</a> to the <var>signature algorithm</var>
+and the <a>public key</a> to the <a>signature algorithm</a>
 (e.g. </var><em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]). Return the resulting
 boolean value.
           </li>
@@ -560,7 +587,8 @@ lexicographically sorted by <var>key</var>:
 Append <var>key</var> to <var>output</var>.
               </li>
               <li>
-Append a colon (U+003A), and one space (U+0020), to <var>output</var>.
+Append a colon, <code>:</code> (U+003A), and one space (U+0020),
+to <var>output</var>.
               </li>
               <li>
 Append <var>value</var> to <var>output</var>.
@@ -574,7 +602,7 @@ Append an end of line character (U+000A), <code>\n</code>, to <var>output</var>.
 Append <var>normalized document</var> to <var>output</var>.
           </li>
           <li>
-Hash <var>output</var> using the <var>message digest algorithm</var>
+Hash <var>output</var> using the <a>message digest algorithm</a>
  (e.g. SHA-256) and replace it with the result.
           </li>
           <li>
