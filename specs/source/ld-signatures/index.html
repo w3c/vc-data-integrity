@@ -200,6 +200,14 @@ ad-hoc value such as <code>mycorp-level3-access</code>, or a very
 specific transaction value like <code>8zF6T$mqP</code>. A signer may
 include a <a>domain</a> in its digital signature to restrict its use
 to particular target, identified by the specified <a>domain</a>.
+        </dd>
+        <dt><dfn>signature suite</dfn></dt>
+        <dd>
+A specified set of cryptographic primitives typically consisting of
+a normalization algorithm, a message digest algorithm, and a signature
+algorithm that are bundled together by cryptographers for developers
+for the purposes of safety and convenience.
+        </dd>
       </dl>
 
     </section>
@@ -220,11 +228,11 @@ All of this information is provided using Linked Data vocabularies such as the
       </p>
 
       <dl style="margin-left: 1em;">
-        <dt><code>type</code><dt>
+        <dt>type<dt>
         <dd>
 A URI that identifies the digital signature suite that was used to create the
 signature. For example: <code>LinkedDataSignature2015</code>.</dd>
-        <dt><code>creator</code><dt>
+        <dt>creator<dt>
         <dd>
 A URI that identifies the public/private key pair associated with the
 signature. The URI SHOULD be a URL that can be dereferenced to obtain a
@@ -238,7 +246,7 @@ public/private key pair, thereby proving ownership.
 The string value of an [[!ISO8601]] combined date and time string generated
 by the <a href="#signature-algorithm">Signature Algorithm</a>.
         </dd>
-        <dt><code>domain</code> (optional)<dt>
+        <dt><dfn>domain</dfn> (optional)<dt>
         <dd>
 A string value specifying the restricted <a>domain</a> of the signature.
         </dd>
@@ -321,181 +329,259 @@ considerations.</div>
     </section>
 
     <section>
-      <h2>Signature Algorithm</h2>
-
-<div class="issue">The signature parameters should be included as headers
-and values in the data to be signed.</div>
+      <h2>Signature Suites</h2>
 
       <p>
-The following algorithm specifies how to create a digital signature that can
-be later used to verify the authenticity and integrity of a
-<a>linked data document</a>. A <a>linked data document</a>,
-<var>document</var>, a <a>private key</a>, and an identifier for the
-public/private key pair, <var>creator</var>, are required inputs. A
-<a>nonce</a> and a <a>domain</a> may also be optionally specified
-as inputs. A <a>signed linked data document</a> is produced as output.
-Whenever this algorithm must encode strings, it uses UTF-8 encoding.
+A Linked Data Signature is designed to be easy to use by developers and
+therefore strives to minimize the amount of information one has to remember
+to generate a signature. Often, just the signature suite name (e.g.
+<code>LinkedDataSignature2015</code>) is required
+from developers to initiate the creation of a signature. These signature
+suites are often created by people that do have the cryptographic training
+to ensure that safe combinations of cryptographic primitives are used.
+      </p>
+      <p>
+This section details the cryptographic primitives that are available to
+signature suite developers.
       </p>
 
-      <ol class="algorithm">
-        <li>
-Create a copy of <var>document</var>, <var>output</var>.
-        </li>
-        <li>
-Remove any <code>signature</code> nodes from the default graph in
-<var>output</var>.
-        </li>
-        <li>
-Generate a <var>normalized document</var> by normalizing
-<var>document</var> according to a <var>normalization algorithm</var>
-(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
-        </li>
-        <li>
-Generate an ISO8601 combined date and time string, <var>created</var>
-containing the current date and time, accurate to at least one second, in
-Universal Time Code format. For example: <code>2011-09-23T20:21:34Z</code>. Add
-an entry to <var>headers</var> with a key of <code>http://purl.org/dc/elements/1.1/created</code>
-and a value of <var>created</var>.
-        </li>
-        <li>
-Create a value <var>tbs</var> that represents the data to be signed, and
-set it to the result of running the
-<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>.
-        </li>
-        <li>
-Digitally sign <var>tbs</var> using the <a>private key</a> and the
-the <var>digital signature algorithm</var> (e.g. <em>RSASSA-PKCS1-v1_5</em> 
-[[!PKCS1]]) and base-64 encode the resulting value. The resulting base-64 
-encoded string is the <a>signatureValue</a>.
-        </li>
-        <li>
-Add a <code>signature</code> node to <var>output</var> containing
-a <a>linked data signature</a> using the appropriate 
-<var>type</var>, <var>creator</var>, <var>created</var>, <a>signatureValue</a>, 
-and if given, the <a>nonce</a>, and <a>domain</a>.
-        </li>
-        <li>
-Return <var>output</var> as the <a>signed linked data document</a>.
-        </li>
-      </ol>
+      <p>
+        At a minimum, a <a>signature suite</a> must have the
+        following attributes:
+      </p>
 
+      <dl style="margin-left: 1em;">
+        <dt>id</dt>
+        <dd>
+A URL that identifies the <a>signature suite</a>.
+For example: <code>https://w3id.org/security#LinkedDataSignature2015</code>.
+        </dd>
+        <dt>type</dt>
+        <dd>
+The value <code>SignatureSuite</code>.
+        </dd>
+        <dt>normalizationAlgorithm</dt>
+        <dd>
+A URL that identifies the <var>normalization algorithm</var> to use on the
+<var>document</var>. For example:
+<code>https://w3id.org/security#UDNA2015</code>.
+        </dd>
+        <dt>digestAlgorithm</dt>
+        <dd>
+A URL that identifies the <var>message digest algorithm</var> to use on the
+<var>normalized document</var>. For example:
+<code>http://example.com/digests#sha512</code>
+        </dd>
+        <dt>signatureAlgorithm</dt>
+        <dd>
+A URL that identifies the <var>signature algorithm</var> to use on the
+<var>data to be signed</var>. For example:
+<code>http://www.w3.org/2000/09/xmldsig#rsa-sha256</code>
+        </dd>
+      </dl>
+
+      <p>
+A complete example of a <a>signature suite</a> is shown in the next example:
+      </p>
+
+      <pre class="example highlight">
+{
+  "id": "https://w3id.org/security#LinkedDataSignature2015",
+  "type": "SignatureSuite",
+  "normalizationAlgorithm": "https://w3id.org/security#UDNA2015",
+  "digestAlgorithm": "http://example.com/digests#sha512",
+  "signatureAlgorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha256"
+}
+      </pre>
     </section>
 
     <section>
-      <h2>Signature Verification Algorithm</h2>
+      <h2>Algorithms</h2>
+
       <p>
-The following algorithm specifies how to check the authenticity and
-integrity of a <a>signed linked data document</a> by verifying its
-digital signature. This algorithm takes a
-<a>signed linked data document</a>, <var>signed document</var> and
-outputs a <code>true</code> or </code>false</code> value based on whether or
-not the digital signature on <var>signed document</var> was verified. Whenever
-this algorithm must encode strings, it uses UTF-8 encoding.
+The algorithms defined below are generalized in that they require a specific
+<a>normalization algorithm</a>, <a>message digest algorithm</a>, and
+<a>signature algorithm</a> to be used to achieve the algorithm's intended
+outcome.
       </p>
 
-<div class="issue">Specify how the public key can be obtained (through
-some out-of-band process and passed in or it can be retrieved by
-derefencing its URL identifier, etc.</div>
+      <section>
+        <h3>Signature Algorithm</h3>
 
-      <ol class="algorithm">
-        <li>
-Get the <a>public key</a> by dereferencing its URL identifier in
-the <code>signature</code> node of the default graph of
-<var>signed document</var>. Confirm that the <a>linked data document</a>
-that describes the <a>public key</a> specifies its owner and that its
-owner's URL identifier can be dereferenced to reveal a bi-directional link back
-to the key. Ensure that the key's owner is a trusted entity before proceeding
-to the next step.
-        </li>
-        <li>
-Let <var>document</var> be a copy of <var>signed document</var>.
-        </li>
-        <li>
-Remove any <code>signature</code> nodes from the default graph in
-<var>document</var> and save it as <var>signature</var>.
-        </li>
-        <li>
-Generate a <var>normalized document</var> by normalizing
-<var>document</var> according to the <var>normalization algorithm</var>
-(e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
-        </li>
-        <li>
-Create a value <var>tbv</var> that represents the data to be verified, and
-set it to the result of running the
-<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>,
-passing the information in <var>signature</var>.
-        </li>
-        <li>
-Base-64 decode the <a>signatureValue</a> and pass it, <var>tbv</var>,
-and the <a>public key</a> to the <var>signature algorithm</var> 
-(e.g. </var><em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]). Return the resulting 
-boolean value.
-        </li>
-      </ol>
-    </section>
+  <div class="issue">The signature parameters should be included as headers
+  and values in the data to be signed.</div>
 
-    <section>
-      <h2>Create Verify Hash Algorithm</h2>
-      <p>
-The following algorithm specifies how to create the data that is used
-to generate or verify a digital signature. It takes a normalized
-<a>linked data document</a>, <var>normalized document</var>, combined
-date and time string, <var>created</var>, and an optionally, a
-<a>nonce</a> and <a>domain</a>. Its output is a message digest that
-can be used to generate or verify a digital signature.
-      </p>
+        <p>
+  The following algorithm specifies how to create a digital signature that can
+  be later used to verify the authenticity and integrity of a
+  <a>linked data document</a>. A <a>linked data document</a>,
+  <var>document</var>, a <a>private key</a>, and an identifier for the
+  public/private key pair, <var>creator</var>, are required inputs. A
+  <a>nonce</a> and a <a>domain</a> may also be optionally specified
+  as inputs. A <a>signed linked data document</a> is produced as output.
+  Whenever this algorithm must encode strings, it uses UTF-8 encoding.
+        </p>
 
-      <ol class="algorithm">
-        <li>
-Create an empty map of header names to header values, <var>headers</var>.
-        </li>
-        <li>
-Add an entry to <var>headers</var> with a key of
-<code>http://purl.org/dc/elements/1.1/created</code> and a value of
-<var>created</var>.
-        </li>
-        <li>
-If a <a>domain</a> is specified, add an entry to <var>headers</var> with
-a key of <code>https://w3id.org/security#domain</code> and a value of the
-<a>domain</a>.
-        </li>
-        <li>
-If a <a>nonce</a> is specified, add an entry to <var>headers</var> with
-a key of <code>https://w3id.org/security#nonce</code> and a value of the
-<a>nonce</a>.
-        <li>
-Create an empty string <var>output</var> that represents the data to be signed
-or verified.
-        </li>
-        <li>
-For each <var>key</var>-<var>value</var> pair in <var>headers</var>,
-lexicographically sorted by <var>key</var>:
-          <ol class="algorithm">
-            <li>
-Append <var>key</var> to <var>output</var>.
-            </li>
-            <li>
-Append a colon (U+003A), and one space (U+0020), to <var>output</var>.
-            </li>
-            <li>
-Append <var>value</var> to <var>output</var>.
-            </li>
-            <li>
-Append an end of line character (U+000A), <code>\n</code>, to <var>output</var>.
-            </li>
-          </ol>
-        </li>
-        <li>
-Append <var>normalized document</var> to <var>output</var>.
-        </li>
-        <li>
-Hash <var>output</var> using the <var>message digest algorithm</var>
- (e.g. SHA-256) and replace it with the result.
-        </li>
-        <li>
-Return <var>output</var>.
-        </li>
-      </ol>
+        <ol class="algorithm">
+          <li>
+  Create a copy of <var>document</var>, <var>output</var>.
+          </li>
+          <li>
+  Remove any <code>signature</code> nodes from the default graph in
+  <var>output</var>.
+          </li>
+          <li>
+  Generate a <var>normalized document</var> by normalizing
+  <var>document</var> according to a <var>normalization algorithm</var>
+  (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+          </li>
+          <li>
+  Generate an ISO8601 combined date and time string, <var>created</var>
+  containing the current date and time, accurate to at least one second, in
+  Universal Time Code format. For example: <code>2011-09-23T20:21:34Z</code>. Add
+  an entry to <var>headers</var> with a key of <code>http://purl.org/dc/elements/1.1/created</code>
+  and a value of <var>created</var>.
+          </li>
+          <li>
+  Create a value <var>tbs</var> that represents the data to be signed, and
+  set it to the result of running the
+  <a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>.
+          </li>
+          <li>
+  Digitally sign <var>tbs</var> using the <a>private key</a> and the
+  the <var>digital signature algorithm</var> (e.g. <em>RSASSA-PKCS1-v1_5</em>
+  [[!PKCS1]]) and base-64 encode the resulting value. The resulting base-64
+  encoded string is the <a>signatureValue</a>.
+          </li>
+          <li>
+  Add a <code>signature</code> node to <var>output</var> containing
+  a <a>linked data signature</a> using the appropriate
+  <var>type</var>, <var>creator</var>, <var>created</var>, <a>signatureValue</a>,
+  and if given, the <a>nonce</a>, and <a>domain</a>.
+          </li>
+          <li>
+  Return <var>output</var> as the <a>signed linked data document</a>.
+          </li>
+        </ol>
+
+      </section>
+
+      <section>
+        <h3>Signature Verification Algorithm</h3>
+        <p>
+  The following algorithm specifies how to check the authenticity and
+  integrity of a <a>signed linked data document</a> by verifying its
+  digital signature. This algorithm takes a
+  <a>signed linked data document</a>, <var>signed document</var> and
+  outputs a <code>true</code> or </code>false</code> value based on whether or
+  not the digital signature on <var>signed document</var> was verified. Whenever
+  this algorithm must encode strings, it uses UTF-8 encoding.
+        </p>
+
+  <div class="issue">Specify how the public key can be obtained (through
+  some out-of-band process and passed in or it can be retrieved by
+  derefencing its URL identifier, etc.</div>
+
+        <ol class="algorithm">
+          <li>
+  Get the <a>public key</a> by dereferencing its URL identifier in
+  the <code>signature</code> node of the default graph of
+  <var>signed document</var>. Confirm that the <a>linked data document</a>
+  that describes the <a>public key</a> specifies its owner and that its
+  owner's URL identifier can be dereferenced to reveal a bi-directional link back
+  to the key. Ensure that the key's owner is a trusted entity before proceeding
+  to the next step.
+          </li>
+          <li>
+  Let <var>document</var> be a copy of <var>signed document</var>.
+          </li>
+          <li>
+  Remove any <code>signature</code> nodes from the default graph in
+  <var>document</var> and save it as <var>signature</var>.
+          </li>
+          <li>
+  Generate a <var>normalized document</var> by normalizing
+  <var>document</var> according to the <var>normalization algorithm</var>
+  (e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+          </li>
+          <li>
+  Create a value <var>tbv</var> that represents the data to be verified, and
+  set it to the result of running the
+  <a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>,
+  passing the information in <var>signature</var>.
+          </li>
+          <li>
+  Base-64 decode the <a>signatureValue</a> and pass it, <var>tbv</var>,
+  and the <a>public key</a> to the <var>signature algorithm</var>
+  (e.g. </var><em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]). Return the resulting
+  boolean value.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>Create Verify Hash Algorithm</h3>
+        <p>
+  The following algorithm specifies how to create the data that is used
+  to generate or verify a digital signature. It takes a normalized
+  <a>linked data document</a>, <var>normalized document</var>, combined
+  date and time string, <var>created</var>, and an optionally, a
+  <a>nonce</a> and <a>domain</a>. Its output is a message digest that
+  can be used to generate or verify a digital signature.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+  Create an empty map of header names to header values, <var>headers</var>.
+          </li>
+          <li>
+  Add an entry to <var>headers</var> with a key of
+  <code>http://purl.org/dc/elements/1.1/created</code> and a value of
+  <var>created</var>.
+          </li>
+          <li>
+  If a <a>domain</a> is specified, add an entry to <var>headers</var> with
+  a key of <code>https://w3id.org/security#domain</code> and a value of the
+  <a>domain</a>.
+          </li>
+          <li>
+  If a <a>nonce</a> is specified, add an entry to <var>headers</var> with
+  a key of <code>https://w3id.org/security#nonce</code> and a value of the
+  <a>nonce</a>.
+          <li>
+  Create an empty string <var>output</var> that represents the data to be signed
+  or verified.
+          </li>
+          <li>
+  For each <var>key</var>-<var>value</var> pair in <var>headers</var>,
+  lexicographically sorted by <var>key</var>:
+            <ol class="algorithm">
+              <li>
+  Append <var>key</var> to <var>output</var>.
+              </li>
+              <li>
+  Append a colon (U+003A), and one space (U+0020), to <var>output</var>.
+              </li>
+              <li>
+  Append <var>value</var> to <var>output</var>.
+              </li>
+              <li>
+  Append an end of line character (U+000A), <code>\n</code>, to <var>output</var>.
+              </li>
+            </ol>
+          </li>
+          <li>
+  Append <var>normalized document</var> to <var>output</var>.
+          </li>
+          <li>
+  Hash <var>output</var> using the <var>message digest algorithm</var>
+   (e.g. SHA-256) and replace it with the result.
+          </li>
+          <li>
+  Return <var>output</var>.
+          </li>
+        </ol>
+      </section>
     </section>
 
     <section>
