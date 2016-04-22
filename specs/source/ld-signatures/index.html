@@ -39,9 +39,13 @@
           // only "name" is required
           editors:  [
               { name: "Dave Longley", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" },
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
               { name: "Manu Sporny", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" }
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
+              { name: "Shane McCarron", url: "https://github.com/halindrome",
+                company: "Spec-Ops", companyURL: "https://www.spec-ops.io/" },
+              { name: "Christopher Allen", url: "http://www.lifewithalacrity.com/",
+                company: "Blockstream", companyURL: "https://blockstream.com/" }
           ],
 
           // authors, add as many as you like.
@@ -50,9 +54,9 @@
 
           authors:  [
               { name: "Dave Longley", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" },
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
               { name: "Manu Sporny", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar, Inc.", companyURL: "http://digitalbazaar.com/" }
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
           ],
 
           // extend the bibliography entries
@@ -195,6 +199,19 @@ A <a>linked data document</a> that has been digitally signed.
 A set of attributes that represent a Linked Data digital signature and
 the parameters required to verify it.
         </dd>
+        <dt><dfn>signature options</dfn></dt>
+        <dd>
+A set of options that is included in the signature data. These options may
+be a <a>domain</a>, <a>nonce</a>, or other data that is specific to the
+signature format.
+        </dd>
+        <dt><dfn>signature suite</dfn></dt>
+        <dd>
+A specified set of cryptographic primitives typically consisting of
+a canonicalization algorithm, a message digest algorithm, and a signature
+algorithm that are bundled together by cryptographers for developers
+for the purposes of safety and convenience.
+        </dd>
         <dt><dfn>public key</dfn></dt>
         <dd>
 A cryptographic key that can be used to verify digital signatures created
@@ -212,19 +229,6 @@ ad-hoc value such as <code>mycorp-level3-access</code>, or a very
 specific transaction value like <code>8zF6T$mqP</code>. A signer may
 include a <a>domain</a> in its digital signature to restrict its use
 to particular target, identified by the specified <a>domain</a>.
-        </dd>
-        <dt><dfn>signature suite</dfn></dt>
-        <dd>
-A specified set of cryptographic primitives typically consisting of
-a canonicalization algorithm, a message digest algorithm, and a signature
-algorithm that are bundled together by cryptographers for developers
-for the purposes of safety and convenience.
-        </dd>
-        <dt><dfn>signature options document</dfn></dt>
-        <dd>
-A set of options that is included in the signature data. These options may
-be a <a>domain</a>, <a>nonce</a>, or other data that is specific to the
-signature format.
         </dd>
         <dt><dfn>canonicalization algorithm</dfn></dt>
         <dd>
@@ -464,9 +468,9 @@ and values in the data to be signed.</div>
 The following algorithm specifies how to create a digital signature that can
 be later used to verify the authenticity and integrity of a
 <a>linked data document</a>. A <a>linked data document</a>,
-<var>document</var>, a <a>signature options document</a>, <var>options</var>,
+<var>document</var>, <a>signature options</a>, <var>options</var>,
 and a <a>private key</a>, <var>privateKey</var>, are required inputs.
-The <a>signature options document</a> MUST contain an identifier for the
+The <a>signature options</a> MUST contain an identifier for the
 public/private key pair, <var>creator</var>, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
@@ -504,7 +508,7 @@ encoded string is the <a>signatureValue</a>.
 Add a <code>signature</code> node to <var>output</var> containing
 a <a>linked data signature</a> using the appropriate
 <var>type</var> and <a>signatureValue</a> values as well as
-all of the data in the <var>signature options document</var> (e.g.
+all of the data in the <var>signature options</var> (e.g.
 <var>creator</var>, <var>created</var>, and if given, any additional signature
 options such as <a>nonce</a> and <a>domain</a>).
           </li>
@@ -575,8 +579,8 @@ The following algorithm specifies how to create the data that is used
 to generate or verify a digital signature. It takes a canonicalized
 <a>linked data document</a>, <var>canonicalized document</var>,
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
-a <a>signature options document</a>, <var>input options</var> (by reference).
-The <a>signature options document</a> MUST contain an identifier for the
+<a>signature options</a>, <var>input options</var> (by reference).
+The <a>signature options</a> MUST contain an identifier for the
 public/private key pair, <var>creator</var>, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
