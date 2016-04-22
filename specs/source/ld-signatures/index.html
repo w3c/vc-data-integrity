@@ -275,8 +275,8 @@ signature. For example: <code>LinkedDataSignature2015</code>.</dd>
         <dd>
 A URI that identifies the public/private key pair associated with the
 signature. The URI SHOULD be a URL that can be dereferenced to obtain a
-linked data document that contains a link identifying the entity that owns
-the key pair. Dereferencing the entity link SHOULD result in a Linked Data
+<a>linked data document</a> that contains a link identifying the entity that
+owns the key pair. Dereferencing the entity link SHOULD result in a Linked Data
 document that contains a link back to the URL identifier for the
 public/private key pair, thereby proving ownership.
         </dd>
@@ -385,8 +385,9 @@ therefore strives to minimize the amount of information one has to remember
 to generate a signature. Often, just the <a>signature suite</a> name (e.g.
 <code>LinkedDataSignature2015</code>) is required
 from developers to initiate the creation of a signature. These signature
-suites are often created by people that do have the cryptographic training
-to ensure that safe combinations of cryptographic primitives are used.
+suites are often created or reviewed by people that have the requisite
+cryptographic training to ensure that safe combinations of cryptographic
+primitives are used.
       </p>
       <p>
 This section details the cryptographic primitives that are available to
@@ -417,7 +418,7 @@ A URL that identifies the <a>canonicalization algorithm</a> to use on the
         <dt>digestAlgorithm</dt>
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
-<var>normalized document</var>. For example:
+<var>canonicalized document</var>. For example:
 <code>http://example.com/digests#sha512</code>
         </dd>
         <dt>signatureAlgorithm</dt>
@@ -483,7 +484,7 @@ Remove any <code>signature</code> nodes from the default graph in
 <var>output</var>.
           </li>
           <li>
-Generate a <var>normalized document</var> by normalizing
+Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to a <a>canonicalization algorithm</a>
 (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
         </li>
@@ -521,7 +522,7 @@ The following algorithm specifies how to check the authenticity and
 integrity of a <a>signed linked data document</a> by verifying its
 digital signature. This algorithm takes a
 <a>signed linked data document</a>, <var>signed document</var> and
-outputs a <code>true</code> or </code>false</code> value based on whether or
+outputs a <code>true</code> or <code>false</code> value based on whether or
 not the digital signature on <var>signed document</var> was verified. Whenever
 this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
@@ -548,7 +549,7 @@ Remove any <code>signature</code> nodes from the default graph in
 <var>document</var> and save it as <var>signature</var>.
           </li>
           <li>
-Generate a <var>normalized document</var> by normalizing
+Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to the <a>canonicalization algorithm</a>
 (e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
           </li>
@@ -571,8 +572,8 @@ boolean value.
         <h3>Create Verify Hash Algorithm</h3>
         <p>
 The following algorithm specifies how to create the data that is used
-to generate or verify a digital signature. It takes a normalized
-<a>linked data document</a>, <var>normalized document</var>,
+to generate or verify a digital signature. It takes a canonicalized
+<a>linked data document</a>, <var>canonicalized document</var>,
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
 a <a>signature options document</a>, <var>input options</var> (by reference).
 The <a>signature options document</a> MUST contain an identifier for the
@@ -603,25 +604,24 @@ second, in Universal Time Code format. For example:
 Generate <var>output</var> by:
             <ol class="algorithm">
               <li>
-Creating a <var>normalized options document</var> by normalizing
+Creating a <var>canonicalized options document</var> by canonicalizing
 <var>options</var> according to the <a>canonicalization algorithm</a>
 (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
               </li>
               <li>
-Append <var>normalized options document</var> to <var>output</var>.
+Hash <var>canonicalized options document</var> using the
+<a>message digest algorithm</a> (e.g. SHA-256) and set <var>output</var>
+to the result.
               </li>
               <li>
-Append an end of line character (U+000A), <code>\n</code>, to
-<var>output</var>.
-              </li>
-              <li>
-Append <var>normalized document</var> to <var>output</var>.
+Hash <var>canonicalized document</var> using the <a>message digest algorithm</a>
+(e.g. SHA-256) and append it to <var>output</var>.
               </li>
             </ol>
           </li>
           <li>
 Hash <var>output</var> using the <a>message digest algorithm</a>
- (e.g. SHA-256) and replace it with the result.
+(e.g. SHA-256) and replace it with the result.
           </li>
           <li>
 Return <var>output</var>.
