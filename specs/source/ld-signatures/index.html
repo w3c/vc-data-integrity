@@ -382,6 +382,14 @@ considerations.</div>
 attacker from selecting an algorithm that may abuse how the key is
 used/interpreted.</div>
 
+<div class="issue">Add a note indicating that selective disclosure signature
+mechanisms can be compatible with Linked Data Signatures; for example,
+an algorithm could produce a merkle tree from a canonicalized set of
+N-Quads and then sign the root hash. Disclosure would involve including
+the merkle paths for each N-Quad that is to be revealed. This mechanism
+would merely consume the normalized output differently (this, and the
+proof mechanism would be modifications to this core spec).</div>
+
     </section>
 
     <section>
