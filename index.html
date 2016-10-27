@@ -402,7 +402,11 @@ an algorithm could produce a merkle tree from a canonicalized set of
 N-Quads and then sign the root hash. Disclosure would involve including
 the merkle paths for each N-Quad that is to be revealed. This mechanism
 would merely consume the normalized output differently (this, and the
-proof mechanism would be modifications to this core spec).</div>
+proof mechanism would be modifications to this core spec). It may also
+be necessary to generate signature parameters such as a private key/seed
+that can be used along with an algorithm to deterministically generate
+nonces that are concatenated with each N-Quad to prevent rainbow
+table or similar attacks.</div>
 
     </section>
 
