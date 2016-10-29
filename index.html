@@ -410,6 +410,84 @@ table or similar attacks.</div>
 
     </section>
 
+
+    <section>
+      <h2>Multiple Signatures</h2>
+      <p>
+The Linked Data Signatures specification supports the concept of multiple
+signatures in a single document. There are two types of multi-signature
+approaches that are identified: Signature Sets and Signature Chains.
+      </p>
+
+      <section>
+        <h3>Signature Sets</h3>
+        <p>
+A signature set is useful when the same data needs to be signed by multiple
+entities, but where the order of signatures does not matter,
+such as in the case of a set of signatures on a contract. A signature set,
+which has no order, is represented by associating a set of signatures
+with the <code>signature</code> key in a document.
+        </p>
+        <pre class="example highlight" title="A signature set in a Linked Data document">
+{
+  "@context": "https://w3id.org/identity/v1",
+  "title": "Hello World!",
+  "signature": [{
+    "type": "RsaSignature2015",
+    "creator": "http://example.com/i/pat/keys/5",
+    "created": "2011-09-23T20:21:34Z",
+    "domain": "example.org",
+    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
+    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDY...NmExMgoYzI43Q3ODIyOWM32NjI="
+  }, {
+    "type": "RsaSignature2015",
+    "creator": "http://example.com/i/kelly/keys/7f3j",
+    "created": "2011-09-23T20:24:12Z",
+    "domain": "example.org",
+    "nonce": "83jj4hd62j49gk38",
+    "signatureValue": "zVm4NTIyZTkZDYOGQzNGVkM...3Q3ODIyOWM32NjINmExMgoYzI4="
+  }]
+}
+        </pre>
+
+      </section>
+
+      <section>
+        <h3>Signature Chains</h3>
+        <p>
+A signature chain is useful when the same data needs to be signed by
+multiple entities and the order of when the signatures occurred matters,
+such as in the case of a notary counter-signing a signature that had been
+created on a document. A signature chain, where order must be preserved, is
+represented by associating an ordered list of signatures with the
+<code>signatureChain</code> key in a document.
+        </p>
+        <pre class="example highlight" title="A signature chain in a Linked Data document">
+{
+  "@context": "https://w3id.org/identity/v1",
+  "title": "Hello World!",
+  "signatureChain": [{
+    "type": "RsaSignature2015",
+    "creator": "http://example.com/i/pat/keys/5",
+    "created": "2011-09-23T20:21:34Z",
+    "domain": "example.org",
+    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
+    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDY...NmExMgoYzI43Q3ODIyOWM32NjI="
+  }, {
+    "type": "RsaSignature2015",
+    "creator": "http://bank.example.com/notary/keys/7f3j",
+    "created": "2011-09-23T20:24:12Z",
+    "domain": "example.org",
+    "nonce": "83jj4hd62j49gk38",
+    "signatureValue": "yZTkZDYOGzNGVkMVm4NTIQz...M32NjINmExMDIyOWgoYzI43Q3O="
+  }]
+}
+        </pre>
+
+      </section>
+
+    </section>
+
     <section>
       <h2>Signature Suites</h2>
 
