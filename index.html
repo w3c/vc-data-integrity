@@ -66,7 +66,7 @@
           wg:           "W3C Digital Verification Community Group",
 
           // URI of the public WG page
-          wgURI:        "http://www.w3.org/community/digital-verification/",
+          wgURI:        "https://www.w3.org/community/digital-verification/",
 
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-digital-verification",
@@ -96,9 +96,9 @@
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
           localBiblio:  {
-            "RDF-DATASET-NORMALIZATION": {
-              title:    "RDF Dataset Normalization",
-              href:     "http://json-ld.github.io/normalization/spec/",
+            "RDF-DATASET-CANONICALIZATION": {
+              title:    "RDF Dataset CANONICALIZATION",
+              href:     "http://json-ld.github.io/CANONICALIZATION/spec/",
               authors:  ["David Longley", "Manu Sporny"],
               status:   "CGDRAFT",
               publisher:  "JSON-LD Community Group"
@@ -248,7 +248,7 @@ to particular target, identified by the specified <a>domain</a>.
         <dd>
 An algorithm that takes an input document that has more than one possible
 representation and always transforms it into a canonical form. This process is
-sometimes also called normalization.
+sometimes also called CANONICALIZATION.
         </dd>
         <dt><dfn>message digest algorithm</dfn></dt>
         <dd>
@@ -288,7 +288,7 @@ All of this information is provided using Linked Data vocabularies such as the
         <dt>type (required)<dt>
         <dd>
 A URI that identifies the digital <a>signature suite</a> that was used to create the
-signature. For example: <code>LinkedDataSignature2015</code>.</dd>
+signature. For example: <code>RsaSignature2017</code>.</dd>
         <dt>creator (required)<dt>
         <dd>
 A URI that identifies the public/private key pair associated with the
@@ -349,18 +349,18 @@ by adding the parameters outlined in this section:
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
   "signature": {
-    "type": "LinkedDataSignature2015",
-    "creator": "http://example.com/i/pat/keys/5",
-    "created": "2011-09-23T20:21:34Z",
+    "type": "RsaSignature2017",
+    "creator": "https://example.com/i/pat/keys/5",
+    "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDY...NmExMgoYzI43Q3ODIyOWM32NjI="
+    "signatureValue": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
 }
       </pre>
 
       <p>
-The signature example above uses the <code>LinkedDataSignature2015</code>
+The signature example above uses the <code>RsaSignature2017</code>
 <a>signature suite</a> to produce a verifiable digital signature.
       </p>
 
@@ -372,17 +372,13 @@ be given.</div>
 <div class="issue">Specify algorithm agility mechanisms (additional attributes
 from the security vocab can be used to indicate other signing and hash
 algorithms). Rewrite algorithms to be parameterized on this basis and
-move `LinkedDataSignature2015` definition to a single supported
+move `RsaSignature2017` definition to a single supported
 mechanism; specify its identifier as a URL. In order to make it easy to
 specify a variety of combinations of algorithms, introduce a core
 type `LinkedDataSignature` that allows for easy filtering/discover of
 signature nodes, but that type on its own doesn't specify any default
 signature or hash algorithms, those must be given via other properties in the
 nodes.</div>
-
-<div class="issue">Specify that linked data documents are syntax agnostic.
-Specify the URLs that property values like <code>signature</code> map to,
-for instance, in the security vocabulary.</div>
 
 <div class="issue">Add a note indicating that this specification should not
 be construed to indicate that public key owners should be restricted to a
@@ -410,7 +406,6 @@ table or similar attacks.</div>
 
     </section>
 
-
     <section>
       <h2>Multiple Signatures</h2>
       <p>
@@ -433,19 +428,19 @@ with the <code>signature</code> key in a document.
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
   "signature": [{
-    "type": "RsaSignature2015",
-    "creator": "http://example.com/i/pat/keys/5",
-    "created": "2011-09-23T20:21:34Z",
+    "type": "RsaSignature2017",
+    "creator": "https://example.com/i/pat/keys/5",
+    "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDY...NmExMgoYzI43Q3ODIyOWM32NjI="
+    "signatureValue": "eyJ0eXAiOiJK...gFWFOEjXk"
   }, {
-    "type": "RsaSignature2015",
-    "creator": "http://example.com/i/kelly/keys/7f3j",
-    "created": "2011-09-23T20:24:12Z",
+    "type": "RsaSignature2017",
+    "creator": "https://example.com/i/kelly/keys/7f3j",
+    "created": "2017-09-23T20:24:12Z",
     "domain": "example.org",
     "nonce": "83jj4hd62j49gk38",
-    "signatureValue": "zVm4NTIyZTkZDYOGQzNGVkM...3Q3ODIyOWM32NjINmExMgoYzI4="
+    "signatureValue": "eyiOiJJ0eXAK...EjXkgFWFO"
   }]
 }
         </pre>
@@ -467,19 +462,19 @@ represented by associating an ordered list of signatures with the
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
   "signatureChain": [{
-    "type": "RsaSignature2015",
+    "type": "RsaSignature2017",
     "creator": "http://example.com/i/pat/keys/5",
-    "created": "2011-09-23T20:21:34Z",
+    "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "OGQzNGVkMzVm4NTIyZTkZDY...NmExMgoYzI43Q3ODIyOWM32NjI="
+    "signatureValue": "eyiOiJKJ0eXA...OEjgFWFXk"
   }, {
-    "type": "RsaSignature2015",
+    "type": "RsaSignature2017",
     "creator": "http://bank.example.com/notary/keys/7f3j",
-    "created": "2011-09-23T20:24:12Z",
+    "created": "2017-09-23T20:24:12Z",
     "domain": "example.org",
     "nonce": "83jj4hd62j49gk38",
-    "signatureValue": "yZTkZDYOGzNGVkMVm4NTIQz...M32NjINmExMDIyOWgoYzI43Q3O="
+    "signatureValue": "eyiOiJJ0eXAK...EjXkgFWFO"
   }]
 }
         </pre>
@@ -495,7 +490,7 @@ represented by associating an ordered list of signatures with the
 A Linked Data Signature is designed to be easy to use by developers and
 therefore strives to minimize the amount of information one has to remember
 to generate a signature. Often, just the <a>signature suite</a> name (e.g.
-<code>LinkedDataSignature2015</code>) is required
+<code>RsaSignature2017</code>) is required
 from developers to initiate the creation of a signature. These signature
 suites are often created or reviewed by people that have the requisite
 cryptographic training to ensure that safe combinations of cryptographic
@@ -515,7 +510,7 @@ This section details the cryptographic primitives that are available to
         <dt>id</dt>
         <dd>
 A URL that identifies the <a>signature suite</a>.
-For example: <code>https://w3id.org/security#LinkedDataSignature2015</code>.
+For example: <code>https://w3id.org/security#RsaSignature2017</code>.
         </dd>
         <dt>type</dt>
         <dd>
@@ -525,19 +520,19 @@ The value <code>SignatureSuite</code>.
         <dd>
 A URL that identifies the <a>canonicalization algorithm</a> to use on the
 <var>document</var>. For example:
-<code>https://w3id.org/security#URDNA2015</code>.
+<code>https://w3id.org/security#GCA2015</code>.
         </dd>
         <dt>digestAlgorithm</dt>
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>canonicalized document</var>. For example:
-<code>http://example.com/digests#sha512</code>
+<code>https://registry.ietf.org/ietf-digest-algorithms#SHA256</code>
         </dd>
         <dt>signatureAlgorithm</dt>
         <dd>
 A URL that identifies the <a>signature algorithm</a> to use on the
 <var>data to be signed</var>. For example:
-<code>http://www.w3.org/2000/09/xmldsig#rsa-sha256</code>
+<code>https://registry.ietf.org/ietf-jose-jws-algorithms#RS256</code>
         </dd>
       </dl>
 
@@ -547,11 +542,11 @@ A complete example of a <a>signature suite</a> is shown in the next example:
 
       <pre class="example highlight">
 {
-  "id": "https://w3id.org/security#LinkedDataSignature2015",
+  "id": "https://w3id.org/security#RsaSignature2017",
   "type": "SignatureSuite",
-  "canonicalizationAlgorithm": "https://w3id.org/security#URDNA2015",
-  "digestAlgorithm": "http://example.com/digests#sha512",
-  "signatureAlgorithm": "http://www.w3.org/2000/09/xmldsig#rsa-sha256"
+  "canonicalizationAlgorithm": "https://w3id.org/security#GCA2015",
+  "digestAlgorithm": "https://registry.ietf.org/ietf-digest-algorithms#SHA256",
+  "signatureAlgorithm": "https://registry.ietf.org/ietf-jose-jws-algorithms#RS256"
 }
       </pre>
     </section>
@@ -589,16 +584,12 @@ algorithm encodes strings, it MUST use UTF-8 encoding.
 
         <ol class="algorithm">
           <li>
-Create a copy of <var>document</var>, <var>output</var>.
-          </li>
-          <li>
-Remove any <code>signature</code> nodes from the default graph in
-<var>output</var>.
+Create a copy of <var>document</var>, hereafter referred to as <var>output</var>.
           </li>
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to a <a>canonicalization algorithm</a>
-(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the <em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
         </li>
           <li>
 Create a value <var>tbs</var> that represents the data to be signed, and
@@ -608,9 +599,9 @@ passing the information in <var>options</var>.
           </li>
           <li>
 Digitally sign <var>tbs</var> using the <var>privateKey</var> and the
-the <var>digital signature algorithm</var> (e.g. <em>RSASSA-PKCS1-v1_5</em>
-[[!PKCS1]]) and base-64 encode the resulting value. The resulting base-64
-encoded string is the <a>signatureValue</a>.
+the <var>digital signature algorithm</var> (e.g. JSON Web Signature using
+<em>RSASSA-PKCS1-v1_5</em> algorithm). The resulting string is the
+<a>signatureValue</a>.
           </li>
           <li>
 Add a <code>signature</code> node to <var>output</var> containing
@@ -663,7 +654,7 @@ Remove any <code>signature</code> nodes from the default graph in
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to the <a>canonicalization algorithm</a>
-(e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the </var><em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
           </li>
           <li>
 Create a value <var>tbv</var> that represents the data to be verified, and
@@ -672,10 +663,10 @@ set it to the result of running the
 passing the information in <var>signature</var>.
           </li>
           <li>
-Base-64 decode the <a>signatureValue</a> and pass it, <var>tbv</var>,
+Pass the <a>signatureValue</a>, <var>tbv</var>,
 and the <a>public key</a> to the <a>signature algorithm</a>
-(e.g. </var><em>RSASSA-PKCS1-v1_5</em> [[!PKCS1]]). Return the resulting
-boolean value.
+(e.g. JSON Web Signature using <em>RSASSA-PKCS1-v1_5</em> algorithm).
+Return the resulting boolean value.
           </li>
         </ol>
       </section>
@@ -710,7 +701,7 @@ If <var>created</var> does not exist in <var>options</var>, add an
 entry with a value that is an ISO8601 combined date and
 time string containing the current date and time accurate to at least one
 second, in Universal Time Code format. For example:
-<code>2017-13-13T20:21:34Z</code>.
+<code>2017-11-13T20:21:34Z</code>.
           </li>
           <li>
 Generate <var>output</var> by:
@@ -718,7 +709,7 @@ Generate <var>output</var> by:
               <li>
 Creating a <var>canonicalized options document</var> by canonicalizing
 <var>options</var> according to the <a>canonicalization algorithm</a>
-(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the <em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
               </li>
               <li>
 Hash <var>canonicalized options document</var> using the
