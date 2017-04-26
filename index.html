@@ -96,9 +96,9 @@
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
           localBiblio:  {
-            "RDF-DATASET-CANONICALIZATION": {
-              title:    "RDF Dataset CANONICALIZATION",
-              href:     "http://json-ld.github.io/CANONICALIZATION/spec/",
+            "RDF-DATASET-NORMALIZATION": {
+              title:    "RDF Dataset Normalization",
+              href:     "https://json-ld.github.io/normalization/spec/",
               authors:  ["David Longley", "Manu Sporny"],
               status:   "CGDRAFT",
               publisher:  "JSON-LD Community Group"
@@ -589,7 +589,7 @@ Create a copy of <var>document</var>, hereafter referred to as <var>output</var>
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to a <a>canonicalization algorithm</a>
-(e.g. the <em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
+(e.g. the <em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
         </li>
           <li>
 Create a value <var>tbs</var> that represents the data to be signed, and
@@ -654,7 +654,7 @@ Remove any <code>signature</code> nodes from the default graph in
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to the <a>canonicalization algorithm</a>
-(e.g. the </var><em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
+(e.g. the </var><em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
           </li>
           <li>
 Create a value <var>tbv</var> that represents the data to be verified, and
@@ -709,7 +709,7 @@ Generate <var>output</var> by:
               <li>
 Creating a <var>canonicalized options document</var> by canonicalizing
 <var>options</var> according to the <a>canonicalization algorithm</a>
-(e.g. the <em>GCA2015</em> [[!RDF-DATASET-CANONICALIZATION]] algorithm).
+(e.g. the <em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
               </li>
               <li>
 Hash <var>canonicalized options document</var> using the
