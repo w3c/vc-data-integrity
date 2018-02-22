@@ -41,11 +41,7 @@
               { name: "Dave Longley", url: "http://digitalbazaar.com/",
                 company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
               { name: "Manu Sporny", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
-              { name: "Shane McCarron", url: "https://github.com/halindrome",
-                company: "Spec-Ops", companyURL: "https://www.spec-ops.io/" },
-              { name: "Christopher Allen", url: "http://www.lifewithalacrity.com/",
-                company: "Blockstream", companyURL: "https://blockstream.com/" }
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
           ],
 
           // authors, add as many as you like.
@@ -56,7 +52,9 @@
               { name: "Dave Longley", url: "http://digitalbazaar.com/",
                 company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
               { name: "Manu Sporny", url: "http://digitalbazaar.com/",
-                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
+              { name: "Christopher Allen", url: "http://www.lifewithalacrity.com/",
+                company: "Blockstream", companyURL: "https://blockstream.com/" }
           ],
 
           // extend the bibliography entries
@@ -123,7 +121,7 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
     <section id='abstract'>
       <p>
 This specification describes a mechanism for ensuring the authenticity and
-integrity of linked data documents using digital signatures.
+integrity of Linked Data documents using digital signatures.
       </p>
     </section>
 
@@ -247,8 +245,9 @@ to particular target, identified by the specified <a>domain</a>.
         <dt><dfn>canonicalization algorithm</dfn></dt>
         <dd>
 An algorithm that takes an input document that has more than one possible
-representation and always transforms it into a canonical form. This process is
-sometimes also called CANONICALIZATION.
+representation and always transforms it into a deterministic representation.
+For example, alphabetically sorting a list of items is a type canonicalization.
+This process is sometimes also called <em>normalization</em>.
         </dd>
         <dt><dfn>message digest algorithm</dfn></dt>
         <dd>
@@ -288,7 +287,7 @@ All of this information is provided using Linked Data vocabularies such as the
         <dt>type (required)<dt>
         <dd>
 A URI that identifies the digital <a>signature suite</a> that was used to create the
-signature. For example: <code>RsaSignature2017</code>.</dd>
+signature. For example: <code>RsaSignature2018</code>.</dd>
         <dt>creator (required)<dt>
         <dd>
 A URI that identifies the public/private key pair associated with the
@@ -348,19 +347,19 @@ by adding the parameters outlined in this section:
 {
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
-  "signature": {
-    "type": "RsaSignature2017",
+  "proof": {
+    "type": "RsaSignature2018",
     "creator": "https://example.com/i/pat/keys/5",
     "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "proofValue": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
 }
       </pre>
 
       <p>
-The signature example above uses the <code>RsaSignature2017</code>
+The signature example above uses the <code>RsaSignature2018</code>
 <a>signature suite</a> to produce a verifiable digital signature.
       </p>
 
@@ -372,7 +371,7 @@ be given.</div>
 <div class="issue">Specify algorithm agility mechanisms (additional attributes
 from the security vocab can be used to indicate other signing and hash
 algorithms). Rewrite algorithms to be parameterized on this basis and
-move `RsaSignature2017` definition to a single supported
+move `RsaSignature2018` definition to a single supported
 mechanism; specify its identifier as a URL. In order to make it easy to
 specify a variety of combinations of algorithms, introduce a core
 type `LinkedDataSignature` that allows for easy filtering/discover of
@@ -427,20 +426,20 @@ with the <code>signature</code> key in a document.
 {
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
-  "signature": [{
-    "type": "RsaSignature2017",
+  "proof": [{
+    "type": "RsaSignature2018",
     "creator": "https://example.com/i/pat/keys/5",
     "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "proofValue": "eyJ0eXAiOiJK...gFWFOEjXk"
   }, {
-    "type": "RsaSignature2017",
+    "type": "RsaSignature2018",
     "creator": "https://example.com/i/kelly/keys/7f3j",
     "created": "2017-09-23T20:24:12Z",
     "domain": "example.org",
     "nonce": "83jj4hd62j49gk38",
-    "signatureValue": "eyiOiJJ0eXAK...EjXkgFWFO"
+    "proofValue": "eyiOiJJ0eXAK...EjXkgFWFO"
   }]
 }
         </pre>
@@ -461,20 +460,20 @@ represented by associating an ordered list of signatures with the
 {
   "@context": "https://w3id.org/identity/v1",
   "title": "Hello World!",
-  "signatureChain": [{
-    "type": "RsaSignature2017",
+  "proofChain": [{
+    "type": "RsaSignature2018",
     "creator": "http://example.com/i/pat/keys/5",
     "created": "2017-09-23T20:21:34Z",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "signatureValue": "eyiOiJKJ0eXA...OEjgFWFXk"
+    "proofValue": "eyiOiJKJ0eXA...OEjgFWFXk"
   }, {
-    "type": "RsaSignature2017",
+    "type": "RsaSignature2018",
     "creator": "http://bank.example.com/notary/keys/7f3j",
     "created": "2017-09-23T20:24:12Z",
     "domain": "example.org",
     "nonce": "83jj4hd62j49gk38",
-    "signatureValue": "eyiOiJJ0eXAK...EjXkgFWFO"
+    "proofValue": "eyiOiJJ0eXAK...EjXkgFWFO"
   }]
 }
         </pre>
@@ -490,7 +489,7 @@ represented by associating an ordered list of signatures with the
 A Linked Data Signature is designed to be easy to use by developers and
 therefore strives to minimize the amount of information one has to remember
 to generate a signature. Often, just the <a>signature suite</a> name (e.g.
-<code>RsaSignature2017</code>) is required
+<code>RsaSignature2018</code>) is required
 from developers to initiate the creation of a signature. These signature
 suites are often created or reviewed by people that have the requisite
 cryptographic training to ensure that safe combinations of cryptographic
@@ -510,7 +509,7 @@ This section details the cryptographic primitives that are available to
         <dt>id</dt>
         <dd>
 A URL that identifies the <a>signature suite</a>.
-For example: <code>https://w3id.org/security#RsaSignature2017</code>.
+For example: <code>https://w3id.org/security#RsaSignature2018</code>.
         </dd>
         <dt>type</dt>
         <dd>
@@ -526,13 +525,13 @@ A URL that identifies the <a>canonicalization algorithm</a> to use on the
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>canonicalized document</var>. For example:
-<code>https://registry.ietf.org/ietf-digest-algorithms#SHA256</code>
+<code>https://www.ietf.org/assignments/jwa-parameters#SHA256</code>
         </dd>
         <dt>signatureAlgorithm</dt>
         <dd>
 A URL that identifies the <a>signature algorithm</a> to use on the
 <var>data to be signed</var>. For example:
-<code>https://registry.ietf.org/ietf-jose-jws-algorithms#RS256</code>
+<code>https://www.ietf.org/assignments/jwa-parameters#RS256</code>
         </dd>
       </dl>
 
@@ -542,11 +541,11 @@ A complete example of a <a>signature suite</a> is shown in the next example:
 
       <pre class="example highlight">
 {
-  "id": "https://w3id.org/security#RsaSignature2017",
+  "id": "https://w3id.org/security#RsaSignature2018",
   "type": "SignatureSuite",
   "canonicalizationAlgorithm": "https://w3id.org/security#GCA2015",
-  "digestAlgorithm": "https://registry.ietf.org/ietf-digest-algorithms#SHA256",
-  "signatureAlgorithm": "https://registry.ietf.org/ietf-jose-jws-algorithms#RS256"
+  "digestAlgorithm": "https://www.ietf.org/assignments/jwa-parameters#SHA256",
+  "proofAlgorithm": "https://www.ietf.org/assignments/jws-parameters#RSASSA-PSS"
 }
       </pre>
     </section>
