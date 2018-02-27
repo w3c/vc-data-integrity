@@ -723,10 +723,11 @@ Hash <var>canonicalized document</var> using the <a>message digest algorithm</a>
             </ol>
           </li>
           <li>
-<div class="issue">This last step needs further clarification. This step is
-usually automatically performed by signing implementations as their
-algorithms are a combination of a signing and a hashing mechanism
-such as RS256 (RSA + SHA-256). Current implementations of RSA-based
+<div class="issue">This last step needs further clarification. Signing
+implementations usually automatically perform their own integrated
+hashing of an input message, i.e. signing algorithms are a combination
+of a raw signing mechanism and a hashing mechanism such as
+RS256 (RSA + SHA-256). Current implementations of RSA-based
 Linked Data Signature suites therefore do not perform this last step
 before passing the data to a signing algorithm as it will be performed
 internally. The Ed25519Signature2018 algorithm also does not perform
