@@ -107,7 +107,14 @@
               authors:  ["Manu Sporny","David Longley"],
               status:   "CGDRAFT",
               publisher:  "Web Payments Community Group"
-          }
+          },
+          "LD-PROOF": {
+            title:    "Linked Data Proofs 1.0",
+            href:     "https://w3c-dvcg.github.io/ld-proofs/",
+            authors:  ["Manu Sporny","David Longley"],
+            status:   "CGDRAFT",
+            publisher:  "Digital Verification Community Group"
+        }
         }
       };
     </script>
@@ -162,9 +169,9 @@ The Linked Data Signature specification achieves the following design goals:
         <dt>Simple for Developers</dt>
         <dd>
 The signature format is designed to be easy to use for developers that don't
-have significant cryptography training. For example, <a>signature suite</a> identifiers
-are used instead of specific cryptographic parameters to ensure that it is
-difficult to accidentally produce a weak digital signature.
+have significant cryptography training. For example, <a>signature suite</a>
+identifiers are used instead of specific cryptographic parameters to ensure that
+it is difficult to accidentally produce a weak digital signature.
         </dd>
 
         <dt>Syntax Agnostic</dt>
@@ -272,10 +279,10 @@ been modified in transit and came from someone possessing a particular secret.
       <h2>Linked Data Signature Overview</h2>
 
       <p>
-A <a>linked data signature</a> is comprised of information about the
-signature, parameters required to verify it, and the signature value itself.
-All of this information is provided using Linked Data vocabularies such as the
-[[!SECURITY-VOCABULARY]].
+A <a>linked data signature</a> is a type of [[!LD-PROOF]], and is comprised of
+information about the signature, parameters required to verify it, and the
+signature value itself. All of this information is provided using Linked Data
+vocabularies such as the [[!SECURITY-VOCABULARY]]. 
       </p>
 
       <p>
@@ -779,4 +786,3 @@ considerations.</div>
 
   </body>
 </html>
-
