@@ -100,8 +100,8 @@
               publisher:  "JSON-LD Community Group"
             },
             "LD-SIGNATURES": {
-              title:    "Linked Data Proofs",
-              href:     "https://w3c-dvcg.github.io/ld-proofs/",
+              title:    "Linked Data Signatures",
+              href:     "https://w3c-dvcg.github.io/ld-signatures/",
               authors:  ["David Longley", "Manu Sporny"],
               status:   "CGDRAFT",
               publisher:  "Digital Verification Community Group"
@@ -311,7 +311,7 @@ type indicates that the proof includes a digital signature produced by an <code>
         <dd>
 The specific intent for the proof, the reason why an entity created it. Acts
 as a safeguard to prevent the proof from being misused for a purpose other than
-the one it was intended for. For exmaple, a proof can be used for purposes of
+the one it was intended for. For example, a proof can be used for purposes of
 <code>authentication</code>, for asserting control of a Verifiable Credential
 (<code>assertionMethod</code>), and several others.
         </dd>
@@ -613,7 +613,7 @@ Create a copy of <var>document</var>, hereafter referred to as <var>output</var>
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to a <a>canonicalization algorithm</a>
-(e.g. the <em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
         </li>
           <li>
 Create a value <var>tbs</var> that represents the data to be signed, and
@@ -683,7 +683,7 @@ Remove any <code>proof</code> nodes from the default graph in
           <li>
 Generate a <var>canonicalized document</var> by canonicalizing
 <var>document</var> according to the <a>canonicalization algorithm</a>
-(e.g. the </var><em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
           </li>
           <li>
 Create a value <var>tbv</var> that represents the data to be verified, and
@@ -744,7 +744,7 @@ Generate <var>output</var> by:
               <li>
 Creating a <var>canonicalized options document</var> by canonicalizing
 <var>options</var> according to the <a>canonicalization algorithm</a>
-(e.g. the <em>GCA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
+(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-NORMALIZATION]] algorithm).
               </li>
               <li>
 Hash <var>canonicalized options document</var> using the
