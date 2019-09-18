@@ -346,8 +346,8 @@ for detached JSON Web Signatures.
 
       <p class="note">
 Since this specification is based on Linked Data, the terms <code>type</code>,
-<code>creator</code>, <code>created</code>, <code>domain</code>,
-<code>nonce</code>, and <code>proofValue</code> above
+ <code>created</code>, <code>domain</code>,
+<code>nonce</code>, and <code>proof</code> above
 map to URLs. The vocabulary where these terms are defined is the
 [[SECURITY-VOCABULARY]].
       </p>
@@ -369,21 +369,22 @@ by adding the parameters outlined in this section:
 
       <pre class="example highlight" title="A simple signed Linked Data document">
 {
-  "@context": "https://w3id.org/identity/v1",
+  "@context": "https://www.w3.org/2018/credentials/examples/v1",
   "title": "Hello World!",
   "proof": {
-    "type": "RsaSignature2018",
-    "creator": "https://example.com/i/pat/keys/5",
+    "type": "Ed25519Signature2018",
+    "proofPurpose": "assertionMethod",
     "created": "2017-09-23T20:21:34Z",
+    "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "proofValue": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
 }
       </pre>
 
       <p>
-The proof example above uses the <code>RsaSignature2018</code>
+The proof example above uses the <code>Ed25519Signature2018</code>
 <a>proof suite</a> to produce a verifiable digital proof.
       </p>
 
@@ -513,7 +514,7 @@ represented by associating an ordered list of proofs with the
 A Linked Data Proof is designed to be easy to use by developers and
 therefore strives to minimize the amount of information one has to remember
 to generate a proof. Often, just the <a>proof suite</a> name (e.g.
-<code>RsaSignature2018</code>) is required
+<code>Ed25519Signature2018</code>) is required
 from developers to initiate the creation of a proof. These proof
 suites are often created or reviewed by people that have the requisite
 cryptographic training to ensure that safe combinations of cryptographic
@@ -533,7 +534,7 @@ This section details the cryptographic primitives that are available to
         <dt>id</dt>
         <dd>
 A URL that identifies the <a>proof suite</a>.
-For example: <code>https://w3id.org/security#RsaSignature2018</code>.
+For example: <code>#Ed25519Signature2018</code>.
         </dd>
         <dt>type</dt>
         <dd>
@@ -543,19 +544,19 @@ The value <code>ProofSuite</code>.
         <dd>
 A URL that identifies the <a>canonicalization algorithm</a> to use on the
 <var>document</var>. For example:
-<code>https://w3id.org/security#GCA2015</code>.
+<code>https://w3id.org/security#URDNA2015</code>.
         </dd>
         <dt>digestAlgorithm</dt>
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>canonicalized document</var>. For example:
-<code>https://www.ietf.org/assignments/jwa-parameters#SHA256</code>
+<code>http://w3id.org/digests#sha512</code>
         </dd>
         <dt>proofAlgorithm</dt>
         <dd>
 A URL that identifies the <a>proof algorithm</a> to use on the
 <var>data to be signed</var>. For example:
-<code>https://www.ietf.org/assignments/jwa-parameters#RS256</code>
+<code>http://w3id.org/security#ed25519</code>
         </dd>
       </dl>
 
@@ -565,11 +566,11 @@ A complete example of a <a>proof suite</a> is shown in the next example:
 
       <pre class="example highlight">
 {
-  "id": "https://w3id.org/security#RsaSignature2018",
-  "type": "ProofSuite",
-  "canonicalizationAlgorithm": "https://w3id.org/security#GCA2015",
-  "digestAlgorithm": "https://www.ietf.org/assignments/jwa-parameters#SHA256",
-  "proofAlgorithm": "https://www.ietf.org/assignments/jws-parameters#RSASSA-PSS"
+  "id": "https://w3id.org/security/v1#Ed25519Signature2018",
+  "type": "Ed25519VerificationKey2018",
+  "canonicalizationAlgorithm": "https://w3id.org/security#URDNA2015",
+  "digestAlgorithm": "http://w3id.org/digests#sha512",
+  "signatureAlgorithm": "http://w3id.org/security#ed25519"
 }
       </pre>
     </section>
