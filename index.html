@@ -449,22 +449,25 @@ with the <code>proof</code> key in a document.
         </p>
         <pre class="example highlight" title="A proof set in a Linked Data document">
 {
-  "@context": "https://w3id.org/identity/v1",
+  "@context": "https://www.w3.org/2018/credentials/examples/v1",
   "title": "Hello World!",
   "proof": [{
-    "type": "RsaSignature2018",
-    "creator": "https://example.com/i/pat/keys/5",
-    "created": "2017-09-23T20:21:34Z",
+    "type": "Ed25519Signature2018",
+    "proofPurpose": "assertionMethod",
+    "created": "2019-08-23T20:21:34Z",
+    "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "proofValue": "eyJ0eXAiOiJK...gFWFOEjXk"
-  }, {
+    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
+  },
+  {
     "type": "RsaSignature2018",
-    "creator": "https://example.com/i/kelly/keys/7f3j",
-    "created": "2017-09-23T20:24:12Z",
+    "proofPurpose": "assertionMethod",
+    "created": "2017-09-23T20:21:34Z",
+    "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "83jj4hd62j49gk38",
-    "proofValue": "eyiOiJJ0eXAK...EjXkgFWFO"
+    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
+    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
         </pre>
@@ -483,22 +486,25 @@ represented by associating an ordered list of proofs with the
         </p>
         <pre class="example highlight" title="A proof chain in a Linked Data document">
 {
-  "@context": "https://w3id.org/identity/v1",
+  "@context": "https://www.w3.org/2018/credentials/examples/v1",
   "title": "Hello World!",
   "proofChain": [{
-    "type": "RsaSignature2018",
-    "creator": "http://example.com/i/pat/keys/5",
-    "created": "2017-09-23T20:21:34Z",
+    "type": "Ed25519Signature2018",
+    "proofPurpose": "assertionMethod",
+    "created": "2019-08-23T20:21:34Z",
+    "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
     "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "proofValue": "eyiOiJKJ0eXA...OEjgFWFXk"
-  }, {
+    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
+  },
+  {
     "type": "RsaSignature2018",
-    "creator": "http://bank.example.com/notary/keys/7f3j",
-    "created": "2017-09-23T20:24:12Z",
+    "proofPurpose": "assertionMethod",
+    "created": "2017-09-23T20:21:34Z",
+    "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "83jj4hd62j49gk38",
-    "proofValue": "eyiOiJJ0eXAK...EjXkgFWFO"
+    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
+    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
         </pre>
@@ -534,7 +540,7 @@ This section details the cryptographic primitives that are available to
         <dt>id</dt>
         <dd>
 A URL that identifies the <a>proof suite</a>.
-For example: <code>#Ed25519Signature2018</code>.
+For example: <code>https://w3id.org/security#Ed25519Signature2018</code>.
         </dd>
         <dt>type</dt>
         <dd>
@@ -598,7 +604,7 @@ be later used to verify the authenticity and integrity of a
 <var>document</var>, <a>proof options</a>, <var>options</var>,
 and a <a>private key</a>, <var>privateKey</var>, are required inputs.
 The <a>proof options</a> MUST contain an identifier for the
-public/private key pair, <var>creator</var>, and an ISO8601 combined date and
+public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
 and a <a>domain</a> may also be specified in the <var>options</var>. A
@@ -632,7 +638,7 @@ Add a <code>proof</code> node to <var>output</var> containing
 a <a>linked data proof</a> using the appropriate
 <var>type</var> and <a>proofValue</a> values as well as
 all of the data in the <var>proof options</var> (e.g.
-<var>creator</var>, <var>created</var>, and if given, any additional proof
+<var>created</var>, and if given, any additional proof
 options such as <a>nonce</a> and <a>domain</a>).
           </li>
           <li>
@@ -714,7 +720,7 @@ to generate or verify a digital proof. It takes a canonicalized
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
 <a>proof options</a>, <var>input options</var> (by reference).
 The <a>proof options</a> MUST contain an identifier for the
-public/private key pair, <var>creator</var>, and an ISO8601 combined date and
+public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
 and a <a>domain</a> may also be specified in the <var>options</var>.
