@@ -578,7 +578,7 @@ be later used to verify the authenticity and integrity of a
 <var>document</var>, <a>signature options</a>, <var>options</var>,
 and a <a>private key</a>, <var>privateKey</var>, are required inputs.
 The <a>signature options</a> MUST contain an identifier for the
-public/private key pair, <var>creator</var>, and an ISO8601 combined date and
+public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
 and a <a>domain</a> may also be specified in the <var>options</var>. A
@@ -612,7 +612,7 @@ Add a <code>signature</code> node to <var>output</var> containing
 a <a>linked data signature</a> using the appropriate
 <var>type</var> and <a>signatureValue</a> values as well as
 all of the data in the <var>signature options</var> (e.g.
-<var>creator</var>, <var>created</var>, and if given, any additional signature
+<var>created</var>, and if given, any additional signature
 options such as <a>nonce</a> and <a>domain</a>).
           </li>
           <li>
@@ -684,7 +684,7 @@ to generate or verify a digital signature. It takes a canonicalized
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
 <a>signature options</a>, <var>input options</var> (by reference).
 The <a>signature options</a> MUST contain an identifier for the
-public/private key pair, <var>creator</var>, and an ISO8601 combined date and
+public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
 and a <a>domain</a> may also be specified in the <var>options</var>.
