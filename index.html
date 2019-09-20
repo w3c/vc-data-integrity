@@ -301,21 +301,6 @@ The string value of an [[!ISO8601]] combined date and time string generated
 by the <a href="#signature-algorithm">Signature Algorithm</a>.
         </dd>
 
-        <dt>proofPurpose (required)<dt>
-        <dd>
-The specific intent for the signature, the reason why an entity created it. Acts
-as a safeguard to prevent the proof from being misused for a purpose other than
-the one it was intended for. For example, a proof can be used for purposes of
-<code>authentication</code>, for asserting control of a Verifiable Credential
-(<code>assertionMethod</code>), and several others.
-        </dd>
-
-        <dt>verificationMethod (required)<dt>
-        <dd>
-A set of parameters required to independently verify the proof, such as an
-identifier for a public/private key pair that would be used in the proof.
-        </dd>
-
         <dt>domain (optional)<dt>
         <dd>
 A string value specifying the restricted <a>domain</a> of the signature.
@@ -340,7 +325,6 @@ Since this specification is based on Linked Data, the terms <code>type</code>,
 <code>jws</code> above map to URLs. The vocabulary where these terms are defined
 is the [[SECURITY-VOCABULARY]].
       </p>
-
 
       <p>
 A signature can be added to a Linked Data document like the following:
