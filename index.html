@@ -351,7 +351,6 @@ by adding the parameters outlined in this section:
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
 }
@@ -431,7 +430,6 @@ with the <code>signature</code> key in a document.
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   },
   {
@@ -440,7 +438,6 @@ with the <code>signature</code> key in a document.
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
@@ -468,7 +465,6 @@ represented by associating an ordered list of signatures with the
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   },
   {
@@ -477,7 +473,6 @@ represented by associating an ordered list of signatures with the
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
@@ -530,7 +525,7 @@ A URL that identifies the <a>canonicalization algorithm</a> to use on the
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>canonicalized document</var>. For example:
-<code>http://w3id.org/digests#sha512</code>
+<code>https://www.ietf.org/assignments/jwa-parameters#SHA256</code>
         </dd>
         <dt>signatureAlgorithm</dt>
         <dd>
@@ -549,7 +544,7 @@ A complete example of a <a>signature suite</a> is shown in the next example:
   "id": "https://w3id.org/security/v1#Ed25519Signature2018",
   "type": "Ed25519VerificationKey2018",
   "canonicalizationAlgorithm": "https://w3id.org/security#URDNA2015",
-  "digestAlgorithm": "http://w3id.org/digests#sha512",
+  "digestAlgorithm": "https://www.ietf.org/assignments/jwa-parameters#SHA256",
   "signatureAlgorithm": "http://w3id.org/security#ed25519"
 }
       </pre>
