@@ -368,7 +368,10 @@ by adding the parameters outlined in this section:
 
       <pre class="example highlight" title="A simple signed Linked Data document">
 {
-  "@context": "https://www.w3.org/2018/credentials/examples/v1",
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
   "title": "Hello World!",
   "proof": {
     "type": "Ed25519Signature2018",
@@ -448,7 +451,10 @@ with the <code>proof</code> key in a document.
         </p>
         <pre class="example highlight" title="A proof set in a Linked Data document">
 {
-  "@context": "https://www.w3.org/2018/credentials/examples/v1",
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
   "title": "Hello World!",
   "proof": [{
     "type": "Ed25519Signature2018",
@@ -485,7 +491,10 @@ represented by associating an ordered list of proofs with the
         </p>
         <pre class="example highlight" title="A proof chain in a Linked Data document">
 {
-  "@context": "https://www.w3.org/2018/credentials/examples/v1",
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
   "title": "Hello World!",
   "proofChain": [{
     "type": "Ed25519Signature2018",
@@ -555,13 +564,13 @@ A URL that identifies the <a>canonicalization algorithm</a> to use on the
         <dd>
 A URL that identifies the <a>message digest algorithm</a> to use on the
 <var>canonicalized document</var>. For example:
-<code>http://w3id.org/digests#sha512</code>
+<code>https://www.ietf.org/assignments/jwa-parameters#SHA256</code>
         </dd>
         <dt>proofAlgorithm</dt>
         <dd>
 A URL that identifies the <a>proof algorithm</a> to use on the
 <var>data to be signed</var>. For example:
-<code>http://w3id.org/security#ed25519</code>
+<code>https://w3id.org/security#ed25519</code>
         </dd>
       </dl>
 
@@ -574,8 +583,8 @@ A complete example of a <a>proof suite</a> is shown in the next example:
   "id": "https://w3id.org/security/v1#Ed25519Signature2018",
   "type": "Ed25519VerificationKey2018",
   "canonicalizationAlgorithm": "https://w3id.org/security#URDNA2015",
-  "digestAlgorithm": "http://w3id.org/digests#sha512",
-  "signatureAlgorithm": "http://w3id.org/security#ed25519"
+  "digestAlgorithm": "https://www.ietf.org/assignments/jwa-parameters#SHA256",
+  "signatureAlgorithm": "https://w3id.org/security#ed25519"
 }
       </pre>
     </section>
