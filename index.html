@@ -140,20 +140,52 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
+Cryptographic proofs enable functionality that's extremely useful to
+implementors of distributed systems. For example, proofs can be used for
+various purposes, such as:
+      </p>
+
+<ul>
+  <li>
+Make statements that can be shared without loss of trust, because their
+authorship can be verified by a third party (e.g. Verifiable Credentials,
+social media posts, so on).
+  </li>
+  <li>
+Authenticate as the controller of a Decentralized Identifier (DID) to some
+domain.
+  </li>
+  <li>
+Invoke capabilities where the invocation can be verified by another party.
+  </li>
+  <li>
+Agree to contracts where the agreement can be verified by another party.
+  </li>
+  <li>
+Additionally, many proofs that are based on cryptographic signatures provide the
+benefit of integrity protection, making documents and data graphs tamper-
+evident.
+  </li>
+</ul>
+
+      <p>
 The term Linked Data is used to describe a recommended best practice for
 exposing, sharing, and connecting information on the Web using standards,
 such as URLs, to identify things and their properties. When information
 is presented as Linked Data, other related information can be easily discovered
 and new information can be easily linked to it. Linked Data is extensible in a
 decentralized way, greatly reducing barriers to large scale integration.
+      </p>
 
+      <p>
 With the increase in usage of Linked Data for a variety of applications, there
 is a need to be able to verify the authenticity and integrity of Linked Data
 documents. This specification adds authentication and integrity protection to
-linked data documents through the use of mathematical proofs
-without sacrificing Linked Data features such as extensibility and
+linked data documents through the use of mathematical proofs without sacrificing
+Linked Data features such as extensibility and
 composability.
       </p>
+
     </section>
 
     <section>
@@ -167,32 +199,32 @@ The Linked Data Proofs specification achieves the following design goals:
         <dt>Simple for Developers</dt>
         <dd>
 The proof format is designed to be easy to use for developers that don't
-have significant cryptography training. For example, <a>cryptosuite</a>
+have significant cryptography training. For example, <a>proof type</a>
 identifiers are used instead of specific cryptographic parameters to ensure
 that it is difficult to accidentally produce a weak digital proof.
         </dd>
-
-        <dt>Syntax Agnostic</dt>
-        <dd>
-The proof mechanism can be used across a variety of RDF data syntaxes such
-as JSON-LD, N-Quads, and TURTLE, without the need to regenerate the proof.
-        </dd>
         <dt>Agile</dt>
         <dd>
-Since digital proof suites may be compromised without warning due to
-technological advancements, it is important that suites can be easily and
-quickly replaced. This specification provides algorithm agility while still
-keeping the digital proof format easy for developers to understand.
+Since digital proof mechanisms may be compromised without warning due to
+technological advancements, it is important that <a>proof type</a>s can be
+easily and quickly replaced. This specification provides algorithm agility
+while still keeping the digital proof format easy for developers to understand.
         </dd>
         <dt>Extensible</dt>
         <dd>
-Creating and deploying new proof suites is a fairly trivial undertaking
+Creating and deploying new proof types is a fairly trivial undertaking
 to ensure that the proof format increases the rate of innovation in the
 digital proof space.
         </dd>
-
+        <dt>Graph Syntax Agnostic</dt>
+        <dd>
+Cryptographic proofs over graph data structures is a notoriously difficult
+problem, since graphs can be serialized in many different but equivalent ways.
+For advanced use cases, these proof mechanisms can be used across a variety of
+RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
+without the need to regenerate the proof.
+        </dd>
       </dl>
-
     </section>
 
     <section>
@@ -207,20 +239,44 @@ generation and verification of Linked Data digital proofs.
         <dd>
 A document comprised of Linked Data.
         </dd>
-        <dt><dfn>signed linked data document</dfn></dt>
-        <dd>
-A <a>linked data document</a> that has been digitally signed.
-        </dd>
         <dt><dfn>linked data proof</dfn></dt>
         <dd>
 A set of attributes that represent a Linked Data digital proof and
 the parameters required to verify it.
         </dd>
+        <dt><dfn>linked data signature</dfn></dt>
+        <dd>
+A <em>type</em> of Linked Data Proof that involves cryptographic signatures --
+see the Linked Data Signatures specification for examples of signature
+algorithms.
+        </dd>
+        <dt><dfn>signed linked data document</dfn></dt>
+        <dd>
+A <a>linked data document</a> that has been digitally signed.
+        </dd>
+        <dt><dfn>public key</dfn></dt>
+        <dd>
+A cryptographic key that can be used to verify digital proofs created
+with a corresponding <a>private key</a>.
+        </dd>
+        <dt><dfn>private key</dfn></dt>
+        <dd>
+A cryptographic key that can be used to generate digital proofs.
+        </dd>
+        <dt><dfn>proof type</dfn></dt>
+        <dd>
+(Also known as a <dfn>proof suite</dfn>.) A specified set of cryptographic
+primitives bundled together by cryptographers for developers, for the purposes
+of safety and convenience. A proof type typically consists of a
+<a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and a
+specific corresponding <a>proof algorithm</a> (see <a>Advanced Terminology</a>
+section).
+        </dd>
         <dt><dfn>proof options</dfn></dt>
         <dd>
 A set of options that is included in the proof data. These options may
-be a <a>controller</a>, <a>nonce</a>, <a>domain</a>, or other data that is
-specific to the proof format.
+be include <a>controller</a>, <a>challenge</a>, <a>domain</a>, or other data
+that is specific to the proof format.
         </dd>
         <dt><dfn>proof purpose</dfn></dt>
         <dd>
@@ -233,37 +289,31 @@ one it was intended for.
 A set of parameters required to independently verify the proof, such as an
 identifier for a public/private key pair that would be used in the proof.
         </dd>
-        <dt><dfn>proof suite</dfn></dt>
-        <dd>
-A specified set of cryptographic primitives typically consisting of
-a canonicalization algorithm, a message digest algorithm, and a proof
-algorithm that are bundled together by cryptographers for developers
-for the purposes of safety and convenience.
-        </dd>
-        <dt><dfn>public key</dfn></dt>
-        <dd>
-A cryptographic key that can be used to verify digital proofs created
-with a corresponding <a>private key</a>.
-        </dd>
-        <dt><dfn>private key</dfn></dt>
-        <dd>
-A cryptographic key that can be used to generate digital proofs.
-        </dd>
         <dt><dfn>domain</dfn></dt>
         <dd>
 A string value that specifies the operational domain of a digital proof.
-This may be an Internet domain name like <code>example.com</code>, a
+This may be an Internet domain name like <code>example.com</code>, an
 ad-hoc value such as <code>mycorp-level3-access</code>, or a very
 specific transaction value like <code>8zF6T$mqP</code>. A signer may
 include a <a>domain</a> in its digital proof to restrict its use
 to particular target, identified by the specified <a>domain</a>.
         </dd>
+      </dl>
+    </section>
+
+    <section>
+      <h3>Advanced Terminology</h3>
+      <p>
+These terms are relevant only to implementors of new <a>proof type</a>s.
+      </p>
+
+      <dl>
         <dt><dfn>canonicalization algorithm</dfn></dt>
         <dd>
 An algorithm that takes an input document that has more than one possible
-representation and always transforms it into a deterministic representation.
-For example, alphabetically sorting a list of items is a type canonicalization.
-This process is sometimes also called <em>normalization</em>.
+representation and always transforms it into a deterministic representation. For
+example, alphabetically sorting a list of items is a type canonicalization. This
+process is sometimes also called <em>normalization</em>.
         </dd>
         <dt><dfn>message digest algorithm</dfn></dt>
         <dd>
@@ -281,7 +331,6 @@ receiver of the message can mathematically verify that the message has not
 been modified in transit and came from someone possessing a particular secret.
         </dd>
       </dl>
-
     </section>
 
     <section>
@@ -302,8 +351,9 @@ All of this information is provided using Linked Data vocabularies such as the
       <dl style="margin-left: 1em;">
         <dt>type (required)<dt>
         <dd>
-The specific type of proof, for example, an <code>Ed25519Signature2018</code>
-type indicates that the proof includes a digital signature produced by an <code>ed25519</code> cryptographic key.
+The specific <a>proof type</a> used. For example, an
+<code>Ed25519Signature2018</code> type indicates that the proof includes a
+digital signature produced by an <code>ed25519</code> cryptographic key.
         </dd>
 
         <dt>proofPurpose (required)<dt>
@@ -329,12 +379,6 @@ by the <a href="#proof-algorithm">Proof Algorithm</a>.
         <dd>
 A string value specifying the restricted <a>domain</a> of the proof.
         </dd>
-        <dt><dfn>nonce</dfn> (optional, but strongly recommended)<dt>
-        <dd>
-A string value that is included in the digital proof and MUST only be
-used once for a particular <a>domain</a> and window of time. This
-value is used to mitigate replay attacks.
-        </dd>
         <dt><dfn>proof value</dfn> (required)<dt>
         <dd>
 One of any number of valid representations of <em>proof value</em> generated by
@@ -345,8 +389,7 @@ for detached JSON Web Signatures.
 
       <p class="note">
 Since this specification is based on Linked Data, the terms <code>type</code>,
- <code>created</code>, <code>domain</code>,
-<code>nonce</code>, and <code>proof</code> above
+ <code>created</code>, <code>domain</code>, and <code>proof</code> above
 map to URLs. The vocabulary where these terms are defined is the
 [[SECURITY-VOCABULARY]].
       </p>
@@ -379,7 +422,6 @@ by adding the parameters outlined in this section:
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
 }
@@ -387,7 +429,7 @@ by adding the parameters outlined in this section:
 
       <p>
 The proof example above uses the <code>Ed25519Signature2018</code>
-<a>proof suite</a> to produce a verifiable digital proof.
+<a>proof type</a> to produce a verifiable digital proof.
       </p>
 
 <div class="issue">Create a separate section detailing an optional mechanism
@@ -433,11 +475,89 @@ table or similar attacks.</div>
     </section>
 
     <section>
+      <h2>Verification Attributes</h2>
+
+      <p>
+Each proof contains a set of interlocking attributes that are used by verifiers
+to ensure that the verification material (such as cryptographic keys) have been
+authorized by their controllers specifically for a purpose that's appropriate to
+a given situation. These attributes include: <code>verificationMethod</code>,
+which describes the cryptographic keys (or other methods) used in the proof,
+<code>proofPurpose</code>, which identifies the purpose for which the method
+is to be used, and the link to a <code>controller</code> document, which
+provides external confirmation that a given method is indeed intended to be used
+for the stated purpose.
+      </p>
+
+      <section>
+        <h3>Verification Method</h3>
+
+        <div class="issue">Add section explaining what a Verification Method parameter is, and its relationship with the Controller document.
+        </div>
+      </section>
+
+      <section>
+        <h3>Proof Purpose</h3>
+
+        <p>
+A proof that describes its purpose helps prevent it from being misused for some
+other purpose.
+        </p>
+
+        <div class="issue">Add a mention of JWK's <code>key_ops</code> parameter and WebCrypto's <code>KeyUsage</code> restrictions; explain that Proof Purpose serves a similar goal but allows for finer-grained restrictions.
+        </div>
+
+        <p>
+  The following is a list of commonly used <a>proof purpose</a> values.
+        </p>
+
+        <dl>
+          <dt>authentication</dt>
+          <dd>
+  Indicates that a given proof is only to be used for the purposes of an
+  authentication protocol.
+          </dd>
+          <dt>assertionMethod</dt>
+          <dd>
+  Indicates that a proof can only be used for making assertions (for example,
+  signing a Verifiable Credential).
+          </dd>
+          <dt>keyAgreement</dt>
+          <dd>
+  Indicates that a proof is used for the purpose of key agreement, for encryption.
+          </dd>
+          <dt>contractAgreement</dt>
+          <dd>
+  Indicates that a proof is used for proofs that an entity agrees to a contract.
+          </dd>
+        </dl>
+
+        <p>
+  Note: The [[Authorization Capabilities]] specification defines additional proof
+  purposes for that use case, such as <code>capabilityInvocation</code> and
+  <code>capabilityDelegation</a>.
+        </p>
+      </section>
+
+      <section>
+        <h3>Controller</h3>
+
+        <div class="issue">Add section explaining what a Controller document  is, and how it's used to ensure that a given method is authorized to be used for a purpose.
+        </div>
+
+        <div class="issue">Add examples of common Controller documents, such as DID Documents published on a ledger-based registry, or on a mutable medium (in combination with an integrity protection mechanism such as Hashlinks).
+        </div>
+      </section>
+
+    </section>
+
+    <section>
       <h2>Multiple Proofs</h2>
       <p>
 The Linked Data Proofs specification supports the concept of multiple
 proofs in a single document. There are two types of multi-proof
-approaches that are identified: Proof Sets and Proof Chains.
+approaches that are identified: Proof Sets (un-ordered) and Proof Chains
+(ordered).
       </p>
 
       <section>
@@ -462,7 +582,6 @@ with the <code>proof</code> key in a document.
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   },
   {
@@ -471,7 +590,6 @@ with the <code>proof</code> key in a document.
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
@@ -502,7 +620,6 @@ represented by associating an ordered list of proofs with the
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   },
   {
@@ -511,7 +628,6 @@ represented by associating an ordered list of proofs with the
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "https://example.com/i/pat/keys/5",
     "domain": "example.org",
-    "nonce": "2bbgh3dgjg2302d-d2b3gi423d42",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
 }
@@ -522,32 +638,32 @@ represented by associating an ordered list of proofs with the
     </section>
 
     <section>
-      <h2>Proof Suites</h2>
+      <h2>Proof Types</h2>
 
       <p>
 A Linked Data Proof is designed to be easy to use by developers and
 therefore strives to minimize the amount of information one has to remember
-to generate a proof. Often, just the <a>proof suite</a> name (e.g.
+to generate a proof. Often, just the <a>proof type</a> name (e.g.
 <code>Ed25519Signature2018</code>) is required
 from developers to initiate the creation of a proof. These proof
-suites are often created or reviewed by people that have the requisite
+types are often created or reviewed by people that have the requisite
 cryptographic training to ensure that safe combinations of cryptographic
 primitives are used.
       </p>
       <p>
 This section details the cryptographic primitives that are available to
-<a>proof suite</a> developers.
+<a>proof type</a> developers.
       </p>
 
       <p>
-        At a minimum, a <a>proof suite</a> must have the
+        At a minimum, a <a>proof type</a> must have the
         following attributes:
       </p>
 
       <dl style="margin-left: 1em;">
         <dt>id</dt>
         <dd>
-A URL that identifies the <a>proof suite</a>.
+A URL that identifies the <a>proof type</a>.
 For example: <code>https://w3id.org/security#Ed25519Signature2018</code>.
         </dd>
         <dt>type</dt>
@@ -575,7 +691,7 @@ A URL that identifies the <a>proof algorithm</a> to use on the
       </dl>
 
       <p>
-A complete example of a <a>proof suite</a> is shown in the next example:
+A complete example of a <a>proof type</a> is shown in the next example:
       </p>
 
       <pre class="example highlight">
@@ -614,8 +730,7 @@ and a <a>private key</a>, <var>privateKey</var>, are required inputs.
 The <a>proof options</a> MUST contain an identifier for the
 public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
-accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
-and a <a>domain</a> may also be specified in the <var>options</var>. A
+accurate to at least one second, in Universal Time Code format. A <a>domain</a> may also be specified in the <var>options</var>. A
 <a>signed linked data document</a> is produced as output. Whenever this
 algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
@@ -647,7 +762,7 @@ a <a>linked data proof</a> using the appropriate
 <var>type</var> and <a>proofValue</a> values as well as
 all of the data in the <var>proof options</var> (e.g.
 <var>created</var>, and if given, any additional proof
-options such as <a>nonce</a> and <a>domain</a>).
+options such as <a>domain</a>).
           </li>
           <li>
 Return <var>output</var> as the <a>signed linked data document</a>.
@@ -730,8 +845,8 @@ to generate or verify a digital proof. It takes a canonicalized
 The <a>proof options</a> MUST contain an identifier for the
 public/private key pair, and an ISO8601 combined date and
 time string, <var>created</var>, containing the current date and time,
-accurate to at least one second, in Universal Time Code format. A <a>nonce</a>
-and a <a>domain</a> may also be specified in the <var>options</var>.
+accurate to at least one second, in Universal Time Code format. A <a>domain</a>
+may also be specified in the <var>options</var>.
 Its output is a data that can be used to generate or verify a
 digital proof (it is usually further hashed as part of the
 verification or signing process).
