@@ -266,8 +266,8 @@ the parameters required to verify it.
         <dt><dfn>linked data signature</dfn></dt>
         <dd>
 A <em>type</em> of Linked Data Proof that involves cryptographic signatures --
-see the Linked Data Signatures specification [[LD-SIGNATURES]] for examples of signature
-algorithms.
+see the Linked Data Signatures specification [[LD-SIGNATURES]] for examples of
+signature algorithms.
         </dd>
         <dt><dfn>signed linked data document</dfn></dt>
         <dd>
@@ -337,7 +337,7 @@ to particular target, identified by the specified <a>domain</a>.
     <section>
       <h3>Advanced Terminology</h3>
       <p>
-These terms are relevant only to implementors of new <a>proof type</a>s.
+These terms are relevant only to implementors of new <a>cryptographic suite</a>s.
       </p>
 
       <dl>
@@ -391,11 +391,11 @@ digital signature produced by an <code>ed25519</code> cryptographic key.
 
         <dt><dfn>proofPurpose</dfn><dt>
         <dd>
-<em>Required</em>. The specific intent for the proof, the reason why an entity created it. Acts
-as a safeguard to prevent the proof from being misused for a purpose other than
-the one it was intended for. For example, a proof can be used for purposes of
-<code>authentication</code>, for asserting control of a Verifiable Credential
-(<code>assertionMethod</code>), and several others.
+<em>Required</em>. The specific intent for the proof, the reason why an entity
+created it. Acts as a safeguard to prevent the proof from being misused for a
+purpose other than the one it was intended for. For example, a proof can be used
+for purposes of <code>authentication</code>, for asserting control of a
+Verifiable Credential (<code>assertionMethod</code>), and several others.
         </dd>
 
         <dt><dfn>verificationMethod</dfn><dt>
@@ -453,6 +453,7 @@ by adding the parameters outlined in this section:
     "proofPurpose": "assertionMethod",
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
+    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
     "domain": "example.org",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }
@@ -613,6 +614,7 @@ with the <code>proof</code> key in a document.
     "proofPurpose": "assertionMethod",
     "created": "2019-08-23T20:21:34Z",
     "verificationMethod": "did:example:123456#key1",
+    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
     "domain": "example.org",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   },
@@ -621,6 +623,7 @@ with the <code>proof</code> key in a document.
     "proofPurpose": "assertionMethod",
     "created": "2017-09-23T20:21:34Z",
     "verificationMethod": "https://example.com/i/pat/keys/5",
+    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
     "domain": "example.org",
     "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
   }]
@@ -673,14 +676,13 @@ represented by associating an ordered list of proofs with the
       <h2>Proof Types</h2>
 
       <p>
-A Linked Data Proof is designed to be easy to use by developers and
-therefore strives to minimize the amount of information one has to remember
-to generate a proof. Often, just the <a>proof type</a> name (e.g.
-<code>Ed25519Signature2018</code>) is required
-from developers to initiate the creation of a proof. These proof
-types are often created or reviewed by people that have the requisite
-cryptographic training to ensure that safe combinations of cryptographic
-primitives are used.
+A Linked Data Proof is designed to be easy to use by developers and therefore
+strives to minimize the amount of information one has to remember to generate a
+proof. Often, just the <a>cryptographic suite</a> name (e.g.
+<code>Ed25519Signature2018</code>) is required from developers to initiate the
+creation of a proof. These <a>cryptographic suite</a>s are often created or
+reviewed by people that have the requisite cryptographic training to ensure that
+safe combinations of cryptographic primitives are used.
       </p>
       <p>
 This section details the cryptographic primitives that are available to
@@ -688,14 +690,13 @@ This section details the cryptographic primitives that are available to
       </p>
 
       <p>
-        At a minimum, a <a>proof type</a> must have the
-        following attributes:
+At a minimum, a <a>proof type</a> is expected have the following attributes:
       </p>
 
       <dl style="margin-left: 1em;">
         <dt>id</dt>
         <dd>
-A URL that identifies the <a>proof type</a>.
+A URL that identifies the <a>cryptographic suite</a>.
 For example: <code>https://w3id.org/security#Ed25519Signature2018</code>.
         </dd>
         <dt>type</dt>
