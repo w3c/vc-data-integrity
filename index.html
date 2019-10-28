@@ -142,7 +142,7 @@ is not fit for production deployment.
       <p>
 Cryptographic proofs enable functionality that's extremely useful to
 implementors of distributed systems. For example, proofs can be used for
-various purposes, such as:
+purposes such as:
       </p>
 
 <ul>
@@ -821,7 +821,7 @@ set it to the result of running the
 passing the information in <var>proof</var>.
           </li>
           <li>
-Pass the <a>proofValue</a>, <var>tbv</var>,
+Pass the <a>proof value</a>, <var>tbv</var>,
 and the <a>public key</a> to the <a>proof algorithm</a>
 (e.g. JSON Web Proof using <em>RSASSA-PKCS1-v1_5</em> algorithm).
 Return the resulting boolean value.
@@ -857,7 +857,7 @@ verification or signing process).
 Let <var>options</var> be a copy of <var>input options</var>.
           </li>
           <li>
-If <code>type</code>, <code>id</code>, or <code>proofValue</code>
+If the <a>proof value</a> parameter (such as <code>jws</code>)
 exists in <var>options</var>, remove the entry.
           </li>
           <li>
