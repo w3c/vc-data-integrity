@@ -140,7 +140,7 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
-Cryptographic proofs enable functionality that's extremely useful to
+Cryptographic proofs enable functionality that is extremely useful to
 implementors of distributed systems. For example, proofs can be used for
 purposes such as:
       </p>
@@ -152,8 +152,8 @@ authorship can be verified by a third party (e.g. Verifiable Credentials,
 social media posts, so on).
   </li>
   <li>
-Authenticate as the controller of a Decentralized Identifier (DID) to some
-domain.
+Authenticate as an entity identified by a particular identifier, for example, as
+the subject identified by a Decentralized Identifier (DID).
   </li>
   <li>
 Invoke capabilities where the invocation can be verified by another party.
@@ -269,8 +269,7 @@ A cryptographic key that can be used to generate digital proofs.
 primitives bundled together by cryptographers for developers, for the purposes
 of safety and convenience. A proof type typically consists of a
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and a
-specific corresponding <a>proof algorithm</a> (see <a>Advanced Terminology</a>
-section).
+specific corresponding <a>proof algorithm</a> (see section <a href="#advanced-terminology"></a>).
         </dd>
         <dt><dfn>proof options</dfn></dt>
         <dd>
@@ -339,8 +338,8 @@ been modified in transit and came from someone possessing a particular secret.
       <p>
 A <a>linked data proof</a> is comprised of information about the
 proof, parameters required to verify it, and the proof value itself.
-All of this information is provided using Linked Data vocabularies such as the
-[[!SECURITY-VOCABULARY]].
+All of this information is provided using Linked Data vocabularies such as
+[[SECURITY-VOCABULARY]].
       </p>
 
       <p>
@@ -372,7 +371,7 @@ identifier for a public/private key pair that would be used in the proof.
         </dd>
         <dt><dfn>created</dfn> (required)<dt>
         <dd>
-The string value of an [[!ISO8601]] combined date and time string generated
+The string value of an [[ISO8601]] combined date and time string generated
 by the <a href="#proof-algorithm">Proof Algorithm</a>.
         </dd>
         <dt>domain (optional)<dt>
@@ -447,14 +446,6 @@ type `LinkedDataProof` that allows for easy filtering/discover of
 proof nodes, but that type on its own doesn't specify any default
 proof or hash algorithms, those must be given via other properties in the
 nodes.</div>
-
-<div class="issue">Add a note indicating that this specification should not
-be construed to indicate that public key owners should be restricted to a
-single public key or that systems that use this spec and involve real people
-should identify each person as only ever being a single entity rather than
-perhaps N entities with M keys. There are no such restrictions and in many
-cases those kinds of restrictions are ill-advised due to privacy
-considerations.</div>
 
 <div class="issue">Add an explicit check on key type to prevent an
 attacker from selecting an algorithm that may abuse how the key is
@@ -535,7 +526,7 @@ other purpose.
         <p>
   Note: The [[Authorization Capabilities]] specification defines additional proof
   purposes for that use case, such as <code>capabilityInvocation</code> and
-  <code>capabilityDelegation</a>.
+  <code>capabilityDelegation</code>.
         </p>
       </section>
 
@@ -728,7 +719,7 @@ be later used to verify the authenticity and integrity of a
 <var>document</var>, <a>proof options</a>, <var>options</var>,
 and a <a>private key</a>, <var>privateKey</var>, are required inputs.
 The <a>proof options</a> MUST contain an identifier for the
-public/private key pair, and an ISO8601 combined date and
+public/private key pair, and an [[!ISO8601]] combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>domain</a> may also be specified in the <var>options</var>. A
 <a>signed linked data document</a> is produced as output. Whenever this
@@ -754,12 +745,12 @@ passing the information in <var>options</var>.
 Digitally sign <var>tbs</var> using the <var>privateKey</var> and the
 the <var>digital proof algorithm</var> (e.g. JSON Web Proof using
 <em>RSASSA-PKCS1-v1_5</em> algorithm). The resulting string is the
-<a>proofValue</a>.
+<a>proof value</a>.
           </li>
           <li>
 Add a <code>proof</code> node to <var>output</var> containing
 a <a>linked data proof</a> using the appropriate
-<var>type</var> and <a>proofValue</a> values as well as
+<var>type</var> and <a>proof value</a> values as well as
 all of the data in the <var>proof options</var> (e.g.
 <var>created</var>, and if given, any additional proof
 options such as <a>domain</a>).
@@ -843,7 +834,7 @@ to generate or verify a digital proof. It takes a canonicalized
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
 <a>proof options</a>, <var>input options</var> (by reference).
 The <a>proof options</a> MUST contain an identifier for the
-public/private key pair, and an ISO8601 combined date and
+public/private key pair, and an [[!ISO8601]] combined date and
 time string, <var>created</var>, containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A <a>domain</a>
 may also be specified in the <var>options</var>.
@@ -862,7 +853,7 @@ exists in <var>options</var>, remove the entry.
           </li>
           <li>
 If <var>created</var> does not exist in <var>options</var>, add an
-entry with a value that is an ISO8601 combined date and
+entry with a value that is an [[!ISO8601]] combined date and
 time string containing the current date and time accurate to at least one
 second, in Universal Time Code format. For example:
 <code>2017-11-13T20:21:34Z</code>.
