@@ -112,7 +112,26 @@
               authors:  ["Manu Sporny","David Longley"],
               status:   "CGDRAFT",
               publisher:  "Web Payments Community Group"
-          }
+            },
+            "DID-CORE": {
+              title:    "Decentralized Identifier Specification v1.0",
+              href:     "https://w3c.github.io/did-core/",
+              status:   "CGDRAFT",
+              publisher:  "Decentralized Identifier Working Group"
+            },
+            "VC-DATA-MODEL": {
+              title:    "Verifiable Credentials Data Model v1.0",
+              href:     "https://www.w3.org/TR/vc-data-model/",
+              authors:  ["Manu Sporny","David Longley","David Chadwick"],
+              status:   "TR",
+              publisher:  "Verifiable Claims Working Group"
+            },
+            "ZCAP": {
+              title:    "Authorization Capabilities for Linked Data",
+              href:     "https://w3c-ccg.github.io/zcap-ld/",
+              status:   "CGDRAFT",
+              publisher:  "Credentials Community Group"
+            }
         }
       };
     </script>
@@ -148,22 +167,23 @@ purposes such as:
 <ul>
   <li>
 Make statements that can be shared without loss of trust, because their
-authorship can be verified by a third party (e.g. Verifiable Credentials,
-social media posts, so on).
+authorship can be verified by a third party (e.g. Verifiable Credentials
+[[VC-DATA-MODEL]], social media posts, so on).
   </li>
   <li>
 Authenticate as an entity identified by a particular identifier, for example, as
-the subject identified by a Decentralized Identifier (DID).
+the subject identified by a Decentralized Identifier (DID) [[DID-CORE]].
   </li>
   <li>
-Invoke capabilities where the invocation can be verified by another party.
+Delegate authorization for actions in a remote execution environment, via
+mechanisms such as Authorization Capabilities [[ZCAP]].
   </li>
   <li>
 Agree to contracts where the agreement can be verified by another party.
   </li>
   <li>
 Additionally, many proofs that are based on cryptographic signatures provide the
-benefit of integrity protection, making documents and data graphs tamper-
+benefit of integrity protection, making documents and data tamper-
 evident.
   </li>
 </ul>
