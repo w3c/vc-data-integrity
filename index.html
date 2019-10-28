@@ -167,8 +167,8 @@ purposes such as:
 <ul>
   <li>
 Make statements that can be shared without loss of trust, because their
-authorship can be verified by a third party (e.g. Verifiable Credentials
-[[VC-DATA-MODEL]], social media posts, so on).
+authorship can be verified by a third party, for example as part of Verifiable
+Credentials [[VC-DATA-MODEL]] or social media posts.
   </li>
   <li>
 Authenticate as an entity identified by a particular identifier, for example, as
@@ -503,15 +503,14 @@ table or similar attacks.</div>
       <h2>Verification Attributes</h2>
 
       <p>
-Each proof contains a set of attributes that are used by verifiers
-to ensure that the verification material (such as cryptographic keys) have been
-authorized by their controllers specifically for a purpose that's appropriate to
-a given situation. These attributes include: <a>verificationMethod</a>,
-which describes the cryptographic keys (or other methods) used in the proof,
-<a>proofPurpose</a>, which identifies the purpose for which the method
-is to be used, and the link to a <a>controller</a>, which
-provides external confirmation that a given method is indeed intended to be used
-for the stated purpose.
+Each proof contains a set of attributes that are used by verifiers to ensure
+that the verification material, such as cryptographic keys, have been authorized
+by their controllers specifically for a purpose that is appropriate to a given
+situation. These attributes include: <a>verificationMethod</a>, which describes
+the cryptographic keys or other methods used in the proof,
+<a>proofPurpose</a>, which identifies the purpose for which the method is to be
+used, and the link to a <a>controller</a>, which provides external confirmation
+that a given method is indeed intended to be used for the stated purpose.
       </p>
 
       <section>
@@ -546,14 +545,14 @@ authentication protocol.
           </dd>
           <dt>assertionMethod</dt>
           <dd>
-Indicates that a proof can only be used for making assertions (for example,
-signing a Verifiable Credential).
+Indicates that a proof can only be used for making assertions, for example
+signing a Verifiable Credential.
           </dd>
           <dt>keyAgreement</dt>
           <dd>
-Indicates that a proof is used for for key agreement protocols (such as
+Indicates that a proof is used for for key agreement protocols, such as
 Elliptic Curve Diffie Hellman key agreement used by popular encryption
-libraries).
+libraries.
           </dd>
           <dt>contractAgreement</dt>
           <dd>
@@ -572,13 +571,13 @@ proof purposes for that use case, such as <code>capabilityInvocation</code> and
         <h3>Controller</h3>
 
         <div class="issue">Add section explaining what a Controller document
-is, and how it's used to ensure that a given method is authorized to be used
+is, and how it is used to ensure that a given method is authorized to be used
 for a purpose.
         </div>
 
         <div class="issue">Add examples of common Controller documents, such as
-DID Documents published on a ledger-based registry, or on a mutable medium (in
-combination with an integrity protection mechanism such as Hashlinks).
+DID Documents published on a ledger-based registry, or on a mutable medium in
+combination with an integrity protection mechanism such as Hashlinks.
         </div>
       </section>
 
@@ -821,7 +820,7 @@ not the digital proof on <var>signed document</var> was verified. Whenever
 this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
 
-<div class="issue">Specify how the public key can be obtained (through
+<div class="issue">Specify how the public key can be obtained, through
 some out-of-band process and passed in or it can be retrieved by
 derefencing its URL identifier, etc.</div>
 
@@ -890,7 +889,7 @@ verification or signing process).
 Let <var>options</var> be a copy of <var>input options</var>.
           </li>
           <li>
-If the <a>proof value</a> parameter (such as <code>jws</code>)
+If the <a>proof value</a> parameter, such as <code>jws</code>,
 exists in <var>options</var>, remove the entry.
           </li>
           <li>
