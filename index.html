@@ -238,7 +238,7 @@ digital proof space.
         </dd>
         <dt>Graph Syntax Agnostic</dt>
         <dd>
-Cryptographic proofs over graph data structures is a notoriously difficult
+Cryptographic proofs over graph data structures is a difficult
 problem, since graphs can be serialized in many different but equivalent ways.
 For advanced use cases, these proof mechanisms can be used across a variety of
 RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
@@ -267,7 +267,7 @@ the parameters required to verify it.
         <dt><dfn>linked data signature</dfn></dt>
         <dd>
 A <em>type</em> of Linked Data Proof that involves cryptographic signatures --
-see the Linked Data Signatures specification for examples of signature
+see the Linked Data Signatures specification [[LD-SIGNATURES]] for examples of signature
 algorithms.
         </dd>
         <dt><dfn>signed linked data document</dfn></dt>
@@ -285,16 +285,17 @@ A cryptographic key that can be used to generate digital proofs.
         </dd>
         <dt><dfn>proof type</dfn></dt>
         <dd>
-(Also known as a <dfn>proof suite</dfn>.) A specified set of cryptographic
-primitives bundled together by cryptographers for developers, for the purposes
-of safety and convenience. A proof type typically consists of a
+A specified set of cryptographic primitives bundled together into a
+<dfn>cryptographic suite</dfn> for the purposes of safety and convenience, by
+cryptographers for developers. A proof type typically consists of a
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and a
-specific corresponding <a>proof algorithm</a> (see section <a href="#advanced-terminology"></a>).
+specific corresponding <a>proof algorithm</a> (see section <a
+href="#advanced-terminology"></a>).
         </dd>
         <dt><dfn>proof options</dfn></dt>
         <dd>
 A set of options that is included in the proof data. These options may
-be include <a>controller</a>, <a>challenge</a>, <a>domain</a>, or other data
+include <a>controller</a>, <a>challenge</a>, <a>domain</a>, or other data
 that is specific to the proof format.
         </dd>
         <dt><dfn>proof purpose</dfn></dt>
@@ -307,6 +308,20 @@ one it was intended for.
         <dd>
 A set of parameters required to independently verify the proof, such as an
 identifier for a public/private key pair that would be used in the proof.
+        </dd>
+        <dt><dfn>controller</dfn></dt>
+        <dd>
+A link to a machine-readable object, such as a DID Document [[DID-CORE]], that
+contains authorization relations that explicitly permit the use of certain
+verification methods for specific purposes. For example, a controller object
+could contain statements that restrict a public key to being used <em>only</em>
+for signing Verifiable Credentials [[VC-DATA-MODEL]] and no other kinds of
+documents.
+        </dd>
+        <dt><dfn>challenge</dfn></dt>
+        <dd>
+A random or pseudo-random value used by some authentication protocols to
+mitigate replay attacks.
         </dd>
         <dt><dfn>domain</dfn></dt>
         <dd>
