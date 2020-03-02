@@ -328,38 +328,6 @@ to particular target, identified by the specified <a>domain</a>.
     </section>
 
     <section>
-      <h3>Advanced Terminology</h3>
-      <p>
-These terms are relevant only to implementors of new <a>cryptographic suite</a>s.
-      </p>
-
-      <dl>
-        <dt><dfn>canonicalization algorithm</dfn></dt>
-        <dd>
-An algorithm that takes an input document that has more than one possible
-representation and always transforms it into a deterministic representation. For
-example, alphabetically sorting a list of items is a type canonicalization. This
-process is sometimes also called <em>normalization</em>.
-        </dd>
-        <dt><dfn>message digest algorithm</dfn></dt>
-        <dd>
-An algorithm that takes an input message and produces a cryptographic
-output message that is often many orders of magnitude smaller than the
-input message. These algorithms are often 1) very fast, 2)
-non-reversible, 3) cause the output to change significantly when even one
-bit of the input message changes, and 4) make it infeasible to find two
-different inputs for the same output.
-        </dd>
-        <dt><dfn>proof algorithm</dfn></dt>
-        <dd>
-An algorithm that takes an input message and produces an output value where the
-receiver of the message can mathematically verify that the message has not
-been modified in transit and came from someone possessing a particular secret.
-        </dd>
-      </dl>
-    </section>
-
-    <section>
       <h2>Linked Data Proof Overview</h2>
 
       <p>
@@ -728,6 +696,38 @@ A complete example of a <a>proof type</a> is shown in the next example:
   "signatureAlgorithm": "https://w3id.org/security#ed25519"
 }
       </pre>
+    </section>
+
+    <section>
+      <h3>Advanced Terminology</h3>
+      <p>
+These terms are relevant only to implementors of new <a>cryptographic suite</a>s.
+      </p>
+
+      <dl>
+        <dt><dfn>canonicalization algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input document that has more than one possible
+representation and always transforms it into a deterministic representation. For
+example, alphabetically sorting a list of items is a type canonicalization. This
+process is sometimes also called <em>normalization</em>.
+        </dd>
+        <dt><dfn>message digest algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input message and produces a cryptographic
+output message that is often many orders of magnitude smaller than the
+input message. These algorithms are often 1) very fast, 2)
+non-reversible, 3) cause the output to change significantly when even one
+bit of the input message changes, and 4) make it infeasible to find two
+different inputs for the same output.
+        </dd>
+        <dt><dfn>proof algorithm</dfn></dt>
+        <dd>
+An algorithm that takes an input message and produces an output value where the
+receiver of the message can mathematically verify that the message has not
+been modified in transit and came from someone possessing a particular secret.
+        </dd>
+      </dl>
     </section>
 
     <section>
