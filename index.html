@@ -393,30 +393,32 @@ A proof can be added to a Linked Data document like the following:
 
       <pre class="example highlight" title="A simple Linked Data document">
 {
-  "@context": "https://w3id.org/identity/v1",
-  "title": "Hello World!"
-}
+  "@context": {"title": "https://schema.org#title"},
+  title: 'Hello world!',
+};
       </pre>
 
       <p>
 by adding the parameters outlined in this section:
       </p>
 
-      <pre class="example highlight" title="A simple signed Linked Data document">
+      <pre class="example highlight"
+      style="overflow-x: auto; white-space pre-wrap; word-wrap: break-word;"
+      title="A simple signed Linked Data document">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://www.w3.org/2018/credentials/examples/v1"
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "title": "Hello World!",
+  "title": "Hello world!",
   "proof": {
-    "type": "Ed25519Signature2018",
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:24Z",
+    "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "created": "2017-09-23T20:21:34Z",
-    "verificationMethod": "did:example:123456#key1",
-    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "domain": "example.org",
-    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
+      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }
 }
       </pre>
@@ -565,27 +567,26 @@ with the <code>proof</code> key in a document.
         <pre class="example highlight" title="A proof set in a Linked Data document">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://www.w3.org/2018/credentials/examples/v1"
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "title": "Hello World!",
+  "title": "Hello world!",
   "proof": [{
-    "type": "Ed25519Signature2018",
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:24Z",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "created": "2019-08-23T20:21:34Z",
-    "verificationMethod": "did:example:123456#key1",
-    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "domain": "example.org",
-    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
-  },
-  {
-    "type": "RsaSignature2018",
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
+      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
+  }, {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T13:08:49Z",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
+      DpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "created": "2017-09-23T20:21:34Z",
-    "verificationMethod": "https://example.com/i/pat/keys/5",
-    "challenge": "2bbgh3dgjg2302d-d2b3gi423d42",
-    "domain": "example.org",
-    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9876
+      zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
   }]
 }
         </pre>
@@ -605,25 +606,26 @@ represented by associating an ordered list of proofs with the
         <pre class="example highlight" title="A proof chain in a Linked Data document">
 {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://www.w3.org/2018/credentials/examples/v1"
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "title": "Hello World!",
-  "proofChain": [{
-    "type": "Ed25519Signature2018",
+  "title": "Hello world!",
+  "proof": [{
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:42Z",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "created": "2019-08-23T20:21:34Z",
-    "verificationMethod": "did:example:123456#key1",
-    "domain": "example.org",
-    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
-  },
-  {
-    "type": "RsaSignature2018",
+    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
+      DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
+  }, {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T21:28:14Z",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
+      DpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "created": "2017-09-23T20:21:34Z",
-    "verificationMethod": "https://example.com/i/pat/keys/5",
-    "domain": "example.org",
-    "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
+    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19KiWXerb8
+      ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ"
   }]
 }
         </pre>
@@ -691,10 +693,10 @@ represented by associating an ordered list of proofs with the
         </p>
 
         <pre class="example highlight" title="A simple Linked Data document">
-  {
-    "@context": "https://www.w3.org/2018/credentials/examples/v1",
-    "title": "Hello World!"
-  }
+{
+  "@context": {"title": "https://schema.org#title"},
+  "title": "Hello world!",
+}
         </pre>
 
         <p>
@@ -702,18 +704,22 @@ represented by associating an ordered list of proofs with the
         </p>
 
         <pre class="example highlight" title="A simple signed Linked Data document">
-  {
-    "@context": "https://www.w3.org/2018/credentials/examples/v1",
-    "title": "Hello World!",
-    "proof": {
-      "type": "Ed25519Signature2018",
-      "proofPurpose": "assertionMethod",
-      "created": "2019-08-23T20:21:34Z",
-      "verificationMethod": "did:example:123456#key1",
-      "domain": "example.org",
-      "jws": "eyJ0eXAiOiJK...gFWFOEjXk"
-    }
+{
+  "@context": [
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+  ],
+  "title": "Hello world!",
+  "proof": {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:24Z",
+    "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
+      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }
+}
         </pre>
 
         <p>
@@ -860,8 +866,8 @@ A complete example of a <a>proof type</a> is shown in the next example:
 
       <pre class="example highlight">
 {
-  "id": "https://w3id.org/security/v1#Ed25519Signature2018",
-  "type": "Ed25519VerificationKey2018",
+  "id": "https://w3id.org/security#Ed25519Signature2020",
+  "type": "Ed25519VerificationKey2020",
   "canonicalizationAlgorithm": "https://w3id.org/security#URDNA2015",
   "digestAlgorithm": "https://www.ietf.org/assignments/jwa-parameters#SHA256",
   "signatureAlgorithm": "https://w3id.org/security#ed25519"
