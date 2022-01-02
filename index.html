@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Linked Data Proofs 1.0</title>
+    <title>Data Integrity 1.0</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -15,7 +15,7 @@
           specStatus:           "CG-DRAFT",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
-          shortName:            "ld-proofs",
+          shortName:            "data-integrity",
 
           // if you wish the publication date to be other than today, set this
           // publishDate:  "2009-08-06",
@@ -26,7 +26,7 @@
           // previousMaturity:  "WD",
 
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:           "https://w3c-ccg.github.io/ld-proofs/",
+          edDraftURI:           "https://w3c-ccg.github.io/data-integrity-spec/",
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -62,19 +62,19 @@
           group:           "credentials",
 
           // name (with the @w3c.org) of the public mailing to which comments are due
-          wgPublicList: "public-digital-verification",
+          wgPublicList: "public-credentials",
 
           otherLinks: [{
             key: "Source control",
             data: [{
-              value: "https://github.com/w3c-ccg/ld-proofs/",
-              href: "https://github.com/w3c-ccg/ld-proofs/"
+              value: "https://github.com/w3c-ccg/data-integrity-spec/",
+              href: "https://github.com/w3c-ccg/data-integrity-spec/"
             }]
           }, {
             key: "Issue Tracker",
             data: [{
-              value: "https://github.com/w3c-ccg/ld-proofs/issues/",
-              href: "https://github.com/w3c-ccg/ld-proofs/issues/"
+              value: "https://github.com/w3c-ccg/data-integrity-spec/issues/",
+              href: "https://github.com/w3c-ccg/data-integrity-spec/issues/"
             }]
           }],
 
@@ -135,7 +135,8 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
     <section id='abstract'>
       <p>
 This specification describes a mechanism for ensuring the authenticity and
-integrity of Linked Data documents using mathematical proofs.
+integrity of documents using cryptography, such as digital signatures and
+other digital mathematical proofs.
       </p>
     </section>
 
@@ -150,8 +151,7 @@ is not fit for production deployment.
       <h2>Introduction</h2>
       <p>
 Cryptographic proofs enable functionality that is extremely useful to
-implementors of distributed systems. For example, proofs can be used for
-purposes such as:
+implementors of distributed systems. For example, proofs can be used to:
       </p>
 
 <ul>
@@ -201,7 +201,7 @@ composability.
       <h2>Design Goals and Rationale</h2>
 
       <p>
-The Linked Data Proofs specification achieves the following design goals:
+The Data Integrity specification achieves the following design goals:
       </p>
 
       <dl>
@@ -446,7 +446,7 @@ attacker from selecting an algorithm that could abuse how the key is
 used/interpreted.</div>
 
 <div class="issue">Add a note indicating that selective disclosure proof
-mechanisms can be compatible with Linked Data Proofs; for example,
+mechanisms can be compatible with Data Integrity; for example,
 an algorithm could produce a merkle tree from a canonicalized set of
 N-Quads and then sign the root hash. Disclosure would involve including
 the merkle paths for each N-Quad that is to be revealed. This mechanism
@@ -546,7 +546,7 @@ combination with an integrity protection mechanism such as Hashlinks.
     <section>
       <h2>Multiple Proofs</h2>
       <p>
-The Linked Data Proofs specification supports the concept of multiple
+The Data Integrity specification supports the concept of multiple
 proofs in a single document. There are two types of multi-proof
 approaches that are identified: Proof Sets (un-ordered) and Proof Chains
 (ordered).
