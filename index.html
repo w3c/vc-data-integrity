@@ -64,6 +64,8 @@
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-credentials",
 
+          github: "w3c-ccg/data-integrity-spec",
+
           otherLinks: [{
             key: "Source control",
             data: [{
@@ -103,19 +105,6 @@
               status:   "CGDRAFT",
               publisher:  "Credentials Community Group"
             },
-            "DID-CORE": {
-              title:    "Decentralized Identifier Specification v1.0",
-              href:     "https://w3c.github.io/did-core/",
-              status:   "CGDRAFT",
-              publisher:  "Decentralized Identifier Working Group"
-            },
-            "VC-DATA-MODEL": {
-              title:    "Verifiable Credentials Data Model v1.0",
-              href:     "https://www.w3.org/TR/vc-data-model/",
-              authors:  ["Manu Sporny","David Longley","David Chadwick"],
-              status:   "TR",
-              publisher:  "Verifiable Claims Working Group"
-            },
             "ZCAP": {
               title:    "Authorization Capabilities for Linked Data",
               href:     "https://w3c-ccg.github.io/zcap-ld/",
@@ -134,9 +123,9 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
   <body>
     <section id='abstract'>
       <p>
-This specification describes a mechanism for ensuring the authenticity and
-integrity of documents using cryptography, such as digital signatures and
-other digital mathematical proofs.
+This specification describes mechanisms for ensuring the authenticity and
+integrity of structured digital documents using cryptography, such as digital
+signatures and other digital mathematical proofs.
       </p>
     </section>
 
@@ -172,8 +161,9 @@ mechanisms such as Authorization Capabilities [[ZCAP]].
 Agree to contracts where the agreement can be verified by another party.
   </li>
   <li>
-Additionally, many proofs that are based on cryptographic signatures provide the
-benefit of integrity protection, making documents and data tamper-evident.
+Additionally, many proofs that are based on cryptographic digital signatures
+provide the benefit of integrity protection, making documents and data
+tamper-evident.
   </li>
 </ul>
 
@@ -195,6 +185,12 @@ Linked Data features such as extensibility and
 composability.
       </p>
 
+      <p class="note" title="Use of Linked Data is an optional feature">
+While  this specification provides mechanisms to digitally sign Linked Data, the
+use  of Linked Data is not necessary to gain some of the advantages provided by
+this specification.
+      </p>
+
     </section>
 
     <section>
@@ -212,24 +208,35 @@ have significant cryptography training. For example, <a>cryptographic suite</a>
 identifiers are used instead of specific cryptographic parameters to ensure
 that it is difficult to accidentally produce a weak digital proof.
         </dd>
-        <dt>Agile</dt>
+        <dt>Layered Architecture</dt>
+        <dd>
+A number of historical digital signature mechanisms have had monolithic
+designs which limited use cases by combining data normalization, syntax,
+digital signature, and serialization into a single specification. This
+specification layers each component such that a broader range of use cases,
+such as generalized selective disclosure and serialization-agnostic signatures,
+are enabled.
+        </dd>
+        <dt>Cryptographic Agility</dt>
         <dd>
 Since digital proof mechanisms might be compromised without warning due to
 technological advancements, it is important that <a>proof type</a>s can be
 easily and quickly replaced. This specification provides algorithm agility
 while still keeping the digital proof format easy for developers to understand.
         </dd>
-        <dt>Extensible</dt>
+        <dt>Extensibility</dt>
         <dd>
 Creating and deploying new proof types is a fairly trivial undertaking
 to ensure that the proof format increases the rate of innovation in the
 digital proof space.
         </dd>
-        <dt>Graph Syntax Agnostic</dt>
+        <dt>Syntax Agnostic Proofs</dt>
         <dd>
-Cryptographic proofs over graph data structures is a difficult
-problem, since graphs can be serialized in many different but equivalent ways.
-For advanced use cases, these proof mechanisms can be used across a variety of
+Cryptographic proofs can be serialized in many different but equivalent ways and
+have often been tightly bound to the original document syntax. This
+specification enables one to create cryptographic proofs that are not
+bound to the original document syntax, which enable more advanced use cases
+such as being able to use a single digital signature across a variety of
 RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
 without the need to regenerate the proof.
         </dd>
@@ -247,31 +254,28 @@ generation and verification of Linked Data digital proofs.
       </p>
 
       <dl>
-        <dt><dfn>linked data document</dfn></dt>
+        <dt><dfn>data integrity proof</dfn></dt>
         <dd>
-A document comprised of Linked Data.
+A set of attributes that represent a digital proof and the parameters required
+to verify it.
         </dd>
-        <dt><dfn>linked data proof</dfn></dt>
+        <dt><dfn>unsigned data document</dfn></dt>
         <dd>
-A set of attributes that represent a Linked Data digital proof and
-the parameters required to verify it.
+A document that does not contain a <a>data integrity proof</a>.
         </dd>
-        <dt><dfn>linked data signature</dfn></dt>
+        <dt><dfn>signed data document</dfn></dt>
         <dd>
-A <em>type</em> of Linked Data Proof that involves cryptographic signatures.
-        </dd>
-        <dt><dfn>signed linked data document</dfn></dt>
-        <dd>
-A <a>linked data document</a> that has been digitally signed.
+A <a>unsigned data document</a> that has had a <a>data integrity proof</a>
+added to it.
         </dd>
         <dt><dfn>public key</dfn></dt>
         <dd>
-A cryptographic key that can be used to verify digital proofs created
-with a corresponding <a>private key</a>.
+Cryptographic material that can be used to verify digital proofs created with a
+corresponding <a>private key</a>.
         </dd>
         <dt><dfn>private key</dfn></dt>
         <dd>
-A cryptographic key that can be used to generate digital proofs.
+Cryptographic material that can be used to generate digital proofs.
         </dd>
         <dt><dfn>proof type</dfn></dt>
         <dd>
@@ -290,9 +294,9 @@ that is specific to the proof format.
         </dd>
         <dt><dfn>proof purpose</dfn></dt>
         <dd>
-The specific intent for the proof, the reason why an entity created it. Acts as
-a safeguard to prevent the proof from being misused for a purpose other than the
-one it was intended for.
+The specific intent for the proof; the reason why an entity created it. The
+protected declaration acts as a safeguard to prevent the proof from being
+misused for a purpose other than the one it was intended for.
         </dd>
         <dt><dfn>verification method</dfn></dt>
         <dd>
@@ -302,7 +306,7 @@ identifier for a public/private key pair that would be used in the proof.
         <dt><dfn>controller</dfn></dt>
         <dd>
 A link to a machine-readable object, such as a DID Document [[DID-CORE]], that
-contains authorization relations that explicitly permit the use of certain
+contains verification relationships that explicitly permit the use of certain
 verification methods for specific purposes. For example, a controller object
 could contain statements that restrict a public key to being used <em>only</em>
 for signing Verifiable Credentials [[VC-DATA-MODEL]] and no other kinds of
@@ -318,7 +322,7 @@ mitigate replay attacks.
 A string value that specifies the operational domain of a digital proof.
 This could be an Internet domain name like <code>example.com</code>, an
 ad-hoc value such as <code>mycorp-level3-access</code>, or a very
-specific transaction value like <code>8zF6T$mqP</code>. A signer could
+specific transaction value like <code>8zF6T8J34qP3mqP</code>. A signer could
 include a <a>domain</a> in its digital proof to restrict its use
 to particular target, identified by the specified <a>domain</a>.
         </dd>
@@ -891,7 +895,7 @@ and values in the data to be signed.</div>
         <p>
 The following algorithm specifies how to create a digital proof that can
 be later used to verify the authenticity and integrity of a
-<a>linked data document</a>. A <a>linked data document</a>,
+<a>unsigned data document</a>. A <a>unsigned data document</a>,
 <var>document</var>, <a>proof options</a>, <var>options</var>,
 and a <a>private key</a>, <var>privateKey</var>, are required inputs.
 The <a>proof options</a> MUST contain an identifier for the
@@ -963,7 +967,7 @@ derefencing its URL identifier, etc.</div>
           <li>
 Get the <a>public key</a> by dereferencing its URL identifier in
 the <code>proof</code> node of the default graph of
-<var>signed document</var>. Confirm that the <a>linked data document</a>
+<var>signed document</var>. Confirm that the <a>unsigned data document</a>
 that describes the <a>public key</a> specifies its owner and that its
 owner's URL identifier can be dereferenced to reveal a bi-directional link back
 to the key. Ensure that the key's owner is a trusted entity before proceeding
@@ -1006,7 +1010,7 @@ generalized for algorithms such as Equihash.
         <p>
 The following algorithm specifies how to create the data that is used
 to generate or verify a digital proof. It takes a canonicalized
-<a>linked data document</a>, <var>canonicalized document</var>,
+<a>unsigned data document</a>, <var>canonicalized document</var>,
 <a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
 <a>proof options</a>, <var>input options</var> (by reference).
 The <a>proof options</a> MUST contain an identifier for the
