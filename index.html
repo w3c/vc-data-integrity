@@ -1762,6 +1762,76 @@ software.
 
 <div class="issue">TODO: We need to add a complete list of security
 considerations.</div>
+
+      <section>
+        <h3>Verification Method Binding</h3>
+
+        <p class="issue">
+Implementers must ensure that a verification method is bound to a particular
+controller by going from the verification method to the controller document,
+and then ensuring that the controller document also contains the verification
+method.
+        </p>
+      </section>
+
+      <section>
+        <h3>Verification Relationship Validation</h3>
+
+        <p class="issue">
+Implementers need to ensure that when a verification method is used, that
+it matches the verification relationship associated with it and that it lines
+up with the proof purpose.
+        </p>
+      </section>
+
+      <section>
+        <h3>Canonicalization Method Correctness</h3>
+
+        <p class="issue">
+Canonicalization mechanisms utilized for normalizing input to hashing functions
+need to have vetted mathematical proofs associted with them. Canonicalization
+mechanisms that create collisions in hash functions can be used to attack
+digital signatures.
+        </p>
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Privacy Considerations</h2>
+      <p>
+The following section describes privacy considerations that developers
+implementing this specification should be aware of in order to create
+privacy enhancing software.
+      </p>
+
+<div class="issue">TODO: We need to add a complete list of privacy
+considerations.</div>
+
+      <section>
+        <h3>Unlinkability</h3>
+
+        <p class="issue">
+When the contents of a digitally signed payload contains correlatable
+identifiers, those identifiers can be used to track individuals. A static
+digital signature is a correlatable identifier. There are digital signature
+schemes that provide uncorrelatable digital signatures.
+        </p>
+      </section>
+
+      <section>
+        <h3>Selective Disclosure</h3>
+
+        <p class="issue">
+When the contents of a digitally signed payload contains correlatable
+identifiers, those identifiers can be used to track individuals. A static
+digital signature is a correlatable identifier. There are selective
+disclosure digital signature schemes, such as BBS+, that are capable of
+not disclosing correlatable identifiers and ensuring that a different
+but valid digital signature is re-created upon every presentation.
+        </p>
+      </section>
+
     </section>
 
 </body>
