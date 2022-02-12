@@ -441,6 +441,29 @@ proof nodes, but that type on its own doesn't specify any default
 proof or hash algorithms, those need to be given via other properties in the
 nodes.</div>
 
+      <p class="issue"
+        title="Avoid signature format proliferation by using text-based suite value">
+The pattern that Data Integrity Signatures use presently leads to a
+proliferation in signature types and JSON-LD Contexts. This proliferation can be
+avoided without any loss of the security characteristics of tightly binding a
+cryptography suite version to one or more acceptable public keys. The
+following signature suites are currently being contemplated: Eddsa2022,
+NistEcdsa2022, KoblitzEcdsa2022, Pgp2022, GostDsa2022, Sm9Ibsa2022, and Jws2022.
+      </p>
+
+      <pre class="example" title="A DataIntegritySignature example using a NistEcdsa2019 Cryptosuite">
+{
+  "@context": ["https://w3id.org/security/data-integrity/v1"],
+  "type": "DataIntegritySignature",
+  "cryptosuite": "NistEcdsa2019",
+  "created": "2021-11-29T20:35:38Z",
+  "verificationMethod": "did:example:123456789abcdefghi#keys-1",
+  "proofPurpose": "assertionMethod",
+  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
+                 evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
+}
+      </pre>
+
 <div class="issue">Add an explicit check on key type to prevent an
 attacker from selecting an algorithm that could abuse how the key is
 used/interpreted.</div>
@@ -456,6 +479,9 @@ be necessary to generate proof parameters such as a private key/seed
 that can be used along with an algorithm to deterministically generate
 nonces that are concatenated with each N-Quad to prevent rainbow
 table or similar attacks.</div>
+
+
+
       </section>
 
       <section>
@@ -637,6 +663,24 @@ href="https://w3c-ccg.github.io/lds-ed25519-2020/">Ed25519 Signature 2020</a>.
 For all registered <a>verification method</a> types and associated verification
 material available for <a>controllers</a>, please see the Data Integrity
 Specification Registries [TBD - DIS-REGISTRIES].
+            </p>
+
+            <p class=issue>
+Ensuring that cryptographic suites are versioned and tightly scoped to a very
+small set of possible key types and signature schemes (ideally one key type and
+size and one signature output type) is a design goal for most Data Integrity
+cryptographic suites. Historically, this has been done by defining both the
+key type and the cryptographic suite that uses the key type in the same
+specification. The downside of doing so, however, is that there might be a
+proliferation of different key types in multikey that result in different
+cryptosuites defining the same key material differently. For example, one
+cryptosuite might use compressed Curve P-256 keys while another uses
+uncompressed values. If that occurs, it will harm interoperability. It will be
+important in the coming months to years to ensure that this does not happen
+by fully defining the multikey format in a separate specification so
+cryptosuite specifications, such as this one, can refer to the multikey
+specification, thus reducing the chances of multikey type proliferation and
+improving the chances of maximum interoperability for the multikey format.
             </p>
 
             <p>
