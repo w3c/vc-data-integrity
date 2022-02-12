@@ -123,6 +123,16 @@
               ],
               status: "Internet-Draft",
               publisher: "IETF"
+            },
+            "MULTICODEC": {
+              title: "The Multi Codec Encoding Scheme",
+              date: "February 2022",
+              href: "https://github.com/multiformats/multicodec/blob/master/table.csv",
+              authors: [
+                "The Multiformats Community"
+              ],
+              status: "Internet-Draft",
+              publisher: "IETF"
             }
           },
           postProcess: [restrictRefs]
@@ -716,6 +726,61 @@ both properties above is shown below.
       <span class="comment">...</span>
     }
             </pre>
+          </section>
+
+          <section>
+            <h3>Multikey</h3>
+            <p>
+The Multikey data model is a specific type of <a>verification method</a> that
+utilizes the [[MULTICODEC]] specification to encode key types into a single
+binary stream that is then encoded using the [[MULTIBASE]] specification.
+To encode a Multikey, the <a>verification method</a> `type` MUST be set to
+`Multikey` and the `publicKeyMultibase` value MUST be a [[MULTIBASE]] encoded
+[[MULTICODEC]] value. An example of a Multikey is provided below:
+            </p>
+
+            <pre class="example nohighlight"
+              title="Multikey encoding of a Ed25519 public key">
+{
+  "@context": ["https://w3id.org/security/suites/multikey/v1"],
+  "id": "did:example:123456789abcdefghi#keys-1",
+  "type": "Multikey",
+  "controller": "did:example:123456789abcdefghi",
+  "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
+}
+            </pre>
+
+            <p>
+In the example above, the `publicKeyMultibase` value starts with the letter `z`,
+which is the [[MULTIBASE]] header that conveys that the binary data is
+base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
+[[MULTICODEC]] header is `0xed`, which specifies that the remaining data
+is a 32-byte raw Ed25519 public key.
+            </p>
+
+            <p>
+The Multikey data model is also capable of encoding secret keys, sometimes
+referred to as <em>private keys</em>.
+            </p>
+
+            <pre class="example nohighlight"
+              title="Multikey encoding of a Ed25519 secret key">
+{
+  "@context": ["https://w3id.org/security/suites/secrets/v1"],
+  "id": "did:example:123456789abcdefghi#keys-1",
+  "type": "Multikey",
+  "controller": "did:example:123456789abcdefghi",
+  "secretKeyMultibase": "z3u2fprgdREFtGakrHr6zLyTeTEZtivDnYCPZmcSt16EYCER"
+}
+            </pre>
+
+            <p>
+In the example above, the `secretKeyMultibase` value starts with the letter `z`,
+which is the [[MULTIBASE]] header that conveys that the binary data is
+base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
+[[MULTICODEC]] header is `0x1300`, which specifies that the remaining data
+is a 32-byte raw Ed25519 private key.
+            </p>
 
           </section>
 
