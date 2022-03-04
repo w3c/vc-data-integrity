@@ -447,16 +447,17 @@ The pattern that Data Integrity Signatures use presently leads to a
 proliferation in signature types and JSON-LD Contexts. This proliferation can be
 avoided without any loss of the security characteristics of tightly binding a
 cryptography suite version to one or more acceptable public keys. The
-following signature suites are currently being contemplated: Eddsa2022,
-NistEcdsa2022, KoblitzEcdsa2022, Pgp2022, GostDsa2022, Sm9Ibsa2022, and Jws2022.
+following signature suites are currently being contemplated: eddsa-2022,
+nist-ecdsa-2022, koblitz-ecdsa-2022, rsa-2022, pgp-2022, bbs-2022, eascdsa-2022,
+ibsa-2022, and jws-2022.
       </p>
 
-      <pre class="example" title="A DataIntegritySignature example using a NistEcdsa2019 Cryptosuite">
+      <pre class="example" title="A DataIntegritySignature example using a NIST ECDSA 2022 Cryptosuite">
 {
   "@context": ["https://w3id.org/security/data-integrity/v1"],
   "type": "DataIntegritySignature",
-  "cryptosuite": "NistEcdsa2019",
-  "created": "2021-11-29T20:35:38Z",
+  "cryptosuite": "ecdsa-2022",
+  "created": "2022-11-29T20:35:38Z",
   "verificationMethod": "did:example:123456789abcdefghi#keys-1",
   "proofPurpose": "assertionMethod",
   "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
