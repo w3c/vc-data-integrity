@@ -64,14 +64,6 @@ include a <a>domain</a> in its digital proof to restrict its use
 to particular target, identified by the specified <a>domain</a>.
   </dd>
 
-  <dt><dfn data-lt="amplification">amplification attack</dfn></dt>
-  <dd>
-A class of attack where the attacker attempts to exhaust a target system's
-CPU, storage, network, or other resources by providing small, valid inputs into
-the system that result in damaging effects that can be exponentially more costly
-to process than the inputs themselves.
-  </dd>
-
   <dt><dfn data-lt="authenticated">authenticate</dfn></dt>
   <dd>
 Authentication is a process by which an entity can prove it has a specific
@@ -79,13 +71,6 @@ attribute or controls a specific secret using one or more <a>verification
 methods</a>. With <a>DIDs</a>, a common example would be proving control of the
 cryptographic private key associated with a public key published in a
 <a>controller document</a>.
-  </dd>
-
-  <dt><dfn>binding</dfn></dt>
-  <dd>
-A concrete mechanism used by a caller to invoke a <a>resolver</a> or a
-<a>URL dereferencer</a>. This could be a local command line tool, a software
-library, or a network call such as an HTTPS request.
   </dd>
 
   <dt><dfn data-lt="cryptosuite">cryptographic suite</dfn></dt>
@@ -106,29 +91,6 @@ not all—methods make use of <a>distributed ledger technology</a> (DLT) or some
 other form of decentralized network.
   </dd>
 
-  <dt><dfn>decentralized identity management</dfn></dt>
-
-  <dd>
-<a href="https://en.wikipedia.org/wiki/Identity_management">Identity
-management</a> that is based on the use of <a>decentralized identifiers</a>.
-Decentralized identity management extends authority for identifier generation,
-registration, and assignment beyond traditional roots of trust such as
-<a href="https://en.wikipedia.org/wiki/X.500">X.500 directory services</a>,
-the <a href="https://en.wikipedia.org/wiki/Domain_Name_System">Domain Name System</a>,
-and most national ID systems.
-  </dd>
-
-  <dt><dfn>decentralized public key infrastructure</dfn> (DPKI)</dt>
-
-  <dd>
-<a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">Public key
-infrastructure</a> that does not rely on traditional <a
-href="https://en.wikipedia.org/wiki/Certificate_authority">certificate
-authorities</a> because it uses <a>decentralized identifiers</a> and
-<a>controller document</a> to discover and verify
-<a>public key descriptions</a>.
-  </dd>
-
   <dt><dfn data-lt="controller(s)">controller</dfn></dt>
 
   <dd>
@@ -141,30 +103,6 @@ An entity that has the capability to make changes to a
   <dd>
 A set of data that specifies one or more relationships between a
 <a>controller</a> and a set of data, such as a set of public cryptographic keys.
-  </dd>
-
-  <dt><dfn data-lt="fragments">fragment</dfn></dt>
-
-  <dd>
-The portion of a <a>URL</a> that follows the first hash sign character
-(<code>#</code>). fragment syntax is identical to URI fragment syntax.
-  </dd>
-
-  <dt><dfn data-lt="paths">path</dfn></dt>
-
-  <dd>
-The portion of a <a>URL</a> that begins with and includes the first forward
-slash (<code>/</code>) character and ends with either a question mark
-(<code>?</code>) character, a fragment hash sign (<code>#</code>) character,
-or the end of the <a>URL</a>. path syntax is identical to URI path syntax.
-  </dd>
-
-  <dt><dfn data-lt="queries">query</dfn></dt>
-
-  <dd>
-The portion of a <a>URL</a> that follows and includes the first question
-mark character (<code>?</code>). query syntax is identical to URI query
-syntax.
   </dd>
 
   <dt><dfn>resolution</dfn></dt>
@@ -203,13 +141,6 @@ The process that takes as its input a <a>URL</a> and a set of input
 metadata, and returns a <a>resource</a>.
   </dd>
 
-  <dt><dfn data-lt="URL dereferencers">URL dereferencer</dfn></dt>
-
-  <dd>
-A software and/or hardware system that performs the <a>URL dereferencing</a>
-function for a given <a>URL</a> or <a>controller document</a>.
-  </dd>
-
   <dt><dfn data-lt="distributed ledger technology|DLT">distributed ledger</dfn> (DLT)</dt>
 
   <dd>
@@ -222,13 +153,6 @@ transactions over time often makes the history of the ledger effectively
 immutable.
   </dd>
 
-  <dt><dfn>public key description</dfn></dt>
-
-  <dd>
-A data object contained inside a <a>controller document</a> that contains all the
-metadata necessary to use a public key or a verification key.
-  </dd>
-
   <dt><dfn data-lt="resources">resource</dfn></dt>
 
   <dd>
@@ -237,43 +161,13 @@ for whatever might be identified by a URI." Similarly, any resource might serve
 as a <a>subject</a> identified by a <a>DID</a>.
   </dd>
 
-  <dt><dfn data-lt="URI|URIs">Uniform Resource Identifier</dfn> (URI)</dt>
 
-  <dd>
-The standard identifier format for all resources on the World Wide Web as
-defined by [[RFC3986]]. A <a>DID</a> is a type of URI scheme.
-  </dd>
-
-    <dt><dfn data-lt="verifiable credentials">verifiable credential</dfn></dt>
+  <dt><dfn data-lt="verifiable credentials">verifiable credential</dfn></dt>
 
   <dd>
 A standard data model and representation format for cryptographically-verifiable
 digital credentials as defined by the W3C Verifiable Credentials specification
 [[VC-DATA-MODEL]].
-  </dd>
-
-  <dt>
-    <dfn data-lt="verifiable data registry|verifiable data registries">
-    verifiable data registry</dfn>
-  </dt>
-
-  <dd>
-A system that facilitates the creation, verification, updating, and/or
-deactivation of <a>decentralized identifiers</a> and <a>controller documents</a>. A
-verifiable data registry might also be used for other
-cryptographically-verifiable data structures such as <a>verifiable
-credentials</a>. For more information, see the W3C Verifiable Credentials
-specification [[VC-DATA-MODEL]].
-  </dd>
-
-  <dt><dfn>verifiable timestamp</dfn></dt>
-
-  <dd>
-A verifiable timestamp enables a third-party to verify that a data object
-existed at a specific moment in time and that it has not been modified or
-corrupted since that moment in time. If the data integrity could reasonably have
-been modified or corrupted since that moment in time, the timestamp is not
-verifiable.
   </dd>
 
   <dt><dfn data-lt="">verification method</dfn></dt>
@@ -303,15 +197,6 @@ An expression of the relationship between the <a>subject</a> and a
 <a>verification method</a>. An example of a verification relationship is
 <a href="#authentication"></a>.
     </p>
-  </dd>
-
-  <dt><dfn data-lt="UUID|UUIDs">Universally Unique Identifier</dfn> (UUID)</dt>
-
-  <dd>
-A type of globally unique identifier defined by [[RFC4122]]. UUIDs are similar
-to DIDs in that they do not require a centralized registration authority. UUIDs
-differ from DIDs in that they are not resolvable or
-cryptographically-verifiable.
   </dd>
 
 </dl>
