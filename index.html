@@ -519,7 +519,7 @@ Indicates that a proof is used for for key agreement protocols, such as
 Elliptic Curve Diffie Hellman key agreement used by popular encryption
 libraries.
           </dd>
-          <dt class="lint-ignore">capabilityDelegation</dt>
+          <dt>capabilityDelegation</dt>
           <dd>
 Indicates that the proof can only be used for delegating capabilities. See the
 Authorization Capabilities [[ZCAP]] specification for more detail.
@@ -1168,7 +1168,7 @@ to access a specific HTTP API to a subordinate.
             </p>
 
             <dl>
-              <dt><dfn>capabilityDelegation</dfn></dt>
+              <dt><dfn class="lint-ignore">capabilityDelegation</dfn></dt>
               <dd>
 The <code>capabilityDelegation</code> property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
