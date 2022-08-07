@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Integrity 1.0</title>
+    <title>Verifiable Credential Data Integrity 1.0</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -17,7 +17,10 @@
           specStatus:           "ED",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
-          shortName:            "data-integrity",
+          shortName:            "vc-data-integrity",
+
+          // subtitle
+          subtitle: "Securing the Integrity of Verifiable Credential Data",
 
           // if you wish the publication date to be other than today, set this
           // publishDate:  "2009-08-06",
@@ -28,7 +31,7 @@
           // previousMaturity:  "WD",
 
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:           "https://w3c.github.io/data-integrity/",
+          edDraftURI:           "https://w3c.github.io/vc-data-integrity/",
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -71,7 +74,7 @@
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-credentials",
 
-          github: "w3c/data-integrity",
+          github: "w3c/vc-data-integrity",
 
           // URI of the patent status for this WG, for Rec-track documents
           // !!!! IMPORTANT !!!!
@@ -139,8 +142,9 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
     <section id='abstract'>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of structured digital documents using cryptography, such as digital
-signatures and other digital mathematical proofs.
+integrity of Verifiable Credentials and other types of structured digital
+documents using cryptography, such as digital signatures and other digital
+mathematical proofs.
       </p>
     </section>
 
@@ -254,6 +258,15 @@ RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
 without the need to regenerate the proof.
           </dd>
         </dl>
+
+      <p class="note" title="Application of technology to broader use cases">
+While this specification primarily focuses on Verifiable Credentials, the
+design of this technology is generalized, such that it can be used for
+non-Verifiable Credential use cases. In these instances, implementers are
+expected to perform their own due diligence and expert review as to the
+applicability of the technology to their use case.
+      </p>
+
       </section>
 
       <section id="conformance">
