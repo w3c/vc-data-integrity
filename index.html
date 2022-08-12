@@ -217,8 +217,10 @@ The Data Integrity specification achieves the following design goals:
           <dd>
 The proof format is designed to be easy to use for developers that don't
 have significant cryptography training. For example, <a>cryptographic suite</a>
-identifiers are used instead of specific cryptographic parameters to ensure
-that it is difficult to accidentally produce a weak digital proof.
+identifiers are used to provide the ability for a developer to select a set of 
+tested and vetted algorithms and parameters for a particular use case or set through
+use of a single identifier.  This prevents accidental selection of a bad combination
+of parameters that lead to weakness in a particular proof.
           </dd>
           <dt>Layered Architecture</dt>
           <dd>
@@ -238,9 +240,13 @@ while still keeping the digital proof format easy for developers to understand.
           </dd>
           <dt>Extensibility</dt>
           <dd>
-Creating and deploying new proof types is a fairly trivial undertaking
-to ensure that the proof format increases the rate of innovation in the
-digital proof space.
+This specification provides the structure by which new proof types can be defined
+for use with Verifiable Credentials. This promotes innovation as well as the ability 
+to test and validate cryptographic agility with new algorithms and proofs under
+consideration for standardization.  The definition of a common proof format further
+increases the ability to validate new use cases for proofs, as well as to promote
+interoperability testing with both existing proofs as well as newer proof mechanisms
+that are under consideration.
           </dd>
           <dt>Syntax Agnostic Proofs</dt>
           <dd>
@@ -276,9 +282,9 @@ This section specifies the data model that is used for expressing
       <section>
         <h3>Proofs</h3>
         <p>
-A <a>data integrity proof</a> is comprised of information about the proof,
-parameters required to verify it, and the proof value itself. All of this
-information is provided using Linked Data vocabularies such as
+A <a>data integrity proof</a> provides information about the proof mechanism,
+parameters required to verify that proof, and the proof value itself. All of this
+information is provided using Linked Data vocabularies such as the
 [[SECURITY-VOCABULARY]].
         </p>
 
@@ -307,7 +313,7 @@ Verifiable Credential (<code>assertionMethod</code>), and several others.
           <dt><dfn>verificationMethod</dfn><dt>
           <dd>
 <em>Required</em>. A set of parameters required to independently verify the
-proof, such as an identifier for a public/private key pair that would be used in
+proof, such as an identifier for key material that would be used in
 the proof.
           </dd>
 
@@ -580,7 +586,7 @@ in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
                   <p>
 The value of the <code>id</code> property for a <a>verification
 method</a> MUST be a <a data-cite="INFRA#string">string</a> that conforms to the
-[[URL]] syntax.
+conforms to the URI syntax as defined in [[RFC3986]].
                   </p>
                 </dd>
                 <dt>type</dt>
@@ -594,7 +600,7 @@ Registries [TBD -- DIS-REGISTRIES].
                 <dt>controller</dt>
                 <dd>
 The value of the <code>controller</code> property MUST be a <a
-data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
+data-cite="INFRA#string">string</a> that conforms to the URI syntax as defined in [[RFC3986]].
                 </dd>
               </dl>
             </dd>
