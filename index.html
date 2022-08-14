@@ -127,6 +127,15 @@
               ],
               status: "Internet-Draft",
               publisher: "IETF"
+            },
+            "VC-EXTENSION-REGISTRY": {
+              title: "Verifiable Credentials Extension Registry",
+              href: "https://w3c-ccg.github.io/vc-extension-registry/",
+              authors: [
+                "Manu Sporny"
+              ],
+              status: "CG-DRAFT",
+              publisher: "Credentials Community Group"
             }
           },
           postProcess: [restrictRefs]
@@ -1767,6 +1776,72 @@ software.
 
 <div class="issue">TODO: We need to add a complete list of security
 considerations.</div>
+
+      <section>
+        <h3>Versioning Cryptography Suites</h3>
+
+        <p>
+Cryptography protects information in a way that requires knowledge of a secret
+to access the information (computationally easy), or a concerted
+brute-force attack to access the same information without the secret
+(computationally difficult). All modern cryptography requires the
+computationally difficult approach to remain difficult throughout time, which
+does not always hold due to breakthroughs in science and mathematics. That is
+to say that <em>Cryptography has a shelf life</em>.
+        </p>
+        <p>
+This specification plans for the obsolecense of all cryptographic approaches by
+asserting that whatever cryptography is in use today is highly likely to be
+broken over time. Given this assumption, it makes sense to identify
+cryptographic suites in a way where we can differentiate different versions
+throughout time. When versioning cryptographic suites, there are several
+approaches that can be taken which include: parameters, numbers, and dates.
+        </p>
+        <p>
+Parametric versioning specifies the particular cryptographic parameters that are
+employed in a cryptographic suite. For example, one could use an identifier such
+as `RSAASSA-PKCS1-v1_5-SHA1`. The benefit to this scheme is that a well-trained
+cryptographer will be able to determine all of the parameters in play by the
+identifier. The drawback to this scheme is that most of the population that uses
+these sorts of identifiers are not well trained and thus will not understand
+that the previously mentioned identifier is a cryptographic suite that is no
+longer safe to use.
+        </p>
+        <p>
+Numbered versioning might specify a major and minor version number such as
+`1.0` or `2.1`. Numbered versioning conveys a specific order and suggests that
+higher version numbers are more capable than lower version numbers. The benefit
+of this approach is that it removes complex parameters that less expert
+developers might not understand with a simpler model that conveys that an
+upgrade might be appropriate. The drawback of this approach is that its not
+clear if an upgrade is necessary, as software version number increases often
+don't require an upgrade for the software to continue functioning. This can
+lead to developers thinking their usage of a particular version is safe, when
+it is not.
+        </p>
+        <p>
+Date-based versioning specifies a particular release date for a specific
+cryptographic suite. The benefit of a date, such as a year, is that it is
+immediately clear to a developer if the date is relatively old or new. Seeing
+an old date might prompt the developer to go searching for a newer
+cryptographic suite, where as a parametric or number-based versioning scheme
+might not. The downside of a date-based version is that some cryptographic
+suites might not expire for 5-10 years, prompting the developer to go
+searching for a newer cryptographic suite only to not find one that is newer.
+While this might be an inconvenience, it is one that results in safer
+ecosystem behaviour.
+        </p>
+        <p>
+It is highly encouraged that cryptographic suite identifiers are versioned
+using a year designation. For example, the cryptographic suite identifier
+`ecdsa-2022` implies that the suite is probably ok to use in the year 2025,
+but might not be a safe choice in the year 2042. A date-based versioning
+mechanism, however, is not enough by itself. All cryptographic suites that
+follow this specification are intended to be registered
+[[?VC-EXTENSION-REGISTRY]] in a way that clearly signal which cryptosuites
+are deprecated, standardized, or experimental.
+        </p>
+      </section>
 
       <section>
         <h3>Verification Method Binding</h3>
