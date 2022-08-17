@@ -1807,10 +1807,14 @@ Parametric versioning specifies the particular cryptographic parameters that are
 employed in a cryptographic suite. For example, one could use an identifier such
 as `RSASSA-PKCS1-v1_5-SHA1`. The benefit to this scheme is that a well-trained
 cryptographer will be able to determine all of the parameters in play by the
-identifier. The drawback to this scheme is that most of the population that uses
-these sorts of identifiers are not well trained and thus will not understand
+identifier. The drawback to this scheme is that most of the population that
+uses these sorts of identifiers are not well trained and thus will not understand
 that the previously mentioned identifier is a cryptographic suite that is no
-longer safe to use.
+longer safe to use. Additionally, this lack of knowledge might lead software
+developers to generalize the parsing of cryptographic suite identifiers
+such that any combination of cryptographic primitives becomes acceptable,
+resulting in reduced security. Ideally, cryptographic suites are implemented
+in software as specific, acceptable profiles of cryptographic parameters instead.
         </p>
         <p>
 Numbered versioning might specify a major and minor version number such as
