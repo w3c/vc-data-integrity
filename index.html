@@ -152,7 +152,7 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
       <p>
 This specification describes mechanisms for ensuring the authenticity and
 integrity of Verifiable Credentials and similar types of constrained digital
-documents using cryptography, especially through the use of digital 
+documents using cryptography, especially through the use of digital
 signatures and related mathematical proofs.
       </p>
     </section>
@@ -1876,6 +1876,88 @@ FIPS Digital Signature Standard
 additional guidance from
 <a href="https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/01.02.01_60/ts_119312v010201p.pdf">ETSI</a>
 or other regional regulatory and standards bodies.
+        </p>
+      </section>
+
+      <section>
+        <h3>Layer Cryptographic Options Appropriately</h3>
+
+        <p>
+Modern cryptographic algorithms provide a number of tunable parameters and
+options to ensure that the algorithms can meet different use case requirements.
+For example, embedded systems have limited processing and memory environments
+and might not have the resources to generate the strongest digital signatures
+for a given algorithm. Other environments, like financial trading systems,
+might only need to protect data for a day while the trade is occuring while
+other environments might need to protect data for multiple decades. To meet
+these needs, cryptographic algorithm designers often provide multiple ways to
+configure a cryptographic algorithm.
+        </p>
+        <p>
+Cryptographic library implementers often take the specifications created by
+cryptographic algorithm designers and specification authors and implement them
+such that all options are available to the application developers that use their
+libraries. This can be due to not knowing which combination of features a
+particular application developer might need for a given cryptographic algorithm.
+All options are often exposed to application developers.
+        </p>
+        <p>
+Application developers that use cryptographic libraries often do not have the
+same level of knowledge as cryptographic algorithm designers, specification
+authors, or cryptographic library implementers. This lack of knowledge can lead
+to an inappropriate selection of cryptographic parameters and options for a
+particular application.
+        </p>
+        <p>
+This specification sets the priority of constituencies to protect application
+developers over cryptographic library implementers over cryptographic
+specification authors over cryptographic algorithm designers. Given these
+priorities, the following recommendations are made:
+        </p>
+        <ul>
+          <li>
+Cryptographic algorithm designers are advised to minimize the number of
+options and parameters to as few as possible to ensure that
+cryptographic library implementers have a more easily auditable security
+attack surface for their software libraries.
+          </li>
+          <li>
+Cryptographic specification authors are advised to, if possible, further
+minimize the number of options and parameters to as few as possible to ensure
+cryptographic agility while also keeping the auditable security
+attack surface for downstream software libraries to a minimum.
+          </li>
+          <li>
+Cryptographic library implementers are advised to, if possible, provide known
+good combinations of options and parameters to application developers. By
+default, there would ideally be two pre-set configurations for any algorithmic
+class, such as Elliptic Curve Digital Signatures, with no ability (by default)
+to fine tune parameters and options. While library options can be provided to
+experts to fine tune the library, usage of those options among the general
+application developer population is to be discouraged.
+          </li>
+          <li>
+Application developers are advised to choose from a number of pre-set
+cryptography library configurations and to avoid modifying cryptographic
+options and parameters, or using experimental or deprecated cryptography.
+          </li>
+        </ul>
+
+        <p>
+The guidance above is provided to ensure that useful cryptographic options and
+parameters are provided at the lower layers of the architecture while not
+exposing those options and parameters to application developers that are ill
+suited to understand the benefits and drawbacks of each option.
+        </p>
+
+        <p class="issue"
+          title="Use of experimental and deprecated cryptography">
+The VCWG is seeking guidance on adding language to allow the use of experimental
+or deprecated cryptography. By default, those features will be disabled and will
+require the developer to specifically allow use on a per-cryptographic suite
+basis. There will be requirements for all implementing libraries to throw errors
+or warnings when deprecated or experimental options are selected without the
+appropriate override flags.
         </p>
       </section>
 
