@@ -2075,6 +2075,42 @@ canonicalize than more complex data syntaxes (such as XML).
       </section>
 
       <section>
+        <h3>Data Opacity</h3>
+
+        <p>
+The inspectability of application data has effects on system efficiency and
+developer productivity. When cryptographically protected application data, such
+as base-encoded binary data, is not easily processed by application subsystems,
+such as databases, it increases the effort of working with with the
+cryptographically protected information. For example, a cryptographically
+protected payload that can be natively stored and indexed by a database will
+result in a simpler system. Similarly, a cryptographically protected payload
+that can be processed by multiple upstream networked systems without having to
+repeatedly decode the payload increases the ability for a system to share
+processing load. Additionally, if a developer is not able to easily view data in
+a system, the ability to easily audit or debug system correctness is hampered.
+        </p>
+        <p>
+There are times, however, where the correct design decision is to make data
+opaque. Data that does not need to be processed by other application subsystems
+or data that does not need to be modified or accessed by an application
+developer can be stored in opaque formats. Examples include digital signature
+values, cryptographic key parameters, and other data fields that only need to
+be accessed by a cryptographic library and need not be modified by the
+application developer.
+        </p>
+        <p>
+This specification strives to provide an architecture where application data
+remains in its native format and is not made opaque while other cryptographic
+data, such as digital signatures, are kept in their opaque binary encoded form.
+Cryptographic suite implementers are urged to consider data opacity when
+designing their suites and weigh the design trade-offs when making application
+data opaque and when providing access to cryptographic data at the application
+layer.
+        </p>
+      </section>
+
+      <section>
         <h3>Verification Method Binding</h3>
 
         <p class="issue">
