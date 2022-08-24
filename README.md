@@ -7,7 +7,7 @@ repository, discussions often occur on the
 as well.
 
 ## Data Integrity (this document) editor's draft:
-* [Data Integrity](https://w3c.github.io/data-integrity/)
+* [Data Integrity](https://w3c.github.io/vc-data-integrity/)
 
 ## Verifiable Credentials Working Group
 * Group page: [https://www.w3.org/2017/vc/WG/](https://www.w3.org/2017/vc/WG/)
