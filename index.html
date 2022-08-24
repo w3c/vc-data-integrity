@@ -2014,11 +2014,11 @@ longer.
         <h3>Transformations</h3>
 
         <p>
-At times, it becomes important to transform the data being protected during the
-cryptographic protection process. Transformations can enable a particular type
+At times, it is beneficial to transform the data being protected during the
+cryptographic protection process. Such "in-line" transformation can enable a particular type
 of cryptographic protection to be agnostic to the data format it is carried in.
 For example, some Data Integrity cryptographic suites utilize RDF Dataset
-Canonicalization [[?URDNA2015]] which transforms the representation into a
+Canonicalization [[?URDNA2015]] which transforms the initial representation into a
 canonical form [[?N-QUADS]] that is then serialized, hashed, and digitally
 signed. As long as any syntax expressing the protected data can be transformed
 into this canonical form, the digital signature can be verified. This enables
@@ -2031,16 +2031,16 @@ Being able to express the same digital signature across a variety of syntaxes is
 beneficial because systems often have native data formats with which they
 operate. For example, some systems are written against JSON data, while others
 are written against CBOR data. Without transformation, systems that process
-their data as CBOR internally are required to store the digitally signed data
+their data internally as CBOR are required to store the digitally signed data
 structures as JSON (or vice-versa). This leads to double-storing data and can
 lead to extra security attack surface if the unsigned representation stored in
 databases accidentally deviates from the signed representation. By using
-transformations, the digital proof can live with the native data format to
-prevent undetectable database drift over time.
+transformations, the digital proof can live in the native data format to
+help prevent otherwise undetectable database drift over time.
         </p>
         <p>
 This specification is designed to avoid requiring the duplication of signed
-information by utilizing data transformations. Application developers are urged
+information by utilizing "in-line" data transformations. Application developers are urged
 to work with cryptographically protected data in the native data format for
 their application and not separate storage of cryptographic proofs from the data
 being protected. Developers are also urged to regularly confirm that the
@@ -2057,9 +2057,9 @@ scheme #2, they must not produce the same output value. As an analogy, this is
 the same requirement for cryptographic hashing mechanisms and is why those
 schemes are designed to be collision resistant. Cryptographic canonicalization
 mechanisms have the same requirement. At present, this isn't a problem because
-the three expected canonicalization schemes, the Universal RDF Dataset
+the three expected canonicalization schemes &mdash; the Universal RDF Dataset
 Canonicalization Algorithm 2015 [[?URDNA2015]], JSON Canonicalization Scheme
-[[?RFC8785]], and a theoretical future base-encoding canonicalization have
+[[?RFC8785]], and a theoretical future base-encoding canonicalization &mdash; have
 entirely different outputs.
         </p>
         <p class="issue"
@@ -2067,10 +2067,10 @@ entirely different outputs.
 The VCWG is seeking feedback on whether to explain why modern canonicalization
 schemes are simpler than the far more complex XML Canonicalization schemes of
 the early 2000s. Some readers seem to be under the impression that all
-canonicalization is difficult and has to be avoided at all costs. The WG would
-like to understand if a section explaining how some simpler data syntaxes (such
-as JSON) are easier to canonicalize than more complex data syntaxes (such as
-XML).
+canonicalization is difficult and has to be avoided at all costs (including costs
+to application developers). The WG would like to understand if a section
+explaining why some simpler data syntaxes (such as JSON) are easier to
+canonicalize than more complex data syntaxes (such as XML).
         </p>
       </section>
 
