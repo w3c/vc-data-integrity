@@ -2092,20 +2092,20 @@ a system, the ability to easily audit or debug system correctness is hampered.
         </p>
         <p>
 There are times, however, where the correct design decision is to make data
-opaque. Data that does not need to be processed by other application subsystems
-or data that does not need to be modified or accessed by an application
-developer can be stored in opaque formats. Examples include digital signature
+opaque. Data that does not need to be processed by other application subsystems,
+as well as data that does not need to be modified or accessed by an application
+developer, can be stored in opaque formats. Examples include digital signature
 values, cryptographic key parameters, and other data fields that only need to
 be accessed by a cryptographic library and need not be modified by the
 application developer.
         </p>
         <p>
 This specification strives to provide an architecture where application data
-remains in its native format and is not made opaque while other cryptographic
+remains in its native format and is not made opaque, while other cryptographic
 data, such as digital signatures, are kept in their opaque binary encoded form.
 Cryptographic suite implementers are urged to consider data opacity when
-designing their suites and weigh the design trade-offs when making application
-data opaque and when providing access to cryptographic data at the application
+designing their suites, and to weigh the design trade-offs when making application
+data opaque versus providing access to cryptographic data at the application
 layer.
         </p>
       </section>
