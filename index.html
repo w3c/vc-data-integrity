@@ -2130,7 +2130,12 @@ as well as data that does not need to be modified or accessed by an application
 developer, can be stored in opaque formats. Examples include digital signature
 values, cryptographic key parameters, and other data fields that only need to be
 accessed by a cryptographic library and need not be modified by the application
-developer.
+developer. There are also examples where data opacity is appropriate when the
+underlying subsystem does not expose the application developer to the underlying
+complexity of the opaque data, such as databases that perform encryption at
+rest. In these cases, the application developer continues to develop against
+transparent application data formats while the database manages the complexity
+of encrypting and decrypting the application data to and from long-term storage.
         </p>
         <p>
 This specification strives to provide an architecture where application data
