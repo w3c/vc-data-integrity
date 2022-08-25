@@ -2108,34 +2108,35 @@ digitally signed data that has multiple nested base-encoded payloads.
 Similarly, a cryptographically protected payload that can be processed by
 multiple upstream networked systems increases the ability to properly layer
 security architectures. For example, if upstream systems do not have to
-repeatedly decode the incoming payload, it increases the ability for a system
-to distribute processing load by specializing upstream subsystems to actively
+repeatedly decode the incoming payload, it increases the ability for a system to
+distribute processing load by specializing upstream subsystems to actively
 combat attacks. While a digital signature needs to always be checked before
-taking action, other upstream checks can be performed &mdash; such as
-identifier-based rate limiting, signature expiration checking, or
-nonce/challenge checking &mdash; to reject obviously bad requests.
+taking substantive action, other upstream checks can be performed on transparent
+payloads &mdash; such as identifier-based rate limiting, signature expiration
+checking, or nonce/challenge checking &mdash; to reject obviously bad requests.
         </p>
         <p>
 Additionally, if a developer is not able to easily view data in a system, the
 ability to easily audit or debug system correctness is hampered. For example,
 requiring application developers to cut-and-paste base-encoded application data
 makes development more challenging and increases the chances that obvious bugs
-will be missed because every message needs to go through a base-decoding tool
-that is external to the system.
+will be missed because every message needs to go through a manually operated
+base-decoding tool.
         </p>
         <p>
 There are times, however, where the correct design decision is to make data
 opaque. Data that does not need to be processed by other application subsystems,
 as well as data that does not need to be modified or accessed by an application
-developer, can be stored in opaque formats. Examples include digital signature
-values, cryptographic key parameters, and other data fields that only need to be
-accessed by a cryptographic library and need not be modified by the application
-developer. There are also examples where data opacity is appropriate when the
-underlying subsystem does not expose the application developer to the underlying
-complexity of the opaque data, such as databases that perform encryption at
-rest. In these cases, the application developer continues to develop against
-transparent application data formats while the database manages the complexity
-of encrypting and decrypting the application data to and from long-term storage.
+developer, can be serialized into opaque formats. Examples include digital
+signature values, cryptographic key parameters, and other data fields that only
+need to be accessed by a cryptographic library and need not be modified by the
+application developer. There are also examples where data opacity is appropriate
+when the underlying subsystem does not expose the application developer to the
+underlying complexity of the opaque data, such as databases that perform
+encryption at rest. In these cases, the application developer continues to
+develop against transparent application data formats while the database manages
+the complexity of encrypting and decrypting the application data to and from
+long-term storage.
         </p>
         <p>
 This specification strives to provide an architecture where application data
