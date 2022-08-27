@@ -1970,7 +1970,7 @@ appropriate override flags.
 <em>switching between multiple cryptographic primitives and/or algorithms</em>. The primary
 goal of cryptographic agility is to enable systems to rapidly adapt to new
 cryptographic primitives and algorithms without making disruptive changes to the
-systems' infrastructure. Thus, when a particular cryptographic primitive, such 
+systems' infrastructure. Thus, when a particular cryptographic primitive, such
 as the SHA-1 algorithm, is determined to be no longer safe to use, systems can
 be reconfigured to use a newer primitive via a simple configuration file change.
         </p>
@@ -1985,16 +1985,16 @@ not provide the desired protections.
         <p>
 <dfn class="lint-ignore">Cryptographic hardening</dfn> is a practice where one
 designs <em>rarely connected</em> information security systems to
-<em>employ multiple primitives and/or algorithms at the same
-time</em>. The primary goal of cryptographic hardening is to enable systems to
-survive the failure or one or more cryptographic algorithms or primitives without
-losing cryptographic protection on the payload. For example, digitally
-signing a single piece of information using RSA, ECDSA, and Falcon algorithms
-in parallel would provide a mechanism that could survive the failure of two of
-these three digital signature algorithms. When a particular cryptographic
-algorithm is compromised,
-such as RSA using 768-bit keys, systems can still utilize the non-compromised
-cryptographic algorithms to continue to protect the information.
+<em>employ multiple primitives and/or algorithms at the same time</em>. The
+primary goal of cryptographic hardening is to enable systems to survive the
+failure or one or more cryptographic algorithms or primitives without losing
+cryptographic protection on the payload. For example, digitally signing a single
+piece of information using RSA, ECDSA, and Falcon algorithms in parallel would
+provide a mechanism that could survive the failure of two of these three digital
+signature algorithms. When a particular cryptographic protection is compromised,
+such as an RSA digital signature using 768-bit keys, systems can still utilize
+the non-compromised cryptographic protections to continue to protect the
+information.
         </p>
         <p>
 This specification is designed to enable the use of cryptographic hardening on
