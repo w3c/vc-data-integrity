@@ -2023,7 +2023,7 @@ canonical form [[?N-QUADS]] that is then serialized, hashed, and digitally
 signed. As long as any syntax expressing the protected data can be transformed
 into this canonical form, the digital signature can be verified. This enables
 the same digital signature over the information to be expressed in JSON, CBOR,
-YAML, and other compatible syntaxes without having to recreate the cryptographic
+YAML, and other compatible syntaxes without having to create a cryptographic
 proof for every syntax.
         </p>
         <p>
@@ -2033,7 +2033,7 @@ operate. For example, some systems are written against JSON data, while others
 are written against CBOR data. Without transformation, systems that process
 their data internally as CBOR are required to store the digitally signed data
 structures as JSON (or vice-versa). This leads to double-storing data and can
-lead to extra security attack surface if the unsigned representation stored in
+lead to increased security attack surface if the unsigned representation stored in
 databases accidentally deviates from the signed representation. By using
 transformations, the digital proof can live in the native data format to
 help prevent otherwise undetectable database drift over time.
@@ -2052,7 +2052,7 @@ and read from application storage.
 The VCWG is seeking feedback on normative language that cryptographic suite
 implementers need to follow to ensure that they do not utilize data
 transformation mechanisms that can map to the same output. That is, given
-the different inputs for canonicalization scheme #1 and canonicalization
+different inputs for canonicalization scheme #1 and canonicalization
 scheme #2, they must not produce the same output value. As an analogy, this is
 the same requirement for cryptographic hashing mechanisms and is why those
 schemes are designed to be collision resistant. Cryptographic canonicalization
