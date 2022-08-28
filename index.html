@@ -314,9 +314,10 @@ SHA-3</a> and
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#BLAKE3">
 BLAKE-3</a>. <dfn class="lint-ignore">Proof Generation</dfn> is a process that
 calculates a value that protects the integrity of the input data from
-modification or otherwise proves a certain desired threshold of trust, much like
-how a wax seal is used on an envelope containing a letter. Possible proof
-generation functions include
+modification or otherwise proves a certain desired threshold of trust. This
+process is conceptually similar to how a wax seal can be used on an envelope
+containing a letter to establish trust in the sender and that the letter has not
+been tampered with in transit. Possible proof generation functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
 <a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
@@ -351,14 +352,14 @@ trusted by applying a cryptographic proof verification function. Possible
 proof verification functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
-<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proof of stake</a>.
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
         </p>
 
         <p>
-This specification details how software architects and implementers can package
-these processes together into things called <a>cryptographic suites</a> and
-provide them to application developers for the purposes of protecting
-the integrity of their data in transit and at rest.
+This specification details how cryptographic software architects and
+implementers can package these processes together into things called
+<a>cryptographic suites</a> and provide them to application developers for the
+purposes of protecting the integrity of their data in transit and at rest.
         </p>
 
       </section>
