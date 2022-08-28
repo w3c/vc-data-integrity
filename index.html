@@ -274,6 +274,53 @@ applicability of the technology to their use case.
 
       </section>
 
+      <section>
+        <h3>How it Works</h3>
+
+        <p>
+The operation of Data Integrity is conceptually simple. To create a
+cryptographic proof, the following steps are performed: 1) Transformation,
+2) Hashing, and 3) Proof Generation.
+        </p>
+
+        <figure id="hiw-creation">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-creation.svg" alt="
+Diagram showing the three steps involved in the creation of a cryptographic
+proof. The diagram is layed out left to right with a blue box labeled 'Data'
+on the very left. The blue box travels, left to right, through three subsequent
+yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Proof'. The
+resulting blue box at the far right is labeled 'Data with Proof'.
+               ">
+          <figcaption style="text-align: center;">
+To create a cryptographic proof data is transformed, hashed, and
+cryptographically protected.
+          </figcaption>
+        </figure>
+
+        <p>
+To verify a cryptographic proof, the following steps are performed:
+1) Transformation, 2) Hashing, and 3) Proof Verification.
+        </p>
+
+        <figure id="hiw-verification">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-verification.svg" alt="
+Diagram showing the three steps involved in the verification of a cryptographic
+proof. The diagram is layed out left to right with a blue box labeled
+'Data with Proof' on the very left. The blue box travels, left to right, through
+three subsequent yellow arrows labeled 'Transform Data', 'Hash Data', and
+'Verify Proof'. The resulting blue box at the far right is labeled 'Data with
+Proof'.
+               ">
+          <figcaption style="text-align: center;">
+To create a cryptographic proof data is transformed, hashed, and
+cryptographically protected.
+          </figcaption>
+        </figure>
+
+      </section>
+
       <section id="conformance">
       </section>
 
