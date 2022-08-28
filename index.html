@@ -209,34 +209,38 @@ The Data Integrity specification achieves the following design goals:
         </p>
 
         <dl>
-          <dt>Simple for Developers</dt>
+          <dt>Simple for Application Developers</dt>
           <dd>
-The proof format is designed to be easy to use for developers that don't
-have significant cryptography training. For example, <a>cryptographic suite</a>
-identifiers are used instead of specific cryptographic parameters to ensure
-that it is difficult to accidentally produce a weak digital proof.
+The technology is designed to be easy to use for application developers, who
+often don't have significant training in cryptography. The solution focuses
+on sensible defaults and preventing the selection of ineffective protection
+mechanisms. See section <a href="#protecting-application-developers"></a> for
+further details.
           </dd>
           <dt>Layered Architecture</dt>
           <dd>
 A number of historical digital signature mechanisms have had monolithic
-designs which limited use cases by combining data normalization, syntax,
+designs which limited use cases by combining data transformation, syntax,
 digital signature, and serialization into a single specification. This
 specification layers each component such that a broader range of use cases,
 such as generalized selective disclosure and serialization-agnostic signatures,
-are enabled.
+are enabled. See section <a href="#transformations"></a> and
+section <a href="#data-opacity"></a> for further rationale.
           </dd>
-          <dt>Cryptographic Agility</dt>
+          <dt>Durability</dt>
           <dd>
 Since digital proof mechanisms might be compromised without warning due to
-technological advancements, it is important that <a>proof type</a>s can be
-easily and quickly replaced. This specification provides algorithm agility
-while still keeping the digital proof format easy for developers to understand.
+technological advancements, it is important that <a>cryptographic suites</a>
+can be easily and quickly replaced. This specification provides for both
+algorithm agility and cryptographic hardening while still keeping the digital
+proof format easy for developers to understand and use. See section
+<a href="#agility-and-hardening"></a> to understand the particulars.
           </dd>
           <dt>Extensibility</dt>
           <dd>
 Creating and deploying new proof types is a fairly trivial undertaking
 to ensure that the proof format increases the rate of innovation in the
-digital proof space.
+digital proof space. See section <a href="#cryptographic-suites"></a>.
           </dd>
           <dt>Syntax Agnostic Proofs</dt>
           <dd>
@@ -246,7 +250,9 @@ specification enables one to create cryptographic proofs that are not
 bound to the original document syntax, which enable more advanced use cases
 such as being able to use a single digital signature across a variety of
 RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
-without the need to regenerate the proof.
+without the need to regenerate the proof. See section
+<a href="#transformations"></a> for an explanation of the benefits of such an
+approach.
           </dd>
         </dl>
 
