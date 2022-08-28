@@ -205,54 +205,62 @@ tamper-evident.
         <h3>Design Goals and Rationale</h3>
 
         <p>
-The Data Integrity specification achieves the following design goals:
+This specification optimizes for following design goals:
         </p>
 
         <dl>
-          <dt>Simple for Application Developers</dt>
+          <dt>Simplicity</dt>
           <dd>
 The technology is designed to be easy to use for application developers, who
-often don't have significant training in cryptography. The solution focuses
-on sensible defaults and preventing the selection of ineffective protection
-mechanisms. See section <a href="#protecting-application-developers"></a> for
-further details.
+often don't have significant training in cryptography. It optimizes for the
+following priority of constituencies: application developers over cryptographic
+suite implementers, over cryptographic suite designers, over cryptographic
+algorithm specification authors.  The solution focuses on sensible defaults and
+preventing the selection of ineffective protection mechanisms. See section
+<a href="#protecting-application-developers"></a> and
+<a href="#versioning-cryptography-suites"></a> for further details.
           </dd>
-          <dt>Layered Architecture</dt>
+          <dt>Composability</dt>
           <dd>
 A number of historical digital signature mechanisms have had monolithic
 designs which limited use cases by combining data transformation, syntax,
 digital signature, and serialization into a single specification. This
 specification layers each component such that a broader range of use cases,
 such as generalized selective disclosure and serialization-agnostic signatures,
-are enabled. See section <a href="#transformations"></a> and
-section <a href="#data-opacity"></a> for further rationale.
+are enabled. See section <a href="#transformations"></a>, section
+<a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
+for further rationale.
           </dd>
-          <dt>Durability</dt>
+          <dt>Resilience</dt>
           <dd>
 Since digital proof mechanisms might be compromised without warning due to
 technological advancements, it is important that <a>cryptographic suites</a>
-can be easily and quickly replaced. This specification provides for both
-algorithm agility and cryptographic hardening while still keeping the digital
-proof format easy for developers to understand and use. See section
-<a href="#agility-and-hardening"></a> to understand the particulars.
+provide multiple layers of protection and can be rapidly upgraded. This
+specification provides for both algorithm agility and cryptographic hardening
+while still keeping the digital proof format easy for developers to understand
+and use. See section <a href="#agility-and-hardening"></a> to understand the
+particulars.
           </dd>
-          <dt>Extensibility</dt>
+          <dt>Progressive Extensibility</dt>
           <dd>
-Creating and deploying new proof types is a fairly trivial undertaking
-to ensure that the proof format increases the rate of innovation in the
-digital proof space. See section <a href="#cryptographic-suites"></a>.
+Creating and deploying new cryptographic protection mechanisms is designed to be
+a deliberate, iterative, and careful process that acknowledges that extension
+happens in phases from experimentation, to implementation, to standardization.
+This specification strives to balance the need for an increase in the rate of
+innovation in cryptography with the need for stable production-grade
+cryptography suites. See section <a href="#cryptographic-suites"></a> for
+instructions on establishing new types of cryptographic proofs.
           </dd>
-          <dt>Syntax Agnostic Proofs</dt>
+          <dt>Serialization Flexibility</dt>
           <dd>
 Cryptographic proofs can be serialized in many different but equivalent ways and
 have often been tightly bound to the original document syntax. This
 specification enables one to create cryptographic proofs that are not
 bound to the original document syntax, which enable more advanced use cases
 such as being able to use a single digital signature across a variety of
-RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
-without the need to regenerate the proof. See section
-<a href="#transformations"></a> for an explanation of the benefits of such an
-approach.
+serialization syntaxes such as JSON and CBOR without the need to regenerate the
+cryptographic proof. See section <a href="#transformations"></a> for an
+explanation of the benefits of such an approach.
           </dd>
         </dl>
 
