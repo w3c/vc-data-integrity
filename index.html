@@ -299,6 +299,30 @@ cryptographically protected.
         </figure>
 
         <p>
+<dfn>Transformation</dfn> is a process that takes input data and prepares it for
+the hashing process. Possible transformations include
+<a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalization</a>
+and
+<a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding">
+binary-to-text</a> encoding. <dfn>Hashing</dfn> is a process that calculates an
+identifier for the transformed data using a
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">
+cryptographic hash function</a>. Possible cryptographic hash functions
+include
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#SHA-3">
+SHA-3</a> and
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#BLAKE3">
+BLAKE-3</a>. <dfn class="lint-ignore">Proof Generation</dfn> is a process that
+calculates a value that protects the integrity of the input data from
+modification or otherwise proves a certain desired threshold of trust, much like
+how a wax seal is used on an envelope containing a letter. Possible proof
+generation functions include
+<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
+and
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+        </p>
+
+        <p>
 To verify a cryptographic proof, the following steps are performed:
 1) Transformation, 2) Hashing, and 3) Proof Verification.
         </p>
@@ -318,6 +342,24 @@ To create a cryptographic proof data is transformed, hashed, and
 cryptographically protected.
           </figcaption>
         </figure>
+
+        <p>
+During verification, the <a>transformation</a> and <a>hashing</a> steps are
+conceptually the same as described above. <dfn class="lint-ignore">Proof
+Verification</dfn> is a process that checks to see if the input data can be
+trusted by applying a cryptographic proof verification function. Possible
+proof verification functions include
+<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
+and
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proof of stake</a>.
+        </p>
+
+        <p>
+This specification details how software architects and implementers can package
+these processes together into things called <a>cryptographic suites</a> and
+provide them to application developers for the purposes of protecting
+the integrity of their data in transit and at rest.
+        </p>
 
       </section>
 
