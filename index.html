@@ -205,18 +205,18 @@ tamper-evident.
         <h3>Design Goals and Rationale</h3>
 
         <p>
-This specification optimizes for following design goals:
+This specification optimizes for the following design goals:
         </p>
 
         <dl>
           <dt>Simplicity</dt>
           <dd>
-The technology is designed to be easy to use for application developers, who
-often don't have significant training in cryptography. It optimizes for the
+The technology is designed to be easy to use for application developers,
+without requiring significant training in cryptography. It optimizes for the
 following priority of constituencies: application developers over cryptographic
 suite implementers, over cryptographic suite designers, over cryptographic
-algorithm specification authors.  The solution focuses on sensible defaults and
-preventing the selection of ineffective protection mechanisms. See section
+algorithm specification authors.  The solution focuses on sensible defaults to
+prevent the selection of ineffective protection mechanisms. See section
 <a href="#protecting-application-developers"></a> and
 <a href="#versioning-cryptography-suites"></a> for further details.
           </dd>
@@ -225,9 +225,9 @@ preventing the selection of ineffective protection mechanisms. See section
 A number of historical digital signature mechanisms have had monolithic
 designs which limited use cases by combining data transformation, syntax,
 digital signature, and serialization into a single specification. This
-specification layers each component such that a broader range of use cases,
-such as generalized selective disclosure and serialization-agnostic signatures,
-are enabled. See section <a href="#transformations"></a>, section
+specification layers each component such that a broader range of use cases are
+enabled, including generalized selective disclosure and serialization-agnostic
+signatures. See section <a href="#transformations"></a>, section
 <a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
 for further rationale.
           </dd>
@@ -236,7 +236,7 @@ for further rationale.
 Since digital proof mechanisms might be compromised without warning due to
 technological advancements, it is important that <a>cryptographic suites</a>
 provide multiple layers of protection and can be rapidly upgraded. This
-specification provides for both algorithm agility and cryptographic hardening
+specification provides for both algorithmic agility and cryptographic hardening,
 while still keeping the digital proof format easy for developers to understand
 and use. See section <a href="#agility-and-hardening"></a> to understand the
 particulars.
@@ -256,7 +256,7 @@ instructions on establishing new types of cryptographic proofs.
 Cryptographic proofs can be serialized in many different but equivalent ways and
 have often been tightly bound to the original document syntax. This
 specification enables one to create cryptographic proofs that are not
-bound to the original document syntax, which enable more advanced use cases
+bound to the original document syntax, which enables more advanced use cases
 such as being able to use a single digital signature across a variety of
 serialization syntaxes such as JSON and CBOR without the need to regenerate the
 cryptographic proof. See section <a href="#transformations"></a> for an
