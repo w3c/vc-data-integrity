@@ -173,8 +173,12 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
-Cryptographic proofs enable functionality that is useful to implementors of
-distributed systems. For example, proofs can be used to:
+This specification describes mechanisms for ensuring the authenticity and
+integrity of Verifiable Credentials and similar types of constrained digital
+documents using cryptography, especially through the use of digital signatures
+and related mathematical proofs. Cryptographic proofs enable functionality that
+is useful to implementors of distributed systems. For example, proofs can be
+used to:
       </p>
 
       <ul>
@@ -200,79 +204,6 @@ provide the benefit of integrity protection, making documents and data
 tamper-evident.
         </li>
       </ul>
-
-      <section>
-        <h3>Design Goals and Rationale</h3>
-
-        <p>
-This specification optimizes for the following design goals:
-        </p>
-
-        <dl>
-          <dt>Simplicity</dt>
-          <dd>
-The technology is designed to be easy to use for application developers,
-without requiring significant training in cryptography. It optimizes for the
-following priority of constituencies: application developers over cryptographic
-suite implementers, over cryptographic suite designers, over cryptographic
-algorithm specification authors.  The solution focuses on sensible defaults to
-prevent the selection of ineffective protection mechanisms. See section
-<a href="#protecting-application-developers"></a> and
-<a href="#versioning-cryptography-suites"></a> for further details.
-          </dd>
-          <dt>Composability</dt>
-          <dd>
-A number of historical digital signature mechanisms have had monolithic
-designs which limited use cases by combining data transformation, syntax,
-digital signature, and serialization into a single specification. This
-specification layers each component such that a broader range of use cases are
-enabled, including generalized selective disclosure and serialization-agnostic
-signatures. See section <a href="#transformations"></a>, section
-<a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
-for further rationale.
-          </dd>
-          <dt>Resilience</dt>
-          <dd>
-Since digital proof mechanisms might be compromised without warning due to
-technological advancements, it is important that <a>cryptographic suites</a>
-provide multiple layers of protection and can be rapidly upgraded. This
-specification provides for both algorithmic agility and cryptographic hardening,
-while still keeping the digital proof format easy for developers to understand
-and use. See section <a href="#agility-and-hardening"></a> to understand the
-particulars.
-          </dd>
-          <dt>Progressive Extensibility</dt>
-          <dd>
-Creating and deploying new cryptographic protection mechanisms is designed to be
-a deliberate, iterative, and careful process that acknowledges that extension
-happens in phases from experimentation, to implementation, to standardization.
-This specification strives to balance the need for an increase in the rate of
-innovation in cryptography with the need for stable production-grade
-cryptography suites. See section <a href="#cryptographic-suites"></a> for
-instructions on establishing new types of cryptographic proofs.
-          </dd>
-          <dt>Serialization Flexibility</dt>
-          <dd>
-Cryptographic proofs can be serialized in many different but equivalent ways and
-have often been tightly bound to the original document syntax. This
-specification enables one to create cryptographic proofs that are not
-bound to the original document syntax, which enables more advanced use cases
-such as being able to use a single digital signature across a variety of
-serialization syntaxes such as JSON and CBOR without the need to regenerate the
-cryptographic proof. See section <a href="#transformations"></a> for an
-explanation of the benefits of such an approach.
-          </dd>
-        </dl>
-
-      <p class="note" title="Application of technology to broader use cases">
-While this specification primarily focuses on Verifiable Credentials, the
-design of this technology is generalized, such that it can be used for
-non-Verifiable Credential use cases. In these instances, implementers are
-expected to perform their own due diligence and expert review as to the
-applicability of the technology to their use case.
-      </p>
-
-      </section>
 
       <section>
         <h3>How it Works</h3>
@@ -378,6 +309,79 @@ implementers can package these processes together into things called
 <a>cryptographic suites</a> and provide them to application developers for the
 purposes of protecting the integrity of application data in transit and at rest.
         </p>
+
+      </section>
+
+      <section>
+        <h3>Design Goals and Rationale</h3>
+
+        <p>
+This specification optimizes for the following design goals:
+        </p>
+
+        <dl>
+          <dt>Simplicity</dt>
+          <dd>
+The technology is designed to be easy to use for application developers,
+without requiring significant training in cryptography. It optimizes for the
+following priority of constituencies: application developers over cryptographic
+suite implementers, over cryptographic suite designers, over cryptographic
+algorithm specification authors.  The solution focuses on sensible defaults to
+prevent the selection of ineffective protection mechanisms. See section
+<a href="#protecting-application-developers"></a> and
+<a href="#versioning-cryptography-suites"></a> for further details.
+          </dd>
+          <dt>Composability</dt>
+          <dd>
+A number of historical digital signature mechanisms have had monolithic
+designs which limited use cases by combining data transformation, syntax,
+digital signature, and serialization into a single specification. This
+specification layers each component such that a broader range of use cases are
+enabled, including generalized selective disclosure and serialization-agnostic
+signatures. See section <a href="#transformations"></a>, section
+<a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
+for further rationale.
+          </dd>
+          <dt>Resilience</dt>
+          <dd>
+Since digital proof mechanisms might be compromised without warning due to
+technological advancements, it is important that <a>cryptographic suites</a>
+provide multiple layers of protection and can be rapidly upgraded. This
+specification provides for both algorithmic agility and cryptographic hardening,
+while still keeping the digital proof format easy for developers to understand
+and use. See section <a href="#agility-and-hardening"></a> to understand the
+particulars.
+          </dd>
+          <dt>Progressive Extensibility</dt>
+          <dd>
+Creating and deploying new cryptographic protection mechanisms is designed to be
+a deliberate, iterative, and careful process that acknowledges that extension
+happens in phases from experimentation, to implementation, to standardization.
+This specification strives to balance the need for an increase in the rate of
+innovation in cryptography with the need for stable production-grade
+cryptography suites. See section <a href="#cryptographic-suites"></a> for
+instructions on establishing new types of cryptographic proofs.
+          </dd>
+          <dt>Serialization Flexibility</dt>
+          <dd>
+Cryptographic proofs can be serialized in many different but equivalent ways and
+have often been tightly bound to the original document syntax. This
+specification enables one to create cryptographic proofs that are not
+bound to the original document syntax, which enables more advanced use cases
+such as being able to use a single digital signature across a variety of
+serialization syntaxes such as JSON and CBOR without the need to regenerate the
+cryptographic proof. See section <a href="#transformations"></a> for an
+explanation of the benefits of such an approach.
+          </dd>
+        </dl>
+
+      <p class="note" title="Application of technology to broader use cases">
+While this specification primarily focuses on Verifiable Credentials, the
+design of this technology is generalized, such that it can be used for
+non-Verifiable Credential use cases. In these instances, implementers are
+expected to perform their own due diligence and expert review as to the
+applicability of the technology to their use case.
+      </p>
 
       </section>
 
