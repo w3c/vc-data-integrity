@@ -287,13 +287,13 @@ cryptographic proof, the following steps are performed: 1) Transformation,
           <img style="margin: auto; display: block; width: 100%;"
                src="diagrams/hiw-creation.svg" alt="
 Diagram showing the three steps involved in the creation of a cryptographic
-proof. The diagram is layed out left to right with a blue box labeled 'Data'
-on the very left. The blue box travels, left to right, through three subsequent
+proof. The diagram is laid out left to right with a blue box labeled 'Data'
+on the far left. The blue box travels, left to right, through three subsequent
 yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Proof'. The
 resulting blue box at the far right is labeled 'Data with Proof'.
                ">
           <figcaption style="text-align: center;">
-To create a cryptographic proof data is transformed, hashed, and
+To create a cryptographic proof, data is transformed, hashed, and
 cryptographically protected.
           </figcaption>
         </figure>
@@ -304,7 +304,11 @@ the hashing process. Possible transformations include
 <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalization</a>
 and
 <a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding">
-binary-to-text</a> encoding. <dfn>Hashing</dfn> is a process that calculates an
+binary-to-text</a> encoding.
+        </p>
+
+        <p>
+<dfn>Hashing</dfn> is a process that calculates an
 identifier for the transformed data using a
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">
 cryptographic hash function</a>. Possible cryptographic hash functions
@@ -312,11 +316,15 @@ include
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#SHA-3">
 SHA-3</a> and
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#BLAKE3">
-BLAKE-3</a>. <dfn class="lint-ignore">Proof Generation</dfn> is a process that
+BLAKE-3</a>.
+        </p>
+
+        <p>
+<dfn class="lint-ignore">Proof Generation</dfn> is a process that
 calculates a value that protects the integrity of the input data from
 modification or otherwise proves a certain desired threshold of trust. This
-process is conceptually similar to how a wax seal can be used on an envelope
-containing a letter to establish trust in the sender and that the letter has not
+process is conceptually similar to the way a wax seal can be used on an envelope
+containing a letter to establish trust in the sender and show that the letter has not
 been tampered with in transit. Possible proof generation functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
@@ -332,23 +340,27 @@ To verify a cryptographic proof, the following steps are performed:
           <img style="margin: auto; display: block; width: 100%;"
                src="diagrams/hiw-verification.svg" alt="
 Diagram showing the three steps involved in the verification of a cryptographic
-proof. The diagram is layed out left to right with a blue box labeled
-'Data with Proof' on the very left. The blue box travels, left to right, through
+proof. The diagram is laid out left to right with a blue box labeled
+'Data with Proof' on the far left. The blue box travels, left to right, through
 three subsequent yellow arrows labeled 'Transform Data', 'Hash Data', and
 'Verify Proof'. The resulting blue box at the far right is labeled 'Data with
 Proof'.
                ">
           <figcaption style="text-align: center;">
-To verify a cryptographic proof data is transformed, hashed, and
+To verify a cryptographic proof, data is transformed, hashed, and
 checked for correctness.
           </figcaption>
         </figure>
 
         <p>
 During verification, the <a>transformation</a> and <a>hashing</a> steps are
-conceptually the same as described above. <dfn class="lint-ignore">Proof
-Verification</dfn> is a process that checks to see if the input data can be
-trusted by applying a cryptographic proof verification function. Possible
+conceptually the same as described above.
+        </p>
+
+        <p>
+<dfn class="lint-ignore">Proof
+Verification</dfn> is a process that applies a cryptographic proof
+verification function to see if the input data can be trusted. Possible
 proof verification functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
@@ -359,7 +371,7 @@ and
 This specification details how cryptographic software architects and
 implementers can package these processes together into things called
 <a>cryptographic suites</a> and provide them to application developers for the
-purposes of protecting the integrity of their data in transit and at rest.
+purposes of protecting the integrity of application data in transit and at rest.
         </p>
 
       </section>
