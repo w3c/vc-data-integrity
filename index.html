@@ -347,9 +347,9 @@ for further rationale.
 Since digital proof mechanisms might be compromised without warning due to
 technological advancements, it is important that <a>cryptographic suites</a>
 provide multiple layers of protection and can be rapidly upgraded. This
-specification provides for both algorithmic agility and cryptographic hardening,
+specification provides for both algorithmic agility and cryptographic layering,
 while still keeping the digital proof format easy for developers to understand
-and use. See section <a href="#agility-and-hardening"></a> to understand the
+and use. See section <a href="#agility-and-layering"></a> to understand the
 particulars.
           </dd>
           <dt>Progressive Extensibility</dt>
@@ -2087,7 +2087,7 @@ appropriate override flags.
       </section>
 
       <section>
-        <h3>Agility and Hardening</h3>
+        <h3>Agility and Layering</h3>
 
         <p>
 <dfn class="lint-ignore">Cryptographic agility</dfn> is a practice by which one designs
@@ -2108,10 +2108,10 @@ able to easily recontact the server (issuer), then cryptographic agility does
 not provide the desired protections.
         </p>
         <p>
-<dfn class="lint-ignore">Cryptographic hardening</dfn> is a practice where one
+<dfn class="lint-ignore">Cryptographic layering</dfn> is a practice where one
 designs <em>rarely connected</em> information security systems to
 <em>employ multiple primitives and/or algorithms at the same time</em>. The
-primary goal of cryptographic hardening is to enable systems to survive the
+primary goal of cryptographic layering is to enable systems to survive the
 failure or one or more cryptographic algorithms or primitives without losing
 cryptographic protection on the payload. For example, digitally signing a single
 piece of information using RSA, ECDSA, and Falcon algorithms in parallel would
@@ -2122,7 +2122,7 @@ the non-compromised cryptographic protections to continue to protect the
 information.
         </p>
         <p>
-This specification is designed to enable the use of cryptographic hardening on
+This specification is designed to enable the use of cryptographic layering on
 all protected information. Implementers are urged to take advantage of this
 feature for all signed content that might need to be protected for a year or
 longer.
