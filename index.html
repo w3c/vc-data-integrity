@@ -428,11 +428,12 @@ the proof.
 
           <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
           <dd>
-The specific intent for the proof, the reason why an entity
-created it. Acts as a safeguard to prevent the proof from being misused for a
-purpose other than the one it was intended for. For example, a proof can be used
-for purposes of <code>authentication</code>, for asserting control of a
-Verifiable Credential (<code>assertionMethod</code>), and several others.
+The reason the proof was created MUST be specified as a string and map to a URL
+[[URL]]. The proof purpose acts as a safeguard to prevent the proof from being
+misused for a purpose other than the one that was intended. For example, a proof
+can be created for the purpose of <code>authentication</code> or for asserting
+a set of statements such as those in a Verifiable Credential
+(<code>assertionMethod</code>).
           </dd>
 
           <dt><dfn>verificationMethod</dfn></dt>
