@@ -406,9 +406,9 @@ This section specifies the data model that is used for expressing
       <section>
         <h3>Proofs</h3>
         <p>
-A <a>data integrity proof</a> is comprised of information about the proof,
-parameters required to verify it, and the proof value itself. All of this
-information is provided using Linked Data vocabularies such as
+A <a>data integrity proof</a> provides information about the proof mechanism,
+parameters required to verify that proof, and the proof value itself. All of this
+information is provided using Linked Data vocabularies such as the
 [[SECURITY-VOCABULARY]].
         </p>
 
@@ -437,7 +437,7 @@ Verifiable Credential (<code>assertionMethod</code>), and several others.
           <dt><dfn>verificationMethod</dfn><dt>
           <dd>
 <em>Required</em>. A set of parameters required to independently verify the
-proof, such as an identifier for a public/private key pair that would be used in
+proof, such as an identifier for cryptographic material that would be used in
 the proof.
           </dd>
 
@@ -934,7 +934,7 @@ in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
                   <p>
 The value of the <code>id</code> property for a <a>verification
 method</a> MUST be a <a data-cite="INFRA#string">string</a> that conforms to the
-[[URL]] syntax.
+conforms to the [[URL]] syntax.
                   </p>
                 </dd>
                 <dt>type</dt>
