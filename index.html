@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Integrity 1.0</title>
+    <title>Verifiable Credential Data Integrity 1.0</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -17,7 +17,10 @@
           specStatus:           "ED",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
-          shortName:            "data-integrity",
+          shortName:            "vc-data-integrity",
+
+          // subtitle
+          subtitle: "Securing the Integrity of Verifiable Credential Data",
 
           // if you wish the publication date to be other than today, set this
           // publishDate:  "2009-08-06",
@@ -28,7 +31,7 @@
           // previousMaturity:  "WD",
 
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:           "https://w3c.github.io/data-integrity/",
+          edDraftURI:           "https://w3c.github.io/vc-data-integrity/",
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -39,16 +42,17 @@
 
           // editors, add as many as you like
           // only "name" is required
-          editors:  [
-              { name: "Manu Sporny", url: "https://digitalbazaar.com/",
-                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
-              { name: "Mike Prorock", url: "https://www.linkedin.com/in/mprorock",
-                company: "Mesur.io", companyURL: "https://mesur.io/" },
-              { name: "Dave Longley", url: "https://digitalbazaar.com/",
-                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
-                note: "2014-2022"
-              }
-          ],
+          editors: [{
+            name: "Manu Sporny", url: "https://digitalbazaar.com/",
+            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/"
+          }, {
+            name: "Dave Longley", url: "https://digitalbazaar.com/",
+            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
+            note: "2014-2022"
+          }, {
+            name: "Mike Prorock", url: "https://www.linkedin.com/in/mprorock",
+            company: "Mesur.io", companyURL: "https://mesur.io/"
+          }],
 
           // authors, add as many as you like.
           // This is optional, uncomment if you have authors as well as editors.
@@ -70,7 +74,7 @@
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-credentials",
 
-          github: "w3c/data-integrity",
+          github: "w3c/vc-data-integrity",
 
           // URI of the patent status for this WG, for Rec-track documents
           // !!!! IMPORTANT !!!!
@@ -78,7 +82,7 @@
           // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
           // Team Contact.
           wgPatentURI:  "",
-          maxTocLevel: 4,
+          maxTocLevel: 3,
           /*preProcess: [ webpayments.preProcess ],
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
@@ -123,6 +127,21 @@
               ],
               status: "Internet-Draft",
               publisher: "IETF"
+            },
+            "VC-EXTENSION-REGISTRY": {
+              title: "Verifiable Credentials Extension Registry",
+              href: "https://w3c-ccg.github.io/vc-extension-registry/",
+              authors: [
+                "Manu Sporny"
+              ],
+              status: "CG-DRAFT",
+              publisher: "Credentials Community Group"
+            },
+            "URDNA2015": {
+              title:    "Universal RDF Dataset Canonicalization Algorithm 2015",
+              href:     "https://json-ld.github.io/rdf-dataset-canonicalization/spec/",
+              status:   "CGDRAFT",
+              publisher:  "Credentials Community Group"
             }
           },
           postProcess: [restrictRefs]
@@ -138,8 +157,9 @@ ol.algorithm li:before { font-weight: bold; counter-increment: numsection; conte
     <section id='abstract'>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of structured digital documents using cryptography, such as digital
-signatures and other digital mathematical proofs.
+integrity of Verifiable Credentials and similar types of constrained digital
+documents using cryptography, especially through the use of digital
+signatures and related mathematical proofs.
       </p>
     </section>
 
@@ -153,112 +173,216 @@ is not fit for production deployment.
     <section>
       <h2>Introduction</h2>
       <p>
-Cryptographic proofs enable functionality that is useful to implementors of
-distributed systems. For example, proofs can be used to:
+This specification describes mechanisms for ensuring the authenticity and
+integrity of Verifiable Credentials and similar types of constrained digital
+documents using cryptography, especially through the use of digital signatures
+and related mathematical proofs. Cryptographic proofs enable functionality that
+is useful to implementors of distributed systems. For example, proofs can be
+used to:
       </p>
 
-<ul>
-<li>
+      <ul>
+        <li>
 Make statements that can be shared without loss of trust, because their
 authorship can be verified by a third party, for example as part of Verifiable
 Credentials [[VC-DATA-MODEL]] or social media posts.
-</li>
-<li>
+        </li>
+        <li>
 Authenticate as an entity identified by a particular identifier, for example, as
 the subject identified by a Decentralized Identifier (DID) [[DID-CORE]].
-</li>
-<li>
+        </li>
+        <li>
 Delegate authorization for actions in a remote execution environment, via
 mechanisms such as Authorization Capabilities [[ZCAP]].
-</li>
-<li>
+        </li>
+        <li>
 Agree to contracts where the agreement can be verified by another party.
-</li>
-<li>
+        </li>
+        <li>
 Additionally, many proofs that are based on cryptographic digital signatures
 provide the benefit of integrity protection, making documents and data
 tamper-evident.
-</li>
-</ul>
+        </li>
+      </ul>
 
-      <p>
-The term Linked Data is used to describe a recommended best practice for
-exposing, sharing, and connecting information on the Web using standards,
-such as URLs, to identify things and their properties. When information
-is presented as Linked Data, other related information can be easily discovered
-and new information can be easily linked to it. Linked Data is extensible in a
-decentralized way, greatly reducing barriers to large scale integration.
-      </p>
+      <section>
+        <h3>How it Works</h3>
 
-      <p>
-With the increase in usage of Linked Data for a variety of applications, there
-is a need to be able to verify the authenticity and integrity of Linked Data
-documents. This specification adds authentication and integrity protection to
-data documents through the use of mathematical proofs without sacrificing
-Linked Data features such as extensibility and
-composability.
-      </p>
+        <p>
+The operation of Data Integrity is conceptually simple. To create a
+cryptographic proof, the following steps are performed: 1) Transformation,
+2) Hashing, and 3) Proof Generation.
+        </p>
 
-      <p class="note" title="Use of Linked Data is an optional feature">
-While  this specification provides mechanisms to digitally sign Linked Data, the
-use  of Linked Data is not necessary to gain some of the advantages provided by
-this specification.
-      </p>
+        <figure id="hiw-creation">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-creation.svg" alt="
+Diagram showing the three steps involved in the creation of a cryptographic
+proof. The diagram is laid out left to right with a blue box labeled 'Data'
+on the far left. The blue box travels, left to right, through three subsequent
+yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Proof'. The
+resulting blue box at the far right is labeled 'Data with Proof'.
+               ">
+          <figcaption style="text-align: center;">
+To create a cryptographic proof, data is transformed, hashed, and
+cryptographically protected.
+          </figcaption>
+        </figure>
+
+        <p>
+<dfn>Transformation</dfn> is a process that takes input data and prepares it for
+the hashing process. One example of a possible transformation is to take a
+record of people's names that attended a meeting, sort the list alphabetically
+by the individual's family name, and rewrite the names on a piece of paper, one
+per line, in sorted order. Possible transformations include
+<a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalization</a>
+and
+<a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding">
+binary-to-text</a> encoding.
+        </p>
+
+        <p>
+<dfn>Hashing</dfn> is a process that calculates an
+identifier for the transformed data using a
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">
+cryptographic hash function</a>. This process is conceptually similar to how a
+phone address book functions, where one takes a person's name (the input data)
+and maps that name to that individual's phone number (the hash). Possible
+cryptographic hash functions include
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#SHA-3">
+SHA-3</a> and
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#BLAKE3">
+BLAKE-3</a>.
+        </p>
+
+        <p>
+<dfn class="lint-ignore">Proof Generation</dfn> is a process that
+calculates a value that protects the integrity of the input data from
+modification or otherwise proves a certain desired threshold of trust. This
+process is conceptually similar to the way a wax seal can be used on an envelope
+containing a letter to establish trust in the sender and show that the letter has not
+been tampered with in transit. Possible proof generation functions include
+<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
+and
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+        </p>
+
+        <p>
+To verify a cryptographic proof, the following steps are performed:
+1) Transformation, 2) Hashing, and 3) Proof Verification.
+        </p>
+
+        <figure id="hiw-verification">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-verification.svg" alt="
+Diagram showing the three steps involved in the verification of a cryptographic
+proof. The diagram is laid out left to right with a blue box labeled
+'Data with Proof' on the far left. The blue box travels, left to right, through
+three subsequent yellow arrows labeled 'Transform Data', 'Hash Data', and
+'Verify Proof'. The resulting blue box at the far right is labeled 'Data with
+Proof'.
+               ">
+          <figcaption style="text-align: center;">
+To verify a cryptographic proof, data is transformed, hashed, and
+checked for correctness.
+          </figcaption>
+        </figure>
+
+        <p>
+During verification, the <a>transformation</a> and <a>hashing</a> steps are
+conceptually the same as described above.
+        </p>
+
+        <p>
+<dfn class="lint-ignore">Proof
+Verification</dfn> is a process that applies a cryptographic proof
+verification function to see if the input data can be trusted. Possible
+proof verification functions include
+<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
+and
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+        </p>
+
+        <p>
+This specification details how cryptographic software architects and
+implementers can package these processes together into things called
+<a>cryptographic suites</a> and provide them to application developers for the
+purposes of protecting the integrity of application data in transit and at rest.
+        </p>
+
+      </section>
 
       <section>
         <h3>Design Goals and Rationale</h3>
 
         <p>
-The Data Integrity specification achieves the following design goals:
+This specification optimizes for the following design goals:
         </p>
 
         <dl>
-          <dt>Simple for Developers</dt>
+          <dt>Simplicity</dt>
           <dd>
-The proof format is designed to be easy to use for developers that don't
-have significant cryptography training. For example, <a>cryptographic suite</a>
-identifiers are used to provide the ability for a developer to select one or more
-vetted algorithms and parameters for a set of particular use cases through
-use of a single identifier.  This prevents accidental selection of a bad combination
-of parameters that lead to weakness in a particular proof.
+The technology is designed to be easy to use for application developers,
+without requiring significant training in cryptography. It optimizes for the
+following priority of constituencies: application developers over cryptographic
+suite implementers, over cryptographic suite designers, over cryptographic
+algorithm specification authors.  The solution focuses on sensible defaults to
+prevent the selection of ineffective protection mechanisms. See section
+<a href="#protecting-application-developers"></a> and
+<a href="#versioning-cryptography-suites"></a> for further details.
           </dd>
-          <dt>Layered Architecture</dt>
+          <dt>Composability</dt>
           <dd>
 A number of historical digital signature mechanisms have had monolithic
-designs which limited use cases by combining data normalization, syntax,
+designs which limited use cases by combining data transformation, syntax,
 digital signature, and serialization into a single specification. This
-specification layers each component such that a broader range of use cases,
-such as generalized selective disclosure and serialization-agnostic signatures,
-are enabled.
+specification layers each component such that a broader range of use cases are
+enabled, including generalized selective disclosure and serialization-agnostic
+signatures. See section <a href="#transformations"></a>, section
+<a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
+for further rationale.
           </dd>
-          <dt>Cryptographic Agility</dt>
+          <dt>Resilience</dt>
           <dd>
 Since digital proof mechanisms might be compromised without warning due to
-technological advancements, it is important that <a>proof type</a>s can be
-easily and quickly replaced. This specification provides algorithm agility
-while still keeping the digital proof format easy for developers to understand.
+technological advancements, it is important that <a>cryptographic suites</a>
+provide multiple layers of protection and can be rapidly upgraded. This
+specification provides for both algorithmic agility and cryptographic hardening,
+while still keeping the digital proof format easy for developers to understand
+and use. See section <a href="#agility-and-hardening"></a> to understand the
+particulars.
           </dd>
-          <dt>Extensibility</dt>
+          <dt>Progressive Extensibility</dt>
           <dd>
-This specification provides the structure by which new proof types can be defined
-for use with Verifiable Credentials and other constrained document use cases. This 
-promotes innovation as well as the ability to test and validate cryptographic agility 
-with new algorithms and proofs under consideration for standardization.  The 
-definition of a common proof format further increases the ability to validate new 
-use cases for proofs, as well as to promote interoperability testing with both 
-existing proofs as well as newer proof mechanisms that are under consideration.
+Creating and deploying new cryptographic protection mechanisms is designed to be
+a deliberate, iterative, and careful process that acknowledges that extension
+happens in phases from experimentation, to implementation, to standardization.
+This specification strives to balance the need for an increase in the rate of
+innovation in cryptography with the need for stable production-grade
+cryptography suites. See section <a href="#cryptographic-suites"></a> for
+instructions on establishing new types of cryptographic proofs.
           </dd>
-          <dt>Syntax Agnostic Proofs</dt>
+          <dt>Serialization Flexibility</dt>
           <dd>
 Cryptographic proofs can be serialized in many different but equivalent ways and
 have often been tightly bound to the original document syntax. This
 specification enables one to create cryptographic proofs that are not
-bound to the original document syntax, which enable more advanced use cases
+bound to the original document syntax, which enables more advanced use cases
 such as being able to use a single digital signature across a variety of
-RDF-based graph serialization syntaxes such as JSON-LD, N-Quads, and TURTLE,
-without the need to regenerate the proof.
+serialization syntaxes such as JSON and CBOR without the need to regenerate the
+cryptographic proof. See section <a href="#transformations"></a> for an
+explanation of the benefits of such an approach.
           </dd>
         </dl>
+
+      <p class="note" title="Application of technology to broader use cases">
+While this specification primarily focuses on Verifiable Credentials, the
+design of this technology is generalized, such that it can be used for
+non-Verifiable Credential use cases. In these instances, implementers are
+expected to perform their own due diligence and expert review as to the
+applicability of the technology to their use case.
+      </p>
+
       </section>
 
       <section id="conformance">
@@ -320,7 +444,7 @@ the proof.
           <dt><dfn>created</dfn><dt>
           <dd>
 <em>Required</em>. The string value of an [[ISO8601]] combined date and time
-string generated by the <a href="#proof-algorithm">Proof Algorithm</a>.
+string generated by the <a href="#create-proof-algorithm">Proof Algorithm</a>.
           </dd>
 
           <dt>domain<dt>
@@ -331,7 +455,7 @@ Optional. A string value specifying the restricted <a>domain</a> of the proof.
           <dt><dfn>proofValue</dfn><dt>
           <dd>
 <em>Required</em>. One of any number of valid representations of <em>proof
-value</em> generated by the <a href="#proof-algorithm">Proof Algorithm</a>.
+value</em> generated by the <a href="#create-proof-algorithm">Proof Algorithm</a>.
           </dd>
         </dl>
 
@@ -477,9 +601,233 @@ that can be used along with an algorithm to deterministically generate
 nonces that are concatenated with each N-Quad to prevent rainbow
 table or similar attacks.</div>
 
+      <p>
+The Data Integrity specification supports the concept of multiple
+proofs in a single document. There are two types of multi-proof
+approaches that are identified: Proof Sets (un-ordered) and Proof Chains
+(ordered).
+      </p>
 
+      <section>
+        <h3>Proof Sets</h3>
+        <p>
+A proof set is useful when the same data needs to be secured by multiple
+entities, but where the order of proofs does not matter,
+such as in the case of a set of signatures on a contract. A proof set,
+which has no order, is represented by associating a set of proofs
+with the <code>proof</code> key in a document.
+        </p>
+        <pre class="example highlight" title="A proof set in a data document">
+{
+  "@context": [
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+],
+  "title": "Hello world!",
+  "proof": [{
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:24Z",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
+      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
+  }, {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T13:08:49Z",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
+      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9876
+      zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
+  }]
+}
+        </pre>
 
       </section>
+
+      <section>
+        <h3>Proof Chains</h3>
+        <p>
+A proof chain is useful when the same data needs to be signed by
+multiple entities and the order of when the proofs occurred matters,
+such as in the case of a notary counter-signing a proof that had been
+created on a document. A proof chain, where order needs to be preserved, is
+represented by associating an ordered list of proofs with the
+<code>proofChain</code> key in a document.
+        </p>
+        <pre class="example highlight" title="A proof chain in a data document">
+{
+  "@context": [
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+],
+  "title": "Hello world!",
+  "proofChain": [{
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:42Z",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
+      DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
+  }, {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T21:28:14Z",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
+      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19KiWXerb8
+      ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ"
+  }]
+}
+        </pre>
+
+      </section>
+    </section>
+
+    <section class="normative">
+      <h2>Proof Types</h2>
+
+      <section>
+        <h3>Signatures</h3>
+
+        <p>
+A <dfn>data integrity signature</dfn> is a type of cryptographic proof, and is
+comprised of information about the signature, parameters required to verify
+it, and the signature value itself. All of this information is provided using
+Linked Data vocabularies such as the [[!SECURITY-VOCABULARY]].
+        </p>
+
+        <p>
+          A <a>data integrity signature</a> typically includes at least the
+          following attributes:
+        </p>
+
+        <dl style="margin-left: 1em;">
+          <dt>type (required)<dt>
+          <dd>
+A URI that identifies the digital <a>cryptographic suite</a> that was used to create the
+signature. For example: <code>Ed25519Signature2020</code>.</dd>
+          <dt>created (required)<dt>
+          <dd>
+The string value of an [[!ISO8601]] combined date and time string generated
+by the <a href="#create-proof-algorithm">Proof Algorithm</a>.
+          </dd>
+
+          <dt>domain (optional)<dt>
+          <dd>
+A string value specifying the restricted <a>domain</a> of the signature.
+          </dd>
+          <dt><dfn class="lint-ignore">nonce</dfn> (optional, but strongly recommended)<dt>
+          <dd>
+A string value that is included in the digital signature and MUST only be
+used once for a particular <a>domain</a> and window of time. This
+value is used to mitigate replay attacks.
+          </dd>
+          <dt><dfn class="lint-ignore">signature value</dfn> (required)<dt>
+          <dd>
+One of any number of valid representations of <em>signature value</em>
+generated by the <a href="#create-proof-algorithm">Proof Algorithm</a>.
+Example: <code>jws</code> for detached JSON Web Signatures.
+</dd>
+        </dl>
+
+        <p class="note">
+The terms <code>type</code>, <code>created</code>, <code>domain</code>,
+<code>nonce</code>, and <code>jws</code> above map to URLs. The vocabulary where
+these terms are defined is the [[SECURITY-VOCABULARY]].
+        </p>
+
+        <p>
+A signature can be added to a data document like the following:
+        </p>
+
+        <pre class="example highlight" title="A simple data document">
+{
+  "@context": {"title": "https://schema.org#title"},
+  "title": "Hello world!",
+}
+        </pre>
+
+        <p>
+by adding the parameters outlined in this section:
+        </p>
+
+        <pre class="example highlight" title="A simple signed data document">
+{
+  "@context": [
+    {"title": "https://schema.org#title"},
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+],
+  "title": "Hello world!",
+  "proof": {
+    "type": "Ed25519Signature2020",
+    "created": "2020-11-05T19:23:24Z",
+    "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
+      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
+  }
+}
+        </pre>
+
+        <p>
+The signature example above uses the <code>Ed25519Signature2020</code>
+<a>cryptographic suite</a> to produce a verifiable digital signature.
+        </p>
+
+<div class="issue">Create a separate section detailing an optional mechanism
+for authenticating public key control via bi-directional links. How
+to establish trust in key controller entities is out of scope but examples can
+be given.</div>
+
+<div class="issue">Specify algorithm agility mechanisms (additional attributes
+from the security vocab can be used to indicate other signing and hash
+algorithms). Rewrite algorithms to be parameterized on this basis and
+move `RsaSignature2018` definition to a single supported
+mechanism; specify its identifier as a URL. In order to make it easy to
+specify a variety of combinations of algorithms, introduce a core
+type `LinkedDataSignature` that allows for easy filtering/discover of
+signature nodes, but that type on its own doesn't specify any default
+signature or hash algorithms, those must be given via other properties in the
+nodes.</div>
+
+<div class="issue">Add a note indicating that this specification should not
+be construed to indicate that public key controllers should be restricted to a
+single public key or that systems that use this spec and involve real people
+should identify each person as only ever being a single entity rather than
+perhaps N entities with M keys. There are no such restrictions and in many
+cases those kinds of restrictions are ill-advised due to privacy
+considerations.</div>
+
+<div class="issue">Add an explicit check on key type to prevent an
+attacker from selecting an algorithm that may abuse how the key is
+used/interpreted.</div>
+
+<div class="issue">Add a note indicating that selective disclosure signature
+mechanisms can be compatible with data integrity signatures; for example,
+an algorithm could produce a merkle tree from a canonicalized set of
+N-Quads and then sign the root hash. Disclosure would involve including
+the merkle paths for each N-Quad that is to be revealed. This mechanism
+would merely consume the normalized output differently (this, and the
+proof mechanism would be modifications to this core spec). It may also
+be necessary to generate signature parameters such as a private key/seed
+that can be used along with an algorithm to deterministically generate
+nonces that are concatenated with each N-Quad to prevent rainbow
+table or similar attacks.</div>
+
+      </section>
+
+      <section>
+        <h3>Other Proof Types</h3>
+
+        <div class="issue">TODO: Add links and examples to proof types that
+are not data integrity signatures, such as proof of existence, proof of work,
+proof of elapsed time, and proof of registration.</div>
+      </section>
+    </section>
 
       <section>
         <h3>Proof Purposes</h3>
@@ -783,7 +1131,7 @@ To encode a Multikey, the <a>verification method</a> `type` MUST be set to
             <pre class="example nohighlight"
               title="Multikey encoding of a Ed25519 public key">
 {
-  "@context": ["https://w3id.org/security/suites/multikey/v1"],
+  "@context": ["https://w3id.org/security/multikey/v1"],
   "id": "did:example:123456789abcdefghi#keys-1",
   "type": "Multikey",
   "controller": "did:example:123456789abcdefghi",
@@ -1213,243 +1561,56 @@ example described in <a href="#capability-invocation"></a>.
         </section>
       </section>
 
+      <section>
+        <h2>Relationship to Linked Data</h2>
+        <p>
+The term Linked Data is used to describe a recommended best practice for
+exposing, sharing, and connecting information on the Web using standards, such
+as URLs, to identify things and their properties. When information is presented
+as Linked Data, other related information can be easily discovered and new
+information can be easily linked to it. Linked Data is extensible in a
+decentralized way, greatly reducing barriers to large scale integration.
+        </p>
+
+        <p>
+With the increase in usage of Linked Data for a variety of applications, there
+is a need to be able to verify the authenticity and integrity of Linked Data
+documents. This specification adds authentication and integrity protection to
+data documents through the use of mathematical proofs without sacrificing Linked
+Data features such as extensibility and composability.
+        </p>
+
+        <p class="note" title="Use of Linked Data is an optional feature">
+While  this specification provides mechanisms to digitally sign Linked Data, the
+use  of Linked Data is not necessary to gain some of the advantages provided by
+this specification.
+        </p>
+
+      </section>
+
+    </section>
+
     </section>
 
     <section>
-      <h2>Multiple Proofs</h2>
+      <h2>Cryptographic Suites</h2>
       <p>
-The Data Integrity specification supports the concept of multiple
-proofs in a single document. There are two types of multi-proof
-approaches that are identified: Proof Sets (un-ordered) and Proof Chains
-(ordered).
+A data integrity proof is designed to be easy to use by developers and therefore
+strives to minimize the amount of information one has to remember to generate a
+proof. Often, just the <a>cryptographic suite</a> name (e.g.
+<code>eddsa-2022</code>) is required from developers to initiate the creation of
+a proof. These <a>cryptographic suite</a>s are often created or reviewed by
+people that have the requisite cryptographic training to ensure that safe
+combinations of cryptographic primitives are used.
+      </p>
+      <p>
+This section details the cryptographic primitives that are available to
+<a>proof type</a> developers.
       </p>
 
-      <section>
-        <h3>Proof Sets</h3>
-        <p>
-A proof set is useful when the same data needs to be secured by multiple
-entities, but where the order of proofs does not matter,
-such as in the case of a set of signatures on a contract. A proof set,
-which has no order, is represented by associating a set of proofs
-with the <code>proof</code> key in a document.
-        </p>
-        <pre class="example highlight" title="A proof set in a data document">
-{
-  "@context": [
-    {"title": "https://schema.org#title"},
-    "https://w3id.org/security/suites/ed25519-2020/v1"
-],
-  "title": "Hello world!",
-  "proof": [{
-    "type": "Ed25519Signature2020",
-    "created": "2020-11-05T19:23:24Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
-  }, {
-    "type": "Ed25519Signature2020",
-    "created": "2020-11-05T13:08:49Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9876
-      zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
-  }]
-}
-        </pre>
-
-      </section>
-
-      <section>
-        <h3>Proof Chains</h3>
-        <p>
-A proof chain is useful when the same data needs to be signed by
-multiple entities and the order of when the proofs occurred matters,
-such as in the case of a notary counter-signing a proof that had been
-created on a document. A proof chain, where order needs to be preserved, is
-represented by associating an ordered list of proofs with the
-<code>proofChain</code> key in a document.
-        </p>
-        <pre class="example highlight" title="A proof chain in a data document">
-{
-  "@context": [
-    {"title": "https://schema.org#title"},
-    "https://w3id.org/security/suites/ed25519-2020/v1"
-],
-  "title": "Hello world!",
-  "proofChain": [{
-    "type": "Ed25519Signature2020",
-    "created": "2020-11-05T19:23:42Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
-      DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
-  }, {
-    "type": "Ed25519Signature2020",
-    "created": "2020-11-05T21:28:14Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19KiWXerb8
-      ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ"
-  }]
-}
-        </pre>
-
-      </section>
-
-    </section>
-
-    <section class="normative">
-      <h2>Proof Types</h2>
-
-      <section>
-        <h3>Signatures</h3>
-
-        <p>
-A <dfn>data integrity signature</dfn> is a type of cryptographic proof, and is
-comprised of information about the signature, parameters required to verify
-it, and the signature value itself. All of this information is provided using
-Linked Data vocabularies such as the [[!SECURITY-VOCABULARY]].
-        </p>
-
-        <p>
-          A <a>data integrity signature</a> typically includes at least the
-          following attributes:
-        </p>
-
-        <dl style="margin-left: 1em;">
-          <dt>type (required)<dt>
-          <dd>
-A URI that identifies the digital <a>cryptographic suite</a> that was used to create the
-signature. For example: <code>Ed25519Signature2020</code>.</dd>
-          <dt>created (required)<dt>
-          <dd>
-The string value of an [[!ISO8601]] combined date and time string generated
-by the <a href="#proof-algorithm">Proof Algorithm</a>.
-          </dd>
-
-          <dt>domain (optional)<dt>
-          <dd>
-A string value specifying the restricted <a>domain</a> of the signature.
-          </dd>
-          <dt><dfn class="lint-ignore">nonce</dfn> (optional, but strongly recommended)<dt>
-          <dd>
-A string value that is included in the digital signature and MUST only be
-used once for a particular <a>domain</a> and window of time. This
-value is used to mitigate replay attacks.
-          </dd>
-          <dt><dfn class="lint-ignore">signature value</dfn> (required)<dt>
-          <dd>
-One of any number of valid representations of <em>signature value</em>
-generated by the <a href="#proof-algorithm">Proof Algorithm</a>.
-Example: <code>jws</code> for detached JSON Web Signatures.
-</dd>
-        </dl>
-
-        <p class="note">
-The terms <code>type</code>, <code>created</code>, <code>domain</code>,
-<code>nonce</code>, and <code>jws</code> above map to URLs. The vocabulary where
-these terms are defined is the [[SECURITY-VOCABULARY]].
-        </p>
-
-        <p>
-A signature can be added to a data document like the following:
-        </p>
-
-        <pre class="example highlight" title="A simple data document">
-{
-  "@context": {"title": "https://schema.org#title"},
-  "title": "Hello world!",
-}
-        </pre>
-
-        <p>
-by adding the parameters outlined in this section:
-        </p>
-
-        <pre class="example highlight" title="A simple signed data document">
-{
-  "@context": [
-    {"title": "https://schema.org#title"},
-    "https://w3id.org/security/suites/ed25519-2020/v1"
-],
-  "title": "Hello world!",
-  "proof": {
-    "type": "Ed25519Signature2020",
-    "created": "2020-11-05T19:23:24Z",
-    "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
-  }
-}
-        </pre>
-
-        <p>
-The signature example above uses the <code>Ed25519Signature2020</code>
-<a>cryptographic suite</a> to produce a verifiable digital signature.
-        </p>
-
-<div class="issue">Create a separate section detailing an optional mechanism
-for authenticating public key control via bi-directional links. How
-to establish trust in key controller entities is out of scope but examples can
-be given.</div>
-
-<div class="issue">Specify algorithm agility mechanisms (additional attributes
-from the security vocab can be used to indicate other signing and hash
-algorithms). Rewrite algorithms to be parameterized on this basis and
-move `RsaSignature2018` definition to a single supported
-mechanism; specify its identifier as a URL. In order to make it easy to
-specify a variety of combinations of algorithms, introduce a core
-type `LinkedDataSignature` that allows for easy filtering/discover of
-signature nodes, but that type on its own doesn't specify any default
-signature or hash algorithms, those must be given via other properties in the
-nodes.</div>
-
-<div class="issue">Add a note indicating that this specification should not
-be construed to indicate that public key controllers should be restricted to a
-single public key or that systems that use this spec and involve real people
-should identify each person as only ever being a single entity rather than
-perhaps N entities with M keys. There are no such restrictions and in many
-cases those kinds of restrictions are ill-advised due to privacy
-considerations.</div>
-
-<div class="issue">Add an explicit check on key type to prevent an
-attacker from selecting an algorithm that may abuse how the key is
-used/interpreted.</div>
-
-<div class="issue">Add a note indicating that selective disclosure signature
-mechanisms can be compatible with data integrity signatures; for example,
-an algorithm could produce a merkle tree from a canonicalized set of
-N-Quads and then sign the root hash. Disclosure would involve including
-the merkle paths for each N-Quad that is to be revealed. This mechanism
-would merely consume the normalized output differently (this, and the
-proof mechanism would be modifications to this core spec). It may also
-be necessary to generate signature parameters such as a private key/seed
-that can be used along with an algorithm to deterministically generate
-nonces that are concatenated with each N-Quad to prevent rainbow
-table or similar attacks.</div>
-
-      </section>
-
-      <section>
-        <h3>Other Proof Types</h3>
-
-        <div class="issue">TODO: Add links and examples to proof types that
-are not data integrity signatures, such as proof of existence, proof of work,
-proof of elapsed time, and proof of registration.</div>
-      </section>
-    </section>
-
-    <section>
-      <h2>Advanced Terminology</h2>
       <p>
-These terms are relevant only to implementors of new <a>cryptographic suite</a>s.
+The following terms are relevant to implementors of new
+<a>cryptographic suites</a>.
       </p>
 
       <dl>
@@ -1476,23 +1637,6 @@ receiver of the message can mathematically verify that the message has not
 been modified in transit and came from someone possessing a particular secret.
         </dd>
       </dl>
-    </section>
-
-    <section>
-      <h2>Creating New Proof Types</h2>
-      <p>
-A data integrity proof is designed to be easy to use by developers and therefore
-strives to minimize the amount of information one has to remember to generate a
-proof. Often, just the <a>cryptographic suite</a> name (e.g.
-<code>Ed25519Signature2020</code>) is required from developers to initiate the
-creation of a proof. These <a>cryptographic suite</a>s are often created or
-reviewed by people that have the requisite cryptographic training to ensure that
-safe combinations of cryptographic primitives are used.
-      </p>
-      <p>
-This section details the cryptographic primitives that are available to
-<a>proof type</a> developers.
-      </p>
 
       <p>
 At a minimum, a <a>proof type</a> is expected have the following attributes:
@@ -1554,7 +1698,7 @@ outcome.
       </p>
 
       <section class="normative">
-        <h3>Proof Algorithm</h3>
+        <h3>Create Proof Algorithm</h3>
 
 <div class="issue">The proof parameters should be included as headers
 and values in the data to be signed.</div>
@@ -1590,8 +1734,7 @@ passing the information in <var>options</var>.
           </li>
           <li>
 Digitally sign <var>tbs</var> using the <var>privateKey</var> and the
-the <var>digital proof algorithm</var> (e.g. JSON Web Proof using
-<em>RSASSA-PKCS1-v1_5</em> algorithm). The resulting string is the
+the <var>digital proof algorithm</var>. The resulting string is the
 <a>proofValue</a>.
           </li>
           <li>
@@ -1610,7 +1753,7 @@ Return <var>output</var> as the <a>signed data document</a>.
       </section>
 
       <section>
-        <h3>Proof Verification Algorithm</h3>
+        <h3>Verify Proof Algorithm</h3>
         <p class="issue">
 This algorithm is highly specific to digital signatures and needs to be
 generalized to other proof mechanisms such as Equihash.
@@ -1659,8 +1802,7 @@ passing the information in <var>proof</var>.
           </li>
           <li>
 Pass the <a>proofValue</a>, <var>tbv</var>,
-and the <a>public key</a> to the <a>proof algorithm</a>
-(e.g. JSON Web Proof using <em>RSASSA-PKCS1-v1_5</em> algorithm).
+and the <a>public key</a> to the <a>proof algorithm</a>.
 Return the resulting boolean value.
           </li>
         </ol>
@@ -1759,6 +1901,372 @@ software.
 
 <div class="issue">TODO: We need to add a complete list of security
 considerations.</div>
+
+      <section>
+        <h3>Versioning Cryptography Suites</h3>
+
+        <p>
+Cryptography secures information through the use of secrets. Knowledge of the
+necessary secret makes it computationally easy to access certain information. The
+same information can be accessed if a computationally-difficult, brute-force effort
+successfully guesses the secret. All modern cryptography requires the
+computationally difficult approach to remain difficult throughout time, which
+does not always hold due to breakthroughs in science and mathematics. That is
+to say that <em>Cryptography has a shelf life</em>.
+        </p>
+        <p>
+This specification plans for the obsolescence of all cryptographic approaches by
+asserting that whatever cryptography is in use today is highly likely to be
+broken over time. Software systems have to be able to change the cryptography
+in use over time in order to continue to secure information. Such changes might
+involve increasing required secret sizes or modifications to the cryptographic
+primitives used. However, some combinations of cryptographic parameters
+might actually reduce security. Given these assumptions, systems need to be able to
+distinguish different combinations of safe cryptographic parameters, also known
+as cryptographic suites, from one another. When identifying or versioning
+cryptographic suites, there are several approaches that can be taken which
+include: parameters, numbers, and dates.
+        </p>
+        <p>
+Parametric versioning specifies the particular cryptographic parameters that are
+employed in a cryptographic suite. For example, one could use an identifier such
+as `RSASSA-PKCS1-v1_5-SHA1`. The benefit to this scheme is that a well-trained
+cryptographer will be able to determine all of the parameters in play by the
+identifier. The drawback to this scheme is that most of the population that
+uses these sorts of identifiers are not well trained and thus will not understand
+that the previously mentioned identifier is a cryptographic suite that is no
+longer safe to use. Additionally, this lack of knowledge might lead software
+developers to generalize the parsing of cryptographic suite identifiers
+such that any combination of cryptographic primitives becomes acceptable,
+resulting in reduced security. Ideally, cryptographic suites are implemented
+in software as specific, acceptable profiles of cryptographic parameters instead.
+        </p>
+        <p>
+Numbered versioning might specify a major and minor version number such as
+`1.0` or `2.1`. Numbered versioning conveys a specific order and suggests that
+higher version numbers are more capable than lower version numbers. The benefit
+of this approach is that it removes complex parameters that less expert
+developers might not understand with a simpler model that conveys that an
+upgrade might be appropriate. The drawback of this approach is that its not
+clear if an upgrade is necessary, as software version number increases often
+don't require an upgrade for the software to continue functioning. This can
+lead to developers thinking their usage of a particular version is safe, when
+it is not. Ideally, additional signals would be given to developers that use
+cryptographic suites in their software that periodic reviews of those
+suites for continued security are required.
+        </p>
+        <p>
+Date-based versioning specifies a particular release date for a specific
+cryptographic suite. The benefit of a date, such as a year, is that it is
+immediately clear to a developer if the date is relatively old or new. Seeing
+an old date might prompt the developer to go searching for a newer
+cryptographic suite, where as a parametric or number-based versioning scheme
+might not. The downside of a date-based version is that some cryptographic
+suites might not expire for 5-10 years, prompting the developer to go
+searching for a newer cryptographic suite only to not find one that is newer.
+While this might be an inconvenience, it is one that results in safer
+ecosystem behavior.
+        </p>
+        <p class="issue" data-number="38">
+The following text is currently under debate:<br><br>
+It is highly encouraged that cryptographic suite identifiers are versioned
+using a year designation. For example, the cryptographic suite identifier
+`ecdsa-2022` implies that the suite is probably an acceptable of ECDSA in the
+year 2025, but might not be a safe choice in the year 2042. A date-based
+versioning mechanism, however, is not enough by itself. All cryptographic
+suites that follow this specification are intended to be registered
+[[?VC-EXTENSION-REGISTRY]] in a way that clearly signal which cryptosuites
+are deprecated, standardized, or experimental. Cryptosuite registration will
+follow CFRG, IETF, NIST, FIPS, and safecurves guidance. Use of deprecated suites
+are expected to throw errors in implementations unless a `useUnsafeCryptosuites`
+option is used specifying exactly the unsafe cryptosuite to use.
+Use of experimental suites are expected to throw errors in implementations
+unless a `useExperimentalCryptosuites` option is used specifying exactly
+the experimental cryptosuite to use.
+        </p>
+
+        <p class="issue" title="Resolve VC Extension Registry Governance">
+The following text is debated due to the governance rules of the VC
+Extension Registry not being finalized:<br><br>
+Developers are urged to always refer to the [[?VC-EXTENSION-REGISTRY]] for
+the latest standardized cryptography suites as well as cross-checking their
+usage against, at least, the
+<a href="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
+COSE Algorithms Registry</a>, the
+<a href="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
+JOSE Algorithms Registry</a>, and the latest
+<a href="https://csrc.nist.gov/publications/detail/fips/186/4/final">
+FIPS Digital Signature Standard
+</a> guidance.  Depending on your jurisdiction you may also need to consider
+additional guidance from
+<a href="https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/01.02.01_60/ts_119312v010201p.pdf">ETSI</a>
+or other regional regulatory and standards bodies.
+        </p>
+      </section>
+
+      <section>
+        <h3>Protecting Application Developers</h3>
+
+        <p>
+Modern cryptographic algorithms provide a number of tunable parameters and
+options to ensure that the algorithms can meet the varied requirements of different use cases.
+For example, embedded systems have limited processing and memory environments
+and might not have the resources to generate the strongest digital signatures
+for a given algorithm. Other environments, like financial trading systems,
+might only need to protect data for a day while the trade is occurring, while
+other environments might need to protect data for multiple decades. To meet
+these needs, cryptographic algorithm designers often provide multiple ways to
+configure a cryptographic algorithm.
+        </p>
+        <p>
+Cryptographic library implementers often take the specifications created by
+cryptographic algorithm designers and specification authors and implement them
+such that all options are available to the application developers that use their
+libraries. This can be due to not knowing which combination of features a
+particular application developer might need for a given cryptographic deployment.
+All options are often exposed to application developers.
+        </p>
+        <p>
+Application developers that use cryptographic libraries often do not have the
+requisite cryptographic expertise and knowledge necessary to appropriately
+select cryptographic parameters and options for a given application. This lack
+of expertise can lead to an inappropriate selection of cryptographic parameters
+and options for a particular application.
+        </p>
+        <p>
+This specification sets the priority of constituencies to protect application
+developers over cryptographic library implementers over cryptographic
+specification authors over cryptographic algorithm designers. Given these
+priorities, the following recommendations are made:
+        </p>
+        <ul>
+          <li>
+Cryptographic algorithm designers are advised [[?RFC7696]] to minimize the
+number of options and parameters to as few as possible to ensure that
+cryptographic library implementers have a more easily auditable security attack
+surface for their software libraries.
+          </li>
+          <li>
+Cryptographic specification authors are advised to, if possible, further
+minimize the number of options and parameters to as few as possible to ensure
+cryptographic agility while also keeping the auditable security
+attack surface for downstream software libraries to a minimum.
+          </li>
+          <li>
+Cryptographic library implementers are advised to, if possible, provide known
+good combinations of options and parameters to application developers. There
+would ideally be two pre-set default configurations for any algorithmic
+class, such as Elliptic Curve Digital Signatures, with no ability
+to fine tune parameters and options when using these pre-sets. Library options can be provided to
+experts to fine tune their use of the library, use of those options by the general
+application developer population is to be discouraged.
+          </li>
+          <li>
+Application developers are advised to choose from a number of pre-set
+cryptography library configurations and to avoid modifying cryptographic
+options and parameters, or using experimental or deprecated cryptography.
+          </li>
+        </ul>
+
+        <p>
+The guidance above is meant to ensure that useful cryptographic options and
+parameters are provided at the lower layers of the architecture while not
+exposing those options and parameters to application developers who may not
+fully understand the balancing benefits and drawbacks of each option.
+        </p>
+
+        <p class="issue"
+          title="Use of experimental and deprecated cryptography">
+The VCWG is seeking guidance on adding language to allow the use of experimental
+or deprecated cryptography. By default, those features will be disabled and will
+require the application developer to specifically allow use on a per-cryptographic suite
+basis. There will be requirements for all implementing libraries to throw errors
+or warnings when deprecated or experimental options are selected without the
+appropriate override flags.
+        </p>
+      </section>
+
+      <section>
+        <h3>Agility and Hardening</h3>
+
+        <p>
+<dfn class="lint-ignore">Cryptographic agility</dfn> is a practice by which one designs
+<em>frequently connected</em> information security systems to support
+<em>switching between multiple cryptographic primitives and/or algorithms</em>. The primary
+goal of cryptographic agility is to enable systems to rapidly adapt to new
+cryptographic primitives and algorithms without making disruptive changes to the
+systems' infrastructure. Thus, when a particular cryptographic primitive, such
+as the SHA-1 algorithm, is determined to be no longer safe to use, systems can
+be reconfigured to use a newer primitive via a simple configuration file change.
+        </p>
+        <p>
+Cryptographic agility is most effective when the client and the server in
+the information security system are in regular contact. However, when the
+messages protected by a particular cryptographic algorithm are long-lived, as
+with Verifiable Credentials, and/or when the client (holder) might not be
+able to easily recontact the server (issuer), then cryptographic agility does
+not provide the desired protections.
+        </p>
+        <p>
+<dfn class="lint-ignore">Cryptographic hardening</dfn> is a practice where one
+designs <em>rarely connected</em> information security systems to
+<em>employ multiple primitives and/or algorithms at the same time</em>. The
+primary goal of cryptographic hardening is to enable systems to survive the
+failure or one or more cryptographic algorithms or primitives without losing
+cryptographic protection on the payload. For example, digitally signing a single
+piece of information using RSA, ECDSA, and Falcon algorithms in parallel would
+provide a mechanism that could survive the failure of two of these three digital
+signature algorithms. When a particular cryptographic protection is compromised,
+such as an RSA digital signature using 768-bit keys, systems can still utilize
+the non-compromised cryptographic protections to continue to protect the
+information.
+        </p>
+        <p>
+This specification is designed to enable the use of cryptographic hardening on
+all protected information. Implementers are urged to take advantage of this
+feature for all signed content that might need to be protected for a year or
+longer.
+        </p>
+      </section>
+
+      <section>
+        <h3>Transformations</h3>
+
+        <p>
+At times, it is beneficial to transform the data being protected during the
+cryptographic protection process. Such "in-line" transformation can enable a particular type
+of cryptographic protection to be agnostic to the data format it is carried in.
+For example, some Data Integrity cryptographic suites utilize RDF Dataset
+Canonicalization [[?URDNA2015]] which transforms the initial representation into a
+canonical form [[?N-QUADS]] that is then serialized, hashed, and digitally
+signed. As long as any syntax expressing the protected data can be transformed
+into this canonical form, the digital signature can be verified. This enables
+the same digital signature over the information to be expressed in JSON, CBOR,
+YAML, and other compatible syntaxes without having to create a cryptographic
+proof for every syntax.
+        </p>
+        <p>
+Being able to express the same digital signature across a variety of syntaxes is
+beneficial because systems often have native data formats with which they
+operate. For example, some systems are written against JSON data, while others
+are written against CBOR data. Without transformation, systems that process
+their data internally as CBOR are required to store the digitally signed data
+structures as JSON (or vice-versa). This leads to double-storing data and can
+lead to increased security attack surface if the unsigned representation stored in
+databases accidentally deviates from the signed representation. By using
+transformations, the digital proof can live in the native data format to
+help prevent otherwise undetectable database drift over time.
+        </p>
+        <p>
+This specification is designed to avoid requiring the duplication of signed
+information by utilizing "in-line" data transformations. Application developers are urged
+to work with cryptographically protected data in the native data format for
+their application and not separate storage of cryptographic proofs from the data
+being protected. Developers are also urged to regularly confirm that the
+cryptographically protected data has not been tampered with as it is written to
+and read from application storage.
+        </p>
+        <p class="issue"
+          title="Collision-resistant canonicalization requirements">
+The VCWG is seeking feedback on normative language that cryptographic suite
+implementers need to follow to ensure that they do not utilize data
+transformation mechanisms that can map to the same output. That is, given
+different inputs for canonicalization scheme #1 and canonicalization
+scheme #2, they must not produce the same output value. As an analogy, this is
+the same requirement for cryptographic hashing mechanisms and is why those
+schemes are designed to be collision resistant. Cryptographic canonicalization
+mechanisms have the same requirement. At present, this isn't a problem because
+the three expected canonicalization schemes &mdash; the Universal RDF Dataset
+Canonicalization Algorithm 2015 [[?URDNA2015]], JSON Canonicalization Scheme
+[[?RFC8785]], and a theoretical future base-encoding canonicalization &mdash; have
+entirely different outputs.
+        </p>
+        <p class="issue"
+          title="Avoiding the pitfalls of XML Canonicalization">
+The VCWG is seeking feedback on whether to explain why modern canonicalization
+schemes are simpler than the far more complex XML Canonicalization schemes of
+the early 2000s. Some readers seem to be under the impression that all
+canonicalization is difficult and has to be avoided at all costs (including costs
+to application developers). The WG would like to understand if it would be helpful
+to include a section explaining why some simpler data syntaxes (such as JSON) are
+easier to canonicalize than more complex data syntaxes (such as XML).
+        </p>
+      </section>
+
+      <section>
+        <h3>Data Opacity</h3>
+
+        <p>
+The inspectability of application data has effects on system efficiency and
+developer productivity. When cryptographically protected application data, such
+as base-encoded binary data, is not easily processed by application subsystems,
+such as databases, it increases the effort of working with the cryptographically
+protected information. For example, a cryptographically protected payload that
+can be natively stored and indexed by a database will result in a simpler system
+that:
+        </p>
+
+        <ul>
+          <li>
+benefits from utilizing existing industry-standard database features with no
+changes to the protected information,
+          </li>
+          <li>
+avoids the complexity of duplicating data where one copy of the data preserves
+the message and digital signature, while the other copy only stores and indexes
+the message and is what drives system behaviour,
+          </li>
+          <li>
+avoids the complexity of bespoke solutions that have to structurally modify
+the protected information, such as serializing and deserializing nested
+digitally signed data that has multiple nested base-encoded payloads.
+          </li>
+        </ul>
+
+        <p>
+Similarly, a cryptographically protected payload that can be processed by
+multiple upstream networked systems increases the ability to properly layer
+security architectures. For example, if upstream systems do not have to
+repeatedly decode the incoming payload, it increases the ability for a system to
+distribute processing load by specializing upstream subsystems to actively
+combat attacks. While a digital signature needs to always be checked before
+taking substantive action, other upstream checks can be performed on transparent
+payloads &mdash; such as identifier-based rate limiting, signature expiration
+checking, or nonce/challenge checking &mdash; to reject obviously bad requests.
+        </p>
+        <p>
+Additionally, if a developer is not able to easily view data in a system, the
+ability to easily audit or debug system correctness is hampered. For example,
+requiring application developers to cut-and-paste base-encoded application data
+makes development more challenging and increases the chances that obvious bugs
+will be missed because every message needs to go through a manually operated
+base-decoding tool.
+        </p>
+        <p>
+There are times, however, where the correct design decision is to make data
+opaque. Data that does not need to be processed by other application subsystems,
+as well as data that does not need to be modified or accessed by an application
+developer, can be serialized into opaque formats. Examples include digital
+signature values, cryptographic key parameters, and other data fields that only
+need to be accessed by a cryptographic library and need not be modified by the
+application developer. There are also examples where data opacity is appropriate
+when the underlying subsystem does not expose the application developer to the
+underlying complexity of the opaque data, such as databases that perform
+encryption at rest. In these cases, the application developer continues to
+develop against transparent application data formats while the database manages
+the complexity of encrypting and decrypting the application data to and from
+long-term storage.
+        </p>
+        <p>
+This specification strives to provide an architecture where application data
+remains in its native format and is not made opaque, while other cryptographic
+data, such as digital signatures, are kept in their opaque binary encoded form.
+Cryptographic suite implementers are urged to consider appropriate use of data
+opacity when designing their suites, and to weigh the design trade-offs when
+making application data opaque versus providing access to cryptographic data at
+the application layer.
+        </p>
+      </section>
 
       <section>
         <h3>Verification Method Binding</h3>
