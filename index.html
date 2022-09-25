@@ -2323,39 +2323,38 @@ considerations.</div>
         <h3>Unlinkability</h3>
 
         <p>
-When a digitally-signed payload contains an identifier that is seen by multiple
-verifiers, it becomes a point of correlation. An example of such an identifier is
-a shopping loyalty card number. Correlatable identifiers can be used for tracking
+When a digitally-signed payload contains data that is seen by multiple
+verifiers, it becomes a point of correlation. An example of such data is a
+shopping loyalty card number. Correlatable data can be used for tracking
 purposes by verifiers, which can sometimes violate privacy expectations. The
-fact that some identifiers can be used for tracking might not be immediately
-apparent. Examples of such correlatable identifiers include, but are not limited
-to, a static digital signature or a cryptographic hash of an image.
+fact that some data can be used for tracking might not be immediately apparent.
+Examples of such correlatable data include, but are not limited to, a static
+digital signature or a cryptographic hash of an image.
         </p>
 
         <p>
 It is possible to create a digitally-signed payload that does not have any
-correlatable tracking identifiers while also providing some level of assurance
-that the payload is trustworthy for a given interaction. This characteristic is
-called <dfn>unlinkability</dfn> which ensures that no correlatable identifiers
-are used in a digitally-signed payload while still providing some level of trust,
-the sufficiency of which must be determined by each verifier.
+correlatable tracking data while also providing some level of assurance that the
+payload is trustworthy for a given interaction. This characteristic is called
+<dfn>unlinkability</dfn> which ensures that no correlatable data are used in a
+digitally-signed payload while still providing some level of trust, the
+sufficiency of which must be determined by each verifier.
         </p>
 
         <p>
 There are at least two aspects to providing unlinkability. The first aspect is
-to 1) ensure that every data field used in the message is never repeated in a
-future message, or 2) ensure that any repeated field(s) provide adequate herd
-privacy such that it becomes practically impossible to correlate the entity that
-expects some level of privacy in the interaction.
+to 1) ensure that every data value used in the message is never repeated in a
+future message, or 2) ensure that any repeated data value(s) provide adequate
+herd privacy such that it becomes practically impossible to correlate the entity
+that expects some level of privacy in the interaction.
         </p>
 
         <p>
-A variety of methods can be used to achieve unlinkability. These methods
-include the utilization of single use bearer tokens, carefully crafted
-messages that utilize attributes that ensure an adequate level of herd privacy,
-and the use of cryptosuites that enable the entity presenting a message to
-regenerate new signatures while not compromising the trust in the message
-being presented.
+A variety of methods can be used to achieve unlinkability. These methods include
+the utilization of single use bearer tokens, carefully crafted messages that
+utilize attributes that ensure an adequate level of herd privacy, and the use of
+cryptosuites that enable the entity presenting a message to regenerate new
+signatures while not compromising the trust in the message being presented.
         </p>
       </section>
 
