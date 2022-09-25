@@ -2371,9 +2371,11 @@ signatures while not compromising the trust in the message being presented.
         <h3>Selective Disclosure</h3>
 
         <p>
-Selective disclosure is a technique that enables the sender of a pre-signed
-message to reveal parts of the message without revealing the entire message. For
-example, selectively disclosing a digital driver's license for the purposes of
+Selective disclosure is a technique that enables the recipient of a previously-signed
+message (that is, a message signed by a previous sender) to reveal parts of the message
+without revealing the entire message and without disturbing the verifiability of the
+origin of the parts being revealed. For
+example, selectively disclosing a digital driver's license for the purpose of
 renting a car might involve the entity presenting the license to only reveal the
 issuing authority, license number, birthday, and authorized motor vehicle class.
 Note that in this case, the license number is correlatable information that is
@@ -2382,11 +2384,13 @@ driver's full name and address are not being shared.
         </p>
 
         <p>
-Selective disclosure is a technique that not all cryptosuites provide. It is
-also a technique that the creator of the initial message needs to utilize to
-ensure that entities that re-transmit the message have the functionality
-available to them. A cryptosuite that provides support for selective
-disclosure is `bbs-2022`.
+Not all cryptosuites are capable of providing selective disclosure. One
+cryptosuite that does support selective disclosure is `bbs-2022`.
+        </p>
+        <p>
+The author of a message needs to use a capable cryptosuite and enable
+selective disclosure on the message in order for a recipient of that
+message to use the technique on future presentations.
         </p>
       </section>
 
