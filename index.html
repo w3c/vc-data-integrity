@@ -2394,9 +2394,14 @@ disclosure. One cryptosuite that does support selective disclosure is
 
         <p>
 It is important to realize that selective disclosure does not always mean that
-privacy is preserved. It is possible to selectively disclose information in
-a way that does not preserve privacy. For more information on disclosing
-information while preserving privacy, see Section <a href="#unlinkability"></a>.
+all aspects of privacy are preserved. It is possible to selectively disclose
+information in a way that does not preserve privacy. For example, one might want
+to disclose the inspection results related to a shipment, which include the
+shipment identifier or lot number, which might have to be correlatable due to
+regulatory requirements. However, disclosure of the entire inspection result
+might not be required as selectively disclosing just the pass/fail status could
+be deemed as adequate. For more information on disclosing information while
+preserving privacy, see Section <a href="#unlinkability"></a>.
         </p>
       </section>
 
