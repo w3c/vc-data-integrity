@@ -452,7 +452,12 @@ The date and time the proof was created MUST be specified as an
 
           <dt>domain</dt>
           <dd>
-Optional. A string value specifying the restricted <a>domain</a> of the proof.
+A string value that SHOULD be included by the creator of a proof and used by a
+verifier to ensure the proof was intended to by used by the verifier. The
+specification of the `domain` parameter is useful in challenge-response
+protocols where the verifier is operating from within a well known security
+domain. Examples of a domain include: `domain.example` (DNS domain),
+`mycorp-intranet`, and `b31d37d4-dd59-47d3-9dd8-c973da43b63a`.
           </dd>
 
           <dt><dfn class="lint-ignore">nonce</dfn> (optional, but strongly recommended)</dt>
