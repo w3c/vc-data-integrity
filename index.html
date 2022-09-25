@@ -2372,27 +2372,27 @@ signatures while not compromising the trust in the message being presented.
 
         <p>
 Selective disclosure is a technique that enables the recipient of a
-previously-signed message (that is, a message signed by a previous sender) to
-reveal parts of the message without revealing the entire message and without
-disturbing the verifiability of the origin of the parts being revealed. For
-example, selectively disclosing a digital driver's license for the purpose of
-renting a car might involve the entity presenting the license to only reveal the
-issuing authority, license number, birthday, and authorized motor vehicle class.
-Note that in this case, the license number is correlatable information that is
-being shared but some amount of privacy is still being preserved because the
-driver's full name and address are not being shared.
+previously-signed message (that is, a message signed by its creator) to reveal
+parts of the message without revealing the entire message and without disturbing
+the verifiability of the origin of the parts being revealed. For example,
+selectively disclosing a digital driver's license for the purpose of renting a
+car might involve the entity presenting the license to only reveal the issuing
+authority, license number, birthday, and authorized motor vehicle class. Note
+that in this case, the license number is correlatable information that is being
+shared but some amount of privacy is still being preserved because the driver's
+full name and address are not being shared.
         </p>
 
         <p>
-The sender of an initial message that they expect to be selectively disclosed
+The creator of an initial message that they expect to be selectively disclosed
 needs to use a capable cryptosuite and enable selective disclosure on the
 message in order for a recipient of that message to use the technique on future
-disclosures. The sender might also need to make it mandatory to disclose certain
-parts of a message. The recipient of the message that desires to selectively
-disclose the original message needs to then utilize software that is capable of
-performing selective disclosure. Not all software or cryptosuites are capable of
-providing selective disclosure. An example of a cryptosuite that does support
-selective disclosure is `bbs-2022`.
+disclosures. The creator might also need to make it mandatory to disclose
+certain parts of a message. The recipient of the message that desires to
+selectively disclose the original message needs to then utilize software that is
+capable of performing selective disclosure. Not all software or cryptosuites are
+capable of providing selective disclosure. An example of a cryptosuite that does
+support selective disclosure is `bbs-2022`.
         </p>
 
         <p>
