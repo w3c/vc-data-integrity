@@ -2384,27 +2384,25 @@ full name and address are not being shared.
         </p>
 
         <p>
-The creator of an initial message that they expect to be selectively disclosed
-needs to use a capable cryptosuite and enable selective disclosure on the
-message in order for a recipient of that message to use the technique on future
-disclosures. The creator might also need to make it mandatory to disclose
-certain parts of a message. The recipient of the message that desires to
-selectively disclose the original message needs to then utilize software that is
-capable of performing selective disclosure. Not all software or cryptosuites are
-capable of providing selective disclosure. An example of a cryptosuite that does
-support selective disclosure is `bbs-2022`.
+Not all software or cryptosuites are capable of providing selective disclosure.
+If the author of a message wishes it to be selectively disclosable by
+its recipient, then they need to both use a capable cryptosuite and enable
+selective disclosure on the specific message. They might also make it mandatory
+to disclose certain parts of the message. A recipient that wants to selectively
+disclose the message needs to utilize software that is able to perform the
+technique. An example of a cryptosuite that supports selective disclosure is
+`bbs-2022`.
         </p>
 
         <p>
-It is important to realize that selective disclosure does not always mean that
-all aspects of privacy are preserved. It is possible to selectively disclose
-information in a way that does not preserve privacy. For example, one might want
-to disclose the inspection results related to a shipment, which include the
-shipment identifier or lot number, which might have to be correlatable due to
-regulatory requirements. However, disclosure of the entire inspection result
-might not be required as selectively disclosing just the pass/fail status could
-be deemed as adequate. For more information on disclosing information while
-preserving privacy, see Section <a href="#unlinkability"></a>.
+It is possible to selectively disclose information in a way that does not preserve
+unlinkability. For example, one might want to disclose the inspection results related
+to a shipment, which include the shipment identifier or lot number, which might
+have to be correlatable due to regulatory requirements. However, disclosure of
+the entire inspection result might not be required as selectively disclosing just
+the pass/fail status could be deemed as adequate. For more information on
+disclosing information while preserving privacy, see
+Section <a href="#unlinkability"></a>.
         </p>
       </section>
 
