@@ -2243,10 +2243,11 @@ full name and address are not being shared.
         <p>
 Not all software or cryptosuites are capable of providing selective disclosure.
 If the author of a message wishes it to be selectively disclosable by
-its recipient, then they need to both use a capable cryptosuite and enable
-selective disclosure on the specific message. They might also make it mandatory
+its recipient, then they need to enable selective disclosure on the specific
+message, and both need to use a capable cryptosuite. The author might
+also make it mandatory
 to disclose certain parts of the message. A recipient that wants to selectively
-disclose the message needs to utilize software that is able to perform the
+disclose partial content of the message needs to utilize software that is able to perform the
 technique. An example of a cryptosuite that supports selective disclosure is
 `bbs-2022`.
         </p>
@@ -2257,7 +2258,7 @@ unlinkability. For example, one might want to disclose the inspection results re
 to a shipment, which include the shipment identifier or lot number, which might
 have to be correlatable due to regulatory requirements. However, disclosure of
 the entire inspection result might not be required as selectively disclosing just
-the pass/fail status could be deemed as adequate. For more information on
+the pass/fail status could be deemed adequate. For more information on
 disclosing information while preserving privacy, see
 Section <a href="#unlinkability"></a>.
         </p>
