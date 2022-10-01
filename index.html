@@ -2342,28 +2342,28 @@ sufficiency of which must be determined by each verifier.
         </p>
 
         <p>
-It is important to understand that not all use cases require unlinkability.
-There are use cases where linkability and correlation are required due to
-regulatory or safety reasons, such as correlating organizations and individuals
-that are shipping and storing hazardous materials. Unlinkability is useful
-when there is an expectation of privacy for a particular interaction.
+It is important to understand that not all use cases require or even permit
+unlinkability. There are use cases where linkability and correlation are
+required due to regulatory or safety reasons, such as correlating organizations
+and individuals that are shipping and storing hazardous materials. Unlinkability
+is useful when there is an expectation of privacy for a particular interaction.
         </p>
 
         <p>
 There are at least two mechanisms that can provide some level of unlinkability.
-The first method is to ensure that every data value used in the message is
-never repeated in a future message. The second is to ensure that any repeated
-data value(s) provide adequate herd privacy such that it becomes practically
-impossible to correlate the entity that expects some level of privacy in the
-interaction.
+The first method is to ensure that no data value used in the message is ever
+repeated in a future message. The second is to ensure that any repeated data
+value provides adequate herd privacy such that it becomes practically impossible
+to correlate the entity that expects some level of privacy in the interaction.
         </p>
 
         <p>
 A variety of methods can be used to achieve unlinkability. These methods include
-the utilization of single use bearer tokens, carefully crafted messages that
-utilize attributes that ensure an adequate level of herd privacy, and the use of
-cryptosuites that enable the entity presenting a message to regenerate new
-signatures while not compromising the trust in the message being presented.
+ensuring that a message is a single use bearer token with no information that
+can be used for the purposes of correlation, using attributes that ensure an
+adequate level of herd privacy, and the use of cryptosuites that enable the
+entity presenting a message to regenerate new signatures while not compromising
+the trust in the message being presented.
         </p>
       </section>
 
