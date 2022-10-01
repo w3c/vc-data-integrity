@@ -2230,28 +2230,28 @@ sufficiency of which must be determined by each verifier.
         </p>
 
         <p>
-It is important to understand that not all use cases require unlinkability.
-There are use cases where linkability and correlation are required due to
-regulatory or safety reasons, such as correlating organizations and individuals
-that are shipping and storing hazardous materials. Unlinkability is useful
-when there is an expectation of privacy for a particular interaction.
+It is important to understand that not all use cases require or even permit
+unlinkability. There are use cases where linkability and correlation are
+required due to regulatory or safety reasons, such as correlating organizations
+and individuals that are shipping and storing hazardous materials. Unlinkability
+is useful when there is an expectation of privacy for a particular interaction.
         </p>
 
         <p>
 There are at least two mechanisms that can provide some level of unlinkability.
-The first method is to ensure that every data value used in the message is
-never repeated in a future message. The second is to ensure that any repeated
-data value(s) provide adequate herd privacy such that it becomes practically
-impossible to correlate the entity that expects some level of privacy in the
-interaction.
+The first method is to ensure that no data value used in the message is ever
+repeated in a future message. The second is to ensure that any repeated data
+value provides adequate herd privacy such that it becomes practically impossible
+to correlate the entity that expects some level of privacy in the interaction.
         </p>
 
         <p>
 A variety of methods can be used to achieve unlinkability. These methods include
-the utilization of single use bearer tokens, carefully crafted messages that
-utilize attributes that ensure an adequate level of herd privacy, and the use of
-cryptosuites that enable the entity presenting a message to regenerate new
-signatures while not compromising the trust in the message being presented.
+ensuring that a message is a single use bearer token with no information that
+can be used for the purposes of correlation, using attributes that ensure an
+adequate level of herd privacy, and the use of cryptosuites that enable the
+entity presenting a message to regenerate new signatures while not compromising
+the trust in the message being presented.
         </p>
       </section>
 
@@ -2261,23 +2261,23 @@ signatures while not compromising the trust in the message being presented.
         <p>
 Selective disclosure is a technique that enables the recipient of a
 previously-signed message (that is, a message signed by its creator) to reveal
-parts of the message without revealing the entire message and without disturbing
-the verifiability of the origin of the parts being revealed. For example,
-selectively disclosing a digital driver's license for the purpose of renting a
-car might involve the entity presenting the license to only reveal the issuing
-authority, license number, birthday, and authorized motor vehicle class. Note
-that in this case, the license number is correlatable information that is being
-shared but some amount of privacy is still being preserved because the driver's
-full name and address are not being shared.
+only parts of the message without disturbing the verifiability of those
+parts. For example, one might selectively disclose a digital driver's license for
+the purpose of renting a car. This could involve revealing only the issuing
+authority, license number, birthday, and authorized motor vehicle class from
+the license. Note that in this case, the license number is correlatable
+information, but some amount of privacy is preserved because the driver's
+full name and address are not shared.
         </p>
 
         <p>
 Not all software or cryptosuites are capable of providing selective disclosure.
 If the author of a message wishes it to be selectively disclosable by
-its recipient, then they need to both use a capable cryptosuite and enable
-selective disclosure on the specific message. They might also make it mandatory
+its recipient, then they need to enable selective disclosure on the specific
+message, and both need to use a capable cryptosuite. The author might
+also make it mandatory
 to disclose certain parts of the message. A recipient that wants to selectively
-disclose the message needs to utilize software that is able to perform the
+disclose partial content of the message needs to utilize software that is able to perform the
 technique. An example of a cryptosuite that supports selective disclosure is
 `bbs-2022`.
         </p>
@@ -2288,10 +2288,11 @@ unlinkability. For example, one might want to disclose the inspection results re
 to a shipment, which include the shipment identifier or lot number, which might
 have to be correlatable due to regulatory requirements. However, disclosure of
 the entire inspection result might not be required as selectively disclosing just
-the pass/fail status could be deemed as adequate. For more information on
+the pass/fail status could be deemed adequate. For more information on
 disclosing information while preserving privacy, see
 Section <a href="#unlinkability"></a>.
         </p>
+
       </section>
 
     </section>
