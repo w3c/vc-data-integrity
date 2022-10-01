@@ -1545,6 +1545,45 @@ the important role that cryptographic suite specifications play in ensuring
 data integrity.
       </p>
 
+      <section>
+        <h3>DataIntegrityProof</h3>
+
+        <p>
+A number of cryptographic suites follow a basic pattern when expressing a data
+integrity proof. This section specifies that general design pattern, a
+cryptographic suite type called a `DataIntegrityProof`, which reduces the burden
+of writing and implementing cryptographic suites through the reuse of design
+primitives and source code.
+        </p>
+
+        <p>
+When specifing a cryptographic suite that utilizes this design pattern, the
+`proof` value takes the following form:
+        </p>
+
+        <dl>
+          <dt>type</dt>
+          <dd>
+The `type` property MUST contain the string `DataIntegrityProof`.
+          </dd>
+          <dt>cryptosuite</dt>
+          <dd>
+The `cryptosuite` property MUST contain a string specifying the name of the
+cryptosuite.
+          </dd>
+          <dt>proofValue</dt>
+          <dd>
+The `proofValue` property MUST be used, as specified in <a href="#proofs"></a>.
+          </dd>
+        </dl>
+
+        <p>
+Cryptographic suite designers MUST use mandatory `proof` value properties
+defined in Section <a href="#proofs"></a>, and MAY define other properties
+specific to their cryptographic suite.
+        </p>
+      </section>
+
     </section>
 
     <section>
