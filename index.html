@@ -413,7 +413,7 @@ information is provided using Linked Data vocabularies such as the
         </p>
 
         <p>
-A <a>data integrity proof</a> can include some of the following attributes:
+The following attributes are defined for use in a <a>data integrity proof</a>:
         </p>
 
         <dl style="margin-left: 1em;">
@@ -422,7 +422,7 @@ A <a>data integrity proof</a> can include some of the following attributes:
 The specific <a>proof type</a> used for the cryptographic proof MUST be
 specified as a string that maps to a URL [[URL]]. Examples of proof types
 include <code>DataIntegrityProof</code> and <code>Ed25519Signature2020</code>.
-Proof types determine what other mandatory fields are required to secure and
+Proof types determine what other fields are required to secure and
 verify the proof.
           </dd>
 
@@ -440,7 +440,7 @@ asserting a set of statements such as those in a Verifiable Credential
           <dd>
 The means and information needed to verify the proof MUST be specified as a
 string that maps to a [[URL]]. An example of a verification method is a
-link to a public key which includes crypographic material that is used by a
+link to a public key which includes cryptographic material that is used by a
 verifier during the verification process.
           </dd>
 
@@ -457,15 +457,16 @@ verifier to ensure the proof was intended to by used by the verifier. The
 specification of the `domain` parameter is useful in challenge-response
 protocols where the verifier is operating from within a security domain known to
 the creator of the proof. Examples of a domain parameter include:
-`domain.example` (DNS domain), `mycorp-intranet` (well-known text string), and
+`domain.example` (DNS domain), `https://domain.example:8443` (full Web origin),
+`mycorp-intranet` (well-known text string), and
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt><dfn class="lint-ignore">nonce</dfn></dt>
+          <dt><dfn class="lint-ignore">challenge</dfn></dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular <a>domain</a> and window of time. This
-value is used to mitigate replay attacks. Examples of a nonce value include:
+value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
           </dd>
 
