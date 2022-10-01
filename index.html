@@ -509,7 +509,8 @@ by adding the parameters outlined in this section:
   {
     "title": "Hello world!",
     "proof": {
-      "type": "JcsSignature2020",
+      "type": "DataIntegrityProof",
+      "cryptosuite": "json-signature-2022",
       "created": "2020-11-05T19:23:24Z",
       "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
         ZPGskmesDpuwRBorgHxUXfxnG",
@@ -521,10 +522,10 @@ by adding the parameters outlined in this section:
         </pre>
 
         <p>
-The proof example above uses the <code>JcsSignature2020</code>
-<a>proof type</a> to produce a verifiable digital proof by canonicalizing the
-input data using the JSON Canonicalization Scheme [[RFC8785]] and then
-digitally signing it using an Ed25519 elliptic curve signature.
+The proof example above suggests an exemplary <code>json-signature-2022</code>
+cryptography suite that produces a verifiable digital proof by presumptively
+transforming the input data using the JSON Canonicalization Scheme [[RFC8785]]
+and then digitally signing it using an Ed25519 elliptic curve signature.
         </p>
 
         <p>
@@ -548,11 +549,12 @@ by adding the parameters outlined in this section:
   {
     "@context": [
       {"title": "https://schema.org/title"},
-      "https://w3id.org/security/suites/ed25519-2020/v1"
+      "https://w3id.org/security/suites/data-integrity/v1"
     ],
     "title": "Hello world!",
     "proof": {
-      "type": "Ed25519Signature2020",
+      "type": "DataIntegrityProof",
+      "cryptosuite": "eddsa-2022",
       "created": "2020-11-05T19:23:24Z",
       "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
         ZPGskmesDpuwRBorgHxUXfxnG",
@@ -597,10 +599,10 @@ nist-ecdsa-2022, koblitz-ecdsa-2022, rsa-2022, pgp-2022, bbs-2022, eascdsa-2022,
 ibsa-2022, and jws-2022.
       </p>
 
-      <pre class="example" title="A DataIntegritySignature example using a NIST ECDSA 2022 Cryptosuite">
+      <pre class="example" title="A DataIntegrityProof example using a NIST ECDSA 2022 Cryptosuite">
 {
-  "@context": ["https://w3id.org/security/data-integrity/v1"],
-  "type": "DataIntegritySignature",
+  "@context": ["https://w3id.org/security/suites/data-integrity/v1"],
+  "type": "DataIntegrityProof",
   "cryptosuite": "ecdsa-2022",
   "created": "2022-11-29T20:35:38Z",
   "verificationMethod": "did:example:123456789abcdefghi#keys-1",
@@ -654,11 +656,12 @@ with the <code>proof</code> key in a document.
 {
   "@context": [
     {"title": "https://schema.org/title"},
-    "https://w3id.org/security/suites/ed25519-2020/v1"
+    "https://w3id.org/security/suites/data-integrity/v1"
 ],
   "title": "Hello world!",
   "proof": [{
-    "type": "Ed25519Signature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:24Z",
     "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
       ZPGskmesDpuwRBorgHxUXfxnG",
@@ -666,7 +669,8 @@ with the <code>proof</code> key in a document.
     "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
       VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
-    "type": "Ed25519Signature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T13:08:49Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
       DpuwRBokeWcmrgHxUXfnncxiZP",
@@ -693,11 +697,12 @@ represented by associating an ordered list of proofs with the
 {
   "@context": [
     {"title": "https://schema.org/title"},
-    "https://w3id.org/security/suites/ed25519-2020/v1"
+    "https://w3id.org/security/suites/data-integrity/v1"
 ],
   "title": "Hello world!",
   "proofChain": [{
-    "type": "Ed25519Signature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:42Z",
     "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
       ZPGskmesDpuwRBorgHxUXfxnG",
@@ -705,7 +710,8 @@ represented by associating an ordered list of proofs with the
     "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
       DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
   }, {
-    "type": "Ed25519Signature2020",
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T21:28:14Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
       DpuwRBokeWcmrgHxUXfnncxiZP",
@@ -848,8 +854,7 @@ data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/jws-2020/v1"
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/suites/data-integrity/v1"
       ]
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -982,7 +987,7 @@ both properties above is shown below.
       "@context": [
         "https://www.w3.org/ns/did/v1",
         "https://w3id.org/security/suites/jws-2020/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/multikey/v1"
       ]
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -998,7 +1003,7 @@ both properties above is shown below.
         }
       }, {
         "id": "did:example:123456789abcdefghi#keys-1",
-        "type": "Ed25519VerificationKey2020", <span class="comment">// external (property value)</span>
+        "type": "Multikey", <span class="comment">// external (property value)</span>
         "controller": "did:example:pqrstuvwxyz0987654321",
         "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
       }],
@@ -1096,7 +1101,7 @@ is done by dereferencing the URL and searching the resulting <a>resource</a> for
         <span class="comment">// this key is embedded and may *only* be used for authentication</span>
         {
           "id": "did:example:123456789abcdefghi#keys-2",
-          "type": "Ed25519VerificationKey2020", <span class="comment">// external (property value)</span>
+          "type": "Multikey", <span class="comment">// external (property value)</span>
           "controller": "did:example:123456789abcdefghi",
           "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1172,7 +1177,7 @@ referenced.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/multikey/v1"
       ],
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -1184,7 +1189,7 @@ referenced.
         <span class="comment">// embedded here rather than using only a reference</span>
         {
           "id": "did:example:123456789abcdefghi#keys-2",
-          "type": "Ed25519VerificationKey2020",
+          "type": "Multikey",
           "controller": "did:example:123456789abcdefghi",
           "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1251,7 +1256,7 @@ corresponding <a>controller document</a>.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/multikey/v1"
       ],
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -1263,7 +1268,7 @@ corresponding <a>controller document</a>.
         <span class="comment">// embedded here rather than using a reference</span>
         {
           "id": "did:example:123456789abcdefghi#keys-2",
-          "type": "Ed25519VerificationKey2020", <span class="comment">// external (property value)</span>
+          "type": "Multikey", <span class="comment">// external (property value)</span>
           "controller": "did:example:123456789abcdefghi",
           "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1369,7 +1374,7 @@ protected resource.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/multikey/v1"
       ],
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -1381,7 +1386,7 @@ protected resource.
         <span class="comment">// embedded here rather than using only a reference</span>
         {
         "id": "did:example:123456789abcdefghi#keys-2",
-        "type": "Ed25519VerificationKey2020", <span class="comment">// external (property value)</span>
+        "type": "Multikey", <span class="comment">// external (property value)</span>
         "controller": "did:example:123456789abcdefghi",
         "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1427,7 +1432,7 @@ example described in <a href="#capability-invocation"></a>.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/multikey/v1"
       ],
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -1439,7 +1444,7 @@ example described in <a href="#capability-invocation"></a>.
         <span class="comment">// embedded here rather than using only a reference</span>
         {
         "id": "did:example:123456789abcdefghi#keys-2",
-        "type": "Ed25519VerificationKey2020", <span class="comment">// external (property value)</span>
+        "type": "Multikey", <span class="comment">// external (property value)</span>
         "controller": "did:example:123456789abcdefghi",
         "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
