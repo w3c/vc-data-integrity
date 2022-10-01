@@ -1489,17 +1489,52 @@ proof. Often, just the <a>cryptographic suite</a> name (e.g.
 <code>eddsa-2022</code>) is required from developers to initiate the creation of
 a proof. These <a>cryptographic suite</a>s are often created or reviewed by
 people that have the requisite cryptographic training to ensure that safe
-combinations of cryptographic primitives are used.
-      </p>
-      <p>
-This section details the cryptographic primitives that are available to
-<a>proof type</a> developers.
+combinations of cryptographic primitives are used. This section specifies the
+requirements for authoring cryptographic suite specifications.
       </p>
 
       <p>
-The following terms are relevant to implementors of new
-<a>cryptographic suites</a>.
+The requirements for all data integrity cryptographic suite specifications are
+as follows:
       </p>
+
+      <ul>
+        <li>
+The specification MUST be published as a human-readable document at a URL.
+        </li>
+        <li>
+The specification MUST identify a cryptographic suite <a>type</a> and any
+parameters that can be used with the suite.
+        </li>
+        <li>
+The specification MUST detail the algorithms used to perform transformations,
+if any, to the data to be protected.
+        </li>
+        <li>
+The specification MUST detail the algorithms used to perform cryptographic
+hashing to the data to be protected.
+        </li>
+        <li>
+The specification MUST detail the algorithms used to perform cryptographic
+protection of the data.
+        </li>
+        <li>
+The specification MUST detail the algorithms used to perform cryptographic
+verification of the data.
+        </li>
+        <li>
+The specification MUST contain a Security Considerations section detailing
+privacy considerations specific to the cryptographic suite.
+        </li>
+        <li>
+The specification MUST contain a Privacy Considerations section detailing
+privacy considerations specific to the cryptographic suite.
+        </li>
+        <li>
+The specification MUST provide an interoperability test suite to determine if
+a given implementation is conformant with the specification.
+        </li>
+      </ul>
 
       <dl>
         <dt><dfn>canonicalization algorithm</dfn></dt>
