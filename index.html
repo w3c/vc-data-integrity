@@ -430,10 +430,13 @@ verify the proof.
           <dd>
 The reason the proof was created MUST be specified as a string that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
-being misused by being applied to a purpose other than the one that was intended. For example, a
-proof can be created for the purpose of <code>authentication</code> or for
-asserting a set of statements such as those in a Verifiable Credential
-(<code>assertionMethod</code>).
+being misused by being applied to a purpose other than the one that was
+intended. For example, without this value the creator of a proof could be
+tricked into using cryptographic material typically used to create a Verifiable
+Credential (<code>assertionMethod</code>) during a login process
+(<code>authentication</code>) which would then result in the creation of a
+Verifiable Credential they never meant to create instead of the intended action,
+which was to merely logging into a website.
           </dd>
 
           <dt><dfn>verificationMethod</dfn></dt>
