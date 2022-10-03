@@ -430,7 +430,7 @@ verify the proof.
           <dd>
 The reason the proof was created MUST be specified as a string that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
-being misused for a purpose other than the one that was intended. For example, a
+being misused by being applied to a purpose other than the one that was intended. For example, a
 proof can be created for the purpose of <code>authentication</code> or for
 asserting a set of statements such as those in a Verifiable Credential
 (<code>assertionMethod</code>).
@@ -452,8 +452,7 @@ The date and time the proof was created MUST be specified as an
 
           <dt>domain</dt>
           <dd>
-A string value that SHOULD be included by the creator of a proof and used by a
-verifier to ensure the proof was intended to by used by the verifier. The
+The creator of a proof SHOULD include a string value that indicates its intended usage, which a verifier SHOULD use to ensure the proof was intended to be used by them. The
 specification of the `domain` parameter is useful in challenge-response
 protocols where the verifier is operating from within a security domain known to
 the creator of the proof. Examples of a domain parameter include:
