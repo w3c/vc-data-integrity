@@ -1605,59 +1605,69 @@ specific to their cryptographic suite.
 The algorithms defined below are generalized in that they require a specific
 <a>transformation algorithm</a>, <a>hashing algorithm</a>,
 <a>proof generation algorithm</a>, and <a>proof verification algorithm</a> to be
-used to achieve the algorithm's intended outcome.
+specified by a particular cryptographic suite (see Section
+<a href="#cryptographic-suites"></a>).
       </p>
 
       <section class="normative">
-        <h3>Create Proof Algorithm</h3>
-
-<div class="issue">The proof parameters should be included as headers
-and values in the data to be signed.</div>
+        <h3>Generate Proof</h3>
 
         <p>
-The following algorithm specifies how to create a digital proof that can
-be later used to verify the authenticity and integrity of a
-<a>unsigned data document</a>. A <a>unsigned data document</a>,
-<var>document</var>, <a>proof options</a>, <var>options</var>,
-and a <a>private key</a>, <var>privateKey</var>, are required inputs.
-The <a>proof options</a> MUST contain an identifier for the
-public/private key pair, and an [[!ISO8601]] combined date and
-time string, <var>created</var>, containing the current date and time,
-accurate to at least one second, in Universal Time Code format. A <a>domain</a> might also be specified in the <var>options</var>. A
-<a>signed data document</a> is produced as output. Whenever this
-algorithm encodes strings, it MUST use UTF-8 encoding.
+The following algorithm specifies how to create a digital proof that can be used
+to verify the authenticity and integrity of an
+<dfn>unsecured data document</dfn>. An <a>unsecured data document</a>
+(<var>unsecuredDocument</var>) and
+<a>proof options</a> (<var>options</var>) are required inputs. The
+<a>proof options</a> MUST contain an identifier for the
+<a>cryptographic suite</a> (<var>cryptosuite</var>), an identifier for the
+<a>verification method</a> (<var>verificationMethod</var>) that can be used to
+verify the authenticity of the proof and an [[!XMLSCHEMA11-2]] combined date and
+time string (<var>created</var>), containing the current date and time, accurate
+to at least one second, in Universal Time Code format. A
+<a href="#dfn-domain">security domain</a> (<var>domain</var>) and
+receiver-supplied challenge (<var>challenge</var>) might also be specified in
+the <var>options</var>. A <dfn>secured data document</dfn> is produced as
+output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Create a copy of <var>document</var>, hereafter referred to as <var>output</var>.
-          </li>
-          <li>
-Generate a <var>transformed document</var> by canonicalizing
-<var>document</var> according to a <a>transformation algorithm</a>
-(e.g. the <em>URDNA2015</em> [[!RDF-DATASET-C14N]] algorithm).
+Let <var>output</var> be a copy of <var>unsecuredDocument</var>.
         </li>
           <li>
-Create a value <var>tbs</var> that represents the data to be signed, and
-set it to the result of running the
-<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a>,
-passing the information in <var>options</var>.
+Let <var>transformedDocument</var> be the result of
+<a href="#dfn-transformation">transforming</a> <var>unsecuredDocument</var>
+according to a <a>transformation algorithm</a> associated with the
+<var>cryptosuite</var> value and the <var>options</var> parameters provided
+as inputs to the algorithm.
+        </li>
+          <li>
+Let <var>hashData</var> be the result of running the
+<a href="#create-verify-hash-algorithm">Create Verify Hash Algorithm</a> with
+the <var>transformedDocument</var> and <var>options</var> parameters provided
+as inputs to the algorithm.
           </li>
           <li>
-Digitally sign <var>tbs</var> using the <var>privateKey</var> and the
-the <var>digital proof algorithm</var>. The resulting string is the
-<a>proofValue</a>.
+Let <var>proof</var> be the result of running the
+<a>proof generation algorithm</a> associated with the <var>cryptosuite</var>
+with the <var>hashData</var> and </var><var>options</var> parameters provided
+as inputs to the algorithm.
           </li>
           <li>
-Add a <code>proof</code> node to <var>output</var> containing
-a <a>data integrity proof</a> using the appropriate
-<var>type</var> and <a>proofValue</a> values as well as
-all of the data in the <var>proof options</var> (e.g.
-<var>created</var>, and if given, any additional proof
-options such as <a>domain</a>).
+If the <var>type</var>, <var>created</var>, <var>verificationMethod</var>,
+or <var>proofPurpose</var> values are not set in <var>proof</var> a
+PROOF_GENERATION_ERROR MUST be raised.
           </li>
           <li>
-Return <var>output</var> as the <a>signed data document</a>.
+If the <var>domain</var> and/or <var>challenge</var> values were set in
+<var>options</var> but are not set in <var>proof</var> a
+PROOF_GENERATION_ERROR MUST be raised.
+          </li>
+          <li>
+Set the `proof` property of <var>output</var> to the value of <var>proof</var>.
+          </li>
+          <li>
+Return <var>output</var> as the <a>secured data document</a>.
           </li>
         </ol>
 
