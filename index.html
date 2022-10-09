@@ -230,11 +230,12 @@ cryptographically protected.
         </figure>
 
         <p>
-<dfn>Transformation</dfn> is a process that takes input data and prepares it for
-the hashing process. One example of a possible transformation is to take a
-record of people's names that attended a meeting, sort the list alphabetically
-by the individual's family name, and rewrite the names on a piece of paper, one
-per line, in sorted order. Possible transformations include
+<dfn>Transformation</dfn> is a process described by a <dfn>transformation
+algorithm</dfn> that takes input data and prepares it for the hashing process.
+One example of a possible transformation is to take a record of people's names
+that attended a meeting, sort the list alphabetically by the individual's family
+name, and rewrite the names on a piece of paper, one per line, in sorted order.
+Possible transformations include
 <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalization</a>
 and
 <a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding">
@@ -242,8 +243,8 @@ binary-to-text</a> encoding.
         </p>
 
         <p>
-<dfn>Hashing</dfn> is a process that calculates an
-identifier for the transformed data using a
+<dfn>Hashing</dfn> is a process described by a <dfn>hashing algorithm</dfn> that
+calculates an identifier for the transformed data using a
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">
 cryptographic hash function</a>. This process is conceptually similar to how a
 phone address book functions, where one takes a person's name (the input data)
@@ -256,12 +257,13 @@ BLAKE-3</a>.
         </p>
 
         <p>
-<dfn class="lint-ignore">Proof Generation</dfn> is a process that
-calculates a value that protects the integrity of the input data from
-modification or otherwise proves a certain desired threshold of trust. This
-process is conceptually similar to the way a wax seal can be used on an envelope
-containing a letter to establish trust in the sender and show that the letter has not
-been tampered with in transit. Possible proof generation functions include
+<dfn class="lint-ignore">Proof Generation</dfn> is a process described by a
+<dfn>proof generation algorithm</dfn> that calculates a value that protects the
+integrity of the input data from modification or otherwise proves a certain
+desired threshold of trust. This process is conceptually similar to the way a
+wax seal can be used on an envelope containing a letter to establish trust in
+the sender and show that the letter has not been tampered with in transit.
+Possible proof generation functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
 <a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
@@ -294,10 +296,10 @@ conceptually the same as described above.
         </p>
 
         <p>
-<dfn class="lint-ignore">Proof
-Verification</dfn> is a process that applies a cryptographic proof
-verification function to see if the input data can be trusted. Possible
-proof verification functions include
+<dfn class="lint-ignore">Proof Verification</dfn> is a process that is described
+by a <dfn>proof verification algorithm</dfn> that applies a cryptographic proof
+verification function to see if the input data can be trusted. Possible proof
+verification functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
 <a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
@@ -447,10 +449,10 @@ link to a public key which includes cryptographic material that is used by a
 verifier during the verification process.
           </dd>
 
-          <dt><dfn>created</dfn></dt>
+          <dt><dfn class="lint-ignore">created</dfn></dt>
           <dd>
 The date and time the proof was created MUST be specified as an
-[[XML-SCHEMA11]] combined date and time string.
+[[XMLSCHEMA11-2]] combined date and time string.
           </dd>
 
           <dt>domain</dt>
@@ -464,7 +466,7 @@ the creator of the proof. Examples of a domain parameter include:
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt><dfn class="lint-ignore">challenge</dfn></dt>
+          <dt>challenge</dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular <a>domain</a> and window of time. This
@@ -1515,20 +1517,24 @@ The specification MUST identify a cryptographic suite <a>type</a> and any
 parameters that can be used with the suite.
         </li>
         <li>
-The specification MUST detail the algorithms used to perform transformations,
-if any, to the data to be protected.
+The specification MUST detail the <a>transformation algorithms</a> (if any)
+parameters, and other necessary details, if any, used to modify input data into
+the data to be protected.
         </li>
         <li>
-The specification MUST detail the algorithms used to perform cryptographic
-hashing to the data to be protected.
+The specification MUST detail the <a>hashing algorithms</a>
+parameters, and other necessary details used to perform cryptographic hashing to
+the data to be protected.
         </li>
         <li>
-The specification MUST detail the algorithms used to perform cryptographic
-protection of the data.
+The specification MUST detail the <a>proof generation algorithms</a>,
+parameters, and other necessary details used to perform cryptographic protection
+of the data.
         </li>
         <li>
-The specification MUST detail the algorithms, parameters, and other necessary
-details used to perform cryptographic verification of the data.
+The specification MUST detail the <a>proof verification algorithms</a>,
+parameters, and other necessary details used to perform cryptographic
+verification of the data.
         </li>
         <li>
 The specification MUST contain a Security Considerations section detailing
@@ -1597,9 +1603,9 @@ specific to their cryptographic suite.
 
       <p>
 The algorithms defined below are generalized in that they require a specific
-<a>canonicalization algorithm</a>, <a>message digest algorithm</a>, and
-<a>proof algorithm</a> to be used to achieve the algorithm's intended
-outcome.
+<a>transformation algorithm</a>, <a>hashing algorithm</a>,
+<a>proof generation algorithm</a>, and <a>proof verification algorithm</a> to be
+used to achieve the algorithm's intended outcome.
       </p>
 
       <section class="normative">
@@ -1627,8 +1633,8 @@ algorithm encodes strings, it MUST use UTF-8 encoding.
 Create a copy of <var>document</var>, hereafter referred to as <var>output</var>.
           </li>
           <li>
-Generate a <var>canonicalized document</var> by canonicalizing
-<var>document</var> according to a <a>canonicalization algorithm</a>
+Generate a <var>transformed document</var> by canonicalizing
+<var>document</var> according to a <a>transformation algorithm</a>
 (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-C14N]] algorithm).
         </li>
           <li>
@@ -1695,8 +1701,8 @@ Remove any <code>proof</code> nodes from the default graph in
 <var>document</var> and save it as <var>proof</var>.
           </li>
           <li>
-Generate a <var>canonicalized document</var> by canonicalizing
-<var>document</var> according to the <a>canonicalization algorithm</a>
+Generate a <var>transformed document</var> by canonicalizing
+<var>document</var> according to the <a>transformation algorithm</a>
 (e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-C14N]] algorithm).
           </li>
           <li>
@@ -1707,7 +1713,7 @@ passing the information in <var>proof</var>.
           </li>
           <li>
 Pass the <a>proofValue</a>, <var>tbv</var>,
-and the <a>public key</a> to the <a>proof algorithm</a>.
+and the <a>public key</a> to the <a>proof verification algorithm</a>.
 Return the resulting boolean value.
           </li>
         </ol>
@@ -1723,8 +1729,8 @@ generalized for algorithms such as Equihash.
         <p>
 The following algorithm specifies how to create the data that is used
 to generate or verify a digital proof. It takes a canonicalized
-<a>unsigned data document</a>, <var>canonicalized document</var>,
-<a>canonicalization algorithm</a>, a <a>message digest algorithm</a>, and
+<a>unsigned data document</a>, <var>transformed document</var>,
+<a>transformation algorithm</a>, a <a>hashing algorithm</a>, and
 <a>proof options</a>, <var>input options</var> (by reference).
 The <a>proof options</a> MUST contain an identifier for the
 public/private key pair, and an [[!ISO8601]] combined date and
@@ -1756,16 +1762,16 @@ Generate <var>output</var> by:
             <ol class="algorithm">
               <li>
 Creating a <var>canonicalized options document</var> by canonicalizing
-<var>options</var> according to the <a>canonicalization algorithm</a>
+<var>options</var> according to the <a>transformation algorithm</a>
 (e.g. the <em>URDNA2015</em> [[!RDF-DATASET-C14N]] algorithm).
               </li>
               <li>
 Hash <var>canonicalized options document</var> using the
-<a>message digest algorithm</a> (e.g. SHA-256) and set <var>output</var>
+<a>hashing algorithm</a> (e.g. SHA-256) and set <var>output</var>
 to the result.
               </li>
               <li>
-Hash <var>canonicalized document</var> using the <a>message digest algorithm</a>
+Hash <var>transformed document</var> using the <a>hashing algorithm</a>
 (e.g. SHA-256) and append it to <var>output</var>.
               </li>
             </ol>
@@ -1782,7 +1788,7 @@ internally. The Ed25519Proof2018 algorithm also does not perform
 this last step -- and, in fact, uses SHA-512 internally. In short,
 this last step should better communicate that the 64 bytes produced
 from concatenating the SHA-256 of the canonicalized options with the
-SHA-256 of the canonicalized document are passed into the signing
+SHA-256 of the transformed document are passed into the signing
 algorithm with a presumption that the signing algorithm will include
 hashing of its own.</div>
 Note: It is presumed that the 64-byte <var>output</var> will be used
@@ -2241,9 +2247,9 @@ digital signature or a cryptographic hash of an image.
 It is possible to create a digitally-signed payload that does not have any
 correlatable tracking data while also providing some level of assurance that the
 payload is trustworthy for a given interaction. This characteristic is called
-<dfn>unlinkability</dfn> which ensures that no correlatable data are used in a
-digitally-signed payload while still providing some level of trust, the
-sufficiency of which must be determined by each verifier.
+<dfn class="lint-ignore">unlinkability</dfn> which ensures that no correlatable
+data are used in a digitally-signed payload while still providing some level of
+trust, the sufficiency of which must be determined by each verifier.
         </p>
 
         <p>
