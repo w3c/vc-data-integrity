@@ -1,7 +1,6 @@
 <p>
-This section defines the terms used in this specification and throughout
-<a>decentralized identifier</a> infrastructure. A link to these terms is
-included whenever they appear in this specification.
+This section defines the terms used in this specification. A link to these terms
+is included whenever they appear in this specification.
 </p>
 
 <dl class="termlist">
@@ -66,9 +65,7 @@ to particular target, identified by the specified <a>domain</a>.
   <dd>
 Authentication is a process by which an entity can prove it has a specific
 attribute or controls a specific secret using one or more <a>verification
-methods</a>. With <a>DIDs</a>, a common example would be proving control of the
-cryptographic private key associated with a public key published in a
-<a>controller document</a>.
+methods</a>.
   </dd>
 
   <dt><dfn data-lt="cryptosuite">cryptographic suite</dfn></dt>
@@ -103,27 +100,12 @@ A set of data that specifies one or more relationships between a
 <a>controller</a> and a set of data, such as a set of public cryptographic keys.
   </dd>
 
-  <dt><dfn>resolution</dfn></dt>
-
-  <dd>
-The process that takes as its input a [[URL]] and a set of resolution
-options and returns a <a>controller document</a> plus additional metadata.
-  </dd>
-
-  <dt><dfn data-lt="resolvers">resolver</dfn></dt>
-
-  <dd>
-A <a>resolver</a> is a software and/or hardware component that performs the
-<a>resolution</a> function by taking a <a>DID</a> as input and producing a
-conforming <a>controller document</a> as output.
-  </dd>
-
   <dt><dfn data-lt="subjects">subject</dfn></dt>
 
   <dd>
-The entity identified by a <a>DID</a> and described by a <a>controller document</a>.
-Anything can be a subject: person, group, organization, physical thing,
-digital thing, logical thing, etc.
+The entity identified by the `id` property in a <a>controller document</a>.
+Anything can be a subject: person, group, organization, physical thing, digital
+thing, logical thing, etc.
   </dd>
 
   <dt><dfn data-lt="distributed ledger technology|DLT">distributed ledger</dfn> (DLT)</dt>
