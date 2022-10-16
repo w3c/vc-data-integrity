@@ -1659,6 +1659,11 @@ or <var>proofPurpose</var> values are not set in <var>proof</var>, a
 `PROOF_GENERATION_ERROR` MUST be raised.
           </li>
           <li>
+If the cryptographic suite does not support unlinkability and the
+<var>created</var> value is not set in <var>proof</var>, a
+`PROOF_GENERATION_ERROR` MUST be raised.
+          </li>
+          <li>
 If the <var>domain</var> and/or <var>challenge</var> values were set in
 <var>options</var> but are not set in <var>proof</var>, a
 `PROOF_GENERATION_ERROR` MUST be raised.
