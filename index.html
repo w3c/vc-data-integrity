@@ -1707,59 +1707,93 @@ digital proof.
       </section>
 
       <section>
-        <h3>Verify Proof Algorithm</h3>
-        <p class="issue">
-This algorithm is highly specific to digital signatures and needs to be
-generalized to other proof mechanisms such as Equihash.
-        </p>
+        <h3>Verify Proof</h3>
 
         <p>
 The following algorithm specifies how to check the authenticity and
-integrity of a <a>signed data document</a> by verifying its
-digital proof. This algorithm takes a
-<a>signed data document</a>, <var>signed document</var> and
-outputs a <code>true</code> or <code>false</code> value based on whether or
-not the digital proof on <var>signed document</var> was verified. Whenever
-this algorithm encodes strings, it MUST use UTF-8 encoding.
+integrity of a <a>secured data document</a> by verifying its
+digital proof. Required inputs are a
+<a>secured data document</a> (<var>securedDocument</var>) and
+<a>proof options</a> (<var>options</var>). A <dfn>verification result</dfn> is
+produced as output.
         </p>
-
-<div class="issue">Specify how the public key can be obtained, through
-some out-of-band process and passed in or it can be retrieved by
-derefencing its URL identifier, etc.</div>
 
         <ol class="algorithm">
           <li>
-Get the <a>public key</a> by dereferencing its URL identifier in the
-<code>proof</code> node of the default graph of <var>signed document</var>.
-Confirm that the <a>unsigned data document</a> that describes the <a>public
-key</a> specifies its controller and that its controllers's URL identifier can
-be dereferenced to reveal a bi-directional link back to the key. Ensure that the
-key's controller is a trusted entity before proceeding to the next step.
+Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>.
           </li>
           <li>
-Let <var>document</var> be a copy of <var>signed document</var>.
+If the <var>proof</var>.<var>type</var>,
+<var>proof</var>.<var>verificationMethod</var>, or
+<var>proof</var>.<var>proofPurpose</var> values are not set, a
+`MALFORMED_PROOF_ERROR` MUST be raised.
           </li>
           <li>
-Remove any <code>proof</code> nodes from the default graph in
-<var>document</var> and save it as <var>proof</var>.
+If the cryptographic suite does not support unlinkability and the
+<var>proof</var>.<var>created</var> value is not set, a `MALFORMED_PROOF_ERROR`
+MUST be raised.
           </li>
           <li>
-Generate a <var>transformed document</var> by canonicalizing
-<var>document</var> according to the <a>transformation algorithm</a>
-(e.g. the </var><em>URDNA2015</em> [[!RDF-DATASET-C14N]] algorithm).
+Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
+the `proof` value removed.
           </li>
           <li>
-Create a value <var>tbv</var> that represents the data to be verified, and
-set it to the result of running the
-<a href="#dfn-hashing-algorithm">hashing algorithm</a>,
-passing the information in <var>proof</var>.
+Let <var>transformedDocument</var> be the result of
+<a href="#dfn-transformation">transforming</a> <var>unsecuredDocument</var>
+according to a <a>transformation algorithm</a> associated with the
+<var>cryptosuite</var> specified in <var>proof</var> and the <var>options</var>
+parameters provided as inputs to the algorithm.
+        </li>
+          <li>
+Let <var>hashData</var> be the result of
+<a href="#dfn-hashing">hashing</a> <var>transformedDocument</var>
+according to a <a>hashing algorithm</a> associated with the
+<var>cryptosuite</var> specified in <var>proof</var> and the <var>options</var>
+parameters provided as inputs to the algorithm.
           </li>
           <li>
-Pass the <a>proofValue</a>, <var>tbv</var>,
-and the <a>public key</a> to the <a>proof verification algorithm</a>.
-Return the resulting boolean value.
+Let <var>isProofValid</var> be the result of running the
+<a>proof verification algorithm</a> associated with the <var>cryptosuite</var>
+with the <var>hashData</var> and <var>options</var> parameters provided
+as inputs to the algorithm.
+          </li>
+          <li>
+If the <var>proof</var>.<var>proofPurpose</var> value does not match
+<var>options</var>.<var>proofPurpose</var>, a `MISMATCHED_PROOF_PURPOSE_ERROR`
+MUST be raised.
+          </li>
+          <li>
+If the <var>proof</var>.<var>created</var> is set and it deviates more than
+<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds, a
+`CREATED_TIME_DEVIATION_ERROR` MUST be raised.
+          </li>
+          <li>
+If <var>options</var>.<var>domain</var> is set and it does not match
+<var>proof</var>.<var>domain</var>, an `INVALID_DOMAIN_ERROR` MUST be raised.
+          </li>
+          <li>
+If <var>options</var>.<var>challenge</var> is set and it does not match
+<var>proof</var>.<var>challenge</var>, an `INVALID_CHALLENGE_ERROR` MUST be
+raised.
+          </li>
+          <li>
+Return <var>isProofValid</var> as the <a>verification result</a>.
           </li>
         </ol>
+
+        <p class="issue" title="Define how verification material is retrieved">
+Specify how <var>proof</var>.<var>verificationMethod</var> can be obtained,
+through some out-of-band process and passed in or it can be retrieved by
+derefencing its URL identifier, etc. It is expected that the <a>public key</a>
+is retrieved by dereferencing its URL identifier in the <code>proof</code> node
+of the default graph of <var>securedDocument</var>. The algorithm needs to
+confirm that the <a>verification method</a> that describes cryptographic
+material, such as the <a>public key</a>, specifies its <a>controller</a> and
+that its controllers's URL identifier can be dereferenced to reveal a
+bi-directional link back to the key. Ensure that the key's controller is a
+trusted entity before proceeding to the next step.
+        </p>
+
       </section>
 
     </section>
