@@ -1652,7 +1652,7 @@ as inputs to the algorithm.
         </li>
           <li>
 Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> <var>transformedDocument</var>
+<a href="#dfn-hashing">hashing</a> the <var>transformedDocument</var>
 according to a <a>hashing algorithm</a> associated with the
 <var>cryptosuite</var> value and the <var>options</var> parameters provided
 as inputs to the algorithm.
@@ -1689,7 +1689,7 @@ Return <var>output</var> as the <a>secured data document</a>.
         <p class="note" title="`hashData` might not consist of a single value">
 While the output of the <a href="#dfn-hashing-algorithm">hashing algorithm</a>
 can be a single value, such as a 32 byte SHA2-256 value, implementers are
-advised that particular cryptographic suites might define `hashData` to be a
+advised that some cryptographic suite(s) might define `hashData` to be
 comprised of multiple values that might be processed independently in the proof
 generation algorithm. For example, this approach is known to be taken in certain
 cryptographic suites that allow selective disclosure or unlinkability via the
