@@ -1739,16 +1739,16 @@ the `proof` value removed.
           </li>
           <li>
 Let <var>transformedDocument</var> be the result of
-<a href="#dfn-transformation">transforming</a> <var>unsecuredDocument</var>
+<a href="#dfn-transformation">transforming</a> the <var>unsecuredDocument</var>
 according to a <a>transformation algorithm</a> associated with the
 <var>cryptosuite</var> specified in <var>proof</var> and the <var>options</var>
 parameters provided as inputs to the algorithm.
         </li>
           <li>
 Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> <var>transformedDocument</var>
+<a href="#dfn-hashing">hashing</a> the <var>transformedDocument</var>
 according to a <a>hashing algorithm</a> associated with the
-<var>cryptosuite</var> specified in <var>proof</var> and the <var>options</var>
+<var>cryptosuite</var> specified in the <var>proof</var> and <var>options</var>
 parameters provided as inputs to the algorithm.
           </li>
           <li>
@@ -1783,12 +1783,12 @@ Return <var>isProofValid</var> as the <a>verification result</a>.
 
         <p class="issue" title="Define how verification material is retrieved">
 Specify how <var>proof</var>.<var>verificationMethod</var> can be obtained,
-through some out-of-band process and passed in or it can be retrieved by
-derefencing its URL identifier, etc. It is expected that the <a>public key</a>
+e.g., through some out-of-band process, by
+dereferencing its URL identifier, etc. It is expected that the <a>public key</a>
 is retrieved by dereferencing its URL identifier in the <code>proof</code> node
 of the default graph of <var>securedDocument</var>. The algorithm needs to
-confirm that the <a>verification method</a> that describes cryptographic
-material, such as the <a>public key</a>, specifies its <a>controller</a> and
+confirm that the <a>verification method</a> that describes the cryptographic
+material, such as the <a>public key</a>, specifies its <a>controller</a>, and
 that its controllers's URL identifier can be dereferenced to reveal a
 bi-directional link back to the key. Ensure that the key's controller is a
 trusted entity before proceeding to the next step.
