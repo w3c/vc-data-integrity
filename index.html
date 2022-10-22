@@ -736,10 +736,19 @@ A proof that describes its purpose helps prevent it from being misused for some
 other purpose.
         </p>
 
-        <div class="issue">Add a mention of JWK's <code>key_ops</code>
-parameter and WebCrypto's <code>KeyUsage</code> restrictions; explain that
-Proof Purpose serves a similar goal but allows for finer-grained restrictions.
-        </div>
+        <p class="issue">
+Add a mention of JWK's <code>key_ops</code> parameter and WebCrypto's
+<code>KeyUsage</code> restrictions; explain that Proof Purpose serves a
+different goal and allows for finer-grained restrictions.
+<br><br>
+Dave Longley suggested that proof purposes enable verifiers to know what the
+proof creator's intent was so the message can't be accidentally abused for
+another purpose, e.g., a message signed for the purpose of merely making an
+assertion (and thus perhaps intended to be widely shared) being abused as a
+message to authenticate to a service or take some action (invoke a capability).
+It's a goal to keep the number of them limited to as few categories as are
+really needed to accomplish this goal.
+        </p>
 
         <p>
 The following is a list of commonly used <a>proof purpose</a> values.
