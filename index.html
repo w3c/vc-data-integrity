@@ -14,7 +14,7 @@
     <script type="text/javascript" class="remove">
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          specStatus:           "ED",
+          specStatus:           "FPWD",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "vc-data-integrity",
@@ -44,14 +44,16 @@
           // only "name" is required
           editors: [{
             name: "Manu Sporny", url: "https://digitalbazaar.com/",
-            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/"
+            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
+            w3cid: 41758
           }, {
             name: "Dave Longley", url: "https://digitalbazaar.com/",
             company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
-            note: "2014-2022"
+            note: "2014-2022", w3cid: 48025
           }, {
             name: "Mike Prorock", url: "https://www.linkedin.com/in/mprorock",
-            company: "Mesur.io", companyURL: "https://mesur.io/"
+            company: "Mesur.io", companyURL: "https://mesur.io/",
+            w3cid: 0
           }],
 
           // authors, add as many as you like.
@@ -474,7 +476,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
           </dd>
 
-          <dt><dfn>proofValue</dfn></dt>
+          <dt>proofValue</dt>
           <dd>
 A string value that contains the data necessary to verify the digital proof
 using the `verificationMethod` specified. The contents of the value MUST be a
