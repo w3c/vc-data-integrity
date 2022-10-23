@@ -1735,6 +1735,11 @@ is not set, a `MALFORMED_PROOF_ERROR`
 MUST be raised.
           </li>
           <li>
+If the <var>proof</var>.<var>proofPurpose</var> value does not match
+<var>options</var>.<var>expectedProofPurpose</var>, a
+`MISMATCHED_PROOF_PURPOSE_ERROR` MUST be raised.
+          </li>
+          <li>
 Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
 the `proof` value removed.
           </li>
@@ -1760,11 +1765,6 @@ Let <var>isProofVerified</var> be the result of running the
 <a>proof verification algorithm</a> associated with the
 <a>cryptographic suite</a> with the <var>hashData</var> and <var>options</var>
 parameters provided as inputs to the algorithm.
-          </li>
-          <li>
-If the <var>proof</var>.<var>proofPurpose</var> value does not match
-<var>options</var>.<var>proofPurpose</var>, a `MISMATCHED_PROOF_PURPOSE_ERROR`
-MUST be raised.
           </li>
           <li>
 If the <var>proof</var>.<var>created</var> is set and it deviates more than
