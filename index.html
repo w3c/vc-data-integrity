@@ -1742,21 +1742,24 @@ the `proof` value removed.
 Let <var>transformedDocument</var> be the result of
 <a href="#dfn-transformation">transforming</a> the <var>unsecuredDocument</var>
 according to a <a>transformation algorithm</a> associated with the
-<var>cryptosuite</var> specified in <var>proof</var> and the <var>options</var>
-parameters provided as inputs to the algorithm.
+<a>cryptographic suite</a> specified in <var>proof</var> and the
+<var>options</var> parameters provided as inputs to the algorithm.
+The type of <a>cryptographic suite</a> is specified by the
+<var>proof.type</var> value and MAY be further described by
+<a>cryptographic suite</a>-specific properties expressed in <var>proof</var>.
         </li>
           <li>
 Let <var>hashData</var> be the result of
 <a href="#dfn-hashing">hashing</a> the <var>transformedDocument</var>
 according to a <a>hashing algorithm</a> associated with the
-<var>cryptosuite</var> specified in the <var>proof</var> and <var>options</var>
-parameters provided as inputs to the algorithm.
+<a>cryptographic suite</a> specified in the <var>proof</var> and
+<var>options</var> parameters provided as inputs to the algorithm.
           </li>
           <li>
 Let <var>isProofVerified</var> be the result of running the
-<a>proof verification algorithm</a> associated with the <var>cryptosuite</var>
-with the <var>hashData</var> and <var>options</var> parameters provided
-as inputs to the algorithm.
+<a>proof verification algorithm</a> associated with the
+<a>cryptographic suite</a> with the <var>hashData</var> and <var>options</var>
+parameters provided as inputs to the algorithm.
           </li>
           <li>
 If the <var>proof</var>.<var>proofPurpose</var> value does not match
