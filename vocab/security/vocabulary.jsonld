@@ -85,7 +85,7 @@
         "en": "The Security vocabulary is used to enable Internet-based applications to encrypt, decrypt, and digitally sign information expressed as Linked Data.\n"
     },
     "rdfs:seeAlso": "https://www.w3.org/TR/vc-data-integrity/",
-    "dc:date": "2022-10-22",
+    "dc:date": "2022-10-23",
     "rdfs_classes": [
         {
             "@id": "sec:Key",
@@ -98,8 +98,31 @@
             }
         },
         {
+            "@id": "sec:Proof",
+            "@type": "rdfs:Class",
+            "rdfs:label": {
+                "en": "Digital proof"
+            },
+            "rdfs:comment": {
+                "en": "This class represents a digital proof on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses."
+            }
+        },
+        {
+            "@id": "sec:ProofGraph",
+            "@type": "rdfs:Class",
+            "rdfs:label": {
+                "en": "An RDF Graph for a digital proof"
+            },
+            "rdfs:comment": {
+                "en": "Instances of this class are RDF Graphs, where each of these graphs must include exactly one Proof."
+            }
+        },
+        {
             "@id": "sec:Signature",
             "@type": "rdfs:Class",
+            "rdfs:subClassOf": [
+                "sec:Proof"
+            ],
             "rdfs:label": {
                 "en": "Digital signature"
             },
@@ -110,12 +133,31 @@
         {
             "@id": "sec:SignatureGraph",
             "@type": "rdfs:Class",
+            "rdfs:subClassOf": [
+                "sec:ProofGraph"
+            ],
             "rdfs:label": {
                 "en": "An RDF Graph for a digital signature"
             },
             "rdfs:comment": {
                 "en": "Instances of this class are RDF Graphs, where each of these graphs must include exactly one Signature."
             }
+        },
+        {
+            "@id": "sec:DataIntegrityProof",
+            "@type": "rdfs:Class",
+            "rdfs:subClassOf": [
+                "sec:Signature"
+            ],
+            "rdfs:label": {
+                "en": "A Data Integrity Proof"
+            },
+            "rdfs:comment": {
+                "en": "This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c.github.io/vc-data-integrity/#dataintegrityproof"
+            ]
         },
         {
             "@id": "sec:EcdsaSecp256k1Signature2019",
@@ -127,7 +169,7 @@
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature suite."
+                "en": "This class represents a data integrity signature suite."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1"
@@ -137,13 +179,13 @@
             "@id": "sec:EcdsaSecp256k1RecoverySignature2020",
             "@type": "rdfs:Class",
             "rdfs:subClassOf": [
-                "sec:Key"
+                "sec:Signature"
             ],
             "rdfs:label": {
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity signature."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020"
@@ -159,7 +201,7 @@
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity verification method."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1"
@@ -175,7 +217,7 @@
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity verification method."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020"
@@ -183,7 +225,11 @@
         },
         {
             "@id": "sec:RsaSignature2018",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -191,7 +237,7 @@
                 "en": "Signature Suite for RSA"
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature suite."
+                "en": "This class represents a data integrity signature suite."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa"
@@ -199,7 +245,11 @@
         },
         {
             "@id": "sec:RsaVerificationKey2018",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -207,7 +257,7 @@
                 "en": "Verification Key for RSA"
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity verification method."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa"
@@ -223,7 +273,7 @@
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature suite."
+                "en": "This class represents a data integrity signature suite."
             }
         },
         {
@@ -236,7 +286,7 @@
                 "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity verification method."
             }
         },
         {
@@ -271,7 +321,11 @@
         },
         {
             "@id": "sec:GraphSignature2012",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -284,7 +338,11 @@
         },
         {
             "@id": "sec:LinkedDataSignature2015",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -297,7 +355,11 @@
         },
         {
             "@id": "sec:LinkedDataSignature2016",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -347,7 +409,7 @@
                 "en": "ED2559 Verification Key, 2018 version"
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature verification key."
+                "en": "This class represents a data integrity verification method."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519"
@@ -441,7 +503,7 @@
                 "en": "BLS 12381 G1 Signature Key, 2020 version"
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature key."
+                "en": "This class represents a data integrity signature key."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519"
@@ -457,7 +519,7 @@
                 "en": "BLS 12381 G2 Signature Key, 2020 version"
             },
             "rdfs:comment": {
-                "en": "This class represents a linked data signature key."
+                "en": "This class represents a data integrity signature key."
             },
             "rdfs:seeAlso": [
                 "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519"
@@ -509,6 +571,24 @@
             "rdfs:comment": {
                 "en": "A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted."
             }
+        },
+        {
+            "@id": "sec:cryptosuite",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:DataIntegrityProof",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Cryptographic suite"
+            },
+            "rdfs:comment": {
+                "en": "The name of a cryptographic"
+            },
+            "rdfs:seeAlso": [
+                "https://w3c.github.io/vc-data-integrity/#dataintegrityproof"
+            ]
         },
         {
             "@id": "sec:digestAlgorithm",
@@ -781,7 +861,7 @@
             "rdfs:domain": "sec:Key",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
-                "en": "Public Key Base58"
+                "en": "Base58-encoded Public Key"
             },
             "rdfs:comment": {
                 "en": "A public key Base58 property is used to specify the base58-encoded version of the public key."
@@ -892,7 +972,7 @@
             "@id": "sec:proof",
             "@type": "rdfs:Property",
             "rdfs:domain": "sec:Key",
-            "rdfs:range": "sec:SignatureGraph",
+            "rdfs:range": "sec:ProofGraph",
             "rdfs:label": {
                 "en": "Proof graph"
             },
@@ -920,7 +1000,7 @@
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:Signature",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Proof purpose"
@@ -935,7 +1015,7 @@
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:Signature",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Challenge with a proof"
@@ -950,7 +1030,7 @@
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:Signature",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Domain with a proof"
@@ -965,7 +1045,7 @@
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:Signature",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:dateTime",
             "rdfs:label": {
                 "en": "Expiration date for proof"
@@ -980,7 +1060,7 @@
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:Signature",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Proof value"
@@ -991,7 +1071,11 @@
         },
         {
             "@id": "sec:signature",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:range": "sec:Signature",
             "rdfs:label": {
                 "en": "Signature"
@@ -1003,9 +1087,11 @@
         {
             "@id": "sec:signatureValue",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -1018,9 +1104,11 @@
         {
             "@id": "sec:signatureAlgorithm",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": [],
             "rdfs:label": {
@@ -1099,8 +1187,11 @@
                 "en": "Allowed action"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An action that the controller of a capability may take when invoking the capability."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#delegated-capability"
+            ]
         },
         {
             "@id": "sec:capability",
@@ -1109,8 +1200,11 @@
                 "en": "Capability"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "A cryptographic mechanism used to execute authority by possession."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#capabilities-are-safer"
+            ]
         },
         {
             "@id": "sec:capabilityChain",
@@ -1119,8 +1213,11 @@
                 "en": "Capability chain"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An list of delegated capabilities from a delegator to a delegatee."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#delegation"
+            ]
         },
         {
             "@id": "sec:capabilityAction",
@@ -1129,8 +1226,11 @@
                 "en": "Capability action"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An action that can be taken given a capability."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability"
+            ]
         },
         {
             "@id": "sec:caveat",
@@ -1139,8 +1239,11 @@
                 "en": "Caveat"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "A restriction on the way the capability may be used."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#caveats"
+            ]
         },
         {
             "@id": "sec:delegator",
@@ -1149,8 +1252,11 @@
                 "en": "Delegator"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An entity that delegates a capability to a delegatee."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#delegation"
+            ]
         },
         {
             "@id": "sec:invocationTarget",
@@ -1159,8 +1265,11 @@
                 "en": "Invocation target"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An invocation target identifies where a capability may be invoked, and identifies the target object for which the root capability expresses authority."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#root-capability"
+            ]
         },
         {
             "@id": "sec:invoker",
@@ -1169,8 +1278,11 @@
                 "en": "Invoker"
             },
             "rdfs:comment": {
-                "en": "T.B.D."
-            }
+                "en": "An identifier to cryptographic material that can invoke a capability."
+            },
+            "rdfs:seeAlso": [
+                "https://w3c-ccg.github.io/zcap-spec/#invocation"
+            ]
         }
     ]
 }

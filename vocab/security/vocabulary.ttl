@@ -12,7 +12,7 @@ cred: a owl:Ontology ;
     dc:description """The Security vocabulary is used to enable Internet-based applications to encrypt, decrypt, and digitally sign information expressed as Linked Data.
 """@en ;
     rdfs:seeAlso <https://www.w3.org/TR/vc-data-integrity/> ;
-    dc:date "2022-10-22"^^xsd:date ;
+    dc:date "2022-10-23"^^xsd:date ;
 .
 
 # Class definitions
@@ -22,30 +22,52 @@ sec:Key a rdfs:Class ;
     rdfs:isDefinedBy cred: ;
 .
 
+sec:Proof a rdfs:Class ;
+    rdfs:label "Digital proof" ;
+    rdfs:comment """This class represents a digital proof on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses."""@en ;
+    rdfs:isDefinedBy cred: ;
+.
+
+sec:ProofGraph a rdfs:Class ;
+    rdfs:label "An RDF Graph for a digital proof" ;
+    rdfs:comment """Instances of this class are RDF Graphs, where each of these graphs must include exactly one Proof."""@en ;
+    rdfs:isDefinedBy cred: ;
+.
+
 sec:Signature a rdfs:Class ;
+    rdfs:subClassOf sec:Proof ;
     rdfs:label "Digital signature" ;
     rdfs:comment """This class represents a digital signature on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
 sec:SignatureGraph a rdfs:Class ;
+    rdfs:subClassOf sec:ProofGraph ;
     rdfs:label "An RDF Graph for a digital signature" ;
     rdfs:comment """Instances of this class are RDF Graphs, where each of these graphs must include exactly one Signature."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
+sec:DataIntegrityProof a rdfs:Class ;
+    rdfs:subClassOf sec:Signature ;
+    rdfs:label "A Data Integrity Proof" ;
+    rdfs:comment """This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings."""@en ;
+    rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c.github.io/vc-data-integrity/#dataintegrityproof> ;
+.
+
 sec:EcdsaSecp256k1Signature2019 a rdfs:Class ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature suite."""@en ;
+    rdfs:comment """This class represents a data integrity signature suite."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1> ;
 .
 
 sec:EcdsaSecp256k1RecoverySignature2020 a rdfs:Class ;
-    rdfs:subClassOf sec:Key ;
+    rdfs:subClassOf sec:Signature ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity signature."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020> ;
 .
@@ -53,7 +75,7 @@ sec:EcdsaSecp256k1RecoverySignature2020 a rdfs:Class ;
 sec:EcdsaSecp256k1VerificationKey2019 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity verification method."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1> ;
 .
@@ -61,23 +83,25 @@ sec:EcdsaSecp256k1VerificationKey2019 a rdfs:Class ;
 sec:EcdsaSecp256k1RecoveryMethod2020 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity verification method."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020> ;
 .
 
-sec:RsaSignature2018 a rdfs:Class ;
+sec:RsaSignature2018 a rdfs:Class, owl:DeprecatedClass ;
+    owl:deprecated true ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "Signature Suite for RSA" ;
-    rdfs:comment """This class represents a linked data signature suite."""@en ;
+    rdfs:comment """This class represents a data integrity signature suite."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa> ;
 .
 
-sec:RsaVerificationKey2018 a rdfs:Class ;
+sec:RsaVerificationKey2018 a rdfs:Class, owl:DeprecatedClass ;
+    owl:deprecated true ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "Verification Key for RSA" ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity verification method."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa> ;
 .
@@ -85,14 +109,14 @@ sec:RsaVerificationKey2018 a rdfs:Class ;
 sec:SchnorrSecp256k1Signature2019 a rdfs:Class ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature suite."""@en ;
+    rdfs:comment """This class represents a data integrity signature suite."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
 sec:SchnorrSecp256k1VerificationKey2019 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "TBD." ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity verification method."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
@@ -114,21 +138,24 @@ sec:EncryptedMessage a rdfs:Class ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:GraphSignature2012 a rdfs:Class ;
+sec:GraphSignature2012 a rdfs:Class, owl:DeprecatedClass ;
+    owl:deprecated true ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "RDF graph signature" ;
     rdfs:comment """A graph signature is used for digital signatures on RDF graphs. The default canonicalization mechanism is specified in the RDF Graph normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:LinkedDataSignature2015 a rdfs:Class ;
+sec:LinkedDataSignature2015 a rdfs:Class, owl:DeprecatedClass ;
+    owl:deprecated true ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "Linked data signature, 2015 version" ;
     rdfs:comment """A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:LinkedDataSignature2016 a rdfs:Class ;
+sec:LinkedDataSignature2016 a rdfs:Class, owl:DeprecatedClass ;
+    owl:deprecated true ;
     rdfs:subClassOf sec:Signature ;
     rdfs:label "Linked data signature, 2016 version" ;
     rdfs:comment """A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature."""@en ;
@@ -153,7 +180,7 @@ sec:X25519KeyAgreementKey2019 a rdfs:Class ;
 sec:Ed25519VerificationKey2018 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "ED2559 Verification Key, 2018 version" ;
-    rdfs:comment """This class represents a linked data signature verification key."""@en ;
+    rdfs:comment """This class represents a data integrity verification method."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519> ;
 .
@@ -203,7 +230,7 @@ sec:BbsBlsSignatureProof2020 a rdfs:Class ;
 sec:Bls12381G1Key2020 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "BLS 12381 G1 Signature Key, 2020 version" ;
-    rdfs:comment """This class represents a linked data signature key."""@en ;
+    rdfs:comment """This class represents a data integrity signature key."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519> ;
 .
@@ -211,7 +238,7 @@ sec:Bls12381G1Key2020 a rdfs:Class ;
 sec:Bls12381G2Key2020 a rdfs:Class ;
     rdfs:subClassOf sec:Key ;
     rdfs:label "BLS 12381 G2 Signature Key, 2020 version" ;
-    rdfs:comment """This class represents a linked data signature key."""@en ;
+    rdfs:comment """This class represents a data integrity signature key."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519> ;
 .
@@ -241,6 +268,15 @@ sec:cipherKey a rdfs:Property, owl:DatatypeProperty ;
     rdfs:label "Cipher key" ;
     rdfs:comment """A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted."""@en ;
     rdfs:isDefinedBy cred: ;
+.
+
+sec:cryptosuite a rdfs:Property, owl:DatatypeProperty ;
+    rdfs:domain sec:DataIntegrityProof ;
+    rdfs:range xsd:string ;
+    rdfs:label "Cryptographic suite" ;
+    rdfs:comment """The name of a cryptographic"""@en ;
+    rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c.github.io/vc-data-integrity/#dataintegrityproof> ;
 .
 
 sec:digestAlgorithm a rdfs:Property, owl:DatatypeProperty ;
@@ -383,7 +419,7 @@ The aforementioned proofs are created to prove that some entity is attempting to
 sec:publicKeyBase58 a rdfs:Property, owl:DatatypeProperty ;
     rdfs:domain sec:Key ;
     rdfs:range xsd:string ;
-    rdfs:label "Public Key Base58" ;
+    rdfs:label "Base58-encoded Public Key" ;
     rdfs:comment """A public key Base58 property is used to specify the base58-encoded version of the public key."""@en ;
     rdfs:isDefinedBy cred: ;
 .
@@ -442,7 +478,7 @@ sec:revoked a rdfs:Property, owl:DatatypeProperty ;
 
 sec:proof a rdfs:Property ;
     rdfs:domain sec:Key ;
-    rdfs:range sec:SignatureGraph ;
+    rdfs:range sec:ProofGraph ;
     rdfs:label "Proof graph" ;
     rdfs:comment """The value of the `proof` property MUST identify a `SignatureGraph` (informally, it indirectly identifies a Signature contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed."""@en ;
     rdfs:isDefinedBy cred: ;
@@ -457,7 +493,7 @@ sec:jws a rdfs:Property ;
 .
 
 sec:proofPurpose a rdfs:Property, owl:DatatypeProperty ;
-    rdfs:domain sec:Signature ;
+    rdfs:domain sec:Proof ;
     rdfs:range xsd:string ;
     rdfs:label "Proof purpose" ;
     rdfs:comment """The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof."""@en ;
@@ -465,7 +501,7 @@ sec:proofPurpose a rdfs:Property, owl:DatatypeProperty ;
 .
 
 sec:challenge a rdfs:Property, owl:DatatypeProperty ;
-    rdfs:domain sec:Signature ;
+    rdfs:domain sec:Proof ;
     rdfs:range xsd:string ;
     rdfs:label "Challenge with a proof" ;
     rdfs:comment """The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`."""@en ;
@@ -473,7 +509,7 @@ sec:challenge a rdfs:Property, owl:DatatypeProperty ;
 .
 
 sec:domain a rdfs:Property, owl:DatatypeProperty ;
-    rdfs:domain sec:Signature ;
+    rdfs:domain sec:Proof ;
     rdfs:range xsd:string ;
     rdfs:label "Domain with a proof" ;
     rdfs:comment """The `domain` property is used to associate a domain with a proof, for use with a `proofPurpose` such as `authentication`."""@en ;
@@ -481,7 +517,7 @@ sec:domain a rdfs:Property, owl:DatatypeProperty ;
 .
 
 sec:expirationDate a rdfs:Property, owl:DatatypeProperty ;
-    rdfs:domain sec:Signature ;
+    rdfs:domain sec:Proof ;
     rdfs:range xsd:dateTime ;
     rdfs:label "Expiration date for proof" ;
     rdfs:comment """The `expirationDate` property is used to associate an expiration date with a proof."""@en ;
@@ -489,21 +525,23 @@ sec:expirationDate a rdfs:Property, owl:DatatypeProperty ;
 .
 
 sec:proofValue a rdfs:Property, owl:DatatypeProperty ;
-    rdfs:domain sec:Signature ;
+    rdfs:domain sec:Proof ;
     rdfs:range xsd:string ;
     rdfs:label "Proof value" ;
     rdfs:comment """The `proofValue` property is used to associate a proof value with a proof."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:signature a rdfs:Property ;
+sec:signature a rdf:Property, owl:DeprecatedProperty ;
+    owl:deprecated true ;
     rdfs:range sec:Signature ;
     rdfs:label "Signature" ;
     rdfs:comment """The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed."""@en ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:signatureValue a rdfs:Property, owl:DatatypeProperty ;
+sec:signatureValue a rdf:Property, owl:DeprecatedProperty, owl:DatatypeProperty ;
+    owl:deprecated true ;
     rdfs:domain sec:Signature ;
     rdfs:range xsd:string ;
     rdfs:label "Signature value" ;
@@ -511,7 +549,8 @@ sec:signatureValue a rdfs:Property, owl:DatatypeProperty ;
     rdfs:isDefinedBy cred: ;
 .
 
-sec:signatureAlgorithm a rdfs:Property, owl:ObjectProperty ;
+sec:signatureAlgorithm a rdf:Property, owl:DeprecatedProperty, owl:ObjectProperty ;
+    owl:deprecated true ;
     rdfs:domain sec:Signature ;
     rdfs:range  ;
     rdfs:label "Signature algorithm" ;
@@ -555,49 +594,57 @@ sec:x509CertificateFingerprint a rdfs:Property ;
 
 sec:allowedAction a rdfs:Property ;
     rdfs:label "Allowed action" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An action that the controller of a capability may take when invoking the capability."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#delegated-capability> ;
 .
 
 sec:capability a rdfs:Property ;
     rdfs:label "Capability" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """A cryptographic mechanism used to execute authority by possession."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#capabilities-are-safer> ;
 .
 
 sec:capabilityChain a rdfs:Property ;
     rdfs:label "Capability chain" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An list of delegated capabilities from a delegator to a delegatee."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#delegation> ;
 .
 
 sec:capabilityAction a rdfs:Property ;
     rdfs:label "Capability action" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An action that can be taken given a capability."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability> ;
 .
 
 sec:caveat a rdfs:Property ;
     rdfs:label "Caveat" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """A restriction on the way the capability may be used."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#caveats> ;
 .
 
 sec:delegator a rdfs:Property ;
     rdfs:label "Delegator" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An entity that delegates a capability to a delegatee."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#delegation> ;
 .
 
 sec:invocationTarget a rdfs:Property ;
     rdfs:label "Invocation target" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An invocation target identifies where a capability may be invoked, and identifies the target object for which the root capability expresses authority."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#root-capability> ;
 .
 
 sec:invoker a rdfs:Property ;
     rdfs:label "Invoker" ;
-    rdfs:comment """T.B.D."""@en ;
+    rdfs:comment """An identifier to cryptographic material that can invoke a capability."""@en ;
     rdfs:isDefinedBy cred: ;
+    rdfs:seeAlso <https://w3c-ccg.github.io/zcap-spec/#invocation> ;
 .
 
