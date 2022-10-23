@@ -22,27 +22,46 @@ class:
     label: Cryptographic key
     comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data.
 
+  - id: Proof
+    label: Digital proof
+    comment: |
+      This class represents a digital proof on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses.
+
+  - id: ProofGraph
+    label: An RDF Graph for a digital proof
+    comment: Instances of this class are RDF Graphs, where each of these graphs must include exactly one Proof.
+
   - id: Signature
     label: Digital signature
+    upper_value: sec:Proof
     comment: |
       This class represents a digital signature on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses.
 
   - id: SignatureGraph
     label: An RDF Graph for a digital signature
+    upper_value: sec:ProofGraph
     comment: Instances of this class are RDF Graphs, where each of these graphs must include exactly one Signature.
+
+  - id: DataIntegrityProof
+    label: A Data Integrity Proof
+    upper_value: sec:Signature
+    comment: This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings.
+    see_also:
+      - label: vc-data-integrity
+        url: https://w3c.github.io/vc-data-integrity/#dataintegrityproof
 
   - id: EcdsaSecp256k1Signature2019
     label: TBD.
     upper_value: sec:Signature
-    comment: This class represents a linked data signature suite.
+    comment: This class represents a data integrity signature suite.
     see_also:
       - label: ecdsa-sep256k1
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
 
   - id: EcdsaSecp256k1RecoverySignature2020
     label: TBD.
-    upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    upper_value: sec:Signature
+    comment: This class represents a data integrity signature.
     see_also:
       - label: ecdsasecp256k1recoverysignature2020
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
@@ -50,31 +69,33 @@ class:
   - id: EcdsaSecp256k1VerificationKey2019
     label: TBD.
     upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    comment: This class represents a data integrity verification method.
     see_also:
       - label: ecdsa-secp256k1
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1 
+        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
 
   - id: EcdsaSecp256k1RecoveryMethod2020
     label: TBD.
     upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    comment: This class represents a data integrity verification method.
     see_also:
       - label: ecdsasecp256k1recoverymethod2020
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020
 
   - id: RsaSignature2018
+    deprecated: true
     label: Signature Suite for RSA
     upper_value: sec:Signature
-    comment: This class represents a linked data signature suite.
+    comment: This class represents a data integrity signature suite.
     see_also:
       - label: RSA registry entry
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa
 
   - id: RsaVerificationKey2018
+    deprecated: true
     label: Verification Key for RSA
     upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    comment: This class represents a data integrity verification method.
     see_also:
       - label: RSA registry entry
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa
@@ -82,12 +103,12 @@ class:
   - id: SchnorrSecp256k1Signature2019
     label: TBD.
     upper_value: sec:Signature
-    comment: This class represents a linked data signature suite.
+    comment: This class represents a data integrity signature suite.
 
   - id: SchnorrSecp256k1VerificationKey2019
     label: TBD.
     upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    comment: This class represents a data integrity verification method.
 
   - id: ServiceEndpointProxyService
     label: TBD.
@@ -102,18 +123,21 @@ class:
     comment: A class of messages that are obfuscated in some cryptographic manner. These messages are incredibly difficult to decrypt without the proper decryption key.
 
   - id: GraphSignature2012
+    deprecated: true
     label: RDF graph signature
     upper_value: sec:Signature
     comment: |
       A graph signature is used for digital signatures on RDF graphs. The default canonicalization mechanism is specified in the RDF Graph normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature.
 
   - id: LinkedDataSignature2015
+    deprecated: true
     label: Linked data signature, 2015 version
     upper_value: sec:Signature
     comment: |
       A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature.
 
   - id: LinkedDataSignature2016
+    deprecated: true
     label: Linked data signature, 2016 version
     upper_value: sec:Signature
     comment: |
@@ -136,7 +160,7 @@ class:
   - id: Ed25519VerificationKey2018
     label: ED2559 Verification Key, 2018 version
     upper_value: sec:Key
-    comment: This class represents a linked data signature verification key.
+    comment: This class represents a data integrity verification method.
     see_also:
       - label: eddsa-ed25519 registry entry
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
@@ -177,7 +201,7 @@ class:
   - id: Bls12381G1Key2020
     label: BLS 12381 G1 Signature Key, 2020 version
     upper_value: sec:Key
-    comment: This class represents a linked data signature key.
+    comment: This class represents a data integrity signature key.
     see_also:
       - label: eddsa-ed25519 registry entry
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
@@ -185,7 +209,7 @@ class:
   - id: Bls12381G2Key2020
     label: BLS 12381 G2 Signature Key, 2020 version
     upper_value: sec:Key
-    comment: This class represents a linked data signature key.
+    comment: This class represents a data integrity signature key.
     see_also:
       - label: eddsa-ed25519 registry entry
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
@@ -208,6 +232,15 @@ property:
     domain: sec:EncryptedMessage
     range: xsd:string
     comment: A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted.
+
+  - id: cryptosuite
+    label: Cryptographic suite
+    domain: sec:DataIntegrityProof
+    range: xsd:string
+    comment: The name of a cryptographic
+    see_also:
+      - label: vc-data-integrity
+        url: https://w3c.github.io/vc-data-integrity/#dataintegrityproof
 
   - id: digestAlgorithm
     label: Digest algorithm
@@ -328,7 +361,7 @@ property:
       The aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a proofPurpose of capabilityInvocation and reference a verificationMethod to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of capabilityInvocation that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed proofPurpose.
 
   - id: publicKeyBase58
-    label: Public Key Base58
+    label: Base58-encoded Public Key
     domain: sec:Key
     range: xsd:string
     comment: A public key Base58 property is used to specify the base58-encoded version of the public key.
@@ -393,7 +426,7 @@ property:
   - id: proof
     domain: sec:Key
     label: Proof graph
-    range: sec:SignatureGraph
+    range: sec:ProofGraph
     comment: The value of the `proof` property MUST identify a <a href=”#SignatureGraph”>`SignatureGraph`</a> (informally, it indirectly identifies a Signature contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed.
 
   - id: jws
@@ -406,47 +439,50 @@ property:
 
   - id: proofPurpose
     label: Proof purpose
-    domain: sec:Signature
+    domain: sec:Proof
     range: xsd:string
     comment: The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof.
 
   - id: challenge
     label: Challenge with a proof
-    domain: sec:Signature
+    domain: sec:Proof
     range: xsd:string
     comment: The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`.
 
   - id: domain
     label: Domain with a proof
-    domain: sec:Signature
+    domain: sec:Proof
     range: xsd:string
     comment: The `domain` property is used to associate a domain with a proof, for use with a `proofPurpose` such as `authentication`.
 
   - id: expirationDate
     label: Expiration date for proof
-    domain: sec:Signature
+    domain: sec:Proof
     range: xsd:dateTime
     comment: The `expirationDate` property is used to associate an expiration date with a proof.
 
   - id: proofValue
     label: Proof value
-    domain: sec:Signature
+    domain: sec:Proof
     range: xsd:string
     comment: The `proofValue` property is used to associate a proof value with a proof.
 
   - id: signature
+    deprecated: true
     label: Signature
     range: sec:Signature
     comment: |
       The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed.
 
   - id: signatureValue
+    deprecated: true
     label: Signature value
     domain: sec:Signature
     range: xsd:string
     comment: The signature value is used to express the output of the signature algorithm expressed in base-64 format.
 
   - id: signatureAlgorithm
+    deprecated: true
     label: Signature algorithm
     domain: sec:Signature
     range: IRI
@@ -492,32 +528,56 @@ property:
 
   - id: allowedAction
     label: Allowed action
-    comment: T.B.D.
+    comment: An action that the controller of a capability may take when invoking the capability.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#delegated-capability
 
   - id: capability
     label: Capability
-    comment: T.B.D.
+    comment: A cryptographic mechanism used to execute authority by possession.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#capabilities-are-safer
 
   - id: capabilityChain
     label: Capability chain
-    comment: T.B.D.
+    comment: An list of delegated capabilities from a delegator to a delegatee.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#delegation
 
   - id: capabilityAction
     label: Capability action
-    comment: T.B.D.
+    comment: An action that can be taken given a capability.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability
 
   - id: caveat
     label: Caveat
-    comment: T.B.D.
+    comment: A restriction on the way the capability may be used.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#caveats
 
   - id: delegator
     label: Delegator
-    comment: T.B.D.
+    comment: An entity that delegates a capability to a delegatee.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#delegation
 
   - id: invocationTarget
     label: Invocation target
-    comment: T.B.D.
+    comment: An invocation target identifies where a capability may be invoked, and identifies the target object for which the root capability expresses authority.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#root-capability
 
   - id: invoker
     label: Invoker
-    comment: T.B.D.
+    comment: An identifier to cryptographic material that can invoke a capability.
+    see_also:
+      - label: Authorization Capabilities
+        url: https://w3c-ccg.github.io/zcap-spec/#invocation
