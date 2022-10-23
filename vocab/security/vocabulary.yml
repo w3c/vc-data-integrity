@@ -237,7 +237,7 @@ property:
     label: Cryptographic suite
     domain: sec:DataIntegrityProof
     range: xsd:string
-    comment: The name of a cryptographic
+    comment: A text-based identifier for a specific cryptographic suite.
     see_also:
       - label: vc-data-integrity
         url: https://w3c.github.io/vc-data-integrity/#dataintegrityproof

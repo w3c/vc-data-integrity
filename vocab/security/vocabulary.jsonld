@@ -584,7 +584,7 @@
                 "en": "Cryptographic suite"
             },
             "rdfs:comment": {
-                "en": "The name of a cryptographic"
+                "en": "A text-based identifier for a specific cryptographic suite."
             },
             "rdfs:seeAlso": [
                 "https://w3c.github.io/vc-data-integrity/#dataintegrityproof"

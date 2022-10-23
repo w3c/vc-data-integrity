@@ -274,7 +274,7 @@ sec:cryptosuite a rdfs:Property, owl:DatatypeProperty ;
     rdfs:domain sec:DataIntegrityProof ;
     rdfs:range xsd:string ;
     rdfs:label "Cryptographic suite" ;
-    rdfs:comment """The name of a cryptographic"""@en ;
+    rdfs:comment """A text-based identifier for a specific cryptographic suite."""@en ;
     rdfs:isDefinedBy cred: ;
     rdfs:seeAlso <https://w3c.github.io/vc-data-integrity/#dataintegrityproof> ;
 .
