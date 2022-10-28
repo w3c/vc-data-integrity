@@ -417,7 +417,7 @@ The following attributes are defined for use in a <a>data integrity proof</a>:
         </p>
 
         <dl style="margin-left: 1em;">
-          <dt><dfn>type</dfn></dt>
+          <dt>type</dt>
           <dd>
 The specific <a>proof type</a> used for the cryptographic proof MUST be
 specified as a string that maps to a URL [[URL]]. Examples of proof types
@@ -426,7 +426,7 @@ Proof types determine what other fields are required to secure and
 verify the proof.
           </dd>
 
-          <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
+          <dt>proofPurpose</dt>
           <dd>
 The reason the proof was created MUST be specified as a string that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
@@ -439,7 +439,7 @@ Verifiable Credential they never meant to create instead of the intended action,
 which was to merely logging into a website.
           </dd>
 
-          <dt><dfn>verificationMethod</dfn></dt>
+          <dt>verificationMethod</dt>
           <dd>
 The means and information needed to verify the proof MUST be specified as a
 string that maps to a [[URL]]. An example of a verification method is a
@@ -447,7 +447,7 @@ link to a public key which includes cryptographic material that is used by a
 verifier during the verification process.
           </dd>
 
-          <dt><dfn class="lint-ignore">created</dfn></dt>
+          <dt>created</dt>
           <dd>
 The date and time the proof was created MUST be specified as an
 [[XMLSCHEMA11-2]] combined date and time string.
@@ -819,7 +819,7 @@ threshold signature.
           </p>
 
           <dl>
-            <dt><a>verificationMethod</a></dt>
+            <dt>verificationMethod</dt>
             <dd>
               <p>
 The <code>verificationMethod</code> property is OPTIONAL. If present, the value
@@ -1520,7 +1520,7 @@ as follows:
 The specification MUST be published as a human-readable document at a URL.
         </li>
         <li>
-The specification MUST identify a cryptographic suite <a>type</a> and any
+The specification MUST identify a cryptographic suite `type` and any
 parameters that can be used with the suite.
         </li>
         <li>
