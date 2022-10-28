@@ -138,6 +138,17 @@
               ],
               status: "CG-DRAFT",
               publisher: "Credentials Community Group"
+            },
+            "VC-DATA-MODEL-2": {
+              title: "Verifiable Credentials Data Model v2.0",
+              href: "https://www.w3.org/TR/vc-data-model-2.0/",
+              authors: [
+                "Manu Sporny", "Dave Longley", "Grant Noble", "Dan Burnett",
+                "Ted Thibodeau", "Brent Zundel", "David Chadwick",
+                "Kyle Den Hartog"
+              ],
+              status: "Working Draft",
+              publisher: "W3C Verifiable Credentials Working Group"
             }
           },
           postProcess: [restrictRefs]
@@ -177,7 +188,7 @@ used to:
         <li>
 Make statements that can be shared without loss of trust, because their
 authorship can be verified by a third party, for example as part of Verifiable
-Credentials [[VC-DATA-MODEL]] or social media posts.
+Credentials [[VC-DATA-MODEL-2]] or social media posts.
         </li>
         <li>
 Authenticate as an entity identified by a particular identifier, for example, as
@@ -1233,7 +1244,7 @@ the value of <code>controller</code> needs to <a>authenticate</a> with its
             <p>
 The <code>assertionMethod</code> <a>verification relationship</a> is used to
 specify how the <a>controller</a> is expected to express claims, such as for
-the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL]].
+the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2]].
             </p>
 
             <dl>
