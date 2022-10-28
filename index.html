@@ -90,16 +90,16 @@
           */
           localBiblio:  {
             "RDF-DATASET-C14N": {
-              title:    "RDF Dataset Normalization",
-              href:     "https://json-ld.github.io/normalization/spec/",
+              title:    "RDF Dataset Canonicalization",
+              href:     "https://w3c-ccg.github.io/rdf-dataset-canonicalization/spec/index.html",
               authors:  ["David Longley", "Manu Sporny"],
-              status:   "CGDRAFT",
-              publisher:  "JSON-LD Community Group"
+              status:   "CGFINAL",
+              publisher:  "Credentials Community Group"
             },
             "SECURITY-VOCABULARY": {
               title:    "The Security Vocabulary",
               href:     "https://w3id.org/security",
-              authors:  ["Manu Sporny","David Longley"],
+              authors:  ["Ivan Herman", "Manu Sporny","David Longley"],
               status:   "ED",
               publisher:  "Verifiable Credentials Working Group"
             },
@@ -138,12 +138,6 @@
               ],
               status: "CG-DRAFT",
               publisher: "Credentials Community Group"
-            },
-            "URDNA2015": {
-              title:    "Universal RDF Dataset Canonicalization Algorithm 2015",
-              href:     "https://json-ld.github.io/rdf-dataset-canonicalization/spec/",
-              status:   "CGDRAFT",
-              publisher:  "Credentials Community Group"
             }
           },
           postProcess: [restrictRefs]
@@ -409,7 +403,7 @@ This section specifies the data model that is used for expressing
 A <a>data integrity proof</a> provides information about the proof mechanism,
 parameters required to verify that proof, and the proof value itself. All of this
 information is provided using Linked Data vocabularies such as the
-[[SECURITY-VOCABULARY]].
+[[?SECURITY-VOCABULARY]].
         </p>
 
         <p>
@@ -486,7 +480,7 @@ value. The contents of this value are determined by a cryptosuite and set to the
 
         <p class="note">
 All of the terms above map to URLs. The vocabulary where these terms are defined
-is the [[SECURITY-VOCABULARY]].
+is the [[?SECURITY-VOCABULARY]].
         </p>
 
         <p>
@@ -525,7 +519,7 @@ by adding the parameters outlined in this section:
 The example proof above suggests a ficticious
 <code>example-signature-2022</code> cryptography suite that produces a
 verifiable digital proof by presumptively transforming the input data using the
-JSON Canonicalization Scheme [[RFC8785]] and then digitally signing it using an
+JSON Canonicalization Scheme [[?RFC8785]] and then digitally signing it using an
 Ed25519 elliptic curve signature.
         </p>
 
@@ -569,7 +563,7 @@ by adding the parameters outlined in this section:
         <p>
 The proof example above uses the <code>Ed25519Signature2020</code> <a>proof
 type</a> to produce a verifiable digital proof by canonicalizing the input data
-using the RDF Dataset Canonicalization algorithm [[RDF-DATASET-C14N]] and then
+using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
 digitally signing it using an Ed25519 elliptic curve signature.
         </p>
 
@@ -772,17 +766,17 @@ libraries.
           <dt>capabilityDelegation</dt>
           <dd>
 Indicates that the proof can only be used for delegating capabilities. See the
-Authorization Capabilities [[ZCAP]] specification for more detail.
+Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
           <dt>capabilityInvocation</dt>
           <dd>
 Indicates that the proof can only be used for invoking capabilities. See the
-Authorization Capabilities [[ZCAP]] specification for more detail.
+Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
         </dl>
 
         <p>
-Note: The Authorization Capabilities [[ZCAP]] specification defines additional
+Note: The Authorization Capabilities [[?ZCAP]] specification defines additional
 proof purposes for that use case, such as <code>capabilityInvocation</code> and
 <code>capabilityDelegation</code>.
         </p>
@@ -2052,16 +2046,16 @@ easy to use for developers.
 
         <p>
 At times, it is beneficial to transform the data being protected during the
-cryptographic protection process. Such "in-line" transformation can enable a particular type
-of cryptographic protection to be agnostic to the data format it is carried in.
-For example, some Data Integrity cryptographic suites utilize RDF Dataset
-Canonicalization [[?URDNA2015]] which transforms the initial representation into a
-canonical form [[?N-QUADS]] that is then serialized, hashed, and digitally
-signed. As long as any syntax expressing the protected data can be transformed
-into this canonical form, the digital signature can be verified. This enables
-the same digital signature over the information to be expressed in JSON, CBOR,
-YAML, and other compatible syntaxes without having to create a cryptographic
-proof for every syntax.
+cryptographic protection process. Such "in-line" transformation can enable a
+particular type of cryptographic protection to be agnostic to the data format it
+is carried in. For example, some Data Integrity cryptographic suites utilize RDF
+Dataset Canonicalization [[?RDF-DATASET-C14N]] which transforms the initial
+representation into a canonical form [[?N-QUADS]] that is then serialized,
+hashed, and digitally signed. As long as any syntax expressing the protected
+data can be transformed into this canonical form, the digital signature can be
+verified. This enables the same digital signature over the information to be
+expressed in JSON, CBOR, YAML, and other compatible syntaxes without having to
+create a cryptographic proof for every syntax.
         </p>
         <p>
 Being able to express the same digital signature across a variety of syntaxes is
@@ -2089,15 +2083,15 @@ and read from application storage.
 The VCWG is seeking feedback on normative language that cryptographic suite
 implementers need to follow to ensure that they do not utilize data
 transformation mechanisms that can map to the same output. That is, given
-different inputs for canonicalization scheme #1 and canonicalization
-scheme #2, they must not produce the same output value. As an analogy, this is
-the same requirement for cryptographic hashing mechanisms and is why those
-schemes are designed to be collision resistant. Cryptographic canonicalization
-mechanisms have the same requirement. At present, this isn't a problem because
-the three expected canonicalization schemes &mdash; the Universal RDF Dataset
-Canonicalization Algorithm 2015 [[?URDNA2015]], JSON Canonicalization Scheme
-[[?RFC8785]], and a theoretical future base-encoding canonicalization &mdash; have
-entirely different outputs.
+different inputs for canonicalization scheme #1 and canonicalization scheme #2,
+they must not produce the same output value. As an analogy, this is the same
+requirement for cryptographic hashing mechanisms and is why those schemes are
+designed to be collision resistant. Cryptographic canonicalization mechanisms
+have the same requirement. At present, this isn't a problem because the three
+expected canonicalization schemes &mdash; the Universal RDF Dataset
+Canonicalization Algorithm 2015 [[?RDF-DATASET-C14N]], JSON Canonicalization
+Scheme [[?RFC8785]], and a theoretical future base-encoding canonicalization
+&mdash; have entirely different outputs.
         </p>
         <p class="issue"
           title="Avoiding the pitfalls of XML Canonicalization">
