@@ -79,24 +79,14 @@
     "@id": "https://w3id.org/security/v1",
     "@type": "owl:Ontology",
     "dc:title": {
-        "en": "The Security Vocabulary"
+        "en": "Security Vocabulary"
     },
     "dc:description": {
-        "en": "The Security vocabulary is used to enable Internet-based applications to encrypt, decrypt, and digitally sign information expressed as Linked Data.\n"
+        "en": "vocabulary used to ensure the authenticity and integrity of Verifiable Credentials and similar types of constrained digital documents using cryptography, especially through the use of digital signatures and related mathematical proofs \n"
     },
     "rdfs:seeAlso": "https://www.w3.org/TR/vc-data-integrity/",
-    "dc:date": "2022-10-23",
+    "dc:date": "2022-11-11",
     "rdfs_classes": [
-        {
-            "@id": "sec:Key",
-            "@type": "rdfs:Class",
-            "rdfs:label": {
-                "en": "Cryptographic key"
-            },
-            "rdfs:comment": {
-                "en": "This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data."
-            }
-        },
         {
             "@id": "sec:Proof",
             "@type": "rdfs:Class",
@@ -104,7 +94,7 @@
                 "en": "Digital proof"
             },
             "rdfs:comment": {
-                "en": "This class represents a digital proof on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses."
+                "en": "This class represents a digital proof on serialized data. "
             }
         },
         {
@@ -118,8 +108,65 @@
             }
         },
         {
-            "@id": "sec:Signature",
+            "@id": "sec:VerificationMethod",
             "@type": "rdfs:Class",
+            "rdfs:label": {
+                "en": "Verification method"
+            },
+            "rdfs:comment": {
+                "en": "A Verification Method class can express different verification methods, such as cryptographic public keys, which can be used to authenticate or authorize interaction with the `controller` or associated parties. Verification methods might take many parameters."
+            }
+        },
+        {
+            "@id": "sec:DataIntegrityProof",
+            "@type": "rdfs:Class",
+            "rdfs:subClassOf": [
+                "sec:Proof"
+            ],
+            "rdfs:label": {
+                "en": "A Data Integrity Proof"
+            },
+            "rdfs:comment": {
+                "en": "This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings."
+            },
+            "rdfs:seeAlso": [
+                "https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof"
+            ]
+        },
+        {
+            "@id": "sec:Ed25519Signature2020",
+            "@type": "rdfs:Class",
+            "rdfs:subClassOf": [
+                "sec:Proof"
+            ],
+            "rdfs:label": {
+                "en": "ED2559 Signature Suite, 2020 version"
+            },
+            "rdfs:comment": {
+                "en": "T.B.D."
+            }
+        },
+        {
+            "@id": "sec:Key",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
+            "rdfs:label": {
+                "en": "Cryptographic key"
+            },
+            "rdfs:comment": {
+                "en": "This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data."
+            }
+        },
+        {
+            "@id": "sec:Signature",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Proof"
             ],
@@ -132,7 +179,11 @@
         },
         {
             "@id": "sec:SignatureGraph",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:ProofGraph"
             ],
@@ -144,24 +195,32 @@
             }
         },
         {
-            "@id": "sec:DataIntegrityProof",
-            "@type": "rdfs:Class",
+            "@id": "sec:EcdsaSecp256k1Signature2019",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
             "rdfs:label": {
-                "en": "A Data Integrity Proof"
+                "en": "TBD."
             },
             "rdfs:comment": {
-                "en": "This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings."
+                "en": "This class represents a data integrity signature suite."
             },
             "rdfs:seeAlso": [
-                "https://w3c.github.io/vc-data-integrity/#dataintegrityproof"
+                "https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1"
             ]
         },
         {
-            "@id": "sec:EcdsaSecp256k1Signature2019",
-            "@type": "rdfs:Class",
+            "@id": "sec:EcdsaSecp256k1Signature2020",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -177,7 +236,11 @@
         },
         {
             "@id": "sec:EcdsaSecp256k1RecoverySignature2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -193,7 +256,11 @@
         },
         {
             "@id": "sec:EcdsaSecp256k1VerificationKey2019",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -209,7 +276,11 @@
         },
         {
             "@id": "sec:EcdsaSecp256k1RecoveryMethod2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -234,7 +305,7 @@
                 "sec:Signature"
             ],
             "rdfs:label": {
-                "en": "Signature Suite for RSA"
+                "en": "Signature Suite for RSA (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "This class represents a data integrity signature suite."
@@ -254,7 +325,7 @@
                 "sec:Key"
             ],
             "rdfs:label": {
-                "en": "Verification Key for RSA"
+                "en": "Verification Key for RSA (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "This class represents a data integrity verification method."
@@ -265,7 +336,11 @@
         },
         {
             "@id": "sec:SchnorrSecp256k1Signature2019",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -278,7 +353,11 @@
         },
         {
             "@id": "sec:SchnorrSecp256k1VerificationKey2019",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -291,7 +370,11 @@
         },
         {
             "@id": "sec:ServiceEndpointProxyService",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "TBD."
             },
@@ -301,7 +384,11 @@
         },
         {
             "@id": "sec:Digest",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Message digest"
             },
@@ -311,7 +398,11 @@
         },
         {
             "@id": "sec:EncryptedMessage",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Encrypted message"
             },
@@ -347,7 +438,7 @@
                 "sec:Signature"
             ],
             "rdfs:label": {
-                "en": "Linked data signature, 2015 version"
+                "en": "Linked data signature, 2015 version (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature."
@@ -364,7 +455,7 @@
                 "sec:Signature"
             ],
             "rdfs:label": {
-                "en": "Linked data signature, 2016 version"
+                "en": "Linked data signature, 2016 version (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature."
@@ -372,7 +463,11 @@
         },
         {
             "@id": "sec:MerkleProof2019",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -388,7 +483,11 @@
         },
         {
             "@id": "sec:X25519KeyAgreementKey2019",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -401,7 +500,11 @@
         },
         {
             "@id": "sec:Ed25519VerificationKey2018",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -417,7 +520,11 @@
         },
         {
             "@id": "sec:Ed25519VerificationKey2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -429,21 +536,12 @@
             }
         },
         {
-            "@id": "sec:Ed25519Signature2020",
-            "@type": "rdfs:Class",
-            "rdfs:subClassOf": [
-                "sec:Signature"
-            ],
-            "rdfs:label": {
-                "en": "ED2559 Signature Suite, 2020 version"
-            },
-            "rdfs:comment": {
-                "en": "A linked data proof suite proof type used with the verification method type `Ed25519VerificationKey2020`"
-            }
-        },
-        {
             "@id": "sec:JsonWebKey2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -456,7 +554,11 @@
         },
         {
             "@id": "sec:JsonWebSignature2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -469,7 +571,11 @@
         },
         {
             "@id": "sec:BbsBlsSignature2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -482,7 +588,11 @@
         },
         {
             "@id": "sec:BbsBlsSignatureProof2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Signature"
             ],
@@ -495,7 +605,11 @@
         },
         {
             "@id": "sec:Bls12381G1Key2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -511,7 +625,11 @@
         },
         {
             "@id": "sec:Bls12381G2Key2020",
-            "@type": "rdfs:Class",
+            "@type": [
+                "rdfs:Class",
+                "owl:DeprecatedClass"
+            ],
+            "owl:deprecated": true,
             "rdfs:subClassOf": [
                 "sec:Key"
             ],
@@ -528,48 +646,239 @@
     ],
     "rdfs_properties": [
         {
-            "@id": "sec:cipherAlgorithm",
+            "@id": "sec:proofPurpose",
             "@type": [
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:EncryptedMessage",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
-                "en": "Cipher algorithm"
+                "en": "Proof purpose"
             },
             "rdfs:comment": {
-                "en": "The cipher algorithm describes the mechanism used to encrypt a message. It is typically a string expressing the cipher suite, the strength of the cipher, and a block cipher mode."
+                "en": "The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof. The proof purpose acts as a safeguard to prevent the proof from being misused by being applied to a purpose other than the one that was intended."
             }
         },
         {
-            "@id": "sec:cipherData",
+            "@id": "sec:verificationMethod",
+            "@type": "rdfs:Property",
+            "rdfs:range": "sec:VerificationMethod",
+            "rdfs:label": {
+                "en": "Verification method"
+            },
+            "rdfs:comment": {
+                "en": "A `verificationMethod` property is used to specify a URL that contains information used for proof verification."
+            },
+            "rdfs:seeAlso": [
+                "https://www.w3.org/TR/did-core/#verification-methods"
+            ]
+        },
+        {
+            "@id": "sec:created",
             "@type": [
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:EncryptedMessage",
-            "rdfs:range": "xsd:string",
+            "rdfs:domain": "sec:Proof",
+            "rdfs:range": "xsd:dateTime",
             "rdfs:label": {
-                "en": "Cipher data"
+                "en": "Creation date of the proof"
             },
             "rdfs:comment": {
-                "en": "Cipher data is an opaque blob of information that is used to specify an encrypted message."
+                "en": "The date and time the proof was created. This information MUST be added to a proof."
             }
         },
         {
-            "@id": "sec:cipherKey",
+            "@id": "sec:domain",
             "@type": [
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
-            "rdfs:domain": "sec:EncryptedMessage",
+            "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
-                "en": "Cipher key"
+                "en": "Domain of a proof"
             },
             "rdfs:comment": {
-                "en": "A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted."
+                "en": "The `domain` property is used to associate a domain with a proof, for use with a `proofPurpose` such as `authentication` and indicating its intended usage."
+            }
+        },
+        {
+            "@id": "sec:challenge",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:Proof",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Challenge with a proof"
+            },
+            "rdfs:comment": {
+                "en": "The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`. This string value SHOULD be included in a proof if a `domain` is specified."
+            }
+        },
+        {
+            "@id": "sec:proofPurpose",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:Proof",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Proof purpose"
+            },
+            "rdfs:comment": {
+                "en": "The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof. The proof purpose acts as a safeguard to prevent the proof from being misused by being applied to a purpose other than the one that was intended."
+            }
+        },
+        {
+            "@id": "sec:proofValue",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:Proof",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Proof value"
+            },
+            "rdfs:comment": {
+                "en": "A string value that contains the data necessary to verify the digital proof using the `verificationMethod` specified"
+            }
+        },
+        {
+            "@id": "sec:proof",
+            "@type": "rdfs:Property",
+            "rdfs:range": "sec:ProofGraph",
+            "rdfs:label": {
+                "en": "Proof sets"
+            },
+            "rdfs:comment": {
+                "en": "The value of the `proof` property MUST identify `ProofGraph` instances (informally, it indirectly identifies `Proof` instances each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested, and digitally signed. The order of the proofs is not relevant."
+            }
+        },
+        {
+            "@id": "sec:proofChain",
+            "@type": "rdfs:Property",
+            "rdfs:range": "sec:ProofGraph",
+            "rdfs:label": {
+                "en": "Proof chain"
+            },
+            "rdfs:comment": {
+                "en": "The value of the `proofChain` property MUST identify a sequence of `ProofGraph` instances (informally, it indirectly identifies a series of `Proof` instances, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested, and digitally signed."
+            }
+        },
+        {
+            "@id": "sec:controller",
+            "@type": [
+                "rdfs:Property",
+                "owl:ObjectProperty"
+            ],
+            "rdfs:domain": "sec:VerificationMethod",
+            "rdfs:range": [],
+            "rdfs:label": {
+                "en": "Controller"
+            },
+            "rdfs:comment": {
+                "en": "A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship where the controller claims control over a particular resource, and the resource clearly identifies its controller."
+            }
+        },
+        {
+            "@id": "sec:publicKeyJwk",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:VerificationMethod",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Public key JWK"
+            },
+            "rdfs:comment": {
+                "en": "See the JOSE suite."
+            },
+            "rdfs:seeAlso": [
+                "https://www.iana.org/assignments/jose/jose.xhtml",
+                "https://tools.ietf.org/html/rfc7517"
+            ]
+        },
+        {
+            "@id": "sec:publicKeyMultibase",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:VerificationMethod",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Public key multibase"
+            },
+            "rdfs:comment": {
+                "en": "The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:\n• Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.\n• Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.\n• Use compressed binary formats to ensure efficient key sizes."
+            },
+            "rdfs:seeAlso": [
+                "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03",
+                "https://w3c-ccg.github.io/ld-cryptosuite-registry/",
+                "https://github.com/multiformats/multicodec/blob/master/table.csv",
+                "https://w3c-ccg.github.io/lds-ed25519-2020/"
+            ]
+        },
+        {
+            "@id": "sec:authentication",
+            "@type": "rdfs:Property",
+            "rdfs:range": "VerificationMethod",
+            "rdfs:label": {
+                "en": "Authentication method"
+            },
+            "rdfs:comment": {
+                "en": "An `authentication` property is used to specify a URL that contains information about a `verificationMethod` used for authentication."
+            }
+        },
+        {
+            "@id": "sec:assertionMethod",
+            "@type": "rdfs:Property",
+            "rdfs:range": "VerificationMethod",
+            "rdfs:label": {
+                "en": "Assertion method"
+            },
+            "rdfs:comment": {
+                "en": "An `assertionMethod` property is used to specify a URL that contains information about a `verificationMethod` used for assertions."
+            }
+        },
+        {
+            "@id": "sec:capabilityDelegation",
+            "@type": "rdfs:Property",
+            "rdfs:range": "VerificationMethod",
+            "rdfs:label": {
+                "en": "Capability Delegation Method"
+            },
+            "rdfs:comment": {
+                "en": "A `capabilityDelegation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of delegating capabilities.\nA `verificationMethod` may be referenced by its identifier (a URL) or expressed in full.\nThe aforementioned proofs are created to prove that some entity is delegating the authority to take some action to another entity. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityDelegation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that has a property of `capabilityDelegation` that references the `verificationMethod`. This indicates that the controller has authorized it for the expressed `proofPurpose`."
+            }
+        },
+        {
+            "@id": "sec:capabilityInvocation",
+            "@type": "rdfs:Property",
+            "rdfs:range": "VerificationMethod",
+            "rdfs:label": {
+                "en": "Capability Invocation Method"
+            },
+            "rdfs:comment": {
+                "en": "A `capabilityInvocation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of invoking capabilities.\nA `verificationMethod` MAY be referenced by its identifier (a URL) or expressed in full.\nThe aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityInvocation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of `capabilityInvocation` that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed `proofPurpose`."
+            }
+        },
+        {
+            "@id": "sec:keyAgreement",
+            "@type": "rdfs:Property",
+            "rdfs:range": "VerificationMethod",
+            "rdfs:label": {
+                "en": "Key agreement protocols"
+            },
+            "rdfs:comment": {
+                "en": "Indicates that a proof is used for for key agreement protocols, such as Elliptic Curve Diffie Hellman key agreement used by popular encryption libraries."
             }
         },
         {
@@ -587,15 +896,108 @@
                 "en": "A text-based identifier for a specific cryptographic suite."
             },
             "rdfs:seeAlso": [
-                "https://w3c.github.io/vc-data-integrity/#dataintegrityproof"
+                "https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof"
             ]
         },
         {
-            "@id": "sec:digestAlgorithm",
+            "@id": "sec:publicKeyMultibase",
             "@type": [
                 "rdfs:Property",
                 "owl:DatatypeProperty"
             ],
+            "rdfs:domain": "sec:VerificationMethod",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Public key multibase"
+            },
+            "rdfs:comment": {
+                "en": "The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:\n• Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.\n• Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.\n• Use compressed binary formats to ensure efficient key sizes."
+            },
+            "rdfs:seeAlso": [
+                "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03",
+                "https://w3c-ccg.github.io/ld-cryptosuite-registry/",
+                "https://github.com/multiformats/multicodec/blob/master/table.csv",
+                "https://w3c-ccg.github.io/lds-ed25519-2020/"
+            ]
+        },
+        {
+            "@id": "sec:publicKeyJwk",
+            "@type": [
+                "rdfs:Property",
+                "owl:DatatypeProperty"
+            ],
+            "rdfs:domain": "sec:VerificationMethod",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Public key JWK"
+            },
+            "rdfs:comment": {
+                "en": "See the JOSE suite."
+            },
+            "rdfs:seeAlso": [
+                "https://www.iana.org/assignments/jose/jose.xhtml",
+                "https://tools.ietf.org/html/rfc7517"
+            ]
+        },
+        {
+            "@id": "sec:cipherAlgorithm",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty",
+                "owl:DatatypeProperty"
+            ],
+            "owl:deprecated": true,
+            "rdfs:domain": "sec:EncryptedMessage",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Cipher algorithm"
+            },
+            "rdfs:comment": {
+                "en": "The cipher algorithm describes the mechanism used to encrypt a message. It is typically a string expressing the cipher suite, the strength of the cipher, and a block cipher mode."
+            }
+        },
+        {
+            "@id": "sec:cipherData",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty",
+                "owl:DatatypeProperty"
+            ],
+            "owl:deprecated": true,
+            "rdfs:domain": "sec:EncryptedMessage",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Cipher data"
+            },
+            "rdfs:comment": {
+                "en": "Cipher data is an opaque blob of information that is used to specify an encrypted message."
+            }
+        },
+        {
+            "@id": "sec:cipherKey",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty",
+                "owl:DatatypeProperty"
+            ],
+            "owl:deprecated": true,
+            "rdfs:domain": "sec:EncryptedMessage",
+            "rdfs:range": "xsd:string",
+            "rdfs:label": {
+                "en": "Cipher key"
+            },
+            "rdfs:comment": {
+                "en": "A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted."
+            }
+        },
+        {
+            "@id": "sec:digestAlgorithm",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty",
+                "owl:DatatypeProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Digest algorithm"
@@ -607,9 +1009,11 @@
         {
             "@id": "sec:digestValue",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Digest value"
@@ -621,9 +1025,11 @@
         {
             "@id": "sec:blockchainAccountId",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Blockchain account ID"
@@ -635,9 +1041,11 @@
         {
             "@id": "sec:ethereumAddress",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Ethereum address"
@@ -653,9 +1061,11 @@
         {
             "@id": "sec:expires",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:dateTime",
             "rdfs:label": {
                 "en": "Expiration time"
@@ -667,9 +1077,11 @@
         {
             "@id": "sec:initializationVector",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:EncryptedMessage",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -682,9 +1094,11 @@
         {
             "@id": "sec:nonce",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -696,7 +1110,11 @@
         },
         {
             "@id": "sec:canonicalizationAlgorithm",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:label": {
                 "en": "Canonicalization algorithm"
@@ -708,9 +1126,11 @@
         {
             "@id": "sec:controller",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": [],
             "rdfs:label": {
                 "en": "Controller"
@@ -729,7 +1149,7 @@
             "owl:deprecated": true,
             "rdfs:range": [],
             "rdfs:label": {
-                "en": "Owner"
+                "en": "Owner (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "An owner is an entity that claims control over a particular resource. Note that ownership is best validated as a two-way relationship where the owner claims ownership over a particular resource, and the resource clearly identifies its owner."
@@ -738,9 +1158,11 @@
         {
             "@id": "sec:password",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Password"
@@ -752,9 +1174,11 @@
         {
             "@id": "sec:privateKeyPem",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Key",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -770,9 +1194,11 @@
         {
             "@id": "sec:publicKey",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Key",
             "rdfs:range": [],
             "rdfs:label": {
@@ -783,81 +1209,13 @@
             }
         },
         {
-            "@id": "sec:verificationMethod",
-            "@type": [
-                "rdfs:Property",
-                "owl:ObjectProperty"
-            ],
-            "rdfs:range": [],
-            "rdfs:label": {
-                "en": "Verification method"
-            },
-            "rdfs:comment": {
-                "en": "A `verificationMethod` property is used to specify a URL that contains information used for proof verification."
-            }
-        },
-        {
-            "@id": "sec:assertionMethod",
-            "@type": [
-                "rdfs:Property",
-                "owl:ObjectProperty"
-            ],
-            "rdfs:range": [],
-            "rdfs:label": {
-                "en": "Assertion method"
-            },
-            "rdfs:comment": {
-                "en": "An `assertionMethod` property is used to specify a URL that contains information about a `verificationMethod` used for assertions."
-            }
-        },
-        {
-            "@id": "sec:authentication",
-            "@type": [
-                "rdfs:Property",
-                "owl:ObjectProperty"
-            ],
-            "rdfs:range": [],
-            "rdfs:label": {
-                "en": "Authentication method"
-            },
-            "rdfs:comment": {
-                "en": "An `authentication` property is used to specify a URL that contains information about a `verificationMethod` used for authentication."
-            }
-        },
-        {
-            "@id": "sec:capabilityDelegation",
-            "@type": [
-                "rdfs:Property",
-                "owl:ObjectProperty"
-            ],
-            "rdfs:range": [],
-            "rdfs:label": {
-                "en": "Capability Delegation Method"
-            },
-            "rdfs:comment": {
-                "en": "A `capabilityDelegation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of delegating capabilities.\nA `verificationMethod` may be referenced by its identifier (a URL) or expressed in full.\nThe aforementioned proofs are created to prove that some entity is delegating the authority to take some action to another entity. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityDelegation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that has a property of `capabilityDelegation` that references the `verificationMethod`. This indicates that the controller has authorized it for the expressed `proofPurpose`."
-            }
-        },
-        {
-            "@id": "sec:capabilityInvocation",
-            "@type": [
-                "rdfs:Property",
-                "owl:ObjectProperty"
-            ],
-            "rdfs:range": [],
-            "rdfs:label": {
-                "en": "Capability Invocation Method"
-            },
-            "rdfs:comment": {
-                "en": "A `capabilityInvocation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of invoking capabilities.\nA `verificationMethod` MAY be referenced by its identifier (a URL) or expressed in full.\nThe aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a proofPurpose of capabilityInvocation and reference a verificationMethod to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of capabilityInvocation that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed proofPurpose."
-            }
-        },
-        {
             "@id": "sec:publicKeyBase58",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Key",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -868,30 +1226,13 @@
             }
         },
         {
-            "@id": "sec:publicKeyJwk",
-            "@type": [
-                "rdfs:Property",
-                "owl:DatatypeProperty"
-            ],
-            "rdfs:domain": "sec:Key",
-            "rdfs:range": "xsd:string",
-            "rdfs:label": {
-                "en": "Public key JWK"
-            },
-            "rdfs:comment": {
-                "en": "See the JOSE suite."
-            },
-            "rdfs:seeAlso": [
-                "https://www.iana.org/assignments/jose/jose.xhtml",
-                "https://tools.ietf.org/html/rfc7517"
-            ]
-        },
-        {
             "@id": "sec:publicKeyPem",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Key",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -904,9 +1245,11 @@
         {
             "@id": "sec:publicKeyHex",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Key",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
@@ -920,32 +1263,13 @@
             ]
         },
         {
-            "@id": "sec:publicKeyMultibase",
-            "@type": [
-                "rdfs:Property",
-                "owl:DatatypeProperty"
-            ],
-            "rdfs:domain": "sec:Key",
-            "rdfs:range": "xsd:string",
-            "rdfs:label": {
-                "en": "Public key multibase"
-            },
-            "rdfs:comment": {
-                "en": "The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:\n• Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.\n• Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.\n• Use compressed binary formats to ensure efficient key sizes."
-            },
-            "rdfs:seeAlso": [
-                "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03",
-                "https://w3c-ccg.github.io/ld-cryptosuite-registry/",
-                "https://github.com/multiformats/multicodec/blob/master/table.csv",
-                "https://w3c-ccg.github.io/lds-ed25519-2020/"
-            ]
-        },
-        {
             "@id": "sec:publicKeyService",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": [],
             "rdfs:label": {
                 "en": "Public key service"
@@ -957,9 +1281,11 @@
         {
             "@id": "sec:revoked",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:range": "xsd:dateTime",
             "rdfs:label": {
                 "en": "Revocation time"
@@ -969,20 +1295,12 @@
             }
         },
         {
-            "@id": "sec:proof",
-            "@type": "rdfs:Property",
-            "rdfs:domain": "sec:Key",
-            "rdfs:range": "sec:ProofGraph",
-            "rdfs:label": {
-                "en": "Proof graph"
-            },
-            "rdfs:comment": {
-                "en": "The value of the `proof` property MUST identify a `SignatureGraph` (informally, it indirectly identifies a Signature contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed."
-            }
-        },
-        {
             "@id": "sec:jws",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:range": "sec:Signature",
             "rdfs:label": {
                 "en": "Json Web Signature"
@@ -995,56 +1313,30 @@
             ]
         },
         {
-            "@id": "sec:proofPurpose",
-            "@type": [
-                "rdfs:Property",
-                "owl:DatatypeProperty"
-            ],
-            "rdfs:domain": "sec:Proof",
-            "rdfs:range": "xsd:string",
-            "rdfs:label": {
-                "en": "Proof purpose"
-            },
-            "rdfs:comment": {
-                "en": "The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof."
-            }
-        },
-        {
             "@id": "sec:challenge",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
                 "en": "Challenge with a proof"
             },
             "rdfs:comment": {
-                "en": "The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`."
-            }
-        },
-        {
-            "@id": "sec:domain",
-            "@type": [
-                "rdfs:Property",
-                "owl:DatatypeProperty"
-            ],
-            "rdfs:domain": "sec:Proof",
-            "rdfs:range": "xsd:string",
-            "rdfs:label": {
-                "en": "Domain with a proof"
-            },
-            "rdfs:comment": {
-                "en": "The `domain` property is used to associate a domain with a proof, for use with a `proofPurpose` such as `authentication`."
+                "en": "The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`. This string value SHOULD be included in a proof if a `domain` is specified."
             }
         },
         {
             "@id": "sec:expirationDate",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:DatatypeProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Proof",
             "rdfs:range": "xsd:dateTime",
             "rdfs:label": {
@@ -1052,21 +1344,6 @@
             },
             "rdfs:comment": {
                 "en": "The `expirationDate` property is used to associate an expiration date with a proof."
-            }
-        },
-        {
-            "@id": "sec:proofValue",
-            "@type": [
-                "rdfs:Property",
-                "owl:DatatypeProperty"
-            ],
-            "rdfs:domain": "sec:Proof",
-            "rdfs:range": "xsd:string",
-            "rdfs:label": {
-                "en": "Proof value"
-            },
-            "rdfs:comment": {
-                "en": "The `proofValue` property is used to associate a proof value with a proof."
             }
         },
         {
@@ -1078,7 +1355,7 @@
             "owl:deprecated": true,
             "rdfs:range": "sec:Signature",
             "rdfs:label": {
-                "en": "Signature"
+                "en": "Signature  (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed."
@@ -1095,7 +1372,7 @@
             "rdfs:domain": "sec:Signature",
             "rdfs:range": "xsd:string",
             "rdfs:label": {
-                "en": "Signature value"
+                "en": "Signature value  (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "The signature value is used to express the output of the signature algorithm expressed in base-64 format."
@@ -1112,7 +1389,7 @@
             "rdfs:domain": "sec:Signature",
             "rdfs:range": [],
             "rdfs:label": {
-                "en": "Signature algorithm"
+                "en": "Signature algorithm  (was deprecated in the CCG document)"
             },
             "rdfs:comment": {
                 "en": "The signature algorithm is used to specify the cryptographic signature function to use when digitally signing the digest data. Typically, text to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step #3. A signature class typically specifies a default signature algorithm, so this property rarely needs to be used in practice when specifying digital signatures."
@@ -1121,9 +1398,11 @@
         {
             "@id": "sec:service",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": [],
             "rdfs:label": {
@@ -1136,9 +1415,11 @@
         {
             "@id": "sec:serviceEndpoint",
             "@type": [
-                "rdfs:Property",
+                "rdf:Property",
+                "owl:DeprecatedProperty",
                 "owl:ObjectProperty"
             ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": [],
             "rdfs:label": {
@@ -1150,7 +1431,11 @@
         },
         {
             "@id": "sec:x509CertificateChain",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": "sec:Signature",
             "rdfs:label": {
@@ -1166,7 +1451,11 @@
         },
         {
             "@id": "sec:x509CertificateFingerprint",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:domain": "sec:Signature",
             "rdfs:range": "sec:Signature",
             "rdfs:label": {
@@ -1182,7 +1471,11 @@
         },
         {
             "@id": "sec:allowedAction",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Allowed action"
             },
@@ -1194,21 +1487,12 @@
             ]
         },
         {
-            "@id": "sec:capability",
-            "@type": "rdfs:Property",
-            "rdfs:label": {
-                "en": "Capability"
-            },
-            "rdfs:comment": {
-                "en": "A cryptographic mechanism used to execute authority by possession."
-            },
-            "rdfs:seeAlso": [
-                "https://w3c-ccg.github.io/zcap-spec/#capabilities-are-safer"
-            ]
-        },
-        {
             "@id": "sec:capabilityChain",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Capability chain"
             },
@@ -1221,7 +1505,11 @@
         },
         {
             "@id": "sec:capabilityAction",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Capability action"
             },
@@ -1234,7 +1522,11 @@
         },
         {
             "@id": "sec:caveat",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Caveat"
             },
@@ -1247,7 +1539,11 @@
         },
         {
             "@id": "sec:delegator",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Delegator"
             },
@@ -1260,7 +1556,11 @@
         },
         {
             "@id": "sec:invocationTarget",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Invocation target"
             },
@@ -1273,7 +1573,11 @@
         },
         {
             "@id": "sec:invoker",
-            "@type": "rdfs:Property",
+            "@type": [
+                "rdf:Property",
+                "owl:DeprecatedProperty"
+            ],
+            "owl:deprecated": true,
             "rdfs:label": {
                 "en": "Invoker"
             },

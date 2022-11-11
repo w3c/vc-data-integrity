@@ -3,7 +3,13 @@
     <meta charset='utf-8'/>
     <title></title>
     <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c"></script>
-    <script class="remove" src="../common.js"></script>
+    <script>
+      function remove_status_remark() {
+          const sotd = document.getElementById("sotd");
+          const p = sotd.getElementsByTagName('p')[0];
+          sotd.removeChild(p);
+      }
+    </script>
     <script class="remove">
       var respecConfig = {
         localBiblio: {
@@ -71,9 +77,26 @@
       .bold {
         font-weight: bold;
       }
-      code {
+      /* code {
         color: red;
+      } */
+
+      .term_definitions section {
+        border-bottom-style: solid ;
+        border-bottom-width: 1px;
+        border-bottom-color: darkgrey;
       }
+
+      .annoy {
+        background: hsla(40,100%,50%,0.95);
+		    color: black;
+		    padding: .75em 1em;
+		    border: red;
+		    border-style: solid none;
+		    box-shadow: 0 2px 8px black;
+		    text-align: center;
+      }
+
     </style>
   </head>
   <body  typeof="owl:Ontology">
@@ -108,16 +131,40 @@
       </dl>
     </section>
 
-    <section id="class_definitions">
-      <h1>Class definitions</h1>
-    </section>
+    <section id="term_definitions">
+      <h1>Term definitions</h1>
 
-    <section id="property_definitions">
-      <h1>Property definitions</h1>
-    </section>
+      <section id="class_definitions" class="term_definitions">
+        <h2>Class definitions</h2>
+      </section>
+  
+      <section id="property_definitions" class="term_definitions">
+        <h2>Property definitions</h2>
+      </section>
+  
+      <section id="individual_definitions" class="term_definitions">
+        <h2>Definitions for individuals</h2>
+      </section>
+    </section>   
 
-    <section id="individual_definitions">
-      <h1>Definitions for individuals</h1>
-    </section>
+    <section id="deprecated_term_definitions">
+      <h1>Deprecated term definitions</h1>
+
+      <p class="annoy">All terms in this section are <em><strong>deprecated</strong></em>, and are only kept in this vocabulary for backward compatibility. 
+        <br>New applications should not use them.
+      </p>
+
+      <section id="deprecated_class_definitions" class="term_definitions">
+        <h2>Deprecated classes</h2>
+      </section>
+  
+      <section id="deprecated_property_definitions" class="term_definitions">
+        <h2>Deprecated properties</h2>
+      </section>
+  
+      <section id="deprecated_individual_definitions" class="term_definitions">
+        <h2>Deprecated individuals</h2>
+      </section>
+    </section>   
   </body>
 </html>
