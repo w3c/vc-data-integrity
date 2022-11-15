@@ -85,7 +85,7 @@
         "en": "vocabulary used to ensure the authenticity and integrity of Verifiable Credentials and similar types of constrained digital documents using cryptography, especially through the use of digital signatures and related mathematical proofs \n"
     },
     "rdfs:seeAlso": "https://www.w3.org/TR/vc-data-integrity/",
-    "dc:date": "2022-11-11",
+    "dc:date": "2022-11-15",
     "rdfs_classes": [
         {
             "@id": "sec:Proof",
@@ -763,7 +763,7 @@
         {
             "@id": "sec:proofChain",
             "@type": "rdfs:Property",
-            "rdfs:range": "sec:ProofGraph",
+            "rdfs:range": "rdf:List",
             "rdfs:label": {
                 "en": "Proof chain"
             },
