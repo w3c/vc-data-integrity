@@ -12,7 +12,7 @@ cred: a owl:Ontology ;
     dc:description """vocabulary used to ensure the authenticity and integrity of Verifiable Credentials and similar types of constrained digital documents using cryptography, especially through the use of digital signatures and related mathematical proofs 
 """@en ;
     rdfs:seeAlso <https://www.w3.org/TR/vc-data-integrity/> ;
-    dc:date "2022-11-11"^^xsd:date ;
+    dc:date "2022-11-15"^^xsd:date ;
 .
 
 # Class definitions
@@ -347,7 +347,7 @@ sec:proof a rdfs:Property ;
 .
 
 sec:proofChain a rdfs:Property ;
-    rdfs:range sec:ProofGraph ;
+    rdfs:range rdf:List ;
     rdfs:label "Proof chain" ;
     rdfs:comment """The value of the `proofChain` property MUST identify a sequence of `ProofGraph` instances (informally, it indirectly identifies a series of `Proof` instances, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested, and digitally signed."""@en ;
     rdfs:isDefinedBy cred: ;
