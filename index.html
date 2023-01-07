@@ -2215,11 +2215,30 @@ up with the proof purpose.
       <section>
         <h3>Canonicalization Method Correctness</h3>
 
-        <p class="issue">
-Canonicalization mechanisms utilized for normalizing input to hashing functions
-need to have vetted mathematical proofs associted with them. Canonicalization
-mechanisms that create collisions in hash functions can be used to attack
-digital signatures.
+        <p>
+One of the algorithmic processes that is used by this specification is
+canonicalization, which is a type of <a>transformation</a>. Canonicalization is
+the process of taking information that might be expressed in a variety of
+equivalent ways and expressing it in one way, called a "canonical form".
+        </p>
+        <p>
+The security of a resulting <a>data integrity proof</a> that utilizes
+canonicalization is highly dependent on the correctness of the algorithm. For
+example, if it is possible to confuse a canonicalization algorithm such that
+multiple different inputs produce the same output, then it's possible for one
+<a>data integrity proof</a> output to be applied to multiple inputs such that
+a verifier will not know to which input the proof applies. This can be used
+as an attack vector by adversaries.
+        </p>
+Implementers are strongly urged to ensure that any canonicalization algorithms
+utilized for <a>transformation</a> of input to a <a>hashing</a> process
+are properly vetted. This includes, at a minimum, being associated with a
+peer reviewed mathematical proof of algorithm correctness. In addition,
+multiple implementations and vetting by experts in a standards setting
+organization is preferred. Implementers are strongly urged not to invent and
+utilize new mechanisms unless they have formal training in information
+canonicalization or access to experts in the field that are capable of
+producing a peer reviewed mathematical proof of algorithm correctness.
         </p>
       </section>
 
