@@ -2205,10 +2205,26 @@ method.
       <section>
         <h3>Verification Relationship Validation</h3>
 
-        <p class="issue">
-Implementers need to ensure that when a verification method is used, that
-it matches the verification relationship associated with it and that it lines
-up with the proof purpose.
+        <p>
+When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
+imperative that the <a>verification method</a> used to generate the proof is not
+only listed in the <a>controller document</a>, but that it was intended to be
+used to generate the proof that is being verified. This process is known as
+"verification relationship validation".
+        </p>
+        <p>
+This process is performed to ensure that cryptographic material, such as a
+private cryptographic key, is not used for a purpose for which it was not
+intended. An example of cryptographic material misuse would be if a private
+cryptographic key meant to be used for logging into a website (authentication)
+was instead used to issue a Verifiable Credential. Not checking a verification
+relationship is dangerous because some cryptographic material is protected more
+than other material, such as storage in a hardware security module in a data
+center versus as an unencrypted file on a laptop.
+        </p>
+        <p>
+The process for verification relationship validation is outlined in
+Section <a href="#retrieve-cryptographic-material"></a>.
         </p>
       </section>
 
