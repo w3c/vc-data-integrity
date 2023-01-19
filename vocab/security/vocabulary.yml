@@ -260,12 +260,6 @@ property:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
 
-  - id: created
-    label: Creation date of the proof
-    domain: sec:Proof
-    range: xsd:dateTime
-    comment: The date and time the proof was created. This information MUST be added to a proof.
-
   - id: domain
     label: Domain of a proof
     domain: sec:Proof
