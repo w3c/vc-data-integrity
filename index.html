@@ -2216,10 +2216,11 @@ up with the proof purpose.
         <h3>Canonicalization Method Correctness</h3>
 
         <p>
-One of the algorithmic processes that is used by this specification is
-canonicalization, which is a type of <a>transformation</a>. Canonicalization is
-the process of taking information that might be expressed in a variety of
-equivalent ways and expressing it in one way, called a "canonical form".
+One of the algorithmic processes used by this specification is canonicalization,
+which is a type of <a>transformation</a>. Canonicalization is the process of
+taking information that might be expressed in a variety of semantically
+equivalent ways as input, and expressing all output in a single way, called a
+"canonical form".
         </p>
         <p>
 The security of a resulting <a>data integrity proof</a> that utilizes
@@ -2230,15 +2231,15 @@ multiple different inputs produce the same output, then it's possible for one
 a verifier will not know to which input the proof applies. This can be used
 as an attack vector by adversaries.
         </p>
-Implementers are strongly urged to ensure that any canonicalization algorithms
-utilized for <a>transformation</a> of input to a <a>hashing</a> process
-are properly vetted. This includes, at a minimum, being associated with a
-peer reviewed mathematical proof of algorithm correctness. In addition,
-multiple implementations and vetting by experts in a standards setting
-organization is preferred. Implementers are strongly urged not to invent and
-utilize new mechanisms unless they have formal training in information
-canonicalization or access to experts in the field that are capable of
-producing a peer reviewed mathematical proof of algorithm correctness.
+Implementers are strongly urged to ensure proper vetting of any canonicalization
+algorithms to be used for <a>transformation</a> of input to a <a>hashing</a>
+process. Proper vetting includes, at a minimum, association with a peer reviewed
+mathematical proof of algorithm correctness; multiple implementations and vetting
+by experts in a standards setting organization is preferred. Implementers are
+strongly urged not to invent or use new mechanisms unless they have formal
+training in information canonicalization and/or access to experts in the field
+who are capable of producing a peer reviewed mathematical proof of algorithm
+correctness.
         </p>
       </section>
 
