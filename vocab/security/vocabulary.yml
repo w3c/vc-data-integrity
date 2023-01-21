@@ -287,20 +287,20 @@ property:
   - id: proof
     label: Proof sets
     range: sec:ProofGraph
-    comment: The value of the `proof` property MUST identify <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies <a href=”#Proof”>`Proof` instances</a> each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested, and digitally signed. The order of the proofs is not relevant.
+    comment: The value of the `proof` property MUST identify <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant.
 
   - id: proofChain
     label: Proof chain
     range: rdf:List
     comment: |
-      The value of the `proofChain` property MUST identify a sequence of <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies a series of <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested, and digitally signed.
+      The value of the `proofChain` property MUST identify a sequence of <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies a series of <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested and digitally signed.
 
   - id: controller
     label: Controller
     domain: sec:VerificationMethod
     range: IRI
     comment: |
-      A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship where the controller claims control over a particular resource, and the resource clearly identifies its controller.
+      A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship, where the controller claims control over a particular resource, and the resource clearly identifies its controller.
 
   - id: authentication
     label: Authentication method
