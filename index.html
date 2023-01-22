@@ -1178,7 +1178,7 @@ challenge-response protocol.
             </p>
 
             <dl>
-              <dt><dfn>authentication</dfn></dt>
+              <dt>authentication</dt>
               <dd>
 The <code>authentication</code> property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
@@ -2229,6 +2229,28 @@ one purpose, or some cryptographic material could be more protected,
 such as through storage in a hardware security module in a data center
 versus as an unencrypted file on a laptop.
         </p>
+      </section>
+
+      <section>
+        <h3>Proof Purpose Validation</h3>
+
+        <p>
+When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
+imperative that it verify that the <a>proof purpose</a> match the intended use.
+        </p>
+
+        <p>
+This process is used to ensure that proofs are not misused by an application for
+an unintended purpose, as this is dangerous for the proof creator. An example of
+misuse would be if a proof that stated its purpose was for securing assertions
+in <a>verifiable credentials</a> was instead used for <a>authentication</a> to
+log into a website. In this case, the proof creator attached proofs to any
+number of <a>verifiable credentials</a> that they expected to be distributed to
+an unbounded number of other parties. Any one of these parties could log into a
+website as the proof creator if the website erroneously accepted such a proof as
+<a>authentication</a> instead of its intended purpose.
+        </p>
+
       </section>
 
       <section>
