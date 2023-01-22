@@ -2225,12 +2225,21 @@ equivalent ways as input, and expressing all output in a single way, called a
         <p>
 The security of a resulting <a>data integrity proof</a> that utilizes
 canonicalization is highly dependent on the correctness of the algorithm. For
-example, if it is possible to confuse a canonicalization algorithm such that
-multiple different inputs produce the same output, then it's possible for one
-<a>data integrity proof</a> output to be applied to multiple inputs such that
-a verifier will not know to which input the proof applies. This can be used
-as an attack vector by adversaries.
+example, if a canonicalization algorithm converts two inputs that have different
+meanings into the same output, then the author's intentions can be
+misrepresented to a <a>verifier</a>. This can be used as an attack vector by
+adversaries.
         </p>
+        <p>
+Additionally, if semantically relevant information in an input is not present in
+the output, then an attacker could insert such information into a message
+without causing proof verification to fail. This is similar to another
+transformation that is commonly used when cryptographically signing messages:
+cryptographic hashing. If an attacker is able to produce the same cryptographic
+hash from a different input, then the cryptographic hash algorithm is not
+considered secure.
+        </p>
+        <p>
 Implementers are strongly urged to ensure proper vetting of any canonicalization
 algorithms to be used for <a>transformation</a> of input to a <a>hashing</a>
 process. Proper vetting includes, at a minimum, association with a peer reviewed
