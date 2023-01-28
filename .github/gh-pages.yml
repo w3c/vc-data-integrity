@@ -1,0 +1,47 @@
+name: Publish to Github Pages
+on:
+  push:
+    branches: [main]
+  # Allows workflow to be triggered manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout/@v3
+      - name: Setup Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Generate Security Vocabulary
+        run: |
+          npm install yml2vocab
+          npm update yml2vocab
+          ./node_modules/.bin/yml2vocab -v vocab/security/vocabulary.yml -t vocab/security/template.html
+          rm -rf node_modules
+      - name: Setup Github Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
