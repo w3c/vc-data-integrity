@@ -252,12 +252,6 @@ class:
         url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
 
 property:
-  - id: proofPurpose
-    label: Proof purpose
-    domain: sec:Proof
-    range: xsd:string
-    comment: The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof. The proof purpose acts as a safeguard to prevent the proof from being misused by being applied to a purpose other than the one that was intended.
-
   - id: verificationMethod
     label: Verification method
     range: sec:VerificationMethod
@@ -313,36 +307,6 @@ property:
     range: IRI
     comment: |
       A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship where the controller claims control over a particular resource, and the resource clearly identifies its controller.
-
-  - id: publicKeyJwk
-    label: Public key JWK
-    range: xsd:string
-    domain: sec:VerificationMethod
-    comment: See the JOSE suite.
-    see_also:
-      - label: IANA JOSE
-        url: https://www.iana.org/assignments/jose/jose.xhtml
-      - label: RFC 7517
-        url: https://tools.ietf.org/html/rfc7517
-
-  - id: publicKeyMultibase
-    label: Public key multibase
-    domain: sec:VerificationMethod
-    range: xsd:string
-    comment: |
-      The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:
-      • Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.
-      • Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.
-      • Use compressed binary formats to ensure efficient key sizes.
-    see_also:
-      - label: multibase
-        url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
-      - label: ld-cryptosuite-registry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/
-      - label: multicodec
-        url: https://github.com/multiformats/multicodec/blob/master/table.csv
-      - label: ed25519-2020
-        url: https://w3c-ccg.github.io/lds-ed25519-2020/
 
   - id: authentication
     label: Authentication method
