@@ -303,7 +303,7 @@ property:
 
   - id: proofChain
     label: Proof chain
-    range: rdf:List
+    range: sec:ProofGraph
     comment: |
       The value of the `proofChain` property MUST identify a sequence of <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies a series of <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested, and digitally signed.
 
