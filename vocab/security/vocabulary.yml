@@ -12,7 +12,7 @@ ontology:
 
   - property: dc:description
     value: |
-      vocabulary used to ensure the authenticity and integrity of Verifiable Credentials and similar types of constrained digital documents using cryptography, especially through the use of digital signatures and related mathematical proofs 
+      vocabulary used to ensure the authenticity and integrity of Verifiable Credentials and similar types of constrained digital documents using cryptography, especially through the use of digital signatures and related mathematical proofs
 
   - property: rdfs:seeAlso
     value: https://www.w3.org/TR/vc-data-integrity/
@@ -21,7 +21,7 @@ class:
   - id: Proof
     label: Digital proof
     comment: |
-      This class represents a digital proof on serialized data. 
+      This class represents a digital proof on serialized data.
 
   - id: ProofGraph
     label: An RDF Graph for a digital proof
@@ -289,12 +289,6 @@ property:
     range: sec:ProofGraph
     comment: The value of the `proof` property MUST identify <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant.
 
-  - id: proofChain
-    label: Proof chain
-    range: rdf:List
-    comment: |
-      The value of the `proofChain` property MUST identify a sequence of <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies a series of <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to provide a sequence of multiple proofs where the order of when the proofs occurred matters. The proof chain property is typically not included in the canonicalized graphs that are then separately digested and digitally signed.
-
   - id: controller
     label: Controller
     domain: sec:VerificationMethod
@@ -464,7 +458,7 @@ property:
       A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship where the controller claims control over a particular resource, and the resource clearly identifies its controller.
 
   - id: owner
-    deprecated: true 
+    deprecated: true
     label: Owner (was deprecated in the CCG document)
     range: IRI
     comment: |
