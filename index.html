@@ -710,9 +710,10 @@ with the `proof` key in a document.
 A proof chain is useful when the same data needs to be signed by
 multiple entities and the order of when the proofs occurred matters,
 such as in the case of a notary counter-signing a proof that had been
-created on a document. A proof chain, where order needs to be preserved, is
-represented by associating an ordered list of proofs with the
-`proofChain` key in a document.
+created on a document. A proof chain, where proof order needs to be preserved,
+is expressed by providing at least one proof with an `id`, such as a UUID,
+and another proof with a `previousProof` value that identifies the
+previous proof.
         </p>
         <pre class="example highlight" title="A proof chain in a data document">
 {
@@ -721,7 +722,7 @@ represented by associating an ordered list of proofs with the
     "https://w3id.org/security/data-integrity/v1"
 ],
   "title": "Hello world!",
-  "proofChain": [{
+  "proof": [{
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
