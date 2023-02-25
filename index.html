@@ -426,7 +426,7 @@ The following attributes are defined for use in a <a>data integrity proof</a>:
           <dd>
 The specific <a>proof type</a> used for the cryptographic proof MUST be
 specified as a string that maps to a URL [[URL]]. Examples of proof types
-include <code>DataIntegrityProof</code> and <code>Ed25519Signature2020</code>.
+include `DataIntegrityProof` and `Ed25519Signature2020`.
 Proof types determine what other fields are required to secure and
 verify the proof.
           </dd>
@@ -438,8 +438,8 @@ URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
 being misused by being applied to a purpose other than the one that was
 intended. For example, without this value the creator of a proof could be
 tricked into using cryptographic material typically used to create a Verifiable
-Credential (<code>assertionMethod</code>) during a login process
-(<code>authentication</code>) which would then result in the creation of a
+Credential (`assertionMethod`) during a login process
+(`authentication`) which would then result in the creation of a
 Verifiable Credential they never meant to create instead of the intended action,
 which was to merely logging into a website.
           </dd>
@@ -528,7 +528,7 @@ by adding the parameters outlined in this section:
 
         <p>
 The example proof above suggests a ficticious
-<code>example-signature-2022</code> cryptography suite that produces a
+`example-signature-2022` cryptography suite that produces a
 verifiable digital proof by presumptively transforming the input data using the
 JSON Canonicalization Scheme [[?RFC8785]] and then digitally signing it using an
 Ed25519 elliptic curve signature.
@@ -572,7 +572,7 @@ by adding the parameters outlined in this section:
         </pre>
 
         <p>
-The proof example above uses the <code>Ed25519Signature2020</code> <a>proof
+The proof example above uses the `Ed25519Signature2020` <a>proof
 type</a> to produce a verifiable digital proof by canonicalizing the input data
 using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
 digitally signing it using an Ed25519 elliptic curve signature.
@@ -656,7 +656,7 @@ A proof set is useful when the same data needs to be secured by multiple
 entities, but where the order of proofs does not matter,
 such as in the case of a set of signatures on a contract. A proof set,
 which has no order, is represented by associating a set of proofs
-with the <code>proof</code> key in a document.
+with the `proof` key in a document.
         </p>
         <pre class="example highlight" title="A proof set in a data document">
 {
@@ -697,7 +697,7 @@ multiple entities and the order of when the proofs occurred matters,
 such as in the case of a notary counter-signing a proof that had been
 created on a document. A proof chain, where order needs to be preserved, is
 represented by associating an ordered list of proofs with the
-<code>proofChain</code> key in a document.
+`proofChain` key in a document.
         </p>
         <pre class="example highlight" title="A proof chain in a data document">
 {
@@ -740,8 +740,8 @@ other purpose.
         </p>
 
         <p class="issue">
-Add a mention of JWK's <code>key_ops</code> parameter and WebCrypto's
-<code>KeyUsage</code> restrictions; explain that Proof Purpose serves a
+Add a mention of JWK's `key_ops` parameter and WebCrypto's
+`KeyUsage` restrictions; explain that Proof Purpose serves a
 different goal and allows for finer-grained restrictions.
 <br><br>
 Dave Longley suggested that proof purposes enable verifiers to know what the
@@ -788,8 +788,8 @@ Authorization Capabilities [[?ZCAP]] specification for more detail.
 
         <p>
 Note: The Authorization Capabilities [[?ZCAP]] specification defines additional
-proof purposes for that use case, such as <code>capabilityInvocation</code> and
-<code>capabilityDelegation</code>.
+proof purposes for that use case, such as `capabilityInvocation` and
+`capabilityDelegation`.
         </p>
       </section>
 
@@ -827,13 +827,13 @@ threshold signature.
             <dt>verificationMethod</dt>
             <dd>
               <p>
-The <code>verificationMethod</code> property is OPTIONAL. If present, the value
+The `verificationMethod` property is OPTIONAL. If present, the value
 MUST be a <a data-cite="INFRA#ordered-set">set</a> of <a>verification
 methods</a>, where each <a>verification method</a> is expressed using a <a
 data-cite="INFRA#ordered-map">map</a>. The <a>verification method</a> <a
-data-cite="INFRA#ordered-map">map</a> MUST include the <code>id</code>,
-<code>type</code>, <code>controller</code>, and specific verification material
-properties that are determined by the value of <code>type</code> and are defined
+data-cite="INFRA#ordered-map">map</a> MUST include the `id`,
+`type`, `controller`, and specific verification material
+properties that are determined by the value of `type` and are defined
 in <a href="#verification-material"></a>. A <a>verification method</a> MAY
 include additional properties. <a>Verification methods</a> SHOULD be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
@@ -843,14 +843,14 @@ in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
                 <dt>id</dt>
                 <dd>
                   <p>
-The value of the <code>id</code> property for a <a>verification
+The value of the `id` property for a <a>verification
 method</a> MUST be a <a data-cite="INFRA#string">string</a> that conforms to the
 conforms to the [[URL]] syntax.
                   </p>
                 </dd>
                 <dt>type</dt>
                 <dd>
-The value of the <code>type</code> property MUST be a <a
+The value of the `type` property MUST be a <a
 data-cite="INFRA#string">string</a> that references exactly one <a>verification
 method</a> type. In order to maximize global interoperability, the
 <a>verification method</a> type SHOULD be registered in the Data Integrity Specification
@@ -858,7 +858,7 @@ Registries [TBD -- DIS-REGISTRIES].
                 </dd>
                 <dt>controller</dt>
                 <dd>
-The value of the <code>controller</code> property MUST be a <a
+The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
                 </dd>
               </dl>
@@ -889,15 +889,15 @@ data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
 
           <p class="note"
             title="Verification method controller(s) and controller(s)">
-The semantics of the <code>controller</code> property are the same when the
+The semantics of the `controller` property are the same when the
 subject of the relationship is the <a>controller document</a> as when the subject of
 the relationship is a <a>verification method</a>, such as a cryptographic public
 key. Since a key can't control itself, and the key controller cannot be inferred
 from the <a>controller document</a>, it is necessary to explicitly express the identity
 of the controller of the key. The difference is that the value of
-<code>controller</code> for a <a>verification method</a> is <em>not</em>
+`controller` for a <a>verification method</a> is <em>not</em>
 necessarily a <a>controller</a>. <a>controllers</a> are expressed
-using the <code><a>controller</a></code> property at the highest level of the
+using the `<a>controller</a>` property at the highest level of the
 <a>controller document</a>.
           </p>
 
@@ -906,12 +906,12 @@ using the <code><a>controller</a></code> property at the highest level of the
 
             <p>
 Verification material is any information that is used by a process that applies
-a <a>verification method</a>. The <code>type</code> of a <a>verification
+a <a>verification method</a>. The `type` of a <a>verification
 method</a> is expected to be used to determine its compatibility with such
 processes. Examples of verification material properties are
-<code><a>publicKeyJwk</a></code> or <code><a>publicKeyMultibase</a></code>. A
+`<a>publicKeyJwk</a>` or `<a>publicKeyMultibase</a>`. A
 <a>cryptographic suite</a> specification is responsible for specifying the
-<a>verification method</a> <code>type</code> and its associated verification
+<a>verification method</a> `type` and its associated verification
 material. For example, see <a href="https://w3c-ccg.github.io/lds-jws2020/">JSON
 Web Signature 2020</a> and <a
 href="https://w3c-ccg.github.io/lds-ed25519-2020/">Ed25519 Signature 2020</a>.
@@ -952,15 +952,15 @@ Two supported verification material properties are listed below:
               <dt><dfn>publicKeyJwk</dfn></dt>
               <dd>
                 <p>
-The <code>publicKeyJwk</code> property is OPTIONAL. If present, the value MUST
+The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
 be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
 conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
 contain "d", or any other members of the private information class as described
 in <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">Registration
 Template</a>. It is RECOMMENDED that verification methods that use JWKs
-[[RFC7517]] to represent their public keys use the value of <code>kid</code> as
+[[RFC7517]] to represent their public keys use the value of `kid` as
 their fragment identifier. It is RECOMMENDED that JWK
-<code>kid</code> values are set to the public key fingerprint [[RFC7638]]. See
+`kid` values are set to the public key fingerprint [[RFC7638]]. See
 the first key in <a href="#example-various-verification-method-types"></a> for
 an example of a public key with a compound key identifier.
                 </p>
@@ -968,7 +968,7 @@ an example of a public key with a compound key identifier.
               <dt><dfn>publicKeyMultibase</dfn></dt>
               <dd>
                 <p>
-The <code>publicKeyMultibase</code> property is OPTIONAL. This feature is
+The `publicKeyMultibase` property is OPTIONAL. This feature is
 non-normative. If present, the value MUST be a <a
 data-cite="INFRA#string">string</a> representation of a [[?MULTIBASE]] encoded
 public key.
@@ -976,8 +976,8 @@ public key.
                 <p class="advisement">
 Note that the [[?MULTIBASE]] specification is not yet a standard and is
 subject to change. There might be some use cases for this data format
-where <code><b>public</b>KeyMultibase</code> is defined, to allow for
-expression of public keys, but <code><b>private</b>KeyMultibase</code>
+where `<b>public</b>KeyMultibase` is defined, to allow for
+expression of public keys, but `<b>private</b>KeyMultibase`
 is not defined, to protect against accidental leakage of secret keys.
                 </p>
               </dd>
@@ -986,8 +986,8 @@ is not defined, to protect against accidental leakage of secret keys.
             <p>
 A <a>verification method</a> MUST NOT contain multiple verification material
 properties for the same material. For example, expressing key material in a
-<a>verification method</a> using both <code>publicKeyJwk</code> and
-<code>publicKeyMultibase</code> at the same time is prohibited.
+<a>verification method</a> using both `publicKeyJwk` and
+`publicKeyMultibase` at the same time is prohibited.
             </p>
 
             <p>
@@ -1101,7 +1101,7 @@ been included by reference and its properties will need to be retrieved from
 elsewhere in the <a>controller document</a> or from another <a>controller document</a>. This
 is done by dereferencing the URL and searching the resulting <a>resource</a> for a
 <a>verification method</a> <a data-cite="INFRA#ordered-map">map</a> with an
-<code>id</code> property whose value matches the URL.
+`id` property whose value matches the URL.
             </p>
 
             <pre class="example nohighlight"
@@ -1149,9 +1149,9 @@ The <a>verification relationship</a> between the <a>controller</a> and the
 <a>Verification methods</a> that are not associated with a particular
 <a>verification relationship</a> cannot be used for that <a>verification
 relationship</a>. For example, a <a>verification method</a> in the value of
-the <code><a>authentication</a></code> property cannot be used to engage in
+the `<a>authentication</a>` property cannot be used to engage in
 key agreement protocols with the <a>controller</a>&mdash;the value of the
-<code><a>keyAgreement</a></code> property needs to be used for that.
+`<a>keyAgreement</a>` property needs to be used for that.
           </p>
           <p>
 The <a>controller document</a> does not express revoked keys using a <a>verification
@@ -1171,7 +1171,7 @@ Data Integrity Specification Registries [TBD: DIS-REGISTRIES].
             <h2>Authentication</h2>
 
             <p>
-The <code>authentication</code> <a>verification relationship</a> is used to
+The `authentication` <a>verification relationship</a> is used to
 specify how the <a>controller</a> is expected to be <a>authenticated</a>, for
 purposes such as logging into a website or engaging in any sort of
 challenge-response protocol.
@@ -1180,7 +1180,7 @@ challenge-response protocol.
             <dl>
               <dt>authentication</dt>
               <dd>
-The <code>authentication</code> property is OPTIONAL. If present, the associated
+The `authentication` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
 <a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
 referenced.
@@ -1225,16 +1225,16 @@ some data (in some protocol-specific format) that contains a proof that was made
 for the purpose of "authentication", and that says that an entity is identified
 by the `id`, then that <em>verifier</em> checks to ensure that the proof can be
 verified using a <a>verification method</a> (e.g., public key) listed under
-<code><a>authentication</a></code> in the <a>controller document</a>.
+`<a>authentication</a>` in the <a>controller document</a>.
             </p>
             <p>
 Note that the <a>verification method</a> indicated by the
-<code><a>authentication</a></code> property of a <a>controller document</a> can
+`<a>authentication</a>` property of a <a>controller document</a> can
 only be used to <a>authenticate</a> the <a>controller</a>. To
 <a>authenticate</a> a different <a>controller</a>, the entity associated with
-the value of <code>controller</code> needs to <a>authenticate</a> with its
+the value of `controller` needs to <a>authenticate</a> with its
 <em>own</em> <a>controller document</a> and associated
-<code><a>authentication</a></code> <a>verification relationship</a>.
+`<a>authentication</a>` <a>verification relationship</a>.
             </p>
           </section>
 
@@ -1242,7 +1242,7 @@ the value of <code>controller</code> needs to <a>authenticate</a> with its
             <h2>Assertion</h2>
 
             <p>
-The <code>assertionMethod</code> <a>verification relationship</a> is used to
+The `assertionMethod` <a>verification relationship</a> is used to
 specify how the <a>controller</a> is expected to express claims, such as for
 the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2]].
             </p>
@@ -1250,7 +1250,7 @@ the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2]].
             <dl>
               <dt><dfn>assertionMethod</dfn></dt>
               <dd>
-The <code>assertionMethod</code> property is OPTIONAL. If present, the
+The `assertionMethod` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
@@ -1262,7 +1262,7 @@ This property is useful, for example, during the processing of a <a>verifiable
 credential</a> by a verifier. During verification, a verifier checks to see if a
 <a>verifiable credential</a> contains a proof created by the <a>controller</a>
 by checking that the <a>verification method</a> used to assert the proof is
-associated with the <code><a>assertionMethod</a></code> property in the
+associated with the `<a>assertionMethod</a>` property in the
 corresponding <a>controller document</a>.
             </p>
 
@@ -1297,7 +1297,7 @@ corresponding <a>controller document</a>.
             <h2>Key Agreement</h2>
 
             <p>
-The <code>keyAgreement</code> <a>verification relationship</a> is used to
+The `keyAgreement` <a>verification relationship</a> is used to
 specify how an entity can generate encryption material in order to transmit
 confidential information intended for the <a>controller</a>, such as for
 the purposes of establishing a secure communication channel with the recipient.
@@ -1306,7 +1306,7 @@ the purposes of establishing a secure communication channel with the recipient.
             <dl>
               <dt><dfn>keyAgreement</dfn></dt>
               <dd>
-The <code>keyAgreement</code> property is OPTIONAL. If present, the associated
+The `keyAgreement` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
 <a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
 referenced.
@@ -1348,7 +1348,7 @@ decryption key for the recipient.
             <h2>Capability Invocation</h2>
 
             <p>
-The <code>capabilityInvocation</code> <a>verification relationship</a> is used
+The `capabilityInvocation` <a>verification relationship</a> is used
 to specify a <a>verification method</a> that might be used by the
 <a>controller</a> to invoke a cryptographic capability, such as the
 authorization to update the <a>controller document</a>.
@@ -1357,7 +1357,7 @@ authorization to update the <a>controller document</a>.
             <dl>
               <dt><dfn>capabilityInvocation</dfn></dt>
               <dd>
-The <code>capabilityInvocation</code> property is OPTIONAL. If present, the
+The `capabilityInvocation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
@@ -1376,7 +1376,7 @@ message that is placed into the HTTP Headers.
             <p>
 The server providing the HTTP API is the <em>verifier</em> of the capability and
 it would need to verify that the <a>verification method</a> referred to by the
-invoked capability exists in the <code><a>capabilityInvocation</a></code>
+invoked capability exists in the `<a>capabilityInvocation</a>`
 property of the <a>controller document</a>. The verifier would also check to make sure
 that the action being performed is valid and the capability is appropriate for
 the resource being accessed. If the verification is successful, the server has
@@ -1415,7 +1415,7 @@ protected resource.
             <h2>Capability Delegation</h2>
 
             <p>
-The <code>capabilityDelegation</code> <a>verification relationship</a> is used
+The `capabilityDelegation` <a>verification relationship</a> is used
 to specify a mechanism that might be used by the <a>controller</a> to delegate
 a cryptographic capability to another party, such as delegating the authority
 to access a specific HTTP API to a subordinate.
@@ -1424,7 +1424,7 @@ to access a specific HTTP API to a subordinate.
             <dl>
               <dt><dfn class="lint-ignore">capabilityDelegation</dfn></dt>
               <dd>
-The <code>capabilityDelegation</code> property is OPTIONAL. If present, the
+The `capabilityDelegation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
@@ -1436,7 +1436,7 @@ An example of when this property is useful is when a <a>controller</a> chooses
 to delegate their capability to access a protected HTTP API to a party other
 than themselves. In order to delegate the capability, the <a>controller</a>
 would use a <a>verification method</a> associated with the
-<code>capabilityDelegation</code> <a>verification relationship</a> to
+`capabilityDelegation` <a>verification relationship</a> to
 cryptographically sign the capability over to another <a>controller</a>. The
 delegate would then use the capability in a manner that is similar to the
 example described in <a href="#capability-invocation"></a>.
@@ -1508,7 +1508,7 @@ this specification.
 A data integrity proof is designed to be easy to use by developers and therefore
 strives to minimize the amount of information one has to remember to generate a
 proof. Often, just the <a>cryptographic suite</a> name (e.g.
-<code>eddsa-2022</code>) is required from developers to initiate the creation of
+`eddsa-2022`) is required from developers to initiate the creation of
 a proof. These <a>cryptographic suite</a>s are often created or reviewed by
 people that have the requisite cryptographic training to ensure that safe
 combinations of cryptographic primitives are used. This section specifies the
@@ -1798,7 +1798,7 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
 Specify how <var>proof</var>.<var>verificationMethod</var> can be obtained,
 e.g., through some out-of-band process, by
 dereferencing its URL identifier, etc. It is expected that the <a>public key</a>
-is retrieved by dereferencing its URL identifier in the <code>proof</code> node
+is retrieved by dereferencing its URL identifier in the `proof` node
 of the default graph of <var>securedDocument</var>. The algorithm needs to
 confirm that the <a>verification method</a> that describes the cryptographic
 material, such as the <a>public key</a>, specifies its <a>controller</a>, and
