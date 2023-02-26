@@ -1656,7 +1656,7 @@ output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
 Let <var>output</var> be a copy of <var>unsecuredDocument</var>.
           </li>
           <li>
-Let <var>transformedDocument</var> be the result of
+Let <var>transformedData</var> be the result of
 <a href="#dfn-transformation">transforming</a> <var>unsecuredDocument</var>
 according to a <a>transformation algorithm</a> associated with the
 <a>cryptographic suite</a> and the <var>options</var> parameters provided
@@ -1664,7 +1664,7 @@ as inputs to the algorithm.
           </li>
           <li>
 Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> the <var>transformedDocument</var>
+<a href="#dfn-hashing">hashing</a> the <var>transformedData</var>
 according to a <a>hashing algorithm</a> associated with the
 <a>cryptographic suite</a> and the <var>options</var> parameters provided as
 inputs to the algorithm.
@@ -1753,7 +1753,7 @@ Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
 the `proof` value removed.
           </li>
           <li>
-Let <var>transformedDocument</var> be the result of
+Let <var>transformedData</var> be the result of
 <a href="#dfn-transformation">transforming</a> the <var>unsecuredDocument</var>
 according to a <a>transformation algorithm</a> associated with the
 <a>cryptographic suite</a> specified in <var>proof</var> and the
@@ -1764,7 +1764,7 @@ The type of <a>cryptographic suite</a> is specified by the
         </li>
           <li>
 Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> the <var>transformedDocument</var>
+<a href="#dfn-hashing">hashing</a> the <var>transformedData</var>
 according to a <a>hashing algorithm</a> associated with the
 <a>cryptographic suite</a> specified in the <var>proof</var> and
 <var>options</var> parameters provided as inputs to the algorithm.
@@ -1810,12 +1810,8 @@ trusted entity before proceeding to the next step.
       </section>
 
       <section class="normative">
-        <h3>Retrieve Cryptographic Material</h3>
+        <h3>Retrieve Verification Method</h3>
 
-        <p class="issue">
-Add a section that details how cryptographic material is retrieved by
-dereferencing a `verificationMethod` in a controller document.
-        </p>
       </section>
 
     </section>
@@ -2223,7 +2219,7 @@ is known as "verification relationship validation".
         </p>
         <p>
 The process for verification relationship validation is outlined in
-Section <a href="#retrieve-cryptographic-material"></a>.
+Section <a href="#retrieve-verification-method"></a>.
         </p>
         <p>
 This process is used to ensure that cryptographic material, such as a private
