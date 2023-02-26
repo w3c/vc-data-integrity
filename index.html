@@ -425,7 +425,7 @@ The following attributes are defined for use in a <a>data integrity proof</a>:
           <dt>id</dt>
           <dd>
 An optional identifier for the proof, which MUST be a URL [[URL]], such as
-a UUID (`urn:uuid:6a1676b8-b51f-11ed-937b-d76685a20ff5`).
+a UUID as a URN (`urn:uuid:6a1676b8-b51f-11ed-937b-d76685a20ff5`).
 The usage of this property is further explained in Section
 <a href="#proof-chains"></a>.
           </dd>
@@ -499,7 +499,7 @@ value. The contents of this value are determined by a cryptosuite and set to the
           <dt>previousProof</dt>
           <dd>
 An optional string value that identifies another <a>data integrity proof</a>
-that MUST verify before the current proof is processed. This property is used by
+that MUST verify before the current proof is processed. This property is used
 in Section <a href="#proof-chains"></a>.
           </dd>
 
@@ -712,7 +712,7 @@ A proof chain is useful when the same data needs to be signed by
 multiple entities and the order of when the proofs occurred matters,
 such as in the case of a notary counter-signing a proof that had been
 created on a document. A proof chain, where proof order needs to be preserved,
-is expressed by providing at least one proof with an `id`, such as a UUID,
+is expressed by providing at least one proof with an `id`, such as a UUID as a URN,
 and another proof with a `previousProof` value that identifies the
 previous proof.
         </p>
