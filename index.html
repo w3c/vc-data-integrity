@@ -1832,8 +1832,80 @@ trusted entity before proceeding to the next step.
       <section class="normative">
         <h3>Retrieve Verification Method</h3>
 
-      </section>
+        <p>
+The following algorithm specifies how to safely retrieve a verification method,
+such as a cryptographic public key, by using a <a>verification method</a>
+identifier contained in a <a>data integrity proof</a>. Required inputs are a
+<a>data integrity proof</a> (<var>proof</var>) and a set of
+<strong>dereferencing options</strong> (<var>options</var>). A
+<strong>verification method</strong> is produced as output.
+        </p>
 
+        <ol class="algorithm">
+          <li>
+Let <var>verificationMethod</var> be set to a `null` value.
+          </li>
+          <li>
+Let <var>vmIdentifier</var> be set to
+<var>proof</var>.<var>verificationMethod</var>.
+          </li>
+          <li>
+Let <var>vmPurpose</var> be set to <var>proof</var>.<var>proofPurpose</var>.
+          </li>
+          <li>
+If <var>vmIdentifier</var> is not a valid URL, an
+`INVALID_VERIFICATION_METHOD_URL` error MUST be raised.
+          </li>
+          <li>
+Let <var>controllerDocument</var> be the result of dereferencing
+<var>vmIdentifier</var>.
+          </li>
+          <li>
+If <var>controllerDocument</var> is not a valid <a>controller document</a>,
+an `INVALID_CONTROLLER_DOCUMENT` error MUST be raised.
+          </li>
+          <li>
+Let <var>verificationMethodArray</var> be an empty array. If the value of
+the <var>vmPurpose</var> property in the <var>controllerDocument</var> is a
+single value, add it to the  <var>verificationMethodArray</var>. If the value of
+the <var>vmPurpose</var> property in the <var>controllerDocument</var> is an
+array, add each item in the array to <var>verificationMethodArray</var>.
+          </li>
+          <li>
+For each <var>item</var> in <var>verificationMethodArray</var>:
+            <ol class="algorithm">
+              <li>
+If <var>item</var> is a string, replace <var>item</var> with the corresponding
+<var>expandedItem</var> in the
+<var>controllerDocument</var>.<var>verificationMethod</var> array. To determine
+if an <var>item</var> corresponds to an <var>expandedItem</var>, check for
+string equivalence between <var>item</var> and
+<var>expandedItem</var>.<var>id</var>. If a corresponding
+<var>expandedItem</var> does not exist, an `INVALID_VERIFICATION_METHOD`
+error MUST be raised.
+              </li>
+              <li>
+If the <var>item</var>.<var>id</var> value is equivalent to
+<var>vmIdentifier</var>, and <var>item</var>.<var>controller</var> is
+equivalent to <var>controllerDocument</var>.<var>id</var>, then set
+<var>verificationMethod</var> to <var>item</var>.
+              </li>
+            </ol>
+          </li>
+          <li>
+If <var>verificationMethod</var> is set to `null`, a
+`VERIFICATION_METHOD_NOT_FOUND` error MUST be raised.
+          </li>
+          <li>
+If <var>verificationMethod</var> is not a conforming <a>verification method</a>,
+a `INVALID_VERIFICATION_METHOD` error MUST be raised.
+          </li>
+          <li>
+Return <var>verificationMethod</var> as the
+<strong>verification method</strong>.
+          </li>
+        </ol>
+      </section>
     </section>
 
     <section>
