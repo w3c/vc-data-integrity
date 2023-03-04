@@ -1887,10 +1887,10 @@ If <var>verificationMethod</var> is not a valid <a>verification method</a>,
 an `INVALID_VERIFICATION_METHOD` error MUST be raised.
           </li>
           <li>
-If <var>verificationMethod</var> does not exist in the <var>vmPurpose</var>
-property in the <var>controllerDocument</var>, either by reference (URL) or
-by value (object), an `INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD` error
-MUST be raised.
+If <var>verificationMethod</var> is not associated with the array of
+<var>vmPurpose</var>s in the <var>controllerDocument</var>, either by reference
+(URL) or by value (object), an `INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD`
+error MUST be raised.
           </li>
           <li>
 Return <var>verificationMethod</var> as the
