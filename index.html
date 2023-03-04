@@ -1854,14 +1854,24 @@ If <var>vmIdentifier</var> is not a valid URL, an
 `INVALID_VERIFICATION_METHOD_URL` error MUST be raised.
           </li>
           <li>
+Let <var>controllerDocumentUrl</var> be the result of parsing
+<var>vmIdentifier</var> according to the rules of the URL scheme and extracting
+the primary resource identifier (without the fragment identifier).
+          </li>
+          <li>
 Let <var>vmFragment</var> be the result of parsing <var>vmIdentifier</var>
 according to the rules of the URL scheme and extracting the secondary
-resource identifier.
+resource identifier (the fragment identifier).
           </li>
           <li>
 Let <var>controllerDocument</var> be the result of dereferencing
-<var>vmIdentifier</var>, without <var>vmFragment</var>, according to the rules
+<var>controllerDocumentUrl</var>, according to the rules
 of the URL scheme and using the supplied <var>options</var>.
+          </li>
+          <li>
+If <var>controllerDocument</var>.<var>id</var> does not match the
+<var>controllerDocumentUrl</var>, a `INVALID_CONTROLLER_DOCUMENT_ID` error MUST
+be raised.
           </li>
           <li>
 If <var>controllerDocument</var> is not a valid <a>controller document</a>,
