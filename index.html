@@ -1888,6 +1888,25 @@ Return <var>verificationMethod</var> as the
           </li>
         </ol>
 
+        <p>
+The following example provides a minimum conformant
+<a>controller document</a> containing a minimum conformant
+<a>verification method</a> as required by the algorithm in this section:
+        </p>
+
+        <pre class="example" title="Minimum conformant controller document">
+{
+  "id": "https://controller.example/123",
+  "verificationMethod": [{
+    "id": "https://controller.example/123#key-456",
+    "type": "ExampleVerificationMethodType",
+    "controller": "https://controller.example/123",
+    <span class="comment">// public cryptographic material goes here</span>
+  }],
+  "authentication": ["#key-456"]
+}
+        </pre>
+
       </section>
     </section>
 
