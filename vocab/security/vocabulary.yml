@@ -275,8 +275,8 @@ property:
   - id: previousProof
     label: Previous proof
     domain: sec:Proof
-    range: xsd:anyURI
-    comment: The` previousProof` property is used to identify a proof that MUST be verified before the proof that contains this property.
+    range: sec:Proof
+    comment: The `previousProof` property is used to identify a proof that MUST be verified before the proof that contains this property.
 
   - id: proofPurpose
     label: Proof purpose
