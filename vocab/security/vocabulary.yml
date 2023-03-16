@@ -316,17 +316,17 @@ property:
     label: Capability Delegation Method
     range: VerificationMethod
     comment: |
-      A `capabilityDelegation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of delegating capabilities.
-      A `verificationMethod` may be referenced by its identifier (a URL) or expressed in full.
-      The aforementioned proofs are created to prove that some entity is delegating the authority to take some action to another entity. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityDelegation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that has a property of `capabilityDelegation` that references the `verificationMethod`. This indicates that the controller has authorized it for the expressed `proofPurpose`.
+      <p>A `capabilityDelegation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of delegating capabilities.</p>
+      <p>A `verificationMethod` may be referenced by its identifier (a URL) or expressed in full.</p>
+      <p>The aforementioned proofs are created to prove that some entity is delegating the authority to take some action to another entity. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityDelegation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that has a property of `capabilityDelegation` that references the `verificationMethod`. This indicates that the controller has authorized it for the expressed `proofPurpose`.</p>
 
   - id: capabilityInvocation
     label: Capability Invocation Method
     range: VerificationMethod
     comment: |
-      A `capabilityInvocation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of invoking capabilities.
-      A `verificationMethod` MAY be referenced by its identifier (a URL) or expressed in full.
-      The aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityInvocation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of `capabilityInvocation` that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed `proofPurpose`.
+      <p>A `capabilityInvocation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of invoking capabilities.</p>
+      <p>A `verificationMethod` MAY be referenced by its identifier (a URL) or expressed in full.</p>
+      <p>The aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityInvocation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of `capabilityInvocation` that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed `proofPurpose`.</p>
 
   - id: keyAgreement
     label: Key agreement protocols
@@ -347,10 +347,12 @@ property:
     domain: sec:VerificationMethod
     range: xsd:string
     comment: |
-      The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:
-      • Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.
-      • Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.
-      • Use compressed binary formats to ensure efficient key sizes.
+      <p>The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:</p>
+      <ul>
+      <li>Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.
+      <li>Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.
+      <li>Use compressed binary formats to ensure efficient key sizes.
+      </ul>
     see_also:
       - label: multibase
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
@@ -400,7 +402,7 @@ property:
     label: Digest algorithm
     range: xsd:string
     comment: |
-      "The digest algorithm is used to specify the cryptographic function to use when generating the data to be digitally signed. Typically, data that is to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step 2. A signature class typically specifies a default digest method, so this property is typically used to specify information for a signature algorithm."
+      The digest algorithm is used to specify the cryptographic function to use when generating the data to be digitally signed. Typically, data that is to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step 2. A signature class typically specifies a default digest method, so this property is typically used to specify information for a signature algorithm.
 
   - id: digestValue
     deprecated: true
@@ -420,7 +422,7 @@ property:
     label: Ethereum address
     range: xsd:string
     comment: |
-      'An `ethereumAddress` property is used to specify the Ethereum address. As per the Ethereum Yellow Paper “Ethereum: a secure decentralised generalised transaction ledger” in consists of a prefix "0x", a common identifier for hexadecimal, concatenated with the rightmost 20 bytes of the Keccak-256 hash (big endian) of the ECDSA public key (the curve used is the so-called secp256k1). In hexadecimal, 2 digits represent a byte, meaning addresses contain 40 hexadecimal digits. The Ethereum address should also contain a checksum as per EIP-55.'
+      An `ethereumAddress` property is used to specify the Ethereum address. As per the Ethereum Yellow Paper “Ethereum: a secure decentralised generalised transaction ledger” in consists of a prefix "0x", a common identifier for hexadecimal, concatenated with the rightmost 20 bytes of the Keccak-256 hash (big endian) of the ECDSA public key (the curve used is the so-called secp256k1). In hexadecimal, 2 digits represent a byte, meaning addresses contain 40 hexadecimal digits. The Ethereum address should also contain a checksum as per EIP-55.
     see_also:
       - label: EIP-55
         url: https://eips.ethereum.org/EIPS/eip-55
@@ -575,7 +577,7 @@ property:
     domain: sec:Signature
     range: IRI
     comment: |
-      "The signature algorithm is used to specify the cryptographic signature function to use when digitally signing the digest data. Typically, text to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step #3. A signature class typically specifies a default signature algorithm, so this property rarely needs to be used in practice when specifying digital signatures."
+      The signature algorithm is used to specify the cryptographic signature function to use when digitally signing the digest data. Typically, text to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step #3. A signature class typically specifies a default signature algorithm, so this property rarely needs to be used in practice when specifying digital signatures.
 
   - id: service
     deprecated: true
