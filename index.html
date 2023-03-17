@@ -1836,7 +1836,7 @@ trusted entity before proceeding to the next step.
 The following algorithm specifies how to safely retrieve a verification method,
 such as a cryptographic public key, by using a <a>verification method</a>
 identifier contained in a <a>data integrity proof</a>. Required inputs are a
-<a>data integrity proof</a> (<var>proof</var>) and a set of
+<strong><a>data integrity proof</a></strong> (<var>proof</var>) and a set of
 <strong>dereferencing options</strong> (<var>options</var>). A
 <strong>verification method</strong> is produced as output.
         </p>
@@ -1870,7 +1870,7 @@ of the URL scheme and using the supplied <var>options</var>.
           </li>
           <li>
 If <var>controllerDocument</var>.<var>id</var> does not match the
-<var>controllerDocumentUrl</var>, a `INVALID_CONTROLLER_DOCUMENT_ID` error MUST
+<var>controllerDocumentUrl</var>, an `INVALID_CONTROLLER_DOCUMENT_ID` error MUST
 be raised.
           </li>
           <li>
@@ -1880,7 +1880,7 @@ an `INVALID_CONTROLLER_DOCUMENT` error MUST be raised.
           <li>
 Let <var>verificationMethod</var> be the result of dereferencing the
 <var>vmFragment</var> from the <var>controllerDocument</var> according to the
-rules of the associated URL scheme and using the supplied <var>options</var>.
+rules of the media type of the <var>controllerDocument</var>.
           </li>
           <li>
 If <var>verificationMethod</var> is not a valid <a>verification method</a>,
@@ -1888,7 +1888,7 @@ an `INVALID_VERIFICATION_METHOD` error MUST be raised.
           </li>
           <li>
 If <var>verificationMethod</var> is not associated with the array of
-<var>vmPurpose</var>s in the <var>controllerDocument</var>, either by reference
+<var>vmPurposes</var> in the <var>controllerDocument</var>, either by reference
 (URL) or by value (object), an `INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD`
 error MUST be raised.
           </li>
