@@ -261,12 +261,12 @@ BLAKE-3</a>.
 
         <p>
 <dfn class="lint-ignore">Proof Generation</dfn> is a process described by a
-<dfn>proof generation algorithm</dfn> that calculates a value that protects the
+<dfn>proof serialization algorithm</dfn> that calculates a value that protects the
 integrity of the input data from modification or otherwise proves a certain
 desired threshold of trust. This process is conceptually similar to the way a
 wax seal can be used on an envelope containing a letter to establish trust in
 the sender and show that the letter has not been tampered with in transit.
-Possible proof generation functions include
+Possible proof serialization functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
 <a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
@@ -1559,7 +1559,7 @@ parameters, and other necessary details used to perform cryptographic hashing to
 the data to be protected.
         </li>
         <li>
-The specification MUST detail the <a>proof generation algorithms</a>,
+The specification MUST detail the <a>proof serialization algorithms</a>,
 parameters, and other necessary details used to perform cryptographic protection
 of the data.
         </li>
@@ -1636,17 +1636,17 @@ specific to their cryptographic suite.
       <p>
 The algorithms defined below are generalized in that they require a specific
 <a>transformation algorithm</a>, <a>hashing algorithm</a>,
-<a>proof generation algorithm</a>, and <a>proof verification algorithm</a> to be
+<a>proof serialization algorithm</a>, and <a>proof verification algorithm</a> to be
 specified by a particular cryptographic suite (see Section
 <a href="#cryptographic-suites"></a>).
       </p>
 
-      <p class="issue" title="Generate verification hash algorithm">
+      <p class="issue" title="Verification hash algorithm definition">
 At present the creation of the verification hash is delegated to the
 cryptographic suite specification when generating and verifying a proof. It is
 expected that this algorithm is going to be common to most cryptographic suites.
-It is predicted that the verification hash generation algorithm will eventually
-be defined in this specification.
+It is predicted that the algorithm that generates the verification hash
+will eventually be defined in this specification.
       </p>
 
       <section class="normative">
@@ -1691,7 +1691,7 @@ inputs to the algorithm.
           </li>
           <li>
 Let <var>proof</var> be the result of running the
-<a>proof generation algorithm</a> associated with the <a>cryptographic suite</a>
+<a>proof serialization algorithm</a> associated with the <a>cryptographic suite</a>
 with the <var>hashData</var> and <var>options</var> parameters provided
 as inputs to the algorithm.
           </li>
@@ -1726,11 +1726,11 @@ Return <var>output</var> as the <a>secured data document</a>.
         <p class="note" title="`hashData` might not consist of a single value">
 While the output of the <a href="#dfn-hashing-algorithm">hashing algorithm</a>
 can be a single value, such as a 32 byte SHA2-256 value, implementers are
-advised that some cryptographic suite(s) might define `hashData` to be
-comprised of multiple values that might be processed independently in the proof
-generation algorithm. For example, this approach is known to be taken in certain
-cryptographic suites that allow selective disclosure or unlinkability via the
-digital proof.
+advised that some cryptographic suite(s) might define `hashData` to be comprised
+of multiple values that might be processed independently in the proof
+serialization algorithm. For example, this approach is known to be taken in
+certain cryptographic suites that allow selective disclosure or unlinkability
+via the digital proof.
         </p>
 
       </section>
