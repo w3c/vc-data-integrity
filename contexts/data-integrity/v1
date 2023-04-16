@@ -61,8 +61,7 @@
         },
         "cryptosuite": "https://w3id.org/security#cryptosuite",
         "proofValue": {
-          "@id": "https://w3id.org/security#proofValue",
-          "@type": "https://w3id.org/security#multibase"
+          "@id": "https://w3id.org/security#proofValue"
         },
         "verificationMethod": {
           "@id": "https://w3id.org/security#verificationMethod",
