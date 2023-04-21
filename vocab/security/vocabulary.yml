@@ -39,9 +39,18 @@ class:
       - label: vc-data-integrity
         url: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
 
+  - id: Multikey
+    label: Multikey Verification Method
+    upper_value: sec:VerificationMethod
+    comment: Verification method to be used with the eddsa-2022 cryptographic suite. See the [EdDSA Cryptosuite v2022](https://www.w3.org/TR/vc-di-eddsa/#multikey) specification for further details.
+    see_also:
+      - label: eddsa-2022
+        url: https://www.w3.org/TR/vc-di-eddsa/#multikey
+
   - id: Ed25519Signature2020
     label: ED2559 Signature Suite, 2020 version
-    upper_value: sec:Proof
+    upper_value: sec:VerificationMethod
+    deprecated: true
     comment: T.B.D.
 
 # These are the class definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
