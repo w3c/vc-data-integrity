@@ -42,7 +42,7 @@ class:
   - id: Multikey
     label: Multikey Verification Method
     upper_value: sec:VerificationMethod
-    comment: Verification method to be used with the eddsa-2022 cryptographic suite. See the [EdDSA Cryptosuite v2022](https://www.w3.org/TR/vc-di-eddsa/#multikey) specification for further details.
+    comment: Verification method to be used with, for example, data integrity proof cryptographic suites, such as the eddsa-2022 cryptographic suite. See the [EdDSA Cryptosuite v2022](https://www.w3.org/TR/vc-di-eddsa/#multikey) specification for further details.
     see_also:
       - label: eddsa-2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
