@@ -44,7 +44,7 @@ class:
     upper_value: sec:VerificationMethod
     comment: Verification method to be used with, for example, data integrity proof cryptographic suites, such as the eddsa-2022 cryptographic suite. See the <a href="https://www.w3.org/TR/vc-di-eddsa/#multikey">EdDSA Cryptosuite v2022 specification</a> for further details.
     see_also:
-      - label: eddsa-2022
+      - label: EdDSA Cryptosuite v2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
 
   - id: Ed25519Signature2020
