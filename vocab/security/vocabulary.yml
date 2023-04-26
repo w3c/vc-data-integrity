@@ -49,8 +49,7 @@ class:
 
   - id: Ed25519Signature2020
     label: ED2559 Signature Suite, 2020 version
-    upper_value: sec:VerificationMethod
-    deprecated: true
+    upper_value: sec:Proof
     comment: T.B.D.
 
 # These are the class definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
