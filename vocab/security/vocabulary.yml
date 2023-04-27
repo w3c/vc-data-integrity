@@ -40,7 +40,7 @@ class:
         url: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
 
   - id: Ed25519Signature2020
-    label: ED2559 Signature Suite, 2020 version
+    label: Ed25519 Signature Suite, 2020 version
     upper_value: sec:Proof
     deprecated: true
     comment: T.B.D.
