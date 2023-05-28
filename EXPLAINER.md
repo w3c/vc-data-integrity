@@ -12,6 +12,29 @@
 - [Issue tracker](https://github.com/w3c/vc-data-integrity/)
 - [Discussion forum](https://lists.w3.org/Archives/Public/public-vc-wg/)
 
+# Table of Contents
+
+  * [Introduction](#introduction)
+  * [Goals](#goals)
+  * [Non-goals](#non-goals)
+  * [User research](#user-research)
+  * [What We're Trying to Accomplish](#what-were-trying-to-accomplish)
+  * [How it Works](#how-it-works)
+  * [Key scenarios](#key-scenarios)
+    + [Signatures in Plain JSON ](#signatures-in-plain-json)
+    + [Signatures on Semantics (Verifiable Credentials)](#signatures-on-semantics-verifiable-credentials)
+    + [Selective Disclosure](#selective-disclosure)
+    + [Unlinkability](#unlinkability)
+  * [High-level Design discussion](#high-level-design-discussion)
+    + [Canonicalization](#canonicalization)
+    + [Use of RDF](#use-of-rdf)
+  * [Considered alternatives](#considered-alternatives)
+    + [JOSE and JWTs](#jose-and-jwts)
+    + [COSE and CWTs](#cose-and-cwts)
+    + [SD-JWTs and JWPs](#sd-jwts-and-jwps)
+  * [Stakeholder Feedback / Opposition](#feedback)
+  * [References & acknowledgements](#acknowledgements)
+
 ## Introduction
 
 These family of VC Data Integrity specifications describe mechanisms for
@@ -239,7 +262,7 @@ The Data Integrity work was started far in advance of he SD-JWT and JWP work at
 IETF. While we are tracking that work, it continues to not align well with the
 scenarios outlined above.
 
-## Stakeholder Feedback / Opposition
+## Feedback
 
 There were 17 implementers that demonstrated interoperability on a subset of the
 Data Integrity work:
@@ -254,7 +277,7 @@ their efforts on VC-JWT, SD-JWT, and JWP. Those approaches continue to not
 address the scenarios and use cases that are a focus for the Data Integrity
 work.
 
-## References & acknowledgements
+## Acknowledgements
 
 Many thanks for valuable feedback and advice from:
 
