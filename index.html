@@ -957,17 +957,12 @@ Two supported verification material properties are listed below:
               <dt><dfn>publicKeyJwk</dfn></dt>
               <dd>
                 <p>
-The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
-be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
-conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
-contain "d", or any other members of the private information class as described
-in <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">Registration
-Template</a>. It is RECOMMENDED that verification methods that use JWKs
-[[RFC7517]] to represent their public keys use the value of `kid` as
-their fragment identifier. It is RECOMMENDED that JWK
-`kid` values are set to the public key fingerprint [[RFC7638]]. See
-the first key in <a href="#example-various-verification-method-types"></a> for
-an example of a public key with a compound key identifier.
+The `publicKeyJwk` property is RECOMMENDED. If present, the value MUST
+conform to the <a data-cite="RFC7517#section-4">JSON Web Key (JWK) Format</a>.
+                </p>
+                <p>
+The value MUST NOT contain private information described
+in <a href="https://www.iana.org/assignments/jose#web-key-parameters">JSON Web Key Parameters</a>.
                 </p>
               </dd>
               <dt><dfn>publicKeyMultibase</dfn></dt>
