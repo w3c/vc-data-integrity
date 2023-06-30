@@ -547,8 +547,8 @@ by adding the parameters outlined in this section:
     "title": "Hello world!",
     "proof": {
       "type": "DataIntegrityProof",
-      "cryptosuite": "example-signature-2022",
-      "created": "2020-11-05T19:23:24Z",
+      "cryptosuite": "jcs-eddsa-2022",
+      "created": "2023-03-05T19:23:24Z",
       "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
         ZPGskmesDpuwRBorgHxUXfxnG",
       "proofPurpose": "assertionMethod",
@@ -559,11 +559,10 @@ by adding the parameters outlined in this section:
         </pre>
 
         <p>
-The example proof above suggests a ficticious
-`example-signature-2022` cryptography suite that produces a
-verifiable digital proof by presumptively transforming the input data using the
-JSON Canonicalization Scheme [[?RFC8785]] and then digitally signing it using an
-Ed25519 elliptic curve signature.
+The proof above uses the `jcs-eddsa-2022` cryptography suite [[?DI-EDDSA]] that
+produces a verifiable digital proof by transforming the input data using the
+JSON Canonicalization Scheme (JCS) [[?RFC8785]] and then digitally signing it
+using an Edwards Digital Signature Algorithm (EdDSA).
         </p>
 
         <p>
@@ -584,30 +583,30 @@ by adding the parameters outlined in this section:
         <pre class="example highlight"
         style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
         title="A simple signed JSON-LD data document">
-  {
-    "@context": [
-      {"title": "https://schema.org/title"},
-      "https://w3id.org/security/data-integrity/v1"
-    ],
-    "title": "Hello world!",
-    "proof": {
-      "type": "DataIntegrityProof",
-      "cryptosuite": "eddsa-2022",
-      "created": "2020-11-05T19:23:24Z",
-      "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-        ZPGskmesDpuwRBorgHxUXfxnG",
-      "proofPurpose": "assertionMethod",
-      "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-        VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
-    }
+{
+  "@context": [
+    {"title": "https://schema.org/title"},
+    "https://w3id.org/security/data-integrity/v1"
+  ],
+  "title": "Hello world!",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-2019",
+    "created": "2020-06-11T19:14:04Z",
+    "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVKw
+      8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zXb23ZkdakfJNUhiTEdwyE598X7RLrkjnXEADLQZ7vZyUGXX8cyJZRB
+      kNw813SGsJHWrcpo4Y8hRJ7adYn35Eetq"
   }
+}
         </pre>
 
         <p>
-The proof example above uses the `Ed25519Signature2020` <a>proof
-type</a> to produce a verifiable digital proof by canonicalizing the input data
-using the RDF Dataset Canonicalization algorithm [[?RDF-CANON]] and then
-digitally signing it using an Ed25519 elliptic curve signature.
+The proof above uses the `ecdsa-2019` cryptography suite [[?DI-ECDSA]] that
+produces a verifiable digital proof by transforming the input data using the
+RDF Dataset Canonicalization Scheme [[?RDF-CANON]] and then digitally signing it
+using the Elliptic Curve Digital Signature Algorithm (ECDSA).
         </p>
 
 <div class="issue">Create a separate section detailing an optional mechanism
