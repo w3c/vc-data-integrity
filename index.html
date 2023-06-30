@@ -85,12 +85,26 @@
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
           localBiblio:  {
-            "RDF-DATASET-C14N": {
-              title:    "RDF Dataset Canonicalization",
-              href:     "https://w3c-ccg.github.io/rdf-dataset-canonicalization/spec/index.html",
-              authors:  ["David Longley", "Manu Sporny"],
-              status:   "CGFINAL",
-              publisher:  "Credentials Community Group"
+            "DI-EDDSA": {
+              title:    "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-eddsa/",
+              authors:  ["David Longley", "Manu Sporny", "Dmitri Zagidulin"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
+            },
+            "DI-ECDSA": {
+              title:    "The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-ecdsa/",
+              authors:  ["David Longley", "Manu Sporny", "Marty Reed"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
+            },
+            "DI-BBSDSA": {
+              title:    "The BBS Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-bbs/",
+              authors:  ["Tobias Looker", "Orie Steele"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
             },
             "SECURITY-VOCABULARY": {
               title:    "The Security Vocabulary",
@@ -136,7 +150,23 @@
               publisher: "Credentials Community Group"
             }
           },
-          postProcess: [restrictRefs]
+          postProcess: [restrictRefs],
+          otherLinks: [{
+            key: "Related Specifications",
+            data: [{
+              value: "The Verifiable Credentials Data Model v2.0",
+              href: "https://www.w3.org/TR/vc-data-model-2.0/"
+            }, {
+              value: "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-eddsa/"
+            }, {
+              value: "The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-ecdsa/"
+            }, {
+              value: "The BBS Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-bbs/"
+            }]
+          }]
       };
     </script>
     <style>
@@ -576,7 +606,7 @@ by adding the parameters outlined in this section:
         <p>
 The proof example above uses the `Ed25519Signature2020` <a>proof
 type</a> to produce a verifiable digital proof by canonicalizing the input data
-using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
+using the RDF Dataset Canonicalization algorithm [[?RDF-CANON]] and then
 digitally signing it using an Ed25519 elliptic curve signature.
         </p>
 
@@ -2154,7 +2184,7 @@ At times, it is beneficial to transform the data being protected during the
 cryptographic protection process. Such "in-line" transformation can enable a
 particular type of cryptographic protection to be agnostic to the data format it
 is carried in. For example, some Data Integrity cryptographic suites utilize RDF
-Dataset Canonicalization [[?RDF-DATASET-C14N]] which transforms the initial
+Dataset Canonicalization [[?RDF-CANON]] which transforms the initial
 representation into a canonical form [[?N-QUADS]] that is then serialized,
 hashed, and digitally signed. As long as any syntax expressing the protected
 data can be transformed into this canonical form, the digital signature can be
@@ -2194,7 +2224,7 @@ requirement for cryptographic hashing mechanisms and is why those schemes are
 designed to be collision resistant. Cryptographic canonicalization mechanisms
 have the same requirement. At present, this isn't a problem because the three
 expected canonicalization schemes &mdash; the Universal RDF Dataset
-Canonicalization Algorithm 2015 [[?RDF-DATASET-C14N]], JSON Canonicalization
+Canonicalization Algorithm 2015 [[?RDF-CANON]], JSON Canonicalization
 Scheme [[?RFC8785]], and a theoretical future base-encoding canonicalization
 &mdash; have entirely different outputs.
         </p>
