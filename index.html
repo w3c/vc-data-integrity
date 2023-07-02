@@ -602,10 +602,12 @@ Signature Algorithm (ECDSA).
 }
         </pre>
 
-<div class="issue">Create a separate section detailing an optional mechanism
-for authenticating public key control via bi-directional links. How
-to establish trust in controllers is out of scope but examples can
-be given.</div>
+        <p>
+The proof example above uses the `Ed25519Signature2020` <a>proof
+type</a> to produce a verifiable digital proof by canonicalizing the input data
+using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
+digitally signing it using an Ed25519 elliptic curve signature.
+        </p>
 
 <div class="issue">Specify algorithm agility mechanisms (additional attributes
 from the security vocab can be used to indicate other signing and hash
