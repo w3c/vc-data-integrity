@@ -531,53 +531,54 @@ A proof can be added to a JSON document like the following:
         </p>
 
         <pre class="example highlight" title="A simple JSON data document">
-  {
-    "title": "Hello world!"
-  };
+{
+  "title": "Hello world!"
+};
         </pre>
 
         <p>
-by adding the parameters outlined in this section:
+The following proof secures the document above using the `jcs-eddsa-2022`
+cryptography suite [[?DI-EDDSA]], which produces a verifiable digital proof by
+transforming the input data using the JSON Canonicalization Scheme (JCS)
+[[?RFC8785]] and then digitally signing it using an Edwards Digital Signature
+Algorithm (EdDSA).
         </p>
 
         <pre class="example highlight"
         style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
         title="A simple signed JSON data document">
-  {
-    "title": "Hello world!",
-    "proof": {
-      "type": "DataIntegrityProof",
-      "cryptosuite": "jcs-eddsa-2022",
-      "created": "2023-03-05T19:23:24Z",
-      "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-        ZPGskmesDpuwRBorgHxUXfxnG",
-      "proofPurpose": "assertionMethod",
-      "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV8nQA
-        pmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
-    }
+{
+  "title": "Hello world!",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "jcs-eddsa-2022",
+    "created": "2023-03-05T19:23:24Z",
+    "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
+      ZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV8nQA
+      pmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
   }
+}
         </pre>
-
-        <p>
-The proof above uses the `jcs-eddsa-2022` cryptography suite [[?DI-EDDSA]] that
-produces a verifiable digital proof by transforming the input data using the
-JSON Canonicalization Scheme (JCS) [[?RFC8785]] and then digitally signing it
-using an Edwards Digital Signature Algorithm (EdDSA).
-        </p>
 
         <p>
 Similarly, a proof can be added to a JSON-LD data document like the following:
         </p>
 
         <pre class="example highlight" title="A simple JSON-LD data document">
-  {
-    "@context": {"title": "https://schema.org/title"},
-    "title": "Hello world!"
-  };
+{
+  "@context": {"title": "https://schema.org/title"},
+  "title": "Hello world!"
+};
         </pre>
 
         <p>
-by adding the parameters outlined in this section:
+The following proof secures the document above by using the `ecdsa-2019`
+cryptography suite [[?DI-ECDSA]], which produces a verifiable digital proof by
+transforming the input data using the RDF Dataset Canonicalization Scheme
+[[?RDF-CANON]] and then digitally signing it using the Elliptic Curve Digital
+Signature Algorithm (ECDSA).
         </p>
 
         <pre class="example highlight"
@@ -601,13 +602,6 @@ by adding the parameters outlined in this section:
   }
 }
         </pre>
-
-        <p>
-The proof above uses the `ecdsa-2019` cryptography suite [[?DI-ECDSA]] that
-produces a verifiable digital proof by transforming the input data using the
-RDF Dataset Canonicalization Scheme [[?RDF-CANON]] and then digitally signing it
-using the Elliptic Curve Digital Signature Algorithm (ECDSA).
-        </p>
 
 <div class="issue">Create a separate section detailing an optional mechanism
 for authenticating public key control via bi-directional links. How
