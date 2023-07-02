@@ -609,17 +609,6 @@ using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
 digitally signing it using an Ed25519 elliptic curve signature.
         </p>
 
-<div class="issue">Specify algorithm agility mechanisms (additional attributes
-from the security vocab can be used to indicate other signing and hash
-algorithms). Rewrite algorithms to be parameterized on this basis and
-move `Ed25519Signature2020` definition to a single supported
-mechanism; specify its identifier as a URL. In order to make it easy to
-specify a variety of combinations of algorithms, introduce a core
-type `DataIntegrityProof` that allows for easy filtering/discover of
-proof nodes, but that type on its own doesn't specify any default
-proof or hash algorithms, those need to be given via other properties in the
-nodes.</div>
-
       <p class="issue"
         title="Avoid signature format proliferation by using text-based suite value">
 The pattern that Data Integrity Signatures use presently leads to a
