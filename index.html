@@ -609,30 +609,6 @@ using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
 digitally signing it using an Ed25519 elliptic curve signature.
         </p>
 
-      <p class="issue"
-        title="Avoid signature format proliferation by using text-based suite value">
-The pattern that Data Integrity Signatures use presently leads to a
-proliferation in signature types and JSON-LD Contexts. This proliferation can be
-avoided without any loss of the security characteristics of tightly binding a
-cryptography suite version to one or more acceptable public keys. The
-following signature suites are currently being contemplated: eddsa-2022,
-nist-ecdsa-2022, koblitz-ecdsa-2022, rsa-2022, pgp-2022, bbs-2022, eascdsa-2022,
-ibsa-2022, and jws-2022.
-      </p>
-
-      <pre class="example nohighlight"
-        title="A DataIntegrityProof using a NIST ECDSA 2022 Cryptosuite">
-{
-  "@context": ["https://w3id.org/security/data-integrity/v1"],
-  "type": "DataIntegrityProof",
-  "cryptosuite": "ecdsa-2019",
-  "created": "2022-11-29T20:35:38Z",
-  "verificationMethod": "did:example:123456789abcdefghi#keys-1",
-  "proofPurpose": "assertionMethod",
-  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV<wbr>evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
-}
-      </pre>
-
 <div class="issue">Add an explicit check on key type to prevent an
 attacker from selecting an algorithm that could abuse how the key is
 used/interpreted.</div>
