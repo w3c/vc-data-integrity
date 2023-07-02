@@ -1778,19 +1778,6 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
           </li>
         </ol>
 
-        <p class="issue" title="Define how verification material is retrieved">
-Specify how <var>proof</var>.<var>verificationMethod</var> can be obtained,
-e.g., through some out-of-band process, by
-dereferencing its URL identifier, etc. It is expected that the <a>public key</a>
-is retrieved by dereferencing its URL identifier in the `proof` node
-of the default graph of <var>securedDocument</var>. The algorithm needs to
-confirm that the <a>verification method</a> that describes the cryptographic
-material, such as the <a>public key</a>, specifies its <a>controller</a>, and
-that its controllers's URL identifier can be dereferenced to reveal a
-bi-directional link back to the key. Ensure that the key's controller is a
-trusted entity before proceeding to the next step.
-        </p>
-
       </section>
 
       <section class="normative">
