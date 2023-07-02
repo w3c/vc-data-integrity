@@ -140,15 +140,15 @@
               status: "Internet-Draft",
               publisher: "IETF"
             },
-            "VC-EXTENSION-REGISTRY": {
-              title: "Verifiable Credentials Extension Registry",
-              href: "https://w3c-ccg.github.io/vc-extension-registry/",
+            "VC-SPECS": {
+              title: "Verifiable Credential Specifications Directory",
+              href: "https://w3c.github.io/vc-specs-dir/",
               authors: [
                 "Manu Sporny"
               ],
-              status: "CG-DRAFT",
-              publisher: "Credentials Community Group"
-            }
+              status: "ED",
+              publisher: "W3C Verifiable Credentials Working Group"
+            },
           },
           postProcess: [restrictRefs],
           otherLinks: [{
@@ -601,13 +601,6 @@ Signature Algorithm (ECDSA).
   }
 }
         </pre>
-
-        <p>
-The proof example above uses the `Ed25519Signature2020` <a>proof
-type</a> to produce a verifiable digital proof by canonicalizing the input data
-using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
-digitally signing it using an Ed25519 elliptic curve signature.
-        </p>
 
 <div class="issue">Add a note indicating that selective disclosure proof
 mechanisms can be compatible with Data Integrity; for example,
@@ -1952,7 +1945,7 @@ using a year designation. For example, the cryptographic suite identifier
 year 2025, but might not be a safe choice in the year 2042. A date-based
 versioning mechanism, however, is not enough by itself. All cryptographic
 suites that follow this specification are intended to be registered
-[[?VC-EXTENSION-REGISTRY]] in a way that clearly signal which cryptosuites
+[[?VC-SPECS]] in a way that clearly signal which cryptosuites
 are deprecated, standardized, or experimental. Cryptosuite registration will
 follow CFRG, IETF, NIST, FIPS, and safecurves guidance. Use of deprecated suites
 are expected to throw errors in implementations unless a `useUnsafeCryptosuites`
@@ -1962,23 +1955,6 @@ unless a `useExperimentalCryptosuites` option is used specifying exactly
 the experimental cryptosuite to use.
         </p>
 
-        <p class="issue" title="Resolve VC Extension Registry Governance">
-The following text is debated due to the governance rules of the VC
-Extension Registry not being finalized:<br><br>
-Developers are urged to always refer to the [[?VC-EXTENSION-REGISTRY]] for
-the latest standardized cryptography suites as well as cross-checking their
-usage against, at least, the
-<a href="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
-COSE Algorithms Registry</a>, the
-<a href="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
-JOSE Algorithms Registry</a>, and the latest
-<a href="https://csrc.nist.gov/publications/detail/fips/186/4/final">
-FIPS Digital Signature Standard
-</a> guidance.  Depending on your jurisdiction you may also need to consider
-additional guidance from
-<a href="https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/01.02.01_60/ts_119312v010201p.pdf">ETSI</a>
-or other regional regulatory and standards bodies.
-        </p>
       </section>
 
       <section>
