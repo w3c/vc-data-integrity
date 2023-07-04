@@ -1,6 +1,6 @@
 vocab:
   id: sec
-  value: https://w3id.org/security/v1
+  value: https://w3id.org/security#
 
 prefix:
   - id: cred
