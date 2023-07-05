@@ -2442,6 +2442,33 @@ indirectly exposed to information expressed by this specification and thus the
 guidance below is provided for those situations.
       </p>
 
+      <section>
+        <h2>Presenting Time Values</h2>
+        <p>
+This specification enables the expression of dates and times related to the
+validity period of cryptographic proofs. This information might be indirectly
+exposed to an individual if a proof is processed and is detected to be outside
+an allowable time range. When exposing these dates and times to an individual,
+implementers are urged to take into account
+<a data-cite="VC-DATA-MODEL-2.0#representing-time">cultural norms when
+representing dates and times</a>, as well as ensuring that the value is
+<a href="#representing-time">displayed according to provided locale settings</a>
+in display software. In addition to these considerations, presenting time
+values in a way that eases the cognitive burden on the individual receiving
+the information is a suggested best practice.
+        </p>
+        <p>
+For example, when conveying the expiration date for a particular set of
+digitally signed information, implementers are urged to present the time of
+expiration using language that is easier to understand rather than language that
+optimizes for accuracy. Presenting the expiration time as "This ticket expired
+three days ago." is preferred over a phrase such as "This ticket expired on July
+25th 2023 at 3:43 PM." The former provides a relative time that is easier to
+comprehend than the latter time, which requires the individual to do the
+calculation in their head and presumes that they are capable of doing such a
+calculation.
+        </p>
+      </section>
 
     </section>
 
