@@ -170,6 +170,10 @@
       };
     </script>
     <style>
+pre.nohighlight {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
 ol.algorithm { counter-reset:numsection; list-style-type: none; }
 ol.algorithm li { margin: 0.5em 0; }
 ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
@@ -530,7 +534,7 @@ is the [[?SECURITY-VOCABULARY]].
 A proof can be added to a JSON document like the following:
         </p>
 
-        <pre class="example highlight" title="A simple JSON data document">
+        <pre class="example nohighlight" title="A simple JSON data document">
 {
   "title": "Hello world!"
 };
@@ -544,8 +548,7 @@ transforming the input data using the JSON Canonicalization Scheme (JCS)
 Algorithm (EdDSA).
         </p>
 
-        <pre class="example highlight"
-        style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
+        <pre class="example nohighlight"
         title="A simple signed JSON data document">
 {
   "title": "Hello world!",
@@ -553,11 +556,9 @@ Algorithm (EdDSA).
     "type": "DataIntegrityProof",
     "cryptosuite": "jcs-eddsa-2022",
     "created": "2023-03-05T19:23:24Z",
-    "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
+    "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcm<wbr>cxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV8nQA
-      pmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
+    "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV<wbr>8nQApmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
   }
 }
         </pre>
@@ -566,7 +567,8 @@ Algorithm (EdDSA).
 Similarly, a proof can be added to a JSON-LD data document like the following:
         </p>
 
-        <pre class="example highlight" title="A simple JSON-LD data document">
+        <pre class="example nohighlight"
+          title="A simple JSON-LD data document">
 {
   "@context": {"title": "https://schema.org/title"},
   "title": "Hello world!"
@@ -581,8 +583,7 @@ transforming the input data using the RDF Dataset Canonicalization Scheme
 Signature Algorithm (ECDSA).
         </p>
 
-        <pre class="example highlight"
-        style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
+        <pre class="example nohighlight"
         title="A simple signed JSON-LD data document">
 {
   "@context": [
@@ -594,11 +595,9 @@ Signature Algorithm (ECDSA).
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-2019",
     "created": "2020-06-11T19:14:04Z",
-    "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVKw
-      8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVK<wbr>w8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "zXb23ZkdakfJNUhiTEdwyE598X7RLrkjnXEADLQZ7vZyUGXX8cyJZRB
-      kNw813SGsJHWrcpo4Y8hRJ7adYn35Eetq"
+    "proofValue": "zXb23ZkdakfJNUhiTEdwyE598X7RLrkjnXEADLQZ7vZyUGXX8cyJZR<wbr>BkNw813SGsJHWrcpo4Y8hRJ7adYn35Eetq"
   }
 }
         </pre>
@@ -630,16 +629,16 @@ nist-ecdsa-2022, koblitz-ecdsa-2022, rsa-2022, pgp-2022, bbs-2022, eascdsa-2022,
 ibsa-2022, and jws-2022.
       </p>
 
-      <pre class="example" title="A DataIntegrityProof example using a NIST ECDSA 2022 Cryptosuite">
+      <pre class="example nohighlight"
+        title="A DataIntegrityProof using a NIST ECDSA 2022 Cryptosuite">
 {
   "@context": ["https://w3id.org/security/data-integrity/v1"],
   "type": "DataIntegrityProof",
-  "cryptosuite": "ecdsa-2022",
+  "cryptosuite": "ecdsa-2019",
   "created": "2022-11-29T20:35:38Z",
   "verificationMethod": "did:example:123456789abcdefghi#keys-1",
   "proofPurpose": "assertionMethod",
-  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
-                 evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
+  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV<wbr>evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
 }
       </pre>
 
@@ -683,7 +682,7 @@ such as in the case of a set of signatures on a contract. A proof set,
 which has no order, is represented by associating a set of proofs
 with the `proof` key in a document.
         </p>
-        <pre class="example highlight" title="A proof set in a data document">
+        <pre class="example nohighlight" title="A proof set in a data document">
 {
   "@context": [
     {"title": "https://schema.org/title"},
@@ -694,20 +693,16 @@ with the `proof` key in a document.
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:24Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeW<wbr>cmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8<wbr>nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T13:08:49Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gK<wbr>S2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9876
-      zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
+    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9<wbr>876zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
   }]
 }
         </pre>
@@ -725,7 +720,8 @@ is expressed by providing at least one proof with an `id`, such as a UUID as a U
 and another proof with a `previousProof` value that identifies the
 previous proof.
         </p>
-        <pre class="example highlight" title="A proof chain in a data document">
+        <pre class="example nohighlight"
+          title="A proof chain in a data document">
 {
   "@context": [
     {"title": "https://schema.org/title"},
@@ -737,20 +733,16 @@ previous proof.
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:42Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnke<wbr>WcmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
-      DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
+    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup<wbr>3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
   }, {
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T21:28:14Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3g<wbr>KS2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19KiWXerb8
-      ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
+    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19Ki<wbr>WXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
     "previousProof": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7"
   }]
 }
@@ -893,7 +885,8 @@ data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
             </dd>
           </dl>
 
-          <pre class="example" title="Example verification method structure">
+          <pre class="example nohighlight"
+            title="Example verification method structure">
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
