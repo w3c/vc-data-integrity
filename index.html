@@ -897,24 +897,6 @@ material available for <a>controllers</a>, please see the Data Integrity
 Specification Registries [TBD - DIS-REGISTRIES].
             </p>
 
-            <p class=issue>
-Ensuring that cryptographic suites are versioned and tightly scoped to a very
-small set of possible key types and signature schemes (ideally one key type and
-size and one signature output type) is a design goal for most Data Integrity
-cryptographic suites. Historically, this has been done by defining both the
-key type and the cryptographic suite that uses the key type in the same
-specification. The downside of doing so, however, is that there might be a
-proliferation of different key types in multikey that result in different
-cryptosuites defining the same key material differently. For example, one
-cryptosuite might use compressed Curve P-256 keys while another uses
-uncompressed values. If that occurs, it will harm interoperability. It will be
-important in the coming months to years to ensure that this does not happen
-by fully defining the multikey format in a separate specification so
-cryptosuite specifications, such as this one, can refer to the multikey
-specification, thus reducing the chances of multikey type proliferation and
-improving the chances of maximum interoperability for the multikey format.
-            </p>
-
             <p>
 To increase the likelihood of interoperable implementations, this specification
 limits the number of formats for expressing verification material in a <a>controller
