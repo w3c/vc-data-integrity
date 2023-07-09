@@ -476,8 +476,8 @@ which was to merely logging into a website.
           <dd>
 The means and information needed to verify the proof MUST be specified as a
 string that maps to a [[URL]]. An example of a verification method is a
-link to a public key which includes cryptographic material that is used by a
-verifier during the verification process.
+link to a <a>public key</a> which includes cryptographic material that is used
+by a verifier during the verification process.
           </dd>
 
           <dt>created</dt>
@@ -789,14 +789,14 @@ combination with an integrity protection mechanism such as Hashlinks.
           <h2>Verification Methods</h2>
           <p>
 A <a>controller document</a> can express <a>verification methods</a>, such as
-cryptographic public keys, which can be used to <a>authenticate</a> or authorize
-interactions with the <a>controller</a> or associated parties. For example, a
-cryptographic public key can be used as a <a>verification method</a> with
-respect to a digital signature; in such usage, it verifies that the signer
-could use the associated cryptographic private key. <a>Verification methods</a>
-might take many parameters. An example of this is a set of five cryptographic
-keys from which any three are required to contribute to a cryptographic
-threshold signature.
+cryptographic <a>public keys</a>, which can be used to <a>authenticate</a> or
+authorize interactions with the <a>controller</a> or associated parties. For
+example, a cryptographic <a>public key</a> can be used as a <a>verification
+method</a> with respect to a digital signature; in such usage, it verifies that
+the signer could use the associated cryptographic private key. <a>Verification
+methods</a> might take many parameters. An example of this is a set of five
+cryptographic keys from which any three are required to contribute to a
+cryptographic threshold signature.
           </p>
 
           <dl>
@@ -917,7 +917,7 @@ conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
 contain "d", or any other members of the private information class as described
 in <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">Registration
 Template</a>. It is RECOMMENDED that verification methods that use JWKs
-[[RFC7517]] to represent their public keys use the value of `kid` as
+[[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
 their fragment identifier. It is RECOMMENDED that JWK
 `kid` values are set to the public key fingerprint [[RFC7638]]. See
 the first key in <a href="#example-various-verification-method-types"></a> for
@@ -936,7 +936,7 @@ public key.
 Note that the [[?MULTIBASE]] specification is not yet a standard and is
 subject to change. There might be some use cases for this data format
 where `<b>public</b>KeyMultibase` is defined, to allow for
-expression of public keys, but `<b>private</b>KeyMultibase`
+expression of <a>public keys</a>, but `<b>private</b>KeyMultibase`
 is not defined, to protect against accidental leakage of secret keys.
                 </p>
               </dd>
@@ -1013,7 +1013,7 @@ In the example above, the `publicKeyMultibase` value starts with the letter `z`,
 which is the [[MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
 [[MULTICODEC]] header is `0xed`, which specifies that the remaining data
-is a 32-byte raw Ed25519 public key.
+is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
             <p>
@@ -1183,8 +1183,8 @@ presenting a valid proof of authentication. When a <em>verifier</em> receives
 some data (in some protocol-specific format) that contains a proof that was made
 for the purpose of "authentication", and that says that an entity is identified
 by the `id`, then that <em>verifier</em> checks to ensure that the proof can be
-verified using a <a>verification method</a> (e.g., public key) listed under
-`<a>authentication</a>` in the <a>controller document</a>.
+verified using a <a>verification method</a> (e.g., <a>public key</a>) listed
+under `<a>authentication</a>` in the <a>controller document</a>.
             </p>
             <p>
 Note that the <a>verification method</a> indicated by the
@@ -1275,8 +1275,8 @@ referenced.
             <p>
 An example of when this property is useful is when encrypting a message intended
 for the <a>controller</a>. In this case, the counterparty uses the
-cryptographic public key information in the <a>verification method</a> to wrap a
-decryption key for the recipient.
+cryptographic <a>public key</a> information in the <a>verification method</a> to
+wrap a decryption key for the recipient.
             </p>
 
             <pre class="example nohighlight" title="Key agreement property
@@ -1760,7 +1760,7 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
 
         <p>
 The following algorithm specifies how to safely retrieve a verification method,
-such as a cryptographic public key, by using a <a>verification method</a>
+such as a cryptographic <a>public key</a>, by using a <a>verification method</a>
 identifier contained in a <a>data integrity proof</a>. Required inputs are a
 <strong><a>data integrity proof</a></strong> (<var>proof</var>) and a set of
 <strong>dereferencing options</strong> (<var>options</var>). A
