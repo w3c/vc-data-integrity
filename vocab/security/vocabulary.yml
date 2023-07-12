@@ -213,13 +213,13 @@ class:
     deprecated: true
     label: ED2559 Verification Key, 2020 version
     upper_value: sec:Key
-    comment: A linked data proof suite verification method type used with <a href=”#Ed25519Signature2020>`Ed25519Signature2020`</a>.
+    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">`Ed25519Signature2020`</a>.
 
   - id: JsonWebKey2020
     deprecated: true
     label: JSON Web Key, 2020 version
     upper_value: sec:Key
-    comment: A linked data proof suite verification method type used with <a href=”#JsonWebSignature2020>`JsonWebSignature2020`</a>
+    comment: A linked data proof suite verification method type used with <a href="#JsonWebSignature2020">`JsonWebSignature2020`</a>
 
   - id: JsonWebSignature2020
     deprecated: true
@@ -240,7 +240,7 @@ class:
     label: BBS Signature Proof, 2020 version
     upper_value: sec:Signature
     comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which deterministically names all unnamed nodes. Importantly, a `BbsBlsSignatureProof2020` is in fact a proof of knowledge of an unrevealed BbsBlsSignature2020 enabling the ability to selectively reveal information from the set that was originally signed. Each of the statements produced by the normalizing process for a JSON-LD document featuring a <a href=”#BbsBlsSignatureProof2020">`BbsBlsSignatureProof2020`</a> represent statements that were originally signed in producing the `BbsBlsSignature2020` and represent the denomination under which information can be selectively disclosed. The signature mechanism uses Blake2B as the digest for each statement and produces a single output digital signature.
+      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which deterministically names all unnamed nodes. Importantly, a `BbsBlsSignatureProof2020` is in fact a proof of knowledge of an unrevealed BbsBlsSignature2020 enabling the ability to selectively reveal information from the set that was originally signed. Each of the statements produced by the normalizing process for a JSON-LD document featuring a <a href="#BbsBlsSignatureProof2020">`BbsBlsSignatureProof2020`</a> represent statements that were originally signed in producing the `BbsBlsSignature2020` and represent the denomination under which information can be selectively disclosed. The signature mechanism uses Blake2B as the digest for each statement and produces a single output digital signature.
 
   - id: Bls12381G1Key2020
     deprecated: true
@@ -302,7 +302,7 @@ property:
   - id: proof
     label: Proof sets
     range: sec:ProofGraph
-    comment: The value of the `proof` property MUST identify <a href=”#ProofGraph”>`ProofGraph` instances</a> (informally, it indirectly identifies <a href=”#Proof”>`Proof` instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant.
+    comment: The value of the `proof` property MUST identify <a href="#ProofGraph">`ProofGraph` instances</a> (informally, it indirectly identifies <a href="#Proof">`Proof` instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant.
 
   - id: controller
     label: Controller
@@ -424,14 +424,14 @@ property:
     label: Blockchain account ID
     range: xsd:string
     comment: |
-      A `blockchainAccountId` property is used to specify a blockchain account identifier, as per the <a href=”https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md”>CAIP-10Account ID Specification</a>.
+      A `blockchainAccountId` property is used to specify a blockchain account identifier, as per the <a href="https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md">CAIP-10Account ID Specification</a>.
 
   - id: ethereumAddress
     deprecated: true
     label: Ethereum address
     range: xsd:string
     comment: |
-      An `ethereumAddress` property is used to specify the Ethereum address. As per the Ethereum Yellow Paper “Ethereum: a secure decentralised generalised transaction ledger” in consists of a prefix "0x", a common identifier for hexadecimal, concatenated with the rightmost 20 bytes of the Keccak-256 hash (big endian) of the ECDSA public key (the curve used is the so-called secp256k1). In hexadecimal, 2 digits represent a byte, meaning addresses contain 40 hexadecimal digits. The Ethereum address should also contain a checksum as per EIP-55.
+      An `ethereumAddress` property is used to specify the Ethereum address. As per the Ethereum Yellow Paper "Ethereum: a secure decentralised generalised transaction ledger" in consists of a prefix "0x", a common identifier for hexadecimal, concatenated with the rightmost 20 bytes of the Keccak-256 hash (big endian) of the ECDSA public key (the curve used is the so-called secp256k1). In hexadecimal, 2 digits represent a byte, meaning addresses contain 40 hexadecimal digits. The Ethereum address should also contain a checksum as per EIP-55.
     see_also:
       - label: EIP-55
         url: https://eips.ethereum.org/EIPS/eip-55
@@ -442,7 +442,7 @@ property:
     deprecated: true
     label: Expiration time
     range: xsd:dateTime
-    comment: The expiration time is typically associated with a <a href=”#Key>`Key`</a> and specifies when the validity of the key will expire.
+    comment: The expiration time is typically associated with a <a href="#Key>`Key`</a> and specifies when the validity of the key will expire.
 
   - id: initializationVector
     deprecated: true
@@ -541,7 +541,7 @@ property:
     label: Revocation time
     range: xsd:dateTime
     comment: |
-      The revocation time is typically associated with a <a href=”#Key”>`Key`</a> that has been marked as invalid as of the date and time associated with the property. Key revocations are often used when a key is compromised, such as the theft of the private key, or during the course of best-practice key rotation schedules.
+      The revocation time is typically associated with a <a href="#Key">`Key`</a> that has been marked as invalid as of the date and time associated with the property. Key revocations are often used when a key is compromised, such as the theft of the private key, or during the course of best-practice key rotation schedules.
 
   - id: jws
     deprecated: true

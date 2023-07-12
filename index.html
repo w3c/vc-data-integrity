@@ -70,7 +70,7 @@
           group:           "vc",
 
           // name (with the @w3c.org) of the public mailing to which comments are due
-          wgPublicList: "public-credentials",
+          wgPublicList: "public-vc-wg",
 
           github: "w3c/vc-data-integrity",
 
@@ -85,12 +85,26 @@
           alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
           */
           localBiblio:  {
-            "RDF-DATASET-C14N": {
-              title:    "RDF Dataset Canonicalization",
-              href:     "https://w3c-ccg.github.io/rdf-dataset-canonicalization/spec/index.html",
-              authors:  ["David Longley", "Manu Sporny"],
-              status:   "CGFINAL",
-              publisher:  "Credentials Community Group"
+            "DI-EDDSA": {
+              title:    "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-eddsa/",
+              authors:  ["David Longley", "Manu Sporny", "Dmitri Zagidulin"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
+            },
+            "DI-ECDSA": {
+              title:    "The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-ecdsa/",
+              authors:  ["David Longley", "Manu Sporny", "Marty Reed"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
+            },
+            "DI-BBSDSA": {
+              title:    "The BBS Digital Signature Algorithm Cryptosuites v1.0",
+              href:     "https://www.w3.org/TR/vc-di-bbs/",
+              authors:  ["Tobias Looker", "Orie Steele"],
+              status:   "WD",
+              publisher:  "W3C Verifiable Credentials Working Group"
             },
             "SECURITY-VOCABULARY": {
               title:    "The Security Vocabulary",
@@ -106,9 +120,9 @@
               publisher:  "Credentials Community Group"
             },
             "MULTIBASE": {
-              title: "The Multibase Encoding Scheme",
-              date: "February 2021",
-              href: "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03",
+              title: "The Multibase Data Format",
+              date: "February 2023",
+              href: "https://datatracker.ietf.org/doc/draft-multiformats-multibase",
               authors: [
                 "Juan Benet",
                 "Manu Sporny"
@@ -126,20 +140,44 @@
               status: "Internet-Draft",
               publisher: "IETF"
             },
-            "VC-EXTENSION-REGISTRY": {
-              title: "Verifiable Credentials Extension Registry",
-              href: "https://w3c-ccg.github.io/vc-extension-registry/",
+            "VC-SPECS": {
+              title: "Verifiable Credential Specifications Directory",
+              href: "https://w3c.github.io/vc-specs-dir/",
               authors: [
                 "Manu Sporny"
               ],
-              status: "CG-DRAFT",
-              publisher: "Credentials Community Group"
-            }
+              status: "ED",
+              publisher: "W3C Verifiable Credentials Working Group"
+            },
           },
-          postProcess: [restrictRefs]
+          postProcess: [restrictRefs],
+          otherLinks: [{
+            key: "Related Specifications",
+            data: [{
+              value: "The Verifiable Credentials Data Model v2.0",
+              href: "https://www.w3.org/TR/vc-data-model-2.0/"
+            }, {
+              value: "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-eddsa/"
+            }, {
+              value: "The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-ecdsa/"
+            }, {
+              value: "The BBS Digital Signature Algorithm Cryptosuites v1.0",
+              href: "https://www.w3.org/TR/vc-di-bbs/"
+            }]
+          }]
       };
     </script>
     <style>
+code {
+  color: rgb(199, 73, 0);
+  font-weight: bold;
+}
+pre.nohighlight {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
 ol.algorithm { counter-reset:numsection; list-style-type: none; }
 ol.algorithm li { margin: 0.5em 0; }
 ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
@@ -223,7 +261,7 @@ algorithm</dfn> that takes input data and prepares it for the hashing process.
 One example of a possible transformation is to take a record of people's names
 that attended a meeting, sort the list alphabetically by the individual's family
 name, and rewrite the names on a piece of paper, one per line, in sorted order.
-Possible transformations include
+Examples of transformations include
 <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalization</a>
 and
 <a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding">
@@ -236,7 +274,7 @@ calculates an identifier for the transformed data using a
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">
 cryptographic hash function</a>. This process is conceptually similar to how a
 phone address book functions, where one takes a person's name (the input data)
-and maps that name to that individual's phone number (the hash). Possible
+and maps that name to that individual's phone number (the hash). Examples of
 cryptographic hash functions include
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function#SHA-3">
 SHA-3</a> and
@@ -251,7 +289,7 @@ integrity of the input data from modification or otherwise proves a certain
 desired threshold of trust. This process is conceptually similar to the way a
 wax seal can be used on an envelope containing a letter to establish trust in
 the sender and show that the letter has not been tampered with in transit.
-Possible proof serialization functions include
+Examples of proof serialization functions include
 <a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
 and
 <a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
@@ -442,8 +480,8 @@ which was to merely logging into a website.
           <dd>
 The means and information needed to verify the proof MUST be specified as a
 string that maps to a [[URL]]. An example of a verification method is a
-link to a public key which includes cryptographic material that is used by a
-verifier during the verification process.
+link to a <a>public key</a> which includes cryptographic material that is used
+by a verifier during the verification process.
           </dd>
 
           <dt>created</dt>
@@ -475,7 +513,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
           <dd>
 A string value that contains the data necessary to verify the digital proof
 using the `verificationMethod` specified. The contents of the value MUST be a
-multibase-encoded binary value. Alternative fields with different encodings MAY
+[[MULTIBASE]]-encoded binary value. Alternative fields with different encodings MAY
 be used to encode the data necessary to verify the digital proof instead of this
 value. The contents of this value are determined by a cryptosuite and set to the
 <em>proof value</em> generated by the
@@ -500,129 +538,73 @@ is the [[?SECURITY-VOCABULARY]].
 A proof can be added to a JSON document like the following:
         </p>
 
-        <pre class="example highlight" title="A simple JSON data document">
-  {
-    "title": "Hello world!"
-  };
+        <pre class="example nohighlight" title="A simple JSON data document">
+{
+  "title": "Hello world!"
+};
         </pre>
 
         <p>
-by adding the parameters outlined in this section:
+The following proof secures the document above using the `jcs-eddsa-2022`
+cryptography suite [[?DI-EDDSA]], which produces a verifiable digital proof by
+transforming the input data using the JSON Canonicalization Scheme (JCS)
+[[?RFC8785]] and then digitally signing it using an Edwards Digital Signature
+Algorithm (EdDSA).
         </p>
 
-        <pre class="example highlight"
-        style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
+        <pre class="example nohighlight"
         title="A simple signed JSON data document">
-  {
-    "title": "Hello world!",
-    "proof": {
-      "type": "DataIntegrityProof",
-      "cryptosuite": "example-signature-2022",
-      "created": "2020-11-05T19:23:24Z",
-      "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-        ZPGskmesDpuwRBorgHxUXfxnG",
-      "proofPurpose": "assertionMethod",
-      "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV8nQA
-        pmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
-    }
+{
+  "title": "Hello world!",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "jcs-eddsa-2022",
+    "created": "2023-03-05T19:23:24Z",
+    "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcm<wbr>cxiZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV<wbr>8nQApmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
   }
+}
         </pre>
-
-        <p>
-The example proof above suggests a ficticious
-`example-signature-2022` cryptography suite that produces a
-verifiable digital proof by presumptively transforming the input data using the
-JSON Canonicalization Scheme [[?RFC8785]] and then digitally signing it using an
-Ed25519 elliptic curve signature.
-        </p>
 
         <p>
 Similarly, a proof can be added to a JSON-LD data document like the following:
         </p>
 
-        <pre class="example highlight" title="A simple JSON-LD data document">
-  {
-    "@context": {"title": "https://schema.org/title"},
-    "title": "Hello world!"
-  };
-        </pre>
-
-        <p>
-by adding the parameters outlined in this section:
-        </p>
-
-        <pre class="example highlight"
-        style="overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"
-        title="A simple signed JSON-LD data document">
-  {
-    "@context": [
-      {"title": "https://schema.org/title"},
-      "https://w3id.org/security/data-integrity/v1"
-    ],
-    "title": "Hello world!",
-    "proof": {
-      "type": "DataIntegrityProof",
-      "cryptosuite": "eddsa-2022",
-      "created": "2020-11-05T19:23:24Z",
-      "verificationMethod": "https://ldi.example/issuer#z6MkjLrk3gKS2nnkeWcmcxi
-        ZPGskmesDpuwRBorgHxUXfxnG",
-      "proofPurpose": "assertionMethod",
-      "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-        VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
-    }
-  }
-        </pre>
-
-        <p>
-The proof example above uses the `Ed25519Signature2020` <a>proof
-type</a> to produce a verifiable digital proof by canonicalizing the input data
-using the RDF Dataset Canonicalization algorithm [[?RDF-DATASET-C14N]] and then
-digitally signing it using an Ed25519 elliptic curve signature.
-        </p>
-
-<div class="issue">Create a separate section detailing an optional mechanism
-for authenticating public key control via bi-directional links. How
-to establish trust in controllers is out of scope but examples can
-be given.</div>
-
-<div class="issue">Specify algorithm agility mechanisms (additional attributes
-from the security vocab can be used to indicate other signing and hash
-algorithms). Rewrite algorithms to be parameterized on this basis and
-move `Ed25519Signature2020` definition to a single supported
-mechanism; specify its identifier as a URL. In order to make it easy to
-specify a variety of combinations of algorithms, introduce a core
-type `DataIntegrityProof` that allows for easy filtering/discover of
-proof nodes, but that type on its own doesn't specify any default
-proof or hash algorithms, those need to be given via other properties in the
-nodes.</div>
-
-      <p class="issue"
-        title="Avoid signature format proliferation by using text-based suite value">
-The pattern that Data Integrity Signatures use presently leads to a
-proliferation in signature types and JSON-LD Contexts. This proliferation can be
-avoided without any loss of the security characteristics of tightly binding a
-cryptography suite version to one or more acceptable public keys. The
-following signature suites are currently being contemplated: eddsa-2022,
-nist-ecdsa-2022, koblitz-ecdsa-2022, rsa-2022, pgp-2022, bbs-2022, eascdsa-2022,
-ibsa-2022, and jws-2022.
-      </p>
-
-      <pre class="example" title="A DataIntegrityProof example using a NIST ECDSA 2022 Cryptosuite">
+        <pre class="example nohighlight"
+          title="A simple JSON-LD data document">
 {
-  "@context": ["https://w3id.org/security/data-integrity/v1"],
-  "type": "DataIntegrityProof",
-  "cryptosuite": "ecdsa-2022",
-  "created": "2022-11-29T20:35:38Z",
-  "verificationMethod": "did:example:123456789abcdefghi#keys-1",
-  "proofPurpose": "assertionMethod",
-  "proofValue": "z2rb7doJxczUFBTdV5F5pehtbUXPDUgKVugZZ99jniVXCUpojJ9PqLYV
-                 evMeB1gCyJ4HqpnTyQwaoRPWaD3afEZboXCBTdV5F5pehtbUXPDUgKVugUpoj"
-}
-      </pre>
+  "@context": {"title": "https://schema.org/title"},
+  "title": "Hello world!"
+};
+        </pre>
 
-<div class="issue">Add an explicit check on key type to prevent an
-attacker from selecting an algorithm that could abuse how the key is
-used/interpreted.</div>
+        <p>
+The following proof secures the document above by using the `ecdsa-2019`
+cryptography suite [[?DI-ECDSA]], which produces a verifiable digital proof by
+transforming the input data using the RDF Dataset Canonicalization Scheme
+[[?RDF-CANON]] and then digitally signing it using the Elliptic Curve Digital
+Signature Algorithm (ECDSA).
+        </p>
+
+        <pre class="example nohighlight"
+        title="A simple signed JSON-LD data document">
+{
+  "@context": [
+    {"title": "https://schema.org/title"},
+    "https://w3id.org/security/data-integrity/v1"
+  ],
+  "title": "Hello world!",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-2019",
+    "created": "2020-06-11T19:14:04Z",
+    "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVK<wbr>w8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zXb23ZkdakfJNUhiTEdwyE598X7RLrkjnXEADLQZ7vZyUGXX8cyJZR<wbr>BkNw813SGsJHWrcpo4Y8hRJ7adYn35Eetq"
+  }
+}
+        </pre>
 
 <div class="issue">Add a note indicating that selective disclosure proof
 mechanisms can be compatible with Data Integrity; for example,
@@ -660,7 +642,7 @@ such as in the case of a set of signatures on a contract. A proof set,
 which has no order, is represented by associating a set of proofs
 with the `proof` key in a document.
         </p>
-        <pre class="example highlight" title="A proof set in a data document">
+        <pre class="example nohighlight" title="A proof set in a data document">
 {
   "@context": [
     {"title": "https://schema.org/title"},
@@ -671,20 +653,16 @@ with the `proof` key in a document.
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:24Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeW<wbr>cmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8nQA
-      VHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
+    "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8<wbr>nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T13:08:49Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gK<wbr>S2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9876
-      zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
+    "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9<wbr>876zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
   }]
 }
         </pre>
@@ -702,7 +680,8 @@ is expressed by providing at least one proof with an `id`, such as a UUID as a U
 and another proof with a `previousProof` value that identifies the
 previous proof.
         </p>
-        <pre class="example highlight" title="A proof chain in a data document">
+        <pre class="example nohighlight"
+          title="A proof chain in a data document">
 {
   "@context": [
     {"title": "https://schema.org/title"},
@@ -714,20 +693,16 @@ previous proof.
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T19:23:42Z",
-    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeWcmcxi
-      ZPGskmesDpuwRBorgHxUXfxnG",
+    "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnke<wbr>WcmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
-    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup3tmzN4
-      DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
+    "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup<wbr>3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
   }, {
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
     "created": "2020-11-05T21:28:14Z",
-    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gKS2mes
-      DpuwRBokeWcmrgHxUXfnncxiZP",
+    "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3g<wbr>KS2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19KiWXerb8
-      ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
+    "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19Ki<wbr>WXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
     "previousProof": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7"
   }]
 }
@@ -818,14 +793,14 @@ combination with an integrity protection mechanism such as Hashlinks.
           <h2>Verification Methods</h2>
           <p>
 A <a>controller document</a> can express <a>verification methods</a>, such as
-cryptographic public keys, which can be used to <a>authenticate</a> or authorize
-interactions with the <a>controller</a> or associated parties. For example, a
-cryptographic public key can be used as a <a>verification method</a> with
-respect to a digital signature; in such usage, it verifies that the signer
-could use the associated cryptographic private key. <a>Verification methods</a>
-might take many parameters. An example of this is a set of five cryptographic
-keys from which any three are required to contribute to a cryptographic
-threshold signature.
+cryptographic <a>public keys</a>, which can be used to <a>authenticate</a> or
+authorize interactions with the <a>controller</a> or associated parties. For
+example, a cryptographic <a>public key</a> can be used as a <a>verification
+method</a> with respect to a digital signature; in such usage, it verifies that
+the signer could use the associated cryptographic private key. <a>Verification
+methods</a> might take many parameters. An example of this is a set of five
+cryptographic keys from which any three are required to contribute to a
+cryptographic threshold signature.
           </p>
 
           <dl>
@@ -870,7 +845,8 @@ data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
             </dd>
           </dl>
 
-          <pre class="example" title="Example verification method structure">
+          <pre class="example nohighlight"
+            title="Example verification method structure">
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
@@ -925,24 +901,6 @@ material available for <a>controllers</a>, please see the Data Integrity
 Specification Registries [TBD - DIS-REGISTRIES].
             </p>
 
-            <p class=issue>
-Ensuring that cryptographic suites are versioned and tightly scoped to a very
-small set of possible key types and signature schemes (ideally one key type and
-size and one signature output type) is a design goal for most Data Integrity
-cryptographic suites. Historically, this has been done by defining both the
-key type and the cryptographic suite that uses the key type in the same
-specification. The downside of doing so, however, is that there might be a
-proliferation of different key types in multikey that result in different
-cryptosuites defining the same key material differently. For example, one
-cryptosuite might use compressed Curve P-256 keys while another uses
-uncompressed values. If that occurs, it will harm interoperability. It will be
-important in the coming months to years to ensure that this does not happen
-by fully defining the multikey format in a separate specification so
-cryptosuite specifications, such as this one, can refer to the multikey
-specification, thus reducing the chances of multikey type proliferation and
-improving the chances of maximum interoperability for the multikey format.
-            </p>
-
             <p>
 To increase the likelihood of interoperable implementations, this specification
 limits the number of formats for expressing verification material in a <a>controller
@@ -970,14 +928,14 @@ in <a href="https://www.iana.org/assignments/jose#web-key-parameters">JSON Web K
                 <p>
 The `publicKeyMultibase` property is OPTIONAL. This feature is
 non-normative. If present, the value MUST be a <a
-data-cite="INFRA#string">string</a> representation of a [[?MULTIBASE]] encoded
+data-cite="INFRA#string">string</a> representation of a [[MULTIBASE]] encoded
 public key.
                 </p>
                 <p class="advisement">
 Note that the [[?MULTIBASE]] specification is not yet a standard and is
 subject to change. There might be some use cases for this data format
 where `<b>public</b>KeyMultibase` is defined, to allow for
-expression of public keys, but `<b>private</b>KeyMultibase`
+expression of <a>public keys</a>, but `<b>private</b>KeyMultibase`
 is not defined, to protect against accidental leakage of secret keys.
                 </p>
               </dd>
@@ -1054,7 +1012,7 @@ In the example above, the `publicKeyMultibase` value starts with the letter `z`,
 which is the [[MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
 [[MULTICODEC]] header is `0xed`, which specifies that the remaining data
-is a 32-byte raw Ed25519 public key.
+is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
             <p>
@@ -1224,8 +1182,8 @@ presenting a valid proof of authentication. When a <em>verifier</em> receives
 some data (in some protocol-specific format) that contains a proof that was made
 for the purpose of "authentication", and that says that an entity is identified
 by the `id`, then that <em>verifier</em> checks to ensure that the proof can be
-verified using a <a>verification method</a> (e.g., public key) listed under
-`<a>authentication</a>` in the <a>controller document</a>.
+verified using a <a>verification method</a> (e.g., <a>public key</a>) listed
+under `<a>authentication</a>` in the <a>controller document</a>.
             </p>
             <p>
 Note that the <a>verification method</a> indicated by the
@@ -1316,8 +1274,8 @@ referenced.
             <p>
 An example of when this property is useful is when encrypting a message intended
 for the <a>controller</a>. In this case, the counterparty uses the
-cryptographic public key information in the <a>verification method</a> to wrap a
-decryption key for the recipient.
+cryptographic <a>public key</a> information in the <a>verification method</a> to
+wrap a decryption key for the recipient.
             </p>
 
             <pre class="example nohighlight" title="Key agreement property
@@ -1794,19 +1752,6 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
           </li>
         </ol>
 
-        <p class="issue" title="Define how verification material is retrieved">
-Specify how <var>proof</var>.<var>verificationMethod</var> can be obtained,
-e.g., through some out-of-band process, by
-dereferencing its URL identifier, etc. It is expected that the <a>public key</a>
-is retrieved by dereferencing its URL identifier in the `proof` node
-of the default graph of <var>securedDocument</var>. The algorithm needs to
-confirm that the <a>verification method</a> that describes the cryptographic
-material, such as the <a>public key</a>, specifies its <a>controller</a>, and
-that its controllers's URL identifier can be dereferenced to reveal a
-bi-directional link back to the key. Ensure that the key's controller is a
-trusted entity before proceeding to the next step.
-        </p>
-
       </section>
 
       <section class="normative">
@@ -1814,7 +1759,7 @@ trusted entity before proceeding to the next step.
 
         <p>
 The following algorithm specifies how to safely retrieve a verification method,
-such as a cryptographic public key, by using a <a>verification method</a>
+such as a cryptographic <a>public key</a>, by using a <a>verification method</a>
 identifier contained in a <a>data integrity proof</a>. Required inputs are a
 <strong><a>data integrity proof</a></strong> (<var>proof</var>) and a set of
 <strong>dereferencing options</strong> (<var>options</var>). A
@@ -1981,7 +1926,7 @@ using a year designation. For example, the cryptographic suite identifier
 year 2025, but might not be a safe choice in the year 2042. A date-based
 versioning mechanism, however, is not enough by itself. All cryptographic
 suites that follow this specification are intended to be registered
-[[?VC-EXTENSION-REGISTRY]] in a way that clearly signal which cryptosuites
+[[?VC-SPECS]] in a way that clearly signal which cryptosuites
 are deprecated, standardized, or experimental. Cryptosuite registration will
 follow CFRG, IETF, NIST, FIPS, and safecurves guidance. Use of deprecated suites
 are expected to throw errors in implementations unless a `useUnsafeCryptosuites`
@@ -1991,23 +1936,6 @@ unless a `useExperimentalCryptosuites` option is used specifying exactly
 the experimental cryptosuite to use.
         </p>
 
-        <p class="issue" title="Resolve VC Extension Registry Governance">
-The following text is debated due to the governance rules of the VC
-Extension Registry not being finalized:<br><br>
-Developers are urged to always refer to the [[?VC-EXTENSION-REGISTRY]] for
-the latest standardized cryptography suites as well as cross-checking their
-usage against, at least, the
-<a href="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
-COSE Algorithms Registry</a>, the
-<a href="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
-JOSE Algorithms Registry</a>, and the latest
-<a href="https://csrc.nist.gov/publications/detail/fips/186/4/final">
-FIPS Digital Signature Standard
-</a> guidance.  Depending on your jurisdiction you may also need to consider
-additional guidance from
-<a href="https://www.etsi.org/deliver/etsi_ts/119300_119399/119312/01.02.01_60/ts_119312v010201p.pdf">ETSI</a>
-or other regional regulatory and standards bodies.
-        </p>
       </section>
 
       <section>
@@ -2149,7 +2077,7 @@ At times, it is beneficial to transform the data being protected during the
 cryptographic protection process. Such "in-line" transformation can enable a
 particular type of cryptographic protection to be agnostic to the data format it
 is carried in. For example, some Data Integrity cryptographic suites utilize RDF
-Dataset Canonicalization [[?RDF-DATASET-C14N]] which transforms the initial
+Dataset Canonicalization [[?RDF-CANON]] which transforms the initial
 representation into a canonical form [[?N-QUADS]] that is then serialized,
 hashed, and digitally signed. As long as any syntax expressing the protected
 data can be transformed into this canonical form, the digital signature can be
@@ -2189,7 +2117,7 @@ requirement for cryptographic hashing mechanisms and is why those schemes are
 designed to be collision resistant. Cryptographic canonicalization mechanisms
 have the same requirement. At present, this isn't a problem because the three
 expected canonicalization schemes &mdash; the Universal RDF Dataset
-Canonicalization Algorithm 2015 [[?RDF-DATASET-C14N]], JSON Canonicalization
+Canonicalization Algorithm 2015 [[?RDF-CANON]], JSON Canonicalization
 Scheme [[?RFC8785]], and a theoretical future base-encoding canonicalization
 &mdash; have entirely different outputs.
         </p>
