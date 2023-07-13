@@ -606,6 +606,20 @@ Signature Algorithm (ECDSA).
 }
         </pre>
 
+        <p class="note" title="Representing time values to individuals">
+This specification enables the expression of dates and times, such as through
+the `created` and `expires` properties. This information might be indirectly
+exposed to an individual if a proof is processed and is detected to be outside
+an allowable time range. When displaying date and time values related to the
+validity of cryptographic proofs, implementers are advised to respect the
+<a date-cite="LTLI#locale" href="https://www.w3.org/TR/ltli/#locale">locale</a>
+and local calendar preferences of the individual [[?LTLI]]. Conversion of
+timestamps to local time values are expected to consider the time zone
+expectations of the individual. See
+<a data-cite="VC-DATA-MODEL-2.0#representing-time"></a> for more details about
+representing time values to individuals.
+        </p>
+
 <div class="issue">Add a note indicating that selective disclosure proof
 mechanisms can be compatible with Data Integrity; for example,
 an algorithm could produce a merkle tree from a canonicalized set of
@@ -2411,35 +2425,6 @@ disclosing information while preserving privacy, see
 Section <a href="#unlinkability"></a>.
         </p>
 
-      </section>
-
-    </section>
-
-    <section>
-      <h2>Internationalization Considerations</h2>
-      <p>
-The following section describes internationalization considerations that
-developers implementing this specification are urged to consider in order to
-ensure that their software is usable by people from different cultures. As a
-general rule, this specification is used by system software and does not
-directly expose individuals to information subject to internationalization
-considerations. However, there are instances where individuals might be
-indirectly exposed to information expressed by this specification and thus the
-guidance below is provided for those situations.
-      </p>
-
-      <section>
-        <h2>Representing Time</h2>
-        <p>
-This specification enables the expression of dates and times related to the
-validity period of cryptographic proofs. This information might be indirectly
-exposed to an individual if a proof is processed and is detected to be outside
-an allowable time range. When exposing these dates and times to an individual,
-implementers are urged to take into account
-<a data-cite="VC-DATA-MODEL-2.0#representing-time">cultural norms when
-representing dates and times</a>, as well as ensuring that the value is
-displayed according to provided locale settings in display software.
-        </p>
       </section>
 
     </section>
