@@ -1583,6 +1583,29 @@ Cryptographic suite designers MUST use mandatory `proof` value properties
 defined in Section <a href="#proofs"></a>, and MAY define other properties
 specific to their cryptographic suite.
         </p>
+
+        <p class="note" title="Legacy Cryptographic Suite Design Patterns">
+One of the design patterns that existed for Data Integrity cryptosuites from
+2012 to 2020 was to use the `type` property to establish a specific type for a
+cryptographic suite. For example, the
+<a href="https://www.w3.org/TR/vc-di-eddsa/#the-ed25519signature2020-suite">
+Ed25519Signature2020 cryptographic suite</a> was one such specification. This
+led to a potential for cryptographic suite proliferation, where every new
+cryptographic suite would require a new JSON-LD Context to be specified,
+resulting in a less-than-ideal developer experience. The design pattern was
+changed in 2020 to streamline the approach such that a developer would only need
+to include a single JSON-LD Context to support all modern cryptographic suites.
+As a result, more modern cryptosuites such as the EdDSA Cryptosuites
+[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] utilize the pattern
+described in this section.
+        </p>
+
+        <p>
+In order to streamline the developer experience, it is RECOMMENDED that authors
+that are creating new Data Integrity cryptographic suite specifications utilize
+the modern pattern where the `type` is set to `DataIntegrityProof` and the
+`cryptosuite` property carries the identifier for the cryptosuite.
+        </p>
       </section>
 
     </section>
