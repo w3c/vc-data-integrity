@@ -1481,6 +1481,55 @@ this specification.
 
       </section>
 
+      <section>
+        <h2>Contexts and Vocabularies</h2>
+
+        <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
+This section lists cryptographic hash values that might change during the
+Candidate Recommendation phase based on implementer feedback that requires
+the referenced files to be modified.
+        </p>
+        <p>
+Implementations that perform JSON-LD processing MUST treat the following
+JSON-LD context URLs as already resolved, where the resolved document matches
+the corresponding hash values below:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>URL and Media Type</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space: nowrap;">
+https://www.w3.org/ns/data-integrity/v1<br>
+application/ld+json
+              </td>
+              <td>
+sha256: v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=<br><br>
+sha3-512: Sg1PLFxKyEYQns9Zr0BoYXtFeDNfrHUDNMkyq4QEWv<wbr>wGIaX1v5xovnCG+dfceZEzr7BhBjm396noZF1HEeCM8g==
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+https://www.w3.org/ns/multikey/v1<br>
+application/ld+json
+              </td>
+              <td>
+sha256: SA+P0RxXl8ZH6xdPcmX71crzeGkCYMPfYjdVT46SF0o=<br><br>
+sha3-512: BgQBN00t6vj1T4uYt5SwdPOhe2BVNY11UEvkVo/rbBv<wbr>fBd+Z09isxhGhf2HkVqMT
+SANah1u7rLk6Uw6GeQGH1w==
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </section>
+
     </section>
 
     </section>
