@@ -1568,6 +1568,12 @@ to `https://www.w3.org/ns/security/` or an equally normative and archived
 location under W3C control.
         </p>
 
+        <p>
+It is possible to confirm the digests listed above by running the following
+command from a modern Unix command interface line:
+`curl -s &lt;DOCUMENT_URL> | openssl dgst -&ltDIGEST_ALGORITHM> -binary | openssl base64 -nopad -a`.
+        </p>
+
       </section>
 
     </section>
