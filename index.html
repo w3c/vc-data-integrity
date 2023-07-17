@@ -492,7 +492,7 @@ by a verifier during the verification process.
 
           <dt>created</dt>
           <dd>
-The date and time the proof was created is OPTIONAL and, if included, MUST be 
+The date and time the proof was created is OPTIONAL and, if included, MUST be
 specified as an [[XMLSCHEMA11-2]] combined date and time string.
           </dd>
 
@@ -1482,6 +1482,28 @@ this specification.
       </section>
 
       <section>
+        <h2>Relationship to Verifiable Credentials</h2>
+        <p>
+Cryptographic suites that implement this specification can be used to secure
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable credentials</a> and
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+verifiable presentations</a>. Implementers
+that are addressing those use cases are cautioned that additional checks might
+be appropriate when processing those types of documents. For example, there are
+some use cases where it is important to ensure that the
+<a href="#proofs">`proof.verificationMethod`</a> value is associated with the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> URL value in a
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable credential</a>, or the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`holder`</a> URL value in a
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable presentation</a>, during the process of
+<a data-cite="VC-DATA-MODEL-2.0#issuer-0">validation</a>.
+        </p>
+      </section>
+
+      <section>
         <h2>Contexts and Vocabularies</h2>
 
         <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
@@ -1729,7 +1751,7 @@ in a sub-optimal developer experience. A streamlined version of this design
 pattern emerged in 2020, such that a developer would only need to include a
 single JSON-LD Context to support all modern cryptographic suites. This
 encouraged more modern cryptosuites &mdash; such as the EdDSA Cryptosuites
-[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] &mdash; to be built 
+[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] &mdash; to be built
 based on the streamlined pattern described in this section.
         <br><br>
 To improve the developer experience, authors creating new Data Integrity
