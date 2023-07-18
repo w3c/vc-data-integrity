@@ -1492,14 +1492,24 @@ verifiable presentations</a>. Implementers
 that are addressing those use cases are cautioned that additional checks might
 be appropriate when processing those types of documents. For example, there are
 some use cases where it is important to ensure that the
-<a href="#proofs">`proof.verificationMethod`</a> value is associated with the
-<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> URL value in a
+<a>verification method</a> used in a proof is associated with the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
 <a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
 verifiable credential</a>, or the
-<a data-cite="VC-DATA-MODEL-2.0#issuer">`holder`</a> URL value in a
-<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
 verifiable presentation</a>, during the process of
-<a data-cite="VC-DATA-MODEL-2.0#issuer-0">validation</a>.
+<a data-cite="VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
+way to check for such an association is to ensure that the value of the
+<code>controller</code> property of a proof's <a>verification method</a>
+matches the URL value used to identify the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively.
+This particular association indicates that the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively,
+is the controller of the <a>verification method</a> used to verify
+the proof.
         </p>
       </section>
 
