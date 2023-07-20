@@ -2040,6 +2040,45 @@ appropriate override flags.
       </section>
 
       <section>
+        <h3>Conventions for Naming Cryptography Suites</h3>
+        <p>
+Section <a href="#versioning-cryptography-suites"></a> emphasized the 
+importance of providing relatively easy to understand information concerning the
+timeliness of particular cryptographic suite. While section 
+<a href="#protecting-application-developers"></a> further emphasized minimizing 
+the number of options to be specified. Indeed section 
+<a href="#cryptographic-suites"></a> lists requirements for crytographic suites
+which include detailed specification of algorithm, transformation, hashing and 
+serialization. Hence the name of the cryptographic suite does not need to 
+include all this detail which implies the <em>parametric versioning</em> mentioned
+in section <a href="#versioning-cryptography-suites"></a> is not necessary or
+desirable.
+        </p>
+        <p>
+The recommended naming convention convention for cryptographic suites is a 
+string composed of a signature algorithm identifier, separated by a hyphen from 
+an option identifier (if the cryptosuite supports more than incompatible 
+implementation option), followed by a hyphen and then designation of the year 
+that the suite was approximately proposed.
+        </p>
+        <p>
+For example the [[DI-EDDSA]] is based on EdDSA digital signatures and supports 
+two incompatible options based on canonicalization approaches, and was proposed 
+roughly in the year 2022 would have two different cryptosuite names: 
+<q>eddsa-rdc-2022</q> and <q>eddsa-jcs-2022</q>.
+        </p>
+        <p>
+Although the [[DI-ECDSA]] is based on ECDSA digital signatures, supports the 
+same two incompatible canonicalization approaches as [[DI-EDDSA]], and supports 
+two different levels of security (128 bit and 192 bit) via two alternative sets 
+of elliptic curves and hashes only cryptosuite names <q>ecdsa-rdc-2019</q> and 
+<q>ecdsa-jcs-2019</q>. The determination of the security level and corresponding 
+curves and hashes are determined from the multi-key format of the public key 
+used in validation.
+        </p>
+      </section>
+
+      <section>
         <h3>Agility and Layering</h3>
 
         <p>
