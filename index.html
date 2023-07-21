@@ -1692,71 +1692,52 @@ via the digital proof.
 
       </section>
       <section>
-        <h3>Add Proof Set</h3>
+        <h3>Add Proof Set/Chain</h3>
         <p>
-          The following algorithm specifies how to add a proof set to a 
-          document. Required inputs are an
-          <a>unsecured data document</a> (<var>unsecuredDocument</var>) and a
-          list (unordered) of
-          <a>proof options</a> (<var>options_list</var>). Each <a>proof options</a>
-          (<var>options</var>) in the list must satisfy the criteria in 
+          The following algorithm specifies how to incrementally add a proof to 
+          a proof set or proof chain starting with a secured document containing
+          either a proof or proof set/chain.
+          Required inputs are a <a>secured data document</a> 
+          (<var>securedDocument</var>) and <a>proof options</a> 
+          (<var>options</var>). The <a>proof options</a>
+          (<var>options</var>) must satisfy the criteria in 
           section <a href="#add-proof"></a>.
-          A <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
+          A new <dfn>secured data document</dfn> is produced as
+          output. Whenever this algorithm encodes strings, it MUST use UTF-8 
+          encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Let <var>output</var> be a copy of <var>unsecuredDocument</var> and 
-<var>proof_list</var> be an empty list.
+Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
+<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all 
+the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var> 
+is an object add a copy of that object to <var>proof_list</var>.
           </li>
           <li>
-For each <var>options</var> in <var>options_list</var> run steps 2 through 8 of
-the algorithm in section <a href="#add-proof"></a>. If no exceptions are raised 
-append the generated <var>proof</var> value to the <var>proof_list</var> 
-otherwise raise the exception.
+Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var> 
+with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of 
+the <var>unsecuredDocument</var>.
+          </li>
+          <li>
+If <var>options</var> contains a <code>previousProof</code> attribute check if 
+an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
+If not  a `PROOF_GENERATION_ERROR` MUST be raised.
+          </li>
+          <li>
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
+no exceptions are raised append the generated <var>proof</var> value to the 
+<var>proof_list</var> otherwise raise the exception.
           </li>
           <li>
 Set <var>output</var>.<var>proof</var> to the value of <var>proof_list</var>.
           </li>
           <li>
-Return <var>output</var> as the <a>secured data document</a>.
+Return <var>output</var> as the new <a>secured data document</a>.
           </li>
         </ol>
       </section>
-      <section>
-        <h3>Add Proof Chain</h3>
-        <p>
-          The following algorithm specifies how to add a proof chain to a 
-          document. Required inputs are an
-          <a>unsecured data document</a> (<var>unsecuredDocument</var>) and a
-          (unordered) list of
-          <a>proof options</a> (<var>options_list</var>) to which an order will
-          be established. Each <a>proof options</a>
-          (<var>options</var>) in the list must satisfy the criteria in 
-          section <a href="#add-proof"></a>.
-          A <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
-        </p>
-
-        <ol class="algorithm">
-          <li>
-For each <var>options</var> in <var>options_list</var> that represents a proof 
-that must come before another proof add an <code>id</code> attribute if it is 
-not already present.
-          </li>
-          <li>
-For each <var>options</var> in <var>options_list</var> that represents a proof 
-that must come after another proof add an <code>previousProof</code> attribute 
-with value the <code>id</code> of the proof that must come before it.
-not already present.
-          </li>
-          <li>
-Use this modified <var>options_list</var> in the algorithm of section 
-<a href="#add-proof-set"></a>.
-          </li>
-        </ol>        
-      </section>
+      
       <section>
         <h3>Verify Proof</h3>
 
@@ -1846,8 +1827,7 @@ In the case of a proof set or proof chain a <a>secured data document</a> has a
 The following algorithm specifies how to check the authenticity and
 integrity of a <a>secured data document</a> by verifying each
 proof in the <var>proof_list</var>. Required inputs are a
-<a>secured data document</a> (<var>securedDocument</var>) and
-<a>proof options</a> (<var>options</var>). A list of 
+<a>secured data document</a> (<var>securedDocument</var>). A list of 
 verification results is produced as output.
         </p>
         <ol class="algorithm">
