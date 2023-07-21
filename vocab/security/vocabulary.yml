@@ -189,7 +189,7 @@ property:
     label: Proof value
     domain: sec:Proof
     range: xsd:string
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofalue
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
 
   - id: authentication
     label: Authentication method
