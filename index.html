@@ -1584,30 +1584,32 @@ defined in Section <a href="#proofs"></a>, and MAY define other properties
 specific to their cryptographic suite.
         </p>
 
-        <p class="note" title="Legacy Cryptographic Suite Design Patterns">
-One of the design patterns that existed for Data Integrity cryptosuites from
-2012 to 2020 was to use the `type` property to establish a specific type for a
+        <p class="note" title="Design Patterns of Legacy Cryptographic Suites">
+One of the design patterns seen in Data Integrity cryptosuites from
+2012 to 2020 was use of the `type` property to establish a specific type for a
 cryptographic suite. For example, the
 <a href="https://www.w3.org/TR/vc-di-eddsa/#the-ed25519signature2020-suite">
 Ed25519Signature2020 cryptographic suite</a> was one such specification. This
-led to a potential for cryptographic suite proliferation, where every new
-cryptographic suite would require a new JSON-LD Context to be specified,
-resulting in a less-than-ideal developer experience. The design pattern was
-changed in 2020 to streamline the approach such that a developer would only need
-to include a single JSON-LD Context to support all modern cryptographic suites.
-As a result, more modern cryptosuites such as the EdDSA Cryptosuites
-[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] utilize the pattern
-described in this section.
+led to a greater burden on cryptographic suite implementations, where every new
+cryptographic suite required a new JSON-LD Context to be specified, resulting
+in a sub-optimal developer experience. A streamlined version of this design
+pattern emerged in 2020, such that a developer would only need to include a
+single JSON-LD Context to support all modern cryptographic suites. This
+encouraged more modern cryptosuites &mdash; such as the EdDSA Cryptosuites
+[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] &mdash; to be built 
+based on the streamlined pattern described in this section.
         </p>
 
         <p>
-In order to streamline the developer experience, it is RECOMMENDED that authors
-that are creating new Data Integrity cryptographic suite specifications utilize
-the modern pattern where the `type` is set to `DataIntegrityProof` and the
-`cryptosuite` property carries the identifier for the cryptosuite. A
-list of known cryptographic suite specifications is provided in the
-<a href="https://w3c.github.io/vc-specs-dir/#proof">Proof types section of the
-Verifiable Credentials Specifications Directory</a>.
+To improve the developer experience, authors creating new Data Integrity
+cryptographic suite specifications SHOULD use the modern pattern &mdash; where
+the `type` is set to `DataIntegrityProof`; the `cryptosuite` property carries
+the identifier for the cryptosuite; and any cryptosuite-specific cryptographic
+data is encapsulated (i.e., not directly exposed as application layer data)
+within `proofValue`. A list of cryptographic suite specifications that are
+known to follow this pattern is provided in the
+<a href="https://w3c.github.io/vc-specs-dir/#proof">Proof types section of
+the Verifiable Credentials Specifications Directory</a>.
         </p>
       </section>
 
