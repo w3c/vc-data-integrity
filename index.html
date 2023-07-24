@@ -2456,6 +2456,23 @@ being protected. Developers are also urged to regularly confirm that the
 cryptographically protected data has not been tampered with as it is written to
 and read from application storage.
         </p>
+        <p class="advisement">
+Some transformations, such as RDF Dataset Canonicalization [[RDF-CANON]], have
+mitigations for input data sets that can be used by attackers to consume
+excessive processing cycles. These class of attacks are called
+<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a> and all modern
+RDF Dataset canonicalizers are required to detect these sorts of bad inputs and
+halt processing. The test suites for RDF Dataset Canonicalization contains such
+poisoned datasets to ensure that such mitigations exist in all conforming
+implementations. Generally speaking, cryptographic suite specifications that
+utilize transformations are required to mitigate these sorts of attacks and
+implementers are urged to ensure that the software libraries that they use
+enforce these mitigations. These attacks are in the same general category as
+any resource starvation attack, such as HTTP clients that deliberately
+slow connections, thus starving connections on the server. Implementers are
+advised to consider these sorts of attacks when implementing defensive
+security strategies.
+        </p>
         <p class="issue"
           title="Collision-resistant canonicalization requirements">
 The VCWG is seeking feedback on normative language that cryptographic suite
