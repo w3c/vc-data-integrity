@@ -522,9 +522,10 @@ value. The contents of this value are determined by a cryptosuite and set to the
 
           <dt>previousProof</dt>
           <dd>
-An optional string value that identifies another <a>data integrity proof</a>
-that MUST verify before the current proof is processed. This property is used
-in Section <a href="#proof-chains"></a>.
+An optional string value or array of string values. Each value identifies 
+another <a>data integrity proof</a> that MUST verify before the current proof is 
+processed. In the case of an array all referenced proofs in the array MUST 
+verify. This property is used in Section <a href="#proof-chains"></a>.
           </dd>
 
         </dl>
@@ -1720,9 +1721,14 @@ with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of
 the <var>unsecuredDocument</var>.
           </li>
           <li>
-If <var>options</var> contains a <code>previousProof</code> attribute check if 
+If <var>options</var> contains a <code>previousProof</code> attribute and that 
+attribute is a string check if 
 an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
-If not  a `PROOF_GENERATION_ERROR` MUST be raised.
+If not  a `PROOF_GENERATION_ERROR` MUST be raised. If the 
+<code>previousProof</code> attribute is an array check that each element of that
+array is a string and that an element of the <var>proof_list</var> has a 
+matching <code>id</code> attribute. If not  a `PROOF_GENERATION_ERROR` MUST be 
+raised.
           </li>
           <li>
 Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
@@ -1844,7 +1850,12 @@ For each <var>proof</var> in <var>proof_list</var> that contains a
 <code>previousProof</code> attribute modify the associated 
 <var>isProofVerified</var> by iteratively checking that the proof identified by
 the <code>id</code> value in <var>previousProof</var> is valid along with any 
-<code>previousProofs</code> up the chain.
+<code>previousProofs</code> up the chain. If <code>previousProof</code> is an
+array then all previous proof proof chains identified by the array elements 
+must be valid for the current proof to be considered valid. Cycle detection, 
+such as keeping a list of previously visited proofs, MUST be used to guard 
+against malicious proofs. If a cycle is detected in a proof chain 
+then a `PROOF_CHAIN_CYCLE_ERROR` must be raised.
           </li>
           <li>
 Return the <var>proof_list</var> along with each proofs associated 
