@@ -522,10 +522,11 @@ value. The contents of this value are determined by a cryptosuite and set to the
 
           <dt>previousProof</dt>
           <dd>
-An optional string value or array of string values. Each value identifies 
-another <a>data integrity proof</a> that MUST verify before the current proof is 
-processed. In the case of an array all referenced proofs in the array MUST 
-verify. This property is used in Section <a href="#proof-chains"></a>.
+An optional string value or an unordered list of string values. Each value 
+identifies another <a>data integrity proof</a> that MUST verify before the 
+current proof is processed. In the case of an unordered list all referenced 
+proofs in the array MUST verify. This property is used in Section 
+<a href="#proof-chains"></a>.
           </dd>
 
         </dl>
