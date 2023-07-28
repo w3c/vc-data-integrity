@@ -1821,7 +1821,7 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
       <section>
         <h3>Verify Proof Sets and Chains</h3>
         <p>
-In the case of a proof set or proof chain a <a>secured data document</a> has a 
+In a proof set or proof chain, a <a>secured data document</a> has a 
 <code>proof</code> attribute which contains a list of proofs 
 (<var>proof_list</var>).
 The following algorithm specifies how to check the authenticity and
@@ -1835,19 +1835,19 @@ verification results is produced as output.
 Set <var>proof_list</var> to </var><var>securedDocument</var>.<var>proof</var>. 
           </li>
           <li>
-For each <var>proof</var> in <var>proof_list</var> run steps 2-11 of the algorithm in
-section <a href="verify-proof"></a> and if no exceptions are raised, associate
+For each <var>proof</var> in <var>proof_list</var>, run steps 2&ndash;11 of the algorithm in
+section <a href="verify-proof"></a>, and if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
           </li>
           <li>
 For each <var>proof</var> in <var>proof_list</var> that contains a 
-<code>previousProof</code> attribute modify the associated 
-<var>isProofVerified</var> by iteratively checking that the proof identified by
-the <code>id</code> value in <var>previousProof</var> is valid along with any 
+<code>previousProof</code> attribute, modify the associated 
+<var>isProofVerified</var> by iteratively checking whether the proof identified by
+the <code>id</code> value in <var>previousProof</var> is valid, along with any 
 <code>previousProofs</code> up the chain.
           </li>
           <li>
-Return the <var>proof_list</var> along with each proofs associated 
+Return the <var>proof_list</var> along with each proof's associated 
 <var>isProofVerified</var> information.
           </li>
         </ol>
