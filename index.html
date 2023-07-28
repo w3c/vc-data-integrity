@@ -469,7 +469,7 @@ Proof types determine what other fields are required to secure and
 verify the proof.
           </dd>
 
-          <dt>proofPurpose</dt>
+          <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
           <dd>
 The reason the proof was created MUST be specified as a string that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
@@ -490,7 +490,7 @@ link to a <a>public key</a> which includes cryptographic material that is used
 by a verifier during the verification process.
           </dd>
 
-          <dt>created</dt>
+          <dt><dfn class="lint-ignore">created</dfn></dt>
           <dd>
 The date and time the proof was created is OPTIONAL and, if included, MUST be
 specified as an [[XMLSCHEMA11-2]] combined date and time string.
@@ -502,7 +502,7 @@ An OPTIONAL property that conveys the date and time that a proof expires and tha
 specified as an [[XMLSCHEMA11-2]] combined date and time string.
           </dd>
 
-          <dt>domain</dt>
+          <dt id="defn-domain">domain</dt>
           <dd>
 The creator of a proof SHOULD include a string value that indicates its intended usage, which a verifier SHOULD use to ensure the proof was intended to be used by them. The
 specification of the `domain` parameter is useful in challenge-response
@@ -513,7 +513,7 @@ the creator of the proof. Examples of a domain parameter include:
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt>challenge</dt>
+          <dt id="defn-challenge">challenge</dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular <a>domain</a> and window of time. This
@@ -521,7 +521,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
           </dd>
 
-          <dt>proofValue</dt>
+          <dt><dfn class="lint-ignore">proofValue</dfn></dt>
           <dd>
 A string value that contains the data necessary to verify the digital proof
 using the `verificationMethod` specified. The contents of the value MUST be a
@@ -532,7 +532,7 @@ value. The contents of this value are determined by a cryptosuite and set to the
 <a href="#add-proof">Add Proof Algorithm</a>.
           </dd>
 
-          <dt>previousProof</dt>
+          <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
 An optional string value that identifies another <a>data integrity proof</a>
 that MUST verify before the current proof is processed. This property is used
@@ -837,7 +837,7 @@ cryptographic threshold signature.
           </p>
 
           <dl>
-            <dt>verificationMethod</dt>
+            <dt><dfn class="lint-ignore">verificationMethod</dfn></dt>
             <dd>
               <p>
 The `verificationMethod` property is OPTIONAL. If present, the value
@@ -873,7 +873,7 @@ method</a> type. In order to maximize global interoperability, the
 <a>verification method</a> type SHOULD be registered in the Data Integrity Specification
 Registries [TBD -- DIS-REGISTRIES].
                 </dd>
-                <dt>controller</dt>
+                <dt><span id="defn-controller">controller</span></dt>
                 <dd>
 The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
@@ -1178,7 +1178,7 @@ challenge-response protocol.
             </p>
 
             <dl>
-              <dt>authentication</dt>
+              <dt id="defn-authentication">authentication</dt>
               <dd>
 The `authentication` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
@@ -1248,7 +1248,7 @@ the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2.0]].
             </p>
 
             <dl>
-              <dt><dfn>assertionMethod</dfn></dt>
+              <dt><dfn id="defn-assertionMethod">assertionMethod</dfn></dt>
               <dd>
 The `assertionMethod` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1304,7 +1304,7 @@ the purposes of establishing a secure communication channel with the recipient.
             </p>
 
             <dl>
-              <dt><dfn>keyAgreement</dfn></dt>
+              <dt><dfn id="defn-keyAgreement">keyAgreement</dfn></dt>
               <dd>
 The `keyAgreement` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
@@ -1355,7 +1355,7 @@ authorization to update the <a>controller document</a>.
             </p>
 
             <dl>
-              <dt><dfn>capabilityInvocation</dfn></dt>
+              <dt><dfn id="defn-capabilityInvocation">capabilityInvocation</dfn></dt>
               <dd>
 The `capabilityInvocation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1422,7 +1422,7 @@ to access a specific HTTP API to a subordinate.
             </p>
 
             <dl>
-              <dt><dfn class="lint-ignore">capabilityDelegation</dfn></dt>
+              <dt><dfn class="lint-ignore" id="defn-capabilityDelegation">capabilityDelegation</dfn></dt>
               <dd>
 The `capabilityDelegation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1753,7 +1753,7 @@ When specifing a cryptographic suite that utilizes this design pattern, the
           <dd>
 The `type` property MUST contain the string `DataIntegrityProof`.
           </dd>
-          <dt>cryptosuite</dt>
+          <dt><dfn class="lint-ignore">cryptosuite</dfn></dt>
           <dd>
 The `cryptosuite` property MUST contain a string specifying the name of the
 cryptosuite.

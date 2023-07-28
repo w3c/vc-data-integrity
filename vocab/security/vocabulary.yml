@@ -20,353 +20,216 @@ ontology:
 class:
   - id: Proof
     label: Digital proof
-    comment: |
-      This class represents a digital proof on serialized data.
+    comment: This class represents a digital proof on serialized data.
 
   - id: ProofGraph
     label: An RDF Graph for a digital proof
-    comment: Instances of this class are RDF Graphs, where each of these graphs must include exactly one Proof.
+    comment: Instances of this class are <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF12-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a>.
 
   - id: VerificationMethod
     label: Verification method
-    comment: A Verification Method class can express different verification methods, such as cryptographic public keys, which can be used to authenticate or authorize interaction with the `controller` or associated parties. Verification methods might take many parameters.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-methods
 
   - id: DataIntegrityProof
     label: A Data Integrity Proof
     upper_value: sec:Proof
-    comment: This class represents a data integrity proof used to encode a variety of cryptographic suite proof encodings.
-    see_also:
-      - label: vc-data-integrity
-        url: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
-
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
+ 
   - id: Multikey
     label: Multikey Verification Method
     upper_value: sec:VerificationMethod
-    comment: Verification method to be used with, for example, data integrity proof cryptographic suites, such as the eddsa-2022 cryptographic suite. See the <a href="https://www.w3.org/TR/vc-di-eddsa/#multikey">EdDSA Cryptosuite v2022 specification</a> for further details.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#multikey
     see_also:
       - label: EdDSA Cryptosuite v2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
 
+  - id: Key
+    label: Cryptographic key
+    comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
+
+  - id: Ed25519VerificationKey2020
+    label: ED2559 Verification Key, 2020 version
+    upper_value: sec:Key
+    defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519verificationkey2020
+    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">Ed25519Signature2020</a>. 
+
   - id: Ed25519Signature2020
     label: Ed25519 Signature Suite, 2020 version
     upper_value: sec:Proof
-    deprecated: true
-    comment: T.B.D.
+    defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519signature2020
 
-# These are the class definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
 
-  - id: Key
-    deprecated: true
-    label: Cryptographic key
-    comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data.
+# These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated
+# In some cases a ccg document was found and used for the definition, but in some cases even that is missing...
 
-  - id: Signature
-    deprecated: true
-    label: Digital signature
-    upper_value: sec:Proof
-    comment: |
-      This class represents a digital signature on serialized data. It is an abstract class and should not be used other than for Semantic Web reasoning purposes, such as by a reasoning agent. This class MUST NOT be used directly, but only through its subclasses.
-
-  - id: SignatureGraph
-    deprecated: true
-    label: An RDF Graph for a digital signature
-    upper_value: sec:ProofGraph
-    comment: Instances of this class are RDF Graphs, where each of these graphs must include exactly one Signature.
-
+ 
   - id: EcdsaSecp256k1Signature2019
     deprecated: true
-    label: TBD.
-    upper_value: sec:Signature
-    comment: This class represents a data integrity signature suite.
-    see_also:
-      - label: ecdsa-sep256k1
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
+    label: ecdsa-sep256k1, 2019 version
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
 
   - id: EcdsaSecp256k1Signature2020
     deprecated: true
-    label: TBD.
-    upper_value: sec:Signature
-    comment: This class represents a data integrity signature suite.
-    see_also:
-      - label: ecdsa-sep256k1
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
-
-  - id: EcdsaSecp256k1RecoverySignature2020
-    deprecated: true
-    label: TBD.
-    upper_value: sec:Signature
-    comment: This class represents a data integrity signature.
-    see_also:
-      - label: ecdsasecp256k1recoverysignature2020
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
+    label: ecdsa-sep256k1, 2020 version
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
 
   - id: EcdsaSecp256k1VerificationKey2019
     deprecated: true
-    label: TBD.
+    label: ecdsa-secp256k1 verification key, 2019 version
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
     upper_value: sec:Key
-    comment: This class represents a data integrity verification method.
-    see_also:
-      - label: ecdsa-secp256k1
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
 
+  - id: EcdsaSecp256k1RecoverySignature2020
+    deprecated: true
+    label: ecdsa-secp256k1 recovery signature, 2020 version
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
+ 
   - id: EcdsaSecp256k1RecoveryMethod2020
     deprecated: true
-    label: TBD.
-    upper_value: sec:Key
-    comment: This class represents a data integrity verification method.
-    see_also:
-      - label: ecdsasecp256k1recoverymethod2020
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020
-
-  - id: RsaSignature2018
-    deprecated: true
-    label: Signature Suite for RSA (was deprecated in the CCG document)
-    upper_value: sec:Signature
-    comment: This class represents a data integrity signature suite.
-    see_also:
-      - label: RSA registry entry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa
-
-  - id: RsaVerificationKey2018
-    deprecated: true
-    label: Verification Key for RSA (was deprecated in the CCG document)
-    upper_value: sec:Key
-    comment: This class represents a data integrity verification method.
-    see_also:
-      - label: RSA registry entry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#rsa
-
-  - id: SchnorrSecp256k1Signature2019
-    deprecated: true
-    label: TBD.
-    upper_value: sec:Signature
-    comment: This class represents a data integrity signature suite.
-
-  - id: SchnorrSecp256k1VerificationKey2019
-    deprecated: true
-    label: TBD.
-    upper_value: sec:Key
-    comment: This class represents a data integrity verification method.
-
-  - id: ServiceEndpointProxyService
-    deprecated: true
-    label: TBD.
-    comment: T.B.D.
-
-  - id: Digest
-    deprecated: true
-    label: Message digest
-    comment: This class represents a message digest that may be used for data integrity verification. The digest algorithm used will determine the cryptographic properties of the digest.
-
-  - id: EncryptedMessage
-    deprecated: true
-    label: Encrypted message
-    comment: A class of messages that are obfuscated in some cryptographic manner. These messages are incredibly difficult to decrypt without the proper decryption key.
-
-  - id: GraphSignature2012
-    deprecated: true
-    label: RDF graph signature
-    upper_value: sec:Signature
-    comment: |
-      A graph signature is used for digital signatures on RDF graphs. The default canonicalization mechanism is specified in the RDF Graph normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature.
-
-  - id: LinkedDataSignature2015
-    deprecated: true
-    label: Linked data signature, 2015 version (was deprecated in the CCG document)
-    upper_value: sec:Signature
-    comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature.
-
-  - id: LinkedDataSignature2016
-    deprecated: true
-    label: Linked data signature, 2016 version (was deprecated in the CCG document)
-    upper_value: sec:Signature
-    comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and RSA to perform the digital signature.
+    label: ecdsa-secp256k1 recovery method, 2020 version
+    #upper_value: sec:Key
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020
 
   - id: MerkleProof2019
     deprecated: true
     label: Merkle Proof
-    upper_value: sec:Signature
-    comment: |
-      Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which effectively deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and ECDSA to perform the digital signature.
-    see_also:
-      - label: Merkle Proof 2019
-        url: https://w3c-ccg.github.io/lds-merkle-proof-2019/
+    defined_by: https://w3c-ccg.github.io/lds-merkle-proof-2019/
 
   - id: X25519KeyAgreementKey2019
     deprecated: true
-    label: X25519 Key Agreement Key 2019
-    upper_value: sec:Key
-    comment: This class represents a verification key.
+    label: X25519 Key Agreement Key, 2019 version
+    #upper_value: sec:Key
+    defined_by: https://w3c-ccg.github.io/security-vocab/#X25519KeyAgreementKey2019
 
   - id: Ed25519VerificationKey2018
     deprecated: true
     label: ED2559 Verification Key, 2018 version
-    upper_value: sec:Key
-    comment: This class represents a data integrity verification method.
-    see_also:
-      - label: eddsa-ed25519 registry entry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
-
-  - id: Ed25519VerificationKey2020
-    deprecated: true
-    label: ED2559 Verification Key, 2020 version
-    upper_value: sec:Key
-    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">`Ed25519Signature2020`</a>.
+    defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
+    #upper_value: sec:Key
 
   - id: JsonWebKey2020
     deprecated: true
     label: JSON Web Key, 2020 version
-    upper_value: sec:Key
+    #upper_value: sec:Key
+    defined_by: https://w3c-ccg.github.io/security-vocab/#JsonWebKey2020
     comment: A linked data proof suite verification method type used with <a href="#JsonWebSignature2020">`JsonWebSignature2020`</a>
 
   - id: JsonWebSignature2020
     deprecated: true
     label: JSON Web Signature, 2020 version
-    upper_value: sec:Signature
-    comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which deterministically names all unnamed nodes. The default signature mechanism uses a SHA-256 digest and JWS to perform the digital signature.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#JsonWebSignature2020
 
   - id: BbsBlsSignature2020
     deprecated: true
     label: BBS Signature, 2020 version
-    upper_value: sec:Signature
-    comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which deterministically names all unnamed nodes. Importantly, a `BbsBlsSignature` digests each of the statements produced by the normalization process individually to enable selective disclosure. The signature mechanism uses Blake2B as the digest for each statement and produces a single output digital signature.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#BbsBlsSignature2020
 
   - id: BbsBlsSignatureProof2020
     deprecated: true
     label: BBS Signature Proof, 2020 version
-    upper_value: sec:Signature
-    comment: |
-      A Linked Data signature is used for digital signatures on RDF Datasets. The default canonicalization mechanism is specified in the RDF Dataset Normalization specification, which deterministically names all unnamed nodes. Importantly, a `BbsBlsSignatureProof2020` is in fact a proof of knowledge of an unrevealed BbsBlsSignature2020 enabling the ability to selectively reveal information from the set that was originally signed. Each of the statements produced by the normalizing process for a JSON-LD document featuring a <a href="#BbsBlsSignatureProof2020">`BbsBlsSignatureProof2020`</a> represent statements that were originally signed in producing the `BbsBlsSignature2020` and represent the denomination under which information can be selectively disclosed. The signature mechanism uses Blake2B as the digest for each statement and produces a single output digital signature.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#BbsBlsSignatureProof2020
 
   - id: Bls12381G1Key2020
     deprecated: true
     label: BLS 12381 G1 Signature Key, 2020 version
-    upper_value: sec:Key
-    comment: This class represents a data integrity signature key.
-    see_also:
-      - label: eddsa-ed25519 registry entry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
+    #upper_value: sec:Key
+    defined_by: https://w3c-ccg.github.io/security-vocab/#Bls12381G1Key2020
 
   - id: Bls12381G2Key2020
     deprecated: true
     label: BLS 12381 G2 Signature Key, 2020 version
-    upper_value: sec:Key
-    comment: This class represents a data integrity signature key.
-    see_also:
-      - label: eddsa-ed25519 registry entry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
+    #upper_value: sec:Key
+    defined_by: https://w3c-ccg.github.io/security-vocab/#Bls12381G2Key2020
 
 property:
   - id: verificationMethod
     label: Verification method
     range: sec:VerificationMethod
-    comment: A `verificationMethod` property is used to specify a URL that contains information used for proof verification.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-verificationmethod
     see_also:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
-
-  - id: domain
-    label: Domain of a proof
-    domain: sec:Proof
-    range: xsd:string
-    comment: The `domain` property is used to associate a domain with a proof, for use with a `proofPurpose` such as `authentication` and indicating its intended usage.
-
-  - id: challenge
-    label: Challenge with a proof
-    domain: sec:Proof
-    range: xsd:string
-    comment: The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`. This string value SHOULD be included in a proof if a `domain` is specified.
-
-  - id: previousProof
-    label: Previous proof
-    domain: sec:Proof
-    range: sec:Proof
-    comment: The `previousProof` property is used to identify a proof that MUST be verified before the proof that contains this property.
-
-  - id: proofPurpose
-    label: Proof purpose
-    domain: sec:Proof
-    range: xsd:string
-    comment: The` proofPurpose` property is used to associate a purpose, such as `assertionMethod` or `authentication` with a proof. The proof purpose acts as a safeguard to prevent the proof from being misused by being applied to a purpose other than the one that was intended.
-
-  - id: proofValue
-    label: Proof value
-    domain: sec:Proof
-    range: xsd:string
-    comment: A string value that contains the data necessary to verify the digital proof using the `verificationMethod` specified
-
-  - id: proof
-    label: Proof sets
-    range: sec:ProofGraph
-    comment: The value of the `proof` property MUST identify <a href="#ProofGraph">`ProofGraph` instances</a> (informally, it indirectly identifies <a href="#Proof">`Proof` instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant.
 
   - id: controller
     label: Controller
     domain: sec:VerificationMethod
     range: IRI
-    comment: |
-      A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship, where the controller claims control over a particular resource, and the resource clearly identifies its controller.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-controller
+
+  - id: proof
+    label: Proof sets
+    range: sec:ProofGraph
+    comment: The value of property must identify <a href="#ProofGraph">ProofGraph instances</a> (informally, it indirectly identifies <a href="#Proof">Proof instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
+
+  - id: domain
+    label: Domain of a proof
+    domain: sec:Proof
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-domain
+
+  - id: challenge
+    label: Challenge of a proof
+    domain: sec:Proof
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-challenge
+
+  - id: previousProof
+    label: Previous proof
+    domain: sec:Proof
+    range: sec:Proof
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-previousproof
+
+  - id: proofPurpose
+    label: Proof purpose
+    domain: sec:Proof
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofpurpose
+
+  - id: proofValue
+    label: Proof value
+    domain: sec:Proof
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
 
   - id: authentication
     label: Authentication method
-    range: VerificationMethod
-    comment: An `authentication` property is used to specify a URL that contains information about a `verificationMethod` used for authentication.
+    range: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-authentication
 
   - id: assertionMethod
     label: Assertion method
-    range: VerificationMethod
-    comment: An `assertionMethod` property is used to specify a URL that contains information about a `verificationMethod` used for assertions.
+    range: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-assertionmethod
 
   - id: capabilityDelegation
     label: Capability Delegation Method
-    range: VerificationMethod
-    comment: |
-      <p>A `capabilityDelegation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of delegating capabilities.</p>
-      <p>A `verificationMethod` may be referenced by its identifier (a URL) or expressed in full.</p>
-      <p>The aforementioned proofs are created to prove that some entity is delegating the authority to take some action to another entity. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityDelegation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that has a property of `capabilityDelegation` that references the `verificationMethod`. This indicates that the controller has authorized it for the expressed `proofPurpose`.</p>
+    range: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilitydelegation
 
   - id: capabilityInvocation
     label: Capability Invocation Method
-    range: VerificationMethod
-    comment: |
-      <p>A `capabilityInvocation` property is used to express that one or more `verificationMethods` are authorized to verify cryptographic proofs that were created for the purpose of invoking capabilities.</p>
-      <p>A `verificationMethod` MAY be referenced by its identifier (a URL) or expressed in full.</p>
-      <p>The aforementioned proofs are created to prove that some entity is attempting to exercise some authority they possess to take an action. A verifier of the proof should expect the proof to express a `proofPurpose` of `capabilityInvocation` and reference a `verificationMethod` to verify it. The dereferenced `verificationMethod` MUST have a controller property that, when dereferenced, has a property of `capabilityInvocation` that references the `verificationMethod.` This indicates that the controller has authorized it for the expressed `proofPurpose`.</p>
-
+    range: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
+ 
   - id: keyAgreement
     label: Key agreement protocols
-    range: VerificationMethod
-    comment: Indicates that a proof is used for for key agreement protocols, such as Elliptic Curve Diffie Hellman key agreement used by popular encryption libraries.
+    range: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-keyagreement
 
   - id: cryptosuite
     label: Cryptographic suite
     domain: sec:DataIntegrityProof
     range: xsd:string
-    comment: A text-based identifier for a specific cryptographic suite.
-    see_also:
-      - label: vc-data-integrity
-        url: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite
 
   - id: publicKeyMultibase
     label: Public key multibase
     domain: sec:VerificationMethod
     range: xsd:string
-    comment: |
-      <p>The public key multibase property is used to specify the multibase-encoded version of a public key. The contents of the property are defined by specifications such as ED25519-2020 and listed in the Linked Data Cryptosuite Registry. Most public key type definitions are expected to:</p>
-      <ul>
-      <li>Specify only a single encoding base per public key type as it reduces implementation burden and increases the chances of reaching broad interoperability.
-      <li>Specify a multicodec header on the encoded public key to aid encoding and decoding applications in confirming that they are serializing and deserializing an expected public key type.
-      <li>Use compressed binary formats to ensure efficient key sizes.
-      </ul>
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeymultibase
     see_also:
       - label: multibase
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
-      - label: ld-cryptosuite-registry
-        url: https://w3c-ccg.github.io/ld-cryptosuite-registry/
       - label: multicodec
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
       - label: ed25519-2020
@@ -376,311 +239,116 @@ property:
     label: Public key JWK
     range: xsd:string
     domain: sec:VerificationMethod
-    comment: See the JOSE suite.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
 
-# These are the class definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
+  - id: expires
+    label: Expiration time
+    range: xsd:dateTime
+    comment: The expiration time is typically associated with a <a href="#Key>`Key`</a> and specifies when the validity of the key will expire. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
 
-  - id: cipherAlgorithm
-    deprecated: true
-    label: Cipher algorithm
-    domain: sec:EncryptedMessage
-    range: xsd:string
-    comment: The cipher algorithm describes the mechanism used to encrypt a message. It is typically a string expressing the cipher suite, the strength of the cipher, and a block cipher mode.
-
-  - id: cipherData
-    deprecated: true
-    label: Cipher data
-    domain: sec:EncryptedMessage
-    range: xsd:string
-    comment: Cipher data is an opaque blob of information that is used to specify an encrypted message.
-
-  - id: cipherKey
-    deprecated: true
-    label: Cipher key
-    domain: sec:EncryptedMessage
-    range: xsd:string
-    comment: A cipher key is a symmetric key that is used to encrypt or decrypt a piece of information. The key itself may be expressed in clear text or encrypted.
-
-  - id: digestAlgorithm
-    deprecated: true
-    label: Digest algorithm
+  - id: nonce
+    label: Nonce
+    # domain: sec:Signature
     range: xsd:string
     comment: |
-      The digest algorithm is used to specify the cryptographic function to use when generating the data to be digitally signed. Typically, data that is to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step 2. A signature class typically specifies a default digest method, so this property is typically used to specify information for a signature algorithm.
+      This property is used in conjunction with the input to the signature hashing function in order to protect against replay attacks. Typically, receivers need to track all nonce values used within a certain time period in order to ensure that an attacker cannot merely re-send a compromised packet in order to execute a privileged request. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
 
-  - id: digestValue
-    deprecated: true
-    label: Digest value
-    range: xsd:string
-    comment: The digest value is used to express the output of the digest algorithm expressed in Base-16 (hexadecimal) format.
+  - id: revoked
+    label: Revocation time
+    range: xsd:dateTime
+    comment: |
+      The revocation time is typically associated with a <a href="#Key">`Key`</a> that has been marked as invalid as of the date and time associated with the property. Key revocations are often used when a key is compromised, such as the theft of the private key, or during the course of best-practice key rotation schedules. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
+
+# These are property specifications that have been defined in a CCG document and are in use; for the time being, these are considered as "reserved"
+
+  - id: allowedAction
+    label: Allowed action
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#delegated-capability
+
+  - id: capabilityChain
+    label: Capability chain
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#delegation
+
+  - id: capabilityAction
+    label: Capability action
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability
+
+  - id: caveat
+    label: Caveat
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#caveats
+
+  - id: delegator
+    label: Delegator
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#delegation
+
+  - id: invocationTarget
+    label: Invocation target
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#root-capability
+
+  - id: invoker
+    label: Invoker
+    status: reserved
+    defined_by: https://w3c-ccg.github.io/zcap-spec/#invocation
+
+# These are the property definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
 
   - id: blockchainAccountId
     deprecated: true
     label: Blockchain account ID
     range: xsd:string
-    comment: |
-      A `blockchainAccountId` property is used to specify a blockchain account identifier, as per the <a href="https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-10.md">CAIP-10Account ID Specification</a>.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#blockchainAccountId
 
   - id: ethereumAddress
     deprecated: true
     label: Ethereum address
     range: xsd:string
-    comment: |
-      An `ethereumAddress` property is used to specify the Ethereum address. As per the Ethereum Yellow Paper "Ethereum: a secure decentralised generalised transaction ledger" in consists of a prefix "0x", a common identifier for hexadecimal, concatenated with the rightmost 20 bytes of the Keccak-256 hash (big endian) of the ECDSA public key (the curve used is the so-called secp256k1). In hexadecimal, 2 digits represent a byte, meaning addresses contain 40 hexadecimal digits. The Ethereum address should also contain a checksum as per EIP-55.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#ethereumAddress
     see_also:
       - label: EIP-55
         url: https://eips.ethereum.org/EIPS/eip-55
       - label: "Ethereum Yellow Paper: Ethereum: a secure decentralised generalised transaction ledger"
         url: https://ethereum.github.io/yellowpaper/paper.pdf
 
-  - id: expires
-    deprecated: true
-    label: Expiration time
-    range: xsd:dateTime
-    comment: The expiration time is typically associated with a <a href="#Key>`Key`</a> and specifies when the validity of the key will expire.
-
-  - id: initializationVector
-    deprecated: true
-    label: Initialization vector
-    domain: sec:EncryptedMessage
-    range: xsd:string
-    comment: |
-      The initialization vector (IV) is a byte stream that is typically used to initialize certain block cipher encryption schemes. For a receiving application to be able to decrypt a message, it must know the decryption key and the initialization vector. The value is typically base-64 encoded.
-
-  - id: nonce
-    deprecated: true
-    label: Nonce
-    domain: sec:Signature
-    range: xsd:string
-    comment: |
-      This property is used in conjunction with the input to the signature hashing function in order to protect against replay attacks. Typically, receivers need to track all nonce values used within a certain time period in order to ensure that an attacker cannot merely re-send a compromised packet in order to execute a privileged request.
-
-  - id: canonicalizationAlgorithm
-    deprecated: true
-    label: Canonicalization algorithm
-    domain: sec:Signature
-    comment: |
-      The canonicalization algorithm is used to transform the input data into a form that can be passed to a cryptographic digest method. The digest is then digitally signed using a digital signature algorithm. Canonicalization ensures that a piece of software that is generating a digital signature is able to do so on the same set of information in a deterministic manner.
-
-  - id: controller
-    deprecated: true
-    label: Controller
-    range: IRI
-    comment: |
-      A controller is an entity that claims control over a particular resource. Note that control is best validated as a two-way relationship where the controller claims control over a particular resource, and the resource clearly identifies its controller.
-
-  - id: owner
-    deprecated: true
-    label: Owner (was deprecated in the CCG document)
-    range: IRI
-    comment: |
-      An owner is an entity that claims control over a particular resource. Note that ownership is best validated as a two-way relationship where the owner claims ownership over a particular resource, and the resource clearly identifies its owner.
-
-  - id: password
-    deprecated: true
-    label: Password
-    range: xsd:string
-    comment: A secret that is used to generate a key that can be used to encrypt or decrypt message. It is typically a string value.
-
-  - id: privateKeyPem
-    deprecated: true
-    label: PEM encoded private key
-    domain: sec:Key
-    range: xsd:string
-    comment: |
-      A private key PEM property is used to specify the PEM-encoded version of the private key. This encoding is compatible with almost every Secure Sockets Layer library implementation and typically plugs directly into functions intializing private keys.
-    see_also:
-      - label: Privacy Enhanced Mail
-        url: http://en.wikipedia.org/wiki/Privacy_Enhanced_Mail
-
-  - id: publicKey
-    deprecated: true
-    label: Public Key
-    domain: sec:Key
-    range: IRI
-    comment: A public key property is used to specify a URL that contains information about a public key.
-
   - id: publicKeyBase58
     deprecated: true
     label: Base58-encoded Public Key
-    domain: sec:Key
+    #domain: sec:Key
     range: xsd:string
-    comment: A public key Base58 property is used to specify the base58-encoded version of the public key.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#publicKeyBase58
 
   - id: publicKeyPem
     deprecated: true
     label: Public key PEM
-    domain: sec:Key
+    #domain: sec:Key
     range: xsd:string
-    comment: |
-      A public key PEM property is used to specify the PEM-encoded version of the public key. This encoding is compatible with almost every Secure Sockets Layer library implementation and typically plugs directly into functions initializing public keys.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#publicKeyPem
 
   - id: publicKeyHex
     deprecated: true
     label: Hex-encoded version of public Key
-    domain: sec:Key
+    #domain: sec:Key
     range: xsd:string
-    comment: A `publicKeyHex` property is used to specify the hex-encoded version of the public key, based on section 8 of rfc4648. Hex encoding is also known as Base16 encoding.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#publicKeyHex
     see_also:
       - label: rfc4648
         url: https://tools.ietf.org/html/rfc4648#section-8
 
-  - id: publicKeyService
-    deprecated: true
-    label: Public key service
-    range: IRI
-    comment: The publicKeyService property is used to express the REST URL that provides public key management services.
-
-  - id: revoked
-    deprecated: true
-    label: Revocation time
-    range: xsd:dateTime
-    comment: |
-      The revocation time is typically associated with a <a href="#Key">`Key`</a> that has been marked as invalid as of the date and time associated with the property. Key revocations are often used when a key is compromised, such as the theft of the private key, or during the course of best-practice key rotation schedules.
-
   - id: jws
     deprecated: true
     label: Json Web Signature
-    range: sec:Signature
-    comment: The jws property is used to associate a detached Json Web Signature with a proof.
+    defined_by: https://w3c-ccg.github.io/security-vocab/#jws
     see_also:
       - label: Detached JSON Web Signature
         url: https://tools.ietf.org/html/rfc7797
 
-  - id: challenge
-    deprecated: true
-    label: Challenge with a proof
-    domain: sec:Proof
-    range: xsd:string
-    comment: The challenge property is used to associate a challenge with a proof, for use with a `proofPurpose` such as `authentication`. This string value SHOULD be included in a proof if a `domain` is specified.
-
-  - id: expirationDate
-    deprecated: true
-    label: Expiration date for proof
-    domain: sec:Proof
-    range: xsd:dateTime
-    comment: The `expirationDate` property is used to associate an expiration date with a proof.
-
-  - id: signature
-    deprecated: true
-    label: Signature  (was deprecated in the CCG document)
-    range: sec:Signature
-    comment: |
-      The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graph that is then digested, and digitally signed.
-
-  - id: signatureValue
-    deprecated: true
-    label: Signature value  (was deprecated in the CCG document)
-    domain: sec:Signature
-    range: xsd:string
-    comment: The signature value is used to express the output of the signature algorithm expressed in base-64 format.
-
-  - id: signatureAlgorithm
-    deprecated: true
-    label: Signature algorithm  (was deprecated in the CCG document)
-    domain: sec:Signature
-    range: IRI
-    comment: |
-      The signature algorithm is used to specify the cryptographic signature function to use when digitally signing the digest data. Typically, text to be signed goes through three steps: 1) canonicalization, 2) digest, and 3) signature. This property is used to specify the algorithm that should be used for step #3. A signature class typically specifies a default signature algorithm, so this property rarely needs to be used in practice when specifying digital signatures.
-
-  - id: service
-    deprecated: true
-    label: Service
-    domain: sec:Signature
-    range: IRI
-    comment: Examples of specific services include discovery services, social networks, file storage services, and verifiable claim repository services.
-
-  - id: serviceEndpoint
-    deprecated: true
-    label: Service endpoint
-    domain: sec:Signature
-    range: IRI
-    comment: |
-      A network address at which a service operates on behalf of a controller. Examples of specific services include discovery services, social networks, file storage services, and verifiable claim repository services. Service endpoints might also be provided by a generalized data interchange protocol, such as extensible data interchange.
-
-  - id: x509CertificateChain
-    deprecated: true
-    label: X509 Certificate chain
-    domain: sec:Signature
-    range: sec:Signature
-    comment: |
-      The x509CertificateChain property is used to associate a chain of X.509 Certificates with a proof. The value of this property is an ordered list where each value in the list is an X.509 Certificate expressed as a DER PKIX format, that is encoded with multibase using the base64pad variant. The certificate directly associated to the verification method used to verify the proof MUST be the first element in the list. Subsequent certificates in the list MAY be included where each one MUST certify the previous one.
-    see_also:
-      - label: X.509 Certificates
-        url: https://tools.ietf.org/html/rfc5280
-      - label: multibase
-        url: https://tools.ietf.org/id/draft-multiformats-multibase-00.html
-
-  - id: x509CertificateFingerprint
-    deprecated: true
-    label: X509 Certificate fingerprint
-    domain: sec:Signature
-    range: sec:Signature
-    comment: |
-      The x509CertificateFingerprint property is used to associate an X.509 Certificate with a proof via its fingerprint. The value is a multihash encoded then multibase encoded value using the base64pad variant. It is RECOMMENDED that the fingerprint value be the SHA-256 hash of the X.509 Certificate.
-    see_also:
-      - label: X.509 Certificates
-        url: https://tools.ietf.org/html/rfc5280
-      - label: multibase
-        url: https://tools.ietf.org/id/draft-multiformats-multibase-00.html
-
-  - id: allowedAction
-    deprecated: true
-    label: Allowed action
-    comment: An action that the controller of a capability may take when invoking the capability.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#delegated-capability
-
-  - id: capabilityChain
-    deprecated: true
-    label: Capability chain
-    comment: An list of delegated capabilities from a delegator to a delegatee.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#delegation
-
-  - id: capabilityAction
-    deprecated: true
-    label: Capability action
-    comment: An action that can be taken given a capability.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability
-
-  - id: caveat
-    deprecated: true
-    label: Caveat
-    comment: A restriction on the way the capability may be used.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#caveats
-
-  - id: delegator
-    deprecated: true
-    label: Delegator
-    comment: An entity that delegates a capability to a delegatee.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#delegation
-
-  - id: invocationTarget
-    deprecated: true
-    label: Invocation target
-    comment: An invocation target identifies where a capability may be invoked, and identifies the target object for which the root capability expresses authority.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#root-capability
-
-  - id: invoker
-    deprecated: true
-    label: Invoker
-    comment: An identifier to cryptographic material that can invoke a capability.
-    see_also:
-      - label: Authorization Capabilities
-        url: https://w3c-ccg.github.io/zcap-spec/#invocation
