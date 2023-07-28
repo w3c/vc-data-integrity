@@ -1522,56 +1522,75 @@ SANah1u7rLk6Uw6GeQGH1w==
         </table>
 
         <p>
-Implementations that perform RDF vocabulary processing MUST 1) be implemented
-such that the vocabulary URLs used in the JSON-LD contexts listed above
-resolve to the files listed below, and 2) match the listed cryptographic
-hashes (if specified). The vocabulary content at the URLs listed below is
-normative.
+The security vocabulary terms that the JSON-LD contexts listed above resolve
+to are in the <a href="https://w3id.org/security">https://w3id.org/security#</a>
+namespace. That is, all security terms in this vocabulary are of the form
+`https://w3id.org/security#TERM`, where `TERM` is the name of a term.
+        </p>
+
+        <p>
+Implementations that perform RDF processing MUST treat the following
+JSON-LD vocabulary URL as already resolved, where the resolved document matches
+the corresponding hash values below.
+        </p>
+
+        <p>
+When dereferencing the
+<a href="https://w3id.org/security">https://w3id.org/security#</a> URL,
+the data returned depends on HTTP content negotiation. These are as follows:
         </p>
 
         <table class="simple">
           <thead>
             <tr>
-              <th>URL and Media Type</th>
-              <th>Content</th>
+              <th>Media Type</th>
+              <th>Description and Cryptographic Hashes</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-https://w3id.org/security#<br>
-text/html
+application/ld+json
               </td>
               <td>
-https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html
+The vocabulary in JSON-LD format [[?JSON-LD]].<br><br>
+
+sha256: LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=<br><br>
+
+sha3-512: f4DhJ3xhT8nT+GZ8UUZi4QC+HT//wXE2fRTgUP4UNw<wbr>e4kvel2PFfd6jcofHBm9BjwEiGzVFGv4K+fFTKXRD2NA==
               </td>
             </tr>
             <tr>
               <td>
-https://w3id.org/security#<br>
-application/ld+json
+text/turtle
               </td>
               <td>
-https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld<br><br>
-sha256: snzV1JA8H7YB4AAQIH6qLzv48ZOhJ3oCl/ewvf0EBMg=<br><br>
-sha3-512: 7QUmDvF24f0/J0I7ZYpZrtlGIHcsjGXGfjBseg5e3j<wbr>xDZlTqd4P7tklHdKn3fwmT
-yKO1kwi0jv9/DLNjWbMrHA==
+The vocabulary in Turtle format [[?TURTLE]].<br><br>
+sha256: McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=<br><br>
+sha3-512: jZtZsqgPPPo+jphAcN8/St4VdRLLAmN3nEQhzs0twE<wbr>MTmCY45euQ01Z4Zo7VlJMYNTf0KC6BMpogpSTAi/1J7Q==
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td>
+text/html
+              </td>
+              <td>
+The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
+sha256: eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=<br><br>
+sha3-512: z53j8ryjVeX16Z/dby//ujhw37degwi09+LAZCTUB8<wbr>WJZjjzW1AydhdEWmgHM0P5KUcPMmSe7edMlGr7G9rmcA==
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <p class="issue" title="w3c.github.io links expected to change">
-The URLs listed above that start with
-`https://w3c.github.io/vc-data-integrity/vocab/security/` are expected to change
-to `https://www.w3.org/ns/security/` or an equally normative and archived
-location under W3C control.
-        </p>
-
         <p>
 It is possible to confirm the digests listed above by running the following
 command from a modern Unix command interface line:
-`curl -s &lt;DOCUMENT_URL> | openssl dgst -&ltDIGEST_ALGORITHM> -binary | openssl base64 -nopad -a`.
+`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -&ltDIGEST_ALGORITHM> -binary | openssl base64 -nopad -a`.
         </p>
 
         <p>
