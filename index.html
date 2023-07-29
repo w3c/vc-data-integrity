@@ -1753,7 +1753,7 @@ When specifing a cryptographic suite that utilizes this design pattern, the
           <dd>
 The `type` property MUST contain the string `DataIntegrityProof`.
           </dd>
-          <dt><dfn class="lint-ignore">cryptosuite</dfn></dt>
+          <dt>cryptosuite</dt>
           <dd>
 The `cryptosuite` property MUST contain a string specifying the name of the
 cryptosuite.
@@ -1914,7 +1914,7 @@ via the digital proof.
           (<var>options</var>). The <a>proof options</a>
           (<var>options</var>) must satisfy the criteria in
           section <a href="#add-proof"></a>.
-          A new <dfn>secured data document</dfn> is produced as
+          A new <a>secured data document</a> is produced as
           output. Whenever this algorithm encodes strings, it MUST use UTF-8
           encoding.
         </p>
@@ -2781,12 +2781,10 @@ validity period of cryptographic proofs. This information might be indirectly
 exposed to an individual if a proof is processed and is detected to be outside
 an allowable time range. When exposing these dates and times to an individual,
 implementers are urged to take into account
-<a data-cite="?VC-DATA-MODEL-2.0#representing-time">cultural norms when
-representing dates and times</a>, as well as ensuring that the value is
-<a href="#representing-time">displayed according to provided locale settings</a>
-in display software. In addition to these considerations, presenting time
-values in a way that eases the cognitive burden on the individual receiving
-the information is a suggested best practice.
+<a data-cite="?VC-DATA-MODEL-2.0#representing-time">cultural normas and locales
+when representing dates and times</a> in display software. In addition to these
+considerations, presenting time values in a way that eases the cognitive burden
+on the individual receiving the information is a suggested best practice.
         </p>
         <p>
 For example, when conveying the expiration date for a particular set of
