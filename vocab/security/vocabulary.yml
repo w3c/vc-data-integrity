@@ -43,6 +43,11 @@ class:
       - label: EdDSA Cryptosuite v2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
 
+  - id: JsonWebKey
+    label: JSON Web Key Verification Method
+    upper_value: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#jsonwebkey
+
   - id: Key
     label: Cryptographic key
     comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
