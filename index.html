@@ -2138,13 +2138,13 @@ and read from application storage.
         <p class="advisement">
 Some transformations, such as RDF Dataset Canonicalization [[RDF-CANON]], have
 mitigations for input data sets that can be used by attackers to consume
-excessive processing cycles. These class of attacks are called
-<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a> and all modern
+excessive processing cycles. This class of attack is called
+<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>, and all modern
 RDF Dataset canonicalizers are required to detect these sorts of bad inputs and
-halt processing. The test suites for RDF Dataset Canonicalization contains such
+halt processing. The test suites for RDF Dataset Canonicalization includes such
 poisoned datasets to ensure that such mitigations exist in all conforming
 implementations. Generally speaking, cryptographic suite specifications that
-utilize transformations are required to mitigate these sorts of attacks and
+use transformations are required to mitigate these sorts of attacks, and
 implementers are urged to ensure that the software libraries that they use
 enforce these mitigations. These attacks are in the same general category as
 any resource starvation attack, such as HTTP clients that deliberately
