@@ -1967,58 +1967,6 @@ Return <var>output</var> as the new <a>secured data document</a>.
           </li>
         </ol>
       </section>
-      
-      <section>
-        <h3>Add Proof Set/Chain</h3>
-        <p>
-          The following algorithm specifies how to incrementally add a proof to 
-          a proof set or proof chain starting with a secured document containing
-          either a proof or proof set/chain.
-          Required inputs are a <a>secured data document</a> 
-          (<var>securedDocument</var>) and <a>proof options</a> 
-          (<var>options</var>). The <a>proof options</a>
-          (<var>options</var>) must satisfy the criteria in 
-          section <a href="#add-proof"></a>.
-          A new <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8 
-          encoding.
-        </p>
-
-        <ol class="algorithm">
-          <li>
-Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
-<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all 
-the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var> 
-is an object add a copy of that object to <var>proof_list</var>.
-          </li>
-          <li>
-Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var> 
-with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of 
-the <var>unsecuredDocument</var>.
-          </li>
-          <li>
-If <var>options</var> contains a <code>previousProof</code> attribute and that 
-attribute is a string check if 
-an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
-If not  a `PROOF_GENERATION_ERROR` MUST be raised. If the 
-<code>previousProof</code> attribute is an array check that each element of that
-array is a string and that an element of the <var>proof_list</var> has a 
-matching <code>id</code> attribute. If not  a `PROOF_GENERATION_ERROR` MUST be 
-raised.
-          </li>
-          <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
-no exceptions are raised, append the generated <var>proof</var> value to the 
-<var>proof_list</var>; otherwise, raise the exception.
-          </li>
-          <li>
-Set <var>output</var>.<var>proof</var> to the value of <var>proof_list</var>.
-          </li>
-          <li>
-Return <var>output</var> as the new <a>secured data document</a>.
-          </li>
-        </ol>
-      </section>
 
       <section>
         <h3>Verify Proof</h3>
