@@ -541,7 +541,7 @@ in Section <a href="#proof-chains"></a>.
 
           <dt>nonce</dt>
           <dd>
-An OPTIONAL string value supplied by the proof creator. One use of this 
+An OPTIONAL string value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
@@ -852,7 +852,7 @@ include additional properties. <a>Verification methods</a> SHOULD be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
               </p>
               <p class="note">
-The `verificationMethod` property is REQUIRED for proofs, unlike controller 
+The `verificationMethod` property is REQUIRED for proofs, unlike controller
 documents, for which it is optional. See section <a href="#proofs"></a>.
               </p>
 
@@ -1716,7 +1716,7 @@ The specification MUST contain a Privacy Considerations section detailing
 privacy considerations specific to the cryptographic suite.
         </li>
         <li>
-The JSON-LD context associated with the cryptographic suite MUST have its terms 
+The JSON-LD context associated with the cryptographic suite MUST have its terms
 protected from unsafe redefinition, by use of the <code>@protected</code> keyword.
         </li>
       </ul>
@@ -1906,39 +1906,39 @@ via the digital proof.
       <section>
         <h3>Add Proof Set/Chain</h3>
         <p>
-          The following algorithm specifies how to incrementally add a proof to 
+          The following algorithm specifies how to incrementally add a proof to
           a proof set or proof chain starting with a secured document containing
           either a proof or proof set/chain.
-          Required inputs are a <a>secured data document</a> 
-          (<var>securedDocument</var>) and <a>proof options</a> 
+          Required inputs are a <a>secured data document</a>
+          (<var>securedDocument</var>) and <a>proof options</a>
           (<var>options</var>). The <a>proof options</a>
-          (<var>options</var>) must satisfy the criteria in 
+          (<var>options</var>) must satisfy the criteria in
           section <a href="#add-proof"></a>.
           A new <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8 
+          output. Whenever this algorithm encodes strings, it MUST use UTF-8
           encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
-<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all 
-the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var> 
+Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let
+<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all
+the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var>
 is an object add a copy of that object to <var>proof_list</var>.
           </li>
           <li>
-Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var> 
-with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of 
+Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var>
+with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of
 the <var>unsecuredDocument</var>.
           </li>
           <li>
-If <var>options</var> contains a <code>previousProof</code> attribute check if 
-an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
+If <var>options</var> contains a <code>previousProof</code> attribute check if
+an element of the <var>proof_list</var> has a matching <code>id</code> attribute.
 If not  a `PROOF_GENERATION_ERROR` MUST be raised.
           </li>
           <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
-no exceptions are raised, append the generated <var>proof</var> value to the 
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If
+no exceptions are raised, append the generated <var>proof</var> value to the
 <var>proof_list</var>; otherwise, raise the exception.
           </li>
           <li>
@@ -1949,7 +1949,7 @@ Return <var>output</var> as the new <a>secured data document</a>.
           </li>
         </ol>
       </section>
-      
+
       <section>
         <h3>Verify Proof</h3>
 
@@ -2033,18 +2033,18 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
       <section>
         <h3>Verify Proof Sets and Chains</h3>
         <p>
-In a proof set or proof chain, a <a>secured data document</a> has a 
-<code>proof</code> attribute which contains a list of proofs 
+In a proof set or proof chain, a <a>secured data document</a> has a
+<code>proof</code> attribute which contains a list of proofs
 (<var>proof_list</var>).
 The following algorithm specifies how to check the authenticity and
 integrity of a <a>secured data document</a> by verifying each
 proof in the <var>proof_list</var>. Required inputs are a
-<a>secured data document</a> (<var>securedDocument</var>). A list of 
+<a>secured data document</a> (<var>securedDocument</var>). A list of
 verification results is produced as output.
         </p>
         <ol class="algorithm">
           <li>
-Set <var>proof_list</var> to </var><var>securedDocument</var>.<var>proof</var>. 
+Set <var>proof_list</var> to </var><var>securedDocument</var>.<var>proof</var>.
           </li>
           <li>
 For each <var>proof</var> in <var>proof_list</var>, run steps 2&ndash;11 of the algorithm in
@@ -2052,14 +2052,14 @@ section <a href="verify-proof"></a>, and if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
           </li>
           <li>
-For each <var>proof</var> in <var>proof_list</var> that contains a 
-<code>previousProof</code> attribute, modify the associated 
+For each <var>proof</var> in <var>proof_list</var> that contains a
+<code>previousProof</code> attribute, modify the associated
 <var>isProofVerified</var> by iteratively checking whether the proof identified by
-the <code>id</code> value in <var>previousProof</var> is valid, along with any 
+the <code>id</code> value in <var>previousProof</var> is valid, along with any
 <code>previousProofs</code> up the chain.
           </li>
           <li>
-Return the <var>proof_list</var> along with each proof's associated 
+Return the <var>proof_list</var> along with each proof's associated
 <var>isProofVerified</var> information.
           </li>
         </ol>
@@ -2334,14 +2334,14 @@ appropriate override flags.
       <section>
         <h3>Conventions for Naming Cryptography Suites</h3>
         <p>
-Section <a href="#versioning-cryptography-suites"></a> emphasized the 
+Section <a href="#versioning-cryptography-suites"></a> emphasized the
 importance of providing relatively easy to understand information concerning the
-timeliness of particular cryptographic suite, while section 
-<a href="#protecting-application-developers"></a> further emphasized minimizing 
-the number of options to be specified. Indeed, section 
+timeliness of particular cryptographic suite, while section
+<a href="#protecting-application-developers"></a> further emphasized minimizing
+the number of options to be specified. Indeed, section
 <a href="#cryptographic-suites"></a> lists requirements for cryptographic suites
-which include detailed specification of algorithm, transformation, hashing, and 
-serialization. Hence, the name of the cryptographic suite does not need to 
+which include detailed specification of algorithm, transformation, hashing, and
+serialization. Hence, the name of the cryptographic suite does not need to
 include all this detail, which implies the <em>parametric versioning</em> mentioned
 in section <a href="#versioning-cryptography-suites"></a> is neither necessary nor
 desirable.
@@ -2354,9 +2354,9 @@ implementation options), followed by a hyphen and designation of the
 approximate year that the suite was proposed.
         </p>
         <p>
-For example, the [[DI-EDDSA]] is based on EdDSA digital signatures, supports 
-two incompatible options based on canonicalization approaches, and was proposed 
-in roughly the year 2022, so it would have two different cryptosuite names: 
+For example, the [[DI-EDDSA]] is based on EdDSA digital signatures, supports
+two incompatible options based on canonicalization approaches, and was proposed
+in roughly the year 2022, so it would have two different cryptosuite names:
 <q>eddsa-rdfc-2022</q> and <q>eddsa-jcs-2022</q>.
         </p>
         <p>
@@ -2364,8 +2364,8 @@ Although the [[DI-ECDSA]] is based on ECDSA digital signatures, supports the
 same two incompatible canonicalization approaches as [[DI-EDDSA]], and supports
 two different levels of security (128 bit and 192 bit) via two alternative sets
 of elliptic curves and hashes, it has only two cryptosuite names:
-<q>ecdsa-rdfc-2019</q> and <q>ecdsa-jcs-2019</q>. The security level and corresponding 
-curves and hashes are determined from the multi-key format of the public key 
+<q>ecdsa-rdfc-2019</q> and <q>ecdsa-jcs-2019</q>. The security level and corresponding
+curves and hashes are determined from the multi-key format of the public key
 used in validation.
         </p>
       </section>
