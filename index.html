@@ -50,6 +50,12 @@
             name: "Dave Longley", url: "https://digitalbazaar.com/",
             company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
             note: "2014-2022", w3cid: 48025
+          }, {
+            name: "Greg Bernstein", url: "https://www.grotto-networking.com/",
+            company: "Invited Expert", w3cid: 140479
+          }, {
+            name: "Sebastian Crane", url: "https://github.com/seabass-labrax",
+            company: "Invited Expert", w3cid: 140132
           }],
 
           // authors, add as many as you like.
@@ -463,7 +469,7 @@ Proof types determine what other fields are required to secure and
 verify the proof.
           </dd>
 
-          <dt>proofPurpose</dt>
+          <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
           <dd>
 The reason the proof was created MUST be specified as a string that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
@@ -484,13 +490,19 @@ link to a <a>public key</a> which includes cryptographic material that is used
 by a verifier during the verification process.
           </dd>
 
-          <dt>created</dt>
+          <dt><dfn class="lint-ignore">created</dfn></dt>
           <dd>
-The date and time the proof was created MUST be specified as an
-[[XMLSCHEMA11-2]] combined date and time string.
+The date and time the proof was created is OPTIONAL and, if included, MUST be
+specified as an [[XMLSCHEMA11-2]] combined date and time string.
           </dd>
 
-          <dt>domain</dt>
+          <dt>expires</dt>
+          <dd>
+An OPTIONAL property that conveys the date and time that a proof expires and that, if present, MUST be
+specified as an [[XMLSCHEMA11-2]] combined date and time string.
+          </dd>
+
+          <dt id="defn-domain">domain</dt>
           <dd>
 The creator of a proof SHOULD include a string value that indicates its intended usage, which a verifier SHOULD use to ensure the proof was intended to be used by them. The
 specification of the `domain` parameter is useful in challenge-response
@@ -501,7 +513,7 @@ the creator of the proof. Examples of a domain parameter include:
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt>challenge</dt>
+          <dt id="defn-challenge">challenge</dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular <a>domain</a> and window of time. This
@@ -509,7 +521,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
           </dd>
 
-          <dt>proofValue</dt>
+          <dt><dfn class="lint-ignore">proofValue</dfn></dt>
           <dd>
 A string value that contains the data necessary to verify the digital proof
 using the `verificationMethod` specified. The contents of the value MUST be a
@@ -520,13 +532,27 @@ value. The contents of this value are determined by a cryptosuite and set to the
 <a href="#add-proof">Add Proof Algorithm</a>.
           </dd>
 
-          <dt>previousProof</dt>
+          <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
 An optional string value or an unordered list of string values. Each value 
 identifies another <a>data integrity proof</a> that MUST verify before the 
 current proof is processed. In the case of an unordered list all referenced 
 proofs in the array MUST verify. This property is used in Section 
 <a href="#proof-chains"></a>.
+          </dd>
+
+          <dt>nonce</dt>
+          <dd>
+An OPTIONAL string value supplied by the proof creator. One use of this
+field is to increase privacy by decreasing linkability that is the result
+of deterministically generated signatures.
+          </dd>
+
+          <dt>nonce</dt>
+          <dd>
+An OPTIONAL string value supplied by the proof creator. One use of this
+field is to increase privacy by decreasing linkability that is the result
+of deterministically generated signatures.
           </dd>
 
         </dl>
@@ -618,7 +644,7 @@ validity of cryptographic proofs, implementers are advised to respect the
 and local calendar preferences of the individual [[?LTLI]]. Conversion of
 timestamps to local time values are expected to consider the time zone
 expectations of the individual. See
-<a data-cite="VC-DATA-MODEL-2.0#representing-time"></a> for more details about
+<a data-cite="?VC-DATA-MODEL-2.0#representing-time"></a> for more details about
 representing time values to individuals.
         </p>
 
@@ -820,7 +846,7 @@ cryptographic threshold signature.
           </p>
 
           <dl>
-            <dt>verificationMethod</dt>
+            <dt><dfn class="lint-ignore">verificationMethod</dfn></dt>
             <dd>
               <p>
 The `verificationMethod` property is OPTIONAL. If present, the value
@@ -833,6 +859,10 @@ properties that are determined by the value of `type` and are defined
 in <a href="#verification-material"></a>. A <a>verification method</a> MAY
 include additional properties. <a>Verification methods</a> SHOULD be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
+              </p>
+              <p class="note">
+The `verificationMethod` property is REQUIRED for proofs, unlike controller
+documents, for which it is optional. See section <a href="#proofs"></a>.
               </p>
 
               <dl>
@@ -852,7 +882,7 @@ method</a> type. In order to maximize global interoperability, the
 <a>verification method</a> type SHOULD be registered in the Data Integrity Specification
 Registries [TBD -- DIS-REGISTRIES].
                 </dd>
-                <dt>controller</dt>
+                <dt><span id="defn-controller">controller</span></dt>
                 <dd>
 The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
@@ -1157,7 +1187,7 @@ challenge-response protocol.
             </p>
 
             <dl>
-              <dt>authentication</dt>
+              <dt id="defn-authentication">authentication</dt>
               <dd>
 The `authentication` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
@@ -1227,7 +1257,7 @@ the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2.0]].
             </p>
 
             <dl>
-              <dt><dfn>assertionMethod</dfn></dt>
+              <dt><dfn id="defn-assertionMethod">assertionMethod</dfn></dt>
               <dd>
 The `assertionMethod` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1283,7 +1313,7 @@ the purposes of establishing a secure communication channel with the recipient.
             </p>
 
             <dl>
-              <dt><dfn>keyAgreement</dfn></dt>
+              <dt><dfn id="defn-keyAgreement">keyAgreement</dfn></dt>
               <dd>
 The `keyAgreement` property is OPTIONAL. If present, the associated
 value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
@@ -1334,7 +1364,7 @@ authorization to update the <a>controller document</a>.
             </p>
 
             <dl>
-              <dt><dfn>capabilityInvocation</dfn></dt>
+              <dt><dfn id="defn-capabilityInvocation">capabilityInvocation</dfn></dt>
               <dd>
 The `capabilityInvocation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1401,7 +1431,7 @@ to access a specific HTTP API to a subordinate.
             </p>
 
             <dl>
-              <dt><dfn class="lint-ignore">capabilityDelegation</dfn></dt>
+              <dt><dfn class="lint-ignore" id="defn-capabilityDelegation">capabilityDelegation</dfn></dt>
               <dd>
 The `capabilityDelegation` property is OPTIONAL. If present, the
 associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
@@ -1477,6 +1507,165 @@ this specification.
 
       </section>
 
+      <section>
+        <h2>Relationship to Verifiable Credentials</h2>
+        <p>
+Cryptographic suites that implement this specification can be used to secure
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable credentials</a> and
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+verifiable presentations</a>. Implementers
+that are addressing those use cases are cautioned that additional checks might
+be appropriate when processing those types of documents. For example, there are
+some use cases where it is important to ensure that the
+<a>verification method</a> used in a proof is associated with the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable credential</a>, or the
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
+<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+verifiable presentation</a>, during the process of
+<a data-cite="VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
+way to check for such an association is to ensure that the value of the
+<code>controller</code> property of a proof's <a>verification method</a>
+matches the URL value used to identify the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively.
+This particular association indicates that the
+<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively,
+is the controller of the <a>verification method</a> used to verify
+the proof.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contexts and Vocabularies</h2>
+
+        <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
+This section lists cryptographic hash values that might change during the
+Candidate Recommendation phase based on implementer feedback that requires
+the referenced files to be modified.
+        </p>
+        <p>
+Implementations that perform JSON-LD processing MUST treat the following
+JSON-LD context URLs as already resolved, where the resolved document matches
+the corresponding hash values below:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>URL and Media Type</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space: nowrap;">
+https://www.w3.org/ns/data-integrity/v1<br>
+application/ld+json
+              </td>
+              <td>
+sha256: v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=<br><br>
+sha3-512: Sg1PLFxKyEYQns9Zr0BoYXtFeDNfrHUDNMkyq4QEWv<wbr>wGIaX1v5xovnCG+dfceZEzr7BhBjm396noZF1HEeCM8g==
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+https://www.w3.org/ns/multikey/v1<br>
+application/ld+json
+              </td>
+              <td>
+sha256: SA+P0RxXl8ZH6xdPcmX71crzeGkCYMPfYjdVT46SF0o=<br><br>
+sha3-512: BgQBN00t6vj1T4uYt5SwdPOhe2BVNY11UEvkVo/rbBv<wbr>fBd+Z09isxhGhf2HkVqMT
+SANah1u7rLk6Uw6GeQGH1w==
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+The security vocabulary terms that the JSON-LD contexts listed above resolve
+to are in the <a href="https://w3id.org/security">https://w3id.org/security#</a>
+namespace. That is, all security terms in this vocabulary are of the form
+`https://w3id.org/security#TERM`, where `TERM` is the name of a term.
+        </p>
+
+        <p>
+Implementations that perform RDF processing MUST treat the following
+JSON-LD vocabulary URL as already resolved, where the resolved document matches
+the corresponding hash values below.
+        </p>
+
+        <p>
+When dereferencing the
+<a href="https://w3id.org/security">https://w3id.org/security#</a> URL,
+the data returned depends on HTTP content negotiation. These are as follows:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Media Type</th>
+              <th>Description and Cryptographic Hashes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+application/ld+json
+              </td>
+              <td>
+The vocabulary in JSON-LD format [[?JSON-LD]].<br><br>
+
+sha256: LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=<br><br>
+
+sha3-512: f4DhJ3xhT8nT+GZ8UUZi4QC+HT//wXE2fRTgUP4UNw<wbr>e4kvel2PFfd6jcofHBm9BjwEiGzVFGv4K+fFTKXRD2NA==
+              </td>
+            </tr>
+            <tr>
+              <td>
+text/turtle
+              </td>
+              <td>
+The vocabulary in Turtle format [[?TURTLE]].<br><br>
+sha256: McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=<br><br>
+sha3-512: jZtZsqgPPPo+jphAcN8/St4VdRLLAmN3nEQhzs0twE<wbr>MTmCY45euQ01Z4Zo7VlJMYNTf0KC6BMpogpSTAi/1J7Q==
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td>
+text/html
+              </td>
+              <td>
+The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
+sha256: eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=<br><br>
+sha3-512: z53j8ryjVeX16Z/dby//ujhw37degwi09+LAZCTUB8<wbr>WJZjjzW1AydhdEWmgHM0P5KUcPMmSe7edMlGr7G9rmcA==
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+It is possible to confirm the digests listed above by running the following
+command from a modern Unix command interface line:
+`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -&ltDIGEST_ALGORITHM> -binary | openssl base64 -nopad -a`.
+        </p>
+
+        <p>
+For further information regarding processing of JSON-LD Contexts and
+Vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
+Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
+Verifiable Credentials v2.0: Vocabularies</a>.
+        </p>
+
+      </section>
+
     </section>
 
     </section>
@@ -1528,12 +1717,20 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
+The specification MUST detail any known resource starvation attack that can
+occur in an algorithm and provide testable mitigations against each attack.
+        </li>
+        <li>
 The specification MUST contain a Security Considerations section detailing
 security considerations specific to the cryptographic suite.
         </li>
         <li>
 The specification MUST contain a Privacy Considerations section detailing
 privacy considerations specific to the cryptographic suite.
+        </li>
+        <li>
+The JSON-LD context associated with the cryptographic suite MUST have its terms
+protected from unsafe redefinition, by use of the <code>@protected</code> keyword.
         </li>
       </ul>
 
@@ -1585,6 +1782,32 @@ Cryptographic suite designers MUST use mandatory `proof` value properties
 defined in Section <a href="#proofs"></a>, and MAY define other properties
 specific to their cryptographic suite.
         </p>
+
+        <p class="note" title="Design Patterns of Legacy Cryptographic Suites">
+One of the design patterns seen in Data Integrity cryptosuites from
+2012 to 2020 was use of the `type` property to establish a specific type for a
+cryptographic suite. For example, the
+<a href="https://www.w3.org/TR/vc-di-eddsa/#the-ed25519signature2020-suite">
+Ed25519Signature2020 cryptographic suite</a> was one such specification. This
+led to a greater burden on cryptographic suite implementations, where every new
+cryptographic suite required a new JSON-LD Context to be specified, resulting
+in a sub-optimal developer experience. A streamlined version of this design
+pattern emerged in 2020, such that a developer would only need to include a
+single JSON-LD Context to support all modern cryptographic suites. This
+encouraged more modern cryptosuites &mdash; such as the EdDSA Cryptosuites
+[[?DI-EDDSA]] and the ECDSA Cryptosuites [[?DI-ECDSA]] &mdash; to be built
+based on the streamlined pattern described in this section.
+        <br><br>
+To improve the developer experience, authors creating new Data Integrity
+cryptographic suite specifications SHOULD use the modern pattern &mdash; where
+the `type` is set to `DataIntegrityProof`; the `cryptosuite` property carries
+the identifier for the cryptosuite; and any cryptosuite-specific cryptographic
+data is encapsulated (i.e., not directly exposed as application layer data)
+within `proofValue`. A list of cryptographic suite specifications that are
+known to follow this pattern is provided in the
+<a href="https://w3c.github.io/vc-specs-dir/#proof">Proof types section of
+the Verifiable Credentials Specifications Directory</a>.
+        </p>
       </section>
 
     </section>
@@ -1621,10 +1844,10 @@ which  can be used to verify the authenticity and integrity of an
 <a>cryptographic suite</a> (<var>type</var>) and any other properties needed by
 the <a>cryptographic suite</a> type; an identifier for the
 <a>verification method</a> (<var>verificationMethod</var>) that can be used to
-verify the authenticity of the proof; and an [[!XMLSCHEMA11-2]] combined date
+verify the authenticity of the proof; an [[!XMLSCHEMA11-2]] combined date
 and time string (<var>created</var>) containing the current date and time,
-accurate to at least one second, in Universal Time Code format. A
-<a href="#dfn-domain">security domain</a> (<var>domain</var>) and
+accurate to at least one second, in Universal Time Code format, a
+<a href="#dfn-domain">security domain</a> (<var>domain</var>), and a
 receiver-supplied challenge (<var>challenge</var>) might also be specified in
 the <var>options</var>. A <dfn>secured data document</dfn> is produced as
 output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
@@ -1745,6 +1968,58 @@ Return <var>output</var> as the new <a>secured data document</a>.
         </ol>
       </section>
       
+      <section>
+        <h3>Add Proof Set/Chain</h3>
+        <p>
+          The following algorithm specifies how to incrementally add a proof to 
+          a proof set or proof chain starting with a secured document containing
+          either a proof or proof set/chain.
+          Required inputs are a <a>secured data document</a> 
+          (<var>securedDocument</var>) and <a>proof options</a> 
+          (<var>options</var>). The <a>proof options</a>
+          (<var>options</var>) must satisfy the criteria in 
+          section <a href="#add-proof"></a>.
+          A new <dfn>secured data document</dfn> is produced as
+          output. Whenever this algorithm encodes strings, it MUST use UTF-8 
+          encoding.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
+<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all 
+the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var> 
+is an object add a copy of that object to <var>proof_list</var>.
+          </li>
+          <li>
+Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var> 
+with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of 
+the <var>unsecuredDocument</var>.
+          </li>
+          <li>
+If <var>options</var> contains a <code>previousProof</code> attribute and that 
+attribute is a string check if 
+an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
+If not  a `PROOF_GENERATION_ERROR` MUST be raised. If the 
+<code>previousProof</code> attribute is an array check that each element of that
+array is a string and that an element of the <var>proof_list</var> has a 
+matching <code>id</code> attribute. If not  a `PROOF_GENERATION_ERROR` MUST be 
+raised.
+          </li>
+          <li>
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
+no exceptions are raised, append the generated <var>proof</var> value to the 
+<var>proof_list</var>; otherwise, raise the exception.
+          </li>
+          <li>
+Set <var>output</var>.<var>proof</var> to the value of <var>proof_list</var>.
+          </li>
+          <li>
+Return <var>output</var> as the new <a>secured data document</a>.
+          </li>
+        </ol>
+      </section>
+
       <section>
         <h3>Verify Proof</h3>
 
@@ -2132,6 +2407,45 @@ appropriate override flags.
       </section>
 
       <section>
+        <h3>Conventions for Naming Cryptography Suites</h3>
+        <p>
+Section <a href="#versioning-cryptography-suites"></a> emphasized the
+importance of providing relatively easy to understand information concerning the
+timeliness of particular cryptographic suite, while section
+<a href="#protecting-application-developers"></a> further emphasized minimizing
+the number of options to be specified. Indeed, section
+<a href="#cryptographic-suites"></a> lists requirements for cryptographic suites
+which include detailed specification of algorithm, transformation, hashing, and
+serialization. Hence, the name of the cryptographic suite does not need to
+include all this detail, which implies the <em>parametric versioning</em> mentioned
+in section <a href="#versioning-cryptography-suites"></a> is neither necessary nor
+desirable.
+        </p>
+        <p>
+The recommended naming convention for cryptographic suites is a
+string composed of a signature algorithm identifier, separated by a hyphen from
+an option identifier (if the cryptosuite supports incompatible
+implementation options), followed by a hyphen and designation of the
+approximate year that the suite was proposed.
+        </p>
+        <p>
+For example, the [[DI-EDDSA]] is based on EdDSA digital signatures, supports
+two incompatible options based on canonicalization approaches, and was proposed
+in roughly the year 2022, so it would have two different cryptosuite names:
+<q>eddsa-rdfc-2022</q> and <q>eddsa-jcs-2022</q>.
+        </p>
+        <p>
+Although the [[DI-ECDSA]] is based on ECDSA digital signatures, supports the
+same two incompatible canonicalization approaches as [[DI-EDDSA]], and supports
+two different levels of security (128 bit and 192 bit) via two alternative sets
+of elliptic curves and hashes, it has only two cryptosuite names:
+<q>ecdsa-rdfc-2019</q> and <q>ecdsa-jcs-2019</q>. The security level and corresponding
+curves and hashes are determined from the multi-key format of the public key
+used in validation.
+        </p>
+      </section>
+
+      <section>
         <h3>Agility and Layering</h3>
 
         <p>
@@ -2216,6 +2530,23 @@ their application and not separate storage of cryptographic proofs from the data
 being protected. Developers are also urged to regularly confirm that the
 cryptographically protected data has not been tampered with as it is written to
 and read from application storage.
+        </p>
+        <p class="advisement">
+Some transformations, such as RDF Dataset Canonicalization [[RDF-CANON]], have
+mitigations for input data sets that can be used by attackers to consume
+excessive processing cycles. This class of attack is called
+<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>, and all modern
+RDF Dataset canonicalizers are required to detect these sorts of bad inputs and
+halt processing. The test suites for RDF Dataset Canonicalization includes such
+poisoned datasets to ensure that such mitigations exist in all conforming
+implementations. Generally speaking, cryptographic suite specifications that
+use transformations are required to mitigate these sorts of attacks, and
+implementers are urged to ensure that the software libraries that they use
+enforce these mitigations. These attacks are in the same general category as
+any resource starvation attack, such as HTTP clients that deliberately
+slow connections, thus starving connections on the server. Implementers are
+advised to consider these sorts of attacks when implementing defensive
+security strategies.
         </p>
         <p class="issue"
           title="Collision-resistant canonicalization requirements">
@@ -2542,12 +2873,10 @@ validity period of cryptographic proofs. This information might be indirectly
 exposed to an individual if a proof is processed and is detected to be outside
 an allowable time range. When exposing these dates and times to an individual,
 implementers are urged to take into account
-<a data-cite="VC-DATA-MODEL-2.0#representing-time">cultural norms when
-representing dates and times</a>, as well as ensuring that the value is
-<a href="#representing-time">displayed according to provided locale settings</a>
-in display software. In addition to these considerations, presenting time
-values in a way that eases the cognitive burden on the individual receiving
-the information is a suggested best practice.
+<a data-cite="?VC-DATA-MODEL-2.0#representing-time">cultural normas and locales
+when representing dates and times</a> in display software. In addition to these
+considerations, presenting time values in a way that eases the cognitive burden
+on the individual receiving the information is a suggested best practice.
         </p>
         <p>
 For example, when conveying the expiration date for a particular set of
