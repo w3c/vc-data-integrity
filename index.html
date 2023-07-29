@@ -1133,15 +1133,15 @@ provided below:
             <pre class="example nohighlight"
               title="JSON Web Key encoding of a Ed25519 public key">
 {
-  "@context": ["https://w3id.org/security/jwk/v1"],
-  "id": "did:example:123456789abcdefghi#keys-1",
+  "@context": ["https://www.w3.org/ns/security/jwk/v1"],
+  "id": "did:example:123456789abcdefghi#key-1",
   "type": "JsonWebKey",
   "controller": "did:example:123456789abcdefghi",
   "publicKeyJwk": {
     "kty": "OKP",
     "alg": "EdDSA"
     "crv": "Ed25519",
-    "kid": "did:example:123456789abcdefghi#keys-1",
+    "kid": "key-1",
     "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
   }
 }
@@ -1172,15 +1172,15 @@ referred to as <em>private keys</em>.
             <pre class="example nohighlight"
               title="JSON Web Key encoding of a Ed25519 secret key">
 {
-  "@context": ["https://w3id.org/security/jwk/v1"],
-  "id": "did:example:123456789abcdefghi#keys-1",
+  "@context": [""https://www.w3.org/ns/security/jwk/v1""],
+  "id": "did:example:123456789abcdefghi#key-1",
   "type": "JsonWebKey",
   "controller": "did:example:123456789abcdefghi",
   "secretKeyJwk": {
     "kty": "OKP",
     "alg": "EdDSA"
     "crv": "Ed25519",
-    "kid": "did:example:123456789abcdefghi#keys-1",
+    "kid": "key-1",
     "d": "Q6JwjCUdThSnoxfXHSFt5C1nVFycY_ZpW7qVzK644_g",
     "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
   }
