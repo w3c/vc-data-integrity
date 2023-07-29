@@ -112,6 +112,13 @@
               status:   "WD",
               publisher:  "W3C Verifiable Credentials Working Group"
             },
+            "JOSE-REGISTRIES": {
+              title:    "The JSON Object Signing and Encryption (JOSE) Registries",
+              href:     "https://www.iana.org/assignments/jose/jose.xhtml",
+              authors:  ["The Internet Assigned Numbers Authority"],
+              status:   "REC",
+              publisher:  "The Internet Assigned Numbers Authority"
+            },
             "SECURITY-VOCABULARY": {
               title:    "The Security Vocabulary",
               href:     "https://w3id.org/security",
@@ -154,7 +161,7 @@
               ],
               status: "ED",
               publisher: "W3C Verifiable Credentials Working Group"
-            },
+            }
           },
           postProcess: [restrictRefs],
           otherLinks: [{
@@ -1008,7 +1015,7 @@ both properties above is shown below.
       <span class="comment">...</span>
       "verificationMethod": [{
         "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
-        "type": "JsonWebKey2020", <span class="comment">// external (property value)</span>
+        "type": "JsonWebKey", <span class="comment">// external (property value)</span>
         "controller": "did:example:123",
         "publicKeyJwk": {
           "crv": "Ed25519", <span class="comment">// external (property name)</span>
@@ -1079,6 +1086,82 @@ which is the [[MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
 [[MULTICODEC]] header is `0x1300`, which specifies that the remaining data
 is a 32-byte raw Ed25519 private key.
+            </p>
+
+          </section>
+
+          <section>
+            <h3>JsonWebKey</h3>
+            <p>
+The JSON Web Key data model is a specific type of <a>verification method</a>
+that utilizes the JWK specification [[RFC7517]] to encode key types into a
+set of parameters. To encode a JSON Web Key, the <a>verification method</a>
+`type` MUST be set to `JsonWebKey` and the `publicKeyJwk` value MUST be a
+valid JWK value as described in [[RFC7517]]. An example of a JSON Web Key is
+provided below:
+            </p>
+
+            <pre class="example nohighlight"
+              title="JSON Web Key encoding of a Ed25519 public key">
+{
+  "@context": ["https://w3id.org/security/jwk/v1"],
+  "id": "did:example:123456789abcdefghi#keys-1",
+  "type": "JsonWebKey",
+  "controller": "did:example:123456789abcdefghi",
+  "publicKeyJwk": {
+    "kty": "OKP",
+    "alg": "EdDSA"
+    "crv": "Ed25519",
+    "kid": "did:example:123456789abcdefghi#keys-1",
+    "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
+  }
+}
+            </pre>
+
+            <p>
+In the example above, the `publicKeyJwk` value contains the JSON Web Key.
+The `kty` property encodes the key type of "OKP", which means
+"Octet string key pairs". The `alg` property identifies the algorithm intended
+for use with the public key. The `crv` property identifies the particular
+curve type of the public key. The `kid` property specifies how the public key
+might be referenced in software systems; if present, the value SHOULD match the
+`id` property of the encapsulating `JsonWebKey` object. Finally, the `x`
+property specifies the point on the Ed25519 curve that is associated with the
+public key.
+            </p>
+
+            <p>
+The `publicKeyJwk` property MUST NOT contain any property marked as
+"Private" in any registry contained in the JOSE Registries [[JOSE-REGISTRIES]].
+            </p>
+
+            <p>
+The JSON Web Key data model is also capable of encoding secret keys, sometimes
+referred to as <em>private keys</em>.
+            </p>
+
+            <pre class="example nohighlight"
+              title="JSON Web Key encoding of a Ed25519 secret key">
+{
+  "@context": ["https://w3id.org/security/jwk/v1"],
+  "id": "did:example:123456789abcdefghi#keys-1",
+  "type": "JsonWebKey",
+  "controller": "did:example:123456789abcdefghi",
+  "secretKeyJwk": {
+    "kty": "OKP",
+    "alg": "EdDSA"
+    "crv": "Ed25519",
+    "kid": "did:example:123456789abcdefghi#keys-1",
+    "d": "Q6JwjCUdThSnoxfXHSFt5C1nVFycY_ZpW7qVzK644_g",
+    "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
+  }
+}
+            </pre>
+
+            <p>
+The example above is identical to the previous example, except that the
+information is stored in the `secretKeyJwk` property and its value encodes the
+private key value in the `d` property.
             </p>
 
           </section>
