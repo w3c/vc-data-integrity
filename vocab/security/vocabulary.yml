@@ -3,6 +3,8 @@ vocab:
   value: https://w3id.org/security#
 
 prefix:
+  - id: rdf
+    value: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   - id: cred
     value: https://w3.org/2018/credentials#
 
@@ -271,7 +273,7 @@ property:
 
   - id: publicKeyJwk
     label: Public key JWK
-    range: xsd:string
+    range: rdf:JSON
     domain: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
     see_also:
