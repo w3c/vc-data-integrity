@@ -438,6 +438,27 @@ This section specifies the data model that is used for expressing
 <a>verification methods</a>.
       </p>
 
+      <p>
+All of the data model terms and types in this specification map to URLs. The
+vocabulary where these terms are defined is the [[?SECURITY-VOCABULARY]]. The
+explicit mechanism that is used to perform this mapping in a secured document
+is the `@context` property.
+      </p>
+      <p>
+When processing a document as JSON-LD, the mapping mechanism is defined by
+JSON-LD [[JSON-LD11]]. When processing a document in a non-JSON-LD environment,
+the same mechanism is used to ensure that the terms have the same interpretation
+regardless of format, but with a simpler processing rule: Implementers
+performing non-JSON-LD processing MUST ensure that all values associated with a
+`@context` property are in the expected order, the contents of the context files
+match known good cryptographic hashes for each file, and the contents are known
+to be valid. Implicit `@context` values MAY be used such that no `@context`
+value needs to be present in a non-JSON-LD document. Using static context files
+with a JSON Schema is one acceptable approach to implementing the aforementioned
+rule above. This can ensure proper term identification, typing, and order, when
+a non-JSON-LD processor is used.
+      </p>
+
       <section>
         <h3>Proofs</h3>
         <p>
@@ -547,11 +568,6 @@ of deterministically generated signatures.
           </dd>
 
         </dl>
-
-        <p class="note">
-All of the terms above map to URLs. The vocabulary where these terms are defined
-is the [[?SECURITY-VOCABULARY]].
-        </p>
 
         <p>
 A proof can be added to a JSON document like the following:
@@ -1608,7 +1624,7 @@ the data returned depends on HTTP content negotiation. These are as follows:
 application/ld+json
               </td>
               <td>
-The vocabulary in JSON-LD format [[?JSON-LD]].<br><br>
+The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
 
 sha256: LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=<br><br>
 
