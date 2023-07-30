@@ -229,7 +229,7 @@ property:
 
   - id: publicKeyMultibase
     label: Public key multibase
-    domain: sec:VerificationMethod
+    domain: sec:Multikey
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeymultibase
     see_also:
@@ -243,7 +243,7 @@ property:
   - id: publicKeyJwk
     label: Public key JWK
     range: rdf:JSON
-    domain: sec:VerificationMethod
+    domain: sec:JsonWebKey
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
     see_also:
       - label: IANA JOSE
