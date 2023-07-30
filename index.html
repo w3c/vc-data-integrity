@@ -1031,8 +1031,8 @@ both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[MULTICODEC]] specification to encode key types into a single
-binary stream that is then encoded using the [[MULTIBASE]] specification.
+utilizes the [[?MULTICODEC]] specification to encode key types into a single
+binary stream that is then encoded using the [[?MULTIBASE]] specification.
 To encode a Multikey, the <a>verification method</a> `type` MUST be set to
 `Multikey` and the `publicKeyMultibase` value MUST be a [[MULTIBASE]] encoded
 [[MULTICODEC]] value. An example of a Multikey is provided below:
@@ -1051,9 +1051,9 @@ To encode a Multikey, the <a>verification method</a> `type` MUST be set to
 
             <p>
 In the example above, the `publicKeyMultibase` value starts with the letter `z`,
-which is the [[MULTIBASE]] header that conveys that the binary data is
+which is the [[?MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[MULTICODEC]] header is `0xed`, which specifies that the remaining data
+[[?MULTICODEC]] header is `0xed`, which specifies that the remaining data
 is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
@@ -1075,9 +1075,9 @@ referred to as <em>private keys</em>.
 
             <p>
 In the example above, the `secretKeyMultibase` value starts with the letter `z`,
-which is the [[MULTIBASE]] header that conveys that the binary data is
+which is the [[?MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[MULTICODEC]] header is `0x1300`, which specifies that the remaining data
+[[?MULTICODEC]] header is `0x1300`, which specifies that the remaining data
 is a 32-byte raw Ed25519 private key.
             </p>
 
