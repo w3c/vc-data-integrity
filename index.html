@@ -2240,6 +2240,30 @@ section provides specific URLs, descriptions, and error codes for the errors
 such that the ecosystem implementing technologies described by this
 specification might interoperate more effectively when errors occur.
         </p>
+
+        <p>
+When exposing these errors through an HTTP interface, implementers SHOULD use
+[[RFC7807]] to encode the error data structure. If [[RFC7807]] is utilized:
+        </p>
+
+        <ul>
+          <li>
+The `type` value of the error object MUST be a URL that starts with the value
+`https://www.w3.org/ns/security/data-integrity#` and ends with the value in the
+section listed below.
+          </li>
+          <li>
+The `code` value MUST be the integer code described in the table below
+(in parenthesis, beside the type name).
+          </li>
+          <li>
+The `title` value SHOULD provide a short but specific human-readable string for
+the error.
+          </li>
+          <li>
+The `detail` value SHOULD provide a longer human-readable string for the error.
+          </li>
+        </ul>
       </section>
     </section>
 
