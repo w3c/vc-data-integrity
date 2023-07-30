@@ -1655,6 +1655,33 @@ Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabula
 Verifiable Credentials v2.0: Vocabularies</a>.
         </p>
 
+        <section>
+          <h3>Context Injection</h3>
+
+          <p>
+The `@context` property is used to ensure that implementations are using the
+same semantics when terms in this specification are processed. For example, this
+can be important when properties like `type` are processed and its value, such
+as `DataIntegrityProof`, are used.
+          </p>
+
+          <p>
+If a `@context` property is not provided in a document that is being secured or
+verified, or the Data Integrity terms used in the document are not defined by
+existing values in the `@context` property, implementations MUST inject or add
+an `@context` property with a value of
+`https://www.w3.org/ns/data-integrity/v1`.
+          </p>
+
+          <p>
+An example of when context injection is unnecessary is when the Verifiable
+Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`)
+exists as a value in the `@context` property, as that context defines all of the
+necessary Data Integrity terms defined by
+`https://www.w3.org/ns/data-integrity/v1`.
+          </p>
+        </section>
+
       </section>
 
     </section>
