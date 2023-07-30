@@ -2264,6 +2264,61 @@ the error.
 The `detail` value SHOULD provide a longer human-readable string for the error.
           </li>
         </ul>
+
+        <dl>
+          <dt id="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR (-16)</dt>
+          <dd>
+A request to generate a proof failed. See Section
+<a href="#add-proof"></a>, and Section <a href="#add-proof-set-chain"></a>.
+          </dd>
+          <dt id="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR (-17)</dt>
+          <dd>
+A proof that is malformed was detected. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR (-18)</dt>
+          <dd>
+The `proofPurpose` value in a proof did not match the expected value. See
+Section <a href="#verify-proof"></a>.
+          </dd>
+          <dt id="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
+          <dd>
+The `domain` value in a proof did not match the expected value. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR (-20)</dt>
+          <dd>
+The `challenge` value in a proof did not match the expected value. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="#INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL (-21)</dt>
+          <dd>
+The `verificationMethod` value in a proof was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="#INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID (-22)</dt>
+          <dd>
+The `id` value in a <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="#INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT (-23)</dt>
+          <dd>
+The <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="#INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD (-24)</dt>
+          <dd>
+The <a>verification method</a> in a <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD (-25)</dt>
+          <dd>
+The <a>verification method</a> in a <a>controller document</a> was not
+associated using the expected <a>verification relationship</a> as expressed
+in the `proofPurpose` property in the proof. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+        </dl>
       </section>
     </section>
 
