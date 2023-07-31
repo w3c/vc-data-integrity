@@ -58,9 +58,13 @@ class:
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519signature2020
 
+  - id: Errors
+    label: Processing errors
+    defined_by: https://www.w3.org/TR/vc-di-eddsa/#errors
 
-# These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated
-# In some cases a ccg document was found and used for the definition, but in some cases even that is missing...
+
+# These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated.
+# In some cases, a CCG document was found and used for the definition, but in other cases, even that is missing...
 
 
   - id: EcdsaSecp256k1Signature2019
@@ -352,3 +356,44 @@ property:
       - label: Detached JSON Web Signature
         url: https://tools.ietf.org/html/rfc7797
 
+individual:
+  - id: PROOF_GENERATION_ERROR
+    upper_value: sec:Errors
+    label: Proof generation error
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
+  - id: MALFORMED_PROOF_ERROR
+    upper_value: sec:Errors
+    label: Malformed proof
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
+  - id: MISMATCHED_PROOF_PURPOSE_ERROR
+    upper_value: sec:Errors
+    label: Mismatched proof purpose
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
+  - id: INVALID_DOMAIN_ERROR
+    upper_value: sec:Errors
+    label: Invalid proof domain
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
+  - id: INVALID_CHALLENGE_ERROR
+    upper_value: sec:Errors
+    label: Invalid challenge
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
+  - id: INVALID_VERIFICATION_METHOD_URL
+    upper_value: sec:Errors
+    label: Invalid verification method URL
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
+  - id: INVALID_CONTROLLER_DOCUMENT_ID
+    upper_value: sec:Errors
+    label: Invalid controller document id
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
+  - id: INVALID_CONTROLLER_DOCUMENT
+    upper_value: sec:Errors
+    label: Invalid controller document
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
+  - id: INVALID_VERIFICATION_METHOD
+    upper_value: sec:Errors
+    label: Invalid verification method
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
+  - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+    upper_value: sec:Errors
+    label: Invalid proof purpose for verification method
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
