@@ -194,6 +194,18 @@ property:
     domain: sec:Proof
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
+    
+  - id: expires
+    label: Proof expiration time
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-expires
+    domain: sec:Proof
+    range: xsd:dateTime
+
+  - id: nonce
+    label: Nonce supplied by proof creator
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-nonce
+    domain: sec:Proof
+    range: xsd:string
 
   - id: authentication
     label: Authentication method
@@ -249,18 +261,6 @@ property:
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
-
-  - id: expires
-    label: Expiration time
-    range: xsd:dateTime
-    comment: The expiration time is typically associated with a <a href="#Key>`Key`</a> and specifies when the validity of the key will expire. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
-
-  - id: nonce
-    label: Nonce
-    # domain: sec:Signature
-    range: xsd:string
-    comment: |
-      This property is used in conjunction with the input to the signature hashing function in order to protect against replay attacks. Typically, receivers need to track all nonce values used within a certain time period in order to ensure that an attacker cannot merely re-send a compromised packet in order to execute a privileged request. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
 
   - id: revoked
     label: Revocation time
