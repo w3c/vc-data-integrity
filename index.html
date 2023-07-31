@@ -640,7 +640,7 @@ the `created` and `expires` properties. This information might be indirectly
 exposed to an individual if a proof is processed and is detected to be outside
 an allowable time range. When displaying date and time values related to the
 validity of cryptographic proofs, implementers are advised to respect the
-<a date-cite="LTLI#locale" href="https://www.w3.org/TR/ltli/#locale">locale</a>
+<a data-cite="LTLI#locale" href="https://www.w3.org/TR/ltli/#locale">locale</a>
 and local calendar preferences of the individual [[?LTLI]]. Conversion of
 timestamps to local time values are expected to consider the time zone
 expectations of the individual. See
@@ -1040,8 +1040,8 @@ both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[MULTICODEC]] specification to encode key types into a single
-binary stream that is then encoded using the [[MULTIBASE]] specification.
+utilizes the [[?MULTICODEC]] specification to encode key types into a single
+binary stream that is then encoded using the [[?MULTIBASE]] specification.
 To encode a Multikey, the <a>verification method</a> `type` MUST be set to
 `Multikey` and the `publicKeyMultibase` value MUST be a [[MULTIBASE]] encoded
 [[MULTICODEC]] value. An example of a Multikey is provided below:
@@ -1060,9 +1060,9 @@ To encode a Multikey, the <a>verification method</a> `type` MUST be set to
 
             <p>
 In the example above, the `publicKeyMultibase` value starts with the letter `z`,
-which is the [[MULTIBASE]] header that conveys that the binary data is
+which is the [[?MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[MULTICODEC]] header is `0xed`, which specifies that the remaining data
+[[?MULTICODEC]] header is `0xed`, which specifies that the remaining data
 is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
@@ -1084,9 +1084,9 @@ referred to as <em>private keys</em>.
 
             <p>
 In the example above, the `secretKeyMultibase` value starts with the letter `z`,
-which is the [[MULTIBASE]] header that conveys that the binary data is
+which is the [[?MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[MULTICODEC]] header is `0x1300`, which specifies that the remaining data
+[[?MULTICODEC]] header is `0x1300`, which specifies that the remaining data
 is a 32-byte raw Ed25519 private key.
             </p>
 
@@ -1511,29 +1511,29 @@ this specification.
         <h2>Relationship to Verifiable Credentials</h2>
         <p>
 Cryptographic suites that implement this specification can be used to secure
-<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
 verifiable credentials</a> and
-<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
 verifiable presentations</a>. Implementers
 that are addressing those use cases are cautioned that additional checks might
 be appropriate when processing those types of documents. For example, there are
 some use cases where it is important to ensure that the
 <a>verification method</a> used in a proof is associated with the
-<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
-<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
 verifiable credential</a>, or the
-<a data-cite="VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
-<a data-cite="VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
 verifiable presentation</a>, during the process of
-<a data-cite="VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
+<a data-cite="?VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
 way to check for such an association is to ensure that the value of the
 <code>controller</code> property of a proof's <a>verification method</a>
 matches the URL value used to identify the
-<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
-<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively.
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively.
 This particular association indicates that the
-<a data-cite="VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
-<a data-cite="VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively,
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively,
 is the controller of the <a>verification method</a> used to verify
 the proof.
         </p>
@@ -2377,14 +2377,14 @@ implementation options), followed by a hyphen and designation of the
 approximate year that the suite was proposed.
         </p>
         <p>
-For example, the [[DI-EDDSA]] is based on EdDSA digital signatures, supports
+For example, the [[?DI-EDDSA]] is based on EdDSA digital signatures, supports
 two incompatible options based on canonicalization approaches, and was proposed
 in roughly the year 2022, so it would have two different cryptosuite names:
 <q>eddsa-rdfc-2022</q> and <q>eddsa-jcs-2022</q>.
         </p>
         <p>
-Although the [[DI-ECDSA]] is based on ECDSA digital signatures, supports the
-same two incompatible canonicalization approaches as [[DI-EDDSA]], and supports
+Although the [[?DI-ECDSA]] is based on ECDSA digital signatures, supports the
+same two incompatible canonicalization approaches as [[?DI-EDDSA]], and supports
 two different levels of security (128 bit and 192 bit) via two alternative sets
 of elliptic curves and hashes, it has only two cryptosuite names:
 <q>ecdsa-rdfc-2019</q> and <q>ecdsa-jcs-2019</q>. The security level and corresponding
@@ -2480,21 +2480,21 @@ cryptographically protected data has not been tampered with as it is written to
 and read from application storage.
         </p>
         <p class="advisement">
-Some transformations, such as RDF Dataset Canonicalization [[RDF-CANON]], have
+Some transformations, such as RDF Dataset Canonicalization [[?RDF-CANON]], have
 mitigations for input data sets that can be used by attackers to consume
 excessive processing cycles. This class of attack is called
-<a data-cite="RDF-CANON#dataset-poisoning">dataset poisoning</a>, and all modern
-RDF Dataset canonicalizers are required to detect these sorts of bad inputs and
-halt processing. The test suites for RDF Dataset Canonicalization includes such
-poisoned datasets to ensure that such mitigations exist in all conforming
-implementations. Generally speaking, cryptographic suite specifications that
-use transformations are required to mitigate these sorts of attacks, and
-implementers are urged to ensure that the software libraries that they use
-enforce these mitigations. These attacks are in the same general category as
-any resource starvation attack, such as HTTP clients that deliberately
-slow connections, thus starving connections on the server. Implementers are
-advised to consider these sorts of attacks when implementing defensive
-security strategies.
+<a data-cite="?RDF-CANON#dataset-poisoning">dataset poisoning</a>, and all
+modern RDF Dataset canonicalizers are required to detect these sorts of bad
+inputs and halt processing. The test suites for RDF Dataset Canonicalization
+includes such poisoned datasets to ensure that such mitigations exist in all
+conforming implementations. Generally speaking, cryptographic suite
+specifications that use transformations are required to mitigate these sorts of
+attacks, and implementers are urged to ensure that the software libraries that
+they use enforce these mitigations. These attacks are in the same general
+category as any resource starvation attack, such as HTTP clients that
+deliberately slow connections, thus starving connections on the server.
+Implementers are advised to consider these sorts of attacks when implementing
+defensive security strategies.
         </p>
         <p class="issue"
           title="Collision-resistant canonicalization requirements">

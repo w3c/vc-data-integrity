@@ -34,7 +34,7 @@ class:
     label: A Data Integrity Proof
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
- 
+
   - id: Multikey
     label: Multikey Verification Method
     upper_value: sec:VerificationMethod
@@ -51,7 +51,7 @@ class:
     label: ED2559 Verification Key, 2020 version
     upper_value: sec:Key
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519verificationkey2020
-    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">Ed25519Signature2020</a>. 
+    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">Ed25519Signature2020</a>.
 
   - id: Ed25519Signature2020
     label: Ed25519 Signature Suite, 2020 version
@@ -62,7 +62,7 @@ class:
 # These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated
 # In some cases a ccg document was found and used for the definition, but in some cases even that is missing...
 
- 
+
   - id: EcdsaSecp256k1Signature2019
     deprecated: true
     label: ecdsa-sep256k1, 2019 version
@@ -83,7 +83,7 @@ class:
     deprecated: true
     label: ecdsa-secp256k1 recovery signature, 2020 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
- 
+
   - id: EcdsaSecp256k1RecoveryMethod2020
     deprecated: true
     label: ecdsa-secp256k1 recovery method, 2020 version
@@ -210,7 +210,7 @@ property:
     label: Capability Invocation Method
     range: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
- 
+
   - id: keyAgreement
     label: Key agreement protocols
     range: sec:VerificationMethod
