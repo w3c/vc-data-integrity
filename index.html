@@ -2163,17 +2163,17 @@ The following example provides a minimum conformant
         <h3>Errors</h3>
 
         <p>
-The algorithms described in this specification, as well as cryptographic
+The algorithms described in this specification, as well as various cryptographic
 suite specitications, throw specific types of errors. Implementers might find
 it useful to convey these errors to other libraries or software systems. This
-section provides specific URLs, descriptions, and error codes for the errors
-such that the ecosystem implementing technologies described by this
+section provides specific URLs, descriptions, and error codes for the errors,
+such that an ecosystem implementing technologies described by this
 specification might interoperate more effectively when errors occur.
         </p>
 
         <p>
 When exposing these errors through an HTTP interface, implementers SHOULD use
-[[RFC7807]] to encode the error data structure. If [[RFC7807]] is utilized:
+[[RFC7807]] to encode the error data structure. If [[RFC7807]] is used:
         </p>
 
         <ul>
@@ -2184,7 +2184,7 @@ section listed below.
           </li>
           <li>
 The `code` value MUST be the integer code described in the table below
-(in parenthesis, beside the type name).
+(in parentheses, beside the type name).
           </li>
           <li>
 The `title` value SHOULD provide a short but specific human-readable string for
