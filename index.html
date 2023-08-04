@@ -2073,9 +2073,9 @@ the <var>isProofVerified</var> value with this <var>proof</var>.
 For each <var>proof</var> in <var>proof_list</var> that contains a 
 <code>previousProof</code> attribute, modify the associated 
 <var>isProofVerified</var> by iteratively checking that the proof identified by
-the <code>id</code> value in <var>previousProof</var>, along with any 
-<code>previousProofs</code> up the chain, is valid. If <code>previousProof</code> is an
-array, then all previous proof proof chains identified by the array elements 
+the <code>id</code> value in <var>previousProof</var>, along with every 
+<code>previousProof</code> up the chain, is valid. If <code>previousProof</code> is an
+array, then all previous proofs identified by the array elements 
 MUST be valid for the current proof to be considered valid. Cycle detection, 
 such as keeping a list of previously visited proofs, MUST be used to guard 
 against malicious proofs. If a cycle is detected in a proof chain, 
