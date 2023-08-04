@@ -536,7 +536,7 @@ value. The contents of this value are determined by a cryptosuite and set to the
           <dd>
 An OPTIONAL string value or unordered list of string values. Each value 
 identifies another <a>data integrity proof</a> that MUST verify before the 
-current proof is processed. In the case of an unordered list all referenced 
+current proof is processed. If an unordered list, all referenced 
 proofs in the array MUST verify. This property is used in Section 
 <a href="#proof-chains"></a>.
           </dd>
@@ -1950,8 +1950,8 @@ attribute is a string, check whether
 an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
 If not, a `PROOF_GENERATION_ERROR` MUST be raised. If the 
 <code>previousProof</code> attribute is an array, check that each element of that
-array is a string and that an element of the <var>proof_list</var> has a 
-matching <code>id</code> attribute. If not, a `PROOF_GENERATION_ERROR` MUST be 
+array is a string which matches the <code>id</code> attribute of an element
+of the <var>proof_list</var>. If not, a `PROOF_GENERATION_ERROR` MUST be 
 raised.
           </li>
           <li>
