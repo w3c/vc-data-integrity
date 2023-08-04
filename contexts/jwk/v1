@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+    "@protected": true,
+    "JsonWebKey": {
+      "@id": "https://w3id.org/security#JsonWebKey",
+      "@context": {
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "controller": {
+          "@id": "https://w3id.org/security#controller",
+          "@type": "@id"
+        },
+        "publicKeyJwk": {
+          "@id": "https://w3id.org/security#publicKeyJwk",
+          "@type": "@json"
+        },
+        "secretKeyJwk": {
+          "@id": "https://w3id.org/security#secretKeyJwk",
+          "@type": "@json"
+        }
+      }
+    }
+  }
+}
