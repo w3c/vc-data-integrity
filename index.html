@@ -1122,8 +1122,8 @@ is a 32-byte raw Ed25519 private key.
           <section>
             <h3>JsonWebKey</h3>
             <p>
-The JSON Web Key data model is a specific type of <a>verification method</a>
-that utilizes the JWK specification [[RFC7517]] to encode key types into a
+The JSON Web Key (JWK) data model is a specific type of <a>verification method</a>
+that uses the JWK specification [[RFC7517]] to encode key types into a
 set of parameters. To encode a JSON Web Key, the <a>verification method</a>
 `type` MUST be set to `JsonWebKey` and the `publicKeyJwk` value MUST be a
 valid JWK value as described in [[RFC7517]]. An example of a JSON Web Key is
@@ -1131,7 +1131,7 @@ provided below:
             </p>
 
             <pre class="example nohighlight"
-              title="JSON Web Key encoding of a Ed25519 public key">
+              title="JSON Web Key encoding of an Ed25519 public key">
 {
   "@context": ["https://www.w3.org/ns/security/jwk/v1"],
   "id": "did:example:123456789abcdefghi#key-1",
@@ -1153,7 +1153,7 @@ The `kty` property encodes the key type of "OKP", which means
 "Octet string key pairs". The `alg` property identifies the algorithm intended
 for use with the public key. The `crv` property identifies the particular
 curve type of the public key. The `kid` property specifies how the public key
-might be referenced in software systems; if present, the value SHOULD match the
+might be referenced in software systems; if present, the `kid` value SHOULD match the
 `id` property of the encapsulating `JsonWebKey` object. Finally, the `x`
 property specifies the point on the Ed25519 curve that is associated with the
 public key.
@@ -1165,12 +1165,12 @@ The `publicKeyJwk` property MUST NOT contain any property marked as
             </p>
 
             <p>
-The JSON Web Key data model is also capable of encoding secret keys, sometimes
+The JSON Web Key data model is also capable of encoding <em>secret keys</em>, sometimes
 referred to as <em>private keys</em>.
             </p>
 
             <pre class="example nohighlight"
-              title="JSON Web Key encoding of a Ed25519 secret key">
+              title="JSON Web Key encoding of an Ed25519 secret key">
 {
   "@context": ["https://www.w3.org/ns/security/jwk/v1"],
   "id": "did:example:123456789abcdefghi#key-1",
@@ -1188,9 +1188,11 @@ referred to as <em>private keys</em>.
             </pre>
 
             <p>
-The example above is identical to the previous example, except that the
-information is stored in the `secretKeyJwk` property and its value encodes the
-private key value in the `d` property.
+The private key example above is almost identical to the previous example of the
+public key, except that the information is stored in the `secretKeyJwk` property
+(rather than the `publicKeyJwk`), and the private key value is encoded in the `d`
+property thereof (alongside the `x` property, which still specifies the point on
+the Ed25519 curve that is associated with the public key).
             </p>
 
           </section>
