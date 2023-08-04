@@ -194,7 +194,7 @@ property:
     domain: sec:Proof
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
-    
+
   - id: expires
     label: Proof expiration time
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-expires
@@ -251,11 +251,35 @@ property:
       - label: ed25519-2020
         url: https://w3c-ccg.github.io/lds-ed25519-2020/
 
+  - id: secretKeyMultibase
+    label: Secret key multibase
+    domain: sec:Multikey
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeymultibase
+    see_also:
+      - label: multibase
+        url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
+      - label: multicodec
+        url: https://github.com/multiformats/multicodec/blob/master/table.csv
+      - label: ed25519-2020
+        url: https://w3c-ccg.github.io/lds-ed25519-2020/
+
   - id: publicKeyJwk
     label: Public key JWK
     range: xsd:string
     domain: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
+    see_also:
+      - label: IANA JOSE
+        url: https://www.iana.org/assignments/jose/jose.xhtml
+      - label: RFC 7517
+        url: https://tools.ietf.org/html/rfc7517
+
+  - id: secretKeyJwk
+    label: Secret key JWK
+    range: rdf:JSON
+    domain: sec:JsonWebKey
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
