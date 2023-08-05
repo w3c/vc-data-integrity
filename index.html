@@ -439,10 +439,10 @@ This section specifies the data model that is used for expressing
       </p>
 
       <p>
-All of the data model terms and types in this specification map to URLs. The
-vocabulary where these URLs are defined is the [[?SECURITY-VOCABULARY]]. The
-explicit mechanism that is used to perform this mapping in a secured document
-is the `@context` property.
+All of the data model properties and types in this specification map to URLs.
+The vocabulary where these URLs are defined is the [[?SECURITY-VOCABULARY]]. The
+explicit mechanism that is used to perform this mapping in a secured document is
+the `@context` property.
       </p>
       <p>
 When processing a document in a JSON-LD environment, the mapping mechanism is
@@ -453,17 +453,24 @@ interpretation regardless of format, but with a simpler processing rule:
 
       <p>
 Ensure that all values associated with a `@context` property are in the expected
-order, the contents of the context files match known good cryptographic hashes
-for each file, and domain experts have deemed that the contents are appropriate
+order, the context files match documented cryptographic hashes for each file,
+and domain experts have deemed that the contents of each file are appropriate
 for the intended use case.
       </p>
 
       <p>
-Implicit `@context` values MAY be used such that no `@context` value needs to be
-present in a non-JSON-LD document. Using static context files with a JSON Schema
-is one acceptable approach to implementing the rule described above, ensuring
-proper term identification, typing, and order, when a non-JSON-LD processor is
-used.
+If no `@context` value is specified in a secured document, implementations MUST
+assume a `@context` value of `https://w3id.org/security/data-integrity/v1` at
+the top-level of the document being secured. Specifications MAY specify a
+different default `@context` value, and if provided, the specification MUST
+document a way of identifying when the different default `@context` value can be
+assumed (such as through a version or type identifier).
+      </p>
+
+      <p>
+Using static context files with a JSON Schema is one acceptable approach to
+implementing the rule described above, ensuring proper term identification,
+typing, and order, when a non-JSON-LD processor is used.
       </p>
 
       <section>
