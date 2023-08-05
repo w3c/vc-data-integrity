@@ -1094,8 +1094,8 @@ is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
             <p>
-The Multikey data model is also capable of encoding secret keys, sometimes
-referred to as <em>private keys</em>.
+The Multikey data model is also capable of encoding secret keys, whose subtypes
+include <em>symmetric keys</em> and <em>private keys</em>.
             </p>
 
             <pre class="example nohighlight"
@@ -1125,9 +1125,9 @@ is a 32-byte raw Ed25519 private key.
 The JSON Web Key (JWK) data model is a specific type of <a>verification method</a>
 that uses the JWK specification [[RFC7517]] to encode key types into a
 set of parameters. To encode a JSON Web Key, the <a>verification method</a>
-`type` MUST be set to `JsonWebKey` and the `publicKeyJwk` value MUST be a
-valid JWK value as described in [[RFC7517]]. An example of a JSON Web Key is
-provided below:
+`type` MUST be set to `JsonWebKey` and the `publicKeyJwk` or `secretKeyJwk`
+value MUST be a valid JWK value as described in [[RFC7517]]. An example of a
+JSON Web Key is provided below:
             </p>
 
             <pre class="example nohighlight"
