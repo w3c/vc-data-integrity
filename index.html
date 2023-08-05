@@ -1688,30 +1688,30 @@ necessary Data Integrity terms that were previously mapped by
           <p>
 HTML processors are designed to continue processing if recoverable errors are
 detected. JSON-LD processors operate in a similar manner. This design philosophy
-was used to ensure that developers need only use the parts of the JSON-LD
-language that they find useful to them without causing the processor to throw
-errors on things that might not be important to the developer. For example,
-JSON-LD processors are designed to not throw errors, but rather warn developers,
-when things such as undefined terms are encountered.
+was meant to ensure that developers could use only the parts of the JSON-LD
+language that they find useful, without causing the processor to throw errors
+on things that might not be important to the developer. Among other effects,
+this philosophy led to JSON-LD processors being designed to not throw errors,
+but rather warn developers, when encountering things such as undefined terms.
           </p>
 
           <p>
 When converting from JSON-LD to an RDF Dataset, such as when canonicalizing a
-document [[?RDF-CANON]], undefined terms can be dropped silently. The dropping
-of undefined terms results in all data associated with the undefined term not
-being protected by a digital proof. This creates a mismatch of expectations,
-where a developer who is unaware of how a JSON-LD processor works, would think
-that certain data was being secured and would be surprised to find out that it
-was not and no error was thrown. This specification requires that any
-recoverable loss of data when performing JSON-LD processing results in an error
-to avoid a mismatch in security expectations from developers.
+document [[?RDF-CANON]], undefined terms and relative URLs can be dropped
+silently. When values are dropped, they are not protected by a digital proof. This
+creates a mismatch of expectations, where a developer, who is unaware of how
+a JSON-LD processor works, might think that certain data was being secured,
+and then be surprised to find that it was not, when no error was thrown.
+This specification requires that any recoverable loss of data when
+performing JSON-LD transformations result in an error, to avoid a mismatch
+in the security expectations of developers.
           </p>
 
           <p>
-Implementations that utilize JSON-LD processing, such as RDF Dataset
-Canonicalization [[?RDF-CANON]], MUST throw an error when data is dropped by a
-JSON-LD processor, such as when an undefined term is detected in an input
-document. The error that is thrown SHOULD be `DATA_LOSS_DETECTION_ERROR`.
+Implementations that use JSON-LD processing, such as RDF Dataset
+Canonicalization [[?RDF-CANON]], MUST throw an error, which SHOULD be
+`DATA_LOSS_DETECTION_ERROR`, when data is dropped by a JSON-LD processor,
+such as when an undefined term is detected in an input document.
           </p>
         </section>
 
