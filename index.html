@@ -985,22 +985,6 @@ Two supported verification material properties are listed below:
             </p>
 
             <dl>
-              <dt><dfn>publicKeyJwk</dfn></dt>
-              <dd>
-                <p>
-The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
-be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
-conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
-contain "d", or any other members of the private information class as described
-in <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">Registration
-Template</a>. It is RECOMMENDED that verification methods that use JWKs
-[[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
-their fragment identifier. It is RECOMMENDED that JWK
-`kid` values are set to the public key fingerprint [[RFC7638]]. See
-the first key in <a href="#example-various-verification-method-types"></a> for
-an example of a public key with a compound key identifier.
-                </p>
-              </dd>
               <dt><dfn>publicKeyMultibase</dfn></dt>
               <dd>
                 <p>
@@ -1124,10 +1108,37 @@ is a 32-byte raw Ed25519 private key.
             <p>
 The JSON Web Key (JWK) data model is a specific type of <a>verification method</a>
 that uses the JWK specification [[RFC7517]] to encode key types into a
-set of parameters. To encode a JSON Web Key, the <a>verification method</a>
-`type` MUST be set to `JsonWebKey` and the `publicKeyJwk` or `secretKeyJwk`
-value MUST be a valid JWK value as described in [[RFC7517]]. An example of a
-JSON Web Key is provided below:
+set of parameters.
+            </p>
+
+            <p>
+When specifing a `JsonWebKey`, the object takes the following form:
+            </p>
+
+            <dl>
+              <dt>type</dt>
+              <dd>
+The `type` property MUST contain the string `JsonWebKey`.
+              </dd>
+              <dt id="publickeyjwk">publicKeyJwk</dt>
+              <dd>
+The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
+be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
+conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
+any members of the private information class, such as "d", as described
+in the <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">JWK
+Registration Template</a>. It is RECOMMENDED that verification methods that use
+JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
+their fragment identifier. It is RECOMMENDED that JWK `kid` values are set to
+the public key fingerprint [[RFC7638]]. See the first key in
+<a href="#example-various-verification-method-types"></a> for an example of a
+public key with a compound key identifier.
+              </dd>
+
+            </dl>
+
+            <p>
+An example of an object that conforms to this data model is provided below:
             </p>
 
             <pre class="example nohighlight"
