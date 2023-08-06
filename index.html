@@ -444,24 +444,34 @@ The vocabulary where these URLs are defined is the [[?SECURITY-VOCABULARY]]. The
 explicit mechanism that is used to perform this mapping in a secured document is
 the `@context` property.
       </p>
+
       <p>
-When processing a document in a JSON-LD environment, the mapping mechanism is
-defined by JSON-LD [[JSON-LD11]]. When processing a document in a non-JSON-LD
-environment, the same mechanism is used to ensure that the terms have the same
-interpretation regardless of format, but with a simpler processing rule:
+When a JSON-LD processor is used, the mapping mechanism is defined by JSON-LD
+[[JSON-LD11]]. When a non-JSON-LD processor is used, the same mechanism is used
+to ensure that the terms have the same interpretation regardless of format.
       </p>
 
       <p>
-Ensure that all values associated with a `@context` property are in the expected
-order, the context files match documented cryptographic hashes for each file,
-and domain experts have deemed that the contents of each file are appropriate
-for the intended use case.
+When a document is expected to be processed by a non-JSON-LD processor,
+document authors are advised to ensure that domain experts have 1) specified the
+expected order for all values associated with a `@context` property, 2)
+published cryptographic hashes for each `@context` file, and 3) deemed that the
+contents of each `@context` file are appropriate for the intended use case.
       </p>
 
       <p>
-Using static context files with a JSON Schema is one acceptable approach to
-implementing the rule described above, ensuring proper term identification,
-typing, and order, when a non-JSON-LD processor is used.
+When a document is processed by a non-JSON-LD processor and there is a
+requirement to use the same semantics as those used in a JSON-LD environment,
+implementers are advised to 1) enforce the expected order and values in the
+`@context` property, and 2) ensure that each `@context` file matches the known
+cryptographic hashes for each `@context` file.
+      </p>
+
+      <p>
+Using static, versioned `@context` files with published cryptographic hashes in
+conjunction with JSON Schema is one acceptable approach to implementing the
+mechanisms described above, which ensures proper term identification, typing,
+and order, when a non-JSON-LD processor is used.
       </p>
 
       <section>
