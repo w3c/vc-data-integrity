@@ -1016,12 +1016,12 @@ When specifing a `Multikey`, the object takes the following form:
               <dd>
 The `type` property MUST contain the string `Multikey`.
               </dd>
-              <dt><dfn>publicKeyMultibase</dfn></dt>
+              <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, the value MUST be a
 [[MULTIBASE]] encoded [[MULTICODEC]] value.
               </dd>
-              <dt><dfn>secretKeyMultibase</dfn></dt>
+              <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
 The `secretKeyMultibase` property is OPTIONAL. If present, the value MUST be a
 [[MULTIBASE]] encoded [[MULTICODEC]] value.
@@ -1094,7 +1094,7 @@ When specifing a `JsonWebKey`, the object takes the following form:
               <dd>
 The `type` property MUST contain the string `JsonWebKey`.
               </dd>
-              <dt id="publickeyjwk">publicKeyJwk</dt>
+              <dt><dfn class="lint-ignore">publicKeyJwk</dfn></dt>
               <dd>
 The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
 be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
@@ -1108,7 +1108,7 @@ the public key fingerprint [[RFC7638]]. See the first key in
 <a href="#example-various-verification-method-types"></a> for an example of a
 public key with a compound key identifier.
               </dd>
-              <dt id="secretkeyjwk">secretKeyJwk</dt>
+              <dt><dfn class="lint-ignore">secretKeyJwk</dfn></dt>
               <dd>
 The `secretKeyJwk` property is OPTIONAL. If present, the value MUST be a <a
 data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that conforms
