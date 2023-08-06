@@ -1500,6 +1500,7 @@ this specification.
 
       <section>
         <h2>Relationship to Verifiable Credentials</h2>
+
         <p>
 Cryptographic suites that implement this specification can be used to secure
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
@@ -1507,8 +1508,11 @@ verifiable credentials</a> and
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
 verifiable presentations</a>. Implementers
 that are addressing those use cases are cautioned that additional checks might
-be appropriate when processing those types of documents. For example, there are
-some use cases where it is important to ensure that the
+be appropriate when processing those types of documents.
+        </p>
+
+        <p>
+There are some use cases where it is important to ensure that the
 <a>verification method</a> used in a proof is associated with the
 <a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
@@ -1527,6 +1531,26 @@ This particular association indicates that the
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-holder">`holder`</a>, respectively,
 is the controller of the <a>verification method</a> used to verify
 the proof.
+        </p>
+
+        <p>
+Document authors and implementers are advised to understand the difference
+between the validity period of a <a href="#proofs">proof</a>, which is expressed
+using the <a href="#dfn-created">`created`</a> and <a
+href="#dfn-expires">`expires`</a> properties, and the validity period of a
+<a>verifiable credential</a>, which is expressed using the
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a> properties.
+While these properties might sometimes express the same validity periods, at
+other times they might not be aligned. When verifying a
+<a href="#proofs">proof</a>, it is important to ensure that the time is within
+the validity period for the proof. When
+<a data-cite="?VC-DATA-MODEL-2.0#validation">validating</a>
+a <a>verifiable credential</a>, it is important to ensure that the time is
+within the validity period for the <a>verifiable credential</a>. Note that a
+failure to validate either the validity period for the <a
+href="#proofs">proof</a>, or the validity period for the <a>verifiable
+credential</a> might result in accepting data that ought to have been rejected.
         </p>
       </section>
 
