@@ -963,7 +963,7 @@ Verification material is any information that is used by a process that applies
 a <a>verification method</a>. The `type` of a <a>verification
 method</a> is expected to be used to determine its compatibility with such
 processes. Examples of verification material properties are
-`<a>publicKeyJwk</a>` or `<a>publicKeyMultibase</a>`. A
+`publicKeyJwk` or `publicKeyMultibase`. A
 <a>cryptographic suite</a> specification is responsible for specifying the
 <a>verification method</a> `type` and its associated verification
 material. For example, see <a href="https://w3c-ccg.github.io/lds-jws2020/">JSON
@@ -983,25 +983,6 @@ approach attempts to strike a delicate balance between ease of implementation
 and supporting formats that have historically had broad deployment.
 Two supported verification material properties are listed below:
             </p>
-
-            <dl>
-              <dt><dfn>publicKeyMultibase</dfn></dt>
-              <dd>
-                <p>
-The `publicKeyMultibase` property is OPTIONAL. This feature is
-non-normative. If present, the value MUST be a <a
-data-cite="INFRA#string">string</a> representation of a [[MULTIBASE]] encoded
-public key.
-                </p>
-                <p class="advisement">
-Note that the [[?MULTIBASE]] specification is not yet a standard and is
-subject to change. There might be some use cases for this data format
-where `<b>public</b>KeyMultibase` is defined, to allow for
-expression of <a>public keys</a>, but `<b>private</b>KeyMultibase`
-is not defined, to protect against accidental leakage of secret keys.
-                </p>
-              </dd>
-          </dl>
 
             <p>
 A <a>verification method</a> MUST NOT contain multiple verification material
@@ -1051,11 +1032,29 @@ both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[?MULTICODEC]] specification to encode key types into a single
-binary stream that is then encoded using the [[?MULTIBASE]] specification.
-To encode a Multikey, the <a>verification method</a> `type` MUST be set to
-`Multikey` and the `publicKeyMultibase` value MUST be a [[MULTIBASE]] encoded
-[[MULTICODEC]] value. An example of a Multikey is provided below:
+utilizes the [[MULTICODEC]] specification to encode key types into a single
+binary stream that is then encoded using the [[MULTIBASE]] specification.
+            </p>
+
+            <p>
+When specifing a `Multikey`, the object takes the following form:
+            </p>
+
+            <dl>
+              <dt>type</dt>
+              <dd>
+The `type` property MUST contain the string `Multikey`.
+              </dd>
+              <dt><dfn>publicKeyMultibase</dfn></dt>
+              <dd>
+The `publicKeyMultibase` property is OPTIONAL. If present, the value MUST be a
+[[MULTIBASE]] encoded [[MULTICODEC]] value.
+              </dd>
+
+            </dl>
+
+            <p>
+An example of a Multikey is provided below:
             </p>
 
             <pre class="example nohighlight"
