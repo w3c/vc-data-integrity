@@ -1931,8 +1931,9 @@ as inputs to the algorithm.
           <li>
 If the <var>proof</var>.<var>type</var>,
 <var>proof</var>.<var>verificationMethod</var>,
-or <var>proof</var>.<var>proofPurpose</var> values are not set, a
-`PROOF_GENERATION_ERROR` MUST be raised.
+or <var>proof</var>.<var>proofPurpose</var> values are not set, an error
+MUST be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If the <a>cryptographic suite</a> requires the use of a created timestamp,
@@ -1941,12 +1942,14 @@ and the <var>proof</var>.<var>created</var> value is not set, a
           </li>
           <li>
 If <var>options</var>.<var>domain</var> is set, it MUST be equal to
-<var>proof</var>.<var>domain</var> or a `PROOF_GENERATION_ERROR` MUST be raised.
+<var>proof</var>.<var>domain</var> or an error MUST be raised and SHOULD convey
+an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>challenge</var> is set, it MUST be equal to
-<var>proof</var>.<var>challenge</var> or a `PROOF_GENERATION_ERROR` MUST be
-raised.
+<var>proof</var>.<var>challenge</var> or an error MUST be raised and SHOULD
+convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 Set <var>output</var>.<var>proof</var> to the value of <var>proof</var>.
@@ -1998,7 +2001,8 @@ the <var>unsecuredDocument</var>.
           <li>
 If <var>options</var> contains a <code>previousProof</code> attribute check if
 an element of the <var>proof_list</var> has a matching <code>id</code> attribute.
-If not  a `PROOF_GENERATION_ERROR` MUST be raised.
+If not an error MUST be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If
@@ -2043,19 +2047,22 @@ Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>.
           <li>
 If the <var>proof</var>.<var>type</var>,
 <var>proof</var>.<var>verificationMethod</var>, or
-<var>proof</var>.<var>proofPurpose</var> values are not set, a
-`MALFORMED_PROOF_ERROR` MUST be raised.
+<var>proof</var>.<var>proofPurpose</var> values are not set,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
 If the cryptographic suite requires the
 <var>proof</var>.<var>created</var> value, and it
-is not set, a `MALFORMED_PROOF_ERROR`
-MUST be raised.
+is not set, an error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
+
           </li>
           <li>
 If the <var>proof</var>.<var>proofPurpose</var> value does not match
-<var>options</var>.<var>expectedProofPurpose</var>, a
-`MISMATCHED_PROOF_PURPOSE_ERROR` MUST be raised.
+<var>options</var>.<var>expectedProofPurpose</var>,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
           <li>
 Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
@@ -2086,17 +2093,20 @@ parameters provided as inputs to the algorithm.
           </li>
           <li>
 If the <var>proof</var>.<var>created</var> is set and it deviates more than
-<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds, a
-`CREATED_TIME_DEVIATION_ERROR` MUST be raised.
+<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#CREATED_TIME_DEVIATION_ERROR">CREATED_TIME_DEVIATION_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>domain</var> is set and it does not match
-<var>proof</var>.<var>domain</var>, an `INVALID_DOMAIN_ERROR` MUST be raised.
+<var>proof</var>.<var>domain</var>, an error MUST be raised and SHOULD convey an
+error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>challenge</var> is set and it does not match
-<var>proof</var>.<var>challenge</var>, an `INVALID_CHALLENGE_ERROR` MUST be
-raised.
+<var>proof</var>.<var>challenge</var>,  an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
           <li>
 Return <var>isProofVerified</var> as the <a>verification result</a>.
@@ -2160,8 +2170,9 @@ Let <var>vmIdentifier</var> be set to
 Let <var>vmPurpose</var> be set to <var>proof</var>.<var>proofPurpose</var>.
           </li>
           <li>
-If <var>vmIdentifier</var> is not a valid URL, an
-`INVALID_VERIFICATION_METHOD_URL` error MUST be raised.
+If <var>vmIdentifier</var> is not a valid URL, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL</a>.
           </li>
           <li>
 Let <var>controllerDocumentUrl</var> be the result of parsing
@@ -2180,12 +2191,15 @@ of the URL scheme and using the supplied <var>options</var>.
           </li>
           <li>
 If <var>controllerDocument</var>.<var>id</var> does not match the
-<var>controllerDocumentUrl</var>, an `INVALID_CONTROLLER_DOCUMENT_ID` error MUST
-be raised.
+<var>controllerDocumentUrl</var>, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID</a>.
           </li>
           <li>
 If <var>controllerDocument</var> is not a valid <a>controller document</a>,
-an `INVALID_CONTROLLER_DOCUMENT` error MUST be raised.
+an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT</a>.
           </li>
           <li>
 Let <var>verificationMethod</var> be the result of dereferencing the
@@ -2194,13 +2208,15 @@ rules of the media type of the <var>controllerDocument</var>.
           </li>
           <li>
 If <var>verificationMethod</var> is not a valid <a>verification method</a>,
-an `INVALID_VERIFICATION_METHOD` error MUST be raised.
+an error MUST be raised and SHOULD convey an error type of
+<a href="#INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD</a>.
           </li>
           <li>
 If <var>verificationMethod</var> is not associated with the array of
 <var>vmPurposes</var> in the <var>controllerDocument</var>, either by reference
-(URL) or by value (object), an `INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD`
-error MUST be raised.
+(URL) or by value (object), an error MUST be raised and SHOULD convey an error
+type of <a href="#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">
+INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD</a>.
           </li>
           <li>
 Return <var>verificationMethod</var> as the
