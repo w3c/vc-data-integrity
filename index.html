@@ -459,15 +459,6 @@ for the intended use case.
       </p>
 
       <p>
-If no `@context` value is specified in a secured document, implementations MUST
-assume a `@context` value of `https://w3id.org/security/data-integrity/v1` at
-the top-level of the document being secured. Specifications MAY specify a
-different default `@context` value, and if provided, the specification MUST
-document a way of identifying when the different default `@context` value can be
-assumed (such as through a version or type identifier).
-      </p>
-
-      <p>
 Using static context files with a JSON Schema is one acceptable approach to
 implementing the rule described above, ensuring proper term identification,
 typing, and order, when a non-JSON-LD processor is used.
