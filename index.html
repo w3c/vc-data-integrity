@@ -446,17 +446,12 @@ the `@context` property.
       </p>
 
       <p>
-When a JSON-LD processor is used, the mapping mechanism is defined by JSON-LD
-[[JSON-LD11]]. When a non-JSON-LD processor is used, the same mechanism is used
-to ensure that the terms have the same interpretation regardless of format.
-      </p>
-
-      <p>
-When a document is expected to be processed by a non-JSON-LD processor,
-document authors are advised to ensure that domain experts have 1) specified the
-expected order for all values associated with a `@context` property, 2)
-published cryptographic hashes for each `@context` file, and 3) deemed that the
-contents of each `@context` file are appropriate for the intended use case.
+The mapping mechanism is defined by JSON-LD [[JSON-LD11]]. To ensure a document
+can be interoperably consumed without the use of a JSON-LD library, document authors
+are advised to ensure that domain experts have 1) specified the expected order for
+all values associated with a `@context` property, 2) published cryptographic hashes
+for each `@context` file, and 3) deemed that the contents of each `@context` file
+are appropriate for the intended use case.
       </p>
 
       <p>
