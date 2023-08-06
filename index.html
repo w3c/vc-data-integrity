@@ -933,7 +933,7 @@ using the `<a>controller</a>` property at the highest level of the
 Verification material is any information that is used by a process that applies
 a <a>verification method</a>. The `type` of a <a>verification method</a> is
 expected to be used to determine its compatibility with such processes. Examples
-of verification material include `JsonWebKey` and `Multikey`.
+of verification methods include `JsonWebKey` and `Multikey`.
 A <a>cryptographic suite</a> specification is responsible for specifying the
 <a>verification method</a> `type` and its associated verification material
 format. For examples, see
@@ -1011,7 +1011,7 @@ When specifing a `Multikey`, the object takes the following form:
             <dl>
               <dt>type</dt>
               <dd>
-The `type` property MUST contain the string `Multikey`.
+The value of the `type` property MUST contain the string `Multikey`.
               </dd>
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
@@ -1089,7 +1089,7 @@ When specifing a `JsonWebKey`, the object takes the following form:
             <dl>
               <dt>type</dt>
               <dd>
-The `type` property MUST contain the string `JsonWebKey`.
+The value of the `type` property MUST contain the string `JsonWebKey`.
               </dd>
               <dt><dfn class="lint-ignore">publicKeyJwk</dfn></dt>
               <dd>
