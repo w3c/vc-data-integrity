@@ -1125,7 +1125,7 @@ The `type` property MUST contain the string `JsonWebKey`.
 The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
 be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
 conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
-any members of the private information class, such as "d", as described
+include any members of the private information class, such as "d", as described
 in the <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">JWK
 Registration Template</a>. It is RECOMMENDED that verification methods that use
 JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
