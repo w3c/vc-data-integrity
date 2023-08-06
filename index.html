@@ -425,22 +425,21 @@ A <dfn>conforming secured document</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
 <a href="#proofs"></a>, <a href="#proof-purposes"></a>,
 <a href="#contexts-and-vocabularies"></a>, and
-<a href="#dataintegrityproof"></a>. Specifically,
-all relevant normative statements in those sections MUST be enforced.
+<a href="#dataintegrityproof"></a>.
         </p>
 
         <p>
 A <dfn>conforming controller document</dfn> is any concrete expression of the
-data model that follows the relevant normative requirements in Section
-<a href="#controller-documents"></a>. Specifically, all relevant normative
-statements in that section this document MUST be enforced.
+data model that follows the relevant normative requirements in Sections
+<a href="#controller-documents"></a> and
+<a href="#contexts-and-vocabularies"></a>.
         </p>
 
         <p>
 A <dfn>conforming verification method</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
-<a href="#verification-methods"></a>. Specifically, all relevant normative
-statements in that section this document MUST be enforced.
+<a href="#verification-methods"></a> and
+<a href="#contexts-and-vocabularies"></a>.
         </p>
 
         <p>
@@ -452,9 +451,17 @@ secured document</a>, a <a>conforming controller document</a>, or a
         <p>
 A <dfn class="lint-ignore">conforming cryptographic suite specification</dfn> is
 any document that follows the relevant normative requirements in Section
-<a href="#cryptographic-suites"></a>. Specifically, all relevant normative
-requirements in that section of this document MUST be implemented.
+<a href="#cryptographic-suites"></a>.
         </p>
+
+        <p>
+A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
+as software and/or hardware that generates or consumes a
+<a>conforming document</a> according to the relevant normative statements in
+Section <a href="#algorithms"></a>. Conforming processors MUST produce errors
+when non-conforming documents are consumed.
+        </p>
+
       </section>
 
       <section class="informative">
