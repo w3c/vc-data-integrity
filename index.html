@@ -1935,7 +1935,7 @@ via the digital proof.
         <ol class="algorithm">
           <li>
 Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
-<var>proof_list</var> be an empty list. If <var>proof</var> is a list copy all 
+<var>allProofs</var> be an empty list. If <var>proof</var> is a list copy all 
 the elements of <var>proof</var> to <var>proof_list</var>. If <var>proof</var> 
 is an object add a copy of that object to <var>proof_list</var>.
           </li>
@@ -2078,7 +2078,7 @@ the <code>id</code> value in <var>previousProof</var>, along with every
 array, then all previous proofs identified by the array elements 
 MUST be valid for the current proof to be considered valid. Cycle detection, 
 such as keeping a list of previously visited proofs, MUST be used to guard 
-against malicious proofs. If a cycle is detected in a proof chain, 
+against proof cycles. If a cycle is detected in a proof chain, 
 then a `PROOF_CHAIN_CYCLE_ERROR` MUST be raised.
           </li>
           <li>
