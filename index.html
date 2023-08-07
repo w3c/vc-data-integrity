@@ -2046,8 +2046,10 @@ The `type` property MUST contain the string `DataIntegrityProof`.
           </dd>
           <dt>cryptosuite</dt>
           <dd>
-The `cryptosuite` property MUST contain a string specifying the name of the
-cryptosuite.
+The `cryptosuite` value MUST specify a string that identifies the
+<a>cryptographic suite</a>. If the processing environment supports string
+subtypes, the string subtype MUST be
+`https://w3id.org/security#cryptosuiteString`.
           </dd>
           <dt>proofValue</dt>
           <dd>

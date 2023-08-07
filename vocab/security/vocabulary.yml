@@ -240,7 +240,7 @@ property:
   - id: cryptosuite
     label: Cryptographic suite
     domain: sec:DataIntegrityProof
-    range: xsd:string
+    range: sec:cryptosuiteString
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite
 
   - id: publicKeyMultibase
