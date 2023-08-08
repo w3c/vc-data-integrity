@@ -294,8 +294,8 @@ property:
   - id: revoked
     label: Revocation time
     range: xsd:dateTime
-    comment: |
-      The revocation time is typically associated with a <a href="#Key">`Key`</a> that has been marked as invalid as of the date and time associated with the property. Key revocations are often used when a key is compromised, such as the theft of the private key, or during the course of best-practice key rotation schedules. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-revoked
+    domain: sec:VerificationMethod
 
 # These are property specifications that have been defined in a CCG document and are in use; for the time being, these are considered as "reserved"
 
