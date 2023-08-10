@@ -969,7 +969,7 @@ format. For examples, see
 <a href="https://www.w3.org/TR/vc-di-ecdsa/">the Data Integrity ECDSA
 Cryptosuites</a> and <a href="https://w3c-ccg.github.io/lds-ed25519-2020/">
 the Data Integrity EdDSA Cryptosuites</a>. For a list of <a>verification
-method</a> types please see the [[?SECURITY-VOCABULARY]].
+method</a> types, please see the [[?SECURITY-VOCABULARY]].
             </p>
 
             <p>
@@ -977,8 +977,8 @@ To increase the likelihood of interoperable implementations, this specification
 limits the number of formats for expressing verification material in a
 <a>controller document</a>. The fewer formats that implementers have to
 implement, the more likely it will be that they will support all of them. This
-approach attempts to strike a delicate balance between ease of implementation
-and supporting formats that have historically had broad deployment.
+approach attempts to strike a delicate balance between easing implementation
+and providing support for formats that have historically had broad deployment.
             </p>
 
             <p>
@@ -1044,12 +1044,12 @@ The value of the `type` property MUST contain the string `Multikey`.
               </dd>
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
-The `publicKeyMultibase` property is OPTIONAL. If present, the value MUST be a
+The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
 [[MULTIBASE]] encoded [[MULTICODEC]] value.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
-The `secretKeyMultibase` property is OPTIONAL. If present, the value MUST be a
+The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
 [[MULTIBASE]] encoded [[MULTICODEC]] value.
               </dd>
             </dl>
@@ -1122,10 +1122,10 @@ The value of the `type` property MUST contain the string `JsonWebKey`.
               </dd>
               <dt><dfn class="lint-ignore">publicKeyJwk</dfn></dt>
               <dd>
-The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
+The `publicKeyJwk` property is OPTIONAL. If present, its value MUST
 be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
 conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
-include any members of the private information class, such as "d", as described
+include any members of the private information class, such as `d`, as described
 in the <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">JWK
 Registration Template</a>. It is RECOMMENDED that verification methods that use
 JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
@@ -1136,7 +1136,7 @@ public key with a compound key identifier.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyJwk</dfn></dt>
               <dd>
-The `secretKeyJwk` property is OPTIONAL. If present, the value MUST be a <a
+The `secretKeyJwk` property is OPTIONAL. If present, its value MUST be a <a
 data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that conforms
 to [[RFC7517]].
               </dd>
