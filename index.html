@@ -1942,6 +1942,51 @@ such as when an undefined term is detected in an input document.
           </p>
         </section>
 
+        <section>
+          <h3 id="cryptosuiteString">The `cryptosuiteString` Datatype</h3>
+
+          <p>
+This specification encodes cryptographic identifiers as enumerable strings,
+which is useful in processes, such as compression algorithms, that need to
+efficiently encode such strings. In environments that support data types for
+string values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier content
+is indicated using a literal value whose datatype is set to
+`https://w3id.org/security#cryptosuiteString`.
+          </p>
+
+          <p>
+The <code>cryptosuiteString</code> datatype is defined as follows:
+          </p>
+
+          <dl>
+            <dt>The URL denoting this datatype</dt>
+            <dd>
+is `https://w3id.org/security#cryptosuiteString`.
+            </dd>
+            <dt>The lexical space</dt>
+            <dd>
+is the set of all cryptosuite types expressed using American Standard Code
+for Information Interchange [[ASCII]] strings that are defined by the sum of all
+Data Integrity cryptosuite specifications.
+            </dd>
+            <dt>The value space</dt>
+            <dd>
+is the set of all cryptosuite types that are expressed using the `cryptosuite`
+property as defined in Section <a href="#dataintegrityproof"></a>.
+            </dd>
+            <dt>The lexical-to-value mapping</dt>
+            <dd>
+maps any element of the lexical space to the result of parsing it into an
+internal representation that uniquely identifies the cryptosuite value from all
+other possible cryptosuite values.
+            </dd>
+            <dt>The canonical mapping</dt>
+            <dd>
+maps any element of the value space to the corresponding string in the lexical space.
+            </dd>
+          </dl>
+        </section>
+
       </section>
 
     </section>
