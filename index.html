@@ -2145,7 +2145,7 @@ the <var>unsecuredDocument</var>.
           <li>
 If <var>options</var> contains a <code>previousProof</code> attribute check if
 an element of the <var>proof_list</var> has a matching <code>id</code> attribute.
-If not an error MUST be raised and SHOULD convey an error type of
+If not, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
@@ -2236,7 +2236,8 @@ Let <var>isProofVerified</var> be the result of running the
 parameters provided as inputs to the algorithm.
           </li>
           <li>
-If the <var>proof</var>.<var>created</var> is set and it deviates more than
+If the <var>proof</var>.<var>created</var> is set and its value differs
+from the datetime of verification by more than
 <var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds,
 an error MUST be raised and SHOULD convey an error type of
 <a href="#CREATED_TIME_DEVIATION_ERROR">CREATED_TIME_DEVIATION_ERROR</a>.
