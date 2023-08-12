@@ -548,13 +548,13 @@ specified as an [[XMLSCHEMA11-2]] combined date and time string.
 
           <dt id="defn-domain">domain</dt>
           <dd>
-An OPTIONAL property that conveys one or more security domains in which the
+The `domain` property is OPTIONAL. It conveys one or more security domains in which the
 proof is meant to be used. If specified, the associated value MUST be either a
 string, or an unordered set of strings. A verifier SHOULD use the value to
 ensure that the proof was intended to be used in the security domain in which
 the verifier is operating. The specification of the `domain` parameter is useful
 in challenge-response protocols where the verifier is operating from within a
-security domain known to the creator of the proof. Examples domain values
+security domain known to the creator of the proof. Example domain values
 include: `domain.example` (DNS domain), `https://domain.example:8443`
 (Web origin), `mycorp-intranet` (bespoke text string), and
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
