@@ -158,7 +158,7 @@ signatures and proofs of stake.
 
 ### Signatures in Plain JSON 
 
-Mastadon was one of the first implementations that used Data Integrity
+Mastodon was one of the first implementations that used Data Integrity
 signatures (many years ago) to digitally sign messages from individuals. There
 is a more recent effort to use the updated Data Integrity cryptosuites to
 digitally sign messages. There is a desire to use JSON Canonicalization Scheme

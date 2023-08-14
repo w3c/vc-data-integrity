@@ -43,6 +43,11 @@ class:
       - label: EdDSA Cryptosuite v2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
 
+  - id: JsonWebKey
+    label: JSON Web Key Verification Method
+    upper_value: sec:VerificationMethod
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#jsonwebkey
+
   - id: Key
     label: Cryptographic key
     comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
@@ -58,9 +63,13 @@ class:
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519signature2020
 
+  - id: ProcessingError
+    label: Processing error
+    defined_by: https://www.w3.org/TR/vc-di-eddsa/#errors
 
-# These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated
-# In some cases a ccg document was found and used for the definition, but in some cases even that is missing...
+
+# These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated.
+# In some cases, a CCG document was found and used for the definition, but in other cases, even that is missing...
 
 
   - id: EcdsaSecp256k1Signature2019
@@ -191,6 +200,18 @@ property:
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
 
+  - id: expires
+    label: Proof expiration time
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-expires
+    domain: sec:Proof
+    range: xsd:dateTime
+
+  - id: nonce
+    label: Nonce supplied by proof creator
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-nonce
+    domain: sec:Proof
+    range: xsd:string
+
   - id: authentication
     label: Authentication method
     range: sec:VerificationMethod
@@ -224,7 +245,7 @@ property:
 
   - id: publicKeyMultibase
     label: Public key multibase
-    domain: sec:VerificationMethod
+    domain: sec:Multikey
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeymultibase
     see_also:
@@ -235,10 +256,23 @@ property:
       - label: ed25519-2020
         url: https://w3c-ccg.github.io/lds-ed25519-2020/
 
+  - id: secretKeyMultibase
+    label: Secret key multibase
+    domain: sec:Multikey
+    range: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeymultibase
+    see_also:
+      - label: multibase
+        url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
+      - label: multicodec
+        url: https://github.com/multiformats/multicodec/blob/master/table.csv
+      - label: ed25519-2020
+        url: https://w3c-ccg.github.io/lds-ed25519-2020/
+
   - id: publicKeyJwk
     label: Public key JWK
-    range: xsd:string
-    domain: sec:VerificationMethod
+    range: rdf:JSON
+    domain: sec:JsonWebKey
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
     see_also:
       - label: IANA JOSE
@@ -246,17 +280,16 @@ property:
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
 
-  - id: expires
-    label: Expiration time
-    range: xsd:dateTime
-    comment: The expiration time is typically associated with a <a href="#Key>`Key`</a> and specifies when the validity of the key will expire. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
-
-  - id: nonce
-    label: Nonce
-    # domain: sec:Signature
-    range: xsd:string
-    comment: |
-      This property is used in conjunction with the input to the signature hashing function in order to protect against replay attacks. Typically, receivers need to track all nonce values used within a certain time period in order to ensure that an attacker cannot merely re-send a compromised packet in order to execute a privileged request. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
+  - id: secretKeyJwk
+    label: Secret key JWK
+    range: rdf:JSON
+    domain: sec:JsonWebKey
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeyjwk
+    see_also:
+      - label: IANA JOSE
+        url: https://www.iana.org/assignments/jose/jose.xhtml
+      - label: RFC 7517
+        url: https://tools.ietf.org/html/rfc7517
 
   - id: revoked
     label: Revocation time
@@ -352,3 +385,44 @@ property:
       - label: Detached JSON Web Signature
         url: https://tools.ietf.org/html/rfc7797
 
+individual:
+  - id: PROOF_GENERATION_ERROR
+    upper_value: sec:ProcessingError
+    label: Proof generation error
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
+  - id: MALFORMED_PROOF_ERROR
+    upper_value: sec:ProcessingError
+    label: Malformed proof
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
+  - id: MISMATCHED_PROOF_PURPOSE_ERROR
+    upper_value: sec:ProcessingError
+    label: Mismatched proof purpose
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
+  - id: INVALID_DOMAIN_ERROR
+    upper_value: sec:ProcessingError
+    label: Invalid proof domain
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
+  - id: INVALID_CHALLENGE_ERROR
+    upper_value: sec:ProcessingError
+    label: Invalid challenge
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
+  - id: INVALID_VERIFICATION_METHOD_URL
+    upper_value: sec:ProcessingError
+    label: Invalid verification method URL
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
+  - id: INVALID_CONTROLLER_DOCUMENT_ID
+    upper_value: sec:ProcessingError
+    label: Invalid controller document id
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
+  - id: INVALID_CONTROLLER_DOCUMENT
+    upper_value: sec:ProcessingError
+    label: Invalid controller document
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
+  - id: INVALID_VERIFICATION_METHOD
+    upper_value: sec:ProcessingError
+    label: Invalid verification method
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
+  - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+    upper_value: sec:ProcessingError
+    label: Invalid proof purpose for verification method
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD

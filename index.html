@@ -54,6 +54,9 @@
             name: "Greg Bernstein", url: "https://www.grotto-networking.com/",
             company: "Invited Expert", w3cid: 140479
           }, {
+            name: "Dmitri Zagidulin", url: "https://dcconsortium.org/",
+            company: "Invited Expert", w3cid: 86708
+          }, {
             name: "Sebastian Crane", url: "https://github.com/seabass-labrax",
             company: "Invited Expert", w3cid: 140132
           }],
@@ -112,6 +115,13 @@
               status:   "WD",
               publisher:  "W3C Verifiable Credentials Working Group"
             },
+            "JOSE-REGISTRIES": {
+              title:    "The JSON Object Signing and Encryption (JOSE) Registries",
+              href:     "https://www.iana.org/assignments/jose",
+              authors:  ["The Internet Assigned Numbers Authority"],
+              status:   "REC",
+              publisher:  "The Internet Assigned Numbers Authority"
+            },
             "SECURITY-VOCABULARY": {
               title:    "The Security Vocabulary",
               href:     "https://w3id.org/security",
@@ -154,7 +164,7 @@
               ],
               status: "ED",
               publisher: "W3C Verifiable Credentials Working Group"
-            },
+            }
           },
           postProcess: [restrictRefs],
           otherLinks: [{
@@ -420,6 +430,48 @@ applicability of the technology to their use case.
       </section>
 
       <section id="conformance">
+        <p>
+A <dfn>conforming secured document</dfn> is any concrete expression of the
+data model that follows the relevant normative requirements in Sections
+<a href="#proofs"></a>, <a href="#proof-purposes"></a>,
+<a href="#contexts-and-vocabularies"></a>, and
+<a href="#dataintegrityproof"></a>.
+        </p>
+
+        <p>
+A <dfn>conforming controller document</dfn> is any concrete expression of the
+data model that follows the relevant normative requirements in Sections
+<a href="#controller-documents"></a> and
+<a href="#contexts-and-vocabularies"></a>.
+        </p>
+
+        <p>
+A <dfn>conforming verification method</dfn> is any concrete expression of the
+data model that follows the relevant normative requirements in Sections
+<a href="#verification-methods"></a> and
+<a href="#contexts-and-vocabularies"></a>.
+        </p>
+
+        <p>
+A <dfn class="lint-ignore">conforming document</dfn> is either a <a>conforming
+secured document</a>, a <a>conforming controller document</a>, or a
+<a>conforming verification method</a>.
+        </p>
+
+        <p>
+A <dfn class="lint-ignore">conforming cryptographic suite specification</dfn> is
+any document that follows the relevant normative requirements in Section
+<a href="#cryptographic-suites"></a>.
+        </p>
+
+        <p>
+A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
+as software and/or hardware that generates and/or consumes a
+<a>conforming document</a> according to the relevant normative statements in
+Section <a href="#algorithms"></a>. Conforming processors MUST produce errors
+when non-conforming documents are consumed.
+        </p>
+
       </section>
 
       <section class="informative">
@@ -438,6 +490,37 @@ This section specifies the data model that is used for expressing
 <a>verification methods</a>.
       </p>
 
+      <p>
+All of the data model properties and types in this specification map to URLs.
+The vocabulary where these URLs are defined is the [[?SECURITY-VOCABULARY]]. The
+explicit mechanism that is used to perform this mapping in a secured document is
+the `@context` property.
+      </p>
+
+      <p>
+The mapping mechanism is defined by JSON-LD [[JSON-LD11]]. To ensure a document
+can be interoperably consumed without the use of a JSON-LD library, document authors
+are advised to ensure that domain experts have 1) specified the expected order for
+all values associated with a `@context` property, 2) published cryptographic hashes
+for each `@context` file, and 3) deemed that the contents of each `@context` file
+are appropriate for the intended use case.
+      </p>
+
+      <p>
+When a document is processed by a non-JSON-LD processor and there is a
+requirement to use the same semantics as those used in a JSON-LD environment,
+implementers are advised to 1) enforce the expected order and values in the
+`@context` property, and 2) ensure that each `@context` file matches the known
+cryptographic hashes for each `@context` file.
+      </p>
+
+      <p>
+Using static, versioned `@context` files with published cryptographic hashes in
+conjunction with JSON Schema is one acceptable approach to implementing the
+mechanisms described above, which ensures proper term identification, typing,
+and order, when a non-JSON-LD processor is used.
+      </p>
+
       <section>
         <h3>Proofs</h3>
         <p>
@@ -448,7 +531,10 @@ information is provided using Linked Data vocabularies such as the
         </p>
 
         <p>
-The following attributes are defined for use in a <a>data integrity proof</a>:
+When expressing a <a>data integrity proof</a> on an object, a
+<dfn class="lint-ignore">`proof`</dfn> property MUST be used where its value is a
+single object, or an unordered set of objects, expressed using the properties
+below:
         </p>
 
         <dl style="margin-left: 1em;">
@@ -496,7 +582,7 @@ The date and time the proof was created is OPTIONAL and, if included, MUST be
 specified as an [[XMLSCHEMA11-2]] combined date and time string.
           </dd>
 
-          <dt>expires</dt>
+          <dt><dfn class="lint-ignore">expires</dfn></dt>
           <dd>
 An OPTIONAL property that conveys the date and time that a proof expires and that, if present, MUST be
 specified as an [[XMLSCHEMA11-2]] combined date and time string.
@@ -504,12 +590,15 @@ specified as an [[XMLSCHEMA11-2]] combined date and time string.
 
           <dt id="defn-domain">domain</dt>
           <dd>
-The creator of a proof SHOULD include a string value that indicates its intended usage, which a verifier SHOULD use to ensure the proof was intended to be used by them. The
-specification of the `domain` parameter is useful in challenge-response
-protocols where the verifier is operating from within a security domain known to
-the creator of the proof. Examples of a domain parameter include:
-`domain.example` (DNS domain), `https://domain.example:8443` (full Web origin),
-`mycorp-intranet` (well-known text string), and
+The `domain` property is OPTIONAL. It conveys one or more security domains in which the
+proof is meant to be used. If specified, the associated value MUST be either a
+string, or an unordered set of strings. A verifier SHOULD use the value to
+ensure that the proof was intended to be used in the security domain in which
+the verifier is operating. The specification of the `domain` parameter is useful
+in challenge-response protocols where the verifier is operating from within a
+security domain known to the creator of the proof. Example domain values
+include: `domain.example` (DNS domain), `https://domain.example:8443`
+(Web origin), `mycorp-intranet` (bespoke text string), and
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
@@ -534,21 +623,21 @@ value. The contents of this value are determined by a cryptosuite and set to the
 
           <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
-An OPTIONAL string value or unordered list of string values. Each value 
-identifies another <a>data integrity proof</a> that MUST verify before the 
-current proof is processed. If an unordered list, all referenced 
-proofs in the array MUST verify. This property is used in Section 
+An OPTIONAL string value or unordered list of string values. Each value
+identifies another <a>data integrity proof</a> that MUST verify before the
+current proof is processed. If an unordered list, all referenced
+proofs in the array MUST verify. This property is used in Section
 <a href="#proof-chains"></a>.
           </dd>
 
-          <dt>nonce</dt>
+          <dt><dfn class="lint-ignore">nonce</dfn></dt>
           <dd>
 An OPTIONAL string value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
 
-          <dt>nonce</dt>
+          <dt><dfn class="lint-ignore">nonce</dfn></dt>
           <dd>
 An OPTIONAL string value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
@@ -556,11 +645,6 @@ of deterministically generated signatures.
           </dd>
 
         </dl>
-
-        <p class="note">
-All of the terms above map to URLs. The vocabulary where these terms are defined
-is the [[?SECURITY-VOCABULARY]].
-        </p>
 
         <p>
 A proof can be added to a JSON document like the following:
@@ -887,6 +971,14 @@ Registries [TBD -- DIS-REGISTRIES].
 The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
                 </dd>
+                <dt><dfn class="lint-ignore">revoked</dfn></dt>
+                <dd>
+The `revoked` property is OPTIONAL. If provided, it MUST be an [[XMLSCHEMA11-2]]
+combined date and time string specifying when the <a>verification method</a>
+SHOULD cease to be used. Once the value is set, it is not expected to be updated, and
+systems depending on the value are expected to not verify any proofs associated
+with the <a>verification method</a> at or after the time of revocation.
+                </dd>
               </dl>
             </dd>
           </dl>
@@ -933,64 +1025,26 @@ using the `<a>controller</a>` property at the highest level of the
 
             <p>
 Verification material is any information that is used by a process that applies
-a <a>verification method</a>. The `type` of a <a>verification
-method</a> is expected to be used to determine its compatibility with such
-processes. Examples of verification material properties are
-`<a>publicKeyJwk</a>` or `<a>publicKeyMultibase</a>`. A
-<a>cryptographic suite</a> specification is responsible for specifying the
-<a>verification method</a> `type` and its associated verification
-material. For example, see <a href="https://w3c-ccg.github.io/lds-jws2020/">JSON
-Web Signature 2020</a> and <a
-href="https://w3c-ccg.github.io/lds-ed25519-2020/">Ed25519 Signature 2020</a>.
-For all registered <a>verification method</a> types and associated verification
-material available for <a>controllers</a>, please see the Data Integrity
-Specification Registries [TBD - DIS-REGISTRIES].
+a <a>verification method</a>. The `type` of a <a>verification method</a> is
+expected to be used to determine its compatibility with such processes. Examples
+of verification methods include `JsonWebKey` and `Multikey`.
+A <a>cryptographic suite</a> specification is responsible for specifying the
+<a>verification method</a> `type` and its associated verification material
+format. For examples, see
+<a href="https://www.w3.org/TR/vc-di-ecdsa/">the Data Integrity ECDSA
+Cryptosuites</a> and <a href="https://w3c-ccg.github.io/lds-ed25519-2020/">
+the Data Integrity EdDSA Cryptosuites</a>. For a list of <a>verification
+method</a> types, please see the [[?SECURITY-VOCABULARY]].
             </p>
 
             <p>
 To increase the likelihood of interoperable implementations, this specification
-limits the number of formats for expressing verification material in a <a>controller
-document</a>. The fewer formats that implementers have to
+limits the number of formats for expressing verification material in a
+<a>controller document</a>. The fewer formats that implementers have to
 implement, the more likely it will be that they will support all of them. This
-approach attempts to strike a delicate balance between ease of implementation
-and supporting formats that have historically had broad deployment.
-Two supported verification material properties are listed below:
+approach attempts to strike a delicate balance between easing implementation
+and providing support for formats that have historically had broad deployment.
             </p>
-
-            <dl>
-              <dt><dfn>publicKeyJwk</dfn></dt>
-              <dd>
-                <p>
-The `publicKeyJwk` property is OPTIONAL. If present, the value MUST
-be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
-conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
-contain "d", or any other members of the private information class as described
-in <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">Registration
-Template</a>. It is RECOMMENDED that verification methods that use JWKs
-[[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
-their fragment identifier. It is RECOMMENDED that JWK
-`kid` values are set to the public key fingerprint [[RFC7638]]. See
-the first key in <a href="#example-various-verification-method-types"></a> for
-an example of a public key with a compound key identifier.
-                </p>
-              </dd>
-              <dt><dfn>publicKeyMultibase</dfn></dt>
-              <dd>
-                <p>
-The `publicKeyMultibase` property is OPTIONAL. This feature is
-non-normative. If present, the value MUST be a <a
-data-cite="INFRA#string">string</a> representation of a [[MULTIBASE]] encoded
-public key.
-                </p>
-                <p class="advisement">
-Note that the [[?MULTIBASE]] specification is not yet a standard and is
-subject to change. There might be some use cases for this data format
-where `<b>public</b>KeyMultibase` is defined, to allow for
-expression of <a>public keys</a>, but `<b>private</b>KeyMultibase`
-is not defined, to protect against accidental leakage of secret keys.
-                </p>
-              </dd>
-          </dl>
 
             <p>
 A <a>verification method</a> MUST NOT contain multiple verification material
@@ -1000,8 +1054,8 @@ properties for the same material. For example, expressing key material in a
             </p>
 
             <p>
-An example of a <a>controller document</a> containing <a>verification methods</a> using
-both properties above is shown below.
+An example of a <a>controller document</a> containing <a>verification
+methods</a> using both properties above is shown below.
             </p>
 
             <pre id="example-various-verification-method-types"
@@ -1017,7 +1071,7 @@ both properties above is shown below.
       <span class="comment">...</span>
       "verificationMethod": [{
         "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
-        "type": "JsonWebKey2020", <span class="comment">// external (property value)</span>
+        "type": "JsonWebKey", <span class="comment">// external (property value)</span>
         "controller": "did:example:123",
         "publicKeyJwk": {
           "crv": "Ed25519", <span class="comment">// external (property name)</span>
@@ -1040,11 +1094,33 @@ both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[?MULTICODEC]] specification to encode key types into a single
-binary stream that is then encoded using the [[?MULTIBASE]] specification.
-To encode a Multikey, the <a>verification method</a> `type` MUST be set to
-`Multikey` and the `publicKeyMultibase` value MUST be a [[MULTIBASE]] encoded
-[[MULTICODEC]] value. An example of a Multikey is provided below:
+utilizes the [[MULTICODEC]] specification to encode key types into a single
+binary stream that is then encoded using the [[MULTIBASE]] specification.
+            </p>
+
+            <p>
+When specifing a `Multikey`, the object takes the following form:
+            </p>
+
+            <dl>
+              <dt>type</dt>
+              <dd>
+The value of the `type` property MUST contain the string `Multikey`.
+              </dd>
+              <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
+              <dd>
+The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
+[[MULTIBASE]] encoded [[MULTICODEC]] value.
+              </dd>
+              <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
+              <dd>
+The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
+[[MULTIBASE]] encoded [[MULTICODEC]] value.
+              </dd>
+            </dl>
+
+            <p>
+An example of a Multikey is provided below:
             </p>
 
             <pre class="example nohighlight"
@@ -1067,8 +1143,8 @@ is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
             <p>
-The Multikey data model is also capable of encoding secret keys, sometimes
-referred to as <em>private keys</em>.
+The Multikey data model is also capable of encoding secret keys, whose subtypes
+include <em>symmetric keys</em> and <em>private keys</em>.
             </p>
 
             <pre class="example nohighlight"
@@ -1088,6 +1164,116 @@ which is the [[?MULTIBASE]] header that conveys that the binary data is
 base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
 [[?MULTICODEC]] header is `0x1300`, which specifies that the remaining data
 is a 32-byte raw Ed25519 private key.
+            </p>
+
+          </section>
+
+          <section>
+            <h3>JsonWebKey</h3>
+            <p>
+The JSON Web Key (JWK) data model is a specific type of <a>verification method</a>
+that uses the JWK specification [[RFC7517]] to encode key types into a
+set of parameters.
+            </p>
+
+            <p>
+When specifing a `JsonWebKey`, the object takes the following form:
+            </p>
+
+            <dl>
+              <dt>type</dt>
+              <dd>
+The value of the `type` property MUST contain the string `JsonWebKey`.
+              </dd>
+              <dt><dfn class="lint-ignore">publicKeyJwk</dfn></dt>
+              <dd>
+The `publicKeyJwk` property is OPTIONAL. If present, its value MUST
+be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
+conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
+include any members of the private information class, such as `d`, as described
+in the <a href="https://tools.ietf.org/html/rfc7517#section-8.1.1">JWK
+Registration Template</a>. It is RECOMMENDED that verification methods that use
+JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
+their fragment identifier. It is RECOMMENDED that JWK `kid` values are set to
+the public key fingerprint [[RFC7638]]. See the first key in
+<a href="#example-various-verification-method-types"></a> for an example of a
+public key with a compound key identifier.
+              </dd>
+              <dt><dfn class="lint-ignore">secretKeyJwk</dfn></dt>
+              <dd>
+The `secretKeyJwk` property is OPTIONAL. If present, its value MUST be a <a
+data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that conforms
+to [[RFC7517]].
+              </dd>
+            </dl>
+
+            <p>
+An example of an object that conforms to this data model is provided below:
+            </p>
+
+            <pre class="example nohighlight"
+              title="JSON Web Key encoding of an Ed25519 public key">
+{
+  "@context": ["https://www.w3.org/ns/security/jwk/v1"],
+  "id": "did:example:123456789abcdefghi#key-1",
+  "type": "JsonWebKey",
+  "controller": "did:example:123456789abcdefghi",
+  "publicKeyJwk": {
+    "kty": "OKP",
+    "alg": "EdDSA"
+    "crv": "Ed25519",
+    "kid": "key-1",
+    "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
+  }
+}
+            </pre>
+
+            <p>
+In the example above, the `publicKeyJwk` value contains the JSON Web Key.
+The `kty` property encodes the key type of "OKP", which means
+"Octet string key pairs". The `alg` property identifies the algorithm intended
+for use with the public key. The `crv` property identifies the particular
+curve type of the public key. The `kid` property specifies how the public key
+might be referenced in software systems; if present, the `kid` value SHOULD match the
+`id` property of the encapsulating `JsonWebKey` object. Finally, the `x`
+property specifies the point on the Ed25519 curve that is associated with the
+public key.
+            </p>
+
+            <p>
+The `publicKeyJwk` property MUST NOT contain any property marked as
+"Private" in any registry contained in the JOSE Registries [[JOSE-REGISTRIES]].
+            </p>
+
+            <p>
+The JSON Web Key data model is also capable of encoding <em>secret keys</em>, sometimes
+referred to as <em>private keys</em>.
+            </p>
+
+            <pre class="example nohighlight"
+              title="JSON Web Key encoding of an Ed25519 secret key">
+{
+  "@context": ["https://www.w3.org/ns/security/jwk/v1"],
+  "id": "did:example:123456789abcdefghi#key-1",
+  "type": "JsonWebKey",
+  "controller": "did:example:123456789abcdefghi",
+  "secretKeyJwk": {
+    "kty": "OKP",
+    "alg": "EdDSA"
+    "crv": "Ed25519",
+    "kid": "key-1",
+    "d": "Q6JwjCUdThSnoxfXHSFt5C1nVFycY_ZpW7qVzK644_g",
+    "x": "_1EiHquO2aUx9JARSu0P8jdYT_OVneYxYOnOMAmUcFI",
+  }
+}
+            </pre>
+
+            <p>
+The private key example above is almost identical to the previous example of the
+public key, except that the information is stored in the `secretKeyJwk` property
+(rather than the `publicKeyJwk`), and the private key value is encoded in the `d`
+property thereof (alongside the `x` property, which still specifies the point on
+the Ed25519 curve that is associated with the public key).
             </p>
 
           </section>
@@ -1617,7 +1803,7 @@ the data returned depends on HTTP content negotiation. These are as follows:
 application/ld+json
               </td>
               <td>
-The vocabulary in JSON-LD format [[?JSON-LD]].<br><br>
+The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
 
 sha256: LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=<br><br>
 
@@ -1663,6 +1849,66 @@ Vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
 Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
 Verifiable Credentials v2.0: Vocabularies</a>.
         </p>
+
+        <section>
+          <h3>Context Injection</h3>
+
+          <p>
+The `@context` property is used to ensure that implementations are using the
+same semantics when terms in this specification are processed. For example, this
+can be important when properties like `type` are processed and its value, such
+as `DataIntegrityProof`, are used.
+          </p>
+
+          <p>
+If an `@context` property is not provided in a document that is being secured or
+verified, or the Data Integrity terms used in the document are not mapped by
+existing values in the `@context` property, implementations MUST inject or add
+an `@context` property with a value of
+`https://www.w3.org/ns/data-integrity/v1`.
+          </p>
+
+          <p>
+One example of when context injection is expected to be unnecessary is when the Verifiable
+Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`)
+exists as a value in the `@context` property, as that context maps all of the
+necessary Data Integrity terms that were previously mapped by
+`https://www.w3.org/ns/data-integrity/v1`.
+          </p>
+        </section>
+
+        <section>
+          <h3>Securing Data Losslessly</h3>
+
+          <p>
+HTML processors are designed to continue processing if recoverable errors are
+detected. JSON-LD processors operate in a similar manner. This design philosophy
+was meant to ensure that developers could use only the parts of the JSON-LD
+language that they find useful, without causing the processor to throw errors
+on things that might not be important to the developer. Among other effects,
+this philosophy led to JSON-LD processors being designed to not throw errors,
+but rather warn developers, when encountering things such as undefined terms.
+          </p>
+
+          <p>
+When converting from JSON-LD to an RDF Dataset, such as when canonicalizing a
+document [[?RDF-CANON]], undefined terms and relative URLs can be dropped
+silently. When values are dropped, they are not protected by a digital proof. This
+creates a mismatch of expectations, where a developer, who is unaware of how
+a JSON-LD processor works, might think that certain data was being secured,
+and then be surprised to find that it was not, when no error was thrown.
+This specification requires that any recoverable loss of data when
+performing JSON-LD transformations result in an error, to avoid a mismatch
+in the security expectations of developers.
+          </p>
+
+          <p>
+Implementations that use JSON-LD processing, such as RDF Dataset
+Canonicalization [[?RDF-CANON]], MUST throw an error, which SHOULD be
+`DATA_LOSS_DETECTION_ERROR`, when data is dropped by a JSON-LD processor,
+such as when an undefined term is detected in an input document.
+          </p>
+        </section>
 
       </section>
 
@@ -1846,9 +2092,9 @@ the <a>cryptographic suite</a> type; an identifier for the
 <a>verification method</a> (<var>verificationMethod</var>) that can be used to
 verify the authenticity of the proof; an [[!XMLSCHEMA11-2]] combined date
 and time string (<var>created</var>) containing the current date and time,
-accurate to at least one second, in Universal Time Code format, a
-<a href="#dfn-domain">security domain</a> (<var>domain</var>), and a
-receiver-supplied challenge (<var>challenge</var>) might also be specified in
+accurate to at least one second, in Universal Time Code format. A
+<a href="#dfn-domain">security domain</a> (<var>domain</var>) and/or a
+receiver-supplied challenge (<var>challenge</var>) MAY also be specified in
 the <var>options</var>. A <dfn>secured data document</dfn> is produced as
 output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
@@ -1880,8 +2126,9 @@ as inputs to the algorithm.
           <li>
 If the <var>proof</var>.<var>type</var>,
 <var>proof</var>.<var>verificationMethod</var>,
-or <var>proof</var>.<var>proofPurpose</var> values are not set, a
-`PROOF_GENERATION_ERROR` MUST be raised.
+or <var>proof</var>.<var>proofPurpose</var> values are not set, an error
+MUST be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If the <a>cryptographic suite</a> requires the use of a created timestamp,
@@ -1890,12 +2137,14 @@ and the <var>proof</var>.<var>created</var> value is not set, a
           </li>
           <li>
 If <var>options</var>.<var>domain</var> is set, it MUST be equal to
-<var>proof</var>.<var>domain</var> or a `PROOF_GENERATION_ERROR` MUST be raised.
+<var>proof</var>.<var>domain</var> or an error MUST be raised and SHOULD convey
+an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>challenge</var> is set, it MUST be equal to
-<var>proof</var>.<var>challenge</var> or a `PROOF_GENERATION_ERROR` MUST be
-raised.
+<var>proof</var>.<var>challenge</var> or an error MUST be raised and SHOULD
+convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 Set <var>output</var>.<var>proof</var> to the value of <var>proof</var>.
@@ -1919,48 +2168,49 @@ via the digital proof.
       <section>
         <h3>Add Proof Set/Chain</h3>
         <p>
-          The following algorithm specifies how to incrementally add a proof to 
+          The following algorithm specifies how to incrementally add a proof to
           a proof set or proof chain starting with a secured document containing
           either a proof or proof set/chain.
-          Required inputs are a <a>secured data document</a> 
-          (<var>securedDocument</var>) and <a>proof options</a> 
+          Required inputs are a <a>secured data document</a>
+          (<var>securedDocument</var>) and <a>proof options</a>
           (<var>options</var>). The <a>proof options</a>
-          (<var>options</var>) must satisfy the criteria in 
+          (<var>options</var>) must satisfy the criteria in
           section <a href="#add-proof"></a>.
           A new <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8 
+          output. Whenever this algorithm encodes strings, it MUST use UTF-8
           encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let 
-<var>allProofs</var> be an empty list. If <var>proof</var> is a list, copy all 
-the elements of <var>proof</var> to <var>allProofs</var>. If <var>proof</var> 
+Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let
+<var>allProofs</var> be an empty list. If <var>proof</var> is a list, copy all
+the elements of <var>proof</var> to <var>allProofs</var>. If <var>proof</var>
 is an object add a copy of that object to <var>allProofs</var>.
           </li>
           <li>
-Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var> 
-with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of 
+Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var>
+with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of
 the <var>unsecuredDocument</var>.
           </li>
           <li>
-If <var>options</var> contains a <code>previousProof</code> attribute and that 
-attribute is a string, check whether 
-an element of the <var>proof_list</var> has a matching <code>id</code> attribute. 
-If not, a `PROOF_GENERATION_ERROR` MUST be raised. If the 
+If <var>options</var> contains a <code>previousProof</code> attribute and that
+attribute is a string, check whether
+an element of the <var>proofList</var> has a matching <code>id</code> attribute.
+If not, an error MUST be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>. If the
 <code>previousProof</code> attribute is an array, check that each element of that
 array is a string which matches the <code>id</code> attribute of an element
-of the <var>proof_list</var>. If not, a `PROOF_GENERATION_ERROR` MUST be 
-raised.
+of the <var>proofList</var>. If not, an error MUST be raised and SHOULD convey
+an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If 
-no exceptions are raised, append the generated <var>proof</var> value to the 
-<var>proof_list</var>; otherwise, raise the exception.
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If
+no exceptions are raised, append the generated <var>proof</var> value to the
+<var>proofList</var>; otherwise, raise the exception.
           </li>
           <li>
-Set <var>output</var>.<var>proof</var> to the value of <var>proof_list</var>.
+Set <var>output</var>.<var>proof</var> to the value of <var>proofList</var>.
           </li>
           <li>
 Return <var>output</var> as the new <a>secured data document</a>.
@@ -1972,12 +2222,22 @@ Return <var>output</var> as the new <a>secured data document</a>.
         <h3>Verify Proof</h3>
 
         <p>
-The following algorithm specifies how to check the authenticity and
-integrity of a <a>secured data document</a> by verifying its
-digital proof. Required inputs are a
-<a>secured data document</a> (<var>securedDocument</var>) and
-<a>proof options</a> (<var>options</var>). A <dfn>verification result</dfn> is
-produced as output.
+The following algorithm specifies how to check the authenticity and integrity of
+a <a>secured data document</a> by verifying its digital proof. Required inputs
+are a <a>secured data document</a> (<var>securedDocument</var>) and
+<a>proof options</a> (<var>options</var>). The <a>proof options</a> MAY contain
+the following values that help protect against relay and replay attacks:
+<var>expectedProofPurpose</var>, <var>domain</var>, and
+<var>challenge</var>. The <var>expectedProofPurpose</var> value is used to
+ensure that the <var>proof</var> was generated by the proof creator for the
+expected reason by the verifier, such as "authentication". The <var>domain</var>
+value is used by the proof creator to lock a proof to a particular security
+domain, and used by the verifier to ensure that a proof is not being used across
+different security domains. The <var>challenge</var> value is used by the
+verifier to ensure that an attacker is not replaying previously created proofs.
+Additional options are expected to be provided by libraries to ensure that
+digital proof time stamps do not deviate more than an acceptable time frame
+for a given use case. A <dfn>verification result</dfn> is produced as output.
         </p>
 
         <ol class="algorithm">
@@ -1987,19 +2247,22 @@ Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>.
           <li>
 If the <var>proof</var>.<var>type</var>,
 <var>proof</var>.<var>verificationMethod</var>, or
-<var>proof</var>.<var>proofPurpose</var> values are not set, a
-`MALFORMED_PROOF_ERROR` MUST be raised.
+<var>proof</var>.<var>proofPurpose</var> values are not set,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
 If the cryptographic suite requires the
 <var>proof</var>.<var>created</var> value, and it
-is not set, a `MALFORMED_PROOF_ERROR`
-MUST be raised.
+is not set, an error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
+
           </li>
           <li>
 If the <var>proof</var>.<var>proofPurpose</var> value does not match
-<var>options</var>.<var>expectedProofPurpose</var>, a
-`MISMATCHED_PROOF_PURPOSE_ERROR` MUST be raised.
+<var>options</var>.<var>expectedProofPurpose</var>,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
           <li>
 Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
@@ -2029,18 +2292,22 @@ Let <var>isProofVerified</var> be the result of running the
 parameters provided as inputs to the algorithm.
           </li>
           <li>
-If the <var>proof</var>.<var>created</var> is set and it deviates more than
-<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds, a
-`CREATED_TIME_DEVIATION_ERROR` MUST be raised.
+If the <var>proof</var>.<var>created</var> is set and its value differs
+from the datetime of verification by more than
+<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds,
+an error MUST be raised and SHOULD convey an error type of
+<a href="#CREATED_TIME_DEVIATION_ERROR">CREATED_TIME_DEVIATION_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>domain</var> is set and it does not match
-<var>proof</var>.<var>domain</var>, an `INVALID_DOMAIN_ERROR` MUST be raised.
+<var>proof</var>.<var>domain</var>, an error MUST be raised and SHOULD convey an
+error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>challenge</var> is set and it does not match
-<var>proof</var>.<var>challenge</var>, an `INVALID_CHALLENGE_ERROR` MUST be
-raised.
+<var>proof</var>.<var>challenge</var>,  an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
           <li>
 Return <var>isProofVerified</var> as the <a>verification result</a>.
@@ -2052,37 +2319,37 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
         <h3>Verify Proof Sets and Chains</h3>
         <p>
 In a proof set or proof chain, a <a>secured data document</a> has a
-<code>proof</code> attribute which contains a list of proofs 
-(<var>proof_list</var>).
+<code>proof</code> attribute which contains a list of proofs
+(<var>proofList</var>).
 The following algorithm specifies how to check the authenticity and
 integrity of a <a>secured data document</a> by verifying each
-proof in the <var>proof_list</var>. Required inputs are a
-<a>secured data document</a> (<var>securedDocument</var>). A list of 
+proof in the <var>proofList</var>. Required inputs are a
+<a>secured data document</a> (<var>securedDocument</var>). A list of
 verification results is produced as output.
         </p>
         <ol class="algorithm">
           <li>
-Set <var>proof_list</var> to </var><var>securedDocument</var>.<var>proof</var>. 
+Set <var>proofList</var> to </var><var>securedDocument</var>.<var>proof</var>.
           </li>
           <li>
-For each <var>proof</var> in <var>proof_list</var>, run steps 2 through 11 of the algorithm in
+For each <var>proof</var> in <var>proofList</var>, run steps 2 through 11 of the algorithm in
 section <a href="verify-proof"></a>; if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
           </li>
           <li>
-For each <var>proof</var> in <var>proof_list</var> that contains a 
-<code>previousProof</code> attribute, modify the associated 
+For each <var>proof</var> in <var>proofList</var> that contains a
+<code>previousProof</code> attribute, modify the associated
 <var>isProofVerified</var> by iteratively checking that the proof identified by
-the <code>id</code> value in <var>previousProof</var>, along with every 
+the <code>id</code> value in <var>previousProof</var>, along with every
 <code>previousProof</code> up the chain, is valid. If <code>previousProof</code> is an
-array, then all previous proofs identified by the array elements 
-MUST be valid for the current proof to be considered valid. Cycle detection, 
-such as keeping a list of previously visited proofs, MUST be used to guard 
-against proof cycles. If a cycle is detected in a proof chain, 
+array, then all previous proofs identified by the array elements
+MUST be valid for the current proof to be considered valid. Cycle detection,
+such as keeping a list of previously visited proofs, MUST be used to guard
+against proof cycles. If a cycle is detected in a proof chain,
 then a `PROOF_CHAIN_CYCLE_ERROR` MUST be raised.
           </li>
           <li>
-Return the <var>proof_list</var> along with each proof's associated 
+Return the <var>proofList</var> along with each proof's associated
 <var>isProofVerified</var> information.
           </li>
         </ol>
@@ -2109,8 +2376,9 @@ Let <var>vmIdentifier</var> be set to
 Let <var>vmPurpose</var> be set to <var>proof</var>.<var>proofPurpose</var>.
           </li>
           <li>
-If <var>vmIdentifier</var> is not a valid URL, an
-`INVALID_VERIFICATION_METHOD_URL` error MUST be raised.
+If <var>vmIdentifier</var> is not a valid URL, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL</a>.
           </li>
           <li>
 Let <var>controllerDocumentUrl</var> be the result of parsing
@@ -2129,12 +2397,15 @@ of the URL scheme and using the supplied <var>options</var>.
           </li>
           <li>
 If <var>controllerDocument</var>.<var>id</var> does not match the
-<var>controllerDocumentUrl</var>, an `INVALID_CONTROLLER_DOCUMENT_ID` error MUST
-be raised.
+<var>controllerDocumentUrl</var>, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID</a>.
           </li>
           <li>
 If <var>controllerDocument</var> is not a valid <a>controller document</a>,
-an `INVALID_CONTROLLER_DOCUMENT` error MUST be raised.
+an error MUST be raised and SHOULD
+convey an error type of
+<a href="#INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT</a>.
           </li>
           <li>
 Let <var>verificationMethod</var> be the result of dereferencing the
@@ -2143,13 +2414,15 @@ rules of the media type of the <var>controllerDocument</var>.
           </li>
           <li>
 If <var>verificationMethod</var> is not a valid <a>verification method</a>,
-an `INVALID_VERIFICATION_METHOD` error MUST be raised.
+an error MUST be raised and SHOULD convey an error type of
+<a href="#INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD</a>.
           </li>
           <li>
 If <var>verificationMethod</var> is not associated with the array of
 <var>vmPurposes</var> in the <var>controllerDocument</var>, either by reference
-(URL) or by value (object), an `INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD`
-error MUST be raised.
+(URL) or by value (object), an error MUST be raised and SHOULD convey an error
+type of <a href="#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">
+INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD</a>.
           </li>
           <li>
 Return <var>verificationMethod</var> as the
@@ -2176,6 +2449,98 @@ The following example provides a minimum conformant
 }
         </pre>
 
+      </section>
+
+      <section class="normative">
+        <h3>Processing Errors</h3>
+
+        <p>
+The algorithms described in this specification, as well as in various cryptographic
+suite specifications, throw specific types of errors. Implementers might find
+it useful to convey these errors to other libraries or software systems. This
+section provides specific URLs, descriptions, and error codes for the errors,
+such that an ecosystem implementing technologies described by this
+specification might interoperate more effectively when errors occur.
+        </p>
+
+        <p>
+When exposing these errors through an HTTP interface, implementers SHOULD use
+[[RFC7807]] to encode the error data structure. If [[RFC7807]] is used:
+        </p>
+
+        <ul>
+          <li>
+The `type` value of the error object MUST be a URL that starts with the value
+`https://w3id.org/security#` and ends with the value in the section listed
+below.
+          </li>
+          <li>
+The `code` value MUST be the integer code described in the table below
+(in parentheses, beside the type name).
+          </li>
+          <li>
+The `title` value SHOULD provide a short but specific human-readable string for
+the error.
+          </li>
+          <li>
+The `detail` value SHOULD provide a longer human-readable string for the error.
+          </li>
+        </ul>
+
+        <dl>
+          <dt id="PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR (-16)</dt>
+          <dd>
+A request to generate a proof failed. See Section
+<a href="#add-proof"></a>, and Section <a href="#add-proof-set-chain"></a>.
+          </dd>
+          <dt id="MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR (-17)</dt>
+          <dd>
+A proof that is malformed was detected. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR (-18)</dt>
+          <dd>
+The `proofPurpose` value in a proof did not match the expected value. See
+Section <a href="#verify-proof"></a>.
+          </dd>
+          <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
+          <dd>
+The `domain` value in a proof did not match the expected value. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR (-20)</dt>
+          <dd>
+The `challenge` value in a proof did not match the expected value. See Section
+<a href="#verify-proof"></a>.
+          </dd>
+          <dt id="INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL (-21)</dt>
+          <dd>
+The `verificationMethod` value in a proof was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID (-22)</dt>
+          <dd>
+The `id` value in a <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT (-23)</dt>
+          <dd>
+The <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD (-24)</dt>
+          <dd>
+The <a>verification method</a> in a <a>controller document</a> was malformed. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+          <dt id="INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD (-25)</dt>
+          <dd>
+The <a>verification method</a> in a <a>controller document</a> was not
+associated using the expected <a>verification relationship</a> as expressed
+in the `proofPurpose` property in the proof. See Section
+<a href="#retrieve-verification-method"></a>.
+          </dd>
+        </dl>
       </section>
     </section>
 
