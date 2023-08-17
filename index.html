@@ -1947,8 +1947,8 @@ such as when an undefined term is detected in an input document.
 
           <p>
 This specification encodes cryptographic identifiers as enumerable strings,
-which is useful in processes, such as compression algorithms, that need to
-efficiently encode such strings. In environments that support data types for
+which is useful in processes that need to efficiently encode such strings,
+such as compression algorithms. In environments that support data types for
 string values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier content
 is indicated using a literal value whose datatype is set to
 `https://w3id.org/security#cryptosuiteString`.
@@ -1961,28 +1961,28 @@ The <code>cryptosuiteString</code> datatype is defined as follows:
           <dl>
             <dt>The URL denoting this datatype</dt>
             <dd>
-is `https://w3id.org/security#cryptosuiteString`.
+`https://w3id.org/security#cryptosuiteString`.
             </dd>
             <dt>The lexical space</dt>
             <dd>
-is the set of all cryptosuite types expressed using American Standard Code
-for Information Interchange [[ASCII]] strings that are defined by the sum of all
+The set of all cryptosuite types, expressed using American Standard Code
+for Information Interchange [[ASCII]] strings that are defined as the set of all
 Data Integrity cryptosuite specifications.
             </dd>
             <dt>The value space</dt>
             <dd>
-is the set of all cryptosuite types that are expressed using the `cryptosuite`
-property as defined in Section <a href="#dataintegrityproof"></a>.
+The set of all cryptosuite types that are expressed using the `cryptosuite`
+property, as defined in Section <a href="#dataintegrityproof"></a>.
             </dd>
             <dt>The lexical-to-value mapping</dt>
             <dd>
-maps any element of the lexical space to the result of parsing it into an
+Any element of the lexical space is mapped to the result of parsing it into an
 internal representation that uniquely identifies the cryptosuite value from all
 other possible cryptosuite values.
             </dd>
             <dt>The canonical mapping</dt>
             <dd>
-maps any element of the value space to the corresponding string in the lexical space.
+Any element of the value space is mapped to the corresponding string in the lexical space.
             </dd>
           </dl>
         </section>
@@ -2091,10 +2091,10 @@ The `type` property MUST contain the string `DataIntegrityProof`.
           </dd>
           <dt>cryptosuite</dt>
           <dd>
-The `cryptosuite` value MUST specify a string that identifies the
+The value of the `cryptosuite` property MUST be a string that identifies the
 <a>cryptographic suite</a>. If the processing environment supports subtypes
-of `string`, the type of the `cryptosuite` value MUST be the `string` subtype
-`https://w3id.org/security#cryptosuiteString`.
+of `string`, the type of the `cryptosuite` value MUST be the
+`https://w3id.org/security#cryptosuiteString` subtype of `string`.
           </dd>
           <dt>proofValue</dt>
           <dd>
