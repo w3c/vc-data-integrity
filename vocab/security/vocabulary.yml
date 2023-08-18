@@ -20,11 +20,12 @@ ontology:
 class:
   - id: Proof
     label: Digital proof
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof
     comment: This class represents a digital proof on serialized data.
 
   - id: ProofGraph
     label: An RDF Graph for a digital proof
-    comment: Instances of this class are <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF12-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a>.
+    comment: Instances of this class are <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF12-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a> instance.
 
   - id: VerificationMethod
     label: Verification method
@@ -48,15 +49,10 @@ class:
     upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#jsonwebkey
 
-  - id: Key
-    label: Cryptographic key
-    comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
-
   - id: Ed25519VerificationKey2020
     label: ED2559 Verification Key, 2020 version
-    upper_value: sec:Key
+    upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519verificationkey2020
-    comment: A linked data proof suite verification method type used with <a href="#Ed25519Signature2020">Ed25519Signature2020</a>.
 
   - id: Ed25519Signature2020
     label: Ed25519 Signature Suite, 2020 version
@@ -71,6 +67,10 @@ class:
 # These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated.
 # In some cases, a CCG document was found and used for the definition, but in other cases, even that is missing...
 
+  - id: Key
+    label: Cryptographic key
+    deprecated: true
+    comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
 
   - id: EcdsaSecp256k1Signature2019
     deprecated: true
@@ -168,8 +168,8 @@ property:
   - id: proof
     label: Proof sets
     range: sec:ProofGraph
-    comment: The value of property must identify <a href="#ProofGraph">ProofGraph instances</a> (informally, it indirectly identifies <a href="#Proof">Proof instances</a>, each contained in a separate graph). The property is used to associate a proof with a graph of information. The proof property is typically not included in the canonicalized graphs that are then digested and digitally signed. The order of the proofs is not relevant. <b><em>There is no URL yet in a VCWG document to <em>define</em> this term.</em></b>
-
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#proof-sets
+    
   - id: domain
     label: Domain of a proof
     domain: sec:Proof
@@ -223,12 +223,12 @@ property:
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-assertionmethod
 
   - id: capabilityDelegation
-    label: Capability Delegation Method
+    label: Capability delegation method
     range: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilitydelegation
 
   - id: capabilityInvocation
-    label: Capability Invocation Method
+    label: Capability invocation method
     range: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
 
@@ -262,9 +262,9 @@ property:
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeymultibase
     see_also:
-      - label: multibase
+      - label: multibase format
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
-      - label: multicodec
+      - label: multicodec format
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
       - label: ed25519-2020
         url: https://w3c-ccg.github.io/lds-ed25519-2020/
@@ -390,39 +390,54 @@ individual:
     upper_value: sec:ProcessingError
     label: Proof generation error
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
+
   - id: MALFORMED_PROOF_ERROR
     upper_value: sec:ProcessingError
     label: Malformed proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
+
   - id: MISMATCHED_PROOF_PURPOSE_ERROR
     upper_value: sec:ProcessingError
     label: Mismatched proof purpose
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
+
   - id: INVALID_DOMAIN_ERROR
     upper_value: sec:ProcessingError
     label: Invalid proof domain
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
+
   - id: INVALID_CHALLENGE_ERROR
     upper_value: sec:ProcessingError
     label: Invalid challenge
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
+
   - id: INVALID_VERIFICATION_METHOD_URL
     upper_value: sec:ProcessingError
     label: Invalid verification method URL
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
+
   - id: INVALID_CONTROLLER_DOCUMENT_ID
     upper_value: sec:ProcessingError
     label: Invalid controller document id
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
+
   - id: INVALID_CONTROLLER_DOCUMENT
     upper_value: sec:ProcessingError
     label: Invalid controller document
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
+
   - id: INVALID_VERIFICATION_METHOD
     upper_value: sec:ProcessingError
     label: Invalid verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
+    
   - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     upper_value: sec:ProcessingError
     label: Invalid proof purpose for verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+
+datatype:
+  - id: cryptosuiteString
+    label: Datatype for cryptosuite Identifiers
+    upper_value: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#cryptosuiteString
