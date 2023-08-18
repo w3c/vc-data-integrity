@@ -637,13 +637,6 @@ field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
 
-          <dt><dfn class="lint-ignore">nonce</dfn></dt>
-          <dd>
-An OPTIONAL string value supplied by the proof creator. One use of this
-field is to increase privacy by decreasing linkability that is the result
-of deterministically generated signatures.
-          </dd>
-
         </dl>
 
         <p>
@@ -2248,17 +2241,14 @@ via the digital proof.
       <section>
         <h3>Add Proof Set/Chain</h3>
         <p>
-          The following algorithm specifies how to incrementally add a proof to
-          a proof set or proof chain starting with a secured document containing
-          either a proof or proof set/chain.
-          Required inputs are a <a>secured data document</a>
-          (<var>securedDocument</var>) and <a>proof options</a>
-          (<var>options</var>). The <a>proof options</a>
-          (<var>options</var>) must satisfy the criteria in
-          section <a href="#add-proof"></a>.
-          A new <dfn>secured data document</dfn> is produced as
-          output. Whenever this algorithm encodes strings, it MUST use UTF-8
-          encoding.
+The following algorithm specifies how to incrementally add a proof to a proof
+set or proof chain starting with a secured document containing either a proof or
+proof set/chain. Required inputs are a <a>secured data document</a>
+(<var>securedDocument</var>) and <a>proof options</a>
+(<var>options</var>). The <a>proof options</a>
+(<var>options</var>) must satisfy the criteria in section <a
+href="#add-proof"></a>. A new <a>secured data document</a> is produced as
+output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
@@ -2370,13 +2360,6 @@ Let <var>isProofVerified</var> be the result of running the
 <a>proof verification algorithm</a> associated with the
 <a>cryptographic suite</a> with the <var>hashData</var> and <var>options</var>
 parameters provided as inputs to the algorithm.
-          </li>
-          <li>
-If the <var>proof</var>.<var>created</var> is set and its value differs
-from the datetime of verification by more than
-<var>options</var>.<var>acceptableCreatedTimeDeviationInSeconds</var> seconds,
-an error MUST be raised and SHOULD convey an error type of
-<a href="#CREATED_TIME_DEVIATION_ERROR">CREATED_TIME_DEVIATION_ERROR</a>.
           </li>
           <li>
 If <var>options</var>.<var>domain</var> is set and it does not match
