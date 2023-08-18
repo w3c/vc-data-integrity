@@ -9,6 +9,14 @@
           const p = sotd.getElementsByTagName('p')[0];
           sotd.removeChild(p);
       }
+      // Note: The vocabulary URL must be adapted for the given environment!!!!
+      function massageSVGLinks(utils, content, url) {
+        const retval = content
+          .replace('<svg', '<svg aria-details="#vocabulary-diagram-alt" ')
+          .replace(/xlink:href/g, 'href')
+          .replace(/href="https:\/\/w3id.org\/security#/g, 'href="#');
+        return retval;
+      }
     </script>
     <script class="remove">
       var respecConfig = {
@@ -142,6 +150,18 @@
         involved. For such cases, the extra definition is included in the current document (and the `rdfs:comment` property
         is used to include them in the RDFS representations).
       </p>
+      <figure id="vocabulary-diagram" style="text-align:center">
+        <!--
+                Original diagram is in https://drive.google.com/file/d/1-kg7AzhahSzIwiIHeh5ANGJB_JK-kugs/view?usp=drive_link
+                using the draw.io (diagrams.net plugin for google).
+              -->
+        <div data-include="vocabulary.svg" data-include-replace="true" data-oninclude="massageSVGLinks"></div>
+        <figcaption>Overview diagram of the vocabulary (without the deprecated items, the error codes, and xsd datatypes).<br />
+          A separate, stand-alone <a href="vocabulary.svg" target="_blank">SVG version</a> of the diagram, as well as a <a
+            href="#vocabulary-diagram-alt">textual description</a>,
+          are also available.
+        </figcaption>
+      </figure>
     </section>
 
     <section>
@@ -160,6 +180,10 @@
   
       <section id="property_definitions" class="term_definitions">
         <h2>Property definitions</h2>
+      </section>
+
+      <section id="datatype_definitions" class="term_definitions">
+        <h2>Datatype definitions</h2>
       </section>
   
       <section id="individual_definitions" class="term_definitions">
@@ -182,6 +206,10 @@
       <section id="reserved_property_definitions" class="term_definitions">
         <h2>Reserved properties</h2>
       </section>
+
+      <section id="reserved_datatype_definitions" class="term_definitions">
+        <h2>Reserved datatype definitions</h2>
+      </section>
     
       <section id="reserved_individual_definitions" class="term_definitions">
         <h2>Reserved individuals</h2>
@@ -198,6 +226,10 @@
       <section id="deprecated_class_definitions" class="term_definitions">
         <h2>Deprecated classes</h2>
       </section>
+
+      <section id="deprecated_datatype_definitions" class="term_definitions">
+        <h2>Deprecated datatype definitions</h2>
+      </section>
   
       <section id="deprecated_property_definitions" class="term_definitions">
         <h2>Deprecated properties</h2>
@@ -207,5 +239,16 @@
         <h2>Deprecated individuals</h2>
       </section>
     </section>   
+
+
+    <section class="appendix" id="vocabulary-diagram-alt">
+      <h2>Diagram description</h2>
+      <details>
+        <summary>Overview diagram of the vocabulary (without the deprecated items).</summary>
+        <p>t.b.d.</p>
+      </details>
+    </section>
+
+
   </body>
 </html>
