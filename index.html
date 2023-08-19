@@ -1895,6 +1895,16 @@ security and privacy characteristics of solutions. Approaches to caching as
 described above, or functionally equivalent mechanisms, MAY be utilized to
 achieve caching goals.
         </p>
+        <p>
+Some applications, such as digital wallets that are capable of holding arbitrary
+<a>verifiable credentials</a> (from any issuer, using any contexts) or other
+data-integrity-protected documents, might need to be able to load externally
+linked resources, such as JSON-LD Context files, in production settings. This is
+expected to increase user choice, scalability, and decentralized upgrades in the
+ecosystem over time. Authors of these applications are advised to read the
+security and privacy sections of this document for further considerations.
+        </p>
+        </p>
 
         <p>
 For further information regarding processing of JSON-LD Contexts and
@@ -3302,7 +3312,7 @@ per-document URLs for <a href="#data-model">JSON-LD Contexts</a> and
 <a>verification methods</a>. When verifying such a document, a verifier fetching
 that information from the network would reveal their interest in the
 <a>conforming document</a>, to the creator of the document, which might lead to
-a mismatch in privacy expectations among any entity that is not the creator of
+a mismatch in privacy expectations for any entity that is not the creator of
 the document.
         </p>
 
