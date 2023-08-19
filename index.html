@@ -1869,6 +1869,22 @@ command from a modern Unix command interface line:
         </p>
 
         <p>
+Application-specific specification and vocabulary authors SHOULD ensure that
+their JSON-LD Context and vocabularies files are permanently cacheable using
+either the approaches to caching as described above, or any other functionally
+equivalent mechanism.
+        </p>
+
+        <p>
+Implementations MAY load application-specific JSON-LD Context files from the
+network during development, but SHOULD permanently cache JSON-LD Context files
+utilized in <a>conforming documents</a> in production settings to increase the
+security and privacy characteristics of solutions. Approaches to caching as
+described above, or functionally equivalent mechanisms, MAY be utilized to
+achieve caching goals.
+        </p>
+
+        <p>
 For further information regarding processing of JSON-LD Contexts and
 Vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
 Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
