@@ -146,6 +146,17 @@
               status: "Internet-Draft",
               publisher: "IETF"
             },
+            "MULTIHASH": {
+              title: "The Multihash Data Format",
+              date: "February 2023",
+              href: "https://datatracker.ietf.org/doc/draft-multiformats-multihash",
+              authors: [
+                "Juan Benet",
+                "Manu Sporny"
+              ],
+              status: "Internet-Draft",
+              publisher: "IETF"
+            },
             "MULTICODEC": {
               title: "The Multi Codec Encoding Scheme",
               date: "February 2022",
@@ -176,6 +187,15 @@
               ],
               status: "CG-DRAFT",
               publisher: "W3C Credentials Community Group"
+            },
+            "SHA3": {
+              title: "SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions",
+              href: "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf",
+              authors: [
+                "National Institute of Standards and Technology",
+              ],
+              status: "National Standard",
+              publisher: "U.S. Department of Commerce"
             }
           },
           postProcess: [restrictRefs],
@@ -1669,6 +1689,159 @@ example described in <a href="#capability-invocation"></a>.
             </pre>
           </section>
         </section>
+      </section>
+
+      <section>
+        <h2>Resource Integrity</h2>
+
+        <p class="issue atrisk" title="Unification of cryptographic hash expression formats are under discussion">
+The Working Group is currently attempting to determine if cryptographic hash
+expression formats can be unified across all of the VCWG core specifications.
+Candidates for this mechanism include `digestSRI` and `digestMultibase`. There
+are arguments for and against unification that the WG is currently debating.
+        </p>
+
+        <p>
+When including a link to an external resource in a
+<a>conforming secured document</a>, it is desirable to know whether the resource
+that is identified has not changed since the proof was created. This applies to
+cases where there is an external resource that is remotely retrieved as well as
+to cases where the <a>verifier</a> might have a locally cached copy of the
+resource.
+        </p>
+        <p>
+To validate that a resource referenced by a <a>conforming secured document</a>
+has not changed since the document was secured, an implementer MAY include a
+property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
+that includes an `id` property. If present, the `digestMultibase` value MUST be
+a single string value, or an array of string values that are
+[[MULTIBASE]]-encoded [[MULTIHASH]] values.
+        </p>
+
+        <p>
+An example of a resource integrity protected object is shown below:
+        </p>
+
+        <pre class="example nohighlight"
+          title="An integrity-protected image that is associated with an object">
+{
+  ...
+  "image": {
+    "id": "https://university.example.org/images/58473",
+    "digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"
+  },
+  ...
+}
+        </pre>
+
+        <p>
+Common [[MULTIBASE]] header values and their encoding alphabets are provided
+below:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Multibase&nbsp;Value</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>`u`</td>
+              <td>
+The base-64-url-no-pad alphabet is used to encode the bytes. The base-alphabet
+consists of the following characters, in order:
+`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_`
+              </td>
+            </tr>
+            <tr>
+              <td>`z`</td>
+              <td>
+The base-58-btc alphabet is used to encode the bytes. The base-alphabet consists
+of the following characters, in order:
+`123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz`
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+Other [[MULTIBASE]] encoding values MAY be used, but interoperability is not
+guaranteed between implementations.
+        </p>
+
+        <p>
+Common [[MULTIHASH]] header values and their encodings are provided
+below:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Multihash&nbsp;Identifier</th>
+              <th>Binary&nbsp;Encoding</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>`sha2-256`</td>
+              <td>`0x12`</td>
+              <td>
+SHA-2 with 256 bits (32 bytes) of output as defined by [[RFC6234]].
+              </td>
+            </tr>
+            <tr>
+              <td>`sha2-384`</td>
+              <td>`0x20`</td>
+              <td>
+SHA-2 with 384 bits (48 bytes) of output as defined by [[RFC6234]].
+              </td>
+            </tr>
+            <tr>
+              <td>`sha3-256`</td>
+              <td>`0x16`</td>
+              <td>
+SHA-3 with 256 bits (32 bytes) of output as defined by [[SHA3]].
+              </td>
+            </tr>
+            <tr>
+              <td>`sha3-384`</td>
+              <td>`0x15`</td>
+              <td>
+SHA-3 with 384 bits (48 bytes) of output as defined by [[SHA3]].
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+Other Multihash encoding values MAY be used, but interoperability is not
+guaranteed between implementations.
+        </p>
+
+        <p class="issue atrisk" title="Multibase and Multihash are being standardized at IETF">
+The [[MULTIBASE]] and [[MULTIHASH]] specifications have been dispatched at IETF
+to be standardized in a
+<a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
+Multiformats Working Group</a>. If the specifications are stabilized before this
+specification goes to the Proposed Recommendation phase, the tables above will
+be replaced with normative references to the Multibase and Multihash
+specifications.
+        </p>
+
+        <p>
+Implementers are urged to consult appropriate sources, such as the
+<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">
+FIPS 180-4 Secure Hash Standard</a> and the
+<a href="https://media.defense.gov/2022/Sep/07/2003071834/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS_.PDF">
+Commercial National Security Algorithm Suite 2.0</a> to ensure that they are
+choosing a hash algorithm that is appropriate for their use case.
+        </p>
+
       </section>
 
       <section>
