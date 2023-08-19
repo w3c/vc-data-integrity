@@ -164,6 +164,18 @@
               ],
               status: "ED",
               publisher: "W3C Verifiable Credentials Working Group"
+            },
+            "DID-KEY": {
+              title: "The did:key Method",
+              href: "https://w3c-ccg.github.io/did-method-key/",
+              authors: [
+                "Manu Sporny",
+                "Dmitri Zagidulin",
+                "Dave Longley",
+                "Orie Steele"
+              ],
+              status: "CG-DRAFT",
+              publisher: "W3C Credentials Community Group"
             }
           },
           postProcess: [restrictRefs],
@@ -3141,6 +3153,36 @@ strongly urged not to invent or use new mechanisms unless they have formal
 training in information canonicalization and/or access to experts in the field
 who are capable of producing a peer reviewed mathematical proof of algorithm
 correctness.
+        </p>
+      </section>
+
+      <section>
+        <h3>Network Requests</h3>
+
+        <p>
+This specification is designed in such a way that no network requests are
+required in order to verify a proof on <a>conforming secured documents</a>.
+Readers might note, however, that <a href="#data-model">JSON-LD Contexts</a>
+and <a>verification methods</a> can contain URLs that might be retrieved
+over a network connection. This concern exists for any URL that might be
+loaded from the network during or after verification.
+        </p>
+        <p>
+To the extent possible, implementers are urged to permanently or aggressively
+cache such information in order to reduce the attack surface on an
+implementation that might need to go out to the network and fetch such URLs. For
+example, caching techniques for <a href="#data-model">JSON-LD Contexts</a> are
+described in Section <a href="#contexts-and-vocabularies"></a> and some
+<a>verification methods</a>, such as `did:key` [[?DID-KEY]], do not need to be
+fetched from the network.
+        </p>
+        <p>
+When it is not possible to cache the information, such as when a specific HTTP
+URL-based instance of a <a>verification method</a> is encountered for the first
+time, implementers are cautioned to use defensive measures to mitigate <a
+href="https://en.wikipedia.org/wiki/Denial-of-service_attack">
+denial-of-service attacks</a> during any process that might fetch a resource
+from the network.
         </p>
       </section>
 
