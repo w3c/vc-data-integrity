@@ -1882,7 +1882,7 @@ command from a modern Unix command interface line:
 
         <p>
 Application-specific specification and vocabulary authors SHOULD ensure that
-their JSON-LD Context and vocabularies files are permanently cacheable using
+their JSON-LD Context and vocabulary files are permanently cacheable using
 either the approaches to caching as described above, or any other functionally
 equivalent mechanism.
         </p>
@@ -3281,7 +3281,40 @@ the pass/fail status could be deemed adequate. For more information on
 disclosing information while preserving privacy, see
 Section <a href="#unlinkability"></a>.
         </p>
+      </section>
 
+      <section>
+        <h3>Network Request Fingerprinting</h3>
+
+        <p>
+Fingerprinting concerns exists for any URL that might be loaded from the network
+during or after <a href="#verify-proof">proof verification</a>. This
+specification is designed in such a way that no network requests are necessary
+in order to verify a proof on <a>conforming secured documents</a>. Readers might
+note, however, that <a href="#data-model">JSON-LD Contexts</a> and
+<a>verification methods</a> can contain resource URLs that might be retrieved
+over a network connection.
+        </p>
+
+        <p>
+For example, creators of <a>conforming documents</a> might craft unique
+per-document URLs for <a href="#data-model">JSON-LD Contexts</a> and
+<a>verification methods</a>. When verifying such a document, a verifier fetching
+that information from the network would reveal their interest in the
+<a>conforming document</a>, to the creator of the document, which might lead to
+a mismatch in privacy expectations among any entity that is not the creator of
+the document.
+        </p>
+
+        <p>
+Implementers are urged to follow the guidance in Section
+<a href="#network-requests"></a> on URL caching and implementing defensively
+when fetching URLs from the network. Additionally, heuristics might be utilized
+to determine if creators of <a>conforming documents</a> are using fingerprinting
+URLs in a way that might violate privacy expectations. These heuristics could be
+used to display warnings to entities that might process documents containing
+suspected fingerprinting URLs.
+        </p>
       </section>
 
     </section>
