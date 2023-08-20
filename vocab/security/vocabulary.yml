@@ -200,6 +200,12 @@ property:
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
 
+  - id: created
+    label: Proof creation time
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-created
+    domain: sec:Proof
+    range: xsd:dateTime
+
   - id: expires
     label: Proof expiration time
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-expires
