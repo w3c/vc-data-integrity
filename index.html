@@ -1988,6 +1988,52 @@ lexical space.
           </dl>
         </section>
 
+        <section>
+          <h4 id="multibase">The `multibase` Datatype</h3>
+
+          <p>
+This specification encodes binary data into [[?MULTIBASE]]-encoded strings,
+which is useful in environments that cannot represent some binary values, such
+as ASCII-only data formats. In environments that support data types
+for string values, such as RDF [[?RDF-CONCEPTS]], [[?MULTIBASE]]-encoded
+content is indicated using a literal value whose datatype is set to
+`https://w3id.org/security#multibase`.
+          </p>
+
+          <p>
+The `multibase` datatype is defined as follows:
+          </p>
+
+          <dl>
+            <dt>The URL denoting this datatype</dt>
+            <dd>
+`https://w3id.org/security#multibase`
+            </dd>
+            <dt>The lexical space</dt>
+            <dd>
+Any string that starts with a [[?MULTIBASE]] character and where the rest of
+the characters consist of allowable characters in the respective base-encoding
+alphabet.
+            </dd>
+            <dt>The value space</dt>
+            <dd>
+Any arbitrary binary data value.
+            </dd>
+            <dt>The lexical-to-value mapping</dt>
+            <dd>
+Any element of the lexical space is mapped to the value space by base-decoding
+the value based on the associated base-decoding alphabet associated with the
+first character in the lexical string.
+            </dd>
+            <dt>The canonical mapping</dt>
+            <dd>
+Any element of the value space is mapped to the lexical space by expressing
+the desired base-encoding [[?MULTIBASE]] character first, and then base-encoding
+the value according to the desired base-encoding alphabet.
+            </dd>
+          </dl>
+        </section>
+
       </section>
 
     </section>
