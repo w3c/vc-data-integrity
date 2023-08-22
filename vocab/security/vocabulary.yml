@@ -197,7 +197,7 @@ property:
   - id: proofValue
     label: Proof value
     domain: sec:Proof
-    range: xsd:string
+    range: sec:multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
 
   - id: created
