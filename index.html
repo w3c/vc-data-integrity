@@ -2011,7 +2011,7 @@ The `multibase` datatype is defined as follows:
             </dd>
             <dt>The lexical space</dt>
             <dd>
-Any string that starts with a [[?MULTIBASE]] character and where the rest of
+Any string that starts with a [[?MULTIBASE]] character and the rest of
 the characters consist of allowable characters in the respective base-encoding
 alphabet.
             </dd>
@@ -2022,7 +2022,7 @@ Any arbitrary binary data value.
             <dt>The lexical-to-value mapping</dt>
             <dd>
 Any element of the lexical space is mapped to the value space by base-decoding
-the value based on the associated base-decoding alphabet associated with the
+the value based on the base-decoding alphabet associated with the
 first character in the lexical string.
             </dd>
             <dt>The canonical mapping</dt>
