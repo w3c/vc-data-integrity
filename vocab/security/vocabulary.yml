@@ -252,7 +252,7 @@ property:
   - id: publicKeyMultibase
     label: Public key multibase
     domain: sec:Multikey
-    range: xsd:string
+    range: sec:multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeymultibase
     see_also:
       - label: multibase
@@ -265,7 +265,7 @@ property:
   - id: secretKeyMultibase
     label: Secret key multibase
     domain: sec:Multikey
-    range: xsd:string
+    range: sec:multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeymultibase
     see_also:
       - label: multibase format
