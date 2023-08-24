@@ -169,7 +169,7 @@ property:
     label: Proof sets
     range: sec:ProofGraph
     defined_by: https://www.w3.org/TR/vc-data-integrity/#proof-sets
-    
+
   - id: domain
     label: Domain of a proof
     domain: sec:Proof
@@ -436,7 +436,7 @@ individual:
     upper_value: sec:ProcessingError
     label: Invalid verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
-    
+
   - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     upper_value: sec:ProcessingError
     label: Invalid proof purpose for verification method
@@ -447,3 +447,8 @@ datatype:
     label: Datatype for cryptosuite Identifiers
     upper_value: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#cryptosuiteString
+
+  - id: multibase
+    label: Datatype for multibase values
+    upper_value: xsd:string
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#multibase
