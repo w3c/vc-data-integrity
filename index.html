@@ -2201,9 +2201,7 @@ lexical space.
           <h4 id="multibase">The `multibase` Datatype</h3>
 
           <p>
-This specification encodes binary data into [[?MULTIBASE]]-encoded strings,
-which is useful in environments that cannot represent some binary values, such
-as ASCII-only data formats. In environments that support data types
+[[?MULTIBASE]]-encoded strings are used to encode binary data into ASCII-only format, useful in environments that cannot directly represent binary values. This specification makes use of this encoding. In environments that support data types
 for string values, such as RDF [[?RDF-CONCEPTS]], [[?MULTIBASE]]-encoded
 content is indicated using a literal value whose datatype is set to
 `https://w3id.org/security#multibase`.
@@ -2226,13 +2224,13 @@ alphabet.
             </dd>
             <dt>The value space</dt>
             <dd>
-Any arbitrary binary data value.
+An arbitrary binary data value.
             </dd>
             <dt>The lexical-to-value mapping</dt>
             <dd>
 Any element of the lexical space is mapped to the value space by base-decoding
 the value based on the base-decoding alphabet associated with the
-first character in the lexical string.
+first  [[?MULTIBASE]] character in the lexical string.
             </dd>
             <dt>The canonical mapping</dt>
             <dd>
