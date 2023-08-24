@@ -579,13 +579,13 @@ by a verifier during the verification process.
           <dt><dfn class="lint-ignore">created</dfn></dt>
           <dd>
 The date and time the proof was created is OPTIONAL and, if included, MUST be
-specified as an [[XMLSCHEMA11-2]] combined date and time string.
+specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string.
           </dd>
 
           <dt><dfn class="lint-ignore">expires</dfn></dt>
           <dd>
 An OPTIONAL property that conveys the date and time that a proof expires and that, if present, MUST be
-specified as an [[XMLSCHEMA11-2]] combined date and time string.
+specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string.
           </dd>
 
           <dt id="defn-domain">domain</dt>
@@ -967,7 +967,7 @@ data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
                 <dt><dfn class="lint-ignore">revoked</dfn></dt>
                 <dd>
 The `revoked` property is OPTIONAL. If provided, it MUST be an [[XMLSCHEMA11-2]]
-combined date and time string specifying when the <a>verification method</a>
+`dateTimeStamp` string specifying when the <a>verification method</a>
 SHOULD cease to be used. Once the value is set, it is not expected to be updated, and
 systems depending on the value are expected to not verify any proofs associated
 with the <a>verification method</a> at or after the time of revocation.
@@ -2163,8 +2163,8 @@ which  can be used to verify the authenticity and integrity of an
 <a>cryptographic suite</a> (<var>type</var>) and any other properties needed by
 the <a>cryptographic suite</a> type; an identifier for the
 <a>verification method</a> (<var>verificationMethod</var>) that can be used to
-verify the authenticity of the proof; an [[!XMLSCHEMA11-2]] combined date
-and time string (<var>created</var>) containing the current date and time,
+verify the authenticity of the proof; an [[!XMLSCHEMA11-2]] `dateTimeStamp`
+string (<var>created</var>) containing the current date and time,
 accurate to at least one second, in Universal Time Code format. A
 <a href="#dfn-domain">security domain</a> (<var>domain</var>) and/or a
 receiver-supplied challenge (<var>challenge</var>) MAY also be specified in
