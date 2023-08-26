@@ -2175,6 +2175,14 @@ Canonicalization [[?RDF-CANON]], MUST throw an error, which SHOULD be
 `DATA_LOSS_DETECTION_ERROR`, when data is dropped by a JSON-LD processor,
 such as when an undefined term is detected in an input document.
           </p>
+
+          <p>
+Similarly, since <a>conforming secured documents</a> can be transferred from one
+security domain to another, <a>conforming processors</a> that process the
+<a>conforming secured document</a> cannot assume any particular base URL for
+the document. When serializing to RDF, implementations MUST ensure that the
+base URL is set to null.
+          </p>
         </section>
 
         <section>
