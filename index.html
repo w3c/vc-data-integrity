@@ -996,13 +996,28 @@ Registries [TBD -- DIS-REGISTRIES].
 The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
                 </dd>
+                <dt><dfn class="lint-ignore">expires</dfn></dt>
+                <dd>
+The `expires` property is OPTIONAL. It is set, in advance, by the
+<a>controller</a> of a  <a>verification method</a> to signal when that method
+can no longer be used for verification purposes. If provided, it MUST be an
+[[XMLSCHEMA11-2]] `dateTimeStamp` string specifying when the
+<a>verification method</a> SHOULD cease to be used. Once the value is set, it is
+not expected to be updated, and systems depending on the value are expected to
+not verify any proofs associated with the <a>verification method</a> at or after
+the time of expiration.
+                </dd>
                 <dt><dfn class="lint-ignore">revoked</dfn></dt>
                 <dd>
-The `revoked` property is OPTIONAL. If provided, it MUST be an [[XMLSCHEMA11-2]]
+The `revoked` property is OPTIONAL. It is set by the <a>controller</a> of a
+<a>verification method</a> to signal when that method is to no longer to be used
+for verification purposes, such as after a security compromise of the
+<a>verification method</a>. If provided, it MUST be an [[XMLSCHEMA11-2]]
 `dateTimeStamp` string specifying when the <a>verification method</a>
-SHOULD cease to be used. Once the value is set, it is not expected to be updated, and
-systems depending on the value are expected to not verify any proofs associated
-with the <a>verification method</a> at or after the time of revocation.
+SHOULD cease to be used. Once the value is set, it is not expected to be
+updated, and systems depending on the value are expected to not verify any
+proofs associated with the <a>verification method</a> at or after the time of
+revocation.
                 </dd>
               </dl>
             </dd>
