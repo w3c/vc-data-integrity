@@ -1695,7 +1695,7 @@ example described in <a href="#capability-invocation"></a>.
         <h2>Resource Integrity</h2>
 
         <p class="issue atrisk" title="Unification of cryptographic hash expression formats are under discussion">
-The Working Group is currently attempting to determine if cryptographic hash
+The Working Group is currently attempting to determine whether cryptographic hash
 expression formats can be unified across all of the VCWG core specifications.
 Candidates for this mechanism include `digestSRI` and `digestMultibase`. There
 are arguments for and against unification that the WG is currently debating.
@@ -1704,13 +1704,13 @@ are arguments for and against unification that the WG is currently debating.
         <p>
 When including a link to an external resource in a
 <a>conforming secured document</a>, it is desirable to know whether the resource
-that is identified has not changed since the proof was created. This applies to
+that is identified has changed since the proof was created. This applies to
 cases where there is an external resource that is remotely retrieved as well as
 to cases where the <a>verifier</a> might have a locally cached copy of the
 resource.
         </p>
         <p>
-To validate that a resource referenced by a <a>conforming secured document</a>
+To enable confirmation that a resource referenced by a <a>conforming secured document</a>
 has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
@@ -1791,28 +1791,28 @@ below:
               <td>`sha2-256`</td>
               <td>`0x12`</td>
               <td>
-SHA-2 with 256 bits (32 bytes) of output as defined by [[RFC6234]].
+SHA-2 with 256 bits (32 bytes) of output, as defined by [[RFC6234]].
               </td>
             </tr>
             <tr>
               <td>`sha2-384`</td>
               <td>`0x20`</td>
               <td>
-SHA-2 with 384 bits (48 bytes) of output as defined by [[RFC6234]].
+SHA-2 with 384 bits (48 bytes) of output, as defined by [[RFC6234]].
               </td>
             </tr>
             <tr>
               <td>`sha3-256`</td>
               <td>`0x16`</td>
               <td>
-SHA-3 with 256 bits (32 bytes) of output as defined by [[SHA3]].
+SHA-3 with 256 bits (32 bytes) of output, as defined by [[SHA3]].
               </td>
             </tr>
             <tr>
               <td>`sha3-384`</td>
               <td>`0x15`</td>
               <td>
-SHA-3 with 384 bits (48 bytes) of output as defined by [[SHA3]].
+SHA-3 with 384 bits (48 bytes) of output, as defined by [[SHA3]].
               </td>
             </tr>
           </tbody>
