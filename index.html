@@ -614,10 +614,11 @@ The date and time the proof was created is OPTIONAL and, if included, MUST be
 specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string.
           </dd>
 
-          <dt><dfn class="lint-ignore">expires</dfn></dt>
+          <dt id="defn-proof-expires">expires</dt>
           <dd>
-An OPTIONAL property that conveys the date and time that a proof expires and that, if present, MUST be
-specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string.
+An OPTIONAL property that conveys the date and time that a proof expires and
+that, if present, MUST be specified as an [[XMLSCHEMA11-2]] combined date and
+time string.
           </dd>
 
           <dt id="defn-domain">domain</dt>
@@ -996,7 +997,7 @@ Registries [TBD -- DIS-REGISTRIES].
 The value of the `controller` property MUST be a <a
 data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
                 </dd>
-                <dt><dfn class="lint-ignore">expires</dfn></dt>
+                <dt id="defn-vm-expires">expires</dt>
                 <dd>
 The `expires` property is OPTIONAL. It is set, in advance, by the
 <a>controller</a> of a  <a>verification method</a> to signal when that method
@@ -1925,8 +1926,8 @@ the proof.
 Document authors and implementers are advised to understand the difference
 between the validity period of a <a href="#proofs">proof</a>, which is expressed
 using the <a href="#dfn-created">`created`</a> and <a
-href="#dfn-expires">`expires`</a> properties, and the validity period of a
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>,
+href="#defn-proof-expires">`expires`</a> properties, and the validity period of
+a <a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>,
 which is expressed using the
 <a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
 <a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a> properties.
@@ -1935,7 +1936,8 @@ other times they might not be aligned. When verifying a
 <a href="#proofs">proof</a>, it is important to ensure that the time of interest
 (which might be the current time or any other time) is within the
 validity period for the proof (that is, between
-<a href="#dfn-created">`created`</a> and <a href="#dfn-expires">`expires`</a> ).
+<a href="#dfn-created">`created`</a> and
+<a href="#defn-proof-expires">`expires`</a> ).
 When <a data-cite="?VC-DATA-MODEL-2.0#validation">validating</a> a
 <a>verifiable credential</a>, it is important to ensure that the time of
 interest is within the validity period for the
