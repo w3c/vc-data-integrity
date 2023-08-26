@@ -207,9 +207,11 @@ property:
     range: xsd:dateTime
 
   - id: expires
-    label: Proof expiration time
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-expires
-    domain: sec:Proof
+    label: Expiration time for a proof or verification method
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-proof-expires
+    domain:
+      - sec:Proof
+      - sec:VerificationMethod
     range: xsd:dateTime
 
   - id: nonce
