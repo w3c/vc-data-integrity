@@ -1881,34 +1881,32 @@ command from a modern Unix command interface line:
         </p>
 
         <p>
-Application-specific vocabulary and specification authors SHOULD ensure that
-their JSON-LD Context and vocabulary files are permanently cacheable using
-either the approaches to caching as described above, or any other functionally
-equivalent mechanism.
+Authors of application-specific vocabularies and specifications SHOULD ensure
+that their JSON-LD context and vocabulary files are permanently cacheable
+using the approaches to caching described above or a functionally equivalent
+mechanism.
         </p>
 
         <p>
-Implementations MAY load application-specific JSON-LD Context files from the
-network during development, but SHOULD permanently cache JSON-LD Context files
-utilized in <a>conforming documents</a> in production settings to increase the
-security and privacy characteristics of solutions. Approaches to caching as
-described above, or functionally equivalent mechanisms, MAY be utilized to
-achieve caching goals.
+Implementations MAY load application-specific JSON-LD context files from the
+network during development, but SHOULD permanently cache JSON-LD context files
+used in <a>conforming documents</a> in production settings to increase their
+security and privacy characteristics. Caching goals MAY be achieved through
+approaches such as those described above or functionally equivalent mechanisms.
         </p>
         <p>
-Some applications, such as digital wallets that are capable of holding arbitrary
-<a>verifiable credentials</a> (from any issuer, using any contexts) or other
-data-integrity-protected documents, might need to be able to load externally
-linked resources, such as JSON-LD Context files, in production settings. This is
+Some applications, such as digital wallets, that are capable of holding arbitrary
+<a>verifiable credentials</a> or other data-integrity-protected documents, from
+any issuer and using any contexts, might need to be able to load externally
+linked resources, such as JSON-LD context files, in production settings. This is
 expected to increase user choice, scalability, and decentralized upgrades in the
-ecosystem over time. Authors of these applications are advised to read the
+ecosystem over time. Authors of such applications are advised to read the
 security and privacy sections of this document for further considerations.
         </p>
-        </p>
 
         <p>
-For further information regarding processing of JSON-LD Contexts and
-Vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
+For further information regarding processing of JSON-LD contexts and
+vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
 Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
 Verifiable Credentials v2.0: Vocabularies</a>.
         </p>
@@ -3171,23 +3169,23 @@ correctness.
 
         <p>
 This specification is designed in such a way that no network requests are
-required in order to verify a proof on <a>conforming secured documents</a>.
-Readers might note, however, that <a href="#data-model">JSON-LD Contexts</a>
+required when verifying a proof on a <a>conforming secured document</a>.
+Readers might note, however, that <a href="#data-model">JSON-LD contexts</a>
 and <a>verification methods</a> can contain URLs that might be retrieved
 over a network connection. This concern exists for any URL that might be
 loaded from the network during or after verification.
         </p>
         <p>
 To the extent possible, implementers are urged to permanently or aggressively
-cache such information in order to reduce the attack surface on an
-implementation that might need to go out to the network and fetch such URLs. For
-example, caching techniques for <a href="#data-model">JSON-LD Contexts</a> are
-described in Section <a href="#contexts-and-vocabularies"></a> and some
+cache such information to reduce the attack surface on an
+implementation that might need to fetch such URLs over the network. For
+example, caching techniques for <a href="#data-model">JSON-LD contexts</a> are
+described in Section <a href="#contexts-and-vocabularies"></a>, and some
 <a>verification methods</a>, such as `did:key` [[?DID-KEY]], do not need to be
-fetched from the network.
+fetched from the network at all.
         </p>
         <p>
-When it is not possible to cache the information, such as when a specific HTTP
+When it is not possible to use cached information, such as when a specific HTTP
 URL-based instance of a <a>verification method</a> is encountered for the first
 time, implementers are cautioned to use defensive measures to mitigate <a
 href="https://en.wikipedia.org/wiki/Denial-of-service_attack">
@@ -3294,24 +3292,24 @@ Section <a href="#unlinkability"></a>.
       </section>
 
       <section>
-        <h3>Network Request Fingerprinting</h3>
+        <h3>Fingerprinting Network Requests</h3>
 
         <p>
-Fingerprinting concerns exists for any URL that might be loaded from the network
+Fingerprinting concerns exist for any URL that might be loaded from the network
 during or after <a href="#verify-proof">proof verification</a>. This
 specification is designed in such a way that no network requests are necessary
-in order to verify a proof on <a>conforming secured documents</a>. Readers might
-note, however, that <a href="#data-model">JSON-LD Contexts</a> and
+when verifying a proof on a <a>conforming secured document</a>. Readers might
+note, however, that <a href="#data-model">JSON-LD contexts</a> and
 <a>verification methods</a> can contain resource URLs that might be retrieved
 over a network connection.
         </p>
 
         <p>
 For example, creators of <a>conforming documents</a> might craft unique
-per-document URLs for <a href="#data-model">JSON-LD Contexts</a> and
+per-document URLs for <a href="#data-model">JSON-LD contexts</a> and
 <a>verification methods</a>. When verifying such a document, a verifier fetching
 that information from the network would reveal their interest in the
-<a>conforming document</a>, to the creator of the document, which might lead to
+<a>conforming document</a> to the creator of the document, which might lead to
 a mismatch in privacy expectations for any entity that is not the creator of
 the document.
         </p>
@@ -3319,8 +3317,8 @@ the document.
         <p>
 Implementers are urged to follow the guidance in Section
 <a href="#network-requests"></a> on URL caching and implementing defensively
-when fetching URLs from the network. Additionally, heuristics might be utilized
-to determine if creators of <a>conforming documents</a> are using fingerprinting
+when fetching URLs from the network. Additionally, heuristics might be used
+to determine whether creators of <a>conforming documents</a> are using fingerprinting
 URLs in a way that might violate privacy expectations. These heuristics could be
 used to display warnings to entities that might process documents containing
 suspected fingerprinting URLs.
