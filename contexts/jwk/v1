@@ -13,6 +13,14 @@
           "@id": "https://w3id.org/security#controller",
           "@type": "@id"
         },
+        "revoked": {
+          "@id": "https://w3id.org/security#revoked",
+          "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+        },
+        "expires": {
+          "@id": "https://w3id.org/security#expiration",
+          "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+        },
         "publicKeyJwk": {
           "@id": "https://w3id.org/security#publicKeyJwk",
           "@type": "@json"
