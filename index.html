@@ -729,7 +729,7 @@ Signature Algorithm (ECDSA).
 {
   "@context": [
     {"title": "https://schema.org/title"},
-    "https://w3id.org/security/data-integrity/v1"
+    "https://w3id.org/security/data-integrity/v2"
   ],
   "title": "Hello world!",
   "proof": {
@@ -797,7 +797,7 @@ with the `proof` key in a document.
 {
   "@context": [
     {"title": "https://schema.org/title"},
-    "https://w3id.org/security/data-integrity/v1"
+    "https://w3id.org/security/data-integrity/v2"
 ],
   "title": "Hello world!",
   "proof": [{
@@ -836,7 +836,7 @@ previous proof.
 {
   "@context": [
     {"title": "https://schema.org/title"},
-    "https://w3id.org/security/data-integrity/v1"
+    "https://w3id.org/security/data-integrity/v2"
 ],
   "title": "Hello world!",
   "proof": [{
@@ -1013,7 +1013,7 @@ with the <a>verification method</a> at or after the time of revocation.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/data-integrity/v1"
+        "https://w3id.org/security/data-integrity/v2"
       ]
       "id": "did:example:123456789abcdefghi",
       <span class="comment">...</span>
@@ -1089,7 +1089,7 @@ methods</a> using both properties above is shown below.
     {
       "@context": [
         "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/suites/jws-2020/v1",
+        "https://w3id.org/security/jwk/v1",
         "https://w3id.org/security/multikey/v1"
       ]
       "id": "did:example:123456789abcdefghi",
@@ -1959,7 +1959,7 @@ the corresponding hash values below:
           <tbody>
             <tr>
               <td style="white-space: nowrap;">
-https://www.w3.org/ns/data-integrity/v1<br>
+https://w3id.org/security/data-integrity/v2<br>
 application/ld+json
               </td>
               <td>
@@ -1969,13 +1969,22 @@ sha3-512: Sg1PLFxKyEYQns9Zr0BoYXtFeDNfrHUDNMkyq4QEWv<wbr>wGIaX1v5xovnCG+dfceZEzr
             </tr>
             <tr>
               <td style="white-space: nowrap;">
-https://www.w3.org/ns/multikey/v1<br>
+https://w3id.org/security/multikey/v1<br>
 application/ld+json
               </td>
               <td>
-sha256: SA+P0RxXl8ZH6xdPcmX71crzeGkCYMPfYjdVT46SF0o=<br><br>
-sha3-512: BgQBN00t6vj1T4uYt5SwdPOhe2BVNY11UEvkVo/rbBv<wbr>fBd+Z09isxhGhf2HkVqMT
-SANah1u7rLk6Uw6GeQGH1w==
+sha256: uiwYLeLZL35HGEvMqPzwvq7m05hsUnv2ZMGVu8fFhZc=<br><br>
+sha3-512: En0TOOp/cC10XtW/aQDtqKrEQZ2lRjGB/KAsJ+BQhRB<wbr>ufT7s6eoOFWvP9cP5nurTl3hcRTvFeffdVJapkeELXw==
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+https://w3id.org/security/jwk/v1<br>
+application/ld+json
+              </td>
+              <td>
+sha256: 9h/GLRVuGCl0rn/ye6lzf219aN7Sgzq9yBFqUoOI54k=<br><br>
+sha3-512: VDH85TsaX6kH2nwmII0WXKzAi2MRNsJd+rJfYL5cw0b<wbr>12sAVPKDsVvRNJo0MMGd1RhV5W6Ii6D9GM7PCFeq97A==
               </td>
             </tr>
           </tbody>
@@ -2099,7 +2108,7 @@ If an `@context` property is not provided in a document that is being secured or
 verified, or the Data Integrity terms used in the document are not mapped by
 existing values in the `@context` property, implementations MUST inject or add
 an `@context` property with a value of
-`https://www.w3.org/ns/data-integrity/v1`.
+`https://w3id.org/security/data-integrity/v2`.
           </p>
 
           <p>
@@ -2107,7 +2116,7 @@ One example of when context injection is expected to be unnecessary is when the 
 Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`)
 exists as a value in the `@context` property, as that context maps all of the
 necessary Data Integrity terms that were previously mapped by
-`https://www.w3.org/ns/data-integrity/v1`.
+`https://w3id.org/security/data-integrity/v2`.
           </p>
         </section>
 
