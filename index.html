@@ -3301,7 +3301,7 @@ specification is designed in such a way that no network requests are necessary
 when verifying a proof on a <a>conforming secured document</a>. Readers might
 note, however, that <a href="#data-model">JSON-LD contexts</a> and
 <a>verification methods</a> can contain resource URLs that might be retrieved
-over a network connection.
+over a network connection leading to fingerprinting concerns.
         </p>
 
         <p>
@@ -3317,11 +3317,14 @@ the document.
         <p>
 Implementers are urged to follow the guidance in Section
 <a href="#network-requests"></a> on URL caching and implementing defensively
-when fetching URLs from the network. Additionally, heuristics might be used
-to determine whether creators of <a>conforming documents</a> are using fingerprinting
-URLs in a way that might violate privacy expectations. These heuristics could be
-used to display warnings to entities that might process documents containing
-suspected fingerprinting URLs.
+when fetching URLs from the network. Usage of techniques such as
+<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">
+Oblivious HTTP</a> to retrieve resources from the network, without revealing
+the client that is making the request, are encouraged. Additionally, heuristics
+might be used to determine whether creators of <a>conforming documents</a> are
+using fingerprinting URLs in a way that might violate privacy expectations.
+These heuristics could be used to display warnings to entities that might
+process documents containing suspected fingerprinting URLs.
         </p>
       </section>
 
