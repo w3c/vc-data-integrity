@@ -260,7 +260,7 @@ used to:
         <li>
 Make statements that can be shared without loss of trust, because their
 authorship can be verified by a third party, for example as part of Verifiable
-Credentials [[VC-DATA-MODEL-2.0]] or social media posts.
+Credentials [[?VC-DATA-MODEL-2.0]] or social media posts.
         </li>
         <li>
 Authenticate as an entity identified by a particular identifier, for example, as
@@ -1135,7 +1135,7 @@ methods</a> using both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[MULTICODEC]] specification to encode key types into a single
+utilizes the [[?MULTICODEC]] specification to encode key types into a single
 binary stream that is then encoded using the [[MULTIBASE]] specification.
             </p>
 
@@ -1151,12 +1151,12 @@ The value of the `type` property MUST contain the string `Multikey`.
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-[[MULTIBASE]] encoded [[MULTICODEC]] value.
+[[MULTIBASE]] encoded [[?MULTICODEC]] value.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
 The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-[[MULTIBASE]] encoded [[MULTICODEC]] value.
+[[MULTIBASE]] encoded [[?MULTICODEC]] value.
               </dd>
             </dl>
 
@@ -3475,7 +3475,7 @@ immediately apparent to readers. To understand the sort of security
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
 <a>verifiable credentials</a> ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
-on <a data-cite="VC-DATA-MODEL-2.0#security-considerations">
+on <a data-cite="?VC-DATA-MODEL-2.0#security-considerations">
 Verifiable Credential Security Considerations</a> for more information.
         </p>
       </section>
@@ -3624,7 +3624,7 @@ immediately apparent to readers. To understand the sort of privacy
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
 <a>verifiable credentials</a> ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
-on <a data-cite="VC-DATA-MODEL-2.0#privacy-considerations">
+on <a data-cite="?VC-DATA-MODEL-2.0#privacy-considerations">
 Verifiable Credential Privacy Considerations</a> for more information.
         </p>
       </section>
