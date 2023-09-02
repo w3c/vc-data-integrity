@@ -3672,5 +3672,92 @@ calculation.
 
     </section>
 
+    <section class="informative">
+      <h2>Revision History</h2>
+
+      <p>
+This section contains the substantive changes that have been made to this
+specification over time.
+      </p>
+
+      <p>
+Changes since the
+<a href="https://www.w3.org/TR/2022/WD-vc-data-integrity-20221110/">
+First Public Working Draft</a>:
+      </p>
+      <ul>
+        <li>
+Added a section on proof purpose validation.
+        </li>
+        <li>
+Refactored chained proof functionality.
+        </li>
+        <li>
+Added the algorithm to retrieve a verification method.
+        </li>
+        <li>
+Added `JsonWebKey` and `Multikey` definitions and context files.
+        </li>
+        <li>
+Deprecated `Ed25519Signature2020` and moved into separate specification.
+        </li>
+        <li>
+Updated Multibase and Multihash references and add text to normatively define
+certain Multikey values.
+        </li>
+        <li>
+Added Internationalization and Accessibility Considerations sections.
+        </li>
+        <li>
+Added cryptographic hashes for context and vocabulary files and note that those
+files are to be cached.
+        </li>
+        <li>
+Added section on relationship to Linked Data and Verifiable Credentials.
+        </li>
+        <li>
+Added algorithms for proof sets and chains.
+        </li>
+        <li>
+Added `nonce` and `expires` to proofs.
+        </li>
+        <li>
+Added requirement to protect terms in JSON-LD mode.
+        </li>
+        <li>
+Required cryptosuite specifications that do RDF canonicalization to abort when
+poison graphs are detected.
+        </li>
+        <li>
+Added section on how context injection is implemented.
+        </li>
+        <li>
+Added error definitions with anchors to specification and vocabulary.
+        </li>
+        <li>
+Added definitions for secret key expression.
+        </li>
+        <li>
+Added `revoked` and `expires` to verification methods.
+        </li>
+        <li>
+Updated proof `domain` property to allow for an array of values.
+        </li>
+        <li>
+Added `cryptosuiteString` type to proofs to enable proof compression.
+        </li>
+        <li>
+Added `digestMultibase` property and `multibase` data type for securing remote
+content.
+        </li>
+        <li>
+Narrowed date time values to use `dateTimeStamp`.
+        </li>
+        <li>
+Ensure that base URL is set to null when processing as RDF.
+        </li>
+      </ul>
+    </section>
+
   </body>
 </html>
