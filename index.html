@@ -1949,6 +1949,23 @@ href="#proofs">proof</a>, or the validity period for the
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>, might result
 in accepting data that ought to have been rejected.
         </p>
+
+        <p>
+Finally, implementers are also urged to understand that there is a difference
+between the <a href="#dfn-revoked">revocation time</a> and
+<a href="#defn-vm-expires">expiration time</a> for a <a>verification method</a>,
+and the revocation information associated with a <a>verifiable credential</a>.
+The <a href="#dfn-revoked">revocation time</a> and
+<a href="#defn-vm-expires">expiration time</a> for a <a>verification method</a>
+are expressed using the `revocation` and `expires` properties, respectively, and
+are related to events such as a private key being compromised or expiring and
+can provide timing information which might reveal details about a controller
+such as their security practices or when they might have been compromised. The
+revocation information for a <a>verifiable credential</a> is expressed using
+the `credentialStatus` property and is related to events such as an individual
+losing the privilege that is granted by the <a>verifiable credential</a> and
+does not provide timing information, which enhances privacy.
+        </p>
       </section>
 
       <section>
