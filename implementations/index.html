@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Integrity Implementation Reports v1.0</title>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <!--
+      === NOTA BENE ===
+      For the three scripts below, if your spec resides on dev.w3 you can check them
+      out in the same tree and use relative links so that they'll work offline,
+     -->
+    <script src='//www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
+
+    <script type="text/javascript" class="remove">
+var respecConfig = {
+    // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+    specStatus:           "ED",
+
+    // the specification's short name, as in http://www.w3.org/TR/short-name/
+    shortName:            "vc-data-integrity-implementations",
+
+    // subtitle
+    subtitle: "Implementation reports for Data Integrity",
+
+    // editors, add as many as you like
+    // only "name" is required
+    editors: [{
+      name: "Manu Sporny", url: "https://digitalbazaar.com/",
+      company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
+      w3cid: 41758
+    }, {
+      name: "Dave Longley", url: "https://digitalbazaar.com/",
+      company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/",
+      note: "2014-2022", w3cid: 48025
+    }, {
+      name: "Greg Bernstein", url: "https://www.grotto-networking.com/",
+      company: "Invited Expert", w3cid: 140479
+    }, {
+      name: "Dmitri Zagidulin", url: "https://dcconsortium.org/",
+      company: "Invited Expert", w3cid: 86708
+    }, {
+      name: "Sebastian Crane", url: "https://github.com/seabass-labrax",
+      company: "Invited Expert", w3cid: 140132
+    }],
+
+
+    // extend the bibliography entries
+    //localBiblio: webpayments.localBiblio,
+
+    // name of the WG
+    group:           "vc",
+
+    // name (with the @w3c.org) of the public mailing to which comments are due
+    wgPublicList: "public-vc-wg",
+
+    github: "w3c/vc-data-integrity",
+
+    // URI of the patent status for this WG, for Rec-track documents
+    // !!!! IMPORTANT !!!!
+    // This is important for Rec-track documents, do not copy a patent URI from a random
+    // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+    // Team Contact.
+    //wgPatentURI:  "",
+    maxTocLevel: 3,
+    postProcess: [],
+    otherLinks: [{
+      key: "Related Specifications",
+      data: [{
+        value: "The Verifiable Credentials Data Model v2.0",
+        href: "https://www.w3.org/TR/vc-data-model-2.0/"
+      }, {
+        value: "Verifiable Credential Data Integrity v1.0",
+        href: "https://www.w3.org/TR/vc-data-integrity/"
+      }, {
+        value: "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
+        href: "https://www.w3.org/TR/vc-di-eddsa/"
+      }, {
+        value: "The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0",
+        href: "https://www.w3.org/TR/vc-di-ecdsa/"
+      }, {
+        value: "The BBS Digital Signature Algorithm Cryptosuites v1.0",
+        href: "https://www.w3.org/TR/vc-di-bbs/"
+      }]
+    }]
+};
+    </script>
+</head>
+<body>
+    <section id='abstract'>
+      <p>
+This document contains the implementation reports for the Verifiable Credentials
+Data Integrity specification and all cryptographic suites developed by the
+W3C Verifiable Credentials Working Group.
+      </p>
+    </section>
+
+    <section id='sotd'>
+    </section>
+
+    <section class="informative">
+      <h2>Test Suite Reports</h2>
+
+      <p>
+Each test suite
+      </p>
+
+      <table class="simple">
+        <thead>
+          <tr>
+            <th>Specification</th>
+            <th>Test Suite</th>
+            <th>Implementation Report</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><a href="https://w3c.github.io/vc-di-ecdsa/">ECDSA Cryptosuites v1.0</a></td>
+            <td><a href="https://github.com/w3c/vc-di-ecdsa-test-suite/">vc-di-ecdsa-test-suite/</a></td>
+            <td><a href="https://w3c.github.io/vc-di-ecdsa-test-suite/">https://w3c.github.io/vc-di-ecdsa-test-suite/</a></td>
+          </tr>
+          <tr>
+            <td><a href="https://w3c.github.io/vc-di-eddsa/">EdDSA Cryptosuites v1.0</a></td>
+            <td><a href="https://github.com/w3c/vc-di-eddsa-test-suite/">vc-di-eddsa-test-suite/</a></td>
+            <td><a href="https://w3c.github.io/vc-di-eddsa-test-suite/">https://w3c.github.io/vc-di-eddsa-test-suite/</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+  </body>
+</html>
