@@ -3578,6 +3578,32 @@ Section <a href="#unlinkability"></a>.
       </section>
 
       <section>
+        <h3>Previous Proofs</h3>
+
+        <p>
+When utilizing the `previousProof` feature defined in
+<a href="#proof-chains"></a>, implementations are required to digitally sign
+over one or more previously specified proofs in order to include it in the
+secured payload. Doing so inevitably exposes information related to the
+entity that added the previous proof.
+        </p>
+        <p>
+At a minimum, the <a>verification method</a> for the previous proof, such as a
+public key, is seen by the creator of the next proof in the proof chain. This
+can be a privacy concern if the creator of the previous proof was not intending
+to be included in a chain of proofs, but is an inevitable potential outcome when
+adding a non-repudiable digital signature on a document of any kind.
+        </p>
+        <p>
+It is possible to utilize more advanced cryptographic mechanisms to hide the
+identity of the signer of a message, such as through the use of a
+<a href="https://en.wikipedia.org/wiki/Group_signature">group signature</a>
+and it is possible for a Data Integrity cryptographic suite to be created
+to mitigate the privacy concern raised in this section.
+        </p>
+      </section>
+
+      <section>
         <h3>Fingerprinting Network Requests</h3>
 
         <p>
