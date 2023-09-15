@@ -3396,6 +3396,32 @@ website as the proof creator if the website erroneously accepted such a proof as
       </section>
 
       <section>
+        <h3>Canonicalization Method Security</h3>
+
+        <p>
+The way in which transformation, namely canonicalization, is performed can
+affect the security characteristics of a system. Selecting among these
+canonicalization mechanisms is dependent on the use case being addressed. Often,
+selecting the simplest mechanism that achieves the desired security requirements
+is the best choice. This section attempts to provide simple guidance to help
+implementers pick between the two main canonicalization mechanisms referred to
+in this specification, namely JSON Canonicalization Scheme [[RFC8785]] and
+RDF Dataset Canonicalization [[RDF-CANON]].
+        </p>
+        <p>
+If an application only utilizes JSON and does not depend on any form of RDF
+semantics, then utilizing a cryptography suite that utilizes JSON
+Canonicalization Scheme [[RFC8785]] is most likely the best approach.
+        </p>
+        <p>
+If an application utilizes JSON-LD and needs to ensure that the semantics of
+the document are being secured, then utilizing a cryptography suite that
+utilizes RDF Dataset Canonicalization [[RDF-CANON]] is most likely the best
+approach.
+        </p>
+      </section>
+
+      <section>
         <h3>Canonicalization Method Correctness</h3>
 
         <p>
@@ -3637,6 +3663,31 @@ might be used to determine whether creators of <a>conforming documents</a> are
 using fingerprinting URLs in a way that might violate privacy expectations.
 These heuristics could be used to display warnings to entities that might
 process documents containing suspected fingerprinting URLs.
+        </p>
+      </section>
+
+      <section>
+        <h3>Canonicalization Method Privacy</h3>
+
+        <p>
+The way in which transformation, namely canonicalization, is performed can
+affect the privacy characteristics of a system. Selecting among these
+canonicalization mechanisms is dependent on the use case being addressed.
+This section attempts to provide simple guidance to help
+implementers pick between the two main canonicalization mechanisms referred to
+in this specification, namely JSON Canonicalization Scheme [[RFC8785]] and
+RDF Dataset Canonicalization [[RDF-CANON]], from a privacy perspective.
+        </p>
+        <p>
+If an application does not require performing a selective disclosure of
+information in a secured document, nor does it utilize JSON-LD, then JSON
+Canonicalization Scheme [[RFC8785]] is most likely the best approach.
+        </p>
+        <p>
+If an application utilizes JSON-LD or might require the selective disclosure
+of information in a secured document, then using a cryptography suite that
+utilizes RDF Dataset Canonicalization [[RDF-CANON]] is most likely the best
+approach.
         </p>
       </section>
 
