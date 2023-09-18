@@ -305,6 +305,12 @@ property:
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-revoked
     domain: sec:VerificationMethod
 
+  - id: digestMultibase
+    label: Digest multibase
+    comment: <b><i>(Feature at Risk)</i></b> The Working Group is currently attempting to determine whether cryptographic hash expression formats can be unified across all of the VCWG core specifications. Candidates for this mechanism include `digestSRI` and `digestMultibase`. 
+    range: multibase
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-digestmultibase
+
 # These are property specifications that have been defined in a CCG document and are in use; for the time being, these are considered as "reserved"
 
   - id: allowedAction
