@@ -197,6 +197,17 @@
               ],
               status: "National Standard",
               publisher: "U.S. Department of Commerce"
+            },
+            "SD-JWT": {
+              title:    "Selective Disclosure for JWTs (SD-JWT)",
+              href:     "https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/",
+              authors: [
+                "Daniel Fett",
+                "Kristina Yasuda",
+                "Brian Campbell"
+              ],
+              status:   "I-D",
+              publisher:  "The IETF OAuth Working Group"
             }
           },
           postProcess: [restrictRefs],
@@ -3399,7 +3410,7 @@ website as the proof creator if the website erroneously accepted such a proof as
         <h3>Canonicalization Method Security</h3>
 
         <p>
-The way in which a transformation, namely canonicalization, is performed can
+The way in which a transformation, such as canonicalization, is performed can
 affect the security characteristics of a system. Selecting the best
 canonicalization mechanisms depends on the use case. Often,
 the simplest mechanism that satisfies the desired security requirements
@@ -3418,6 +3429,14 @@ If an application uses JSON-LD and needs to secure the semantics of
 the document, then using a cryptography suite that
 uses RDF Dataset Canonicalization [[RDF-CANON]] is an attractive
 approach.
+        </p>
+        <p>
+Implementers are also advised that other mechanisms that perform no
+transformations are available, that secure the data by wrapping it in a
+cryptographic envelope instead of embedding the proof in the data, such as
+JWTs [[?RFC7519]] and CWTs [[?RFC8392]]. These approaches have simplicity
+advantages in some use cases, at the expense of some of the benefits provided
+by the approach detailed in this specification.
         </p>
       </section>
 
@@ -3662,6 +3681,14 @@ If an application uses JSON-LD and/or might require selective disclosure
 of information in a secured document, then using a cryptography suite that
 uses RDF Dataset Canonicalization [[RDF-CANON]] is an attractive
 approach.
+        </p>
+        <p>
+Implementers are also advised that other selective disclosure mechanisms that
+perform no transformations are available, that secure the data by wrapping it in a
+cryptographic envelope instead of embedding the proof in the data, such as
+SD-JWTs [[?SD-JWT]]. This approach has simplicity advantages in some use cases,
+at the expense of some of the benefits provided by the approach detailed in
+this specification.
         </p>
       </section>
 
