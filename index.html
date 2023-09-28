@@ -1796,7 +1796,11 @@ future IETF Multiformats Working Group.
         </p>
 
         <p>
-The Multihash header values and their encodings as provided below are normative:
+A Multihash value starts with a binary header, which identifies the specific
+cryptographic hash algorithm and parameters used to generate the digest,
+followed by the cryptographic digest value. The normative Multihash header
+values defined by this specification, and their associated output sizes and
+associated specifications, are provided below:
         </p>
 
         <table class="simple">
