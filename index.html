@@ -1148,8 +1148,8 @@ methods</a> using both properties above is shown below.
             <h3>Multikey</h3>
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
-utilizes the [[?MULTICODEC]] specification to encode key types into a single
-binary stream that is then encoded using the [[?MULTIBASE]] specification.
+encodes key types into a single binary stream that is then encoded as a
+Multibase value as described in Section <a href="#multibase-0"></a>.
             </p>
 
             <p>
@@ -1164,12 +1164,12 @@ The value of the `type` property MUST contain the string `Multikey`.
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-[[?MULTIBASE]] encoded [[?MULTICODEC]] value.
+Multibase encoded value as described in Section <a href="#multibase-0"></a>.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
 The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-[[?MULTIBASE]] encoded [[?MULTICODEC]] value.
+Multibase encoded value as described in Section <a href="#multibase-0"></a>.
               </dd>
             </dl>
 
@@ -1190,10 +1190,10 @@ An example of a Multikey is provided below:
 
             <p>
 In the example above, the `publicKeyMultibase` value starts with the letter `z`,
-which is the [[?MULTIBASE]] header that conveys that the binary data is
-base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[?MULTICODEC]] header is `0xed`, which specifies that the remaining data
-is a 32-byte raw Ed25519 <a>public key</a>.
+which is the <a href="#multibase-0">Multibase</a> header that conveys that the
+binary data is base-58-btc-encoded using the Bitcoin base-encoding alphabet. The
+decoded binary data header is `0xed01`, which specifies that the
+remaining data is a 32-byte raw Ed25519 <a>public key</a>.
             </p>
 
             <p>
@@ -1214,10 +1214,10 @@ include <em>symmetric keys</em> and <em>private keys</em>.
 
             <p>
 In the example above, the `secretKeyMultibase` value starts with the letter `z`,
-which is the [[?MULTIBASE]] header that conveys that the binary data is
-base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[[?MULTICODEC]] header is `0x1300`, which specifies that the remaining data
-is a 32-byte raw Ed25519 private key.
+which is the <a href="#multibase-0">Multibase</a> header that conveys that the
+binary data is base-58-btc-encoded using the Bitcoin base-encoding alphabet. The
+decoded binary data header is `0x8026`, which specifies that the
+remaining data is a 32-byte raw Ed25519 private key.
             </p>
 
           </section>
@@ -1723,20 +1723,23 @@ example described in <a href="#capability-invocation"></a>.
       <section>
         <h2>Multibase</h2>
 
-        <p class="issue atrisk" title="Multibase and Multihash may be standardized at IETF">
+        <p class="issue atrisk"
+           title="Multibase and Multihash may be standardized at IETF">
 The [[?MULTIBASE]] specification has been dispatched at IETF and may be
 standardized there. There is active discussion on this initiative in
 the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
 Multiformats mailing list at IETF</a>. If the Multibase draft is stabilized
 before this specification goes to the Proposed Recommendation phase, the table
 below will be replaced with normative references to the Multibase
-specification.
+specification at IETF. It is the intention of the Working Group to ensure
+alignment between the Multibase values used in this specification and the
+Multibase values defined by the current Multibase community and any potential
+future IETF Multiformats Working Group.
         </p>
 
         <p>
-The common [[?MULTIBASE]] header values and their encoding alphabets
+The common Multibase header values and their encoding alphabets
 as provided below are normative:
-
         </p>
 
         <table class="simple">
@@ -1768,7 +1771,7 @@ of the following characters, in order:
         </table>
 
         <p>
-Other [[?MULTIBASE]] encoding values MAY be used, but interoperability is not
+Other Multibase encoding values MAY be used, but interoperability is not
 guaranteed between implementations using such.
         </p>
       </section>
@@ -1777,18 +1780,20 @@ guaranteed between implementations using such.
         <h2>Multihash</h2>
 
         <p class="issue atrisk" title="Multibase and Multihash may be standardized at IETF">
-The  [[?MULTIHASH]] specification has been dispatched at IETF and may be
+The [[?MULTIHASH]] specification has been dispatched at IETF and may be
 standardized. There is active discussion on this initiative in
 the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
 Multiformats mailing list at IETF</a>. If the IETF draft is stabilized
 before this specification goes to the Proposed Recommendation phase, the table
 below will be replaced with normative references to the Multihash
-specification.
+specification. It is the intention of the Working Group to ensure
+alignment between the Multihash values used in this specification and the
+Multihash values defined by the current Multihash community and any potential
+future IETF Multiformats Working Group.
         </p>
 
         <p>
-The [[?MULTIHASH]] header values and their encodings
-as provided below are normative:
+The Multihash header values and their encodings as provided below are normative:
         </p>
 
         <table class="simple">
@@ -1863,7 +1868,8 @@ has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
 a single string value, or an array of string values that are
-[[?MULTIBASE]]-encoded [[?MULTIHASH]] values.
+<a href="#multibase-0">Multibase</a>-encoded <a href="#multihash">Multihash</a>
+values.
         </p>
 
         <p>
@@ -2281,12 +2287,13 @@ lexical space.
           <h4 id="multibase">The `multibase` Datatype</h3>
 
           <p>
-[[?MULTIBASE]]-encoded strings are used to encode binary data into ASCII-only
-formats, which are useful in environments that cannot directly represent binary
-values. This specification makes use of this encoding. In environments that
-support data types for string values, such as RDF [[?RDF-CONCEPTS]],
-[[?MULTIBASE]]-encoded content is indicated using a literal value whose datatype
-is set to `https://w3id.org/security#multibase`.
+<a href="#multibase">Multibase</a>-encoded strings are used to encode binary
+data into ASCII-only formats, which are useful in environments that cannot
+directly represent binary values. This specification makes use of this encoding.
+In environments that support data types for string values, such as RDF
+[[?RDF-CONCEPTS]], <a href="#multibase">Multibase</a>-encoded content is
+indicated using a literal value whose datatype is set to
+`https://w3id.org/security#multibase`.
           </p>
 
           <p>
@@ -2300,9 +2307,9 @@ The `multibase` datatype is defined as follows:
             </dd>
             <dt>The lexical space</dt>
             <dd>
-Any string that starts with a [[?MULTIBASE]] character and the rest of
-the characters consist of allowable characters in the respective base-encoding
-alphabet.
+Any string that starts with a <a href="#multibase">Multibase</a> character and
+the rest of the characters consist of allowable characters in the respective
+base-encoding alphabet.
             </dd>
             <dt>The value space</dt>
             <dd>
@@ -2312,7 +2319,7 @@ An arbitrary binary data value.
             <dd>
 Any element of the lexical space is mapped to the value space by base-decoding
 the value based on the base-decoding alphabet associated with the
-first  [[?MULTIBASE]] character in the lexical string.
+first <a href="#multibase">Multibase</a> character in the lexical string.
             </dd>
             <dt>The canonical mapping</dt>
             <dd>
