@@ -2596,6 +2596,65 @@ Return <var>baseEncoding</var> as the base-encoded value.
           </li>
         </ol>
 
+        <pre class="example" title="An implementation of the general base-encoding algorithm above in Javascript">
+function baseEncode(bytes, targetBase, baseAlphabet) {
+  let zeroes = 0;
+  let length = 0;
+  let begin = 0;
+  let end = bytes.length;
+
+  // count the number of leading bytes that are zero
+  while(begin !== end && bytes[begin] === 0) {
+    begin++;
+    zeroes++;
+  }
+
+  // allocate enough space to store the target base value
+  const baseExpansionFactor = Math.log(256) / Math.log(targetBase);
+  let size = Math.floor((end - begin) * baseExpansionFactor + 1);
+  let baseValue = new Uint8Array(size);
+
+  // process the entire input byte array
+  while(begin !== end) {
+    let carry = bytes[begin];
+
+    // for each byte in the array, perform base-expansion
+    let i = 0;
+    for(let basePosition = size - 1;
+        (carry !== 0 || i < length) && (basePosition !== -1);
+        basePosition--, i++) {
+      carry += Math.floor(256 * baseValue[basePosition]);
+      baseValue[basePosition] = Math.floor(carry % targetBase);
+      carry = Math.floor(carry / targetBase);
+    }
+
+    length = i;
+    begin++;
+  }
+
+  // skip leading zeroes in base-encoded result
+  let baseEncodingPosition = size - length;
+  while(baseEncodingPosition !== size &&
+        baseValue[baseEncodingPosition] === 0) {
+    baseEncodingPosition++;
+  }
+
+  // convert the base value to the base encoding
+  let baseEncoding = baseAlphabet.charAt(0).repeat(zeroes)
+  for(; baseEncodingPosition < size; ++baseEncodingPosition) {
+    baseEncoding += baseAlphabet.charAt(baseValue[baseEncodingPosition])
+  }
+
+  return baseEncoding;
+}
+        </pre>
+
+        <p class="note">
+The specification authors would like to thank the base-x software library
+contributors and the Bitcoin Core developers, who wrote the original code from
+which the algorithm above is derived and used under the MIT Software License.
+        </p>
+
       </section>
 
       <section class="normative">
