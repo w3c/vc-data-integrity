@@ -2505,6 +2505,100 @@ will eventually be defined in this specification.
       </p>
 
       <section class="normative">
+        <h2>Base Encoding</h2>
+
+        <p>
+The following algorithm specifies how to convert an array of bytes, where each
+byte represents a base-256 value, to a different base representation that uses a
+particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
+required inputs are the <var>bytes</var>, <var>targetBase</var>, and
+<var>baseAlphabet</var>. The output is a string that contains the base-encoded
+value. All mathematical operations MUST be performed using integer arithmetic.
+Alternatives to the algorithm provided below MAY be used as long as the
+outputs of the alternative algorithm remain the same.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Initialize the following variables; <var>zeroes</var> to `0`, <var>length</var> to
+`0`, <var>begin</var> to `0`, and <var>end</var> to the length of
+<var>bytes</var>.
+          </li>
+          <li>
+Set <var>begin</var> and <var>zeroes</var> to the number of leading `0` byte
+values in <var>bytes</var>.
+          </li>
+          <li>
+Set <var>baseValue</var> to an empty byte array that is the size of the final
+base-expanded value. Calculate the final <var>size</var> of <var>baseValue</var>
+by dividing log(256) by log(<var>targetBase</var>) and then multiplying the
+length of <var>bytes</var> minus the leading <var>zeroes</var>. Add `1` to the
+value of <var>size</var>.
+          </li>
+          <li>
+Process each byte in <var>bytes</var> as <var>byte</var> starting at offset
+<var>begin</var>:
+            <ol class="algorithm">
+              <li>
+Set the <var>carry</var> value to <var>byte</var>.
+              </li>
+              <li>
+Perform base-expansion by starting at the end of the <var>baseValue</var> array.
+Initialize an iterator <var>i</var> to `0`. Set <var>basePosition</var> to
+<var>size</var> minus `1`. Perform the following loop as long as <var>carry</var>
+does not equal `0` or <var>i</var> is less than <var>length</var>, and
+<var>basePosition</var> does not equal `-1`.
+                <ol class="algorithm">
+                  <li>
+Multiply the value in <var>baseValue[basePosition]</var> by `256` and add
+it to <var>carry</var>.
+                  </li>
+                  <li>
+Set the value at <var>baseValue[basePosition]</var> to the remainder after
+dividing <var>carry</var> by <var>targetBase</var>.
+                  </li>
+                  <li>
+Set the value of <var>carry</var> to <var>carry</var> divided by
+<var>targetBase</var> ensuring that integer division is used to perform the
+division.
+                  </li>
+                  <li>
+Decrement <var>basePosition</var> by `1` and increment <var>i</var> by `1`.
+                  </li>
+                </ol>
+              </li>
+              <li>
+Set <var>length</var> to <var>i</var> and increment <var>begin</var> by `1`.
+              </li>
+            </ol>
+          </li>
+          <li>
+Set the <var>baseEncodingPosition</var> to <var>size</var> minus <var>length</var>.
+While the <var>baseEncodingPosition</var> does not equal <var>size</var> and the
+<var>baseValue[baseEncodingPosition]</var> does not equal `0`, increment
+<var>baseEncodingPosition</var>. This step skips the leading zeros in the
+base-encoded result.
+          </li>
+          <li>
+Initialize the <var>baseEncoding</var> by repeating the first entry in the
+<var>baseAlphabet</var> by the value of <var>zeroes</var> (the number of leading
+zeroes in <var>bytes</var>).
+          </li>
+          <li>
+Convert the rest of the <var>baseValue</var> to the base-encoding. While the
+<var>baseEncodingPosition</var> is less than <var>size</var>, increment the
+<var>baseEncodingPosition</var>: Set <var>baseEncodedValue</var> to
+<var>baseValue</var>[<var>baseEncodingPosition</var>]. Append
+<var>baseAlphabet</var>[<var>baseEncodedValue</var>] to <var>baseEncoding</var>.
+          </li>
+          <li>
+Return <var>baseEncoding</var> as the base-encoded value.
+          </li>
+        </ol>
+
+      </section>
+
+      <section class="normative">
         <h3>Add Proof</h3>
 
         <p>
