@@ -2752,6 +2752,64 @@ to <var>decodedSize</var>, starting at offset <var>decodedOffset</var> to
           </li>
         </ol>
 
+        <pre class="example" title="An implementation of the general base-decoding algorithm above in Javascript">
+function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
+  // build the base-alphabet to integer value map
+  baseMap = {};
+  for(let i = 0; i < baseAlphabet.length; i++) {
+    baseMap[baseAlphabet[i]] = i;
+  }
+
+  // skip and count zero-byte values in the sourceEncoding
+  let sourceOffset = 0;
+  let zeroes = 0;
+  let decodedLength = 0;
+  while(sourceEncoding[sourceOffset] === baseAlphabet[0]) {
+    zeroes++;
+    sourceOffset++;
+  }
+
+  // allocate the decoded byte array
+  const baseContractionFactor = Math.log(sourceBase) / Math.log(256);
+  let decodedSize = Math.floor((
+    (sourceEncoding.length - sourceOffset) * baseContractionFactor) + 1);
+  let decodedBytes = new Uint8Array(decodedSize);
+
+  // perform base-conversion on the source encoding
+  while(sourceEncoding[sourceOffset]) {
+    // process each base-encoded number
+    let carry = baseMap[sourceEncoding[sourceOffset]];
+
+    // convert the base-encoded number by performing base-expansion
+    let i = 0
+    for(let byteOffset = decodedSize - 1;
+      (carry !== 0 || i < decodedLength) && (byteOffset !== -1);
+      byteOffset--, i++) {
+      carry += Math.floor(sourceBase * decodedBytes[byteOffset]);
+      decodedBytes[byteOffset] = Math.floor(carry % 256);
+      carry = Math.floor(carry / 256);
+    }
+
+    decodedLength = i;
+    sourceOffset++;
+  }
+
+  // skip leading zeros in the decoded byte array
+  let decodedOffset = decodedSize - decodedLength;
+  while(decodedOffset !== decodedSize && decodedBytes[decodedOffset] === 0) {
+    decodedOffset++;
+  }
+
+  // create the final byte array that has been base-decoded
+  let finalBytes = new Uint8Array(zeroes + (decodedSize - decodedOffset));
+  let j = zeroes;
+  while(decodedOffset !== decodedSize) {
+    finalBytes[j++] = decodedBytes[decodedOffset++];
+  }
+
+  return finalBytes;
+}
+        </pre>
 
       </section>
 
