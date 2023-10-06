@@ -1741,7 +1741,7 @@ future IETF Multiformats Working Group.
 A Multibase string includes a single character header which identifies the
 base and encoding alphabet used to encode a binary value, followed by the
 encoded binary value (using that base and alphabet). The algorithm for
-base-encoding values can be found in Section <a href="#base-encoding"></a>.
+base-encoding values can be found in Section <a href="#base-encode"></a>.
 The common Multibase header values and their associated base encoding
 alphabets as provided below are normative:
         </p>
@@ -2506,10 +2506,10 @@ will eventually be defined in this specification.
       </p>
 
       <section class="normative">
-        <h2>Base Encoding</h2>
+        <h2>Base Encode</h2>
 
         <p>
-The following algorithm specifies how to convert an array of bytes, where each
+The following algorithm specifies how to encode an array of bytes, where each
 byte represents a base-256 value, to a different base representation that uses a
 particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
 required inputs are the <var>bytes</var>, <var>targetBase</var>, and
@@ -2655,6 +2655,103 @@ The specification authors would like to thank the base-x software library
 contributors and the Bitcoin Core developers, who wrote the original code from
 which the algorithm above is derived and used under the MIT Software License.
         </p>
+
+      </section>
+
+      <section class="normative">
+        <h2>Base Decode</h2>
+
+        <p>
+The following algorithm specifies how to decode an array of bytes, where each
+byte represents a base-encoded value, to a different base representation that
+uses a particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
+required inputs are the <var>sourceEncoding</var>, <var>sourceBase</var>, and
+<var>baseAlphabet</var>. The output is an array of bytes that contains the
+base-decoded value. All mathematical operations MUST be performed using integer
+arithmetic. Alternatives to the algorithm provided below MAY be used as long as
+the outputs of the alternative algorithm remain the same.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Initialize a <var>baseMap</var> mapping by associating each character
+in <var>baseAlphabet</var> to its integer position in the
+<var>baseAlphabet</var> string.
+          </li>
+          <li>
+Initialize the following variables; <var>sourceOffset</var> to `0`,
+<var>zeroes</var> to `0`, and <var>decodedLength</var> to `0`.
+          </li>
+          <li>
+Set <var>zeroes</var> and <var>sourceOffset</var> to the number of leading
+<var>baseAlphabet[0]</var> values in <var>sourceEncoding</var>.
+          </li>
+          <li>
+Set <var>decodedBytes</var> to an empty byte array that is the size of the final
+base-converted value. Calculate the size of <var>decodedBytes</var>
+by dividing log(<var>sourceBase</var>) by log(`256`) and then multiplying by the
+length of <var>sourceEncoding</var> minus the leading zeroes. Add 1 to the value
+of size.
+          </li>
+          <li>
+Process each character in <var>sourceEncoding</var> as <var>character</var>
+starting at offset <var>sourceOffset</var>:
+            <ol class="algorithm">
+              <li>
+Set the <var>carry</var> value to the integer value in the <var>baseMap</var>
+that is associated with <var>character</var>.
+              </li>
+              <li>
+Perform base-decoding by starting at the end of the <var>decodedBytes</var>
+array. Initialize an iterator <var>i</var> to `0`. Set <var>byteOffset</var>
+to <var>decodedSize</var> minus `1`. Perform the following loop as long as,
+<var>carry</var> does not equal `0` or <var>i</var> is less than
+<var>decodedLength</var>, and <var>byteOffset</var> does not equal `-1`:
+                <ol class="algorithm">
+                  <li>
+Add the result of multiplying <var>sourceBase</var> by
+<var>decodedBytes</var>[<var>byteOffset</var>] to <var>carry</var>.
+                  </li>
+                  <li>
+Set <var>decodedBytes</var>[<var>byteOffset</var>] to the remainder of
+dividing <var>carry</var> by `256`.
+                  </li>
+                  <li>
+Set <var>carry</var> to <var>carry</var> divided by `256`, ensuring that integer
+division is used to perform the division.
+                  </li>
+                  <li>
+Decrement <var>byteOffset</var> by `1` and increment <var>i</var> by `1`.
+                  </li>
+                </ol>
+                <li>
+Set <var>decodedLength</var> to <var>i</var> and increment
+<var>sourceOffset</var> by `1`.
+                </li>
+              </li>
+            </ol>
+          </li>
+          <li>
+Set the <var>decodedOffset</var> to <var>decodedSize</var> minus
+<var>decodedLength</var>. While the <var>decodedOffset</var> does not equal
+the <var>decodedSize</var> and
+<var>decodedBytes</var>[<var>decodedOffset</var>] equals `0`, increment
+<var>decodedOffset</var> by `1`. This step skips the leading zeros in the
+final base-decoded byte array.
+          </li>
+          <li>
+Set the size of the <var>finalBytes</var> array to <var>zeroes</var> plus,
+<var>decodedSize</var> minus <var>decodedOffset</var>. Initialize the first
+<var>zeroes</var> bytes in <var>finalBytes</var> to `0`.
+          </li>
+          <li>
+Starting at an offset equal to the number of <var>zeroes</var> in
+<var>finalBytes</var> plus `1`, copy all bytes in <var>decodedBytes</var>, up
+to <var>decodedSize</var>, starting at offset <var>decodedOffset</var> to
+<var>finalBytes</var>.
+          </li>
+        </ol>
+
 
       </section>
 
