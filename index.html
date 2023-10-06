@@ -1740,16 +1740,15 @@ future IETF Multiformats Working Group.
         <p>
 A Multibase string includes a single character header which identifies the
 base and encoding alphabet used to encode a binary value, followed by the
-encoded binary value (using that base and alphabet). The algorithm for
-base-encoding values can be found in Section <a href="#base-encode"></a>.
-The common Multibase header values and their associated base encoding
-alphabets as provided below are normative:
+encoded binary value (using that base and alphabet). The common Multibase
+header values and their associated base encoding alphabets as provided below
+are normative:
         </p>
 
         <table class="simple">
           <thead>
             <tr>
-              <th>Multibase&nbsp;Value</th>
+              <th>Multibase&nbsp;Header</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -1778,6 +1777,22 @@ of the following characters, in order:
 Other Multibase encoding values MAY be used, but interoperability is not
 guaranteed between implementations using such values.
         </p>
+
+        <p>
+To base-encode a binary value into a Multibase string, an implementation MUST
+apply the algorithm in Section <a href="#base-encode"></a> to the binary value,
+with the desired base encoding and alphabet from the table above, ensuring to
+prepend the associated Multibase header from the table above to the result.
+Any algorithm with equivalent output MAY be used.
+        </p>
+
+        <p>
+To base-decode a Multibase string, an implementation MUST apply the algorithm
+in Section <a href="#base-decode"></a> to the string following the first
+character (Multibase header), with the alphabet associated with the
+Multibase header. Any algorithm with equivalent output MAY be used.
+        </p>
+
       </section>
 
       <section>
