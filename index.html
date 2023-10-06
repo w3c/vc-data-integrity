@@ -1823,7 +1823,7 @@ associated specifications, are provided below:
           <thead>
             <tr>
               <th>Multihash&nbsp;Identifier</th>
-              <th>Binary&nbsp;Encoding</th>
+              <th>Multihash&nbsp;Header</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -1863,6 +1863,18 @@ SHA-3 with 384 bits (48 bytes) of output, as defined by [[SHA3]].
         <p>
 Other Multihash encoding values MAY be used, but interoperability is not
 guaranteed between implementations.
+        </p>
+
+        <p>
+To encode to a Multihash value, an implementation MUST prepend the associated
+Multihash header value to the cryptographic hash value.
+        </p>
+
+        <p>
+To decode a Multihash value, an implementation MUST remove the prepended
+Multihash header value, which identifies the type of cryptographic hashing
+algorithm as well as its output length, leaving the raw cryptographic hash
+value which MUST match the output length associated with the Multihash header.
         </p>
 
       </section>
