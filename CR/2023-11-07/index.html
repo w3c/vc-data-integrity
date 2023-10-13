@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 34.1.6">
+<meta name="generator" content="ReSpec 34.1.8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -157,7 +157,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "specStatus": "CR",
   "shortName": "vc-data-integrity",
   "subtitle": "Securing the Integrity of Verifiable Credential Data",
-  "publishDate": "2023-09-28",
+  "publishDate": "2023-11-07",
   "edDraftURI": "https://w3c.github.io/vc-data-integrity/",
   "implementationReportURI": "https://w3c.github.io/vc-data-integrity/implementations/",
   "crEnd": "2023-11-30",
@@ -310,8 +310,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         "The Multiformats Community"
       ],
       "status": "Internet-Draft",
-      "publisher": "IETF",
-      "id": "multicodec"
+      "publisher": "IETF"
     },
     "VC-SPECS": {
       "title": "Verifiable Credential Specifications Directory",
@@ -345,6 +344,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "status": "National Standard",
       "publisher": "U.S. Department of Commerce",
       "id": "sha3"
+    },
+    "SD-JWT": {
+      "title": "Selective Disclosure for JWTs (SD-JWT)",
+      "href": "https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/",
+      "authors": [
+        "Daniel Fett",
+        "Kristina Yasuda",
+        "Brian Campbell"
+      ],
+      "status": "I-D",
+      "publisher": "The IETF OAuth Working Group",
+      "id": "sd-jwt"
     }
   },
   "postProcess": [
@@ -373,20 +384,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       ]
     }
   ],
-  "publishISODate": "2023-09-28T00:00:00.000Z",
-  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 28 September 2023"
+  "publishISODate": "2023-11-07T00:00:00.000Z",
+  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 07 November 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-CR"></head>
 <body class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Verifiable Credential Data Integrity 1.0</h1> <h2 id="subtitle" class="subtitle">Securing the Integrity of Verifiable Credential Data</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-09-28">28 September 2023</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-11-07">07 November 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20230928/">https://www.w3.org/TR/2023/CR-vc-data-integrity-20230928/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20231107/">https://www.w3.org/TR/2023/CR-vc-data-integrity-20231107/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
@@ -503,7 +514,7 @@ signatures and related mathematical proofs.
   </p><p>
                   This document is governed by the
                   <a id="w3c_process_revision" href="https://www.w3.org/2023/Process-20230612/">12 June 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
-                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#how-it-works"><bdi class="secno">1.1 </bdi>How it Works</a></li><li class="tocline"><a class="tocxref" href="#design-goals-and-rationale"><bdi class="secno">1.2 </bdi>Design Goals and Rationale</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1.3 </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">1.4 </bdi>Terminology</a></li></ol></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">2. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proofs"><bdi class="secno">2.1 </bdi>Proofs</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proof-sets"><bdi class="secno">2.1.1 </bdi>Proof Sets</a></li><li class="tocline"><a class="tocxref" href="#proof-chains"><bdi class="secno">2.1.2 </bdi>Proof Chains</a></li></ol></li><li class="tocline"><a class="tocxref" href="#proof-purposes"><bdi class="secno">2.2 </bdi>Proof Purposes</a></li><li class="tocline"><a class="tocxref" href="#controller-documents"><bdi class="secno">2.3 </bdi>Controller Documents</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#verification-methods"><bdi class="secno">2.3.1 </bdi>Verification Methods</a><ol class="toc"></ol></li><li class="tocline"><a class="tocxref" href="#verification-relationships"><bdi class="secno">2.3.2 </bdi>Verification Relationships</a><ol class="toc"></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#resource-integrity"><bdi class="secno">2.4 </bdi>Resource Integrity</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-linked-data"><bdi class="secno">2.5 </bdi>Relationship to Linked Data</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-verifiable-credentials"><bdi class="secno">2.6 </bdi>Relationship to Verifiable Credentials</a></li><li class="tocline"><a class="tocxref" href="#contexts-and-vocabularies"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#context-injection"><bdi class="secno">2.7.1 </bdi>Context Injection</a></li><li class="tocline"><a class="tocxref" href="#securing-data-losslessly"><bdi class="secno">2.7.2 </bdi>Securing Data Losslessly</a></li><li class="tocline"><a class="tocxref" href="#datatypes"><bdi class="secno">2.7.3 </bdi>Datatypes</a><ol class="toc"></ol></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#cryptographic-suites"><bdi class="secno">3. </bdi>Cryptographic Suites</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#dataintegrityproof"><bdi class="secno">3.1 </bdi>DataIntegrityProof</a></li></ol></li><li class="tocline"><a class="tocxref" href="#algorithms"><bdi class="secno">4. </bdi>Algorithms</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#add-proof"><bdi class="secno">4.1 </bdi>Add Proof</a></li><li class="tocline"><a class="tocxref" href="#add-proof-set-chain"><bdi class="secno">4.2 </bdi>Add Proof Set/Chain</a></li><li class="tocline"><a class="tocxref" href="#verify-proof"><bdi class="secno">4.3 </bdi>Verify Proof</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-sets-and-chains"><bdi class="secno">4.4 </bdi>Verify Proof Sets and Chains</a></li><li class="tocline"><a class="tocxref" href="#retrieve-verification-method"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a></li><li class="tocline"><a class="tocxref" href="#processing-errors"><bdi class="secno">4.6 </bdi>Processing Errors</a></li></ol></li><li class="tocline"><a class="tocxref" href="#security-considerations"><bdi class="secno">5. </bdi>Security Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#versioning-cryptography-suites"><bdi class="secno">5.1 </bdi>Versioning Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#protecting-application-developers"><bdi class="secno">5.2 </bdi>Protecting Application Developers</a></li><li class="tocline"><a class="tocxref" href="#conventions-for-naming-cryptography-suites"><bdi class="secno">5.3 </bdi>Conventions for Naming Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#agility-and-layering"><bdi class="secno">5.4 </bdi>Agility and Layering</a></li><li class="tocline"><a class="tocxref" href="#transformations"><bdi class="secno">5.5 </bdi>Transformations</a></li><li class="tocline"><a class="tocxref" href="#data-opacity"><bdi class="secno">5.6 </bdi>Data Opacity</a></li><li class="tocline"><a class="tocxref" href="#verification-method-binding"><bdi class="secno">5.7 </bdi>Verification Method Binding</a></li><li class="tocline"><a class="tocxref" href="#verification-relationship-validation"><bdi class="secno">5.8 </bdi>Verification Relationship Validation</a></li><li class="tocline"><a class="tocxref" href="#proof-purpose-validation"><bdi class="secno">5.9 </bdi>Proof Purpose Validation</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-correctness"><bdi class="secno">5.10 </bdi>Canonicalization Method Correctness</a></li><li class="tocline"><a class="tocxref" href="#network-requests"><bdi class="secno">5.11 </bdi>Network Requests</a></li><li class="tocline"><a class="tocxref" href="#other-security-considerations"><bdi class="secno">5.12 </bdi>Other Security Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#privacy-considerations"><bdi class="secno">6. </bdi>Privacy Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#unlinkability"><bdi class="secno">6.1 </bdi>Unlinkability</a></li><li class="tocline"><a class="tocxref" href="#selective-disclosure"><bdi class="secno">6.2 </bdi>Selective Disclosure</a></li><li class="tocline"><a class="tocxref" href="#fingerprinting-network-requests"><bdi class="secno">6.3 </bdi>Fingerprinting Network Requests</a></li><li class="tocline"><a class="tocxref" href="#other-privacy-considerations"><bdi class="secno">6.4 </bdi>Other Privacy Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#accessibility-considerations"><bdi class="secno">7. </bdi>Accessibility Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#presenting-time-values"><bdi class="secno">7.1 </bdi>Presenting Time Values</a></li></ol></li><li class="tocline"><a class="tocxref" href="#revision-history"><bdi class="secno">8. </bdi>Revision History</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#how-it-works"><bdi class="secno">1.1 </bdi>How it Works</a></li><li class="tocline"><a class="tocxref" href="#design-goals-and-rationale"><bdi class="secno">1.2 </bdi>Design Goals and Rationale</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1.3 </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">1.4 </bdi>Terminology</a></li></ol></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">2. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proofs"><bdi class="secno">2.1 </bdi>Proofs</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proof-sets"><bdi class="secno">2.1.1 </bdi>Proof Sets</a></li><li class="tocline"><a class="tocxref" href="#proof-chains"><bdi class="secno">2.1.2 </bdi>Proof Chains</a></li></ol></li><li class="tocline"><a class="tocxref" href="#proof-purposes"><bdi class="secno">2.2 </bdi>Proof Purposes</a></li><li class="tocline"><a class="tocxref" href="#controller-documents"><bdi class="secno">2.3 </bdi>Controller Documents</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#verification-methods"><bdi class="secno">2.3.1 </bdi>Verification Methods</a><ol class="toc"></ol></li><li class="tocline"><a class="tocxref" href="#verification-relationships"><bdi class="secno">2.3.2 </bdi>Verification Relationships</a><ol class="toc"></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#multibase-0"><bdi class="secno">2.4 </bdi>Multibase</a></li><li class="tocline"><a class="tocxref" href="#multihash"><bdi class="secno">2.5 </bdi>Multihash</a></li><li class="tocline"><a class="tocxref" href="#resource-integrity"><bdi class="secno">2.6 </bdi>Resource Integrity</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-linked-data"><bdi class="secno">2.7 </bdi>Relationship to Linked Data</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-verifiable-credentials"><bdi class="secno">2.8 </bdi>Relationship to Verifiable Credentials</a></li><li class="tocline"><a class="tocxref" href="#contexts-and-vocabularies"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#context-injection"><bdi class="secno">2.9.1 </bdi>Context Injection</a></li><li class="tocline"><a class="tocxref" href="#securing-data-losslessly"><bdi class="secno">2.9.2 </bdi>Securing Data Losslessly</a></li><li class="tocline"><a class="tocxref" href="#datatypes"><bdi class="secno">2.9.3 </bdi>Datatypes</a><ol class="toc"></ol></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#cryptographic-suites"><bdi class="secno">3. </bdi>Cryptographic Suites</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#dataintegrityproof"><bdi class="secno">3.1 </bdi>DataIntegrityProof</a></li></ol></li><li class="tocline"><a class="tocxref" href="#algorithms"><bdi class="secno">4. </bdi>Algorithms</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#base-encode"><bdi class="secno">4.1 </bdi>Base Encode</a></li><li class="tocline"><a class="tocxref" href="#base-decode"><bdi class="secno">4.2 </bdi>Base Decode</a></li><li class="tocline"><a class="tocxref" href="#add-proof"><bdi class="secno">4.3 </bdi>Add Proof</a></li><li class="tocline"><a class="tocxref" href="#add-proof-set-chain"><bdi class="secno">4.4 </bdi>Add Proof Set/Chain</a></li><li class="tocline"><a class="tocxref" href="#verify-proof"><bdi class="secno">4.5 </bdi>Verify Proof</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-sets-and-chains"><bdi class="secno">4.6 </bdi>Verify Proof Sets and Chains</a></li><li class="tocline"><a class="tocxref" href="#retrieve-verification-method"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a></li><li class="tocline"><a class="tocxref" href="#processing-errors"><bdi class="secno">4.8 </bdi>Processing Errors</a></li></ol></li><li class="tocline"><a class="tocxref" href="#security-considerations"><bdi class="secno">5. </bdi>Security Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#versioning-cryptography-suites"><bdi class="secno">5.1 </bdi>Versioning Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#protecting-application-developers"><bdi class="secno">5.2 </bdi>Protecting Application Developers</a></li><li class="tocline"><a class="tocxref" href="#conventions-for-naming-cryptography-suites"><bdi class="secno">5.3 </bdi>Conventions for Naming Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#agility-and-layering"><bdi class="secno">5.4 </bdi>Agility and Layering</a></li><li class="tocline"><a class="tocxref" href="#transformations"><bdi class="secno">5.5 </bdi>Transformations</a></li><li class="tocline"><a class="tocxref" href="#data-opacity"><bdi class="secno">5.6 </bdi>Data Opacity</a></li><li class="tocline"><a class="tocxref" href="#verification-method-binding"><bdi class="secno">5.7 </bdi>Verification Method Binding</a></li><li class="tocline"><a class="tocxref" href="#verification-relationship-validation"><bdi class="secno">5.8 </bdi>Verification Relationship Validation</a></li><li class="tocline"><a class="tocxref" href="#proof-purpose-validation"><bdi class="secno">5.9 </bdi>Proof Purpose Validation</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-security"><bdi class="secno">5.10 </bdi>Canonicalization Method Security</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-correctness"><bdi class="secno">5.11 </bdi>Canonicalization Method Correctness</a></li><li class="tocline"><a class="tocxref" href="#network-requests"><bdi class="secno">5.12 </bdi>Network Requests</a></li><li class="tocline"><a class="tocxref" href="#other-security-considerations"><bdi class="secno">5.13 </bdi>Other Security Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#privacy-considerations"><bdi class="secno">6. </bdi>Privacy Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#unlinkability"><bdi class="secno">6.1 </bdi>Unlinkability</a></li><li class="tocline"><a class="tocxref" href="#selective-disclosure"><bdi class="secno">6.2 </bdi>Selective Disclosure</a></li><li class="tocline"><a class="tocxref" href="#previous-proofs"><bdi class="secno">6.3 </bdi>Previous Proofs</a></li><li class="tocline"><a class="tocxref" href="#fingerprinting-network-requests"><bdi class="secno">6.4 </bdi>Fingerprinting Network Requests</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-privacy"><bdi class="secno">6.5 </bdi>Canonicalization Method Privacy</a></li><li class="tocline"><a class="tocxref" href="#other-privacy-considerations"><bdi class="secno">6.6 </bdi>Other Privacy Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#accessibility-considerations"><bdi class="secno">7. </bdi>Accessibility Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#presenting-time-values"><bdi class="secno">7.1 </bdi>Presenting Time Values</a></li></ol></li><li class="tocline"><a class="tocxref" href="#revision-history"><bdi class="secno">8. </bdi>Revision History</a></li><li class="tocline"><a class="tocxref" href="#acknowledgements"><bdi class="secno">9. </bdi>Acknowledgements</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.2 </bdi>Informative references</a></li></ol></li></ol></nav>
 
     <section class="informative" id="introduction"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div><p><em>This section is non-normative.</em></p>
       
@@ -731,7 +742,7 @@ applicability of the technology to their use case.
 A <dfn data-plurals="conforming secured documents" id="dfn-conforming-secured-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">conforming secured document</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
 <a href="#proofs" class="sec-ref"><bdi class="secno">2.1 </bdi>Proofs</a>, <a href="#proof-purposes" class="sec-ref"><bdi class="secno">2.2 </bdi>Proof Purposes</a>,
-<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</a>, and
+<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a>, and
 <a href="#dataintegrityproof" class="sec-ref"><bdi class="secno">3.1 </bdi>DataIntegrityProof</a>.
         </p>
 
@@ -739,14 +750,14 @@ data model that follows the relevant normative requirements in Sections
 A <dfn id="dfn-conforming-controller-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">conforming controller document</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
 <a href="#controller-documents" class="sec-ref"><bdi class="secno">2.3 </bdi>Controller Documents</a> and
-<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</a>.
+<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a>.
         </p>
 
         <p>
 A <dfn id="dfn-conforming-verification-method" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">conforming verification method</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
 <a href="#verification-methods" class="sec-ref"><bdi class="secno">2.3.1 </bdi>Verification Methods</a> and
-<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</a>.
+<a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a>.
         </p>
 
         <p>
@@ -1074,13 +1085,15 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 
           <dt><dfn class="lint-ignore" id="dfn-proofvalue" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">proofValue</dfn></dt>
           <dd>
-A string value that contains the data necessary to verify the digital proof
-using the <code>verificationMethod</code> specified. The contents of the value <em class="rfc2119">MUST</em> be a
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>]-encoded binary value. Alternative fields with different encodings <em class="rfc2119">MAY</em>
-be used to encode the data necessary to verify the digital proof instead of this
-value. The contents of this value are determined by a cryptosuite and set to the
-<em>proof value</em> generated by the
-<a href="#add-proof">Add Proof Algorithm</a>.
+A string value that contains the base-encoded binary data necessary to verify
+the digital proof using the <code>verificationMethod</code> specified. The contents of the
+value <em class="rfc2119">MUST</em> be expressed with a header and encoding as described in Section
+<a href="#multibase-0" class="sec-ref"><bdi class="secno">2.4 </bdi>Multibase</a>. The contents of this value are determined by a
+specific cryptosuite and set to the <em>proof value</em> generated by the
+<a href="#add-proof">Add Proof Algorithm</a> for that cryptosuite. Alternative
+properties with different encodings specified by the cryptosuite <em class="rfc2119">MAY</em> be used,
+instead of this property, to encode the data necessary to verify the digital
+proof.
           </dd>
 
           <dt><dfn class="lint-ignore" id="dfn-previousproof" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">previousProof</dfn></dt>
@@ -1568,8 +1581,8 @@ methods</a> using both properties above is shown below.
             
             <p>
 The Multikey data model is a specific type of <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-32">verification method</a> that
-utilizes the [<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="The Multi Codec Encoding Scheme">MULTICODEC</a></cite>] specification to encode key types into a single
-binary stream that is then encoded using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] specification.
+encodes key types into a single binary stream that is then encoded as a
+Multibase value as described in Section <a href="#multibase-0" class="sec-ref"><bdi class="secno">2.4 </bdi>Multibase</a>.
             </p>
 
             <p>
@@ -1584,12 +1597,12 @@ The value of the <code>type</code> property <em class="rfc2119">MUST</em> contai
               <dt><dfn class="lint-ignore" id="dfn-publickeymultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">publicKeyMultibase</dfn></dt>
               <dd>
 The <code>publicKeyMultibase</code> property is <em class="rfc2119">OPTIONAL</em>. If present, its value <em class="rfc2119">MUST</em> be a
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] encoded [<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="The Multi Codec Encoding Scheme">MULTICODEC</a></cite>] value.
+Multibase encoded value as described in Section <a href="#multibase-0" class="sec-ref"><bdi class="secno">2.4 </bdi>Multibase</a>.
               </dd>
               <dt><dfn class="lint-ignore" id="dfn-secretkeymultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">secretKeyMultibase</dfn></dt>
               <dd>
 The <code>secretKeyMultibase</code> property is <em class="rfc2119">OPTIONAL</em>. If present, its value <em class="rfc2119">MUST</em> be a
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] encoded [<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="The Multi Codec Encoding Scheme">MULTICODEC</a></cite>] value.
+Multibase encoded value as described in Section <a href="#multibase-0" class="sec-ref"><bdi class="secno">2.4 </bdi>Multibase</a>.
               </dd>
             </dl>
 
@@ -1611,10 +1624,10 @@ An example of a Multikey is provided below:
 
             <p>
 In the example above, the <code>publicKeyMultibase</code> value starts with the letter <code>z</code>,
-which is the [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] header that conveys that the binary data is
-base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="The Multi Codec Encoding Scheme">MULTICODEC</a></cite>] header is <code>0xed</code>, which specifies that the remaining data
-is a 32-byte raw Ed25519 <a href="#dfn-public-key" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-public-key-4">public key</a>.
+which is the <a href="#multibase-0">Multibase</a> header that conveys that the
+binary data is base-58-btc-encoded using the Bitcoin base-encoding alphabet. The
+decoded binary data header is <code>0xed01</code>, which specifies that the
+remaining data is a 32-byte raw Ed25519 <a href="#dfn-public-key" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-public-key-4">public key</a>.
             </p>
 
             <p>
@@ -1636,10 +1649,10 @@ include <em>symmetric keys</em> and <em>private keys</em>.
 
             <p>
 In the example above, the <code>secretKeyMultibase</code> value starts with the letter <code>z</code>,
-which is the [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] header that conveys that the binary data is
-base58-encoded using the Bitcoin base-encoding alphabet. The decoded binary data
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multicodec" title="The Multi Codec Encoding Scheme">MULTICODEC</a></cite>] header is <code>0x1300</code>, which specifies that the remaining data
-is a 32-byte raw Ed25519 private key.
+which is the <a href="#multibase-0">Multibase</a> header that conveys that the
+binary data is base-58-btc-encoded using the Bitcoin base-encoding alphabet. The
+decoded binary data header is <code>0x8026</code>, which specifies that the
+remaining data is a 32-byte raw Ed25519 private key.
             </p>
 
           </section>
@@ -2152,59 +2165,34 @@ example described in <a href="#capability-invocation" class="sec-ref"><bdi class
         </section>
       </section>
 
-      <section id="resource-integrity"><div class="header-wrapper"><h3 id="x2-4-resource-integrity"><bdi class="secno">2.4 </bdi>Resource Integrity</h3><a class="self-link" href="#resource-integrity" aria-label="Permalink for Section 2.4"></a></div>
+      <section id="multibase-0"><div class="header-wrapper"><h3 id="x2-4-multibase"><bdi class="secno">2.4 </bdi>Multibase</h3><a class="self-link" href="#multibase-0" aria-label="Permalink for Section 2.4"></a></div>
         
 
-        <div class="issue atrisk" id="issue-container-generatedID-7"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Unification of cryptographic hash expression formats are under discussion</span></div><p class="atrisk">
-The Working Group is currently attempting to determine whether cryptographic hash
-expression formats can be unified across all of the VCWG core specifications.
-Candidates for this mechanism include <code>digestSRI</code> and <code>digestMultibase</code>. There
-are arguments for and against unification that the WG is currently debating.
+        <div class="issue" id="issue-container-generatedID-7"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue</span><span class="issue-label">: Multibase may be standardized at IETF</span></div><p class="">
+The [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] specification has been dispatched at IETF and may be
+standardized there. There is active discussion on this initiative in
+the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
+Multiformats mailing list at IETF</a>. If the Multibase draft is stabilized
+before this specification goes to the Proposed Recommendation phase, the table
+below will be replaced with normative references to the Multibase
+specification at IETF. It is the intention of the Working Group to ensure
+alignment between the Multibase values used in this specification and the
+Multibase values defined by the current Multibase community and any potential
+future IETF Multiformats Working Group.
         </p></div>
 
         <p>
-When including a link to an external resource in a
-<a href="#dfn-conforming-secured-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-secured-document-2">conforming secured document</a>, it is desirable to know whether the resource
-that is identified has changed since the proof was created. This applies to
-cases where there is an external resource that is remotely retrieved as well as
-to cases where the <a href="#dfn-verifier" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verifier-1">verifier</a> might have a locally cached copy of the
-resource.
-        </p>
-        <p>
-To enable confirmation that a resource referenced by a <a href="#dfn-conforming-secured-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-secured-document-3">conforming secured document</a>
-has not changed since the document was secured, an implementer <em class="rfc2119">MAY</em> include a
-property named <dfn class="lint-ignore" id="dfn-digestmultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn"><code>digestMultibase</code></dfn> in any object
-that includes an <code>id</code> property. If present, the <code>digestMultibase</code> value <em class="rfc2119">MUST</em> be
-a single string value, or an array of string values that are
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>]-encoded [<cite><a class="bibref" data-link-type="biblio" href="#bib-multihash" title="The Multihash Data Format">MULTIHASH</a></cite>] values.
-        </p>
-
-        <p>
-An example of a resource integrity protected object is shown below:
-        </p>
-
-        <div class="example" id="example-an-integrity-protected-image-that-is-associated-with-an-object">
-        <div class="marker">
-    <a class="self-link" href="#example-an-integrity-protected-image-that-is-associated-with-an-object">Example<bdi> 19</bdi></a><span class="example-title">: An integrity-protected image that is associated with an object</span>
-  </div> <pre class="nohighlight">{
-  ...
-  "image": {
-    "id": "https://university.example.org/images/58473",
-    "digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"
-  },
-  ...
-}</pre>
-      </div>
-
-        <p>
-Common [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] header values and their encoding alphabets are provided
-below:
+A Multibase string includes a single character header which identifies the
+base and encoding alphabet used to encode a binary value, followed by the
+encoded binary value (using that base and alphabet). The common Multibase
+header values and their associated base encoding alphabets as provided below
+are normative:
         </p>
 
         <table class="simple">
           <thead>
             <tr>
-              <th>Multibase&nbsp;Value</th>
+              <th>Multibase&nbsp;Header</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -2230,20 +2218,56 @@ of the following characters, in order:
         </table>
 
         <p>
-Other [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] encoding values <em class="rfc2119">MAY</em> be used, but interoperability is not
-guaranteed between implementations.
+Other Multibase encoding values <em class="rfc2119">MAY</em> be used, but interoperability is not
+guaranteed between implementations using such values.
         </p>
 
         <p>
-Common [<cite><a class="bibref" data-link-type="biblio" href="#bib-multihash" title="The Multihash Data Format">MULTIHASH</a></cite>] header values and their encodings are provided
-below:
+To base-encode a binary value into a Multibase string, an implementation <em class="rfc2119">MUST</em>
+apply the algorithm in Section <a href="#base-encode" class="sec-ref"><bdi class="secno">4.1 </bdi>Base Encode</a> to the binary value,
+with the desired base encoding and alphabet from the table above, ensuring to
+prepend the associated Multibase header from the table above to the result.
+Any algorithm with equivalent output <em class="rfc2119">MAY</em> be used.
+        </p>
+
+        <p>
+To base-decode a Multibase string, an implementation <em class="rfc2119">MUST</em> apply the algorithm
+in Section <a href="#base-decode" class="sec-ref"><bdi class="secno">4.2 </bdi>Base Decode</a> to the string following the first
+character (Multibase header), with the alphabet associated with the
+Multibase header. Any algorithm with equivalent output <em class="rfc2119">MAY</em> be used.
+        </p>
+
+      </section>
+
+      <section id="multihash"><div class="header-wrapper"><h3 id="x2-5-multihash"><bdi class="secno">2.5 </bdi>Multihash</h3><a class="self-link" href="#multihash" aria-label="Permalink for Section 2.5"></a></div>
+        
+
+        <div class="issue" id="issue-container-generatedID-8"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue</span><span class="issue-label">: Multihash may be standardized at IETF</span></div><p class="">
+The [<cite><a class="bibref" data-link-type="biblio" href="#bib-multihash" title="The Multihash Data Format">MULTIHASH</a></cite>] specification has been dispatched at IETF and may be
+standardized. There is active discussion on this initiative in
+the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
+Multiformats mailing list at IETF</a>. If the IETF draft is stabilized
+before this specification goes to the Proposed Recommendation phase, the table
+below will be replaced with normative references to the Multihash
+specification. It is the intention of the Working Group to ensure
+alignment between the Multihash values used in this specification and the
+Multihash values defined by the current Multihash community and any potential
+future IETF Multiformats Working Group.
+        </p></div>
+
+        <p>
+A Multihash value starts with a binary header, which identifies the specific
+cryptographic hash algorithm and parameters used to generate the digest,
+followed by the cryptographic digest value. The normative Multihash header
+values defined by this specification, and their associated output sizes and
+associated specifications, are provided below:
         </p>
 
         <table class="simple">
           <thead>
             <tr>
               <th>Multihash&nbsp;Identifier</th>
-              <th>Binary&nbsp;Encoding</th>
+              <th>Multihash&nbsp;Header</th>
               <th>Description</th>
             </tr>
           </thead>
@@ -2285,15 +2309,64 @@ Other Multihash encoding values <em class="rfc2119">MAY</em> be used, but intero
 guaranteed between implementations.
         </p>
 
-        <div class="issue atrisk" id="issue-container-generatedID-8"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Multibase and Multihash are being standardized at IETF</span></div><p class="atrisk">
-The [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] and [<cite><a class="bibref" data-link-type="biblio" href="#bib-multihash" title="The Multihash Data Format">MULTIHASH</a></cite>] specifications have been dispatched at IETF
-to be standardized in a
-<a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
-Multiformats Working Group</a>. If the specifications are stabilized before this
-specification goes to the Proposed Recommendation phase, the tables above will
-be replaced with normative references to the Multibase and Multihash
-specifications.
+        <p>
+To encode to a Multihash value, an implementation <em class="rfc2119">MUST</em> prepend the associated
+Multihash header value to the cryptographic hash value.
+        </p>
+
+        <p>
+To decode a Multihash value, an implementation <em class="rfc2119">MUST</em> remove the prepended
+Multihash header value, which identifies the type of cryptographic hashing
+algorithm as well as its output length, leaving the raw cryptographic hash
+value which <em class="rfc2119">MUST</em> match the output length associated with the Multihash header.
+        </p>
+
+      </section>
+
+      <section id="resource-integrity"><div class="header-wrapper"><h3 id="x2-6-resource-integrity"><bdi class="secno">2.6 </bdi>Resource Integrity</h3><a class="self-link" href="#resource-integrity" aria-label="Permalink for Section 2.6"></a></div>
+        
+
+        <div class="issue atrisk" id="issue-container-generatedID-9"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Unification of cryptographic hash expression formats are under discussion</span></div><p class="atrisk">
+The Working Group is currently attempting to determine whether cryptographic hash
+expression formats can be unified across all of the VCWG core specifications.
+Candidates for this mechanism include <code>digestSRI</code> and <code>digestMultibase</code>. There
+are arguments for and against unification that the WG is currently debating.
         </p></div>
+
+        <p>
+When a link to an external resource is included in a
+<a href="#dfn-conforming-secured-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-secured-document-2">conforming secured document</a>, it is desirable to know whether the resource
+that is identified has changed since the proof was created. This applies to
+cases where there is an external resource that is remotely retrieved as well as
+to cases where the <a href="#dfn-verifier" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verifier-1">verifier</a> might have a locally cached copy of the
+resource.
+        </p>
+        <p>
+To enable confirmation that a resource referenced by a <a href="#dfn-conforming-secured-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-secured-document-3">conforming secured document</a>
+has not changed since the document was secured, an implementer <em class="rfc2119">MAY</em> include a
+property named <dfn class="lint-ignore" id="dfn-digestmultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn"><code>digestMultibase</code></dfn> in any object
+that includes an <code>id</code> property. If present, the <code>digestMultibase</code> value <em class="rfc2119">MUST</em> be
+a single string value, or an array of string values that are
+<a href="#multibase-0">Multibase</a>-encoded <a href="#multihash">Multihash</a>
+values.
+        </p>
+
+        <p>
+An example of a resource integrity protected object is shown below:
+        </p>
+
+        <div class="example" id="example-an-integrity-protected-image-that-is-associated-with-an-object">
+        <div class="marker">
+    <a class="self-link" href="#example-an-integrity-protected-image-that-is-associated-with-an-object">Example<bdi> 19</bdi></a><span class="example-title">: An integrity-protected image that is associated with an object</span>
+  </div> <pre class="nohighlight">{
+  ...
+  "image": {
+    "id": "https://university.example.org/images/58473",
+    "digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"
+  },
+  ...
+}</pre>
+      </div>
 
         <p>
 Implementers are urged to consult appropriate sources, such as the
@@ -2306,7 +2379,7 @@ choosing a hash algorithm that is appropriate for their use case.
 
       </section>
 
-      <section id="relationship-to-linked-data"><div class="header-wrapper"><h3 id="x2-5-relationship-to-linked-data"><bdi class="secno">2.5 </bdi>Relationship to Linked Data</h3><a class="self-link" href="#relationship-to-linked-data" aria-label="Permalink for Section 2.5"></a></div>
+      <section id="relationship-to-linked-data"><div class="header-wrapper"><h3 id="x2-7-relationship-to-linked-data"><bdi class="secno">2.7 </bdi>Relationship to Linked Data</h3><a class="self-link" href="#relationship-to-linked-data" aria-label="Permalink for Section 2.7"></a></div>
         
         <p>
 The term Linked Data is used to describe a recommended best practice for
@@ -2325,7 +2398,7 @@ data documents through the use of mathematical proofs without sacrificing Linked
 Data features such as extensibility and composability.
         </p>
 
-        <div class="note" role="note" id="issue-container-generatedID-9"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span><span class="issue-label">: Use of Linked Data is an optional feature</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-10"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span><span class="issue-label">: Use of Linked Data is an optional feature</span></div><p class="">
 While  this specification provides mechanisms to digitally sign Linked Data, the
 use  of Linked Data is not necessary to gain some of the advantages provided by
 this specification.
@@ -2333,7 +2406,7 @@ this specification.
 
       </section>
 
-      <section id="relationship-to-verifiable-credentials"><div class="header-wrapper"><h3 id="x2-6-relationship-to-verifiable-credentials"><bdi class="secno">2.6 </bdi>Relationship to Verifiable Credentials</h3><a class="self-link" href="#relationship-to-verifiable-credentials" aria-label="Permalink for Section 2.6"></a></div>
+      <section id="relationship-to-verifiable-credentials"><div class="header-wrapper"><h3 id="x2-8-relationship-to-verifiable-credentials"><bdi class="secno">2.8 </bdi>Relationship to Verifiable Credentials</h3><a class="self-link" href="#relationship-to-verifiable-credentials" aria-label="Permalink for Section 2.8"></a></div>
         
 
         <p>
@@ -2413,10 +2486,10 @@ does not provide timing information, which enhances privacy.
         </p>
       </section>
 
-      <section id="contexts-and-vocabularies"><div class="header-wrapper"><h3 id="x2-7-contexts-and-vocabularies"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</h3><a class="self-link" href="#contexts-and-vocabularies" aria-label="Permalink for Section 2.7"></a></div>
+      <section id="contexts-and-vocabularies"><div class="header-wrapper"><h3 id="x2-9-contexts-and-vocabularies"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</h3><a class="self-link" href="#contexts-and-vocabularies" aria-label="Permalink for Section 2.9"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-10"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>Issue</span><span class="issue-label">: (AT RISK) Hash values might change during Candidate Recommendation</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-11"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="4"><span>Issue</span><span class="issue-label">: (AT RISK) Hash values might change during Candidate Recommendation</span></div><p class="">
 This section lists cryptographic hash values that might change during the
 Candidate Recommendation phase based on implementer feedback that requires
 the referenced files to be modified.
@@ -2567,7 +2640,7 @@ Credentials v2.0: Base Context</a> and <a href="https://www.w3.org/TR/vc-data-mo
 Verifiable Credentials v2.0: Vocabularies</a>.
         </p>
 
-        <section id="context-injection"><div class="header-wrapper"><h4 id="x2-7-1-context-injection"><bdi class="secno">2.7.1 </bdi>Context Injection</h4><a class="self-link" href="#context-injection" aria-label="Permalink for Section 2.7.1"></a></div>
+        <section id="context-injection"><div class="header-wrapper"><h4 id="x2-9-1-context-injection"><bdi class="secno">2.9.1 </bdi>Context Injection</h4><a class="self-link" href="#context-injection" aria-label="Permalink for Section 2.9.1"></a></div>
           
 
           <p>
@@ -2594,7 +2667,7 @@ necessary Data Integrity terms that were previously mapped by
           </p>
         </section>
 
-        <section id="securing-data-losslessly"><div class="header-wrapper"><h4 id="x2-7-2-securing-data-losslessly"><bdi class="secno">2.7.2 </bdi>Securing Data Losslessly</h4><a class="self-link" href="#securing-data-losslessly" aria-label="Permalink for Section 2.7.2"></a></div>
+        <section id="securing-data-losslessly"><div class="header-wrapper"><h4 id="x2-9-2-securing-data-losslessly"><bdi class="secno">2.9.2 </bdi>Securing Data Losslessly</h4><a class="self-link" href="#securing-data-losslessly" aria-label="Permalink for Section 2.9.2"></a></div>
           
 
           <p>
@@ -2635,14 +2708,14 @@ base URL is set to null.
           </p>
         </section>
 
-        <section id="datatypes"><div class="header-wrapper"><h4 id="x2-7-3-datatypes"><bdi class="secno">2.7.3 </bdi>Datatypes</h4><a class="self-link" href="#datatypes" aria-label="Permalink for Section 2.7.3"></a></div>
+        <section id="datatypes"><div class="header-wrapper"><h4 id="x2-9-3-datatypes"><bdi class="secno">2.9.3 </bdi>Datatypes</h4><a class="self-link" href="#datatypes" aria-label="Permalink for Section 2.9.3"></a></div>
           
 
           <p>
 This section defines datatypes that are used by this specification.
           </p>
 
-        <section id="the-cryptosuitestring-datatype"><div class="header-wrapper"><h5 id="cryptosuiteString"><bdi class="secno">2.7.3.1 </bdi>The <code>cryptosuiteString</code> Datatype</h5><a class="self-link" href="#cryptosuiteString" aria-label="Permalink for Section 2.7.3.1"></a></div>
+        <section id="the-cryptosuitestring-datatype"><div class="header-wrapper"><h5 id="cryptosuiteString"><bdi class="secno">2.9.3.1 </bdi>The <code>cryptosuiteString</code> Datatype</h5><a class="self-link" href="#cryptosuiteString" aria-label="Permalink for Section 2.9.3.1"></a></div>
           
 
           <p>
@@ -2688,16 +2761,17 @@ lexical space.
           </dl>
         </section>
 
-        <section id="the-multibase-datatype"><div class="header-wrapper"><h5 id="multibase"><bdi class="secno">2.7.3.2 </bdi>The <code>multibase</code> Datatype</h5><a class="self-link" href="#multibase" aria-label="Permalink for Section 2.7.3.2"></a></div>
+        <section id="the-multibase-datatype"><div class="header-wrapper"><h5 id="multibase"><bdi class="secno">2.9.3.2 </bdi>The <code>multibase</code> Datatype</h5><a class="self-link" href="#multibase" aria-label="Permalink for Section 2.9.3.2"></a></div>
           
 
           <p>
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>]-encoded strings are used to encode binary data into ASCII-only
-formats, which are useful in environments that cannot directly represent binary
-values. This specification makes use of this encoding. In environments that
-support data types for string values, such as RDF [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-concepts" title="Resource Description Framework (RDF): Concepts and Abstract Syntax">RDF-CONCEPTS</a></cite>],
-[<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>]-encoded content is indicated using a literal value whose datatype
-is set to <code>https://w3id.org/security#multibase</code>.
+<a href="#multibase">Multibase</a>-encoded strings are used to encode binary
+data into ASCII-only formats, which are useful in environments that cannot
+directly represent binary values. This specification makes use of this encoding.
+In environments that support data types for string values, such as RDF
+[<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-concepts" title="Resource Description Framework (RDF): Concepts and Abstract Syntax">RDF-CONCEPTS</a></cite>], <a href="#multibase">Multibase</a>-encoded content is
+indicated using a literal value whose datatype is set to
+<code>https://w3id.org/security#multibase</code>.
           </p>
 
           <p>
@@ -2711,9 +2785,9 @@ The <code>multibase</code> datatype is defined as follows:
             </dd>
             <dt>The lexical space</dt>
             <dd>
-Any string that starts with a [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] character and the rest of
-the characters consist of allowable characters in the respective base-encoding
-alphabet.
+Any string that starts with a <a href="#multibase">Multibase</a> character and
+the rest of the characters consist of allowable characters in the respective
+base-encoding alphabet.
             </dd>
             <dt>The value space</dt>
             <dd>
@@ -2723,7 +2797,7 @@ An arbitrary binary data value.
             <dd>
 Any element of the lexical space is mapped to the value space by base-decoding
 the value based on the base-decoding alphabet associated with the
-first  [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] character in the lexical string.
+first <a href="#multibase">Multibase</a> character in the lexical string.
             </dd>
             <dt>The canonical mapping</dt>
             <dd>
@@ -2802,7 +2876,7 @@ protected from unsafe redefinition, by use of the <code>@protected</code> keywor
         </li>
       </ul>
 
-      <div class="issue" id="issue-container-generatedID-11"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="3"><span>Issue</span><span class="issue-label">: Require interoperability report?</span></div><p class="">
+      <div class="issue" id="issue-container-generatedID-12"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="3"><span>Issue</span><span class="issue-label">: Require interoperability report?</span></div><p class="">
 The following language was deemed to be contentious: <em>The specification <em class="rfc2119">MUST</em>
 provide a link to an interoperability test report to document which
 implementations are conformant with the cryptographic suite specification.</em>
@@ -2853,7 +2927,7 @@ defined in Section <a href="#proofs" class="sec-ref"><bdi class="secno">2.1 </bd
 specific to their cryptographic suite.
         </p>
 
-        <div class="note" role="note" id="issue-container-generatedID-12"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span class="issue-label">: Design Patterns of Legacy Cryptographic Suites</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-13"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span class="issue-label">: Design Patterns of Legacy Cryptographic Suites</span></div><p class="">
 One of the design patterns seen in Data Integrity cryptosuites from
 2012 to 2020 was use of the <code>type</code> property to establish a specific type for a
 cryptographic suite. For example, the
@@ -2893,7 +2967,7 @@ specified by a particular cryptographic suite (see Section
 <a href="#cryptographic-suites" class="sec-ref"><bdi class="secno">3. </bdi>Cryptographic Suites</a>).
       </p>
 
-      <div class="issue" id="issue-container-generatedID-13"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="3"><span>Issue</span><span class="issue-label">: Verification hash algorithm definition</span></div><p class="">
+      <div class="issue" id="issue-container-generatedID-14"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="3"><span>Issue</span><span class="issue-label">: Verification hash algorithm definition</span></div><p class="">
 At present the creation of the verification hash is delegated to the
 cryptographic suite specification when generating and verifying a proof. It is
 expected that this algorithm is going to be common to most cryptographic suites.
@@ -2901,7 +2975,312 @@ It is predicted that the algorithm that generates the verification hash
 will eventually be defined in this specification.
       </p></div>
 
-      <section class="normative" id="add-proof"><div class="header-wrapper"><h3 id="x4-1-add-proof"><bdi class="secno">4.1 </bdi>Add Proof</h3><a class="self-link" href="#add-proof" aria-label="Permalink for Section 4.1"></a></div>
+      <section class="normative" id="base-encode"><div class="header-wrapper"><h3 id="x4-1-base-encode"><bdi class="secno">4.1 </bdi>Base Encode</h3><a class="self-link" href="#base-encode" aria-label="Permalink for Section 4.1"></a></div>
+        
+
+        <p>
+The following algorithm specifies how to encode an array of bytes, where each
+byte represents a base-256 value, to a different base representation that uses a
+particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
+required inputs are the <var>bytes</var>, <var>targetBase</var>, and
+<var>baseAlphabet</var>. The output is a string that contains the base-encoded
+value. All mathematical operations <em class="rfc2119">MUST</em> be performed using integer arithmetic.
+Alternatives to the algorithm provided below <em class="rfc2119">MAY</em> be used as long as the
+outputs of the alternative algorithm remain the same.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Initialize the following variables; <var>zeroes</var> to <code>0</code>, <var>length</var> to
+<code>0</code>, <var>begin</var> to <code>0</code>, and <var>end</var> to the length of
+<var>bytes</var>.
+          </li>
+          <li>
+Set <var>begin</var> and <var>zeroes</var> to the number of leading <code>0</code> byte
+values in <var>bytes</var>.
+          </li>
+          <li>
+Set <var>baseValue</var> to an empty byte array that is the size of the final
+base-expanded value. Calculate the final <var>size</var> of <var>baseValue</var>
+by dividing log(256) by log(<var>targetBase</var>) and then multiplying the
+length of <var>bytes</var> minus the leading <var>zeroes</var>. Add <code>1</code> to the
+value of <var>size</var>.
+          </li>
+          <li>
+Process each byte in <var>bytes</var> as <var>byte</var> starting at offset
+<var>begin</var>:
+            <ol class="algorithm">
+              <li>
+Set the <var>carry</var> value to <var>byte</var>.
+              </li>
+              <li>
+Perform base-expansion by starting at the end of the <var>baseValue</var> array.
+Initialize an iterator <var>i</var> to <code>0</code>. Set <var>basePosition</var> to
+<var>size</var> minus <code>1</code>. Perform the following loop as long as <var>carry</var>
+does not equal <code>0</code> or <var>i</var> is less than <var>length</var>, and
+<var>basePosition</var> does not equal <code>-1</code>.
+                <ol class="algorithm">
+                  <li>
+Multiply the value in <var>baseValue[basePosition]</var> by <code>256</code> and add
+it to <var>carry</var>.
+                  </li>
+                  <li>
+Set the value at <var>baseValue[basePosition]</var> to the remainder after
+dividing <var>carry</var> by <var>targetBase</var>.
+                  </li>
+                  <li>
+Set the value of <var>carry</var> to <var>carry</var> divided by
+<var>targetBase</var> ensuring that integer division is used to perform the
+division.
+                  </li>
+                  <li>
+Decrement <var>basePosition</var> by <code>1</code> and increment <var>i</var> by <code>1</code>.
+                  </li>
+                </ol>
+              </li>
+              <li>
+Set <var>length</var> to <var>i</var> and increment <var>begin</var> by <code>1</code>.
+              </li>
+            </ol>
+          </li>
+          <li>
+Set the <var>baseEncodingPosition</var> to <var>size</var> minus <var>length</var>.
+While the <var>baseEncodingPosition</var> does not equal <var>size</var> and the
+<var>baseValue[baseEncodingPosition]</var> does not equal <code>0</code>, increment
+<var>baseEncodingPosition</var>. This step skips the leading zeros in the
+base-encoded result.
+          </li>
+          <li>
+Initialize the <var>baseEncoding</var> by repeating the first entry in the
+<var>baseAlphabet</var> by the value of <var>zeroes</var> (the number of leading
+zeroes in <var>bytes</var>).
+          </li>
+          <li>
+Convert the rest of the <var>baseValue</var> to the base-encoding. While the
+<var>baseEncodingPosition</var> is less than <var>size</var>, increment the
+<var>baseEncodingPosition</var>: Set <var>baseEncodedValue</var> to
+<var>baseValue</var>[<var>baseEncodingPosition</var>]. Append
+<var>baseAlphabet</var>[<var>baseEncodedValue</var>] to <var>baseEncoding</var>.
+          </li>
+          <li>
+Return <var>baseEncoding</var> as the base-encoded value.
+          </li>
+        </ol>
+
+        <div class="example" id="example-an-implementation-of-the-general-base-encoding-algorithm-above-in-javascript">
+        <div class="marker">
+    <a class="self-link" href="#example-an-implementation-of-the-general-base-encoding-algorithm-above-in-javascript">Example<bdi> 20</bdi></a><span class="example-title">: An implementation of the general base-encoding algorithm above in Javascript</span>
+  </div> <pre aria-busy="false"><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">baseEncode</span>(<span class="hljs-params">bytes, targetBase, baseAlphabet</span>) </span>{
+  <span class="hljs-keyword">let</span> zeroes = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> length = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> begin = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> end = bytes.length;
+
+  <span class="hljs-comment">// count the number of leading bytes that are zero</span>
+  <span class="hljs-keyword">while</span>(begin !== end &amp;&amp; bytes[begin] === <span class="hljs-number">0</span>) {
+    begin++;
+    zeroes++;
+  }
+
+  <span class="hljs-comment">// allocate enough space to store the target base value</span>
+  <span class="hljs-keyword">const</span> baseExpansionFactor = <span class="hljs-built_in">Math</span>.log(<span class="hljs-number">256</span>) / <span class="hljs-built_in">Math</span>.log(targetBase);
+  <span class="hljs-keyword">let</span> size = <span class="hljs-built_in">Math</span>.floor((end - begin) * baseExpansionFactor + <span class="hljs-number">1</span>);
+  <span class="hljs-keyword">let</span> baseValue = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(size);
+
+  <span class="hljs-comment">// process the entire input byte array</span>
+  <span class="hljs-keyword">while</span>(begin !== end) {
+    <span class="hljs-keyword">let</span> carry = bytes[begin];
+
+    <span class="hljs-comment">// for each byte in the array, perform base-expansion</span>
+    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> basePosition = size - <span class="hljs-number">1</span>;
+        (carry !== <span class="hljs-number">0</span> || i &lt; length) &amp;&amp; (basePosition !== -<span class="hljs-number">1</span>);
+        basePosition--, i++) {
+      carry += <span class="hljs-built_in">Math</span>.floor(<span class="hljs-number">256</span> * baseValue[basePosition]);
+      baseValue[basePosition] = <span class="hljs-built_in">Math</span>.floor(carry % targetBase);
+      carry = <span class="hljs-built_in">Math</span>.floor(carry / targetBase);
+    }
+
+    length = i;
+    begin++;
+  }
+
+  <span class="hljs-comment">// skip leading zeroes in base-encoded result</span>
+  <span class="hljs-keyword">let</span> baseEncodingPosition = size - length;
+  <span class="hljs-keyword">while</span>(baseEncodingPosition !== size &amp;&amp;
+        baseValue[baseEncodingPosition] === <span class="hljs-number">0</span>) {
+    baseEncodingPosition++;
+  }
+
+  <span class="hljs-comment">// convert the base value to the base encoding</span>
+  <span class="hljs-keyword">let</span> baseEncoding = baseAlphabet.charAt(<span class="hljs-number">0</span>).repeat(zeroes)
+  <span class="hljs-keyword">for</span>(; baseEncodingPosition &lt; size; ++baseEncodingPosition) {
+    baseEncoding += baseAlphabet.charAt(baseValue[baseEncodingPosition])
+  }
+
+  <span class="hljs-keyword">return</span> baseEncoding;
+}</code></pre>
+      </div>
+      </section>
+
+      <section class="normative" id="base-decode"><div class="header-wrapper"><h3 id="x4-2-base-decode"><bdi class="secno">4.2 </bdi>Base Decode</h3><a class="self-link" href="#base-decode" aria-label="Permalink for Section 4.2"></a></div>
+        
+
+        <p>
+The following algorithm specifies how to decode an array of bytes, where each
+byte represents a base-encoded value, to a different base representation that
+uses a particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
+required inputs are the <var>sourceEncoding</var>, <var>sourceBase</var>, and
+<var>baseAlphabet</var>. The output is an array of bytes that contains the
+base-decoded value. All mathematical operations <em class="rfc2119">MUST</em> be performed using integer
+arithmetic. Alternatives to the algorithm provided below <em class="rfc2119">MAY</em> be used as long as
+the outputs of the alternative algorithm remain the same.
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Initialize a <var>baseMap</var> mapping by associating each character
+in <var>baseAlphabet</var> to its integer position in the
+<var>baseAlphabet</var> string.
+          </li>
+          <li>
+Initialize the following variables; <var>sourceOffset</var> to <code>0</code>,
+<var>zeroes</var> to <code>0</code>, and <var>decodedLength</var> to <code>0</code>.
+          </li>
+          <li>
+Set <var>zeroes</var> and <var>sourceOffset</var> to the number of leading
+<var>baseAlphabet[0]</var> values in <var>sourceEncoding</var>.
+          </li>
+          <li>
+Set <var>decodedBytes</var> to an empty byte array that is the size of the final
+base-converted value. Calculate the size of <var>decodedBytes</var>
+by dividing log(<var>sourceBase</var>) by log(<code>256</code>) and then multiplying by the
+length of <var>sourceEncoding</var> minus the leading zeroes. Add 1 to the value
+of size.
+          </li>
+          <li>
+Process each character in <var>sourceEncoding</var> as <var>character</var>
+starting at offset <var>sourceOffset</var>:
+            <ol class="algorithm">
+              <li>
+Set the <var>carry</var> value to the integer value in the <var>baseMap</var>
+that is associated with <var>character</var>.
+              </li>
+              <li>
+Perform base-decoding by starting at the end of the <var>decodedBytes</var>
+array. Initialize an iterator <var>i</var> to <code>0</code>. Set <var>byteOffset</var>
+to <var>decodedSize</var> minus <code>1</code>. Perform the following loop as long as,
+<var>carry</var> does not equal <code>0</code> or <var>i</var> is less than
+<var>decodedLength</var>, and <var>byteOffset</var> does not equal <code>-1</code>:
+                <ol class="algorithm">
+                  <li>
+Add the result of multiplying <var>sourceBase</var> by
+<var>decodedBytes</var>[<var>byteOffset</var>] to <var>carry</var>.
+                  </li>
+                  <li>
+Set <var>decodedBytes</var>[<var>byteOffset</var>] to the remainder of
+dividing <var>carry</var> by <code>256</code>.
+                  </li>
+                  <li>
+Set <var>carry</var> to <var>carry</var> divided by <code>256</code>, ensuring that integer
+division is used to perform the division.
+                  </li>
+                  <li>
+Decrement <var>byteOffset</var> by <code>1</code> and increment <var>i</var> by <code>1</code>.
+                  </li>
+                </ol>
+                </li><li>
+Set <var>decodedLength</var> to <var>i</var> and increment
+<var>sourceOffset</var> by <code>1</code>.
+                </li>
+              
+            </ol>
+          </li>
+          <li>
+Set the <var>decodedOffset</var> to <var>decodedSize</var> minus
+<var>decodedLength</var>. While the <var>decodedOffset</var> does not equal
+the <var>decodedSize</var> and
+<var>decodedBytes</var>[<var>decodedOffset</var>] equals <code>0</code>, increment
+<var>decodedOffset</var> by <code>1</code>. This step skips the leading zeros in the
+final base-decoded byte array.
+          </li>
+          <li>
+Set the size of the <var>finalBytes</var> array to <var>zeroes</var> plus,
+<var>decodedSize</var> minus <var>decodedOffset</var>. Initialize the first
+<var>zeroes</var> bytes in <var>finalBytes</var> to <code>0</code>.
+          </li>
+          <li>
+Starting at an offset equal to the number of <var>zeroes</var> in
+<var>finalBytes</var> plus <code>1</code>, copy all bytes in <var>decodedBytes</var>, up
+to <var>decodedSize</var>, starting at offset <var>decodedOffset</var> to
+<var>finalBytes</var>.
+          </li>
+        </ol>
+
+        <div class="example" id="example-an-implementation-of-the-general-base-decoding-algorithm-above-in-javascript">
+        <div class="marker">
+    <a class="self-link" href="#example-an-implementation-of-the-general-base-decoding-algorithm-above-in-javascript">Example<bdi> 21</bdi></a><span class="example-title">: An implementation of the general base-decoding algorithm above in Javascript</span>
+  </div> <pre aria-busy="false"><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">baseDecode</span>(<span class="hljs-params">sourceEncoding, sourceBase, baseAlphabet</span>) </span>{
+  <span class="hljs-comment">// build the base-alphabet to integer value map</span>
+  baseMap = {};
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; baseAlphabet.length; i++) {
+    baseMap[baseAlphabet[i]] = i;
+  }
+
+  <span class="hljs-comment">// skip and count zero-byte values in the sourceEncoding</span>
+  <span class="hljs-keyword">let</span> sourceOffset = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> zeroes = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> decodedLength = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(sourceEncoding[sourceOffset] === baseAlphabet[<span class="hljs-number">0</span>]) {
+    zeroes++;
+    sourceOffset++;
+  }
+
+  <span class="hljs-comment">// allocate the decoded byte array</span>
+  <span class="hljs-keyword">const</span> baseContractionFactor = <span class="hljs-built_in">Math</span>.log(sourceBase) / <span class="hljs-built_in">Math</span>.log(<span class="hljs-number">256</span>);
+  <span class="hljs-keyword">let</span> decodedSize = <span class="hljs-built_in">Math</span>.floor((
+    (sourceEncoding.length - sourceOffset) * baseContractionFactor) + <span class="hljs-number">1</span>);
+  <span class="hljs-keyword">let</span> decodedBytes = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(decodedSize);
+
+  <span class="hljs-comment">// perform base-conversion on the source encoding</span>
+  <span class="hljs-keyword">while</span>(sourceEncoding[sourceOffset]) {
+    <span class="hljs-comment">// process each base-encoded number</span>
+    <span class="hljs-keyword">let</span> carry = baseMap[sourceEncoding[sourceOffset]];
+
+    <span class="hljs-comment">// convert the base-encoded number by performing base-expansion</span>
+    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> byteOffset = decodedSize - <span class="hljs-number">1</span>;
+      (carry !== <span class="hljs-number">0</span> || i &lt; decodedLength) &amp;&amp; (byteOffset !== -<span class="hljs-number">1</span>);
+      byteOffset--, i++) {
+      carry += <span class="hljs-built_in">Math</span>.floor(sourceBase * decodedBytes[byteOffset]);
+      decodedBytes[byteOffset] = <span class="hljs-built_in">Math</span>.floor(carry % <span class="hljs-number">256</span>);
+      carry = <span class="hljs-built_in">Math</span>.floor(carry / <span class="hljs-number">256</span>);
+    }
+
+    decodedLength = i;
+    sourceOffset++;
+  }
+
+  <span class="hljs-comment">// skip leading zeros in the decoded byte array</span>
+  <span class="hljs-keyword">let</span> decodedOffset = decodedSize - decodedLength;
+  <span class="hljs-keyword">while</span>(decodedOffset !== decodedSize &amp;&amp; decodedBytes[decodedOffset] === <span class="hljs-number">0</span>) {
+    decodedOffset++;
+  }
+
+  <span class="hljs-comment">// create the final byte array that has been base-decoded</span>
+  <span class="hljs-keyword">let</span> finalBytes = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(zeroes + (decodedSize - decodedOffset));
+  <span class="hljs-keyword">let</span> j = zeroes;
+  <span class="hljs-keyword">while</span>(decodedOffset !== decodedSize) {
+    finalBytes[j++] = decodedBytes[decodedOffset++];
+  }
+
+  <span class="hljs-keyword">return</span> finalBytes;
+}</code></pre>
+      </div>
+
+      </section>
+
+      <section class="normative" id="add-proof"><div class="header-wrapper"><h3 id="x4-3-add-proof"><bdi class="secno">4.3 </bdi>Add Proof</h3><a class="self-link" href="#add-proof" aria-label="Permalink for Section 4.3"></a></div>
         
 
         <p>
@@ -2978,7 +3357,7 @@ Return <var>output</var> as the <a href="#dfn-secured-data-document" class="inte
           </li>
         </ol>
 
-        <div class="note" role="note" id="issue-container-generatedID-14"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span><span class="issue-label">: `hashData` might not consist of a single value</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-15"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span><span class="issue-label">: `hashData` might not consist of a single value</span></div><p class="">
 While the output of the <a href="#dfn-hashing-algorithm" id="ref-for-dfn-hashing-algorithm-4">hashing algorithm</a>
 can be a single value, such as a 32 byte SHA2-256 value, implementers are
 advised that some cryptographic suite(s) might define <code>hashData</code> to be comprised
@@ -2989,7 +3368,7 @@ via the digital proof.
         </p></div>
 
       </section>
-      <section id="add-proof-set-chain"><div class="header-wrapper"><h3 id="x4-2-add-proof-set-chain"><bdi class="secno">4.2 </bdi>Add Proof Set/Chain</h3><a class="self-link" href="#add-proof-set-chain" aria-label="Permalink for Section 4.2"></a></div>
+      <section id="add-proof-set-chain"><div class="header-wrapper"><h3 id="x4-4-add-proof-set-chain"><bdi class="secno">4.4 </bdi>Add Proof Set/Chain</h3><a class="self-link" href="#add-proof-set-chain" aria-label="Permalink for Section 4.4"></a></div>
         
         <p>
 The following algorithm specifies how to incrementally add a proof to a proof
@@ -2997,7 +3376,7 @@ set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a href="#dfn-secured-data-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-secured-data-document-2">secured data document</a>
 (<var>securedDocument</var>) and <a href="#dfn-proof-options" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-proof-options-3">proof options</a>
 (<var>options</var>). The <a href="#dfn-proof-options" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-proof-options-4">proof options</a>
-(<var>options</var>) must satisfy the criteria in section <a href="#add-proof" class="sec-ref"><bdi class="secno">4.1 </bdi>Add Proof</a>. A new <a href="#dfn-secured-data-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-secured-data-document-3">secured data document</a> is produced as
+(<var>options</var>) must satisfy the criteria in section <a href="#add-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Add Proof</a>. A new <a href="#dfn-secured-data-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-secured-data-document-3">secured data document</a> is produced as
 output. Whenever this algorithm encodes strings, it <em class="rfc2119">MUST</em> use UTF-8 encoding.
         </p>
 
@@ -3025,7 +3404,7 @@ of the <var>allProofs</var>. If not, an error <em class="rfc2119">MUST</em> be r
 an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof" class="sec-ref"><bdi class="secno">4.1 </bdi>Add Proof</a>. If
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Add Proof</a>. If
 no exceptions are raised, append the generated <var>proof</var> value to the
 <var>allProofs</var>; otherwise, raise the exception.
           </li>
@@ -3038,7 +3417,7 @@ Return <var>output</var> as the new <a href="#dfn-secured-data-document" class="
         </ol>
       </section>
 
-      <section id="verify-proof"><div class="header-wrapper"><h3 id="x4-3-verify-proof"><bdi class="secno">4.3 </bdi>Verify Proof</h3><a class="self-link" href="#verify-proof" aria-label="Permalink for Section 4.3"></a></div>
+      <section id="verify-proof"><div class="header-wrapper"><h3 id="x4-5-verify-proof"><bdi class="secno">4.5 </bdi>Verify Proof</h3><a class="self-link" href="#verify-proof" aria-label="Permalink for Section 4.5"></a></div>
         
 
         <p>
@@ -3128,7 +3507,7 @@ Return <var>isProofVerified</var> as the <a href="#dfn-verification-result" clas
         </ol>
 
       </section>
-      <section id="verify-proof-sets-and-chains"><div class="header-wrapper"><h3 id="x4-4-verify-proof-sets-and-chains"><bdi class="secno">4.4 </bdi>Verify Proof Sets and Chains</h3><a class="self-link" href="#verify-proof-sets-and-chains" aria-label="Permalink for Section 4.4"></a></div>
+      <section id="verify-proof-sets-and-chains"><div class="header-wrapper"><h3 id="x4-6-verify-proof-sets-and-chains"><bdi class="secno">4.6 </bdi>Verify Proof Sets and Chains</h3><a class="self-link" href="#verify-proof-sets-and-chains" aria-label="Permalink for Section 4.6"></a></div>
         
         <p>
 In a proof set or proof chain, a <a href="#dfn-secured-data-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-secured-data-document-7">secured data document</a> has a
@@ -3146,7 +3525,7 @@ Set <var>allProofs</var> to <var>securedDocument</var>.<var>proof</var>.
           </li>
           <li>
 For each <var>proof</var> in <var>allProofs</var>, run steps 2 through 11 of the algorithm in
-section <a href="#verify-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Verify Proof</a>; if no exceptions are raised, associate
+section <a href="#verify-proof" class="sec-ref"><bdi class="secno">4.5 </bdi>Verify Proof</a>; if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
           </li>
           <li>
@@ -3168,7 +3547,7 @@ Return the <var>allProofs</var> along with each proof's associated
         </ol>
       </section>
 
-      <section class="normative" id="retrieve-verification-method"><div class="header-wrapper"><h3 id="x4-5-retrieve-verification-method"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</h3><a class="self-link" href="#retrieve-verification-method" aria-label="Permalink for Section 4.5"></a></div>
+      <section class="normative" id="retrieve-verification-method"><div class="header-wrapper"><h3 id="x4-7-retrieve-verification-method"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</h3><a class="self-link" href="#retrieve-verification-method" aria-label="Permalink for Section 4.7"></a></div>
         
 
         <p>
@@ -3251,7 +3630,7 @@ The following example provides a minimum conformant
 
         <div class="example" id="example-minimum-conformant-controller-document">
         <div class="marker">
-    <a class="self-link" href="#example-minimum-conformant-controller-document">Example<bdi> 20</bdi></a><span class="example-title">: Minimum conformant controller document</span>
+    <a class="self-link" href="#example-minimum-conformant-controller-document">Example<bdi> 22</bdi></a><span class="example-title">: Minimum conformant controller document</span>
   </div> <pre aria-busy="false"><code class="hljs json">{
   <span class="hljs-attr">"id"</span>: <span class="hljs-string">"https://controller.example/123"</span>,
   <span class="hljs-attr">"verificationMethod"</span>: [{
@@ -3266,7 +3645,7 @@ The following example provides a minimum conformant
 
       </section>
 
-      <section class="normative" id="processing-errors"><div class="header-wrapper"><h3 id="x4-6-processing-errors"><bdi class="secno">4.6 </bdi>Processing Errors</h3><a class="self-link" href="#processing-errors" aria-label="Permalink for Section 4.6"></a></div>
+      <section class="normative" id="processing-errors"><div class="header-wrapper"><h3 id="x4-8-processing-errors"><bdi class="secno">4.8 </bdi>Processing Errors</h3><a class="self-link" href="#processing-errors" aria-label="Permalink for Section 4.8"></a></div>
         
 
         <p>
@@ -3306,54 +3685,54 @@ The <code>detail</code> value <em class="rfc2119">SHOULD</em> provide a longer h
           <dt id="PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR (-16)</dt>
           <dd>
 A request to generate a proof failed. See Section
-<a href="#add-proof" class="sec-ref"><bdi class="secno">4.1 </bdi>Add Proof</a>, and Section <a href="#add-proof-set-chain" class="sec-ref"><bdi class="secno">4.2 </bdi>Add Proof Set/Chain</a>.
+<a href="#add-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Add Proof</a>, and Section <a href="#add-proof-set-chain" class="sec-ref"><bdi class="secno">4.4 </bdi>Add Proof Set/Chain</a>.
           </dd>
           <dt id="MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR (-17)</dt>
           <dd>
 A proof that is malformed was detected. See Section
-<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Verify Proof</a>.
+<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.5 </bdi>Verify Proof</a>.
           </dd>
           <dt id="MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR (-18)</dt>
           <dd>
 The <code>proofPurpose</code> value in a proof did not match the expected value. See
-Section <a href="#verify-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Verify Proof</a>.
+Section <a href="#verify-proof" class="sec-ref"><bdi class="secno">4.5 </bdi>Verify Proof</a>.
           </dd>
           <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
           <dd>
 The <code>domain</code> value in a proof did not match the expected value. See Section
-<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Verify Proof</a>.
+<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.5 </bdi>Verify Proof</a>.
           </dd>
           <dt id="INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR (-20)</dt>
           <dd>
 The <code>challenge</code> value in a proof did not match the expected value. See Section
-<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.3 </bdi>Verify Proof</a>.
+<a href="#verify-proof" class="sec-ref"><bdi class="secno">4.5 </bdi>Verify Proof</a>.
           </dd>
           <dt id="INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL (-21)</dt>
           <dd>
 The <code>verificationMethod</code> value in a proof was malformed. See Section
-<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID (-22)</dt>
           <dd>
 The <code>id</code> value in a <a href="#dfn-controller-documents" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-controller-documents-27">controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT (-23)</dt>
           <dd>
 The <a href="#dfn-controller-documents" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-controller-documents-28">controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
           </dd>
           <dt id="INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD (-24)</dt>
           <dd>
 The <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-72">verification method</a> in a <a href="#dfn-controller-documents" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-controller-documents-29">controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
           </dd>
           <dt id="INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD (-25)</dt>
           <dd>
 The <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-73">verification method</a> in a <a href="#dfn-controller-documents" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-controller-documents-30">controller document</a> was not
 associated using the expected <a href="#dfn-verification-relationship" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-relationship-20">verification relationship</a> as expressed
 in the <code>proofPurpose</code> property in the proof. See Section
-<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+<a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
           </dd>
         </dl>
       </section>
@@ -3432,7 +3811,7 @@ searching for a newer cryptographic suite only to not find one that is newer.
 While this might be an inconvenience, it is one that results in safer
 ecosystem behavior.
         </p>
-        <div class="issue closed" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="4"><a href="https://github.com/w3c/vc-data-integrity/issues/38"><span class="issue-number">Issue 38</span></a><span class="issue-label">: Determine how cryptographic suites are named and versioned <a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22pr+exists%22" style="background-color: rgb(172, 229, 37); color: rgb(0, 0, 0);" aria-label="GitHub label: pr exists">pr exists</a><a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22before+CR%22" style="background-color: rgb(120, 32, 58); color: rgb(255, 255, 255);" aria-label="GitHub label: before CR">before CR</a></span></div><p class="">
+        <div class="issue closed" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="4"><a href="https://github.com/w3c/vc-data-integrity/issues/38"><span class="issue-number">Issue 38</span></a><span class="issue-label">: Determine how cryptographic suites are named and versioned <a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22pr+exists%22" style="background-color: rgb(172, 229, 37); color: rgb(0, 0, 0);" aria-label="GitHub label: pr exists">pr exists</a><a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22before+CR%22" style="background-color: rgb(120, 32, 58); color: rgb(255, 255, 255);" aria-label="GitHub label: before CR">before CR</a></span></div><p class="">
 The following text is currently under debate:<br><br>
 It is highly encouraged that cryptographic suite identifiers are versioned
 using a year designation. For example, the cryptographic suite identifier
@@ -3523,7 +3902,7 @@ exposing those options and parameters to application developers who may not
 fully understand the balancing benefits and drawbacks of each option.
         </p>
 
-        <div class="issue" id="issue-container-generatedID-15"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="4"><span>Issue</span><span class="issue-label">: Use of experimental and deprecated cryptography</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-16"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="4"><span>Issue</span><span class="issue-label">: Use of experimental and deprecated cryptography</span></div><p class="">
 The VCWG is seeking guidance on adding language to allow the use of experimental
 or deprecated cryptography. By default, those features will be disabled and will
 require the application developer to specifically allow use on a per-cryptographic suite
@@ -3675,7 +4054,7 @@ deliberately slow connections, thus starving connections on the server.
 Implementers are advised to consider these sorts of attacks when implementing
 defensive security strategies.
         </p>
-        <div class="issue" id="issue-container-generatedID-16"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="4"><span>Issue</span><span class="issue-label">: Collision-resistant canonicalization requirements</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-17"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><span>Issue</span><span class="issue-label">: Collision-resistant canonicalization requirements</span></div><p class="">
 The VCWG is seeking feedback on normative language that cryptographic suite
 implementers need to follow to ensure that they do not utilize data
 transformation mechanisms that can map to the same output. That is, given
@@ -3689,7 +4068,7 @@ Canonicalization Algorithm 2015 [<cite><a class="bibref" data-link-type="biblio"
 Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>], and a theoretical future base-encoding canonicalization
 — have entirely different outputs.
         </p></div>
-        <div class="issue" id="issue-container-generatedID-17"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><span>Issue</span><span class="issue-label">: Avoiding the pitfalls of XML Canonicalization</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-18"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><span>Issue</span><span class="issue-label">: Avoiding the pitfalls of XML Canonicalization</span></div><p class="">
 The VCWG is seeking feedback on whether to explain why modern canonicalization
 schemes are simpler than the far more complex XML Canonicalization schemes of
 the early 2000s. Some readers seem to be under the impression that all
@@ -3778,7 +4157,7 @@ the application layer.
       <section id="verification-method-binding"><div class="header-wrapper"><h3 id="x5-7-verification-method-binding"><bdi class="secno">5.7 </bdi>Verification Method Binding</h3><a class="self-link" href="#verification-method-binding" aria-label="Permalink for Section 5.7"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-18"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><span>Issue</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-19"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="4"><span>Issue</span></div><p class="">
 Implementers must ensure that a verification method is bound to a particular
 controller by going from the verification method to the controller document,
 and then ensuring that the controller document also contains the verification
@@ -3798,7 +4177,7 @@ is known as "verification relationship validation".
         </p>
         <p>
 The process for verification relationship validation is outlined in
-Section <a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.5 </bdi>Retrieve Verification Method</a>.
+Section <a href="#retrieve-verification-method" class="sec-ref"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a>.
         </p>
         <p>
 This process is used to ensure that cryptographic material, such as a private
@@ -3837,7 +4216,41 @@ website as the proof creator if the website erroneously accepted such a proof as
 
       </section>
 
-      <section id="canonicalization-method-correctness"><div class="header-wrapper"><h3 id="x5-10-canonicalization-method-correctness"><bdi class="secno">5.10 </bdi>Canonicalization Method Correctness</h3><a class="self-link" href="#canonicalization-method-correctness" aria-label="Permalink for Section 5.10"></a></div>
+      <section id="canonicalization-method-security"><div class="header-wrapper"><h3 id="x5-10-canonicalization-method-security"><bdi class="secno">5.10 </bdi>Canonicalization Method Security</h3><a class="self-link" href="#canonicalization-method-security" aria-label="Permalink for Section 5.10"></a></div>
+        
+
+        <p>
+The way in which a transformation, such as canonicalization, is performed can
+affect the security characteristics of a system. Selecting the best
+canonicalization mechanisms depends on the use case. Often,
+the simplest mechanism that satisfies the desired security requirements
+is the best choice. This section attempts to provide simple guidance to help
+implementers choose between the two main canonicalization mechanisms referred to
+in this specification, namely JSON Canonicalization Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>] and
+RDF Dataset Canonicalization [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-canon" title="RDF Dataset Canonicalization">RDF-CANON</a></cite>].
+        </p>
+        <p>
+If an application only uses JSON and does not depend on any form of RDF
+semantics, then using a cryptography suite that uses JSON
+Canonicalization Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>] is an attractive approach.
+        </p>
+        <p>
+If an application uses JSON-LD and needs to secure the semantics of
+the document, then using a cryptography suite that
+uses RDF Dataset Canonicalization [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-canon" title="RDF Dataset Canonicalization">RDF-CANON</a></cite>] is an attractive
+approach.
+        </p>
+        <p>
+Implementers are also advised that other mechanisms that perform no
+transformations are available, that secure the data by wrapping it in a
+cryptographic envelope instead of embedding the proof in the data, such as
+JWTs [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7519" title="JSON Web Token (JWT)">RFC7519</a></cite>] and CWTs [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8392" title="CBOR Web Token (CWT)">RFC8392</a></cite>]. These approaches have simplicity
+advantages in some use cases, at the expense of some of the benefits provided
+by the approach detailed in this specification.
+        </p>
+      </section>
+
+      <section id="canonicalization-method-correctness"><div class="header-wrapper"><h3 id="x5-11-canonicalization-method-correctness"><bdi class="secno">5.11 </bdi>Canonicalization Method Correctness</h3><a class="self-link" href="#canonicalization-method-correctness" aria-label="Permalink for Section 5.11"></a></div>
         
 
         <p>
@@ -3877,7 +4290,7 @@ correctness.
         </p>
       </section>
 
-      <section id="network-requests"><div class="header-wrapper"><h3 id="x5-11-network-requests"><bdi class="secno">5.11 </bdi>Network Requests</h3><a class="self-link" href="#network-requests" aria-label="Permalink for Section 5.11"></a></div>
+      <section id="network-requests"><div class="header-wrapper"><h3 id="x5-12-network-requests"><bdi class="secno">5.12 </bdi>Network Requests</h3><a class="self-link" href="#network-requests" aria-label="Permalink for Section 5.12"></a></div>
         
 
         <p>
@@ -3893,7 +4306,7 @@ To the extent possible, implementers are urged to permanently or aggressively
 cache such information to reduce the attack surface on an
 implementation that might need to fetch such URLs over the network. For
 example, caching techniques for <a href="#data-model">JSON-LD contexts</a> are
-described in Section <a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.7 </bdi>Contexts and Vocabularies</a>, and some
+described in Section <a href="#contexts-and-vocabularies" class="sec-ref"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a>, and some
 <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-76">verification methods</a>, such as <code>did:key</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-did-key" title="The did:key Method">DID-KEY</a></cite>], do not need to be
 fetched from the network at all.
         </p>
@@ -3906,7 +4319,7 @@ from the network.
         </p>
       </section>
 
-      <section id="other-security-considerations"><div class="header-wrapper"><h3 id="x5-12-other-security-considerations"><bdi class="secno">5.12 </bdi>Other Security Considerations</h3><a class="self-link" href="#other-security-considerations" aria-label="Permalink for Section 5.12"></a></div>
+      <section id="other-security-considerations"><div class="header-wrapper"><h3 id="x5-13-other-security-considerations"><bdi class="secno">5.13 </bdi>Other Security Considerations</h3><a class="self-link" href="#other-security-considerations" aria-label="Permalink for Section 5.13"></a></div>
         
 
         <p>
@@ -4018,7 +4431,33 @@ Section <a href="#unlinkability" class="sec-ref"><bdi class="secno">6.1 </bdi>Un
         </p>
       </section>
 
-      <section id="fingerprinting-network-requests"><div class="header-wrapper"><h3 id="x6-3-fingerprinting-network-requests"><bdi class="secno">6.3 </bdi>Fingerprinting Network Requests</h3><a class="self-link" href="#fingerprinting-network-requests" aria-label="Permalink for Section 6.3"></a></div>
+      <section id="previous-proofs"><div class="header-wrapper"><h3 id="x6-3-previous-proofs"><bdi class="secno">6.3 </bdi>Previous Proofs</h3><a class="self-link" href="#previous-proofs" aria-label="Permalink for Section 6.3"></a></div>
+        
+
+        <p>
+When using the <code>previousProof</code> feature defined in
+<a href="#proof-chains" class="sec-ref"><bdi class="secno">2.1.2 </bdi>Proof Chains</a>, implementations are required to digitally sign
+over one or more previous proofs, so as to include them in the
+secured payload. This inevitably exposes information related to each
+entity that added a previous proof.
+        </p>
+        <p>
+At minimum, the <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-78">verification method</a> for the previous proof, such as a
+public key, is seen by the creator of the next proof in a proof chain. This
+can be a privacy concern if the creator of the previous proof did not intend
+to be included in a proof chain, but is an inevitable outcome when
+adding a non-repudiable digital signature to a document of any kind.
+        </p>
+        <p>
+It is possible to use more advanced cryptographic mechanisms, such as a
+<a href="https://en.wikipedia.org/wiki/Group_signature">group signature</a>,
+to hide the identity of the signer of a message,
+and it is also possible for a Data Integrity cryptographic suite
+to mitigate this privacy concern.
+        </p>
+      </section>
+
+      <section id="fingerprinting-network-requests"><div class="header-wrapper"><h3 id="x6-4-fingerprinting-network-requests"><bdi class="secno">6.4 </bdi>Fingerprinting Network Requests</h3><a class="self-link" href="#fingerprinting-network-requests" aria-label="Permalink for Section 6.4"></a></div>
         
 
         <p>
@@ -4027,14 +4466,14 @@ during or after <a href="#verify-proof">proof verification</a>. This
 specification is designed in such a way that no network requests are necessary
 when verifying a proof on a <a href="#dfn-conforming-secured-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-secured-document-7">conforming secured document</a>. Readers might
 note, however, that <a href="#data-model">JSON-LD contexts</a> and
-<a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-78">verification methods</a> can contain resource URLs that might be retrieved
+<a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-79">verification methods</a> can contain resource URLs that might be retrieved
 over a network connection leading to fingerprinting concerns.
         </p>
 
         <p>
 For example, creators of <a href="#dfn-conforming-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-document-3">conforming documents</a> might craft unique
 per-document URLs for <a href="#data-model">JSON-LD contexts</a> and
-<a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-79">verification methods</a>. When verifying such a document, a verifier fetching
+<a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-80">verification methods</a>. When verifying such a document, a verifier fetching
 that information from the network would reveal their interest in the
 <a href="#dfn-conforming-document" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-conforming-document-4">conforming document</a> to the creator of the document, which might lead to
 a mismatch in privacy expectations for any entity that is not the creator of
@@ -4043,7 +4482,7 @@ the document.
 
         <p>
 Implementers are urged to follow the guidance in Section
-<a href="#network-requests" class="sec-ref"><bdi class="secno">5.11 </bdi>Network Requests</a> on URL caching and implementing defensively
+<a href="#network-requests" class="sec-ref"><bdi class="secno">5.12 </bdi>Network Requests</a> on URL caching and implementing defensively
 when fetching URLs from the network. Usage of techniques such as
 <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">
 Oblivious HTTP</a> to retrieve resources from the network, without revealing
@@ -4055,7 +4494,40 @@ process documents containing suspected fingerprinting URLs.
         </p>
       </section>
 
-      <section id="other-privacy-considerations"><div class="header-wrapper"><h3 id="x6-4-other-privacy-considerations"><bdi class="secno">6.4 </bdi>Other Privacy Considerations</h3><a class="self-link" href="#other-privacy-considerations" aria-label="Permalink for Section 6.4"></a></div>
+      <section id="canonicalization-method-privacy"><div class="header-wrapper"><h3 id="x6-5-canonicalization-method-privacy"><bdi class="secno">6.5 </bdi>Canonicalization Method Privacy</h3><a class="self-link" href="#canonicalization-method-privacy" aria-label="Permalink for Section 6.5"></a></div>
+        
+
+        <p>
+The way in which a transformation, namely canonicalization, is performed can
+affect the privacy characteristics of a system. Selecting the best
+canonicalization mechanism depends on the use case.
+This section attempts to provide simple guidance to help
+implementers pick between the two main canonicalization mechanisms referred to
+in this specification, namely JSON Canonicalization Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>] and
+RDF Dataset Canonicalization [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-canon" title="RDF Dataset Canonicalization">RDF-CANON</a></cite>], from a privacy perspective.
+        </p>
+        <p>
+If an application does not require performing a selective disclosure of
+information in a secured document, nor does it utilize JSON-LD, then JSON
+Canonicalization Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>] is an attractive approach.
+        </p>
+        <p>
+If an application uses JSON-LD and might require selective disclosure
+of information in a secured document, then using a cryptography suite that
+uses RDF Dataset Canonicalization [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-canon" title="RDF Dataset Canonicalization">RDF-CANON</a></cite>] is an attractive
+approach.
+        </p>
+        <p>
+Implementers are also advised that other selective disclosure mechanisms that
+perform no transformations are available, that secure the data by wrapping it in a
+cryptographic envelope instead of embedding the proof in the data, such as
+SD-JWTs [<cite><a class="bibref" data-link-type="biblio" href="#bib-sd-jwt" title="Selective Disclosure for JWTs (SD-JWT)">SD-JWT</a></cite>]. This approach has simplicity advantages in some use cases,
+at the expense of some of the benefits provided by the approach detailed in
+this specification.
+        </p>
+      </section>
+
+      <section id="other-privacy-considerations"><div class="header-wrapper"><h3 id="x6-6-other-privacy-considerations"><bdi class="secno">6.6 </bdi>Other Privacy Considerations</h3><a class="self-link" href="#other-privacy-considerations" aria-label="Permalink for Section 6.6"></a></div>
         
 
         <p>
@@ -4199,10 +4671,18 @@ Ensure that base URL is set to null when processing as RDF.
         </li>
       </ul>
     </section>
+    <section class="informative" id="acknowledgements"><div class="header-wrapper"><h2 id="x9-acknowledgements"><bdi class="secno">9. </bdi>Acknowledgements</h2><a class="self-link" href="#acknowledgements" aria-label="Permalink for Section 9."></a></div><p><em>This section is non-normative.</em></p>
+      
 
+      <p>
+The specification authors would like to thank the base-x software library
+contributors and the Bitcoin Core developers who wrote the original code,
+shared under an MIT License, found in Section <a href="#base-encode" class="sec-ref"><bdi class="secno">4.1 </bdi>Base Encode</a> and
+Section <a href="#base-decode" class="sec-ref"><bdi class="secno">4.2 </bdi>Base Decode</a>.
+      </p>
   
 
-<section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-references"><bdi class="secno">A. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="a-1-normative-references"><bdi class="secno">A.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix A.1"></a></div>
+</section><section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-references"><bdi class="secno">A. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="a-1-normative-references"><bdi class="secno">A.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix A.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-ascii">[ASCII]</dt><dd>
       <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/"><cite>ISO/IEC 646:1991, Information technology -- ISO 7-bit coded character set for information interchange</cite></a>.  Ecma International. URL: <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/">https://www.ecma-international.org/publications-and-standards/standards/ecma-6/</a>
@@ -4212,10 +4692,8 @@ Ensure that base URL is set to null when processing as RDF.
       <a href="https://www.iana.org/assignments/jose"><cite>The JSON Object Signing and Encryption (JOSE) Registries</cite></a>. The Internet Assigned Numbers Authority.  The Internet Assigned Numbers Authority. W3C Recommendation. URL: <a href="https://www.iana.org/assignments/jose">https://www.iana.org/assignments/jose</a>
     </dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd>
       <a href="https://www.w3.org/TR/json-ld11/"><cite>JSON-LD 1.1</cite></a>. Gregg Kellogg; Pierre-Antoine Champin; Dave Longley.  W3C. 16 July 2020. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld11/">https://www.w3.org/TR/json-ld11/</a>
-    </dd><dt id="bib-multibase">[MULTIBASE]</dt><dd>
-      <a href="https://datatracker.ietf.org/doc/draft-multiformats-multibase"><cite>The Multibase Data Format</cite></a>. Juan Benet; Manu Sporny.  IETF. February 2023. Internet-Draft. URL: <a href="https://datatracker.ietf.org/doc/draft-multiformats-multibase">https://datatracker.ietf.org/doc/draft-multiformats-multibase</a>
-    </dd><dt id="bib-multihash">[MULTIHASH]</dt><dd>
-      <a href="https://datatracker.ietf.org/doc/draft-multiformats-multihash"><cite>The Multihash Data Format</cite></a>. Juan Benet; Manu Sporny.  IETF. February 2023. Internet-Draft. URL: <a href="https://datatracker.ietf.org/doc/draft-multiformats-multihash">https://datatracker.ietf.org/doc/draft-multiformats-multihash</a>
+    </dd><dt id="bib-rdf-canon">[RDF-CANON]</dt><dd>
+      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Dave Longley; Gregg Kellogg; Dan Yamamoto.  W3C. 4 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc6234">[RFC6234]</dt><dd>
@@ -4226,6 +4704,8 @@ Ensure that base URL is set to null when processing as RDF.
       <a href="https://www.rfc-editor.org/rfc/rfc7638"><cite>JSON Web Key (JWK) Thumbprint</cite></a>. M. Jones; N. Sakimura.  IETF. September 2015. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc7638">https://www.rfc-editor.org/rfc/rfc7638</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
+    </dd><dt id="bib-rfc8785">[RFC8785]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8785"><cite>JSON Canonicalization Scheme (JCS)</cite></a>. A. Rundgren; B. Jordan; S. Erdtman.  IETF. June 2020. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>
     </dd><dt id="bib-rfc9457">[RFC9457]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc9457"><cite>Problem Details for HTTP APIs</cite></a>. M. Nottingham; E. Wilde; S. Dalal.  IETF. July 2023. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc9457">https://www.rfc-editor.org/rfc/rfc9457</a>
     </dd><dt id="bib-sha3">[SHA3]</dt><dd>
@@ -4249,26 +4729,30 @@ Ensure that base URL is set to null when processing as RDF.
       <a href="https://www.w3.org/TR/html-rdfa/"><cite>HTML+RDFa 1.1 - Second Edition</cite></a>. Manu Sporny.  W3C. 17 March 2015. W3C Recommendation. URL: <a href="https://www.w3.org/TR/html-rdfa/">https://www.w3.org/TR/html-rdfa/</a>
     </dd><dt id="bib-ltli">[LTLI]</dt><dd>
       <a href="https://www.w3.org/TR/ltli/"><cite>Language Tags and Locale Identifiers for the World Wide Web</cite></a>. Addison Phillips.  W3C. 7 October 2020. W3C Working Draft. URL: <a href="https://www.w3.org/TR/ltli/">https://www.w3.org/TR/ltli/</a>
-    </dd><dt id="bib-multicodec">[MULTICODEC]</dt><dd>
-      <a href="https://github.com/multiformats/multicodec/blob/master/table.csv"><cite>The Multi Codec Encoding Scheme</cite></a>. The Multiformats Community.  IETF. February 2022. Internet-Draft. URL: <a href="https://github.com/multiformats/multicodec/blob/master/table.csv">https://github.com/multiformats/multicodec/blob/master/table.csv</a>
+    </dd><dt id="bib-multibase">[MULTIBASE]</dt><dd>
+      <a href="https://datatracker.ietf.org/doc/draft-multiformats-multibase"><cite>The Multibase Data Format</cite></a>. Juan Benet; Manu Sporny.  IETF. February 2023. Internet-Draft. URL: <a href="https://datatracker.ietf.org/doc/draft-multiformats-multibase">https://datatracker.ietf.org/doc/draft-multiformats-multibase</a>
+    </dd><dt id="bib-multihash">[MULTIHASH]</dt><dd>
+      <a href="https://datatracker.ietf.org/doc/draft-multiformats-multihash"><cite>The Multihash Data Format</cite></a>. Juan Benet; Manu Sporny.  IETF. February 2023. Internet-Draft. URL: <a href="https://datatracker.ietf.org/doc/draft-multiformats-multihash">https://datatracker.ietf.org/doc/draft-multiformats-multihash</a>
     </dd><dt id="bib-n-quads">[N-QUADS]</dt><dd>
       <a href="https://www.w3.org/TR/n-quads/"><cite>RDF 1.1 N-Quads</cite></a>. Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/n-quads/">https://www.w3.org/TR/n-quads/</a>
-    </dd><dt id="bib-rdf-canon">[RDF-CANON]</dt><dd>
-      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Dave Longley; Gregg Kellogg; Dan Yamamoto.  W3C. 1 September 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
     </dd><dt id="bib-rdf-concepts">[RDF-CONCEPTS]</dt><dd>
       <a href="https://www.w3.org/TR/rdf-concepts/"><cite>Resource Description Framework (RDF): Concepts and Abstract Syntax</cite></a>. Graham Klyne; Jeremy Carroll.  W3C. 10 February 2004. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf-concepts/">https://www.w3.org/TR/rdf-concepts/</a>
     </dd><dt id="bib-rfc3986">[RFC3986]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. T. Berners-Lee; R. Fielding; L. Masinter.  IETF. January 2005. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>
+    </dd><dt id="bib-rfc7519">[RFC7519]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc7519"><cite>JSON Web Token (JWT)</cite></a>. M. Jones; J. Bradley; N. Sakimura.  IETF. May 2015. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc7519">https://www.rfc-editor.org/rfc/rfc7519</a>
     </dd><dt id="bib-rfc7696">[RFC7696]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc7696"><cite>Guidelines for Cryptographic Algorithm Agility and Selecting Mandatory-to-Implement Algorithms</cite></a>. R. Housley.  IETF. November 2015. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc7696">https://www.rfc-editor.org/rfc/rfc7696</a>
-    </dd><dt id="bib-rfc8785">[RFC8785]</dt><dd>
-      <a href="https://www.rfc-editor.org/rfc/rfc8785"><cite>JSON Canonicalization Scheme (JCS)</cite></a>. A. Rundgren; B. Jordan; S. Erdtman.  IETF. June 2020. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>
+    </dd><dt id="bib-rfc8392">[RFC8392]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8392"><cite>CBOR Web Token (CWT)</cite></a>. M. Jones; E. Wahlstroem; S. Erdtman; H. Tschofenig.  IETF. May 2018. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>
+    </dd><dt id="bib-sd-jwt">[SD-JWT]</dt><dd>
+      <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/"><cite>Selective Disclosure for JWTs (SD-JWT)</cite></a>. Daniel Fett; Kristina Yasuda; Brian Campbell.  The IETF OAuth Working Group. I-D. URL: <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/">https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/</a>
     </dd><dt id="bib-security-vocabulary">[SECURITY-VOCABULARY]</dt><dd>
       <a href="https://w3id.org/security"><cite>The Security Vocabulary</cite></a>. Ivan Herman; Manu Sporny; David Longley.  Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3id.org/security">https://w3id.org/security</a>
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-data-model-2.0">[VC-DATA-MODEL-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 31 August 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 12 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-vc-specs">[VC-SPECS]</dt><dd>
       <a href="https://w3c.github.io/vc-specs-dir/"><cite>Verifiable Credential Specifications Directory</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-specs-dir/">https://w3c.github.io/vc-specs-dir/</a>
     </dd><dt id="bib-zcap">[ZCAP]</dt><dd>
@@ -4287,11 +4771,11 @@ Ensure that base URL is set to null when processing as RDF.
     <li>
       <a href="#ref-for-dfn-transformation-1" title="§ 1.1 How it Works">§ 1.1 How it Works</a> 
     </li><li>
-      <a href="#ref-for-dfn-transformation-2" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-transformation-2" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-transformation-3" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-transformation-3" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-transformation-4" title="§ 5.10 Canonicalization Method Correctness">§ 5.10 Canonicalization Method Correctness</a> <a href="#ref-for-dfn-transformation-5" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-transformation-4" title="§ 5.11 Canonicalization Method Correctness">§ 5.11 Canonicalization Method Correctness</a> <a href="#ref-for-dfn-transformation-5" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-transformation-algorithm" aria-label="Links in this document to definition: transformation algorithm">
@@ -4307,9 +4791,9 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-transformation-algorithm-2" title="§ 4. Algorithms">§ 4. Algorithms</a> 
     </li><li>
-      <a href="#ref-for-dfn-transformation-algorithm-3" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-transformation-algorithm-3" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-transformation-algorithm-4" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-transformation-algorithm-4" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-hashing" aria-label="Links in this document to definition: Hashing">
@@ -4323,11 +4807,11 @@ Ensure that base URL is set to null when processing as RDF.
     <li>
       <a href="#ref-for-dfn-hashing-1" title="§ 1.1 How it Works">§ 1.1 How it Works</a> 
     </li><li>
-      <a href="#ref-for-dfn-hashing-2" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-hashing-2" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-hashing-3" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-hashing-3" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-hashing-4" title="§ 5.10 Canonicalization Method Correctness">§ 5.10 Canonicalization Method Correctness</a> 
+      <a href="#ref-for-dfn-hashing-4" title="§ 5.11 Canonicalization Method Correctness">§ 5.11 Canonicalization Method Correctness</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-hashing-algorithm" aria-label="Links in this document to definition: hashing algorithm">
@@ -4343,9 +4827,9 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-hashing-algorithm-2" title="§ 4. Algorithms">§ 4. Algorithms</a> 
     </li><li>
-      <a href="#ref-for-dfn-hashing-algorithm-3" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> <a href="#ref-for-dfn-hashing-algorithm-4" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-hashing-algorithm-3" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> <a href="#ref-for-dfn-hashing-algorithm-4" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-hashing-algorithm-5" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-hashing-algorithm-5" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-proof-serialization-algorithm" aria-label="Links in this document to definition: proof serialization algorithm">
@@ -4361,7 +4845,7 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-proof-serialization-algorithm-2" title="§ 4. Algorithms">§ 4. Algorithms</a> 
     </li><li>
-      <a href="#ref-for-dfn-proof-serialization-algorithm-3" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-proof-serialization-algorithm-3" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-proof-verification-algorithm" aria-label="Links in this document to definition: proof verification algorithm">
@@ -4377,7 +4861,7 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-proof-verification-algorithm-2" title="§ 4. Algorithms">§ 4. Algorithms</a> 
     </li><li>
-      <a href="#ref-for-dfn-proof-verification-algorithm-3" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-proof-verification-algorithm-3" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-conforming-secured-document" aria-label="Links in this document to definition: conforming secured document">
@@ -4391,13 +4875,13 @@ Ensure that base URL is set to null when processing as RDF.
     <li>
       <a href="#ref-for-dfn-conforming-secured-document-1" title="§ 1.3 Conformance">§ 1.3 Conformance</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-secured-document-2" title="§ 2.4 Resource Integrity">§ 2.4 Resource Integrity</a> <a href="#ref-for-dfn-conforming-secured-document-3" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-conforming-secured-document-2" title="§ 2.6 Resource Integrity">§ 2.6 Resource Integrity</a> <a href="#ref-for-dfn-conforming-secured-document-3" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-secured-document-4" title="§ 2.7.2 Securing Data Losslessly">§ 2.7.2 Securing Data Losslessly</a> <a href="#ref-for-dfn-conforming-secured-document-5" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-conforming-secured-document-4" title="§ 2.9.2 Securing Data Losslessly">§ 2.9.2 Securing Data Losslessly</a> <a href="#ref-for-dfn-conforming-secured-document-5" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-secured-document-6" title="§ 5.11 Network Requests">§ 5.11 Network Requests</a> 
+      <a href="#ref-for-dfn-conforming-secured-document-6" title="§ 5.12 Network Requests">§ 5.12 Network Requests</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-secured-document-7" title="§ 6.3 Fingerprinting Network Requests">§ 6.3 Fingerprinting Network Requests</a> 
+      <a href="#ref-for-dfn-conforming-secured-document-7" title="§ 6.4 Fingerprinting Network Requests">§ 6.4 Fingerprinting Network Requests</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-conforming-controller-document" aria-label="Links in this document to definition: conforming controller document">
@@ -4435,9 +4919,9 @@ Ensure that base URL is set to null when processing as RDF.
     <li>
       <a href="#ref-for-dfn-conforming-document-1" title="§ 1.3 Conformance">§ 1.3 Conformance</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-document-2" title="§ 2.7 Contexts and Vocabularies">§ 2.7 Contexts and Vocabularies</a> 
+      <a href="#ref-for-dfn-conforming-document-2" title="§ 2.9 Contexts and Vocabularies">§ 2.9 Contexts and Vocabularies</a> 
     </li><li>
-      <a href="#ref-for-dfn-conforming-document-3" title="§ 6.3 Fingerprinting Network Requests">§ 6.3 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-conforming-document-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-conforming-document-5" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-conforming-document-3" title="§ 6.4 Fingerprinting Network Requests">§ 6.4 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-conforming-document-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-conforming-document-5" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-conforming-processor" aria-label="Links in this document to definition: conforming processor">
@@ -4449,7 +4933,7 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-conforming-processor-1" title="§ 2.7.2 Securing Data Losslessly">§ 2.7.2 Securing Data Losslessly</a> 
+      <a href="#ref-for-dfn-conforming-processor-1" title="§ 2.9.2 Securing Data Losslessly">§ 2.9.2 Securing Data Losslessly</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-data-integrity-proof" aria-label="Links in this document to definition: data integrity proof">
@@ -4467,9 +4951,9 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-data-integrity-proof-3" title="§ 2.1 Proofs">§ 2.1 Proofs</a> <a href="#ref-for-dfn-data-integrity-proof-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-data-integrity-proof-5" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-data-integrity-proof-6" title="§ 4.5 Retrieve Verification Method">§ 4.5 Retrieve Verification Method</a> <a href="#ref-for-dfn-data-integrity-proof-7" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-data-integrity-proof-6" title="§ 4.7 Retrieve Verification Method">§ 4.7 Retrieve Verification Method</a> <a href="#ref-for-dfn-data-integrity-proof-7" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-data-integrity-proof-8" title="§ 5.10 Canonicalization Method Correctness">§ 5.10 Canonicalization Method Correctness</a> 
+      <a href="#ref-for-dfn-data-integrity-proof-8" title="§ 5.11 Canonicalization Method Correctness">§ 5.11 Canonicalization Method Correctness</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-public-key" aria-label="Links in this document to definition: public key">
@@ -4493,7 +4977,7 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-public-key-7" title="§ 2.3.2.3 Key Agreement">§ 2.3.2.3 Key Agreement</a> 
     </li><li>
-      <a href="#ref-for-dfn-public-key-8" title="§ 4.5 Retrieve Verification Method">§ 4.5 Retrieve Verification Method</a> 
+      <a href="#ref-for-dfn-public-key-8" title="§ 4.7 Retrieve Verification Method">§ 4.7 Retrieve Verification Method</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-private-key" aria-label="Links in this document to definition: private key">
@@ -4529,11 +5013,11 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-proof-options-1" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> <a href="#ref-for-dfn-proof-options-2" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-proof-options-1" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> <a href="#ref-for-dfn-proof-options-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-proof-options-3" title="§ 4.2 Add Proof Set/Chain">§ 4.2 Add Proof Set/Chain</a> <a href="#ref-for-dfn-proof-options-4" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-proof-options-3" title="§ 4.4 Add Proof Set/Chain">§ 4.4 Add Proof Set/Chain</a> <a href="#ref-for-dfn-proof-options-4" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-proof-options-5" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> <a href="#ref-for-dfn-proof-options-6" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-proof-options-5" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> <a href="#ref-for-dfn-proof-options-6" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-proof-purpose" aria-label="Links in this document to definition: proof purpose">
@@ -4575,7 +5059,7 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-domain-4" title="§ 2.1 Proofs">§ 2.1 Proofs</a> 
     </li><li>
-      <a href="#ref-for-dfn-domain-5" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-domain-5" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-authenticated" aria-label="Links in this document to definition: authentication">
@@ -4617,9 +5101,9 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-cryptosuite-7" title="§ 3.1 DataIntegrityProof">§ 3.1 DataIntegrityProof</a> 
     </li><li>
-      <a href="#ref-for-dfn-cryptosuite-8" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> <a href="#ref-for-dfn-cryptosuite-9" title="Reference 2">(2)</a> <a href="#ref-for-dfn-cryptosuite-10" title="Reference 3">(3)</a> <a href="#ref-for-dfn-cryptosuite-11" title="Reference 4">(4)</a> <a href="#ref-for-dfn-cryptosuite-12" title="Reference 5">(5)</a> <a href="#ref-for-dfn-cryptosuite-13" title="Reference 6">(6)</a> 
+      <a href="#ref-for-dfn-cryptosuite-8" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> <a href="#ref-for-dfn-cryptosuite-9" title="Reference 2">(2)</a> <a href="#ref-for-dfn-cryptosuite-10" title="Reference 3">(3)</a> <a href="#ref-for-dfn-cryptosuite-11" title="Reference 4">(4)</a> <a href="#ref-for-dfn-cryptosuite-12" title="Reference 5">(5)</a> <a href="#ref-for-dfn-cryptosuite-13" title="Reference 6">(6)</a> 
     </li><li>
-      <a href="#ref-for-dfn-cryptosuite-14" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> <a href="#ref-for-dfn-cryptosuite-15" title="Reference 2">(2)</a> <a href="#ref-for-dfn-cryptosuite-16" title="Reference 3">(3)</a> <a href="#ref-for-dfn-cryptosuite-17" title="Reference 4">(4)</a> <a href="#ref-for-dfn-cryptosuite-18" title="Reference 5">(5)</a> 
+      <a href="#ref-for-dfn-cryptosuite-14" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> <a href="#ref-for-dfn-cryptosuite-15" title="Reference 2">(2)</a> <a href="#ref-for-dfn-cryptosuite-16" title="Reference 3">(3)</a> <a href="#ref-for-dfn-cryptosuite-17" title="Reference 4">(4)</a> <a href="#ref-for-dfn-cryptosuite-18" title="Reference 5">(5)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-decentralized-identifiers" aria-label="Links in this document to definition: decentralized identifier">
@@ -4691,9 +5175,9 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-controller-documents-23" title="§ 2.3.2.4 Capability Invocation">§ 2.3.2.4 Capability Invocation</a> <a href="#ref-for-dfn-controller-documents-24" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-controller-documents-25" title="§ 4.5 Retrieve Verification Method">§ 4.5 Retrieve Verification Method</a> <a href="#ref-for-dfn-controller-documents-26" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-controller-documents-25" title="§ 4.7 Retrieve Verification Method">§ 4.7 Retrieve Verification Method</a> <a href="#ref-for-dfn-controller-documents-26" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-controller-documents-27" title="§ 4.6 Processing Errors">§ 4.6 Processing Errors</a> <a href="#ref-for-dfn-controller-documents-28" title="Reference 2">(2)</a> <a href="#ref-for-dfn-controller-documents-29" title="Reference 3">(3)</a> <a href="#ref-for-dfn-controller-documents-30" title="Reference 4">(4)</a> 
+      <a href="#ref-for-dfn-controller-documents-27" title="§ 4.8 Processing Errors">§ 4.8 Processing Errors</a> <a href="#ref-for-dfn-controller-documents-28" title="Reference 2">(2)</a> <a href="#ref-for-dfn-controller-documents-29" title="Reference 3">(3)</a> <a href="#ref-for-dfn-controller-documents-30" title="Reference 4">(4)</a> 
     </li><li>
       <a href="#ref-for-dfn-controller-documents-31" title="§ 5.8 Verification Relationship Validation">§ 5.8 Verification Relationship Validation</a> 
     </li>
@@ -4743,9 +5227,9 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-verifier-1" title="§ 2.4 Resource Integrity">§ 2.4 Resource Integrity</a> 
+      <a href="#ref-for-dfn-verifier-1" title="§ 2.6 Resource Integrity">§ 2.6 Resource Integrity</a> 
     </li><li>
-      <a href="#ref-for-dfn-verifier-2" title="§ 5.10 Canonicalization Method Correctness">§ 5.10 Canonicalization Method Correctness</a> 
+      <a href="#ref-for-dfn-verifier-2" title="§ 5.11 Canonicalization Method Correctness">§ 5.11 Canonicalization Method Correctness</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-verifiable-credentials" aria-label="Links in this document to definition: verifiable credential">
@@ -4759,15 +5243,15 @@ Ensure that base URL is set to null when processing as RDF.
     <li>
       <a href="#ref-for-dfn-verifiable-credentials-1" title="§ 2.3.2.2 Assertion">§ 2.3.2.2 Assertion</a> <a href="#ref-for-dfn-verifiable-credentials-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verifiable-credentials-3" title="§ 2.6 Relationship to Verifiable Credentials">§ 2.6 Relationship to Verifiable Credentials</a> <a href="#ref-for-dfn-verifiable-credentials-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verifiable-credentials-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-verifiable-credentials-6" title="Reference 4">(4)</a> 
+      <a href="#ref-for-dfn-verifiable-credentials-3" title="§ 2.8 Relationship to Verifiable Credentials">§ 2.8 Relationship to Verifiable Credentials</a> <a href="#ref-for-dfn-verifiable-credentials-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verifiable-credentials-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-verifiable-credentials-6" title="Reference 4">(4)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verifiable-credentials-7" title="§ 2.7 Contexts and Vocabularies">§ 2.7 Contexts and Vocabularies</a> 
+      <a href="#ref-for-dfn-verifiable-credentials-7" title="§ 2.9 Contexts and Vocabularies">§ 2.9 Contexts and Vocabularies</a> 
     </li><li>
       <a href="#ref-for-dfn-verifiable-credentials-8" title="§ 5.9 Proof Purpose Validation">§ 5.9 Proof Purpose Validation</a> <a href="#ref-for-dfn-verifiable-credentials-9" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verifiable-credentials-10" title="§ 5.12 Other Security Considerations">§ 5.12 Other Security Considerations</a> 
+      <a href="#ref-for-dfn-verifiable-credentials-10" title="§ 5.13 Other Security Considerations">§ 5.13 Other Security Considerations</a> 
     </li><li>
-      <a href="#ref-for-dfn-verifiable-credentials-11" title="§ 6.4 Other Privacy Considerations">§ 6.4 Other Privacy Considerations</a> 
+      <a href="#ref-for-dfn-verifiable-credentials-11" title="§ 6.6 Other Privacy Considerations">§ 6.6 Other Privacy Considerations</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-verification-method" aria-label="Links in this document to definition: verification method">
@@ -4807,19 +5291,21 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-verification-method-60" title="§ 2.3.2.5 Capability Delegation">§ 2.3.2.5 Capability Delegation</a> <a href="#ref-for-dfn-verification-method-61" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-62" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-63" title="§ 2.6 Relationship to Verifiable Credentials">§ 2.6 Relationship to Verifiable Credentials</a> <a href="#ref-for-dfn-verification-method-64" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-65" title="Reference 3">(3)</a> <a href="#ref-for-dfn-verification-method-66" title="Reference 4">(4)</a> <a href="#ref-for-dfn-verification-method-67" title="Reference 5">(5)</a> 
+      <a href="#ref-for-dfn-verification-method-63" title="§ 2.8 Relationship to Verifiable Credentials">§ 2.8 Relationship to Verifiable Credentials</a> <a href="#ref-for-dfn-verification-method-64" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-65" title="Reference 3">(3)</a> <a href="#ref-for-dfn-verification-method-66" title="Reference 4">(4)</a> <a href="#ref-for-dfn-verification-method-67" title="Reference 5">(5)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-68" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-verification-method-68" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-69" title="§ 4.5 Retrieve Verification Method">§ 4.5 Retrieve Verification Method</a> <a href="#ref-for-dfn-verification-method-70" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-71" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-verification-method-69" title="§ 4.7 Retrieve Verification Method">§ 4.7 Retrieve Verification Method</a> <a href="#ref-for-dfn-verification-method-70" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-71" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-72" title="§ 4.6 Processing Errors">§ 4.6 Processing Errors</a> <a href="#ref-for-dfn-verification-method-73" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-verification-method-72" title="§ 4.8 Processing Errors">§ 4.8 Processing Errors</a> <a href="#ref-for-dfn-verification-method-73" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dfn-verification-method-74" title="§ 5.8 Verification Relationship Validation">§ 5.8 Verification Relationship Validation</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-75" title="§ 5.11 Network Requests">§ 5.11 Network Requests</a> <a href="#ref-for-dfn-verification-method-76" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-77" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-verification-method-75" title="§ 5.12 Network Requests">§ 5.12 Network Requests</a> <a href="#ref-for-dfn-verification-method-76" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-77" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-78" title="§ 6.3 Fingerprinting Network Requests">§ 6.3 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-verification-method-79" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-verification-method-78" title="§ 6.3 Previous Proofs">§ 6.3 Previous Proofs</a> 
+    </li><li>
+      <a href="#ref-for-dfn-verification-method-79" title="§ 6.4 Fingerprinting Network Requests">§ 6.4 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-verification-method-80" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-verification-relationship" aria-label="Links in this document to definition: verification relationship">
@@ -4847,7 +5333,7 @@ Ensure that base URL is set to null when processing as RDF.
     </li><li>
       <a href="#ref-for-dfn-verification-relationship-18" title="§ 2.3.2.5 Capability Delegation">§ 2.3.2.5 Capability Delegation</a> <a href="#ref-for-dfn-verification-relationship-19" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-relationship-20" title="§ 4.6 Processing Errors">§ 4.6 Processing Errors</a> 
+      <a href="#ref-for-dfn-verification-relationship-20" title="§ 4.8 Processing Errors">§ 4.8 Processing Errors</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-defn-assertionMethod" aria-label="Links in this document to definition: assertionMethod">
@@ -4895,7 +5381,7 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-unsecured-data-document-1" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-unsecured-data-document-1" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-secured-data-document" aria-label="Links in this document to definition: secured data document">
@@ -4907,13 +5393,13 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-secured-data-document-1" title="§ 4.1 Add Proof">§ 4.1 Add Proof</a> 
+      <a href="#ref-for-dfn-secured-data-document-1" title="§ 4.3 Add Proof">§ 4.3 Add Proof</a> 
     </li><li>
-      <a href="#ref-for-dfn-secured-data-document-2" title="§ 4.2 Add Proof Set/Chain">§ 4.2 Add Proof Set/Chain</a> <a href="#ref-for-dfn-secured-data-document-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-secured-data-document-4" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-secured-data-document-2" title="§ 4.4 Add Proof Set/Chain">§ 4.4 Add Proof Set/Chain</a> <a href="#ref-for-dfn-secured-data-document-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-secured-data-document-4" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-secured-data-document-5" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> <a href="#ref-for-dfn-secured-data-document-6" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-secured-data-document-5" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> <a href="#ref-for-dfn-secured-data-document-6" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-secured-data-document-7" title="§ 4.4 Verify Proof Sets and Chains">§ 4.4 Verify Proof Sets and Chains</a> <a href="#ref-for-dfn-secured-data-document-8" title="Reference 2">(2)</a> <a href="#ref-for-dfn-secured-data-document-9" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-secured-data-document-7" title="§ 4.6 Verify Proof Sets and Chains">§ 4.6 Verify Proof Sets and Chains</a> <a href="#ref-for-dfn-secured-data-document-8" title="Reference 2">(2)</a> <a href="#ref-for-dfn-secured-data-document-9" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-verification-result" aria-label="Links in this document to definition: verification result">
@@ -4925,7 +5411,7 @@ Ensure that base URL is set to null when processing as RDF.
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-verification-result-1" title="§ 4.3 Verify Proof">§ 4.3 Verify Proof</a> 
+      <a href="#ref-for-dfn-verification-result-1" title="§ 4.5 Verify Proof">§ 4.5 Verify Proof</a> 
     </li>
   </ul>
     </div><script id="respec-dfn-panel">(() => {
