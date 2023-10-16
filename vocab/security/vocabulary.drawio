@@ -94,17 +94,17 @@
         <mxCell id="Uf8WLKuzS3drS_BCJ-BJ-112" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Datatype&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;" parent="Uf8WLKuzS3drS_BCJ-BJ-113" vertex="1">
           <mxGeometry width="90" height="40" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;i&gt;VerificationMethod&lt;/i&gt;" link="https://w3id.org/security/#VerificationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-37">
+        <UserObject label="&lt;i&gt;VerificationMethod&lt;/i&gt;" link="https://w3id.org/security#VerificationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-37">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="1104.668136020151" y="30" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;controller&lt;/i&gt;" link="https://w3id.org/security/#controller" id="Uf8WLKuzS3drS_BCJ-BJ-44">
+        <UserObject label="&lt;i&gt;controller&lt;/i&gt;" link="https://w3id.org/security#controller" id="Uf8WLKuzS3drS_BCJ-BJ-44">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="868.003765743073" y="298.9969117647059" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;revoked&lt;/i&gt;" link="https://w3id.org/security/#revoked" id="Uf8WLKuzS3drS_BCJ-BJ-45">
+        <UserObject label="&lt;i&gt;revoked&lt;/i&gt;" link="https://w3id.org/security#revoked" id="Uf8WLKuzS3drS_BCJ-BJ-45">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="868.003765743073" y="347.99470588235295" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
@@ -181,7 +181,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;Ed25519VerificationKey2020&lt;/i&gt;" link="https://w3id.org/security/#Ed25519VerificationKey2020" id="Uf8WLKuzS3drS_BCJ-BJ-56">
+        <UserObject label="&lt;i&gt;Ed25519VerificationKey2020&lt;/i&gt;" link="https://w3id.org/security#Ed25519VerificationKey2020" id="Uf8WLKuzS3drS_BCJ-BJ-56">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="1099.67" y="390" width="227.68" height="46.89" as="geometry" />
           </mxCell>
@@ -210,12 +210,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;Proof&lt;/i&gt;" link="https://w3id.org/security/#Proof" id="Uf8WLKuzS3drS_BCJ-BJ-1">
+        <UserObject label="&lt;i&gt;Proof&lt;/i&gt;" link="https://w3id.org/security#Proof" id="Uf8WLKuzS3drS_BCJ-BJ-1">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;pointer-events=&quot;all&quot;" parent="1" vertex="1">
             <mxGeometry x="234.92600755667502" y="30" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;ProofGraph&lt;/i&gt;" link="https://w3id.org/security/#ProofGraph" id="Uf8WLKuzS3drS_BCJ-BJ-2">
+        <UserObject label="&lt;i&gt;ProofGraph&lt;/i&gt;" link="https://w3id.org/security#ProofGraph" id="Uf8WLKuzS3drS_BCJ-BJ-2">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="62.57714105793451" y="163.97382352941176" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
@@ -226,7 +226,7 @@
             <mxPoint x="464.72449622166243" y="125.69558823529412" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;proof&lt;/i&gt;" link="https://w3id.org/security/#proof" id="Uf8WLKuzS3drS_BCJ-BJ-5">
+        <UserObject label="&lt;i&gt;proof&lt;/i&gt;" link="https://w3id.org/security#proof" id="Uf8WLKuzS3drS_BCJ-BJ-5">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="85.55698992443325" y="317.08676470588233" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
@@ -237,42 +237,42 @@
             <mxPoint x="415.8923173803526" y="259.8580448593747" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;domain&lt;/i&gt;" link="https://w3id.org/security/#domain" id="Uf8WLKuzS3drS_BCJ-BJ-7">
+        <UserObject label="&lt;i&gt;domain&lt;/i&gt;" link="https://w3id.org/security#domain" id="Uf8WLKuzS3drS_BCJ-BJ-7">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="143" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;challenge&lt;/i&gt;" link="https://w3id.org/security/#challenge" id="Uf8WLKuzS3drS_BCJ-BJ-8">
+        <UserObject label="&lt;i&gt;challenge&lt;/i&gt;" link="https://w3id.org/security#challenge" id="Uf8WLKuzS3drS_BCJ-BJ-8">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="248" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;previousProof&lt;/i&gt;" link="https://w3id.org/security/#previousProof" id="Uf8WLKuzS3drS_BCJ-BJ-9">
+        <UserObject label="&lt;i&gt;previousProof&lt;/i&gt;" link="https://w3id.org/security#previousProof" id="Uf8WLKuzS3drS_BCJ-BJ-9">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="96.8925" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;proofPurpose&lt;br&gt;&lt;/i&gt;" link="https://w3.org/2018/credentials/#proofPurpose" id="Uf8WLKuzS3drS_BCJ-BJ-10">
+        <UserObject label="&lt;i&gt;proofPurpose&lt;br&gt;&lt;/i&gt;" link="https://w3id.org/security#proofPurpose" id="Uf8WLKuzS3drS_BCJ-BJ-10">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="299.15" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;proofValue&lt;/i&gt;" link="https://w3.org/2018/credentials/#proofValue" id="Uf8WLKuzS3drS_BCJ-BJ-11">
+        <UserObject label="&lt;i&gt;proofValue&lt;/i&gt;" link="https://w3id.org/security#proofValue" id="Uf8WLKuzS3drS_BCJ-BJ-11">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="440.29808823529413" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;expires&lt;/i&gt;" link="https://w3.org/2018/credentials/#expires" id="Uf8WLKuzS3drS_BCJ-BJ-12">
+        <UserObject label="&lt;i&gt;expires&lt;/i&gt;" link="https://w3id.org/security#expires" id="Uf8WLKuzS3drS_BCJ-BJ-12">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="867.9989294710327" y="247" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;nonce&lt;/i&gt;" link="https://w3.org/2018/credentials/#nonce" id="Uf8WLKuzS3drS_BCJ-BJ-13">
+        <UserObject label="&lt;i&gt;nonce&lt;/i&gt;" link="https://w3id.org/security#nonce" id="Uf8WLKuzS3drS_BCJ-BJ-13">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="347" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;created&lt;/i&gt;" link="https://w3.org/2018/credentials/#created" id="Uf8WLKuzS3drS_BCJ-BJ-14">
+        <UserObject label="&lt;i&gt;created&lt;/i&gt;" link="https://w3id.org/security#created" id="Uf8WLKuzS3drS_BCJ-BJ-14">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="555.3489294710328" y="394" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
@@ -349,12 +349,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;DataIntegrityProof&lt;/i&gt;" link="https://w3id.org/security/#DataIntegrityProof" id="Uf8WLKuzS3drS_BCJ-BJ-23">
+        <UserObject label="&lt;i&gt;DataIntegrityProof&lt;/i&gt;" link="https://w3id.org/security#DataIntegrityProof" id="Uf8WLKuzS3drS_BCJ-BJ-23">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="234.92600755667502" y="460.6301470588235" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;Ed25519Signature2020&lt;/i&gt;" link="https://w3id.org/security/#Ed25519Signature2020" id="Uf8WLKuzS3drS_BCJ-BJ-24">
+        <UserObject label="&lt;i&gt;Ed25519Signature2020&lt;/i&gt;" link="https://w3id.org/security#Ed25519Signature2020" id="Uf8WLKuzS3drS_BCJ-BJ-24">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="8" y="460.6301470588235" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
@@ -374,12 +374,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;cryptosuite&lt;/i&gt;" link="https://w3id.org/security/#cryptosuite" id="Uf8WLKuzS3drS_BCJ-BJ-27">
+        <UserObject label="&lt;i&gt;cryptosuite&lt;/i&gt;" link="https://w3id.org/security#cryptosuite" id="Uf8WLKuzS3drS_BCJ-BJ-27">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="257.90585642317376" y="559.1966029411765" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="cryptosuiteString" link="https://w3id.org/security/#cryptosuiteString" id="Uf8WLKuzS3drS_BCJ-BJ-29">
+        <UserObject label="cryptosuiteString" link="https://w3id.org/security#cryptosuiteString" id="Uf8WLKuzS3drS_BCJ-BJ-29">
           <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="264.60831234256926" y="652.0213235294117" width="149.3690176322418" height="28.708676470588237" as="geometry" />
           </mxCell>
@@ -405,37 +405,37 @@
             <mxPoint x="957.8337531486145" y="192.87113309466875" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;verificationMethod&lt;/i&gt;" link="https://w3id.org/security/#verificationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-38">
+        <UserObject label="&lt;i&gt;verificationMethod&lt;/i&gt;" link="https://w3id.org/security#verificationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-38">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="89.75691176470589" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;authentication&lt;/i&gt;" link="https://w3id.org/security/#authentication" id="Uf8WLKuzS3drS_BCJ-BJ-39">
+        <UserObject label="&lt;i&gt;authentication&lt;/i&gt;" link="https://w3id.org/security#authentication" id="Uf8WLKuzS3drS_BCJ-BJ-39">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="137.60470588235296" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;assertionMethod&lt;/i&gt;" link="https://w3id.org/security/#assertionMethod" id="Uf8WLKuzS3drS_BCJ-BJ-40">
+        <UserObject label="&lt;i&gt;assertionMethod&lt;/i&gt;" link="https://w3id.org/security#assertionMethod" id="Uf8WLKuzS3drS_BCJ-BJ-40">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="185.45250000000004" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;capabilityDelegation&lt;/i&gt;" link="https://w3id.org/security/#capabilityDelegation" id="Uf8WLKuzS3drS_BCJ-BJ-41">
+        <UserObject label="&lt;i&gt;capabilityDelegation&lt;/i&gt;" link="https://w3id.org/security#capabilityDelegation" id="Uf8WLKuzS3drS_BCJ-BJ-41">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="233.30029411764707" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;capabilityInvocation&lt;/i&gt;" link="https://w3id.org/security/#capabilityInvocation" id="Uf8WLKuzS3drS_BCJ-BJ-42">
+        <UserObject label="&lt;i&gt;capabilityInvocation&lt;/i&gt;" link="https://w3id.org/security#capabilityInvocation" id="Uf8WLKuzS3drS_BCJ-BJ-42">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="281.14808823529415" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;keyAgreement&lt;/i&gt;" link="https://w3id.org/security/#keyAgreement" id="Uf8WLKuzS3drS_BCJ-BJ-43">
+        <UserObject label="&lt;i&gt;keyAgreement&lt;/i&gt;" link="https://w3id.org/security#keyAgreement" id="Uf8WLKuzS3drS_BCJ-BJ-43">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="1398.004710327456" y="328.99588235294124" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="multibase" link="https://w3id.org/security/#cryptosuiteString" id="aMvtbWUda6Bs1y7FLRK9-2">
+        <UserObject label="multibase" link="https://w3id.org/security#cryptosuiteString" id="aMvtbWUda6Bs1y7FLRK9-2">
           <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="710.1783123425694" y="652.0213235294117" width="149.3690176322418" height="28.708676470588237" as="geometry" />
           </mxCell>
@@ -446,7 +446,7 @@
             <mxPoint x="687" y="610.1971178589811" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;Multikey&lt;/i&gt;" link="https://w3id.org/security/#Multikey" id="Uf8WLKuzS3drS_BCJ-BJ-58">
+        <UserObject label="&lt;i&gt;Multikey&lt;/i&gt;" link="https://w3id.org/security#Multikey" id="Uf8WLKuzS3drS_BCJ-BJ-58">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="919.5030667506297" y="450.00014705882353" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
@@ -454,12 +454,12 @@
         <mxCell id="Uf8WLKuzS3drS_BCJ-BJ-72" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="851.9997607052896" y="548.5666029411765" width="343.7402392947103" height="32.5365" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;i&gt;publicKeyMultibase&lt;/i&gt;" link="https://w3id.org/security/#publicKeyMultibase" id="Uf8WLKuzS3drS_BCJ-BJ-60">
+        <UserObject label="&lt;i&gt;publicKeyMultibase&lt;/i&gt;" link="https://w3id.org/security#publicKeyMultibase" id="Uf8WLKuzS3drS_BCJ-BJ-60">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="Uf8WLKuzS3drS_BCJ-BJ-72" vertex="1">
             <mxGeometry x="185.7537783375315" width="163.7314231738035" height="32.5365" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;secretKeyMultibase&lt;/i&gt;" link="https://w3id.org/security/#secretKeyMultibase" id="Uf8WLKuzS3drS_BCJ-BJ-61">
+        <UserObject label="&lt;i&gt;secretKeyMultibase&lt;/i&gt;" link="https://w3id.org/security#secretKeyMultibase" id="Uf8WLKuzS3drS_BCJ-BJ-61">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="Uf8WLKuzS3drS_BCJ-BJ-72" vertex="1">
             <mxGeometry x="-4.787468513853904" width="163.7314231738035" height="32.5365" as="geometry" />
           </mxCell>
@@ -476,7 +476,7 @@
             <mxPoint x="940.2368513853904" y="698.8086764705882" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;JsonWebKey&lt;/i&gt;" link="https://w3id.org/security/#JsonWebKey" id="Uf8WLKuzS3drS_BCJ-BJ-57">
+        <UserObject label="&lt;i&gt;JsonWebKey&lt;/i&gt;" link="https://w3id.org/security#JsonWebKey" id="Uf8WLKuzS3drS_BCJ-BJ-57">
           <mxCell style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;strokeColor=#336600;" parent="1" vertex="1">
             <mxGeometry x="1306.248016372796" y="450.00014705882353" width="208.7336272040302" height="46.89083823529412" as="geometry" />
           </mxCell>
@@ -489,12 +489,12 @@
         <mxCell id="Uf8WLKuzS3drS_BCJ-BJ-65" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1232.9997481108312" y="548.5666029411765" width="355.2301637279597" height="32.536500000000004" as="geometry" />
         </mxCell>
-        <UserObject label="&lt;i&gt;secretKeyJwk&lt;/i&gt;" link="https://w3id.org/security/#secretKeyJwk" id="Uf8WLKuzS3drS_BCJ-BJ-62">
+        <UserObject label="&lt;i&gt;secretKeyJwk&lt;/i&gt;" link="https://w3id.org/security#secretKeyJwk" id="Uf8WLKuzS3drS_BCJ-BJ-62">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="Uf8WLKuzS3drS_BCJ-BJ-65" vertex="1">
             <mxGeometry width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;publicKeyJwk&lt;/i&gt;" link="https://w3id.org/security/#publicKeyJwk" id="Uf8WLKuzS3drS_BCJ-BJ-63">
+        <UserObject label="&lt;i&gt;publicKeyJwk&lt;/i&gt;" link="https://w3id.org/security#publicKeyJwk" id="Uf8WLKuzS3drS_BCJ-BJ-63">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="Uf8WLKuzS3drS_BCJ-BJ-65" vertex="1">
             <mxGeometry x="191.49874055415614" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
@@ -541,7 +541,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <UserObject label="&lt;i&gt;digestMultibase&lt;/i&gt;" link="https://w3.org/2018/credentials/#digestMultibase" id="0YF8A2KC1bUMDjYDby_S-1">
+        <UserObject label="&lt;i&gt;digestMultibase&lt;/i&gt;" link="https://w3id.org/security#digestMultibase" id="0YF8A2KC1bUMDjYDby_S-1">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="546.4489294710328" y="559.1980882352941" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
