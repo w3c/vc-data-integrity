@@ -106,7 +106,7 @@
         </foreignObject>
         <text xmlns="http://www.w3.org/2000/svg" x="536" y="834" font-family="Helvetica" font-size="16">Datatype</text>
     </switch>
-    <a xlink:href="https://w3id.org/security/#VerificationMethod">
+    <a xlink:href="https://w3id.org/security#VerificationMethod">
         <ellipse cx="1222.03" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -123,7 +123,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1222" y="49" font-family="Helvetica" font-size="16" text-anchor="middle">VerificationMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#controller">
+    <a xlink:href="https://w3id.org/security#controller">
         <rect width="163.73" height="32.54" x="881" y="290" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -140,7 +140,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="963" y="311" font-family="Helvetica" font-size="16" text-anchor="middle">controller</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#revoked">
+    <a xlink:href="https://w3id.org/security#revoked">
         <rect width="163.73" height="32.54" x="881" y="338.99" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -173,7 +173,7 @@
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.81 304.31.43-11.18 3.18 4.6 5.59.22Z" pointer-events="all"/>
     <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.93 347.03Q1161 171 1147.66 60.89" pointer-events="stroke"/>
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.93 353.37 1.11-11.12 2.89 4.78 5.56.55Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#Ed25519VerificationKey2020">
+    <a xlink:href="https://w3id.org/security#Ed25519VerificationKey2020">
         <ellipse cx="1226.51" cy="404.44" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="113.84" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -196,7 +196,7 @@
     <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.07 70.13 5.14 9.92-5.04-2.42-4.96 2.57Z" pointer-events="all"/>
     <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1036.87 441Q1222 281 1222.03 77.63" pointer-events="stroke"/>
     <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.03 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#Proof">
+    <a xlink:href="https://w3id.org/security#Proof">
         <ellipse cx="352.29" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -213,7 +213,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="352" y="49" font-family="Helvetica" font-size="16" text-anchor="middle">Proof</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#ProofGraph">
+    <a xlink:href="https://w3id.org/security#ProofGraph">
         <ellipse cx="179.94" cy="178.42" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -232,7 +232,7 @@
     </a>
     <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m179.94 154.97 90.96-87.33" pointer-events="stroke"/>
     <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m276.31 62.44-3.75 10.53-1.66-5.33-5.27-1.88Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#proof">
+    <a xlink:href="https://w3id.org/security#proof">
         <rect width="163.73" height="32.54" x="98.56" y="308.09" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -251,7 +251,7 @@
     </a>
     <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m180.42 308.09-.43-96.49" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m179.95 204.1 5.05 9.98-5.01-2.48-4.99 2.52Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#domain">
+    <a xlink:href="https://w3id.org/security#domain">
         <rect width="163.73" height="32.54" x="568.35" y="134" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -268,7 +268,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="155" font-family="Helvetica" font-size="16" text-anchor="middle">domain</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#challenge">
+    <a xlink:href="https://w3id.org/security#challenge">
         <rect width="163.73" height="32.54" x="568.35" y="239" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -285,7 +285,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="260" font-family="Helvetica" font-size="16" text-anchor="middle">challenge</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#previousProof">
+    <a xlink:href="https://w3id.org/security#previousProof">
         <rect width="163.73" height="32.54" x="568.35" y="87.89" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -302,7 +302,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="109" font-family="Helvetica" font-size="16" text-anchor="middle">previousProof</text>
         </switch>
     </a>
-    <a xlink:href="https://w3.org/2018/credentials/#proofPurpose">
+    <a xlink:href="https://w3id.org/security#proofPurpose">
         <rect width="163.73" height="32.54" x="568.35" y="290.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -321,7 +321,7 @@
 </text>
         </switch>
     </a>
-    <a xlink:href="https://w3.org/2018/credentials/#proofValue">
+    <a xlink:href="https://w3id.org/security#proofValue">
         <rect width="163.73" height="32.54" x="568.35" y="431.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -338,7 +338,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="452" font-family="Helvetica" font-size="16" text-anchor="middle">proofValue</text>
         </switch>
     </a>
-    <a xlink:href="https://w3.org/2018/credentials/#expires">
+    <a xlink:href="https://w3id.org/security#expires">
         <rect width="163.73" height="32.54" x="881" y="238" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -355,7 +355,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="963" y="259" font-family="Helvetica" font-size="16" text-anchor="middle">expires</text>
         </switch>
     </a>
-    <a xlink:href="https://w3.org/2018/credentials/#nonce">
+    <a xlink:href="https://w3id.org/security#nonce">
         <rect width="163.73" height="32.54" x="568.35" y="338" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -372,7 +372,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="359" font-family="Helvetica" font-size="16" text-anchor="middle">nonce</text>
         </switch>
     </a>
-    <a xlink:href="https://w3.org/2018/credentials/#created">
+    <a xlink:href="https://w3id.org/security#created">
         <rect width="163.73" height="32.54" x="568.35" y="385" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -405,7 +405,7 @@
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.66 352.8-10.83-2.78 5.17-2.14 1.39-5.41Z" pointer-events="all"/>
     <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M561.55 394.3Q451 281 426.67 60.89" pointer-events="stroke"/>
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="M566.79 399.67 556.23 396l5.32-1.7 1.83-5.28Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#DataIntegrityProof">
+    <a xlink:href="https://w3id.org/security#DataIntegrityProof">
         <ellipse cx="352.29" cy="475.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -422,7 +422,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="352" y="480" font-family="Helvetica" font-size="16" text-anchor="middle">DataIntegrityProof</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#Ed25519Signature2020">
+    <a xlink:href="https://w3id.org/security#Ed25519Signature2020">
         <ellipse cx="125.37" cy="475.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -443,7 +443,7 @@
     <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.29 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
     <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M194.25 457.35Q349.42 317.66 352.18 77.63" pointer-events="stroke"/>
     <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.27 70.13 4.88 10.05-4.97-2.55-5.03 2.44Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#cryptosuite">
+    <a xlink:href="https://w3id.org/security#cryptosuite">
         <rect width="163.73" height="32.54" x="270.91" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -460,7 +460,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="353" y="571" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuite</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#cryptosuiteString">
+    <a xlink:href="https://w3id.org/security#cryptosuiteString">
         <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M297.61 643.02h109.37l20 14.36-20 14.35H297.61l-20-14.35Z" pointer-events="all"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -481,7 +481,7 @@
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m352.31 640.79-4.92-10.04 4.98 2.54 5.02-2.46Z" pointer-events="all"/>
     <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 104.16q9.92.04 9.92-29.86T466.4 44.44" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m458.9 44.45 9.99-5.01-2.49 5 2.5 5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#verificationMethod">
+    <a xlink:href="https://w3id.org/security#verificationMethod">
         <rect width="163.73" height="32.54" x="1411" y="80.76" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -498,7 +498,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="102" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#authentication">
+    <a xlink:href="https://w3id.org/security#authentication">
         <rect width="163.73" height="32.54" x="1411" y="128.6" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -515,7 +515,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="150" font-family="Helvetica" font-size="16" text-anchor="middle">authentication</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#assertionMethod">
+    <a xlink:href="https://w3id.org/security#assertionMethod">
         <rect width="163.73" height="32.54" x="1411" y="176.45" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -532,7 +532,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="198" font-family="Helvetica" font-size="16" text-anchor="middle">assertionMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#capabilityDelegation">
+    <a xlink:href="https://w3id.org/security#capabilityDelegation">
         <rect width="163.73" height="32.54" x="1411" y="224.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -549,7 +549,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="245" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityDelegation</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#capabilityInvocation">
+    <a xlink:href="https://w3id.org/security#capabilityInvocation">
         <rect width="163.73" height="32.54" x="1411" y="272.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -566,7 +566,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="293" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityInvocation</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#keyAgreement">
+    <a xlink:href="https://w3id.org/security#keyAgreement">
         <rect width="163.73" height="32.54" x="1411" y="320" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -583,7 +583,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1493" y="341" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreement</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#cryptosuiteString">
+    <a xlink:href="https://w3id.org/security#cryptosuiteString">
         <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M743.18 643.02h109.37l20 14.36-20 14.35H743.18l-20-14.35Z" pointer-events="all"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -600,7 +600,7 @@
     </a>
     <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 447.57q65.82.03 65.78 185.72" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m797.86 640.79-4.99-10.01 4.99 2.51 5.01-2.5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#Multikey">
+    <a xlink:href="https://w3id.org/security#Multikey">
         <ellipse cx="1036.87" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -618,7 +618,7 @@
         </switch>
     </a>
     <rect width="343.74" height="32.54" x="865" y="539.57" fill="none"/>
-    <a xlink:href="https://w3id.org/security/#publicKeyMultibase">
+    <a xlink:href="https://w3id.org/security#publicKeyMultibase">
         <rect width="163.73" height="32.54" x="1050.75" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -635,7 +635,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1133" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyMultibase</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#secretKeyMultibase">
+    <a xlink:href="https://w3id.org/security#secretKeyMultibase">
         <rect width="163.73" height="32.54" x="860.21" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -656,7 +656,7 @@
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m944.04 538.5 6.39-9.18.2 5.59 4.58 3.19Z" pointer-events="all"/>
     <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1124.05 534.94-87.18-47.05" pointer-events="stroke"/>
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1130.65 538.5-11.17-.34 4.57-3.22.18-5.58Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security/#JsonWebKey">
+    <a xlink:href="https://w3id.org/security#JsonWebKey">
         <ellipse cx="1423.61" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -687,7 +687,7 @@
         <text xmlns="http://www.w3.org/2000/svg" x="1424" y="652" font-family="Helvetica" font-size="16" text-anchor="middle">rdf:JSON</text>
     </switch>
     <rect width="355.23" height="32.54" x="1246" y="539.57" fill="none"/>
-    <a xlink:href="https://w3id.org/security/#secretKeyJwk">
+    <a xlink:href="https://w3id.org/security#secretKeyJwk">
         <rect width="163.73" height="32.54" x="1246" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -704,7 +704,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1328" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyJwk</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security/#publicKeyJwk">
+    <a xlink:href="https://w3id.org/security#publicKeyJwk">
         <rect width="163.73" height="32.54" x="1437.5" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -733,7 +733,7 @@
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.59 656.46 7.05-8.67-.22 5.58 4.34 3.53Z" pointer-events="all"/>
     <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1132.62 572.1Q1061 641 882.25 656.53" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.77 657.18 9.53-5.84-2.05 5.19 2.92 4.77Z" pointer-events="all"/>
-    <a xlink:href="https://w3.org/2018/credentials/#digestMultibase">
+    <a xlink:href="https://w3id.org/security#digestMultibase">
         <rect width="163.73" height="32.54" x="559.45" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">

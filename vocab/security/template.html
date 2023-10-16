@@ -14,7 +14,7 @@
         const retval = content
           .replace('<svg', '<svg aria-details="#vocabulary-diagram-alt" ')
           .replace(/xlink:href/g, 'href')
-          .replace(/href="https:\/\/w3id.org\/security\/#/g, 'href="#');
+          .replace(/href="https:\/\/w3id.org\/security#/g, 'href="#');
         return retval;
       }
     </script>

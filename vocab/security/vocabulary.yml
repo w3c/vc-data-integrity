@@ -4,7 +4,7 @@ vocab:
 
 prefix:
   - id: cred
-    value: https://w3.org/2018/credentials#
+    value: https://www.w3.org/2018/credentials#
 
 ontology:
   - property: dc:title
