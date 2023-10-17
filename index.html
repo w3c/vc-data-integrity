@@ -702,7 +702,7 @@ A proof can be added to a JSON document like the following:
 
         <pre class="example nohighlight" title="A simple JSON data document">
 {
-  "title": "Hello world!"
+  "myWebsite": "https://hello.world.example/"
 };
         </pre>
 
@@ -717,7 +717,7 @@ Algorithm (EdDSA).
         <pre class="example nohighlight"
         title="A simple signed JSON data document">
 {
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "jcs-eddsa-2022",
@@ -736,8 +736,8 @@ Similarly, a proof can be added to a JSON-LD data document like the following:
         <pre class="example nohighlight"
           title="A simple JSON-LD data document">
 {
-  "@context": {"title": "https://schema.org/title"},
-  "title": "Hello world!"
+  "@context": {"myWebsite": "https://vocabulary.example/myWebsite"},
+  "myWebsite": "https://hello.world.example/"
 };
         </pre>
 
@@ -753,10 +753,10 @@ Signature Algorithm (ECDSA).
         title="A simple signed JSON-LD data document">
 {
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
   ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-2019",
@@ -821,10 +821,10 @@ with the `proof` key in a document.
         <pre class="example nohighlight" title="A proof set in a data document">
 {
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
 ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": [{
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
@@ -860,10 +860,10 @@ previous proof.
           title="A proof chain in a data document">
 {
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
 ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": [{
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
