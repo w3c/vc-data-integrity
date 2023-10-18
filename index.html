@@ -4165,7 +4165,7 @@ the data that is being secured, and not this specification.
       </p>
 
       <section>
-        <h2>Expressing Language Information in JSON</h2>
+        <h2>Internationalization in JSON</h2>
 
         <p>
 There is currently no standard way to express language and text direction
@@ -4201,6 +4201,49 @@ direction in JSON data that is secured using this specification.
     "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcm<wbr>cxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
     "proofValue": "zQeVbY4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYV<wbr>8nQApmEcqaqA3Q1gVHMrXFkXJeV6doDwLWx"
+  }
+}
+        </pre>
+      </section>
+
+      <section>
+        <h2>Internationalization in JSON-LD</h2>
+
+        <p>
+The JSON-LD format provides a number of mechanisms that enable the expression of
+language and text direction metadata. Implementers and authors are urged to read
+the section on <a data-cite="JSON-LD11#string-internationalization">
+String Internationalization</a> to understand which mechanisms might be of
+most use to their use case.
+        </p>
+
+        <p>
+The example below is one way in which an author could encode language and text
+direction in JSON-LD data that is secured using this specification.
+        </p>
+
+        <pre class="example nohighlight"
+        title="An example of a JSON-LD document containing internationalized strings">
+{
+  "myWebsite": "https://hello.world.example/",
+  "title": [{
+    "@value": "My Website",
+    "@language": "en"
+  }, {
+    "@value": "Mon Site Internet",
+    "@language": "fr"
+  }, {
+    "@value": "موقع الويب الخاص بي",
+    "@language": "ar",
+    "@direction": "rtl"
+  }],
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "jcs-eddsa-2022",
+    "created": "2023-03-05T19:23:24Z",
+    "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcm<wbr>cxiZPGskmesDpuwRBorgHxUXfxnG",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "ztmzN4DRFHX5XTYVQeVbYTLVqpLMweBrSxMY2xup34oey5q2M3XKax<wbr>VHMrXFkXx8nJeV6doDwLWA3Q1gQApmEcqaq"
   }
 }
         </pre>
