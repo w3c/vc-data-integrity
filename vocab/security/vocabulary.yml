@@ -206,7 +206,7 @@ property:
     domain: sec:Proof
     range: xsd:dateTime
 
-  - id: expires
+  - id: expiration
     label: Expiration time for a proof or verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-proof-expires
     domain:

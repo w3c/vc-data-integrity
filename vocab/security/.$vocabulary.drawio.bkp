@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-10-18T06:59:33.055Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="IhpbdUE1Z5rGB04jLSLF" version="22.0.2" type="device">
+<mxfile host="Electron" modified="2023-10-18T06:59:02.668Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="Wiul4hF7IiNVehw98v2E" version="22.0.2" type="device">
   <diagram name="Page-1" id="hQ0IBVJ5jpEcegRt-_B3">
     <mxGraphModel dx="1710" dy="1142" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
@@ -262,7 +262,7 @@
             <mxGeometry x="555.3489294710328" y="440.29808823529413" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;expiration&lt;/i&gt;" link="https://w3id.org/security#expiration" id="Uf8WLKuzS3drS_BCJ-BJ-12">
+        <UserObject label="&lt;i&gt;expiration&lt;/i&gt;" link="https://w3id.org/security#expires" id="Uf8WLKuzS3drS_BCJ-BJ-12">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="867.9989294710327" y="247" width="163.7314231738035" height="32.536500000000004" as="geometry" />
           </mxCell>
