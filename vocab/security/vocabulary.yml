@@ -209,6 +209,7 @@ property:
   - id: expiration
     label: Expiration time for a proof or verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-proof-expires
+    comment: This property is often expressed using `expires` as a shortened term in JSON-LD, for historical purposes; since this shortened term and its mapping to this property are in significant use in the ecosystem, this inconsistency between the short term name and the property identifier is expected.
     domain:
       - sec:Proof
       - sec:VerificationMethod
