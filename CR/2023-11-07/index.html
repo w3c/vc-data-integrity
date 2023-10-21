@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 34.1.8">
+<meta name="generator" content="ReSpec 34.2.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -479,6 +479,17 @@ signatures and related mathematical proofs.
       publications and the latest revision of this technical report can be found
       in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
       https://www.w3.org/TR/.</em></p>
+
+      <p>
+The Working Group is actively seeking implementation feedback for this
+specification. In order to exit the Candidate Recommendation phase, the
+Working Group has set the requirement of at least two independent
+implementations for each mandatory feature in the specification. For details
+on the conformance testing process, see the test suites listed in the
+<a href="https://w3c.github.io/vc-data-integrity/implementations/">
+implementation report</a>.
+      </p>
+
     <p>
     This document was published by the <a href="https://www.w3.org/groups/wg/vc">Verifiable Credentials Working Group</a> as
     a Candidate Recommendation Snapshot using the
@@ -1122,7 +1133,7 @@ A proof can be added to a JSON document like the following:
         <div class="marker">
     <a class="self-link" href="#example-a-simple-json-data-document">Example<bdi> 1</bdi></a><span class="example-title">: A simple JSON data document</span>
   </div> <pre class="nohighlight">{
-  "title": "Hello world!"
+  "myWebsite": "https://hello.world.example/"
 };</pre>
       </div>
 
@@ -1138,7 +1149,7 @@ Algorithm (EdDSA).
         <div class="marker">
     <a class="self-link" href="#example-a-simple-signed-json-data-document">Example<bdi> 2</bdi></a><span class="example-title">: A simple signed JSON data document</span>
   </div> <pre class="nohighlight">{
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "jcs-eddsa-2022",
@@ -1158,8 +1169,8 @@ Similarly, a proof can be added to a JSON-LD data document like the following:
         <div class="marker">
     <a class="self-link" href="#example-a-simple-json-ld-data-document">Example<bdi> 3</bdi></a><span class="example-title">: A simple JSON-LD data document</span>
   </div> <pre class="nohighlight">{
-  "@context": {"title": "https://schema.org/title"},
-  "title": "Hello world!"
+  "@context": {"myWebsite": "https://vocabulary.example/myWebsite"},
+  "myWebsite": "https://hello.world.example/"
 };</pre>
       </div>
 
@@ -1176,10 +1187,10 @@ Signature Algorithm (ECDSA).
     <a class="self-link" href="#example-a-simple-signed-json-ld-data-document">Example<bdi> 4</bdi></a><span class="example-title">: A simple signed JSON-LD data document</span>
   </div> <pre class="nohighlight">{
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
   ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-2019",
@@ -1246,10 +1257,10 @@ with the <code>proof</code> key in a document.
     <a class="self-link" href="#example-a-proof-set-in-a-data-document">Example<bdi> 5</bdi></a><span class="example-title">: A proof set in a data document</span>
   </div> <pre class="nohighlight">{
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
 ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": [{
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-2022",
@@ -1286,10 +1297,10 @@ previous proof.
     <a class="self-link" href="#example-a-proof-chain-in-a-data-document">Example<bdi> 6</bdi></a><span class="example-title">: A proof chain in a data document</span>
   </div> <pre class="nohighlight">{
   "@context": [
-    {"title": "https://schema.org/title"},
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
 ],
-  "title": "Hello world!",
+  "myWebsite": "https://hello.world.example/",
   "proof": [{
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
@@ -1386,7 +1397,19 @@ contain <a href="#dfn-verification-relationship" class="internalDFN" data-link-t
 certain <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-4">verification methods</a> for specific purposes.
         </p>
 
-        <div class="issue" id="issue-container-generatedID-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>Issue</span></div><div class="">Add examples of common Controller documents, such as
+        <div class="issue atrisk" id="issue-container-generatedID-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Potential for stand-alone Controller Document specification</span></div><p class="atrisk">
+This section on Controller Documents has been identified as potentially useful
+for other securing mechanisms such as [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-jose-cose" title="Securing Verifiable Credentials using JOSE and COSE">VC-JOSE-COSE</a></cite>]. There is a possibility
+that this section will be moved to an independent Controller Document
+specification, which would then be normatively referenced by this specification.
+If this migration occurs, it is expected that there will be little to no
+impact on implementations as the normative statements that exist in this
+section will remain in the new document or be preserved in this document as
+an additional set of requirements on top of the base Controller Document
+specification.
+        </p></div>
+
+        <div class="issue" id="issue-container-generatedID-5"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue</span></div><div class="">Add examples of common Controller documents, such as
 controller documents published on a ledger-based registry, or on a mutable medium in
 combination with an integrity protection mechanism such as Hashlinks.
         </div></div>
@@ -1418,7 +1441,7 @@ in <a href="#verification-material" class="sec-ref"><bdi class="secno">2.3.1.1 <
 include additional properties. <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-12">Verification methods</a> <em class="rfc2119">SHOULD</em> be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
               </p>
-              <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span></div><p class="">
+              <div class="note" role="note" id="issue-container-generatedID-6"><div role="heading" class="note-title marker" id="h-note-1" aria-level="5"><span>Note</span></div><p class="">
 The <code>verificationMethod</code> property is <em class="rfc2119">REQUIRED</em> for proofs, unlike controller
 documents, for which it is optional. See section <a href="#proofs" class="sec-ref"><bdi class="secno">2.1 </bdi>Proofs</a>.
               </p></div>
@@ -1494,7 +1517,7 @@ revocation.
 }</pre>
       </div>
 
-          <div class="note" role="note" id="issue-container-generatedID-6"><div role="heading" class="note-title marker" id="h-note-2" aria-level="5"><span>Note</span><span class="issue-label">: Verification method controller(s) and controller(s)</span></div><p class="">
+          <div class="note" role="note" id="issue-container-generatedID-7"><div role="heading" class="note-title marker" id="h-note-2" aria-level="5"><span>Note</span><span class="issue-label">: Verification method controller(s) and controller(s)</span></div><p class="">
 The semantics of the <code>controller</code> property are the same when the
 subject of the relationship is the <a href="#dfn-controller-documents" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-controller-documents-7">controller document</a> as when the subject of
 the relationship is a <a href="#dfn-verification-method" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-verification-method-23">verification method</a>, such as a cryptographic public
@@ -2168,7 +2191,7 @@ example described in <a href="#capability-invocation" class="sec-ref"><bdi class
       <section id="multibase-0"><div class="header-wrapper"><h3 id="x2-4-multibase"><bdi class="secno">2.4 </bdi>Multibase</h3><a class="self-link" href="#multibase-0" aria-label="Permalink for Section 2.4"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-7"><div role="heading" class="issue-title marker" id="h-issue-3" aria-level="4"><span>Issue</span><span class="issue-label">: Multibase may be standardized at IETF</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-8"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue</span><span class="issue-label">: Multibase may be standardized at IETF</span></div><p class="">
 The [<cite><a class="bibref" data-link-type="biblio" href="#bib-multibase" title="The Multibase Data Format">MULTIBASE</a></cite>] specification has been dispatched at IETF and may be
 standardized there. There is active discussion on this initiative in
 the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
@@ -2242,7 +2265,7 @@ Multibase header. Any algorithm with equivalent output <em class="rfc2119">MAY</
       <section id="multihash"><div class="header-wrapper"><h3 id="x2-5-multihash"><bdi class="secno">2.5 </bdi>Multihash</h3><a class="self-link" href="#multihash" aria-label="Permalink for Section 2.5"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-8"><div role="heading" class="issue-title marker" id="h-issue-4" aria-level="4"><span>Issue</span><span class="issue-label">: Multihash may be standardized at IETF</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-9"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>Issue</span><span class="issue-label">: Multihash may be standardized at IETF</span></div><p class="">
 The [<cite><a class="bibref" data-link-type="biblio" href="#bib-multihash" title="The Multihash Data Format">MULTIHASH</a></cite>] specification has been dispatched at IETF and may be
 standardized. There is active discussion on this initiative in
 the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
@@ -2326,7 +2349,7 @@ value which <em class="rfc2119">MUST</em> match the output length associated wit
       <section id="resource-integrity"><div class="header-wrapper"><h3 id="x2-6-resource-integrity"><bdi class="secno">2.6 </bdi>Resource Integrity</h3><a class="self-link" href="#resource-integrity" aria-label="Permalink for Section 2.6"></a></div>
         
 
-        <div class="issue atrisk" id="issue-container-generatedID-9"><div role="heading" class="issue-title marker" id="h-issue-5" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Unification of cryptographic hash expression formats are under discussion</span></div><p class="atrisk">
+        <div class="issue atrisk" id="issue-container-generatedID-10"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Unification of cryptographic hash expression formats are under discussion</span></div><p class="atrisk">
 The Working Group is currently attempting to determine whether cryptographic hash
 expression formats can be unified across all of the VCWG core specifications.
 Candidates for this mechanism include <code>digestSRI</code> and <code>digestMultibase</code>. There
@@ -2398,7 +2421,7 @@ data documents through the use of mathematical proofs without sacrificing Linked
 Data features such as extensibility and composability.
         </p>
 
-        <div class="note" role="note" id="issue-container-generatedID-10"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span><span class="issue-label">: Use of Linked Data is an optional feature</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-11"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span><span class="issue-label">: Use of Linked Data is an optional feature</span></div><p class="">
 While  this specification provides mechanisms to digitally sign Linked Data, the
 use  of Linked Data is not necessary to gain some of the advantages provided by
 this specification.
@@ -2489,7 +2512,7 @@ does not provide timing information, which enhances privacy.
       <section id="contexts-and-vocabularies"><div class="header-wrapper"><h3 id="x2-9-contexts-and-vocabularies"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</h3><a class="self-link" href="#contexts-and-vocabularies" aria-label="Permalink for Section 2.9"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-11"><div role="heading" class="issue-title marker" id="h-issue-6" aria-level="4"><span>Issue</span><span class="issue-label">: (AT RISK) Hash values might change during Candidate Recommendation</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-12"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="4"><span>Issue</span><span class="issue-label">: (AT RISK) Hash values might change during Candidate Recommendation</span></div><p class="">
 This section lists cryptographic hash values that might change during the
 Candidate Recommendation phase based on implementer feedback that requires
 the referenced files to be modified.
@@ -2791,7 +2814,7 @@ base-encoding alphabet.
             </dd>
             <dt>The value space</dt>
             <dd>
-An arbitrary binary data value.
+The standard mathematical concept of all integer numbers.
             </dd>
             <dt>The lexical-to-value mapping</dt>
             <dd>
@@ -2876,7 +2899,7 @@ protected from unsafe redefinition, by use of the <code>@protected</code> keywor
         </li>
       </ul>
 
-      <div class="issue" id="issue-container-generatedID-12"><div role="heading" class="issue-title marker" id="h-issue-7" aria-level="3"><span>Issue</span><span class="issue-label">: Require interoperability report?</span></div><p class="">
+      <div class="issue" id="issue-container-generatedID-13"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="3"><span>Issue</span><span class="issue-label">: Require interoperability report?</span></div><p class="">
 The following language was deemed to be contentious: <em>The specification <em class="rfc2119">MUST</em>
 provide a link to an interoperability test report to document which
 implementations are conformant with the cryptographic suite specification.</em>
@@ -2927,7 +2950,7 @@ defined in Section <a href="#proofs" class="sec-ref"><bdi class="secno">2.1 </bd
 specific to their cryptographic suite.
         </p>
 
-        <div class="note" role="note" id="issue-container-generatedID-13"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span class="issue-label">: Design Patterns of Legacy Cryptographic Suites</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-14"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span class="issue-label">: Design Patterns of Legacy Cryptographic Suites</span></div><p class="">
 One of the design patterns seen in Data Integrity cryptosuites from
 2012 to 2020 was use of the <code>type</code> property to establish a specific type for a
 cryptographic suite. For example, the
@@ -2967,7 +2990,7 @@ specified by a particular cryptographic suite (see Section
 <a href="#cryptographic-suites" class="sec-ref"><bdi class="secno">3. </bdi>Cryptographic Suites</a>).
       </p>
 
-      <div class="issue" id="issue-container-generatedID-14"><div role="heading" class="issue-title marker" id="h-issue-8" aria-level="3"><span>Issue</span><span class="issue-label">: Verification hash algorithm definition</span></div><p class="">
+      <div class="issue" id="issue-container-generatedID-15"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="3"><span>Issue</span><span class="issue-label">: Verification hash algorithm definition</span></div><p class="">
 At present the creation of the verification hash is delegated to the
 cryptographic suite specification when generating and verifying a proof. It is
 expected that this algorithm is going to be common to most cryptographic suites.
@@ -3357,7 +3380,7 @@ Return <var>output</var> as the <a href="#dfn-secured-data-document" class="inte
           </li>
         </ol>
 
-        <div class="note" role="note" id="issue-container-generatedID-15"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span><span class="issue-label">: `hashData` might not consist of a single value</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-16"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span><span class="issue-label">: `hashData` might not consist of a single value</span></div><p class="">
 While the output of the <a href="#dfn-hashing-algorithm" id="ref-for-dfn-hashing-algorithm-4">hashing algorithm</a>
 can be a single value, such as a 32 byte SHA2-256 value, implementers are
 advised that some cryptographic suite(s) might define <code>hashData</code> to be comprised
@@ -3811,7 +3834,7 @@ searching for a newer cryptographic suite only to not find one that is newer.
 While this might be an inconvenience, it is one that results in safer
 ecosystem behavior.
         </p>
-        <div class="issue closed" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-9" aria-level="4"><a href="https://github.com/w3c/vc-data-integrity/issues/38"><span class="issue-number">Issue 38</span></a><span class="issue-label">: Determine how cryptographic suites are named and versioned <a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22pr+exists%22" style="background-color: rgb(172, 229, 37); color: rgb(0, 0, 0);" aria-label="GitHub label: pr exists">pr exists</a><a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22before+CR%22" style="background-color: rgb(120, 32, 58); color: rgb(255, 255, 255);" aria-label="GitHub label: before CR">before CR</a></span></div><p class="">
+        <div class="issue closed" id="issue-container-number-38"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="4"><a href="https://github.com/w3c/vc-data-integrity/issues/38"><span class="issue-number">Issue 38</span></a><span class="issue-label">: Determine how cryptographic suites are named and versioned <a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22pr+exists%22" style="background-color: rgb(172, 229, 37); color: rgb(0, 0, 0);" aria-label="GitHub label: pr exists">pr exists</a><a class="respec-gh-label" href="https://github.com/w3c/vc-data-integrity/issues/?q=is%3Aissue+is%3Aopen+label%3A%22before+CR%22" style="background-color: rgb(120, 32, 58); color: rgb(255, 255, 255);" aria-label="GitHub label: before CR">before CR</a></span></div><p class="">
 The following text is currently under debate:<br><br>
 It is highly encouraged that cryptographic suite identifiers are versioned
 using a year designation. For example, the cryptographic suite identifier
@@ -3902,7 +3925,7 @@ exposing those options and parameters to application developers who may not
 fully understand the balancing benefits and drawbacks of each option.
         </p>
 
-        <div class="issue" id="issue-container-generatedID-16"><div role="heading" class="issue-title marker" id="h-issue-10" aria-level="4"><span>Issue</span><span class="issue-label">: Use of experimental and deprecated cryptography</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-17"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><span>Issue</span><span class="issue-label">: Use of experimental and deprecated cryptography</span></div><p class="">
 The VCWG is seeking guidance on adding language to allow the use of experimental
 or deprecated cryptography. By default, those features will be disabled and will
 require the application developer to specifically allow use on a per-cryptographic suite
@@ -4054,7 +4077,7 @@ deliberately slow connections, thus starving connections on the server.
 Implementers are advised to consider these sorts of attacks when implementing
 defensive security strategies.
         </p>
-        <div class="issue" id="issue-container-generatedID-17"><div role="heading" class="issue-title marker" id="h-issue-11" aria-level="4"><span>Issue</span><span class="issue-label">: Collision-resistant canonicalization requirements</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-18"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><span>Issue</span><span class="issue-label">: Collision-resistant canonicalization requirements</span></div><p class="">
 The VCWG is seeking feedback on normative language that cryptographic suite
 implementers need to follow to ensure that they do not utilize data
 transformation mechanisms that can map to the same output. That is, given
@@ -4068,7 +4091,7 @@ Canonicalization Algorithm 2015 [<cite><a class="bibref" data-link-type="biblio"
 Scheme [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8785" title="JSON Canonicalization Scheme (JCS)">RFC8785</a></cite>], and a theoretical future base-encoding canonicalization
 — have entirely different outputs.
         </p></div>
-        <div class="issue" id="issue-container-generatedID-18"><div role="heading" class="issue-title marker" id="h-issue-12" aria-level="4"><span>Issue</span><span class="issue-label">: Avoiding the pitfalls of XML Canonicalization</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-19"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="4"><span>Issue</span><span class="issue-label">: Avoiding the pitfalls of XML Canonicalization</span></div><p class="">
 The VCWG is seeking feedback on whether to explain why modern canonicalization
 schemes are simpler than the far more complex XML Canonicalization schemes of
 the early 2000s. Some readers seem to be under the impression that all
@@ -4157,7 +4180,7 @@ the application layer.
       <section id="verification-method-binding"><div class="header-wrapper"><h3 id="x5-7-verification-method-binding"><bdi class="secno">5.7 </bdi>Verification Method Binding</h3><a class="self-link" href="#verification-method-binding" aria-label="Permalink for Section 5.7"></a></div>
         
 
-        <div class="issue" id="issue-container-generatedID-19"><div role="heading" class="issue-title marker" id="h-issue-13" aria-level="4"><span>Issue</span></div><p class="">
+        <div class="issue" id="issue-container-generatedID-20"><div role="heading" class="issue-title marker" id="h-issue-14" aria-level="4"><span>Issue</span></div><p class="">
 Implementers must ensure that a verification method is bound to a particular
 controller by going from the verification method to the controller document,
 and then ensuring that the controller document also contains the verification
@@ -4752,7 +4775,9 @@ Section <a href="#base-decode" class="sec-ref"><bdi class="secno">4.2 </bdi>Base
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-data-model-2.0">[VC-DATA-MODEL-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 12 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 16 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+    </dd><dt id="bib-vc-jose-cose">[VC-JOSE-COSE]</dt><dd>
+      <a href="https://www.w3.org/TR/vc-jose-cose/"><cite>Securing Verifiable Credentials using JOSE and COSE</cite></a>. Orie Steele; Michael Jones; Michael Prorock; Gabe Cohen.  W3C. 16 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-jose-cose/">https://www.w3.org/TR/vc-jose-cose/</a>
     </dd><dt id="bib-vc-specs">[VC-SPECS]</dt><dd>
       <a href="https://w3c.github.io/vc-specs-dir/"><cite>Verifiable Credential Specifications Directory</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-specs-dir/">https://w3c.github.io/vc-specs-dir/</a>
     </dd><dt id="bib-zcap">[ZCAP]</dt><dd>
