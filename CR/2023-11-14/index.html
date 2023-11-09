@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 34.2.0">
+<meta name="generator" content="ReSpec 34.2.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -157,10 +157,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "specStatus": "CR",
   "shortName": "vc-data-integrity",
   "subtitle": "Securing the Integrity of Verifiable Credential Data",
-  "publishDate": "2023-11-07",
+  "publishDate": "2023-11-14",
   "edDraftURI": "https://w3c.github.io/vc-data-integrity/",
   "implementationReportURI": "https://w3c.github.io/vc-data-integrity/implementations/",
-  "crEnd": "2024-01-07",
+  "crEnd": "2024-01-17",
   "editors": [
     {
       "name": "Manu Sporny",
@@ -384,20 +384,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       ]
     }
   ],
-  "publishISODate": "2023-11-07T00:00:00.000Z",
-  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 07 November 2023"
+  "publishISODate": "2023-11-14T00:00:00.000Z",
+  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 14 November 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-CR"></head>
 <body class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Verifiable Credential Data Integrity 1.0</h1> <h2 id="subtitle" class="subtitle">Securing the Integrity of Verifiable Credential Data</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-11-07">07 November 2023</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2023-11-14">14 November 2023</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20231107/">https://www.w3.org/TR/2023/CR-vc-data-integrity-20231107/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20231114/">https://www.w3.org/TR/2023/CR-vc-data-integrity-20231114/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
@@ -453,15 +453,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     
     <p class="copyright">
-    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    <a href="https://www.w3.org/policies/#copyright">Copyright</a>
     ©
     2023
     
     <a href="https://www.w3.org/">World Wide Web Consortium</a>.
     <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup>
-    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
-    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
-    <a rel="license" href="https://www.w3.org/Consortium/Legal/2023/software-license" title="W3C Software and Document Notice and License">permissive document license</a> rules apply.
+    <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>,
+    <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and
+    <a rel="license" href="https://www.w3.org/copyright/software-license-2023/" title="W3C Software and Document Notice and License">permissive document license</a> rules apply.
   </p>
     <hr title="Separator for header">
   </div>
@@ -493,17 +493,17 @@ implementation report</a>.
     <p>
     This document was published by the <a href="https://www.w3.org/groups/wg/vc">Verifiable Credentials Working Group</a> as
     a Candidate Recommendation Snapshot using the
-        <a href="https://www.w3.org/2023/Process-20230612/#recs-and-notes">Recommendation track</a>. 
+        <a href="https://www.w3.org/2023/Process-20231103/#recs-and-notes">Recommendation track</a>. 
   </p><p>Publication as a Candidate Recommendation does not
   imply endorsement by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. A Candidate Recommendation Snapshot has received
-        <a href="https://www.w3.org/2023/Process-20230612/#dfn-wide-review">wide review</a>, is intended to
+        <a href="https://www.w3.org/2023/Process-20231103/#dfn-wide-review">wide review</a>, is intended to
         gather
         <a href="https://w3c.github.io/vc-data-integrity/implementations/">implementation experience</a>,
         and has commitments from Working Group members to
         <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Requirements">royalty-free licensing</a>
         for implementations.</p><p>
           This Candidate Recommendation is not expected to advance to Proposed
-          Recommendation any earlier than 07 January 2024.
+          Recommendation any earlier than 17 January 2024.
         </p><p>
     
         This document was produced by a group
@@ -524,7 +524,7 @@ implementation report</a>.
         
   </p><p>
                   This document is governed by the
-                  <a id="w3c_process_revision" href="https://www.w3.org/2023/Process-20230612/">12 June 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                  <a id="w3c_process_revision" href="https://www.w3.org/2023/Process-20231103/">03 November 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
                 </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#how-it-works"><bdi class="secno">1.1 </bdi>How it Works</a></li><li class="tocline"><a class="tocxref" href="#design-goals-and-rationale"><bdi class="secno">1.2 </bdi>Design Goals and Rationale</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">1.3 </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#terminology"><bdi class="secno">1.4 </bdi>Terminology</a></li></ol></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">2. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proofs"><bdi class="secno">2.1 </bdi>Proofs</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#proof-sets"><bdi class="secno">2.1.1 </bdi>Proof Sets</a></li><li class="tocline"><a class="tocxref" href="#proof-chains"><bdi class="secno">2.1.2 </bdi>Proof Chains</a></li></ol></li><li class="tocline"><a class="tocxref" href="#proof-purposes"><bdi class="secno">2.2 </bdi>Proof Purposes</a></li><li class="tocline"><a class="tocxref" href="#controller-documents"><bdi class="secno">2.3 </bdi>Controller Documents</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#verification-methods"><bdi class="secno">2.3.1 </bdi>Verification Methods</a><ol class="toc"></ol></li><li class="tocline"><a class="tocxref" href="#verification-relationships"><bdi class="secno">2.3.2 </bdi>Verification Relationships</a><ol class="toc"></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#multibase-0"><bdi class="secno">2.4 </bdi>Multibase</a></li><li class="tocline"><a class="tocxref" href="#multihash"><bdi class="secno">2.5 </bdi>Multihash</a></li><li class="tocline"><a class="tocxref" href="#resource-integrity"><bdi class="secno">2.6 </bdi>Resource Integrity</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-linked-data"><bdi class="secno">2.7 </bdi>Relationship to Linked Data</a></li><li class="tocline"><a class="tocxref" href="#relationship-to-verifiable-credentials"><bdi class="secno">2.8 </bdi>Relationship to Verifiable Credentials</a></li><li class="tocline"><a class="tocxref" href="#contexts-and-vocabularies"><bdi class="secno">2.9 </bdi>Contexts and Vocabularies</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#context-injection"><bdi class="secno">2.9.1 </bdi>Context Injection</a></li><li class="tocline"><a class="tocxref" href="#securing-data-losslessly"><bdi class="secno">2.9.2 </bdi>Securing Data Losslessly</a></li><li class="tocline"><a class="tocxref" href="#datatypes"><bdi class="secno">2.9.3 </bdi>Datatypes</a><ol class="toc"></ol></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#cryptographic-suites"><bdi class="secno">3. </bdi>Cryptographic Suites</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#dataintegrityproof"><bdi class="secno">3.1 </bdi>DataIntegrityProof</a></li></ol></li><li class="tocline"><a class="tocxref" href="#algorithms"><bdi class="secno">4. </bdi>Algorithms</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#base-encode"><bdi class="secno">4.1 </bdi>Base Encode</a></li><li class="tocline"><a class="tocxref" href="#base-decode"><bdi class="secno">4.2 </bdi>Base Decode</a></li><li class="tocline"><a class="tocxref" href="#add-proof"><bdi class="secno">4.3 </bdi>Add Proof</a></li><li class="tocline"><a class="tocxref" href="#add-proof-set-chain"><bdi class="secno">4.4 </bdi>Add Proof Set/Chain</a></li><li class="tocline"><a class="tocxref" href="#verify-proof"><bdi class="secno">4.5 </bdi>Verify Proof</a></li><li class="tocline"><a class="tocxref" href="#verify-proof-sets-and-chains"><bdi class="secno">4.6 </bdi>Verify Proof Sets and Chains</a></li><li class="tocline"><a class="tocxref" href="#retrieve-verification-method"><bdi class="secno">4.7 </bdi>Retrieve Verification Method</a></li><li class="tocline"><a class="tocxref" href="#processing-errors"><bdi class="secno">4.8 </bdi>Processing Errors</a></li></ol></li><li class="tocline"><a class="tocxref" href="#security-considerations"><bdi class="secno">5. </bdi>Security Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#versioning-cryptography-suites"><bdi class="secno">5.1 </bdi>Versioning Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#protecting-application-developers"><bdi class="secno">5.2 </bdi>Protecting Application Developers</a></li><li class="tocline"><a class="tocxref" href="#conventions-for-naming-cryptography-suites"><bdi class="secno">5.3 </bdi>Conventions for Naming Cryptography Suites</a></li><li class="tocline"><a class="tocxref" href="#agility-and-layering"><bdi class="secno">5.4 </bdi>Agility and Layering</a></li><li class="tocline"><a class="tocxref" href="#transformations"><bdi class="secno">5.5 </bdi>Transformations</a></li><li class="tocline"><a class="tocxref" href="#data-opacity"><bdi class="secno">5.6 </bdi>Data Opacity</a></li><li class="tocline"><a class="tocxref" href="#verification-method-binding"><bdi class="secno">5.7 </bdi>Verification Method Binding</a></li><li class="tocline"><a class="tocxref" href="#verification-relationship-validation"><bdi class="secno">5.8 </bdi>Verification Relationship Validation</a></li><li class="tocline"><a class="tocxref" href="#proof-purpose-validation"><bdi class="secno">5.9 </bdi>Proof Purpose Validation</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-security"><bdi class="secno">5.10 </bdi>Canonicalization Method Security</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-correctness"><bdi class="secno">5.11 </bdi>Canonicalization Method Correctness</a></li><li class="tocline"><a class="tocxref" href="#network-requests"><bdi class="secno">5.12 </bdi>Network Requests</a></li><li class="tocline"><a class="tocxref" href="#other-security-considerations"><bdi class="secno">5.13 </bdi>Other Security Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#privacy-considerations"><bdi class="secno">6. </bdi>Privacy Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#unlinkability"><bdi class="secno">6.1 </bdi>Unlinkability</a></li><li class="tocline"><a class="tocxref" href="#selective-disclosure"><bdi class="secno">6.2 </bdi>Selective Disclosure</a></li><li class="tocline"><a class="tocxref" href="#previous-proofs"><bdi class="secno">6.3 </bdi>Previous Proofs</a></li><li class="tocline"><a class="tocxref" href="#fingerprinting-network-requests"><bdi class="secno">6.4 </bdi>Fingerprinting Network Requests</a></li><li class="tocline"><a class="tocxref" href="#canonicalization-method-privacy"><bdi class="secno">6.5 </bdi>Canonicalization Method Privacy</a></li><li class="tocline"><a class="tocxref" href="#other-privacy-considerations"><bdi class="secno">6.6 </bdi>Other Privacy Considerations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#accessibility-considerations"><bdi class="secno">7. </bdi>Accessibility Considerations</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#presenting-time-values"><bdi class="secno">7.1 </bdi>Presenting Time Values</a></li></ol></li><li class="tocline"><a class="tocxref" href="#revision-history"><bdi class="secno">8. </bdi>Revision History</a></li><li class="tocline"><a class="tocxref" href="#acknowledgements"><bdi class="secno">9. </bdi>Acknowledgements</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.2 </bdi>Informative references</a></li></ol></li></ol></nav>
 
     <section class="informative" id="introduction"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div><p><em>This section is non-normative.</em></p>
@@ -1398,14 +1398,14 @@ certain <a href="#dfn-verification-method" class="internalDFN" data-link-type="d
         </p>
 
         <div class="issue atrisk" id="issue-container-generatedID-4"><div role="heading" class="issue-title marker" id="h-issue-2" aria-level="4"><span>(Feature at Risk) Issue</span><span class="issue-label">: Potential for stand-alone Controller Document specification</span></div><p class="atrisk">
-There are lots of commonalities between this section on Controller Documents and
-similar sections in other securing mechanisms such as [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-jose-cose" title="Securing Verifiable Credentials using JOSE and COSE">VC-JOSE-COSE</a></cite>], or
-similar concepts in specifications such as [<cite><a class="bibref" data-link-type="biblio" href="#bib-did-core" title="Decentralized Identifiers (DIDs) v1.0">DID-CORE</a></cite>]. The Working Group is
-currently discussing the possibility to move this section to an independent
+There are many commonalities between this section on Controller Documents and
+similar sections in other securing mechanisms such as [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-jose-cose" title="Securing Verifiable Credentials using JOSE and COSE">VC-JOSE-COSE</a></cite>], as well as
+sections on similar concepts in specifications such as [<cite><a class="bibref" data-link-type="biblio" href="#bib-did-core" title="Decentralized Identifiers (DIDs) v1.0">DID-CORE</a></cite>]. The Working Group is
+currently discussing the possibility of moving this section to an independent
 Controller Document specification that can be referenced normatively. If this
 migration occurs, it is expected that there will be little to no impact on
-implementations as the normative statements that exist in this section will
-remain in the new document or be preserved in this document as an additional set
+implementations, as the normative statements that exist in this section will
+remain in this or the new document as an additive set
 of requirements on top of the base Controller Document specification.
         </p></div>
 
@@ -4716,7 +4716,7 @@ Section <a href="#base-decode" class="sec-ref"><bdi class="secno">4.2 </bdi>Base
     </dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd>
       <a href="https://www.w3.org/TR/json-ld11/"><cite>JSON-LD 1.1</cite></a>. Gregg Kellogg; Pierre-Antoine Champin; Dave Longley.  W3C. 16 July 2020. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld11/">https://www.w3.org/TR/json-ld11/</a>
     </dd><dt id="bib-rdf-canon">[RDF-CANON]</dt><dd>
-      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Dave Longley; Gregg Kellogg; Dan Yamamoto.  W3C. 4 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
+      <a href="https://www.w3.org/TR/rdf-canon/"><cite>RDF Dataset Canonicalization</cite></a>. Gregg Kellogg; Dave Longley; Dan Yamamoto.  W3C. 31 October 2023. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/rdf-canon/">https://www.w3.org/TR/rdf-canon/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc6234">[RFC6234]</dt><dd>
@@ -4775,9 +4775,9 @@ Section <a href="#base-decode" class="sec-ref"><bdi class="secno">4.2 </bdi>Base
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-data-model-2.0">[VC-DATA-MODEL-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 16 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Orie Steele; Michael Jones; Gabe Cohen; Oliver Terbu.  W3C. 4 November 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-vc-jose-cose">[VC-JOSE-COSE]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-jose-cose/"><cite>Securing Verifiable Credentials using JOSE and COSE</cite></a>. Orie Steele; Michael Jones; Michael Prorock; Gabe Cohen.  W3C. 16 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-jose-cose/">https://www.w3.org/TR/vc-jose-cose/</a>
+      <a href="https://www.w3.org/TR/vc-jose-cose/"><cite>Securing Verifiable Credentials using JOSE and COSE</cite></a>. Orie Steele; Michael Jones; Michael Prorock; Gabe Cohen.  W3C. 27 October 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-jose-cose/">https://www.w3.org/TR/vc-jose-cose/</a>
     </dd><dt id="bib-vc-specs">[VC-SPECS]</dt><dd>
       <a href="https://w3c.github.io/vc-specs-dir/"><cite>Verifiable Credential Specifications Directory</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-specs-dir/">https://w3c.github.io/vc-specs-dir/</a>
     </dd><dt id="bib-zcap">[ZCAP]</dt><dd>
