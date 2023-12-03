@@ -2971,15 +2971,35 @@ with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of
 the <var>unsecuredDocument</var>.
           </li>
           <li>
+Let <var>matchingProofs</var> be an empty set.
+          </li>
+          <li>
 If <var>options</var> contains a <code>previousProof</code> attribute and that
-attribute is a string, check whether
-an element of the <var>allProofs</var> has a matching <code>id</code> attribute.
-If not, an error MUST be raised and SHOULD convey an error type of
-<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>. If the
-<code>previousProof</code> attribute is an array, check that each element of that
-array is a string which matches the <code>id</code> attribute of an element
-of the <var>allProofs</var>. If not, an error MUST be raised and SHOULD convey
-an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+attribute is a string, add the element from <var>allProofs</var> with a matching
+<code>id</code> attribute to matchingProofs. If it does not exist, an error MUST
+be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+If the <code>previousProof</code> attribute is an array, add an element from
+<var>allProofs</var> with an <code>id</code> attribute that matches each element
+of that array. If any matches are missing, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+          </li>
+          <li>
+For each element <var>mp</var> of <var>matchingProofs</var>, if there are any,
+recursively run the previous step on <var>mp.previousProof</var> if it exist.
+            <p class="note">
+This steps insures that all proof dependencies are added regardless of the depth
+of the proof chain.
+            </p>
+          </li>
+          <li>
+Set <var>unsecuredDocument.proof</var> to <var>matchingProofs</var>.
+            <p class="note">
+This step is critical to <q>bind</q> the previous proofs to the document prior
+to signing. The <var>proof</var> value for the document will be updated in a
+later step of this algorithm.
+            </p>
           </li>
           <li>
 Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If
