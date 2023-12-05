@@ -3118,10 +3118,11 @@ Set <var>allProofs</var> to </var><var>securedDocument</var>.<var>proof</var>.
           <li>
 For each <var>proof</var> in <var>allProofs</var>, do the following steps:
           </li>
-          <li>
+          <ol class="algorithm">
+            <li>
 Let <var>matchingProofs</var> be an empty list.
-          </li>
-          <li>
+            </li>
+            <li>
 If <var>proof</var> contains a <code>previousProof</code> attribute and that
 attribute is a string, add the element from <var>allProofs</var> with an
 <code>id</code> attribute matching <code>previousProof</code> to matchingProofs.
@@ -3133,25 +3134,26 @@ If the <code>previousProof</code> attribute is an array, add each element from
 of that array. If any matches are missing, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-          </li>
-          <li>
+            </li>
+            <li>
 Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
 the proof value removed and then set <var>unsecuredDocument.proof</var>
 to <var>matchingProofs</var>.
-          <li>
+            </li>
+            <li>
 Run steps 2 through 4 to validate the contents of <var>proof</var>.
-          </li>
-          </li>
-          <li>
+            </li>
+            <li>
 Run steps 6 through 11 of the algorithm in
 section <a href="#verify-proof"></a>; if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
-            <p class="note">
+              <p class="note">
 We specifically use the value of <var>unsecuredDocument</var> as set above,
 rather than using the value from step 5 of the algorithm in section
 <a href="#verify-proof"></a>.
-            </p>
-          </li>
+              </p>
+            </li>
+          </ol>
           <li>
 Return the <var>allProofs</var> along with each proof's associated
 <var>isProofVerified</var> information.
