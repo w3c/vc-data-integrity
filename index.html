@@ -2983,7 +2983,9 @@ attribute is a string, add the element from <var>allProofs</var> with an
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
 If the <code>previousProof</code> attribute is an array, add each element from
 <var>allProofs</var> with an <code>id</code> attribute that matches an element
-of that array. If any matches are missing, an error MUST be raised and SHOULD
+of that array. If any elements of <code>previousProof</code> array have an
+<code>id</code> attribute that does not match the <code>id</code> attribute
+of any element of <var>allProofs</var>, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
