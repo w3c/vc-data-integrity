@@ -3125,7 +3125,8 @@ Let <var>matchingProofs</var> be an empty list.
             <li>
 If <var>proof</var> contains a <code>previousProof</code> attribute and that
 attribute is a string, add the element from <var>allProofs</var> with an
-<code>id</code> attribute matching <code>previousProof</code> to matchingProofs.
+<code>id</code> attribute matching <code>previousProof</code> to
+<code>matchingProofs</code>.
 If a proof with <code>id</code> does not exist in <var>allProofs</var>, an error
 MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
