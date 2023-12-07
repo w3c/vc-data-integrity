@@ -3107,11 +3107,14 @@ Return <var>isProofVerified</var> as the <a>verification result</a>.
 In a proof set or proof chain, a <a>secured data document</a> has a
 <code>proof</code> attribute which contains a list of proofs
 (<var>allProofs</var>).
-The following algorithm specifies how to check the authenticity and
-integrity of a <a>secured data document</a> by verifying each
-proof in the <var>allProofs</var>. Required inputs are a
+The following algorithm gives one method to check the authenticity and
+integrity of a <a>secured data document</a>. It does this by verifying every
+proof in <var>allProofs</var>. Other approaches are possible, particularly if
+it is desired to only verify a subset of the proofs contained in
+<var>allProfs</var>. Required inputs are a
 <a>secured data document</a> (<var>securedDocument</var>). A list of
-verification results is produced as output.
+verification results corresponding to each proof in <var>allProofs</var> is
+produced as output.
         </p>
         <ol class="algorithm">
           <li>
