@@ -2442,6 +2442,33 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
+          The specification MUST define a <dfn>suite selection algorithm</dfn> that accepts a [=JSON
+          object=] |proof| and uses the properties described in [[[#proofs]]] to return either
+          failure or a [=VC cryptographic suite=] [[Infra]] [=struct=]. This algorithm SHOULD be
+          registered in [[[VC-SPECS]]]. A
+          <dfn class="export">VC cryptographic suite</dfn> [=struct=] has the following
+          [=struct/items=].
+          <dl data-dfn-for="cryptographic suite">
+            <dt><dfn>transform</dfn></dt>
+            <dd>A [=transformation algorithm=] that takes a [=JSON object=] as input and returns a
+            [=JSON object=].</dd>
+            <dt><dfn>hash</dfn></dt>
+            <dd>A [=hashing algorithm=] that takes a [=JSON object=] as input and returns a [=byte
+            sequence=].</dd>
+            <dt><dfn>proof creation options</dfn></dt>
+            <dd>A [=struct=] type that needs to be supplied to the [=cryptographic suite/serialize
+            proof=] operation.</dd>
+            <dt><dfn>serialize proof</dfn></dt>
+            <dd>A [=proof serialization algorithm=] that takes a [=byte sequence=] and an instance
+            of this suite's [=proof creation options=] type as input and returns a [=JSON object=]
+            or failure.</dd>
+            <dt><dfn>verify proof</dfn></dt>
+            <dd>A [=proof verification algorithm=] that takes an [=unsecured data document=] and a
+            [=JSON object=] with the properties described in [[[#proofs]]], and returns "valid" or
+            "invalid".</dd>
+          </dl>
+        </li>
+        <li>
 The specification MUST detail any known resource starvation attack that can
 occur in an algorithm and provide testable mitigations against each attack.
         </li>
@@ -2543,11 +2570,11 @@ the Verifiable Credentials Specifications Directory</a>.
       <h2>Algorithms</h2>
 
       <p>
-The algorithms defined below are generalized in that they require a specific
-<a>transformation algorithm</a>, <a>hashing algorithm</a>,
-<a>proof serialization algorithm</a>, and <a>proof verification algorithm</a> to be
-specified by a particular cryptographic suite (see Section
-<a href="#cryptographic-suites"></a>).
+The algorithms defined below operate on documents represented as <dfn
+data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows [[JSON-LD-API]] in
+representing a JSON object as an [[Infra]] [=map=]. An
+<dfn>unsecured data document</dfn> is a [=JSON object=] with no "`proof`" [=map/key=]. A
+<dfn>secured data document</dfn> is a [=JSON object=] with a "`proof`" [=map/key=].
       </p>
 
       <p class="issue" title="Verification hash algorithm definition">
@@ -2865,20 +2892,11 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
         <p>
 The following algorithm specifies how to add a digital proof to a document,
 which  can be used to verify the authenticity and integrity of an
-<dfn>unsecured data document</dfn>. Required inputs are an
-<a>unsecured data document</a> (<var>unsecuredDocument</var>) and
-<a>proof options</a> (<var>options</var>). The
-<a>proof options</a> MUST contain a type identifier for the
-<a>cryptographic suite</a> (<var>type</var>) and any other properties needed by
-the <a>cryptographic suite</a> type; an identifier for the
-<a>verification method</a> (<var>verificationMethod</var>) that can be used to
-verify the authenticity of the proof; an [[!XMLSCHEMA11-2]] `dateTimeStamp`
-string (<var>created</var>) containing the current date and time,
-accurate to at least one second, in Universal Time Code format. A
-<a href="#dfn-domain">security domain</a> (<var>domain</var>) and/or a
-receiver-supplied challenge (<var>challenge</var>) MAY also be specified in
-the <var>options</var>. A <dfn>secured data document</dfn> is produced as
-output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
+<a>unsecured data document</a>. Required inputs are an
+<a>unsecured data document</a> (<var>unsecuredDocument</var>), a <a>VC cryptographic suite</a>
+(|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
+options=] (|options|). A <a>secured data document</a> is produced as output. Whenever this algorithm
+encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
@@ -2886,24 +2904,16 @@ output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
 Let <var>output</var> be a copy of <var>unsecuredDocument</var>.
           </li>
           <li>
-Let <var>transformedData</var> be the result of
-<a href="#dfn-transformation">transforming</a> <var>unsecuredDocument</var>
-according to a <a>transformation algorithm</a> associated with the
-<a>cryptographic suite</a> and the <var>options</var> parameters provided
-as inputs to the algorithm.
+Let <var>transformedData</var> be the result of running |suite|'s [=cryptographic suite/transform=]
+algorithm on <var>unsecuredDocument</var>.
           </li>
           <li>
-Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> the <var>transformedData</var>
-according to a <a>hashing algorithm</a> associated with the
-<a>cryptographic suite</a> and the <var>options</var> parameters provided as
-inputs to the algorithm.
+Let <var>hashData</var> be the result of running |suite|'s [=cryptographic suite/hash=] algorithm on
+the <var>transformedData</var>.
           </li>
           <li>
-Let <var>proof</var> be the result of running the
-<a>proof serialization algorithm</a> associated with the <a>cryptographic suite</a>
-with the <var>hashData</var> and <var>options</var> parameters provided
-as inputs to the algorithm.
+Let <var>proof</var> be the result of running |suite|'s [=cryptographic suite/serialize proof=]
+algorithm on <var>hashData</var> and <var>options</var>.
           </li>
           <li>
 If the <var>proof</var>.<var>type</var>,
@@ -2918,12 +2928,12 @@ and the <var>proof</var>.<var>created</var> value is not set, a
 `PROOF_GENERATION_ERROR` MUST be raised.
           </li>
           <li>
-If <var>options</var>.<var>domain</var> is set, it MUST be equal to
+If <var>options</var> has a non-null <var>domain</var> [=struct/item=], it MUST be equal to
 <var>proof</var>.<var>domain</var> or an error MUST be raised and SHOULD convey
 an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var>.<var>challenge</var> is set, it MUST be equal to
+If <var>options</var> has a non-null <var>challenge</var> [=struct/item=], it MUST be equal to
 <var>proof</var>.<var>challenge</var> or an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
@@ -2953,10 +2963,9 @@ via the digital proof.
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a>secured data document</a>
-(<var>securedDocument</var>) and <a>proof options</a>
-(<var>options</var>). The <a>proof options</a>
-(<var>options</var>) must satisfy the criteria in section <a
-href="#add-proof"></a>. A new <a>secured data document</a> is produced as
+(<var>securedDocument</var>), a <a>VC cryptographic suite</a>
+(|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
+options=] (|options|). A new <a>secured data document</a> is produced as
 output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
 
@@ -2976,14 +2985,17 @@ the <var>unsecuredDocument</var>.
 Let <var>matchingProofs</var> be an empty list.
           </li>
           <li>
-If <var>options</var> contains a <code>previousProof</code> attribute and that
-attribute is a string, add the element from <var>allProofs</var> with an
+If <var>options</var> has a <code>previousProof</code> [=struct/item=] that
+is a string, add the element from <var>allProofs</var> with an
 <code>id</code> attribute matching <code>previousProof</code> to
 <var>matchingProofs</var>. If a proof with
 <code>id</code> equal to <code>previousProof</code>does not exist in
 <var>allProofs</var>, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
-If the <code>previousProof</code> attribute is an array, add each element from
+          </li>
+          <li>
+If <var>options</var> has a <code>previousProof</code> [=struct/item=] that
+is an array, add each element from
 <var>allProofs</var> with an <code>id</code> attribute that matches an element
 of that array. If any element of <code>previousProof</code> array has an
 <code>id</code> attribute that does not match the <code>id</code> attribute
@@ -3000,7 +3012,8 @@ in a later step of this algorithm.
             </p>
           </li>
           <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>. If
+Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>, passing
+|unsecuredDocument|, |suite|, and |options|. If
 no exceptions are raised, append the generated <var>proof</var> value to the
 <var>allProofs</var>; otherwise, raise the exception.
           </li>
@@ -3018,21 +3031,31 @@ Return <var>output</var> as the new <a>secured data document</a>.
 
         <p>
 The following algorithm specifies how to check the authenticity and integrity of
-a <a>secured data document</a> by verifying its digital proof. Required inputs
-are a <a>secured data document</a> (<var>securedDocument</var>) and
-<a>proof options</a> (<var>options</var>). The <a>proof options</a> MAY contain
-the following values that help protect against relay and replay attacks:
-<var>expectedProofPurpose</var>, <var>domain</var>, and
-<var>challenge</var>. The <var>expectedProofPurpose</var> value is used to
-ensure that the <var>proof</var> was generated by the proof creator for the
-expected reason by the verifier, such as "authentication". The <var>domain</var>
-value is used by the proof creator to lock a proof to a particular security
-domain, and used by the verifier to ensure that a proof is not being used across
-different security domains. The <var>challenge</var> value is used by the
-verifier to ensure that an attacker is not replaying previously created proofs.
-Additional options are expected to be provided by libraries to ensure that
-digital proof time stamps do not deviate more than an acceptable time frame
-for a given use case. A <dfn>verification result</dfn> is produced as output.
+a <a>secured data document</a> by verifying its digital proof. The algorithm takes as input:
+        </p>
+
+        <ul>
+          <li>
+|securedDocument|, a <a>secured data document</a>
+          </li>
+          <li>
+|expectedProofPurpose|, an optional [=string=], used to ensure that the
+<var>proof</var> was generated by the proof creator for the expected reason by the verifier, such as
+"authentication"
+          </li>
+          <li>
+|domain|, an optional [=string=], used by the proof creator to lock a proof to a particular security
+domain, and used by the verifier to ensure that a proof is not being used across different security
+domains
+          </li>
+          <li>
+|challenge|, an optional [=string=] [=challenge=], used by the verifier to ensure that an attacker
+is not replaying previously created proofs
+          </li>
+        </ul>
+
+        <p>
+This algorithm returns "valid" or "invalid".
         </p>
 
         <ol class="algorithm">
@@ -3047,15 +3070,20 @@ an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
-If the cryptographic suite requires the
+For each known [=cryptographic suite=], run its [=suite selection algorithm=] on <var>proof</var>.
+If all of these algorithms return failure, return "invalid". Otherwise, let |suite:VC cryptographic
+suite| be an [=implementation-defined=] choice of one of the non-failure results.
+          </li>
+          <li>
+If |suite| requires the
 <var>proof</var>.<var>created</var> value, and it
 is not set, an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
 
           </li>
           <li>
-If the <var>proof</var>.<var>proofPurpose</var> value does not match
-<var>options</var>.<var>expectedProofPurpose</var>,
+If <var>expectedProofPurpose</var> was given, and it does not match
+<var>proof</var>.<var>proofPurpose</var>,
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
@@ -3064,41 +3092,30 @@ Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
 the `proof` value removed.
           </li>
           <li>
-Let <var>transformedData</var> be the result of
-<a href="#dfn-transformation">transforming</a> the <var>unsecuredDocument</var>
-according to a <a>transformation algorithm</a> associated with the
-<a>cryptographic suite</a> specified in <var>proof</var> and the
-<var>options</var> parameters provided as inputs to the algorithm.
-The type of <a>cryptographic suite</a> is specified by the
-<var>proof.type</var> value and MAY be further described by
-<a>cryptographic suite</a>-specific properties expressed in <var>proof</var>.
+Let <var>transformedData</var> be the result of running |suite|'s'
+[=cryptographic suite/transform=] algorithm on the <var>unsecuredDocument</var>.
         </li>
           <li>
-Let <var>hashData</var> be the result of
-<a href="#dfn-hashing">hashing</a> the <var>transformedData</var>
-according to a <a>hashing algorithm</a> associated with the
-<a>cryptographic suite</a> specified in the <var>proof</var> and
-<var>options</var> parameters provided as inputs to the algorithm.
+Let <var>hashData</var> be the result of running |suite|'s'
+[=cryptographic suite/hash=] algorithm on the <var>transformedData</var>.
           </li>
           <li>
-Let <var>isProofVerified</var> be the result of running the
-<a>proof verification algorithm</a> associated with the
-<a>cryptographic suite</a> with the <var>hashData</var> and <var>options</var>
-parameters provided as inputs to the algorithm.
+Let |isProofVerified:valid or invalid| be the result of running |suite|'s
+[=cryptographic suite/verify proof=] algorithm on <var>hashData</var> and <var>proof</var>.
           </li>
           <li>
-If <var>options</var>.<var>domain</var> is set and it does not match
+If <var>domain</var> was given, and it does not match
 <var>proof</var>.<var>domain</var>, an error MUST be raised and SHOULD convey an
 error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
-If <var>options</var>.<var>challenge</var> is set and it does not match
+If <var>challenge</var> was given, and it does not match
 <var>proof</var>.<var>challenge</var>,  an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
           <li>
-Return <var>isProofVerified</var> as the <a>verification result</a>.
+Return <var>isProofVerified</var>.
           </li>
         </ol>
 
