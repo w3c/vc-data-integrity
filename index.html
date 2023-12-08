@@ -2456,8 +2456,15 @@ verification of the data.
             <dd>A [=hashing algorithm=] that takes a [=JSON object=] as input and returns a [=byte
             sequence=].</dd>
             <dt><dfn>proof creation options</dfn></dt>
-            <dd>A [=struct=] type that needs to be supplied to the [=cryptographic suite/serialize
-            proof=] operation.</dd>
+            <dd>
+              <p>A [=struct=] type that needs to be supplied to the [=cryptographic suite/serialize
+              proof=] operation.</p>
+              <p class="note">To sign data, cryptographic suites need to be able to use a private
+              key. This private key will often be implied by a field in the [=proof creation
+              options=], but it is often a better design to avoid passing the key directly. Passing
+              a key identifier or an asynchronous signing algorithm allows implementations to take
+              advantage of hardware security modules (HSMs) to get better security.</p>
+            </dd>
             <dt><dfn>serialize proof</dfn></dt>
             <dd>A [=proof serialization algorithm=] that takes a [=byte sequence=] and an instance
             of this suite's [=proof creation options=] type as input and returns a [=JSON object=]
