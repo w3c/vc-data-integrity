@@ -3043,7 +3043,10 @@ a <a>secured data document</a> by verifying its digital proof. The algorithm tak
 
         <ul>
           <li>
-|securedDocument|, a <a>secured data document</a>
+|mediaType|, a [=MIME type=]
+          </li>
+          <li>
+|documentBytes|, a [=byte sequence=] whose media type is |mediaType|
           </li>
           <li>
 |expectedProofPurpose|, an optional [=string=], used to ensure that the
@@ -3062,17 +3065,49 @@ is not replaying previously created proofs
         </ul>
 
         <p>
-This algorithm returns "valid" or "invalid".
+This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose [=struct/items=] are:
+        </p>
+        <dl>
+          <dt><dfn data-dfn-for="verification result">status</dfn></dt>
+          <dd>"valid" or "invalid"</dd>
+          <dt><dfn data-dfn-for="verification result">document</dfn></dt>
+          <dd>null if [=status=] is "invalid" or an [=unsecured data document=]</dd>
+          <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
+          <dd>null if [=status=] is "invalid" or a [=MIME type=], which may include [=MIME
+          type/parameters=]</dd>
+          <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
+          <dd>a [=list=] of <dfn data-cite="vc-data-model#dfn-problemdetails">ProblemDetails</dfn>,
+          defaulting to an empty [=list=]</dd>
+          <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
+          <dd>a [=list=] of [=ProblemDetails=], defaulting to an empty [=list=]</dd>
+        </dl>
+
+        <p>
+When a step says "an error MUST be raised", it means to return a [=verification result=] with a
+[=verification result/status=] of "invalid" and a non-empty [=verification result/errors=] list.
         </p>
 
-        <ol class="algorithm">
+        <ol class="algorithm" data-cite="Infra MIMESNIFF">
           <li>
-Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>.
+[=Assert=]: the [=MIME type/essence=] of |mediaType| is "`application/vc+ld+json`" or
+"`application/vp+ld+json`".
           </li>
           <li>
-If the <var>proof</var>.<var>type</var>,
-<var>proof</var>.<var>verificationMethod</var>, or
-<var>proof</var>.<var>proofPurpose</var> values are not set,
+Let |securedDocument:map| be the result of running [=parse JSON bytes to an Infra value=] on
+|documentBytes|.
+          </li>
+          <li>
+If |securedDocument| is not a [=map=] or |securedDocument|["`proof`"] is not a [=map=], an error
+MUST be raised and SHOULD convey an error type of
+`https://www.w3.org/TR/vc-data-model#PARSING_ERROR`.
+          </li>
+          <li>
+Let |proof:map| be <var>securedDocument</var>["`proof`"].
+          </li>
+          <li>
+If <var>proof</var>["`type`"],
+<var>proof</var>["`verificationMethod`"], or
+<var>proof</var>["`proofPurpose`"] do not [=map/exist=],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
@@ -3083,14 +3118,14 @@ suite| be an [=implementation-defined=] choice of one of the non-failure results
           </li>
           <li>
 If |suite| requires the
-<var>proof</var>.<var>created</var> value, and it
-is not set, an error MUST be raised and SHOULD convey an error type of
+<var>proof</var>["`created`"] value, and it does not [=map/exist=],
+an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
 
           </li>
           <li>
 If <var>expectedProofPurpose</var> was given, and it does not match
-<var>proof</var>.<var>proofPurpose</var>,
+<var>proof</var>["`proofPurpose`"],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
@@ -3111,18 +3146,30 @@ Let |isProofVerified:valid or invalid| be the result of running |suite|'s
 [=cryptographic suite/verify proof=] algorithm on <var>hashData</var> and <var>proof</var>.
           </li>
           <li>
+If |isProofVerified| is "invalid", an error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
+          </li>
+          <li>
 If <var>domain</var> was given, and it does not match
-<var>proof</var>.<var>domain</var>, an error MUST be raised and SHOULD convey an
+<var>proof</var>["`domain`"], an error MUST be raised and SHOULD convey an
 error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If <var>challenge</var> was given, and it does not match
-<var>proof</var>.<var>challenge</var>,  an error MUST be raised and SHOULD
+<var>proof</var>["`challenge`"],  an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
           <li>
-Return <var>isProofVerified</var>.
+Return a [=verification result=] with [=struct/items=]:
+<dl data-link-for="verification result">
+  <dt>[=status=]</dt>
+  <dd>"valid"</dd>
+  <dt>[=document=]</dt>
+  <dd>|unsecuredDocument|</dd>
+  <dt>[=media type=]</dt>
+  <dd>|mediaType|</dd>
+</dl>
           </li>
         </ol>
 
@@ -3181,10 +3228,10 @@ the proof value removed and then set <var>unsecuredDocument.proof</var>
 to <var>matchingProofs</var>.
             </li>
             <li>
-Run steps 2 through 4 to validate the contents of <var>proof</var>.
+Run steps 5 through 8 to validate the contents of <var>proof</var>.
             </li>
             <li>
-Run steps 6 through 11 of the algorithm in
+Run steps 10 through 15 of the algorithm in
 section <a href="#verify-proof"></a>; if no exceptions are raised, associate
 the <var>isProofVerified</var> value with this <var>proof</var>.
               <p class="note">
