@@ -3111,7 +3111,13 @@ The following algorithm provides one method of checking the authenticity and
 integrity of a <a>secured data document</a>, achieved by verifying every
 proof in <var>allProofs</var>. Other approaches are possible, particularly if
 it is only desired to verify a subset of the proofs contained in
-<var>allProfs</var>. Required input is a
+<var>allProfs</var>. If another approach is taken to verify only a subset of the
+proofs, then it is important to note any proof with <code>previousProof</code>
+in that subset can only be considered verified if the proofs it references are
+also considered verified.
+        </p>
+        <p>
+Required input is a
 <a>secured data document</a> (<var>securedDocument</var>). A list of
 verification results corresponding to each proof in <var>allProofs</var> is
 produced as output.
