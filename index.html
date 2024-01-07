@@ -2599,8 +2599,8 @@ will eventually be defined in this specification.
 The following algorithm specifies how to encode an array of bytes, where each
 byte represents a base-256 value, to a different base representation that uses a
 particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
-required inputs are the <var>bytes</var>, <var>targetBase</var>, and
-<var>baseAlphabet</var>. The output is a string that contains the base-encoded
+required inputs are the |bytes|, |targetBase|, and
+|baseAlphabet|. The output is a string that contains the base-encoded
 value. All mathematical operations MUST be performed using integer arithmetic.
 Alternatives to the algorithm provided below MAY be used as long as the
 outputs of the alternative algorithm remain the same.
@@ -2608,79 +2608,79 @@ outputs of the alternative algorithm remain the same.
 
         <ol class="algorithm">
           <li>
-Initialize the following variables; <var>zeroes</var> to `0`, <var>length</var> to
-`0`, <var>begin</var> to `0`, and <var>end</var> to the length of
-<var>bytes</var>.
+Initialize the following variables; |zeroes| to `0`, |length| to
+`0`, |begin| to `0`, and |end| to the length of
+|bytes|.
           </li>
           <li>
-Set <var>begin</var> and <var>zeroes</var> to the number of leading `0` byte
-values in <var>bytes</var>.
+Set |begin| and |zeroes| to the number of leading `0` byte
+values in |bytes|.
           </li>
           <li>
-Set <var>baseValue</var> to an empty byte array that is the size of the final
-base-expanded value. Calculate the final <var>size</var> of <var>baseValue</var>
-by dividing log(256) by log(<var>targetBase</var>) and then multiplying the
-length of <var>bytes</var> minus the leading <var>zeroes</var>. Add `1` to the
-value of <var>size</var>.
+Set |baseValue| to an empty byte array that is the size of the final
+base-expanded value. Calculate the final |size| of |baseValue|
+by dividing log(256) by log(|targetBase|) and then multiplying the
+length of |bytes| minus the leading |zeroes|. Add `1` to the
+value of |size|.
           </li>
           <li>
-Process each byte in <var>bytes</var> as <var>byte</var> starting at offset
-<var>begin</var>:
+Process each byte in |bytes| as |byte| starting at offset
+|begin|:
             <ol class="algorithm">
               <li>
-Set the <var>carry</var> value to <var>byte</var>.
+Set the |carry| value to |byte|.
               </li>
               <li>
-Perform base-expansion by starting at the end of the <var>baseValue</var> array.
-Initialize an iterator <var>i</var> to `0`. Set <var>basePosition</var> to
-<var>size</var> minus `1`. Perform the following loop as long as <var>carry</var>
-does not equal `0` or <var>i</var> is less than <var>length</var>, and
-<var>basePosition</var> does not equal `-1`.
+Perform base-expansion by starting at the end of the |baseValue| array.
+Initialize an iterator |i| to `0`. Set |basePosition| to
+|size| minus `1`. Perform the following loop as long as |carry|
+does not equal `0` or |i| is less than |length|, and
+|basePosition| does not equal `-1`.
                 <ol class="algorithm">
                   <li>
-Multiply the value in <var>baseValue[basePosition]</var> by `256` and add
-it to <var>carry</var>.
+Multiply the value in |baseValue[basePosition]| by `256` and add
+it to |carry|.
                   </li>
                   <li>
-Set the value at <var>baseValue[basePosition]</var> to the remainder after
-dividing <var>carry</var> by <var>targetBase</var>.
+Set the value at |baseValue[basePosition]| to the remainder after
+dividing |carry| by |targetBase|.
                   </li>
                   <li>
-Set the value of <var>carry</var> to <var>carry</var> divided by
-<var>targetBase</var> ensuring that integer division is used to perform the
+Set the value of |carry| to |carry| divided by
+|targetBase| ensuring that integer division is used to perform the
 division.
                   </li>
                   <li>
-Decrement <var>basePosition</var> by `1` and increment <var>i</var> by `1`.
+Decrement |basePosition| by `1` and increment |i| by `1`.
                   </li>
                 </ol>
               </li>
               <li>
-Set <var>length</var> to <var>i</var> and increment <var>begin</var> by `1`.
+Set |length| to |i| and increment |begin| by `1`.
               </li>
             </ol>
           </li>
           <li>
-Set the <var>baseEncodingPosition</var> to <var>size</var> minus <var>length</var>.
-While the <var>baseEncodingPosition</var> does not equal <var>size</var> and the
-<var>baseValue[baseEncodingPosition]</var> does not equal `0`, increment
-<var>baseEncodingPosition</var>. This step skips the leading zeros in the
+Set the |baseEncodingPosition| to |size| minus |length|.
+While the |baseEncodingPosition| does not equal |size| and the
+|baseValue[baseEncodingPosition]| does not equal `0`, increment
+|baseEncodingPosition|. This step skips the leading zeros in the
 base-encoded result.
           </li>
           <li>
-Initialize the <var>baseEncoding</var> by repeating the first entry in the
-<var>baseAlphabet</var> by the value of <var>zeroes</var> (the number of leading
-zeroes in <var>bytes</var>).
+Initialize the |baseEncoding| by repeating the first entry in the
+|baseAlphabet| by the value of |zeroes| (the number of leading
+zeroes in |bytes|).
           </li>
           <li>
-Convert the rest of the <var>baseValue</var> to the base-encoding. While the
-<var>baseEncodingPosition</var> is less than <var>size</var>, increment the
-<var>baseEncodingPosition</var>: Set <var>baseEncodedValue</var> to
-<var>baseValue</var>[<var>baseEncodingPosition</var>]. Append
-<var>baseAlphabet</var>[<var>baseEncodedValue</var>] to <var>baseEncoding</var>.
+Convert the rest of the |baseValue| to the base-encoding. While the
+|baseEncodingPosition| is less than |size|, increment the
+|baseEncodingPosition|: Set |baseEncodedValue| to
+|baseValue|[|baseEncodingPosition|]. Append
+|baseAlphabet|[|baseEncodedValue|] to |baseEncoding|.
           </li>
           <li>
-Return <var>baseEncoding</var> as the base-encoded value.
+Return |baseEncoding| as the base-encoded value.
           </li>
         </ol>
 
@@ -2745,8 +2745,8 @@ function baseEncode(bytes, targetBase, baseAlphabet) {
 The following algorithm specifies how to decode an array of bytes, where each
 byte represents a base-encoded value, to a different base representation that
 uses a particular base alphabet, such as base-64-url-no-pad or base-58-btc. The
-required inputs are the <var>sourceEncoding</var>, <var>sourceBase</var>, and
-<var>baseAlphabet</var>. The output is an array of bytes that contains the
+required inputs are the |sourceEncoding|, |sourceBase|, and
+|baseAlphabet|. The output is an array of bytes that contains the
 base-decoded value. All mathematical operations MUST be performed using integer
 arithmetic. Alternatives to the algorithm provided below MAY be used as long as
 the outputs of the alternative algorithm remain the same.
@@ -2754,81 +2754,81 @@ the outputs of the alternative algorithm remain the same.
 
         <ol class="algorithm">
           <li>
-Initialize a <var>baseMap</var> mapping by associating each character
-in <var>baseAlphabet</var> to its integer position in the
-<var>baseAlphabet</var> string.
+Initialize a |baseMap| mapping by associating each character
+in |baseAlphabet| to its integer position in the
+|baseAlphabet| string.
           </li>
           <li>
-Initialize the following variables; <var>sourceOffset</var> to `0`,
-<var>zeroes</var> to `0`, and <var>decodedLength</var> to `0`.
+Initialize the following variables; |sourceOffset| to `0`,
+|zeroes| to `0`, and |decodedLength| to `0`.
           </li>
           <li>
-Set <var>zeroes</var> and <var>sourceOffset</var> to the number of leading
-<var>baseAlphabet[0]</var> values in <var>sourceEncoding</var>.
+Set |zeroes| and |sourceOffset| to the number of leading
+|baseAlphabet[0]| values in |sourceEncoding|.
           </li>
           <li>
-Set <var>decodedBytes</var> to an empty byte array that is the size of the final
-base-converted value. Calculate the size of <var>decodedBytes</var>
-by dividing log(<var>sourceBase</var>) by log(`256`) and then multiplying by the
-length of <var>sourceEncoding</var> minus the leading zeroes. Add 1 to the value
+Set |decodedBytes| to an empty byte array that is the size of the final
+base-converted value. Calculate the size of |decodedBytes|
+by dividing log(|sourceBase|) by log(`256`) and then multiplying by the
+length of |sourceEncoding| minus the leading zeroes. Add 1 to the value
 of size.
           </li>
           <li>
-Process each character in <var>sourceEncoding</var> as <var>character</var>
-starting at offset <var>sourceOffset</var>:
+Process each character in |sourceEncoding| as |character|
+starting at offset |sourceOffset|:
             <ol class="algorithm">
               <li>
-Set the <var>carry</var> value to the integer value in the <var>baseMap</var>
-that is associated with <var>character</var>.
+Set the |carry| value to the integer value in the |baseMap|
+that is associated with |character|.
               </li>
               <li>
-Perform base-decoding by starting at the end of the <var>decodedBytes</var>
-array. Initialize an iterator <var>i</var> to `0`. Set <var>byteOffset</var>
-to <var>decodedSize</var> minus `1`. Perform the following loop as long as,
-<var>carry</var> does not equal `0` or <var>i</var> is less than
-<var>decodedLength</var>, and <var>byteOffset</var> does not equal `-1`:
+Perform base-decoding by starting at the end of the |decodedBytes|
+array. Initialize an iterator |i| to `0`. Set |byteOffset|
+to |decodedSize| minus `1`. Perform the following loop as long as,
+|carry| does not equal `0` or |i| is less than
+|decodedLength|, and |byteOffset| does not equal `-1`:
                 <ol class="algorithm">
                   <li>
-Add the result of multiplying <var>sourceBase</var> by
-<var>decodedBytes</var>[<var>byteOffset</var>] to <var>carry</var>.
+Add the result of multiplying |sourceBase| by
+|decodedBytes|[|byteOffset|] to |carry|.
                   </li>
                   <li>
-Set <var>decodedBytes</var>[<var>byteOffset</var>] to the remainder of
-dividing <var>carry</var> by `256`.
+Set |decodedBytes|[|byteOffset|] to the remainder of
+dividing |carry| by `256`.
                   </li>
                   <li>
-Set <var>carry</var> to <var>carry</var> divided by `256`, ensuring that integer
+Set |carry| to |carry| divided by `256`, ensuring that integer
 division is used to perform the division.
                   </li>
                   <li>
-Decrement <var>byteOffset</var> by `1` and increment <var>i</var> by `1`.
+Decrement |byteOffset| by `1` and increment |i| by `1`.
                   </li>
                 </ol>
                 <li>
-Set <var>decodedLength</var> to <var>i</var> and increment
-<var>sourceOffset</var> by `1`.
+Set |decodedLength| to |i| and increment
+|sourceOffset| by `1`.
                 </li>
               </li>
             </ol>
           </li>
           <li>
-Set the <var>decodedOffset</var> to <var>decodedSize</var> minus
-<var>decodedLength</var>. While the <var>decodedOffset</var> does not equal
-the <var>decodedSize</var> and
-<var>decodedBytes</var>[<var>decodedOffset</var>] equals `0`, increment
-<var>decodedOffset</var> by `1`. This step skips the leading zeros in the
+Set the |decodedOffset| to |decodedSize| minus
+|decodedLength|. While the |decodedOffset| does not equal
+the |decodedSize| and
+|decodedBytes|[|decodedOffset|] equals `0`, increment
+|decodedOffset| by `1`. This step skips the leading zeros in the
 final base-decoded byte array.
           </li>
           <li>
-Set the size of the <var>finalBytes</var> array to <var>zeroes</var> plus,
-<var>decodedSize</var> minus <var>decodedOffset</var>. Initialize the first
-<var>zeroes</var> bytes in <var>finalBytes</var> to `0`.
+Set the size of the |finalBytes| array to |zeroes| plus,
+|decodedSize| minus |decodedOffset|. Initialize the first
+|zeroes| bytes in |finalBytes| to `0`.
           </li>
           <li>
-Starting at an offset equal to the number of <var>zeroes</var> in
-<var>finalBytes</var> plus `1`, copy all bytes in <var>decodedBytes</var>, up
-to <var>decodedSize</var>, starting at offset <var>decodedOffset</var> to
-<var>finalBytes</var>.
+Starting at an offset equal to the number of |zeroes| in
+|finalBytes| plus `1`, copy all bytes in |decodedBytes|, up
+to |decodedSize|, starting at offset |decodedOffset| to
+|finalBytes|.
           </li>
         </ol>
 
@@ -2900,7 +2900,7 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 The following algorithm specifies how to add a digital proof to a document,
 which  can be used to verify the authenticity and integrity of an
 <a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> (<var>unsecuredDocument</var>), a <a>VC cryptographic suite</a>
+<a>unsecured data document</a> (|unsecuredDocument|), a <a>VC cryptographic suite</a>
 (|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
 options=] (|options|). A <a>secured data document</a> is produced as output. Whenever this algorithm
 encodes strings, it MUST use UTF-8 encoding.
@@ -2908,48 +2908,48 @@ encodes strings, it MUST use UTF-8 encoding.
 
         <ol class="algorithm">
           <li>
-Let <var>output</var> be a copy of <var>unsecuredDocument</var>.
+Let |output| be a copy of |unsecuredDocument|.
           </li>
           <li>
-Let <var>transformedData</var> be the result of running |suite|'s [=cryptographic suite/transform=]
-algorithm on <var>unsecuredDocument</var>.
+Let |transformedData| be the result of running |suite|'s [=cryptographic suite/transform=]
+algorithm on |unsecuredDocument|.
           </li>
           <li>
-Let <var>hashData</var> be the result of running |suite|'s [=cryptographic suite/hash=] algorithm on
-the <var>transformedData</var>.
+Let |hashData| be the result of running |suite|'s [=cryptographic suite/hash=] algorithm on
+the |transformedData|.
           </li>
           <li>
-Let <var>proof</var> be the result of running |suite|'s [=cryptographic suite/serialize proof=]
-algorithm on <var>hashData</var> and <var>options</var>.
+Let |proof| be the result of running |suite|'s [=cryptographic suite/serialize proof=]
+algorithm on |hashData| and |options|.
           </li>
           <li>
-If the <var>proof</var>.<var>type</var>,
-<var>proof</var>.<var>verificationMethod</var>,
-or <var>proof</var>.<var>proofPurpose</var> values are not set, an error
+If the |proof|.|type|,
+|proof|.|verificationMethod|,
+or |proof|.|proofPurpose| values are not set, an error
 MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If the <a>cryptographic suite</a> requires the use of a created timestamp,
-and the <var>proof</var>.<var>created</var> value is not set, a
+and the |proof|.|created| value is not set, a
 `PROOF_GENERATION_ERROR` MUST be raised.
           </li>
           <li>
-If <var>options</var> has a non-null <var>domain</var> [=struct/item=], it MUST be equal to
-<var>proof</var>.<var>domain</var> or an error MUST be raised and SHOULD convey
+If |options| has a non-null |domain| [=struct/item=], it MUST be equal to
+|proof|.|domain| or an error MUST be raised and SHOULD convey
 an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var> has a non-null <var>challenge</var> [=struct/item=], it MUST be equal to
-<var>proof</var>.<var>challenge</var> or an error MUST be raised and SHOULD
+If |options| has a non-null |challenge| [=struct/item=], it MUST be equal to
+|proof|.|challenge| or an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Set <var>output</var>.<var>proof</var> to the value of <var>proof</var>.
+Set |output|.|proof| to the value of |proof|.
           </li>
           <li>
-Return <var>output</var> as the <a>secured data document</a>.
+Return |output| as the <a>secured data document</a>.
           </li>
         </ol>
 
@@ -2970,7 +2970,7 @@ via the digital proof.
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a>secured data document</a>
-(<var>securedDocument</var>), a <a>VC cryptographic suite</a>
+(|securedDocument|), a <a>VC cryptographic suite</a>
 (|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
 options=] (|options|). A new <a>secured data document</a> is produced as
 output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
@@ -2978,57 +2978,57 @@ output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
 
         <ol class="algorithm">
           <li>
-Let <var>proof</var> be set to <var>securedDocument</var>.<var>proof</var>. Let
-<var>allProofs</var> be an empty list. If <var>proof</var> is a list, copy all
-the elements of <var>proof</var> to <var>allProofs</var>. If <var>proof</var>
-is an object add a copy of that object to <var>allProofs</var>.
+Let |proof| be set to |securedDocument|.|proof|. Let
+|allProofs| be an empty list. If |proof| is a list, copy all
+the elements of |proof| to |allProofs|. If |proof|
+is an object add a copy of that object to |allProofs|.
           </li>
           <li>
-Let the <var>unsecuredDocument</var> be a copy of the <var>securedDocument</var>
-with the <var>proof</var> attribute removed. Let <var>output</var> be a copy of
-the <var>unsecuredDocument</var>.
+Let the |unsecuredDocument| be a copy of the |securedDocument|
+with the |proof| attribute removed. Let |output| be a copy of
+the |unsecuredDocument|.
           </li>
           <li>
-Let <var>matchingProofs</var> be an empty list.
+Let |matchingProofs| be an empty list.
           </li>
           <li>
-If <var>options</var> has a <code>previousProof</code> [=struct/item=] that
-is a string, add the element from <var>allProofs</var> with an
+If |options| has a <code>previousProof</code> [=struct/item=] that
+is a string, add the element from |allProofs| with an
 <code>id</code> attribute matching <code>previousProof</code> to
-<var>matchingProofs</var>. If a proof with
+|matchingProofs|. If a proof with
 <code>id</code> equal to <code>previousProof</code>does not exist in
-<var>allProofs</var>, an error MUST be raised and SHOULD convey an error type of
+|allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var> has a <code>previousProof</code> [=struct/item=] that
+If |options| has a <code>previousProof</code> [=struct/item=] that
 is an array, add each element from
-<var>allProofs</var> with an <code>id</code> attribute that matches an element
+|allProofs| with an <code>id</code> attribute that matches an element
 of that array. If any element of <code>previousProof</code> array has an
 <code>id</code> attribute that does not match the <code>id</code> attribute
-of any element of <var>allProofs</var>, an error MUST be raised and SHOULD
+of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Set <var>unsecuredDocument.proof</var> to <var>matchingProofs</var>.
+Set |unsecuredDocument.proof| to |matchingProofs|.
             <p class="note">
 This step is critical, as it <q>binds</q> the previous proofs to the document
-prior to signing. The <var>proof</var> value for the document will be updated
+prior to signing. The |proof| value for the document will be updated
 in a later step of this algorithm.
             </p>
           </li>
           <li>
 Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>, passing
 |unsecuredDocument|, |suite|, and |options|. If
-no exceptions are raised, append the generated <var>proof</var> value to the
-<var>allProofs</var>; otherwise, raise the exception.
+no exceptions are raised, append the generated |proof| value to the
+|allProofs|; otherwise, raise the exception.
           </li>
           <li>
-Set <var>output</var>.<var>proof</var> to the value of <var>allProofs</var>.
+Set |output|.|proof| to the value of |allProofs|.
           </li>
           <li>
-Return <var>output</var> as the new <a>secured data document</a>.
+Return |output| as the new <a>secured data document</a>.
           </li>
         </ol>
       </section>
@@ -3050,7 +3050,7 @@ a <a>secured data document</a> by verifying its digital proof. The algorithm tak
           </li>
           <li>
 |expectedProofPurpose|, an optional [=string=], used to ensure that the
-<var>proof</var> was generated by the proof creator for the expected reason by the verifier. See
+|proof| was generated by the proof creator for the expected reason by the verifier. See
 [[[#proof-purposes]]] for common values.
           </li>
           <li>
@@ -3103,62 +3103,62 @@ MUST be raised and SHOULD convey an error type of
 `https://www.w3.org/TR/vc-data-model#PARSING_ERROR`.
           </li>
           <li>
-Let |proof:map| be <var>securedDocument</var>["`proof`"].
+Let |proof:map| be |securedDocument|["`proof`"].
           </li>
           <li>
-If <var>proof</var>["`type`"],
-<var>proof</var>["`verificationMethod`"], or
-<var>proof</var>["`proofPurpose`"] do not [=map/exist=],
+If |proof|["`type`"],
+|proof|["`verificationMethod`"], or
+|proof|["`proofPurpose`"] do not [=map/exist=],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
-For each known [=cryptographic suite=], run its [=suite selection algorithm=] on <var>proof</var>.
+For each known [=cryptographic suite=], run its [=suite selection algorithm=] on |proof|.
 If all of these algorithms return failure, return "invalid". Otherwise, let |suite:VC cryptographic
 suite| be an [=implementation-defined=] choice of one of the non-failure results.
           </li>
           <li>
 If |suite| requires the
-<var>proof</var>["`created`"] value, and it does not [=map/exist=],
+|proof|["`created`"] value, and it does not [=map/exist=],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
 
           </li>
           <li>
-If <var>expectedProofPurpose</var> was given, and it does not match
-<var>proof</var>["`proofPurpose`"],
+If |expectedProofPurpose| was given, and it does not match
+|proof|["`proofPurpose`"],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
           <li>
-Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
+Let |unsecuredDocument| be a copy of |securedDocument| with
 the `proof` value removed.
           </li>
           <li>
-Let <var>transformedData</var> be the result of running |suite|'s
-[=cryptographic suite/transform=] algorithm on the <var>unsecuredDocument</var>.
+Let |transformedData| be the result of running |suite|'s
+[=cryptographic suite/transform=] algorithm on the |unsecuredDocument|.
         </li>
           <li>
-Let <var>hashData</var> be the result of running |suite|'s
-[=cryptographic suite/hash=] algorithm on the <var>transformedData</var>.
+Let |hashData| be the result of running |suite|'s
+[=cryptographic suite/hash=] algorithm on the |transformedData|.
           </li>
           <li>
 Let |isProofVerified:valid or invalid| be the result of running |suite|'s
-[=cryptographic suite/verify proof=] algorithm on <var>hashData</var> and <var>proof</var>.
+[=cryptographic suite/verify proof=] algorithm on |hashData| and |proof|.
           </li>
           <li>
 If |isProofVerified| is "invalid", an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
-If <var>domain</var> was given, and it does not contain the same [=strings=] as
-<var>proof</var>["`domain`"] (treating a single [=string=] as a [=set=] containing just that
+If |domain| was given, and it does not contain the same [=strings=] as
+|proof|["`domain`"] (treating a single [=string=] as a [=set=] containing just that
 [=string=]), an error MUST be raised and SHOULD convey an error type of <a
 href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
-If <var>challenge</var> was given, and it does not match
-<var>proof</var>["`challenge`"],  an error MUST be raised and SHOULD
+If |challenge| was given, and it does not match
+|proof|["`challenge`"],  an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
@@ -3181,71 +3181,71 @@ Return a [=verification result=] with [=struct/items=]:
         <p>
 In a proof set or proof chain, a <a>secured data document</a> has a
 <code>proof</code> attribute which contains a list of proofs
-(<var>allProofs</var>).
+(|allProofs|).
 The following algorithm provides one method of checking the authenticity and
 integrity of a <a>secured data document</a>, achieved by verifying every
-proof in <var>allProofs</var>. Other approaches are possible, particularly if
+proof in |allProofs|. Other approaches are possible, particularly if
 it is only desired to verify a subset of the proofs contained in
-<var>allProofs</var>. If another approach is taken to verify only a subset of the
+|allProofs|. If another approach is taken to verify only a subset of the
 proofs, then it is important to note that any proof in that subset with a
 <code>previousProof</code> can only be considered verified if the proofs it
 references are also considered verified.
         </p>
         <p>
 Required input is a
-<a>secured data document</a> (<var>securedDocument</var>). A list of
-verification results corresponding to each proof in <var>allProofs</var> is
+<a>secured data document</a> (|securedDocument|). A list of
+verification results corresponding to each proof in |allProofs| is
 produced as output.
         </p>
         <ol class="algorithm">
           <li>
-Set <var>allProofs</var> to </var><var>securedDocument</var>.<var>proof</var>.
+Set |allProofs| to </var>|securedDocument|.|proof|.
           </li>
           <li>
-For each <var>proof</var> in <var>allProofs</var>, do the following steps:
+For each |proof| in |allProofs|, do the following steps:
           </li>
           <ol class="algorithm">
             <li>
-Let <var>matchingProofs</var> be an empty list.
+Let |matchingProofs| be an empty list.
             </li>
             <li>
-If <var>proof</var> contains a <code>previousProof</code> attribute and that
-attribute is a string, add the element from <var>allProofs</var> with an
+If |proof| contains a <code>previousProof</code> attribute and that
+attribute is a string, add the element from |allProofs| with an
 <code>id</code> attribute matching <code>previousProof</code> to
 <code>matchingProofs</code>.
-If a proof with <code>id</code> does not exist in <var>allProofs</var>, an error
+If a proof with <code>id</code> does not exist in |allProofs|, an error
 MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
 If the <code>previousProof</code> attribute is an array, add each element from
-<var>allProofs</var> with an <code>id</code> attribute that matches an element
+|allProofs| with an <code>id</code> attribute that matches an element
 of that array. If any element of <code>previousProof</code> array has an
 <code>id</code> attribute that does not match the <code>id</code> attribute
-of any element of <var>allProofs</var>, an error MUST be raised and SHOULD
+of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
             </li>
             <li>
-Let <var>unsecuredDocument</var> be a copy of <var>securedDocument</var> with
-the proof value removed and then set <var>unsecuredDocument.proof</var>
-to <var>matchingProofs</var>.
+Let |unsecuredDocument| be a copy of |securedDocument| with
+the proof value removed and then set |unsecuredDocument.proof|
+to |matchingProofs|.
             </li>
             <li>
-Run steps 5 through 8 to validate the contents of <var>proof</var>.
+Run steps 5 through 8 to validate the contents of |proof|.
             </li>
             <li>
 Run steps 10 through 15 of the algorithm in
 section <a href="#verify-proof"></a>; if no exceptions are raised, associate
-the <var>isProofVerified</var> value with this <var>proof</var>.
+the |isProofVerified| value with this |proof|.
               <p class="note">
-We specifically use the value of <var>unsecuredDocument</var> as set above,
+We specifically use the value of |unsecuredDocument| as set above,
 rather than using the value from step 5 of the algorithm in section
 <a href="#verify-proof"></a>.
               </p>
             </li>
           </ol>
           <li>
-Return the <var>allProofs</var> along with each proof's associated
-<var>isProofVerified</var> information.
+Return the |allProofs| along with each proof's associated
+|isProofVerified| information.
           </li>
         </ol>
       </section>
@@ -3257,70 +3257,70 @@ Return the <var>allProofs</var> along with each proof's associated
 The following algorithm specifies how to safely retrieve a verification method,
 such as a cryptographic <a>public key</a>, by using a <a>verification method</a>
 identifier contained in a <a>data integrity proof</a>. Required inputs are a
-<strong><a>data integrity proof</a></strong> (<var>proof</var>) and a set of
-<strong>dereferencing options</strong> (<var>options</var>). A
+<strong><a>data integrity proof</a></strong> (|proof|) and a set of
+<strong>dereferencing options</strong> (|options|). A
 <strong>verification method</strong> is produced as output.
         </p>
 
         <ol class="algorithm">
           <li>
-Let <var>vmIdentifier</var> be set to
-<var>proof</var>.<var>verificationMethod</var>.
+Let |vmIdentifier| be set to
+|proof|.|verificationMethod|.
           </li>
           <li>
-Let <var>vmPurpose</var> be set to <var>proof</var>.<var>proofPurpose</var>.
+Let |vmPurpose| be set to |proof|.|proofPurpose|.
           </li>
           <li>
-If <var>vmIdentifier</var> is not a valid URL, an error MUST be raised and SHOULD
+If |vmIdentifier| is not a valid URL, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL</a>.
           </li>
           <li>
-Let <var>controllerDocumentUrl</var> be the result of parsing
-<var>vmIdentifier</var> according to the rules of the URL scheme and extracting
+Let |controllerDocumentUrl| be the result of parsing
+|vmIdentifier| according to the rules of the URL scheme and extracting
 the primary resource identifier (without the fragment identifier).
           </li>
           <li>
-Let <var>vmFragment</var> be the result of parsing <var>vmIdentifier</var>
+Let |vmFragment| be the result of parsing |vmIdentifier|
 according to the rules of the URL scheme and extracting the secondary
 resource identifier (the fragment identifier).
           </li>
           <li>
-Let <var>controllerDocument</var> be the result of dereferencing
-<var>controllerDocumentUrl</var>, according to the rules
-of the URL scheme and using the supplied <var>options</var>.
+Let |controllerDocument| be the result of dereferencing
+|controllerDocumentUrl|, according to the rules
+of the URL scheme and using the supplied |options|.
           </li>
           <li>
-If <var>controllerDocument</var>.<var>id</var> does not match the
-<var>controllerDocumentUrl</var>, an error MUST be raised and SHOULD
+If |controllerDocument|.|id| does not match the
+|controllerDocumentUrl|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID</a>.
           </li>
           <li>
-If <var>controllerDocument</var> is not a valid <a>controller document</a>,
+If |controllerDocument| is not a valid <a>controller document</a>,
 an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT</a>.
           </li>
           <li>
-Let <var>verificationMethod</var> be the result of dereferencing the
-<var>vmFragment</var> from the <var>controllerDocument</var> according to the
-rules of the media type of the <var>controllerDocument</var>.
+Let |verificationMethod| be the result of dereferencing the
+|vmFragment| from the |controllerDocument| according to the
+rules of the media type of the |controllerDocument|.
           </li>
           <li>
-If <var>verificationMethod</var> is not a valid <a>verification method</a>,
+If |verificationMethod| is not a valid <a>verification method</a>,
 an error MUST be raised and SHOULD convey an error type of
 <a href="#INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD</a>.
           </li>
           <li>
-If <var>verificationMethod</var> is not associated with the array of
-<var>vmPurposes</var> in the <var>controllerDocument</var>, either by reference
+If |verificationMethod| is not associated with the array of
+|vmPurposes| in the |controllerDocument|, either by reference
 (URL) or by value (object), an error MUST be raised and SHOULD convey an error
 type of <a href="#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">
 INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD</a>.
           </li>
           <li>
-Return <var>verificationMethod</var> as the
+Return |verificationMethod| as the
 <strong>verification method</strong>.
           </li>
         </ol>
