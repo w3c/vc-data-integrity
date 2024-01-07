@@ -2011,7 +2011,7 @@ verifiable credential</a>, or the
 verifiable presentation</a>, during the process of
 <a data-cite="?VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
 way to check for such an association is to ensure that the value of the
-<code>controller</code> property of a proof's <a>verification method</a>
+`controller` property of a proof's <a>verification method</a>
 matches the URL value used to identify the
 <a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively.
@@ -2311,7 +2311,7 @@ content is indicated using a literal value whose datatype is set to
           </p>
 
           <p>
-The <code>cryptosuiteString</code> datatype is defined as follows:
+The `cryptosuiteString` datatype is defined as follows:
           </p>
 
           <dl>
@@ -2489,7 +2489,7 @@ privacy considerations specific to the cryptographic suite.
         </li>
         <li>
 The JSON-LD context associated with the cryptographic suite MUST have its terms
-protected from unsafe redefinition, by use of the <code>@protected</code> keyword.
+protected from unsafe redefinition, by use of the `@protected` keyword.
         </li>
       </ul>
 
@@ -2992,20 +2992,20 @@ the |unsecuredDocument|.
 Let |matchingProofs| be an empty list.
           </li>
           <li>
-If |options| has a <code>previousProof</code> [=struct/item=] that
+If |options| has a `previousProof` [=struct/item=] that
 is a string, add the element from |allProofs| with an
-<code>id</code> attribute matching <code>previousProof</code> to
+`id` attribute matching `previousProof` to
 |matchingProofs|. If a proof with
-<code>id</code> equal to <code>previousProof</code>does not exist in
+`id` equal to `previousProof`does not exist in
 |allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If |options| has a <code>previousProof</code> [=struct/item=] that
+If |options| has a `previousProof` [=struct/item=] that
 is an array, add each element from
-|allProofs| with an <code>id</code> attribute that matches an element
-of that array. If any element of <code>previousProof</code> array has an
-<code>id</code> attribute that does not match the <code>id</code> attribute
+|allProofs| with an `id` attribute that matches an element
+of that array. If any element of `previousProof` array has an
+`id` attribute that does not match the `id` attribute
 of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
@@ -3180,7 +3180,7 @@ Return a [=verification result=] with [=struct/items=]:
         <h3>Verify Proof Sets and Chains</h3>
         <p>
 In a proof set or proof chain, a <a>secured data document</a> has a
-<code>proof</code> attribute which contains a list of proofs
+`proof` attribute which contains a list of proofs
 (|allProofs|).
 The following algorithm provides one method of checking the authenticity and
 integrity of a <a>secured data document</a>, achieved by verifying every
@@ -3188,7 +3188,7 @@ proof in |allProofs|. Other approaches are possible, particularly if
 it is only desired to verify a subset of the proofs contained in
 |allProofs|. If another approach is taken to verify only a subset of the
 proofs, then it is important to note that any proof in that subset with a
-<code>previousProof</code> can only be considered verified if the proofs it
+`previousProof` can only be considered verified if the proofs it
 references are also considered verified.
         </p>
         <p>
@@ -3209,17 +3209,17 @@ For each |proof| in |allProofs|, do the following steps:
 Let |matchingProofs| be an empty list.
             </li>
             <li>
-If |proof| contains a <code>previousProof</code> attribute and that
+If |proof| contains a `previousProof` attribute and that
 attribute is a string, add the element from |allProofs| with an
-<code>id</code> attribute matching <code>previousProof</code> to
-<code>matchingProofs</code>.
-If a proof with <code>id</code> does not exist in |allProofs|, an error
+`id` attribute matching `previousProof` to
+`matchingProofs`.
+If a proof with `id` does not exist in |allProofs|, an error
 MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-If the <code>previousProof</code> attribute is an array, add each element from
-|allProofs| with an <code>id</code> attribute that matches an element
-of that array. If any element of <code>previousProof</code> array has an
-<code>id</code> attribute that does not match the <code>id</code> attribute
+If the `previousProof` attribute is an array, add each element from
+|allProofs| with an `id` attribute that matches an element
+of that array. If any element of `previousProof` array has an
+`id` attribute that does not match the `id` attribute
 of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
