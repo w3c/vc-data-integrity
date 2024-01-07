@@ -211,11 +211,12 @@
             }
           },
           postProcess: [restrictRefs],
+          xref: ["INFRA"],
           otherLinks: [{
             key: "Related Specifications",
             data: [{
               value: "The Verifiable Credentials Data Model v2.0",
-              href: "https://www.w3.org/TR/vc-data-model-2.0/"
+              href: "https://www.w3.org/TR/VC-DATA-MODEL-2.0/"
             }, {
               value: "The Edwards Digital Signature Algorithm Cryptosuites v1.0",
               href: "https://www.w3.org/TR/vc-di-eddsa/"
@@ -999,10 +1000,9 @@ cryptographic threshold signature.
             <dd>
               <p>
 The `verificationMethod` property is OPTIONAL. If present, the value
-MUST be a <a data-cite="INFRA#ordered-set">set</a> of <a>verification
-methods</a>, where each <a>verification method</a> is expressed using a <a
-data-cite="INFRA#ordered-map">map</a>. The <a>verification method</a> <a
-data-cite="INFRA#ordered-map">map</a> MUST include the `id`,
+MUST be a [=set=] of <a>verification
+methods</a>, where each <a>verification method</a> is expressed using a
+[=map=]. The <a>verification method</a> [=map=] MUST include the `id`,
 `type`, `controller`, and specific verification material
 properties that are determined by the value of `type` and are defined
 in <a href="#verification-material"></a>. A <a>verification method</a> MAY
@@ -1018,23 +1018,21 @@ documents, for which it is optional. See section <a href="#proofs"></a>.
                 <dt>id</dt>
                 <dd>
                   <p>
-The value of the `id` property for a <a>verification
-method</a> MUST be a <a data-cite="INFRA#string">string</a> that conforms to the
-conforms to the [[URL]] syntax.
+The value of the `id` property for a <a>verification method</a> MUST be a
+[=string=] that conforms to the conforms to the [[URL]] syntax.
                   </p>
                 </dd>
                 <dt>type</dt>
                 <dd>
-The value of the `type` property MUST be a <a
-data-cite="INFRA#string">string</a> that references exactly one <a>verification
-method</a> type. In order to maximize global interoperability, the
-<a>verification method</a> type SHOULD be registered in the Data Integrity Specification
-Registries [TBD -- DIS-REGISTRIES].
+The value of the `type` property MUST be a [=string=] that references exactly
+one <a>verification method</a> type. In order to maximize global
+interoperability, the <a>verification method</a> type SHOULD be registered in
+the Data Integrity Specification Registries [TBD -- DIS-REGISTRIES].
                 </dd>
                 <dt><span id="defn-controller">controller</span></dt>
                 <dd>
-The value of the `controller` property MUST be a <a
-data-cite="INFRA#string">string</a> that conforms to the [[URL]] syntax.
+The value of the `controller` property MUST be a [=string=] that conforms to
+the [[URL]] syntax.
                 </dd>
                 <dt id="defn-vm-expires">expires</dt>
                 <dd>
@@ -1268,8 +1266,8 @@ The value of the `type` property MUST contain the string `JsonWebKey`.
               <dt><dfn class="lint-ignore">publicKeyJwk</dfn></dt>
               <dd>
 The `publicKeyJwk` property is OPTIONAL. If present, its value MUST
-be a <a data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that
-conforms to [[RFC7517]]. The <a data-cite="INFRA#ordered-map">map</a> MUST NOT
+be a [=map=] representing a JSON Web Key that
+conforms to [[RFC7517]]. The [=map=] MUST NOT
 include any members of the private information class, such as `d`, as described
 in the <a href="https://datatracker.ietf.org/doc/html/rfc7517#section-8.1.1">JWK
 Registration Template</a>. It is RECOMMENDED that verification methods that use
@@ -1281,9 +1279,8 @@ public key with a compound key identifier.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyJwk</dfn></dt>
               <dd>
-The `secretKeyJwk` property is OPTIONAL. If present, its value MUST be a <a
-data-cite="INFRA#ordered-map">map</a> representing a JSON Web Key that conforms
-to [[RFC7517]].
+The `secretKeyJwk` property is OPTIONAL. If present, its value MUST be a [=map=]
+representing a JSON Web Key that conforms to [[RFC7517]].
               </dd>
             </dl>
 
@@ -1368,15 +1365,14 @@ allows them to be used by more than one <a>verification relationship</a>.
             </p>
 
             <p>
-If the value of a <a>verification method</a> property is a <a
-data-cite="INFRA#ordered-map">map</a>, the <a>verification method</a> has been
-embedded and its properties can be accessed directly. However, if the value is a
-URL <a data-cite="INFRA#string">string</a>, the <a>verification method</a> has
-been included by reference and its properties will need to be retrieved from
-elsewhere in the <a>controller document</a> or from another <a>controller document</a>. This
-is done by dereferencing the URL and searching the resulting <a>resource</a> for a
-<a>verification method</a> <a data-cite="INFRA#ordered-map">map</a> with an
-`id` property whose value matches the URL.
+If the value of a <a>verification method</a> property is a [=map=], the
+<a>verification method</a> has been embedded and its properties can be accessed
+directly. However, if the value is a URL [=string=], the <a>verification
+method</a> has been included by reference and its properties will need to be
+retrieved from elsewhere in the <a>controller document</a> or from another
+<a>controller document</a>. This is done by dereferencing the URL and searching
+the resulting <a>resource</a> for a <a>verification method</a> [=map=] with
+an `id` property whose value matches the URL.
             </p>
 
             <pre class="example nohighlight"
@@ -1456,7 +1452,7 @@ challenge-response protocol.
               <dt id="defn-authentication">authentication</dt>
               <dd>
 The `authentication` property is OPTIONAL. If present, the associated
-value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
+value MUST be a [=set=] of one or more
 <a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
 referenced.
               </dd>
@@ -1526,7 +1522,7 @@ the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2.0]].
               <dt><dfn id="defn-assertionMethod">assertionMethod</dfn></dt>
               <dd>
 The `assertionMethod` property is OPTIONAL. If present, the
-associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
+associated value MUST be a [=set=] of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
               </dd>
@@ -1582,7 +1578,7 @@ the purposes of establishing a secure communication channel with the recipient.
               <dt><dfn id="defn-keyAgreement">keyAgreement</dfn></dt>
               <dd>
 The `keyAgreement` property is OPTIONAL. If present, the associated
-value MUST be a <a data-cite="INFRA#ordered-set">set</a> of one or more
+value MUST be a [=set=] of one or more
 <a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
 referenced.
               </dd>
@@ -1633,7 +1629,7 @@ authorization to update the <a>controller document</a>.
               <dt><dfn id="defn-capabilityInvocation">capabilityInvocation</dfn></dt>
               <dd>
 The `capabilityInvocation` property is OPTIONAL. If present, the
-associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
+associated value MUST be a [=set=] of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
               </dd>
@@ -1700,7 +1696,7 @@ to access a specific HTTP API to a subordinate.
               <dt><dfn class="lint-ignore" id="defn-capabilityDelegation">capabilityDelegation</dfn></dt>
               <dd>
 The `capabilityDelegation` property is OPTIONAL. If present, the
-associated value MUST be a <a data-cite="INFRA#ordered-set">set</a> of
+associated value MUST be a [=set=] of
 one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
 embedded or referenced.
               </dd>
@@ -3077,7 +3073,7 @@ This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose [=st
           <dd>null if [=verification result/status=] is "invalid" or a [=MIME type=], which may
           include [=MIME type/parameters=]</dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
-          <dd>a [=list=] of <dfn data-cite="vc-data-model#dfn-problemdetails">ProblemDetails</dfn>,
+          <dd>a [=list=] of <dfn data-cite="VC-DATA-MODEL-2.0#dfn-problemdetails">ProblemDetails</dfn>,
           defaulting to an empty [=list=]</dd>
           <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
           <dd>a [=list=] of [=ProblemDetails=], defaulting to an empty [=list=]</dd>
@@ -3100,7 +3096,7 @@ Let |securedDocument:map| be the result of running [=parse JSON bytes to an Infr
           <li>
 If |securedDocument| is not a [=map=] or |securedDocument|["`proof`"] is not a [=map=], an error
 MUST be raised and SHOULD convey an error type of
-`https://www.w3.org/TR/vc-data-model#PARSING_ERROR`.
+`https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR`.
           </li>
           <li>
 Let |proof:map| be |securedDocument|["`proof`"].
