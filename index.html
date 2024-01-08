@@ -4372,6 +4372,146 @@ Ensure that base URL is set to null when processing as RDF.
         </li>
       </ul>
     </section>
+    <section class="appendix informative">
+      <h2>Understanding Proof Sets and Proof Chains</h2>
+      <p>
+Proof sets and chains allow multiple proofs to be carried in a VC, i.e., instead
+of a single <em>proof</em> included in the signed VC we can have an array of
+proofs as shown in the previous examples. The elements of this array can be
+either members of <em>proof set</em> or a <em>proof chain</em>. The purpose of
+this section is to explain the intended use of each of these entities and, in
+particular, their differing security properties. These differing security
+properties lead to differences in the processing in section <a href="#add-proof-set-chain"></a>.
+      </p>
+      <p>
+We are going to represent VCs and their proofs in a highly abbreviated manner so
+that the key security properties can be observed.
+      </p>
+      <p>
+We consider a scenario with three signatories: a CEO, a CFO, and a VP of
+Engineering. Each will need to have a public and private key pair for signing a
+document. We denote the private/public keys of each of these signatories by
+<em>priv/pubCEO</em>, <em>priv/pubCFO</em>, and <em>priv/pubVPE</em>
+respectively.
+      </p>
+      <p>
+When constructing a <em>proof set</em> where each of the signatories signs a
+document without concern we construct a proof symbolically as:
+      </p>
+      <pre><code class="language-javascript">
+{
+  &quot;type&quot;: &quot;DataIntegrityProof&quot;,
+  &quot;cryptosuite&quot;: &quot;jcs-eddsa-2022&quot;,
+  &quot;created&quot;: &quot;2023-03-05T19:23:24Z&quot;,
+  &quot;proofPurpose&quot;: &quot;assertionMethod&quot;,
+  &quot;verificationMethod&quot;: pubCEO,
+  &quot;proofValue&quot;: signature(privCEO, document)
+}
+      </code></pre>
+      <p>
+Where <em>pubCEO</em> is used as a placeholder for a reference that resolves to
+the CEO's public key and <code>signature(priv, doc)</code> denotes the
+computation of a digital signature by a particular data integrity cryptosuite
+using a particular private key over a particular document. The <em>type</em>,
+<em>cryptosuite</em>,  <em>created</em>, and <em>proofPurpose</em> attributes do
+not factor into our discussion so we will omit them. In particular below we show
+all the proofs in a <em>proof set</em> on a document that has been signed by the
+VP of engineering, CFO, and CEO:
+      </p>
+      <pre><code class="language-javascript">
+{ // Rest of VC document not shown, this proof set will verify
+  &quot;proof&quot;: [
+  {verificationMethod: pubVPE, proofValue: signature(privVPE, document)},
+  {verificationMethod: pubCFO, proofValue: signature(privCFO, document)},
+  {verificationMethod: pubCEO, proofValue: signature(privCEO, document)}]
+}
+      </code></pre>
+      <p>
+The <em>holder</em> or any other intermediary receiving a signed VC containing a
+<em>proof set</em> is able to remove any of the <em>proofs</em> within the set
+prior to passing it on to another entity and this VC will still verify. This may
+or may not be the intent. For the signatories sending a birthday card to a
+valued employee this is probably fine. If we are trying to model a business
+process where approvals ascend the company hierarchy this would not be ideal
+since any intermediary could remove signatures from the <em>proof set</em> and
+still have it verify, i.e., below it looks like the CFO and CEO just approved
+something without the VP of engineering's concurrence.
+      </p>
+      <pre><code class="language-javascript">
+{ // Rest of VC document not shown, this proof set will also verify
+  &quot;proof&quot;: [
+  {verificationMethod: pubCFO, proofValue: signature(privCFO, document)},
+  {verificationMethod: pubCEO, proofValue: signature(privCEO, document)}]
+}
+      </code></pre>
+      <p>
+We can introduce a &quot;dependency relation&quot; between <em>proofs</em> in a
+<em>proof set</em> by assigning the proof that another proof relies on, i.e.,
+the <em>dependent proof</em>, an <em>id</em> and the <em>relying proof</em> will
+have a list (or single item) denoting <em>previousProofs</em>. Such
+<em>dependency chains</em> can have arbitrary depth. The <strong>intent</strong>
+of such a <em>proof chain</em> is to model an approval chain in a business
+process or a notary witnessing analog signatures. In such cases we CANNOT allow
+the <em>proofs</em> that are relied upon to be <strong>substituted</strong> with
+other proofs or removed.
+      </p>
+      <p>
+Let's see how a <em>proof chain</em> is constructed where the VP of Engineering
+signs off on the document first, based on the VP of engineering's signature and
+a review the CFO then signs off of the document, finally based on both the prior
+signatures and a review the CEO signs off on the document. Since others will be
+referring to the VP of engineering's signature we need to add a <em>id</em> to
+the proof options. First the VC of engineering signs the VC:
+      </p>
+      <pre><code class="language-javascript">
+{ // Rest of VC document not shown, this proof set will verify
+  &quot;proof&quot;: {id: 0, verificationMethod: pubVPE, proofValue: signature(privVPE, document)}
+}
+      </code></pre>
+      <p>
+Next, the CFO receives the document, verifies that the VP of engineering signed
+it and signs it based on a review and on the VP of Engineering signing. For this
+we need to set up the <em>proof chain</em> by indicating a dependency on the
+proof in the document just received, i.e., <code>previousProof = 0</code>. The
+processing algorithm has us &quot;bind&quot; the previous proof to the unsigned
+document. Denote the this proof by <em>proof0</em> and &quot;binding&quot; this
+information to the document by <code>document + proof0</code>:
+      </p>
+      <pre><code class="language-javascript">
+{ // Rest of VC document not shown
+  &quot;proof&quot;: [
+  {id: 0, verificationMethod: pubVPE, proofValue: signature(VP_Eng, document)},
+  {id: 1, verificationMethod: pubCFO, previousProof: 0, proofValue: signature(privCFO, document + proof0)}]
+}
+      </code></pre>
+      <p>
+Now when the CEO validates the received the VC with the above <em>proof
+chain</em> they will check that the CFO signed based on the VP of Engineering
+signing it. First, they will check the proof/signature with
+<code>id = 0</code> against the public key of the VP of Engineering. Note that
+this proof/signature is over the original document. Next, the CEO will check
+the proof/signature <code>id = 1</code> against the public key of the CFO.
+However, to make sure that the CFO signed with the document knowing, and with
+proof, that the VP of engineering signed we verify this signature/proof over
+the combination of the document and <em>proof0</em>. If validation is
+successful the CEO signs producing a proof over the document and
+<em>proof1</em> (the proof with <code>id = 1</code>). The final signed chain
+looks like:
+      </p>
+      <pre><code class="language-javascript">
+{ // Rest of VC document not shown
+  &quot;proof&quot;: [
+  {id: 0, verificationMethod: pubVPE, proofValue: signature(VP_Eng, document)},
+  {id: 1, verificationMethod: pubCFO, previousProof: 0, proofValue: signature(privCFO, document + proof0)},
+  {id: 2, verificationMethod: pubCEO, previousProof: 1, proofValue: signature(privCEO, document + proof1)},
+  ]
+}
+      </code></pre>
+      <p>
+The recipient of this VC then validates it in a similar way as above but with one extra step.
+      </p>
+    </section>
+
     <section class="informative">
       <h2>Acknowledgements</h2>
 
