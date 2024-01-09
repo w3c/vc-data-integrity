@@ -4418,9 +4418,9 @@ VP of engineering, CFO, and CEO:
       <pre><code class="language-javascript">
 { // Rest of VC document not shown, this proof set will verify
   &quot;proof&quot;: [
-  {verificationMethod: pubVPE, proofValue: signature(privVPE, document)},
-  {verificationMethod: pubCFO, proofValue: signature(privCFO, document)},
-  {verificationMethod: pubCEO, proofValue: signature(privCEO, document)}]
+  {&quot;verificationMethod&quot;: pubVPE, &quot;proofValue&quot;: signature(privVPE, document)},
+  {&quot;verificationMethod&quot;: pubCFO, &quot;proofValue&quot;: signature(privCFO, document)},
+  {&quot;verificationMethod&quot;: pubCEO, &quot;proofValue&quot;: signature(privCEO, document)}]
 }
       </code></pre>
       <p>
@@ -4437,8 +4437,8 @@ something without the VP of engineering's concurrence.
       <pre><code class="language-javascript">
 { // Rest of VC document not shown, this proof set will also verify
   &quot;proof&quot;: [
-  {verificationMethod: pubCFO, proofValue: signature(privCFO, document)},
-  {verificationMethod: pubCEO, proofValue: signature(privCEO, document)}]
+  {&quot;verificationMethod&quot;: pubCFO, &quot;proofValue&quot;: signature(privCFO, document)},
+  {&quot;verificationMethod&quot;: pubCEO, &quot;proofValue&quot;: signature(privCEO, document)}]
 }
       </code></pre>
       <p>
@@ -4462,14 +4462,16 @@ the proof options. First the VC of engineering signs the VC:
       </p>
       <pre><code class="language-javascript">
 { // Rest of VC document not shown, this proof set will verify
-  &quot;proof&quot;: {id: 0, verificationMethod: pubVPE, proofValue: signature(privVPE, document)}
+  &quot;proof&quot;: {&quot;id&quot;: &quot;urn:proof-0&quot;, &quot;verificationMethod&quot;: pubVPE,
+    &quot;proofValue&quot;: signature(privVPE, document)}
 }
       </code></pre>
       <p>
 Next, the CFO receives the document, verifies that the VP of engineering signed
 it and signs it based on a review and on the VP of Engineering signing. For this
 we need to set up the <em>proof chain</em> by indicating a dependency on the
-proof in the document just received, i.e., <code>previousProof = 0</code>. The
+proof in the document just received, i.e.,
+<code>previousProof = &quot;urn:proof-0&quot;</code>. The
 processing algorithm has us &quot;bind&quot; the previous proof to the unsigned
 document. Denote the this proof by <em>proof0</em> and &quot;binding&quot; this
 information to the document by <code>document + proof0</code>:
@@ -4477,8 +4479,10 @@ information to the document by <code>document + proof0</code>:
       <pre><code class="language-javascript">
 { // Rest of VC document not shown
   &quot;proof&quot;: [
-  {id: 0, verificationMethod: pubVPE, proofValue: signature(VP_Eng, document)},
-  {id: 1, verificationMethod: pubCFO, previousProof: 0, proofValue: signature(privCFO, document + proof0)}]
+  {&quot;id&quot;: &quot;urn:proof-0&quot;, &quot;verificationMethod&quot;: pubVPE,
+    &quot;proofValue&quot;: signature(VP_Eng, document)},
+  {&quot;id&quot;: &quot;urn:proof-1&quot;, &quot;verificationMethod&quot;: pubCFO, &quot;previousProof&quot;: &quot;urn:proof-0&quot;,
+    &quot;proofValue&quot;: signature(privCFO, document + proof0)}]
 }
       </code></pre>
       <p>
@@ -4487,20 +4491,24 @@ chain</em> they will check that the CFO signed based on the VP of Engineering
 signing it. First, they will check the proof/signature with
 <code>id = 0</code> against the public key of the VP of Engineering. Note that
 this proof/signature is over the original document. Next, the CEO will check
-the proof/signature <code>id = 1</code> against the public key of the CFO.
+the proof/signature <code>id = &quot;urn:proof-1&quot;</code> against the public
+key of the CFO.
 However, to make sure that the CFO signed with the document knowing, and with
 proof, that the VP of engineering signed we verify this signature/proof over
 the combination of the document and <em>proof0</em>. If validation is
 successful the CEO signs producing a proof over the document and
-<em>proof1</em> (the proof with <code>id = 1</code>). The final signed chain
-looks like:
+<em>proof1</em> (the proof with <code>id = &quot;urn:proof-1&quot;</code>).
+The final signed chain looks like:
       </p>
       <pre><code class="language-javascript">
 { // Rest of VC document not shown
   &quot;proof&quot;: [
-  {id: 0, verificationMethod: pubVPE, proofValue: signature(VP_Eng, document)},
-  {id: 1, verificationMethod: pubCFO, previousProof: 0, proofValue: signature(privCFO, document + proof0)},
-  {id: 2, verificationMethod: pubCEO, previousProof: 1, proofValue: signature(privCEO, document + proof1)},
+  {&quot;id&quot;: &quot;urn:proof-0&quot;, &quot;verificationMethod&quot;: pubVPE,
+    &quot;proofValue&quot;: signature(VP_Eng, document)},
+  {&quot;id&quot;: &quot;urn:proof-1&quot;, &quot;verificationMethod&quot;: pubCFO, &quot;previousProof&quot;: &quot;urn:proof-0&quot;,
+    proofValue: signature(privCFO, document + proof0)},
+  {&quot;id&quot;: &quot;urn:proof-2&quot;, &quot;verificationMethod&quot;: pubCEO, &quot;previousProof&quot;: &quot;urn:proof-1&quot;,
+    &quot;proofValue&quot;: signature(privCEO, document + proof1)},
   ]
 }
       </code></pre>
