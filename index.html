@@ -637,13 +637,15 @@ by a verifier during the verification process.
           <dt><dfn class="lint-ignore">created</dfn></dt>
           <dd>
 The date and time the proof was created is OPTIONAL and, if included, MUST be
-specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string.
+specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string and SHOULD include a
+zone offset, preferably Z (meaning UTC).
           </dd>
 
           <dt id="defn-proof-expires">expires</dt>
           <dd>
-The `expires` property is OPTIONAL. If present, it MUST be an [[XMLSCHEMA11-2]]
-`dateTimeStamp` string specifying when the proof expires.
+The `expires` property is OPTIONAL and, if present, specifies when the proof
+expires. If present, it MUST be an [[XMLSCHEMA11-2]] `dateTimeStamp` string and
+SHOULD include a zone offset, preferably Z (meaning UTC).
           </dd>
 
           <dt id="defn-domain">domain</dt>
