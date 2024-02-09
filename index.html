@@ -646,8 +646,10 @@ an offset MUST be interpreted as UTC.
           <dt id="defn-proof-expires">expires</dt>
           <dd>
 The `expires` property is OPTIONAL and, if present, specifies when the proof
-expires. If present, it MUST be an [[XMLSCHEMA11-2]] `dateTimeStamp` string and
-SHOULD include a zone offset, preferably Z (meaning UTC).
+expires. If present, it MUST be an [[XMLSCHEMA11-2]] `dateTimeStamp` string,
+either in Universal Coordinated Time (UTC), denoted by a Z at the end of the
+value, or with a time zone offset relative to UTC. Time values that are
+incorrectly serialized without an offset MUST be interpreted as UTC.
           </dd>
 
           <dt id="defn-domain">domain</dt>
