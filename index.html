@@ -14,7 +14,7 @@
     <script type="text/javascript" class="remove">
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          specStatus:           "CR",
+          specStatus:           "CRD",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "vc-data-integrity",
@@ -23,7 +23,7 @@
           subtitle: "Securing the Integrity of Verifiable Credential Data",
 
           // if you wish the publication date to be other than today, set this
-          publishDate:  "2023-11-14",
+          //publishDate:  "2023-11-14",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
@@ -211,7 +211,7 @@
             }
           },
           postProcess: [restrictRefs],
-          xref: ["INFRA"],
+          xref: ["INFRA", "VC-DATA-MODEL-2.0"],
           otherLinks: [{
             key: "Related Specifications",
             data: [{
@@ -1988,10 +1988,7 @@ this specification.
 
         <p>
 Cryptographic suites that implement this specification can be used to secure
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
-verifiable credentials</a> and
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
-verifiable presentations</a>. Implementers
+[=verifiable credentials=] and [=verifiable presentations=]. Implementers
 that are addressing those use cases are cautioned that additional checks might
 be appropriate when processing those types of documents.
         </p>
