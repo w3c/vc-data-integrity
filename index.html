@@ -2459,37 +2459,58 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-          The specification MUST define a <dfn>suite selection algorithm</dfn> that accepts a [=JSON
-          object=] |proof| and uses the properties described in [[[#proofs]]] to return either
-          failure or a [=VC cryptographic suite=] [[Infra]] [=struct=]. This algorithm SHOULD be
-          registered in [[[VC-SPECS]]]. A
-          <dfn class="export">VC cryptographic suite</dfn> [=struct=] has the following
-          [=struct/items=].
+The specification MUST define a <dfn>suite selection algorithm</dfn> that
+accepts a set of options ([=map=] |options|) and returns a
+[=cryptographic suite=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
+registered in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the
+following [=struct/items=].
           <dl data-dfn-for="cryptographic suite">
             <dt><dfn>transform</dfn></dt>
-            <dd>A [=transformation algorithm=] that takes a [=JSON object=] as input and returns a
-            [=JSON object=].</dd>
-            <dt><dfn>hash</dfn></dt>
-            <dd>A [=hashing algorithm=] that takes a [=JSON object=] as input and returns a [=byte
-            sequence=].</dd>
-            <dt><dfn>proof creation options</dfn></dt>
             <dd>
-              <p>A [=struct=] type that needs to be supplied to the [=cryptographic suite/serialize
-              proof=] operation.</p>
-              <p class="note">To sign data, cryptographic suites need to be able to use a private
-              key. This private key will often be implied by a field in the [=proof creation
-              options=], but it is often a better design to avoid passing the key directly. Passing
-              a key identifier or an asynchronous signing algorithm allows implementations to take
-              advantage of hardware security modules (HSMs) to get better security.</p>
+A [=transformation algorithm=] that takes an [=unsecured data document=]
+([=JSON object=] |unsecuredDocument|) and transformation options
+([=struct=] |options|) as input and produces a
+<em>transformed data document</em> ([=JSON object=] |transformedDocument|),
+or an error, as output.
             </dd>
-            <dt><dfn>serialize proof</dfn></dt>
-            <dd>A [=proof serialization algorithm=] that takes a [=byte sequence=] and an instance
-            of this suite's [=proof creation options=] type as input and returns a [=JSON object=]
-            or failure.</dd>
-            <dt><dfn>verify proof</dfn></dt>
-            <dd>A [=proof verification algorithm=] that takes an [=unsecured data document=] and a
-            [=JSON object=] with the properties described in [[[#proofs]]], and returns "valid" or
-            "invalid".</dd>
+            <dt><dfn>hash</dfn></dt>
+            <dd>
+A [=hashing algorithm=] that takes a transformed data document
+([=JSON object=] |transformedDocument|) and canonical proof configuration
+([=struct=] |canonicalProofConfig|) as input and returns a [=byte sequence=],
+or an error, as output.
+            </dd>
+            <dt><dfn>createProofConfig</dfn></dt>
+            <dd>
+              <p>
+An algorithm that takes proof options ([=struct=] |options|) as input and
+produces a proof configuration ([=struct=] proofConfig) as output, which is
+then supplied to the [=cryptographic suite/serializeProof=] algorithm. If a
+failure occurs, and error is produced.
+              </p>
+              <p class="note" title="Avoid direct use of cryptographic secrets">
+To sign data, cryptographic suites need to be able to use a private key. This
+private key will often be implied by a field in the [=createProofConfig=],
+but it is often a better design to avoid passing the key directly. Passing a key
+identifier or an asynchronous signing algorithm allows implementations to take
+advantage of hardware security modules (HSMs) to get better security.
+              </p>
+            </dd>
+            <dt><dfn>serializeProof</dfn></dt>
+            <dd>
+An [=proof serialization algorithm=] that takes cryptographic hash data
+([=byte sequence=] |hashData|) and proof options ([=struct=] options) as
+input and produces a signal digital proof value ([=JSON object=] proof), or
+an error, as output.
+            </dd>
+            <dt><dfn>verifyProof</dfn></dt>
+            <dd>
+A [=proof verification algorithm=] that takes an  are cryptographic hash data
+([=byte sequence=] |hashData|), a digital proof
+([=byte sequence=] |proofBytes|) and proof options ([=struct=] options) as
+input and produces a verification result represented as a boolean value, or
+an error, as output.
+            </dd>
           </dl>
         </li>
         <li>
@@ -2917,9 +2938,10 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 The following algorithm specifies how to add a digital proof to a document,
 which  can be used to verify the authenticity and integrity of an
 <a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> (|unsecuredDocument|), a <a>VC cryptographic suite</a>
-(|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
-options=] (|options|). A <a>secured data document</a> is produced as output. Whenever this algorithm
+<a>unsecured data document</a> (|unsecuredDocument|), a <a>cryptographic
+suite</a> (|suite:cryptographic suite|), and an instance of |suite|'s
+[=cryptographic suite/createProofConfig=] (|options|). A
+<a>secured data document</a> is produced as output. Whenever this algorithm
 encodes strings, it MUST use UTF-8 encoding.
         </p>
 
@@ -2936,8 +2958,8 @@ Let |hashData| be the result of running |suite|'s [=cryptographic suite/hash=] a
 the |transformedData|.
           </li>
           <li>
-Let |proof| be the result of running |suite|'s [=cryptographic suite/serialize proof=]
-algorithm on |hashData| and |options|.
+Let |proof| be the result of running |suite|'s
+[=cryptographic suite/serializeProof=] algorithm on |hashData| and |options|.
           </li>
           <li>
 If the |proof|.|type|,
@@ -2987,10 +3009,11 @@ via the digital proof.
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a>secured data document</a>
-(|securedDocument|), a <a>VC cryptographic suite</a>
-(|suite:VC cryptographic suite|), and an instance of |suite|'s [=cryptographic suite/proof creation
-options=] (|options|). A new <a>secured data document</a> is produced as
-output. Whenever this algorithm encodes strings, it MUST use UTF-8 encoding.
+(|securedDocument|), a <a>cryptographic suite</a>
+(|suite:cryptographic suite|), and an instance of |suite|'s [=cryptographic
+suite/createProofConfig=] (|options|). A new <a>secured data document</a> is
+produced as output. Whenever this algorithm encodes strings, it MUST use UTF-8
+encoding.
         </p>
 
         <ol class="algorithm">
@@ -3161,7 +3184,7 @@ Let |hashData| be the result of running |suite|'s
           </li>
           <li>
 Let |isProofVerified:valid or invalid| be the result of running |suite|'s
-[=cryptographic suite/verify proof=] algorithm on |hashData| and |proof|.
+[=cryptographic suite/verifyProof=] algorithm on |hashData| and |proof|.
           </li>
           <li>
 If |isProofVerified| is "invalid", an error MUST be raised and SHOULD convey an error type of
