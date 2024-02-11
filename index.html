@@ -169,7 +169,7 @@
               publisher: "IETF"
             },
             "VC-SPECS": {
-              title: "Verifiable Credential Specifications Directory",
+              title: "The Verifiable Credential Specifications Directory",
               href: "https://w3c.github.io/vc-specs-dir/",
               authors: [
                 "Manu Sporny"
@@ -2936,13 +2936,15 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 
         <p>
 The following algorithm specifies how to add a digital proof to a document,
-which  can be used to verify the authenticity and integrity of an
+which can be used to verify the authenticity and integrity of an
 <a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> (|unsecuredDocument|), a <a>cryptographic
-suite</a> (|suite:cryptographic suite|), and an instance of |suite|'s
-[=cryptographic suite/createProofConfig=] (|options|). A
-<a>secured data document</a> is produced as output. Whenever this algorithm
-encodes strings, it MUST use UTF-8 encoding.
+<a>unsecured data document</a> ([=JSON object=] |unsecuredDocument|) and a set
+of options ([=struct=] |options|). A <a>secured data document</a>, or an
+error, is produced as output. Whenever this algorithm encodes strings, it MUST
+use UTF-8 encoding. The set of known [=cryptographic suites=]
+([=list=] |cryptosuites|) is also made available to the algorithm in an
+implementation-specific manner, which SHOULD utilize [[[VC-SPECS]]] to discover
+known [=cryptographic suites=].
         </p>
 
         <ol class="algorithm">
@@ -2950,28 +2952,40 @@ encodes strings, it MUST use UTF-8 encoding.
 Let |output| be a copy of |unsecuredDocument|.
           </li>
           <li>
-Let |transformedData| be the result of running |suite|'s [=cryptographic suite/transform=]
-algorithm on |unsecuredDocument|.
-          </li>
-          <li>
-Let |hashData| be the result of running |suite|'s [=cryptographic suite/hash=] algorithm on
-the |transformedData|.
-          </li>
-          <li>
-Let |proof| be the result of running |suite|'s
-[=cryptographic suite/serializeProof=] algorithm on |hashData| and |options|.
-          </li>
-          <li>
-If the |proof|.|type|,
-|proof|.|verificationMethod|,
-or |proof|.|proofPurpose| values are not set, an error
+Set |suite:cryptographic suite| to the first non-empty result from running the
+[=suite selection algorithm=] associated with each item in |cryptosuites|,
+passing |options| as a parameter. If no suite is found, an error
 MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
+          </li>
           <li>
-If the <a>cryptographic suite</a> requires the use of a created timestamp,
-and the |proof|.|created| value is not set, a
-`PROOF_GENERATION_ERROR` MUST be raised.
+Let |proofConfig| be the result of running |suite|'s
+[=cryptographic suite/createProofConfig=] algorithm on |options|.
+          </li>
+          <li>
+Let |transformedData| be the result of running |suite|'s
+[=cryptographic suite/transform=] algorithm with |unsecuredDocument| and
+|options| passed as parameters.
+          </li>
+          <li>
+Let |hashData| be the result of running |suite|'s [=cryptographic suite/hash=]
+algorithm with |transformedData| and |proofConfig| passed as a parameters.
+          </li>
+          <li>
+Let |proof| be the result of running |suite|'s
+[=cryptographic suite/serializeProof=] algorithm with |hashData| and |options|
+passed as parameters.
+          </li>
+          <li>
+If the |proof|.|type|, |proof|.|verificationMethod|, or |proof|.|proofPurpose|
+values are not set, an error MUST be raised and SHOULD convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+          </li>
+          <li>
+If the <a>cryptographic suite</a> requires the use of a created timestamp, and
+the |proof|.|created| value is not set, a `PROOF_GENERATION_ERROR` MUST be
+raised.
           </li>
           <li>
 If |options| has a non-null |domain| [=struct/item=], it MUST be equal to
