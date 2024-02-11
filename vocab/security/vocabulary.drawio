@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-10-18T06:59:33.055Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="IhpbdUE1Z5rGB04jLSLF" version="22.0.2" type="device">
+<mxfile host="Electron" modified="2024-02-04T15:27:01.598Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="WWMKmeTrPV5vMB27TpU0" version="22.1.21" type="device">
   <diagram name="Page-1" id="hQ0IBVJ5jpEcegRt-_B3">
-    <mxGraphModel dx="1710" dy="1142" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1943" dy="1368" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -407,32 +407,32 @@
         </mxCell>
         <UserObject label="&lt;i&gt;verificationMethod&lt;/i&gt;" link="https://w3id.org/security#verificationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-38">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="89.75691176470589" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="89.76" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="&lt;i&gt;authentication&lt;/i&gt;" link="https://w3id.org/security#authentication" id="Uf8WLKuzS3drS_BCJ-BJ-39">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="137.60470588235296" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="137.6" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="&lt;i&gt;assertionMethod&lt;/i&gt;" link="https://w3id.org/security#assertionMethod" id="Uf8WLKuzS3drS_BCJ-BJ-40">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="185.45250000000004" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="185.45" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;capabilityDelegation&lt;/i&gt;" link="https://w3id.org/security#capabilityDelegation" id="Uf8WLKuzS3drS_BCJ-BJ-41">
+        <UserObject label="&lt;i&gt;capabilityDelegationMethod&lt;/i&gt;" link="https://w3id.org/security#capabilityDelegationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-41">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="233.30029411764707" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="233.3" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;capabilityInvocation&lt;/i&gt;" link="https://w3id.org/security#capabilityInvocation" id="Uf8WLKuzS3drS_BCJ-BJ-42">
+        <UserObject label="&lt;i&gt;capabilityInvocationMethod&lt;br&gt;&lt;/i&gt;" link="https://w3id.org/security#capabilityInvocationMethod" id="Uf8WLKuzS3drS_BCJ-BJ-42">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="281.14808823529415" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="281.15" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="&lt;i&gt;keyAgreement&lt;/i&gt;" link="https://w3id.org/security#keyAgreement" id="Uf8WLKuzS3drS_BCJ-BJ-43">
+        <UserObject label="&lt;i&gt;keyAgreementMethod&lt;/i&gt;" link="https://w3id.org/security#keyAgreementMethod" id="Uf8WLKuzS3drS_BCJ-BJ-43">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
-            <mxGeometry x="1398.004710327456" y="328.99588235294124" width="163.7314231738035" height="32.536500000000004" as="geometry" />
+            <mxGeometry x="1380" y="329" width="210" height="32.54" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="multibase" link="https://w3id.org/security#cryptosuiteString" id="aMvtbWUda6Bs1y7FLRK9-2">

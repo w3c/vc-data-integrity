@@ -105,6 +105,10 @@
 		    text-align: center;
       }
 
+      summary {
+        font-weight: normal !important;
+      }
+
     </style>
   </head>
   <body  typeof="owl:Ontology">
@@ -171,17 +175,24 @@
       </dl>
     </section>
 
+    <section>
+      <h2><code>@context</code> files</h2>
+      <p>The following <code>@context</code> files make use of the terms defined in this specification:</p>
+      <ul id="contexts">
+      </ul>
+    </section>
+
     <section id="term_definitions">
       <h1>Regular terms</h1>
+
+      <section id="property_definitions" class="term_definitions">
+        <h2>Property definitions</h2>
+      </section>
 
       <section id="class_definitions" class="term_definitions">
         <h2>Class definitions</h2>
       </section>
   
-      <section id="property_definitions" class="term_definitions">
-        <h2>Property definitions</h2>
-      </section>
-
       <section id="datatype_definitions" class="term_definitions">
         <h2>Datatype definitions</h2>
       </section>
@@ -199,14 +210,14 @@
         normatively specify them.
       </p>
     
-      <section id="reserved_class_definitions" class="term_definitions">
-        <h2>Reserved classes</h2>
-      </section>
-    
       <section id="reserved_property_definitions" class="term_definitions">
         <h2>Reserved properties</h2>
       </section>
 
+      <section id="reserved_class_definitions" class="term_definitions">
+        <h2>Reserved classes</h2>
+      </section>
+    
       <section id="reserved_datatype_definitions" class="term_definitions">
         <h2>Reserved datatype definitions</h2>
       </section>
@@ -223,6 +234,10 @@
         <br><br>New applications should not use them.
       </p>
 
+      <section id="deprecated_property_definitions" class="term_definitions">
+        <h2>Deprecated properties</h2>
+      </section>
+
       <section id="deprecated_class_definitions" class="term_definitions">
         <h2>Deprecated classes</h2>
       </section>
@@ -230,11 +245,7 @@
       <section id="deprecated_datatype_definitions" class="term_definitions">
         <h2>Deprecated datatype definitions</h2>
       </section>
-  
-      <section id="deprecated_property_definitions" class="term_definitions">
-        <h2>Deprecated properties</h2>
-      </section>
-  
+    
       <section id="deprecated_individual_definitions" class="term_definitions">
         <h2>Deprecated individuals</h2>
       </section>
