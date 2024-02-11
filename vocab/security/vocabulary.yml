@@ -1,6 +1,7 @@
 vocab:
   id: sec
   value: https://w3id.org/security#
+  context: https://w3id.org/security/data-integrity/v2
 
 prefix:
   - id: cred
@@ -26,6 +27,7 @@ class:
   - id: ProofGraph
     label: An RDF Graph for a digital proof
     comment: Instances of this class are <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF12-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a> instance.
+    context: none
 
   - id: VerificationMethod
     label: Verification method
@@ -35,6 +37,7 @@ class:
     label: A Data Integrity Proof
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
+    context: [vocab,https://www.w3.org/ns/credentials/v2]
 
   - id: Multikey
     label: Multikey Verification Method
@@ -43,26 +46,30 @@ class:
     see_also:
       - label: EdDSA Cryptosuite v2022
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
+    context: https://w3id.org/security/multikey/v1
 
   - id: JsonWebKey
     label: JSON Web Key Verification Method
     upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#jsonwebkey
+    context: https://w3id.org/security/jwk/v1 
 
   - id: Ed25519VerificationKey2020
     label: ED2559 Verification Key, 2020 version
     upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519verificationkey2020
+    context: none
 
   - id: Ed25519Signature2020
     label: Ed25519 Signature Suite, 2020 version
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#ed25519signature2020
+    context: none
 
   - id: ProcessingError
     label: Processing error
     defined_by: https://www.w3.org/TR/vc-di-eddsa/#errors
-
+    context: none
 
 # These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated.
 # In some cases, a CCG document was found and used for the definition, but in other cases, even that is missing...
@@ -71,50 +78,59 @@ class:
     label: Cryptographic key
     deprecated: true
     comment: This class represents a cryptographic key that may be used for encryption, decryption, or digitally signing data. This class serves as a supertype for specific key types.
+    context: none
 
   - id: EcdsaSecp256k1Signature2019
     deprecated: true
     label: ecdsa-sep256k1, 2019 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
+    context: none
 
   - id: EcdsaSecp256k1Signature2020
     deprecated: true
     label: ecdsa-sep256k1, 2020 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsa-secp256k1
+    context: none
 
   - id: EcdsaSecp256k1VerificationKey2019
     deprecated: true
     label: ecdsa-secp256k1 verification key, 2019 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
     upper_value: sec:Key
+    context: none
 
   - id: EcdsaSecp256k1RecoverySignature2020
     deprecated: true
     label: ecdsa-secp256k1 recovery signature, 2020 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverysignature2020
+    context: none
 
   - id: EcdsaSecp256k1RecoveryMethod2020
     deprecated: true
     label: ecdsa-secp256k1 recovery method, 2020 version
     #upper_value: sec:Key
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ecdsasecp256k1recoverymethod2020
+    context: none
 
   - id: MerkleProof2019
     deprecated: true
     label: Merkle Proof
     defined_by: https://w3c-ccg.github.io/lds-merkle-proof-2019/
+    context: none
 
   - id: X25519KeyAgreementKey2019
     deprecated: true
     label: X25519 Key Agreement Key, 2019 version
     #upper_value: sec:Key
     defined_by: https://w3c-ccg.github.io/security-vocab/#X25519KeyAgreementKey2019
+    context: none
 
   - id: Ed25519VerificationKey2018
     deprecated: true
     label: ED2559 Verification Key, 2018 version
     defined_by: https://w3c-ccg.github.io/ld-cryptosuite-registry/#ed25519
     #upper_value: sec:Key
+    context: none
 
   - id: JsonWebKey2020
     deprecated: true
@@ -122,33 +138,39 @@ class:
     #upper_value: sec:Key
     defined_by: https://w3c-ccg.github.io/security-vocab/#JsonWebKey2020
     comment: A linked data proof suite verification method type used with <a href="#JsonWebSignature2020">`JsonWebSignature2020`</a>
+    context: none
 
   - id: JsonWebSignature2020
     deprecated: true
     label: JSON Web Signature, 2020 version
     defined_by: https://w3c-ccg.github.io/security-vocab/#JsonWebSignature2020
+    context: none
 
   - id: BbsBlsSignature2020
     deprecated: true
     label: BBS Signature, 2020 version
     defined_by: https://w3c-ccg.github.io/security-vocab/#BbsBlsSignature2020
+    context: none
 
   - id: BbsBlsSignatureProof2020
     deprecated: true
     label: BBS Signature Proof, 2020 version
     defined_by: https://w3c-ccg.github.io/security-vocab/#BbsBlsSignatureProof2020
+    context: none
 
   - id: Bls12381G1Key2020
     deprecated: true
     label: BLS 12381 G1 Signature Key, 2020 version
     #upper_value: sec:Key
     defined_by: https://w3c-ccg.github.io/security-vocab/#Bls12381G1Key2020
+    context: none
 
   - id: Bls12381G2Key2020
     deprecated: true
     label: BLS 12381 G2 Signature Key, 2020 version
     #upper_value: sec:Key
     defined_by: https://w3c-ccg.github.io/security-vocab/#Bls12381G2Key2020
+    context: none
 
 property:
   - id: verificationMethod
@@ -158,47 +180,55 @@ property:
     see_also:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: controller
     label: Controller
     domain: sec:VerificationMethod
     range: IRI
     defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-controller
+    context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]
 
   - id: proof
     label: Proof sets
     range: sec:ProofGraph
     defined_by: https://www.w3.org/TR/vc-data-integrity/#proof-sets
+    context: [https://www.w3.org/ns/credentials/v2, vocab]
 
   - id: domain
     label: Domain of a proof
     domain: sec:Proof
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-domain
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: challenge
     label: Challenge of a proof
     domain: sec:Proof
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-challenge
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: previousProof
     label: Previous proof
     domain: sec:Proof
     range: sec:Proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-previousproof
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: proofPurpose
     label: Proof purpose
     domain: sec:Proof
     range: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofpurpose
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: proofValue
     label: Proof value
     domain: sec:Proof
     range: sec:multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofvalue
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: created
     label: Proof creation time
@@ -214,43 +244,54 @@ property:
       - sec:Proof
       - sec:VerificationMethod
     range: xsd:dateTime
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: nonce
     label: Nonce supplied by proof creator
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-nonce
     domain: sec:Proof
     range: xsd:string
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: authentication
     label: Authentication method
     range: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-authentication
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-assertionmethod
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
-  - id: capabilityDelegation
+  - id: capabilityDelegationMethod
     label: Capability delegation method
     range: sec:VerificationMethod
+    comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilitydelegation
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
-  - id: capabilityInvocation
+  - id: capabilityInvocationMethod
     label: Capability invocation method
     range: sec:VerificationMethod
+    comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
-  - id: keyAgreement
+  - id: keyAgreementMethod
     label: Key agreement protocols
     range: sec:VerificationMethod
+    comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-keyagreement
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: cryptosuite
     label: Cryptographic suite
     domain: sec:DataIntegrityProof
     range: sec:cryptosuiteString
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite
+    context: [vocab, https://www.w3.org/ns/credentials/v2]
 
   - id: publicKeyMultibase
     label: Public key multibase
@@ -264,6 +305,7 @@ property:
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
       - label: ed25519-2020
         url: https://w3c-ccg.github.io/lds-ed25519-2020/
+    context: https://w3id.org/security/multikey/v1
 
   - id: secretKeyMultibase
     label: Secret key multibase
@@ -277,6 +319,7 @@ property:
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
       - label: ed25519-2020
         url: https://w3c-ccg.github.io/lds-ed25519-2020/
+    context: https://w3id.org/security/multikey/v1
 
   - id: publicKeyJwk
     label: Public key JWK
@@ -288,6 +331,7 @@ property:
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
+    context: https://w3id.org/security/jwk/v1
 
   - id: secretKeyJwk
     label: Secret key JWK
@@ -299,18 +343,21 @@ property:
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
+    context: https://w3id.org/security/jwk/v1
 
   - id: revoked
     label: Revocation time
     range: xsd:dateTime
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-revoked
     domain: sec:VerificationMethod
+    context: https://w3id.org/security/jwk/v1
 
   - id: digestMultibase
     label: Digest multibase
     comment: <b><i>(Feature at Risk)</i></b> The Working Group is currently attempting to determine whether cryptographic hash expression formats can be unified across all of the VCWG core specifications. Candidates for this mechanism include `digestSRI` and `digestMultibase`. 
     range: multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-digestmultibase
+    context: https://www.w3.org/ns/credentials/v2
 
 # These are property specifications that have been defined in a CCG document and are in use; for the time being, these are considered as "reserved"
 
@@ -318,36 +365,43 @@ property:
     label: Allowed action
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#delegated-capability
+    context: none
 
   - id: capabilityChain
     label: Capability chain
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#delegation
+    context: none
 
   - id: capabilityAction
     label: Capability action
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#invoking-root-capability
+    context: none
 
   - id: caveat
     label: Caveat
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#caveats
+    context: none
 
   - id: delegator
     label: Delegator
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#delegation
+    context: none
 
   - id: invocationTarget
     label: Invocation target
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#root-capability
+    context: none
 
   - id: invoker
     label: Invoker
     status: reserved
     defined_by: https://w3c-ccg.github.io/zcap-spec/#invocation
+    context: none
 
 # These are the property definitions in the CCG documents that are not defined in the VCWG document; they are all deprecated
 
@@ -356,6 +410,7 @@ property:
     label: Blockchain account ID
     range: xsd:string
     defined_by: https://w3c-ccg.github.io/security-vocab/#blockchainAccountId
+    context: none
 
   - id: ethereumAddress
     deprecated: true
@@ -367,6 +422,7 @@ property:
         url: https://eips.ethereum.org/EIPS/eip-55
       - label: "Ethereum Yellow Paper: Ethereum: a secure decentralised generalised transaction ledger"
         url: https://ethereum.github.io/yellowpaper/paper.pdf
+    context: none
 
   - id: publicKeyBase58
     deprecated: true
@@ -374,6 +430,7 @@ property:
     #domain: sec:Key
     range: xsd:string
     defined_by: https://w3c-ccg.github.io/security-vocab/#publicKeyBase58
+    context: none
 
   - id: publicKeyPem
     deprecated: true
@@ -381,6 +438,7 @@ property:
     #domain: sec:Key
     range: xsd:string
     defined_by: https://w3c-ccg.github.io/security-vocab/#publicKeyPem
+    context: none
 
   - id: publicKeyHex
     deprecated: true
@@ -391,6 +449,7 @@ property:
     see_also:
       - label: rfc4648
         url: https://tools.ietf.org/html/rfc4648#section-8
+    context: none
 
   - id: jws
     deprecated: true
@@ -399,57 +458,68 @@ property:
     see_also:
       - label: Detached JSON Web Signature
         url: https://tools.ietf.org/html/rfc7797
+    context: none
 
 individual:
   - id: PROOF_GENERATION_ERROR
     upper_value: sec:ProcessingError
     label: Proof generation error
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
+    context: none
 
   - id: MALFORMED_PROOF_ERROR
     upper_value: sec:ProcessingError
     label: Malformed proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
+    context: none
 
   - id: MISMATCHED_PROOF_PURPOSE_ERROR
     upper_value: sec:ProcessingError
     label: Mismatched proof purpose
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
+    context: none
 
   - id: INVALID_DOMAIN_ERROR
     upper_value: sec:ProcessingError
     label: Invalid proof domain
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
+    context: none
 
   - id: INVALID_CHALLENGE_ERROR
     upper_value: sec:ProcessingError
     label: Invalid challenge
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
+    context: none
 
   - id: INVALID_VERIFICATION_METHOD_URL
     upper_value: sec:ProcessingError
     label: Invalid verification method URL
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
+    context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT_ID
     upper_value: sec:ProcessingError
     label: Invalid controller document id
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
+    context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT
     upper_value: sec:ProcessingError
     label: Invalid controller document
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
+    context: none
 
   - id: INVALID_VERIFICATION_METHOD
     upper_value: sec:ProcessingError
     label: Invalid verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
+    context: none
 
   - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     upper_value: sec:ProcessingError
     label: Invalid proof purpose for verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+    context: none
 
 datatype:
   - id: cryptosuiteString
@@ -461,3 +531,4 @@ datatype:
     label: Datatype for multibase values
     upper_value: xsd:string
     defined_by: https://www.w3.org/TR/vc-data-integrity/#multibase
+    context: https://w3id.org/security/multikey/v1

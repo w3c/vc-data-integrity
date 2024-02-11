@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#fff" viewBox="-0.5 -0.5 1623 879">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#fff" viewBox="-0.5 -0.5 1624 879">
     <rect width="1330" height="54.5" x="140" y="803.5" fill="none" stroke="#000" stroke-dasharray="3 3" pointer-events="all"/>
     <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m1374 830.25 63.26.19" pointer-events="stroke"/>
     <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1444.76 830.46-10.01 4.97 2.51-4.99-2.48-5.01Z" pointer-events="all"/>
@@ -157,17 +157,17 @@
             <text xmlns="http://www.w3.org/2000/svg" x="963" y="360" font-family="Helvetica" font-size="16" text-anchor="middle">revoked</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 97.03q-70-6.03-106.52-30.69" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 97.03q-52-6.03-88.52-30.69" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1298.26 62.14 11.09 1.46-4.87 2.74-.73 5.54Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 144.87q-80-33.87-109.06-75.96" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 144.87q-62-33.87-91.06-75.96" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.68 62.73 9.8 5.39-5.54.79-2.69 4.89Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 192.72Q1341 141 1301.14 69.4" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 192.72Q1341 141 1301.14 69.4" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.5 62.85 9.23 6.3-5.59.25-3.15 4.62Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 240.57Q1331 161 1299.59 70.1" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 240.57Q1331 161 1299.59 70.1" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.14 63.01 7.99 7.82-5.54-.73-3.91 3.99Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 288.42Q1321 191 1298.22 70.46" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 288.42q-72-97.42-94.78-217.96" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.82 63.09 6.77 8.9-5.37-1.53-4.45 3.39Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1411 336.26Q1311 221 1297.29 70.59" pointer-events="stroke"/>
+    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 336.27Q1311 221 1297.29 70.59" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.61 63.12 5.89 9.51-5.21-2.04-4.75 2.94Z" pointer-events="all"/>
     <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.42 297.73Q1141 131 1147.66 60.89" pointer-events="stroke"/>
     <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.81 304.31.43-11.18 3.18 4.6 5.59.22Z" pointer-events="all"/>
@@ -482,10 +482,10 @@
     <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 104.16q9.92.04 9.92-29.86T466.4 44.44" pointer-events="stroke"/>
     <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m458.9 44.45 9.99-5.01-2.49 5 2.5 5Z" pointer-events="all"/>
     <a xlink:href="https://w3id.org/security#verificationMethod">
-        <rect width="163.73" height="32.54" x="1411" y="80.76" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1393" y="80.76" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:97px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:97px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -495,14 +495,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="102" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="102" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#authentication">
-        <rect width="163.73" height="32.54" x="1411" y="128.6" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1393" y="128.6" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:145px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:145px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -512,14 +512,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="150" font-family="Helvetica" font-size="16" text-anchor="middle">authentication</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="150" font-family="Helvetica" font-size="16" text-anchor="middle">authentication</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#assertionMethod">
-        <rect width="163.73" height="32.54" x="1411" y="176.45" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1393" y="176.45" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:193px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:193px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -529,58 +529,60 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="198" font-family="Helvetica" font-size="16" text-anchor="middle">assertionMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="198" font-family="Helvetica" font-size="16" text-anchor="middle">assertionMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#capabilityDelegation">
-        <rect width="163.73" height="32.54" x="1411" y="224.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <a xlink:href="https://w3id.org/security#capabilityDelegationMethod">
+        <rect width="210" height="32.54" x="1393" y="224.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:241px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:241px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                capabilityDelegation
+                                capabilityDelegationMethod
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="245" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityDelegation</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="245" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityDelegationMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#capabilityInvocation">
-        <rect width="163.73" height="32.54" x="1411" y="272.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <a xlink:href="https://w3id.org/security#capabilityInvocationMethod">
+        <rect width="210" height="32.54" x="1393" y="272.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:288px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:288px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                capabilityInvocation
+                                capabilityInvocationMethod
+                                <br/>
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="293" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityInvocation</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="293" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityInvocationMethod
+</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#keyAgreement">
-        <rect width="163.73" height="32.54" x="1411" y="320" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <a xlink:href="https://w3id.org/security#keyAgreementMethod">
+        <rect width="210" height="32.54" x="1393" y="320" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:336px;margin-left:1412px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:336px;margin-left:1394px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                keyAgreement
+                                keyAgreementMethod
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1493" y="341" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreement</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="341" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreementMethod</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#cryptosuiteString">
