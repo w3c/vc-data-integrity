@@ -2462,14 +2462,14 @@ verification of the data.
 The specification MUST define a <dfn>suite selection algorithm</dfn> that
 accepts a set of options ([=map=] |options|) and returns a
 [=cryptographic suite=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
-registered in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the
+listed in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the
 following [=struct/items=].
           <dl data-dfn-for="cryptographic suite">
             <dt><dfn>transform</dfn></dt>
             <dd>
 A [=transformation algorithm=] that takes an [=unsecured data document=]
 ([=JSON object=] |unsecuredDocument|) and transformation options
-([=struct=] |options|) as input and produces a
+([=map=] |options|) as input and produces a
 <em>transformed data document</em> ([=JSON object=] |transformedDocument|),
 or an error, as output.
             </dd>
@@ -2486,7 +2486,7 @@ or an error, as output.
 An algorithm that takes proof options ([=struct=] |options|) as input and
 produces a proof configuration ([=struct=] proofConfig) as output, which is
 then supplied to the [=cryptographic suite/serializeProof=] algorithm. If a
-failure occurs, and error is produced.
+failure occurs, an error is produced.
               </p>
               <p class="note" title="Avoid direct use of cryptographic secrets">
 To sign data, cryptographic suites need to be able to use a private key. This
@@ -2500,16 +2500,16 @@ advantage of hardware security modules (HSMs) to get better security.
             <dd>
 An [=proof serialization algorithm=] that takes cryptographic hash data
 ([=byte sequence=] |hashData|) and proof options ([=struct=] options) as
-input and produces a signal digital proof value ([=JSON object=] proof), or
-an error, as output.
+input, and produces as output either a single digital proof value
+([=JSON object=] proof) or an error.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
             <dd>
 A [=proof verification algorithm=] that takes an  are cryptographic hash data
 ([=byte sequence=] |hashData|), a digital proof
-([=byte sequence=] |proofBytes|) and proof options ([=struct=] options) as
-input and produces a verification result represented as a boolean value, or
-an error, as output.
+([=byte sequence=] |proofBytes|), and proof options ([=struct=] options) as
+input, and produces as output either a verification result represented as a
+boolean value or an error.
             </dd>
           </dl>
         </li>
@@ -2956,7 +2956,7 @@ Set |suite:cryptographic suite| to the first non-empty result from running the
 [=suite selection algorithm=] associated with each item in |cryptosuites|,
 passing |options| as a parameter. If no suite is found, an error
 MUST be raised and SHOULD convey an error type of
-<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+<a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a>.
           </li>
           </li>
           <li>
@@ -2980,7 +2980,7 @@ passed as parameters.
           <li>
 If the |proof|.|type|, |proof|.|verificationMethod|, or |proof|.|proofPurpose|
 values are not set, an error MUST be raised and SHOULD convey an error type of
-<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+<a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a>.
           </li>
           <li>
 If the <a>cryptographic suite</a> requires the use of a created timestamp, and
