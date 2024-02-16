@@ -2471,13 +2471,13 @@ cryptographic suite instance</dfn> [=struct=] has the following
             <dt><dfn>createProof</dfn></dt>
             <dd>
 An algorithm that takes an [=unsecured data document=] ([=JSON object=]
-|unsecuredDocument|) and proof options ([=map=] |options|) as input, and outputs
-a [=secured data document=] ([=JSON object=]) or an error.
+|unsecuredDocument|) and proof options ([=map=] |options|) as input, and
+produces a [=data integrity proof=] ([=JSON object=]) or an error.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
             <dd>
 An algorithm that takes a [=secured data document=] ([=JSON object=]
-|securedDocument|) as input, and outputs a verification result
+|securedDocument|) as input, and produces a verification result
 ([=map=]) or an error. The verification result MUST contain a
 verification status ([=boolean=] |verified|) value and an [=unsecured data
 document=] ([=JSON object=] |verifiedDocument|), and MAY contain information
