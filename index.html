@@ -2595,10 +2595,11 @@ the Verifiable Credentials Specifications Directory</a>.
 
       <p>
 The algorithms defined below operate on documents represented as <dfn
-data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows [[JSON-LD-API]] in
-representing a JSON object as an [[Infra]] [=map=]. An
-<dfn>unsecured data document</dfn> is a [=JSON object=] with no "`proof`" [=map/key=]. A
-<dfn>secured data document</dfn> is a [=JSON object=] with a "`proof`" [=map/key=].
+data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows
+[[JSON-LD-API]] in representing a JSON object as an [[Infra]] [=map=]. An
+<dfn class="export">unsecured data document</dfn> is a [=map=] with no
+`proof` [=map/key=]. A <dfn class="export">secured data document</dfn> is a
+[=map=] with a `proof` [=map/key=].
       </p>
 
       <p class="issue" title="Verification hash algorithm definition">
