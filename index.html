@@ -2459,57 +2459,26 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-The specification MUST define a <dfn>suite selection algorithm</dfn> that
-accepts a set of options ([=map=] |options|) and returns a
+The specification MUST define a <dfn class="export">cryptosuite instantiation
+algorithm</dfn> that accepts a set of options ([=map=] |options|) and returns a
 [=cryptographic suite=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
-listed in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the
-following [=struct/items=].
+listed in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the following
+[=struct/items=].
           <dl data-dfn-for="cryptographic suite">
-            <dt><dfn>transform</dfn></dt>
+            <dt><dfn>createProof</dfn></dt>
             <dd>
-A [=transformation algorithm=] that takes an [=unsecured data document=]
-([=JSON object=] |unsecuredDocument|) and transformation options
-([=map=] |options|) as input and produces a
-<em>transformed data document</em> ([=JSON object=] |transformedDocument|),
-or an error, as output.
-            </dd>
-            <dt><dfn>hash</dfn></dt>
-            <dd>
-A [=hashing algorithm=] that takes a transformed data document
-([=JSON object=] |transformedDocument|) and canonical proof configuration
-([=struct=] |canonicalProofConfig|) as input and returns a [=byte sequence=],
-or an error, as output.
-            </dd>
-            <dt><dfn>createProofConfig</dfn></dt>
-            <dd>
-              <p>
-An algorithm that takes proof options ([=struct=] |options|) as input and
-produces a proof configuration ([=struct=] proofConfig) as output, which is
-then supplied to the [=cryptographic suite/serializeProof=] algorithm. If a
-failure occurs, an error is produced.
-              </p>
-              <p class="note" title="Avoid direct use of cryptographic secrets">
-To sign data, cryptographic suites need to be able to use a private key. This
-private key will often be implied by a field in the [=createProofConfig=],
-but it is often a better design to avoid passing the key directly. Passing a key
-identifier or an asynchronous signing algorithm allows implementations to take
-advantage of hardware security modules (HSMs) to get better security.
-              </p>
-            </dd>
-            <dt><dfn>serializeProof</dfn></dt>
-            <dd>
-An [=proof serialization algorithm=] that takes cryptographic hash data
-([=byte sequence=] |hashData|) and proof options ([=struct=] options) as
-input, and produces as output either a single digital proof value
-([=JSON object=] proof) or an error.
+An algorithm that takes an [=unsecured data document=] ([=JSON object=]
+|unsecuredDocument|) and proof options ([=map=] |options|) as input and produces
+a [=secured data document=] ([=JSON object=]), or an error, as output.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
             <dd>
-A [=proof verification algorithm=] that takes an  are cryptographic hash data
-([=byte sequence=] |hashData|), a digital proof
-([=byte sequence=] |proofBytes|), and proof options ([=struct=] options) as
-input, and produces as output either a verification result represented as a
-boolean value or an error.
+An algorithm that takes a [=secured data document=] ([=JSON object=]
+|securedDocument|) as input and produces a verification result
+([=JSON object=]), or an error, as output. The result MUST contain a
+verification status ([=boolean=] |verified|) value, SHOULD contain information
+that is useful to a [=validation=] process, and MAY contain information that
+is useful for debugging purposes.
             </dd>
           </dl>
         </li>
@@ -2530,6 +2499,13 @@ The JSON-LD context associated with the cryptographic suite MUST have its terms
 protected from unsafe redefinition, by use of the `@protected` keyword.
         </li>
       </ul>
+
+      <p>
+A [=cryptographic suite=] is instantiated using a [=cryptosuite instantiation
+algorithm=] and is made available to algorithms an implementation-specific
+manner, which MAY utilize [[[VC-SPECS]]] to discover known [=cryptosuite
+instantiation algorithms=].
+      </p>
 
       <p class="issue" title="Require interoperability report?">
 The following language was deemed to be contentious: <em>The specification MUST
@@ -2935,47 +2911,20 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
         <h3>Add Proof</h3>
 
         <p>
-The following algorithm specifies how to add a digital proof to a document,
-which can be used to verify the authenticity and integrity of an
-<a>unsecured data document</a>. Required inputs are an
-<a>unsecured data document</a> ([=JSON object=] |unsecuredDocument|) and a set
-of options ([=struct=] |options|). A <a>secured data document</a>, or an
-error, is produced as output. Whenever this algorithm encodes strings, it MUST
-use UTF-8 encoding. The set of known [=cryptographic suites=]
-([=list=] |cryptosuites|) is also made available to the algorithm in an
-implementation-specific manner, which SHOULD utilize [[[VC-SPECS]]] to discover
-known [=cryptographic suites=].
+The following algorithm specifies how to add a digital proof to an
+<a>unsecured data document</a>, which can be used to verify its authenticity and
+integrity. Required inputs are an <a>unsecured data document</a>
+([=JSON object=] |unsecuredDocument|), a [=cryptographic suite=] ([=struct=]
+|cryptosuite|), and a set of options ([=map=] |options|). A
+<a>secured data document</a>, or an error, is produced as output. Whenever this
+algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Let |output| be a copy of |unsecuredDocument|.
-          </li>
-          <li>
-Set |suite:cryptographic suite| to the first non-empty result from running the
-[=suite selection algorithm=] associated with each item in |cryptosuites|,
-passing |options| as a parameter. If no suite is found, an error
-MUST be raised and SHOULD convey an error type of
-<a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a>.
-          </li>
-          </li>
-          <li>
-Let |proofConfig| be the result of running |suite|'s
-[=cryptographic suite/createProofConfig=] algorithm on |options|.
-          </li>
-          <li>
-Let |transformedData| be the result of running |suite|'s
-[=cryptographic suite/transform=] algorithm with |unsecuredDocument| and
-|options| passed as parameters.
-          </li>
-          <li>
-Let |hashData| be the result of running |suite|'s [=cryptographic suite/hash=]
-algorithm with |transformedData| and |proofConfig| passed as a parameters.
-          </li>
-          <li>
-Let |proof| be the result of running |suite|'s
-[=cryptographic suite/serializeProof=] algorithm with |hashData| and |options|
-passed as parameters.
+Let |proof| be the result of calling the [=cryptographic suite/createProof=]
+algorithm specified in |cryptosuite|.|createProof| with |options| passed as a
+parameter.
           </li>
           <li>
 If the |proof|.|type|, |proof|.|verificationMethod|, or |proof|.|proofPurpose|
@@ -3024,10 +2973,9 @@ The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a>secured data document</a>
 (|securedDocument|), a <a>cryptographic suite</a>
-(|suite:cryptographic suite|), and an instance of |suite|'s [=cryptographic
-suite/createProofConfig=] (|options|). A new <a>secured data document</a> is
-produced as output. Whenever this algorithm encodes strings, it MUST use UTF-8
-encoding.
+(|suite:cryptographic suite|), and a set of ([=map=] |options|). A new
+<a>secured data document</a> is produced as output. Whenever this algorithm
+encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
@@ -3073,10 +3021,10 @@ in a later step of this algorithm.
             </p>
           </li>
           <li>
-Run steps 2 through 8 of the algorithm in section <a href="#add-proof"></a>, passing
-|unsecuredDocument|, |suite|, and |options|. If
-no exceptions are raised, append the generated |proof| value to the
-|allProofs|; otherwise, raise the exception.
+Run steps 1 through 6 of the algorithm in section <a href="#add-proof"></a>,
+passing |unsecuredDocument|, |suite|, and |options|. If no exceptions are
+raised, append the generated |proof| value to the |allProofs|; otherwise, raise
+the exception.
           </li>
           <li>
 Set |output|.|proof| to the value of |allProofs|.
@@ -3092,69 +3040,84 @@ Return |output| as the new <a>secured data document</a>.
 
         <p>
 The following algorithm specifies how to check the authenticity and integrity of
-a <a>secured data document</a> by verifying its digital proof. The algorithm takes as input:
+a <a>secured data document</a> by verifying its digital proof. The algorithm
+takes as input:
         </p>
 
-        <ul>
-          <li>
-|mediaType|, a [=MIME type=]
-          </li>
-          <li>
-|documentBytes|, a [=byte sequence=] whose media type is |mediaType|
-          </li>
-          <li>
-|expectedProofPurpose|, an optional [=string=], used to ensure that the
-|proof| was generated by the proof creator for the expected reason by the verifier. See
-[[[#proof-purposes]]] for common values.
-          </li>
-          <li>
-|domain|, an optional [=set=] of [=strings=], used by the proof creator to lock a proof to a
-particular security domain, and used by the verifier to ensure that a proof is not being used across
-different security domains
-          </li>
-          <li>
-|challenge|, an optional [=string=] [=challenge=], used by the verifier to ensure that an attacker
-is not replaying previously created proofs
-          </li>
-        </ul>
-
-        <p>
-This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose [=struct/items=] are:
-        </p>
         <dl>
-          <dt><dfn data-dfn-for="verification result">status</dfn></dt>
-          <dd>"valid" or "invalid"</dd>
-          <dt><dfn data-dfn-for="verification result">document</dfn></dt>
-          <dd>null if [=verification result/status=] is "invalid" or an [=unsecured data
-          document=]</dd>
-          <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
-          <dd>null if [=verification result/status=] is "invalid" or a [=MIME type=], which may
-          include [=MIME type/parameters=]</dd>
-          <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
-          <dd>a [=list=] of <dfn data-cite="VC-DATA-MODEL-2.0#dfn-problemdetails">ProblemDetails</dfn>,
-          defaulting to an empty [=list=]</dd>
-          <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
-          <dd>a [=list=] of [=ProblemDetails=], defaulting to an empty [=list=]</dd>
+          <dt>|mediaType|</dt>
+          <dd>
+A [=MIME type=].
+          </dd>
+          <dt>|documentBytes|</dt>
+          <dd>
+A [=byte sequence=] whose media type is |mediaType|.
+          </dd>
+          <dt>|cryptosuite|</dt>
+          <dd>
+An instance of a [=cryptographic suite=].
+          </dd>
+          <dt>|expectedProofPurpose|</dt>
+          <dd>
+An optional [=string=], used to ensure that the |proof| was generated by the
+proof creator for the expected reason by the verifier. See
+[[[#proof-purposes]]] for common values.
+          <dt>|domain|</dt>
+          <dd>
+An optional [=set=] of [=strings=], used by the proof creator to lock a proof to
+a particular security domain, and used by the verifier to ensure that a proof is
+not being used across different security domains.
+          </dd>
+          <dt>|challenge|</dt>
+          <dd>
+An optional [=string=] [=challenge=], used by the verifier to ensure that an
+attacker is not replaying previously created proofs.
+          </dd>
         </dl>
 
         <p>
-When a step says "an error MUST be raised", it means to return a [=verification result=] with a
-[=verification result/status=] of "invalid" and a non-empty [=verification result/errors=] list.
+This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
+[=struct/items=] are:
+        </p>
+        <dl>
+          <dt><dfn data-dfn-for="verification result">verified</dfn></dt>
+          <dd>`true` or `false`.</dd>
+          <dt><dfn data-dfn-for="verification result">document</dfn></dt>
+          <dd>
+null if [=verification result/verified=] is `false` or an [=unsecured data
+document=].
+          </dd>
+          <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
+          <dd>
+null if [=verification result/verified=] is `false` or a [=MIME type=], which
+MAY include [=MIME type/parameters=].
+          </dd>
+          <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
+          <dd>
+a [=list=] of
+<dfn data-cite="VC-DATA-MODEL-2.0#dfn-problemdetails">ProblemDetails</dfn>,
+defaulting to an empty [=list=].</dd>
+          <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
+          <dd>
+a [=list=] of [=ProblemDetails=], defaulting to an empty [=list=].</dd>
+        </dl>
+
+        <p>
+When a step says "an error MUST be raised", it means to return a [=verification
+result=] with a [=verification result/verified=] of `false` and a non-empty
+[=verification result/errors=] list.
         </p>
 
         <ol class="algorithm">
           <li>
-[=Assert=]: the [=MIME type/essence=] of |mediaType| is "`application/vc+ld+json`" or
-"`application/vp+ld+json`".
+Let |securedDocument:map| be the result of running [=parse JSON bytes to an
+Infra value=] on |documentBytes|.
           </li>
           <li>
-Let |securedDocument:map| be the result of running [=parse JSON bytes to an Infra value=] on
-|documentBytes|.
-          </li>
-          <li>
-If |securedDocument| is not a [=map=] or |securedDocument|["`proof`"] is not a [=map=], an error
-MUST be raised and SHOULD convey an error type of
-`https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR`.
+If |securedDocument| is not a [=map=] or |securedDocument|["`proof`"] is not a
+[=map=], an error MUST be raised and SHOULD convey an error type of
+<a href="https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR">
+PARSING_ERROR</a>.
           </li>
           <li>
 Let |proof:map| be |securedDocument|["`proof`"].
@@ -3167,65 +3130,38 @@ an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
-For each known [=cryptographic suite=], run its [=suite selection algorithm=] on |proof|.
-If all of these algorithms return failure, return "invalid". Otherwise, let |suite:VC cryptographic
-suite| be an [=implementation-defined=] choice of one of the non-failure results.
-          </li>
-          <li>
-If |suite| requires the
-|proof|["`created`"] value, and it does not [=map/exist=],
-an error MUST be raised and SHOULD convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-
-          </li>
-          <li>
 If |expectedProofPurpose| was given, and it does not match
 |proof|["`proofPurpose`"],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
           <li>
-Let |unsecuredDocument| be a copy of |securedDocument| with
-the `proof` value removed.
-          </li>
-          <li>
-Let |transformedData| be the result of running |suite|'s
-[=cryptographic suite/transform=] algorithm on the |unsecuredDocument|.
-        </li>
-          <li>
-Let |hashData| be the result of running |suite|'s
-[=cryptographic suite/hash=] algorithm on the |transformedData|.
-          </li>
-          <li>
-Let |isProofVerified:valid or invalid| be the result of running |suite|'s
-[=cryptographic suite/verifyProof=] algorithm on |hashData| and |proof|.
-          </li>
-          <li>
-If |isProofVerified| is "invalid", an error MUST be raised and SHOULD convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-          </li>
-          <li>
 If |domain| was given, and it does not contain the same [=strings=] as
-|proof|["`domain`"] (treating a single [=string=] as a [=set=] containing just that
-[=string=]), an error MUST be raised and SHOULD convey an error type of <a
+|proof|["`domain`"] (treating a single [=string=] as a [=set=] containing just
+that [=string=]), an error MUST be raised and SHOULD convey an error type of <a
 href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If |challenge| was given, and it does not match
-|proof|["`challenge`"],  an error MUST be raised and SHOULD
+|proof|["`challenge`"], an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
           <li>
+Let |cryptosuiteVerificationResult| be the result of running the
+|cryptosuite|.[=cryptographic suite/verifyProof=] algorithm with
+|securedDocument| provided as input.
+          </li>
+          <li>
 Return a [=verification result=] with [=struct/items=]:
-<dl data-link-for="verification result">
-  <dt>[=status=]</dt>
-  <dd>"valid"</dd>
-  <dt>[=document=]</dt>
-  <dd>|unsecuredDocument|</dd>
-  <dt>[=media type=]</dt>
-  <dd>|mediaType|</dd>
-</dl>
+            <dl data-link-for="verification result">
+              <dt>[=verified=]</dt>
+              <dd>|cryptosuiteVerificationResult|["`verified`"]</dd>
+              <dt>[=document=]</dt>
+              <dd>|cryptosuiteVerificationResult|["`unsecuredDocument`"]</dd>
+              <dt>[=media type=]</dt>
+              <dd>|mediaType|</dd>
+            </dl>
           </li>
         </ol>
 
