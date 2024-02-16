@@ -2459,12 +2459,13 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-The specification MUST define a <dfn class="export">cryptosuite instantiation
-algorithm</dfn> that accepts a set of options ([=map=] |options|) and returns a
-[=cryptographic suite=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
-listed in [[[VC-SPECS]]]. A cryptographic suite [=struct=] has the following
-[=struct/items=].
-          <dl data-dfn-for="cryptographic suite">
+The specification MUST define a <dfn class="export">cryptographic suite
+instantiation algorithm</dfn> that accepts a set of options ([=map=] |options|)
+and returns a [=cryptographic suite instance=] ([=struct=] |cryptosuite|). This
+algorithm SHOULD be listed in [[[VC-SPECS]]]. A
+<dfn class="export">cryptographic suite instance</dfn> [=struct=] has the
+following [=struct/items=].
+          <dl data-dfn-for="cryptographic suite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
 An algorithm that takes an [=unsecured data document=] ([=JSON object=]
@@ -2501,10 +2502,10 @@ protected from unsafe redefinition, by use of the `@protected` keyword.
       </ul>
 
       <p>
-A [=cryptographic suite=] is instantiated using a [=cryptosuite instantiation
-algorithm=] and is made available to algorithms an implementation-specific
-manner, which MAY utilize [[[VC-SPECS]]] to discover known [=cryptosuite
-instantiation algorithms=].
+A [=cryptographic suite=] is instantiated using a [=cryptographic suite
+instantiation algorithm=] and is made available to algorithms an
+implementation-specific manner, which MAY utilize [[[VC-SPECS]]] to discover
+known [=cryptographic suite instantiation algorithms=].
       </p>
 
       <p class="issue" title="Require interoperability report?">
@@ -2914,8 +2915,8 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 The following algorithm specifies how to add a digital proof to an
 <a>unsecured data document</a>, which can be used to verify its authenticity and
 integrity. Required inputs are an <a>unsecured data document</a>
-([=JSON object=] |unsecuredDocument|), a [=cryptographic suite=] ([=struct=]
-|cryptosuite|), and a set of options ([=map=] |options|). A
+([=JSON object=] |unsecuredDocument|), a [=cryptographic suite instance=]
+([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). A
 <a>secured data document</a>, or an error, is produced as output. Whenever this
 algorithm encodes strings, it MUST use UTF-8 encoding.
         </p>
@@ -3046,7 +3047,7 @@ A [=byte sequence=] whose media type is |mediaType|.
           </dd>
           <dt>|cryptosuite|</dt>
           <dd>
-An instance of a [=cryptographic suite=].
+A [=cryptographic suite instance=].
           </dd>
           <dt>|expectedProofPurpose|</dt>
           <dd>
@@ -3140,7 +3141,7 @@ convey an error type of
           </li>
           <li>
 Let |cryptosuiteVerificationResult| be the result of running the
-|cryptosuite|.[=cryptographic suite/verifyProof=] algorithm with
+|cryptosuite|.[=cryptographic suite instance/verifyProof=] algorithm with
 |securedDocument| provided as input.
           </li>
           <li>
