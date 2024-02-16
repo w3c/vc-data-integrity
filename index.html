@@ -2459,13 +2459,15 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-The specification MUST define a <dfn class="export">cryptographic suite
-instantiation algorithm</dfn> that accepts a set of options ([=map=] |options|)
-and returns a [=cryptographic suite instance=] ([=struct=] |cryptosuite|). This
-algorithm SHOULD be listed in [[[VC-SPECS]]]. A
-<dfn class="export">cryptographic suite instance</dfn> [=struct=] has the
-following [=struct/items=].
-          <dl data-dfn-for="cryptographic suite instance">
+The specification MUST define a <dfn class="export"
+data-lt="cryptosuite instantiation algorithm">data integrity cryptographic
+suite instantiation algorithm</dfn> that accepts a set of options
+([=map=] |options|) and returns a [=cryptosuite instance=]
+([=struct=] |cryptosuite|). This algorithm SHOULD be listed in [[[VC-SPECS]]].
+A <dfn class="export" data-lt="cryptosuite instance">data integrity
+cryptographic suite instance</dfn> [=struct=] has the following
+[=struct/items=].
+          <dl data-dfn-for="cryptosuite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
 An algorithm that takes an [=unsecured data document=] ([=JSON object=]
@@ -2502,10 +2504,10 @@ protected from unsafe redefinition, by use of the `@protected` keyword.
       </ul>
 
       <p>
-A [=cryptographic suite=] is instantiated using a [=cryptographic suite
+A [=cryptosuite instance=] is instantiated using a [=cryptosuite
 instantiation algorithm=] and is made available to algorithms in an
 implementation-specific manner. Implementations MAY use [[[VC-SPECS]]]
-[[VC-SPECS]] to discover known [=cryptographic suite instantiation algorithms=].
+[[VC-SPECS]] to discover known [=cryptosuite instantiation algorithms=].
       </p>
 
       <p class="issue" title="Require interoperability report?">
@@ -2915,7 +2917,7 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 The following algorithm specifies how a digital proof can be added to an
 <a>unsecured data document</a>, and can then be used to verify the output document's
 authenticity and integrity. Required inputs are an <a>unsecured data document</a>
-([=JSON object=] |unsecuredDocument|), a [=cryptographic suite instance=]
+([=JSON object=] |unsecuredDocument|), a [=cryptosuite instance=]
 ([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). Output is
 a <a>secured data document</a> or an error. Whenever this
 algorithm encodes strings, it MUST use UTF-8 encoding.
@@ -2924,7 +2926,7 @@ algorithm encodes strings, it MUST use UTF-8 encoding.
         <ol class="algorithm">
           <li>
 Let |proof| be the result of calling the
-[=cryptographic suite instance/createProof=]
+[=cryptosuite instance/createProof=]
 algorithm specified in |cryptosuite|.|createProof| with |options| passed as a
 parameter.
           </li>
@@ -2932,12 +2934,6 @@ parameter.
 If one or more of the |proof|.|type|, |proof|.|verificationMethod|, and
 |proof|.|proofPurpose| values is not set, an error MUST be raised and SHOULD convey
 an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
-          </li>
-          <li>
-If the <a>cryptographic suite</a> requires the use of a created timestamp, and
-the |proof|.|created| value is not set, a
-<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a> MUST be
-raised.
           </li>
           <li>
 If |options| has a non-null |domain| [=struct/item=], it MUST be equal to
@@ -3048,7 +3044,7 @@ A [=byte sequence=] whose media type is |mediaType|
           </dd>
           <dt>|cryptosuite|</dt>
           <dd>
-A [=cryptographic suite instance=]
+A [=cryptosuite instance=]
           </dd>
           <dt>|expectedProofPurpose|</dt>
           <dd>
@@ -3142,7 +3138,7 @@ convey an error type of
           </li>
           <li>
 Let |cryptosuiteVerificationResult| be the result of running the
-|cryptosuite|.[=cryptographic suite instance/verifyProof=] algorithm with
+|cryptosuite|.[=cryptosuite instance/verifyProof=] algorithm with
 |securedDocument| provided as input.
           </li>
           <li>
