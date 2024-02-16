@@ -3106,36 +3106,36 @@ Let |securedDocument:map| be the result of running [=parse JSON bytes to an
 Infra value=] on |documentBytes|.
           </li>
           <li>
-If |securedDocument| is not a [=map=] or |securedDocument|["`proof`"] is not a
+If |securedDocument| is not a [=map=] or |securedDocument|.|proof| is not a
 [=map=], an error MUST be raised and SHOULD convey an error type of
 <a href="https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR">
 PARSING_ERROR</a>.
           </li>
           <li>
-Let |proof:map| be |securedDocument|["`proof`"].
+Let |proof:map| be |securedDocument|.|proof|.
           </li>
           <li>
-If |proof|["`type`"],
-|proof|["`verificationMethod`"], or
-|proof|["`proofPurpose`"] do not [=map/exist=],
+If |proof|.|type|,
+|proof|.|verificationMethod|, or
+|proof|.|proofPurpose| do not [=map/exist=],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
           </li>
           <li>
 If |expectedProofPurpose| was given, and it does not match
-|proof|["`proofPurpose`"],
+|proof|.|proofPurpose|,
 an error MUST be raised and SHOULD convey an error type of
 <a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
           </li>
           <li>
 If |domain| was given, and it does not contain the same [=strings=] as
-|proof|["`domain`"] (treating a single [=string=] as a [=set=] containing just
+|proof|.|domain| (treating a single [=string=] as a [=set=] containing just
 that [=string=]), an error MUST be raised and SHOULD convey an error type of <a
 href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If |challenge| was given, and it does not match
-|proof|["`challenge`"], an error MUST be raised and SHOULD
+|proof|.|challenge|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</a>.
           </li>
@@ -3148,9 +3148,9 @@ Let |cryptosuiteVerificationResult| be the result of running the
 Return a [=verification result=] with [=struct/items=]:
             <dl data-link-for="verification result">
               <dt>[=verified=]</dt>
-              <dd>|cryptosuiteVerificationResult|["`verified`"]</dd>
+              <dd>|cryptosuiteVerificationResult|.|verified|</dd>
               <dt>[=document=]</dt>
-              <dd>|cryptosuiteVerificationResult|["`verifiedDocument`"]</dd>
+              <dd>|cryptosuiteVerificationResult|.|verifiedDocument|</dd>
               <dt>[=media type=]</dt>
               <dd>|mediaType|</dd>
             </dl>
