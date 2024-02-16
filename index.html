@@ -2470,17 +2470,17 @@ cryptographic suite instance</dfn> [=struct=] has the following
           <dl data-dfn-for="cryptosuite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
-An algorithm that takes an [=unsecured data document=] ([=JSON object=]
+An algorithm that takes an [=unsecured data document=] ([=map=]
 |unsecuredDocument|) and proof options ([=map=] |options|) as input, and
-produces a [=data integrity proof=] ([=JSON object=]) or an error.
+produces a [=data integrity proof=] ([=map=]) or an error.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
             <dd>
-An algorithm that takes a [=secured data document=] ([=JSON object=]
+An algorithm that takes a [=secured data document=] ([=map=]
 |securedDocument|) as input, and produces a verification result
 ([=map=]) or an error. The verification result MUST contain a
 verification status ([=boolean=] |verified|) value and an [=unsecured data
-document=] ([=JSON object=] |verifiedDocument|), and MAY contain information
+document=] ([=map=] |verifiedDocument|), and MAY contain information
 that is useful for debugging purposes.
             </dd>
           </dl>
@@ -2915,25 +2915,25 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 
         <p>
 The following algorithm specifies how a digital proof can be added to an
-<a>unsecured data document</a>, and can then be used to verify the output document's
-authenticity and integrity. Required inputs are an <a>unsecured data document</a>
-([=JSON object=] |unsecuredDocument|), a [=cryptosuite instance=]
+<a>unsecured data document</a>, and can then be used to verify the output
+document's authenticity and integrity. Required inputs are an <a>unsecured data
+document</a> ([=map=] |unsecuredDocument|), a [=cryptosuite instance=]
 ([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). Output is
-a <a>secured data document</a> or an error. Whenever this
-algorithm encodes strings, it MUST use UTF-8 encoding.
+a <a>secured data document</a> ([=map=]) or an error. Whenever this algorithm
+encodes strings, it MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
           <li>
-Let |proof| be the result of calling the
-[=cryptosuite instance/createProof=]
-algorithm specified in |cryptosuite|.|createProof| with |options| passed as a
-parameter.
+Let |proof| be the result of calling the [=cryptosuite instance/createProof=]
+algorithm specified in |cryptosuite|.|createProof| with |unsecuredDocument|
+and |options| passed as a parameters.
           </li>
           <li>
 If one or more of the |proof|.|type|, |proof|.|verificationMethod|, and
-|proof|.|proofPurpose| values is not set, an error MUST be raised and SHOULD convey
-an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+|proof|.|proofPurpose| values is not set, an error MUST be raised and SHOULD
+convey an error type of
+<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
 If |options| has a non-null |domain| [=struct/item=], it MUST be equal to
@@ -2947,10 +2947,13 @@ convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Set |output|.|proof| to the value of |proof|.
+Let |securedDataDocument| be a copy of |unsecuredDocument|.
           </li>
           <li>
-Return |output| as the <a>secured data document</a>.
+Set |securedDataDocument|.|proof| to the value of |proof|.
+          </li>
+          <li>
+Return |securedDataDocument| as the <a>secured data document</a>.
           </li>
         </ol>
 
@@ -2961,9 +2964,9 @@ Return |output| as the <a>secured data document</a>.
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
 proof set/chain. Required inputs are a <a>secured data document</a>
-(|securedDocument|), a <a>cryptographic suite</a>
-(|suite:cryptographic suite|), and a set of options ([=map=] |options|). Output
-is a new <a>secured data document</a>. Whenever this algorithm
+([=map=] |securedDocument|), a <a>cryptographic suite</a>
+(|suite:cryptosuite instance|), and a set of options ([=map=] |options|). Output
+is a new <a>secured data document</a> ([=map=]). Whenever this algorithm
 encodes strings, it MUST use UTF-8 encoding.
         </p>
 
