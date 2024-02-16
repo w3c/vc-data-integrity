@@ -211,7 +211,7 @@
             }
           },
           postProcess: [restrictRefs],
-          xref: ["INFRA", "VC-DATA-MODEL-2.0"],
+          xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0"],
           otherLinks: [{
             key: "Related Specifications",
             data: [{
@@ -3024,7 +3024,7 @@ Return |output| as the new <a>secured data document</a>.
         </ol>
       </section>
 
-      <section data-cite="Infra MIMESNIFF">
+      <section>
         <h3>Verify Proof</h3>
 
         <p>
@@ -3036,7 +3036,7 @@ takes as input:
         <dl>
           <dt>|mediaType|</dt>
           <dd>
-A [=MIME type=].
+A [=MIME type|media type=]
           </dd>
           <dt>|documentBytes|</dt>
           <dd>
@@ -3073,13 +3073,14 @@ This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
           <dd>`true` or `false`</dd>
           <dt><dfn data-dfn-for="verification result">document</dfn></dt>
           <dd>
-NULL, if [=verification result/verified=] is `false`; otherwise, an [=unsecured data
-document=]
+<a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
+`false`; otherwise, an [=unsecured data document=]
           </dd>
           <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
           <dd>
-NULL, if [=verification result/verified=] is `false`; otherwise, a [=MIME type=],
-which MAY include [=MIME type/parameters=]
+<a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
+`false`; otherwise, a [=MIME type|media type=], which MAY include [=MIME
+type/parameters=]
           </dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
           <dd>
