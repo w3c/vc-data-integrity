@@ -2934,19 +2934,20 @@ values are not set, an error MUST be raised and SHOULD convey an error type of
           </li>
           <li>
 If the <a>cryptographic suite</a> requires the use of a created timestamp, and
-the |proof|.|created| value is not set, a `PROOF_GENERATION_ERROR` MUST be
+the |proof|.|created| value is not set, a
+<a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a> MUST be
 raised.
           </li>
           <li>
 If |options| has a non-null |domain| [=struct/item=], it MUST be equal to
 |proof|.|domain| or an error MUST be raised and SHOULD convey
-an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+an error type of <a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a>.
           </li>
           <li>
 If |options| has a non-null |challenge| [=struct/item=], it MUST be equal to
 |proof|.|challenge| or an error MUST be raised and SHOULD
 convey an error type of
-<a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
+<a href="#PROOF_GENERATION_ERROR">`PROOF_GENERATION_ERROR`</a>.
           </li>
           <li>
 Set |output|.|proof| to the value of |proof|.
@@ -3159,7 +3160,7 @@ Return a [=verification result=] with [=struct/items=]:
               <dt>[=verified=]</dt>
               <dd>|cryptosuiteVerificationResult|["`verified`"]</dd>
               <dt>[=document=]</dt>
-              <dd>|cryptosuiteVerificationResult|["`unsecuredDocument`"]</dd>
+              <dd>|cryptosuiteVerificationResult|["`verifiedDocument`"]</dd>
               <dt>[=media type=]</dt>
               <dd>|mediaType|</dd>
             </dl>
