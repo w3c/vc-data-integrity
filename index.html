@@ -235,9 +235,29 @@ code {
   color: rgb(199, 73, 0);
   font-weight: bold;
 }
-pre.nohighlight {
+pre {
   overflow-x: auto;
   white-space: pre-wrap;
+}
+pre .highlight {
+  font-weight: bold;
+  color: Green;
+}
+pre .subject {
+  font-weight: bold;
+  color: RoyalBlue;
+}
+pre .property {
+  font-weight: bold;
+  color: DarkGoldenrod;
+}
+pre .comment {
+  font-weight: bold;
+  color: SteelBlue;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 ol.algorithm { counter-reset:numsection; list-style-type: none; }
 ol.algorithm li { margin: 0.5em 0; }
@@ -815,11 +835,10 @@ approaches that are identified: Proof Sets (un-ordered) and Proof Chains
       <section>
         <h3>Proof Sets</h3>
         <p>
-A proof set is useful when the same data needs to be secured by multiple
-entities, but where the order of proofs does not matter,
-such as in the case of a set of signatures on a contract. A proof set,
-which has no order, is represented by associating a set of proofs
-with the `proof` key in a document.
+A <dfn>proof set</dfn> is useful when the same data needs to be secured by
+multiple entities, but where the order of proofs does not matter, such as in the
+case of a set of signatures on a contract. A proof set, which has no order, is
+represented by associating a set of proofs with the `proof` key in a document.
         </p>
         <pre class="example nohighlight" title="A proof set in a data document">
 {
@@ -851,13 +870,12 @@ with the `proof` key in a document.
       <section>
         <h3>Proof Chains</h3>
         <p>
-A proof chain is useful when the same data needs to be signed by
-multiple entities and the order of when the proofs occurred matters,
-such as in the case of a notary counter-signing a proof that had been
-created on a document. A proof chain, where proof order needs to be preserved,
-is expressed by providing at least one proof with an `id`, such as a UUID as a URN,
-and another proof with a `previousProof` value that identifies the
-previous proof.
+A <dfn>proof chain</dfn> is useful when the same data needs to be signed by
+multiple entities and the order of when the proofs occurred matters, such as in
+the case of a notary counter-signing a proof that had been created on a
+document. A proof chain, where proof order needs to be preserved, is expressed
+by providing at least one proof with an `id`, such as a UUID as a URN, and
+another proof with a `previousProof` value that identifies the previous proof.
         </p>
         <pre class="example nohighlight"
           title="A proof chain in a data document">
@@ -4372,150 +4390,185 @@ Ensure that base URL is set to null when processing as RDF.
     <section class="appendix informative">
       <h2>Understanding Proof Sets and Proof Chains</h2>
       <p>
-Proof sets and chains allow multiple proofs to be carried in a VC, i.e., instead
-of a single <em>proof</em> included in the signed VC we can express multiple
-proofs in an array as shown in the previous examples. The elements of this array
-are members of <em>proof set</em> and, optionally, a <em>proof chain</em>.
-The purpose of this section is to explain the intended use of each of these entities
-and, in particular, their differing security properties. These differing security
-properties lead to differences in the processing in section <a href="#add-proof-set-chain"></a>.
+Sections [[[#proof-sets]]] and [[[#proof-chains]]] describe how multiple proofs
+can be expressed in a [=secured data document=]; that is, instead of a single
+[=proof=] included in the [=secured data document=], one can express multiple
+proofs in an array as shown in [[[#example-a-proof-set-in-a-data-document]]] and
+[[[#example-a-proof-chain-in-a-data-document]]]. The elements of this array are
+members of a [=proof set=] and, optionally, a [=proof chain=]. The purpose of
+this section is to explain the intended use of each of these features and, in
+particular, their differing security properties. These differing security
+properties lead to differences in the processing in section
+[[[#add-proof-set-chain]]].
       </p>
       <p>
-We are going to represent VCs and their proofs in a highly abbreviated manner so
-that the key security properties can be observed.
+This section represents [=secured data documents=], including their proofs, in
+an abbreviated manner so that the important security properties can be
+observed.
       </p>
       <p>
-We consider a scenario with three signatories: a CEO, a CFO, and a VP of
-Engineering. Each will need to have a public key and secret key pair for signing a
-document. We denote the secret/public keys of each of these signatories by
-<em>secretCEO/pubCEO</em>, <em>secretCFO/pubCFO</em>, and <em>secretVPE/pubVPE</em>,
-respectively.
+Consider a scenario with three signatories: a CEO, a CFO, and a VP of
+Engineering. Each will need to have a public key and secret key pair for signing
+a document. We denote the secret/public keys of each of these signatories by
+<em>secretCEO/publicCEO</em>, <em>secretCFO/publicCFO</em>, and
+<em>secretVPE/publicVPE</em>, respectively.
       </p>
       <p>
-When constructing a <em>proof set</em> where each of the signatories signs a
-document without concern, we construct a proof symbolically as:
+When constructing a [=proof set=] where each of the signatories signs an
+|unsecuredDataDocument| without concern, we construct a proof symbolically as:
       </p>
-      <pre><code class="language-javascript">
+      <pre class="example nohighlight" title="Symbolic expression of how a proof is created">
 {
   "type": "DataIntegrityProof",
   "cryptosuite": "jcs-eddsa-2022",
   "created": "2023-03-05T19:23:24Z",
   "proofPurpose": "assertionMethod",
-  "verificationMethod": pubCEO,
-  "proofValue": signature(secretCEO, document)
+  "verificationMethod": <code>publicCEO</code>,
+  "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
 }
-      </code></pre>
+      </pre>
       <p>
-Where <em>pubCEO</em> is used as a placeholder for a reference that resolves to
-the CEO's public key and `signature(secret, doc)` denotes the
-computation of a digital signature by a particular data integrity cryptosuite
-using a particular secret key over a particular document. The <em>type</em>,
-<em>cryptosuite</em>,  <em>created</em>, and <em>proofPurpose</em> attributes do
-not factor into our discussion so we will omit them. In particular, below we show
-all the proofs in a <em>proof set</em> on a document that has been signed by the
-VP of Engineering, the CFO, and the CEO:
+Where <em>publicCEO</em> is used as a placeholder for a reference that resolves
+to the CEO's public key and <strong>signature(`secretKey`,
+`unsecuredDataDocument`)</strong> denotes the computation of a digital signature
+by a particular data integrity cryptosuite using a particular secret key over a
+particular document. The `type`, `cryptosuite`, `created`, and `proofPurpose`
+attributes do not factor into our discussion so we will omit them. In
+particular, below we show all the proofs in a [=proof set=] on a document that
+has been signed by the VP of Engineering, the CFO, and the CEO:
       </p>
-      <pre><code class="language-javascript">
-{ // Remainder of verifiable credential document not shown; this proof set will verify
-  "proof": [
-  {"verificationMethod": pubVPE, "proofValue": signature(secretVPE, document)},
-  {"verificationMethod": pubCFO, "proofValue": signature(secretCFO, document)},
-  {"verificationMethod": pubCEO, "proofValue": signature(secretCEO, document)}]
+      <pre class="example nohighlight" title="Symbolic expression of a proof set">
+{
+  <span class="comment">// Remainder of secured data document not shown (above)</span>
+  "proof": [{
+    "verificationMethod": <code>publicVPE</code>,
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+  }, {
+    "verificationMethod": <code>publicCFO</code>,
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+  }, {
+    "verificationMethod": <code>publicCEO</code>,
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+  }]
 }
-      </code></pre>
+      </pre>
       <p>
-A <em>holder</em> or any other intermediary receiving a signed verifiable credential containing a
-<em>proof set</em> is able to remove any of the <em>proofs</em> within the set
-prior to passing it on to another entity and this verifiable credential will still verify. This might
-or might not have been the intent. For the signatories sending a birthday card to a
-valued employee, this is probably fine. If we are trying to model a business
-process where approvals ascend the company hierarchy, this would not be ideal,
-since any intermediary could remove signatures from the <em>proof set</em> and
-still have it verify; for instance, below it looks like the CFO and CEO approved
-something without the VP of Engineering's concurrence.
+A [=holder=] or any other intermediary receiving a [=secured data document=]
+containing a [=proof set=] is able to remove any of the `proof` values within
+the set prior to passing it on to another entity and the [=secured data
+document=] will still verify. This might or might not have been the intent. For
+the signatories sending a birthday card to a valued employee, using a [=proof
+set=] is probably fine. If we are trying to model a business process where
+approvals ascend the company hierarchy, this would not be ideal, since any
+intermediary could remove signatures from the [=proof set=] and still have it
+verify; for instance, in the example below, it looks like the CFO and CEO
+approved something without the VP of Engineering's concurrence.
       </p>
-      <pre><code class="language-javascript">
-{ // Remainder of verifiable credential document not shown; this proof set will also verify
-  "proof": [
-  {"verificationMethod": pubCFO, "proofValue": signature(secretCFO, document)},
-  {"verificationMethod": pubCEO, "proofValue": signature(secretCEO, document)}]
+      <pre class="example nohighlight" title="Removal of a signature in a proof set">
+{
+  <span class="comment">// Remainder of secured data document not shown (above)</span>
+  "proof": [{
+    "verificationMethod": <code>publicCFO</code>,
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+  }, {
+    "verificationMethod": <code>publicCEO</code>,
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+  }]
 }
       </code></pre>
       <p>
-We can introduce a "dependency relation" between <em>proofs</em> in a
-<em>proof set</em> by assigning an <em>id</em> to each proof that another
-proof relies on, i.e., each <em>dependent proof</em>, and the <em>relying proof</em>
-will have a list (or single item) denoting <em>previousProofs</em>. Such
+It is possible to introduce a dependency between [=proofs=] in a [=proof set=]
+by setting the `id` property of each proof such that another proof can reference
+it. In other words, a <em>dependent proof</em> will be referenced by other
+<em>relying proofs</em> by using the `previousProof` property. Such
 <em>dependency chains</em> can have arbitrary depth. The <strong>intent</strong>
-of such a <em>proof chain</em> is to model an approval chain in a business
-process or a notary witnessing analog signatures. Implementers are cautioned
-against allowing <em>supporting proofs</em> to be removed or
-<strong>substituted</strong> by other proofs.
+of such a [=proof chain=] is to model an approval chain in a business process or
+a notary witnessing analog signatures.
       </p>
       <p>
-Let's see how a <em>proof chain</em> is constructed when the VP of Engineering
-signs off on the document first; based on the VP of Engineering's signature and
-a review, the CFO then signs off on the document; and finally, based on both prior
-signatures and a review, the CEO signs off on the document. Since others will be
-referring to the VP of Engineering's signature, we need to add an <em>id</em> to
-the proof options. First the VP of Engineering signs the verifiable credential:
+The examples below demonstrate how a [=proof chain=] can be constructed when the
+VP of Engineering signs off on the document first; based on the VP of
+Engineering's signature and a review, the CFO then signs off on the document;
+and finally, based on both prior signatures and a review, the CEO signs off on
+the document. Since others will be referring to the VP of Engineering's
+signature, we need to add an `id` to the proof. First the VP of
+Engineering signs the [=unsecured data document=]:
       </p>
-      <pre><code class="language-javascript">
-{ // Remainder of verifiable credential document not shown; this proof set will verify
-  "proof": {&quot;id&quot;: "urn:proof-0", "verificationMethod": pubVPE,
-    "proofValue": signature(privateVPE, document)}
+      <pre class="example nohighlight"
+        title="Proof chain containing first proof with `id` property set">
+{
+  <span class="comment">// Remainder of secured data document not shown (above)</span>
+  "proof": {
+    <span class="highlight">"id": "urn:proof-1"</span>,
+    "verificationMethod": <code>publicVPE</code>,
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+  }
 }
-      </code></pre>
+      </pre>
       <p>
 Next, the CFO receives the document, verifies that the VP of Engineering signed
-it, and signs it based on a review and on the signature of the VP of Engineering. For this,
-we need to set up the <em>proof chain</em> by indicating a dependency on the
-proof in the document just received, i.e.,
-`previousProof = "urn:proof-0"`. The
-processing algorithm has us "bind" the previous proof to the unsigned
-document. Denote the dependency on this proof by <em>proof0</em> and "binding" this
-information to the document by `document + proof0`:
+it, and signs it based on a review and on the signature of the VP of
+Engineering. For this, we need to set up the [=proof chain=] by indicating a
+dependency on the proof in the document just received. We do this by
+setting the `previousProof` property of the second proof to the value
+`urn:proof-1`, which "binds" the second proof to the first proof, which is
+then signed. The following example shows how the dependency on the first proof
+is created:
       </p>
-      <pre><code class="language-javascript">
-{ // Remainder of verifiable credential document not shown
-  "proof": [
-  {"id": "urn:proof-0", "verificationMethod": pubVPE,
-    "proofValue": signature(VP_Eng, document)},
-  {"id": "urn:proof-1", "verificationMethod": pubCFO, "previousProof": "urn:proof-0",
-    "proofValue": signature(secretCFO, document + proof0)}]
+      <pre class="example nohighlight" title="Proof chain containing two proofs">
+{
+  <span class="comment">// Remainder of secured data document not shown (above)</span>
+  "proof": [{
+    "id": "urn:proof-1",
+    "verificationMethod": <code>publicVPE</code>,
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+  }, {
+    "id": "urn:proof-2",
+    "verificationMethod": <code>publicCFO</code>,
+    <span class="highlight">"previousProof": "urn:proof-1"</span>,
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+  }]
 }
-      </code></pre>
+      </pre>
       <p>
-Now, when the CEO validates the received the verifiable credential with the above <em>proof
-chain</em>, they will check that the CFO signed based on the signature of the
-VP of Engineering. First, they will check the proof/signature with
-`id = urn:proof-0` against the public key of the VP of Engineering. Note that
-this proof/signature is over the original document.
+Now, when the CEO verifies the received [=secured data document=] with the
+above [=proof chain=], they will check that the CFO signed based on the
+signature of the VP of Engineering. First, they will check the proof with an
+`id` property whose value is `urn:proof-1` against the public key of the VP of
+Engineering. Note that this proof is over the original document.
       </p>
       <p>
-Next, the CEO will check the proof/signature `id = "urn:proof-1"` against the
-public key of the CFO. However, to make sure that the CFO signed with the
-document knowing, and with proof, that the VP of engineering signed we verify
-this signature/proof over
-the combination of the document and <em>proof0</em>. If validation is
-successful, the CEO signs producing a proof over the document and
-<em>proof1</em> (the proof with `id = "urn:proof-1"`).
-The final signed chain looks like this:
+Next, the CEO will check the proof with an `id` property whose value is
+`urn:proof-2` against the public key of the CFO. However, to make sure that the
+CFO signed the document with proof that the VP of Engineering had already
+signed, we verify this proof over the combination of the document and
+`urn:proof-1`. If verification is successful, the CEO signs, producing a proof
+over the document which includes `urn:proof-1` and `urn:proof-2`. The final
+[=proof chain=] looks like this:
       </p>
-      <pre><code class="language-javascript">
-{ // Remainder of verifiable credential document not shown
-  "proof": [
-  {"id": "urn:proof-0", "verificationMethod": pubVPE,
-    "proofValue": signature(VP_Eng, document)},
-  {"id": "urn:proof-1", "verificationMethod": pubCFO, "previousProof": "urn:proof-0",
-    "proofValue": signature(secretCFO, document + proof0)},
-  {"id": "urn:proof-2", "verificationMethod": pubCEO, "previousProof": "urn:proof-1",
-    "proofValue": signature(secretCEO, document + proof1)},
-  ]
+      <pre class="example nohighlight" title="Proof chain containing three proofs">
+{
+  <span class="comment">// Remainder of secured data document not shown (above)</span>
+  "proof": [{
+    "id": "urn:proof-1",
+    "verificationMethod": <code>publicVPE</code>,
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+  }, {
+    "id": "urn:proof-2",
+    "verificationMethod": <code>publicCFO</code>,
+    "previousProof": "urn:proof-1",
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+  }, {
+    "id": "urn:proof-3",
+    "verificationMethod": <code>publicCEO</code>,
+    "previousProof": "urn:proof-2",
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocumentWithProof2</code>)</strong>
+  }]
 }
-      </code></pre>
+      </pre>
       <p>
-The recipient of this verifiable credential then validates it in a similar way as above, but with one extra step.
+The recipient of this [=secured data document=] then validates it in a similar
+way, checking each proof in the chain.
       </p>
     </section>
 
