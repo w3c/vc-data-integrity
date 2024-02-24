@@ -505,22 +505,26 @@ applicability of the technology to their use case.
 
       <section id="conformance">
         <p>
-A <dfn>conforming secured document</dfn> is any concrete expression of the
-data model that follows the relevant normative requirements in Sections
-[[[#proofs]]], [[[#proof-purposes]]], [[[#contexts-and-vocabularies]]], and
-[[[#dataintegrityproof]]].
+A <dfn>conforming secured document</dfn> is any [=byte sequence=] that can be
+converted to a
+<a data-cite="INFRA#parse-json-bytes-to-a-javascript-value">
+<dfn>JSON document</dfn></a> that follows the relevant normative requirements in
+Sections [[[#proofs]]], [[[#proof-purposes]]], [[[#contexts-and-vocabularies]]],
+and [[[#dataintegrityproof]]].
         </p>
 
         <p>
-A <dfn>conforming controller document</dfn> is any concrete expression of the
-data model that follows the relevant normative requirements in Sections
-[[[#controller-documents]]] and [[[#contexts-and-vocabularies]]].
+A <dfn>conforming controller document</dfn> is any [=byte sequence=] that can be
+converted to a [=JSON document=] that follows the relevant normative
+requirements in Sections [[[#controller-documents]]] and
+[[[#contexts-and-vocabularies]]].
         </p>
 
         <p>
-A <dfn>conforming verification method</dfn> is any concrete expression of the
-data model that follows the relevant normative requirements in Sections
-[[[#verification-methods]]] and [[[#contexts-and-vocabularies]]].
+A <dfn>conforming verification method</dfn> is any [=byte sequence=] that can be
+converted to a [=JSON document=] that follows the relevant normative
+requirements in Sections [[[#verification-methods]]] and
+[[[#contexts-and-vocabularies]]].
         </p>
 
         <p>
@@ -531,7 +535,7 @@ secured document</a>, a [=conforming controller document=], or a
 
         <p>
 A <dfn class="lint-ignore">conforming cryptographic suite specification</dfn> is
-any document that follows the relevant normative requirements in Section
+any specification that follows the relevant normative requirements in Section
 [[[#cryptographic-suites]]].
         </p>
 
