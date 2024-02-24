@@ -409,7 +409,7 @@ checked for correctness.
         </figure>
 
         <p>
-During verification, the <a>transformation</a> and <a>hashing</a> steps are
+During verification, the [=transformation=] and [=hashing=] steps are
 conceptually the same as described above.
         </p>
 
@@ -426,7 +426,7 @@ and
         <p>
 This specification details how cryptographic software architects and
 implementers can package these processes together into things called
-<a>cryptographic suites</a> and provide them to application developers for the
+[=cryptographic suites=] and provide them to application developers for the
 purposes of protecting the integrity of application data in transit and at rest.
         </p>
 
@@ -464,7 +464,7 @@ signatures. See section [[[#transformations]]], section [[[#data-opacity]]], and
           <dt>Resilience</dt>
           <dd>
 Since digital proof mechanisms might be compromised without warning due to
-technological advancements, it is important that <a>cryptographic suites</a>
+technological advancements, it is important that [=cryptographic suites=]
 provide multiple layers of protection and can be rapidly upgraded. This
 specification provides for both algorithmic agility and cryptographic layering,
 while still keeping the digital proof format easy for developers to understand
@@ -525,8 +525,8 @@ data model that follows the relevant normative requirements in Sections
 
         <p>
 A <dfn class="lint-ignore">conforming document</dfn> is either a <a>conforming
-secured document</a>, a <a>conforming controller document</a>, or a
-<a>conforming verification method</a>.
+secured document</a>, a [=conforming controller document=], or a
+[=conforming verification method=].
         </p>
 
         <p>
@@ -538,7 +538,7 @@ any document that follows the relevant normative requirements in Section
         <p>
 A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
 as software and/or hardware that generates and/or consumes a
-<a>conforming document</a> according to the relevant normative statements in
+[=conforming document=] according to the relevant normative statements in
 Section [[[#algorithms]]]. Conforming processors MUST produce errors
 when non-conforming documents are consumed.
         </p>
@@ -557,8 +557,8 @@ when non-conforming documents are consumed.
 
       <p>
 This section specifies the data model that is used for expressing
-<a>data integrity proofs</a>, <a>controller documents</a>, and
-<a>verification methods</a>.
+[=data integrity proofs=], [=controller documents=], and
+[=verification methods=].
       </p>
 
       <p>
@@ -595,14 +595,14 @@ and order, when a non-JSON-LD processor is used.
       <section>
         <h3>Proofs</h3>
         <p>
-A <a>data integrity proof</a> provides information about the proof mechanism,
+A [=data integrity proof=] provides information about the proof mechanism,
 parameters required to verify that proof, and the proof value itself. All of this
 information is provided using Linked Data vocabularies such as the
 [[?SECURITY-VOCABULARY]].
         </p>
 
         <p>
-When expressing a <a>data integrity proof</a> on an object, a
+When expressing a [=data integrity proof=] on an object, a
 <dfn class="lint-ignore">`proof`</dfn> property MUST be used.
 The `proof` property within a Verifiable Credential is a named graph.
 If present, its
@@ -620,7 +620,7 @@ The usage of this property is further explained in Section [[[#proof-chains]]].
 
           <dt>type</dt>
           <dd>
-The specific <a>proof type</a> used for the cryptographic proof MUST be
+The specific [=proof type=] used for the cryptographic proof MUST be
 specified as a string that maps to a URL [[URL]]. Examples of proof types
 include `DataIntegrityProof` and `Ed25519Signature2020`.
 Proof types determine what other fields are required to secure and
@@ -644,7 +644,7 @@ which was to merely logging into a website.
           <dd>
 The means and information needed to verify the proof MUST be specified as a
 string that maps to a [[URL]]. An example of a verification method is a
-link to a <a>public key</a> which includes cryptographic material that is used
+link to a [=public key=] which includes cryptographic material that is used
 by a verifier during the verification process.
           </dd>
 
@@ -683,7 +683,7 @@ include: `domain.example` (DNS domain), `https://domain.example:8443`
           <dt id="defn-challenge">challenge</dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
-The value is used once for a particular <a>domain</a> and window of time. This
+The value is used once for a particular [=domain=] and window of time. This
 value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
           </dd>
@@ -704,7 +704,7 @@ proof.
           <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
 An OPTIONAL string value or unordered list of string values. Each value
-identifies another <a>data integrity proof</a> that MUST verify before the
+identifies another [=data integrity proof=] that MUST verify before the
 current proof is processed. If an unordered list, all referenced proofs in the
 array MUST verify. This property is used in Section [[[#proof-chains]]].
           </dd>
@@ -930,7 +930,7 @@ really needed to accomplish this goal.
         </p>
 
         <p>
-The following is a list of commonly used <a>proof purpose</a> values.
+The following is a list of commonly used [=proof purpose=] values.
         </p>
 
         <dl>
@@ -973,11 +973,11 @@ proof purposes for that use case, such as `capabilityInvocation` and
         <h3>Controller Documents</h3>
 
         <p>
-A <a>controller document</a> is a set of data that specifies one or more
-relationships between a <a>controller</a> and a set of data, such as a set of
-public cryptographic keys. The <a>controller document</a> SHOULD
-contain <a>verification relationships</a> that explicitly permit the use of
-certain <a>verification methods</a> for specific purposes.
+A [=controller document=] is a set of data that specifies one or more
+relationships between a [=controller=] and a set of data, such as a set of
+public cryptographic keys. The [=controller document=] SHOULD
+contain [=verification relationships=] that explicitly permit the use of
+certain [=verification methods=] for specific purposes.
         </p>
 
         <p class="issue atrisk"
@@ -1001,10 +1001,10 @@ combination with an integrity protection mechanism such as Hashlinks.
         <section>
           <h2>Verification Methods</h2>
           <p>
-A <a>controller document</a> can express <a>verification methods</a>, such as
-cryptographic <a>public keys</a>, which can be used to <a>authenticate</a> or
-authorize interactions with the <a>controller</a> or associated parties. For
-example, a cryptographic <a>public key</a> can be used as a <a>verification
+A [=controller document=] can express [=verification methods=], such as
+cryptographic [=public keys=], which can be used to [=authenticate=] or
+authorize interactions with the [=controller=] or associated parties. For
+example, a cryptographic [=public key=] can be used as a <a>verification
 method</a> with respect to a digital signature; in such usage, it verifies that
 the signer could use the associated cryptographic private key. <a>Verification
 methods</a> might take many parameters. An example of this is a set of five
@@ -1018,12 +1018,12 @@ cryptographic threshold signature.
               <p>
 The `verificationMethod` property is OPTIONAL. If present, the value
 MUST be a [=set=] of <a>verification
-methods</a>, where each <a>verification method</a> is expressed using a
-[=map=]. The <a>verification method</a> [=map=] MUST include the `id`,
+methods</a>, where each [=verification method=] is expressed using a
+[=map=]. The [=verification method=] [=map=] MUST include the `id`,
 `type`, `controller`, and specific verification material
 properties that are determined by the value of `type` and are defined
-in [[[#verification-material]]]. A <a>verification method</a> MAY
-include additional properties. <a>Verification methods</a> SHOULD be registered
+in [[[#verification-material]]]. A [=verification method=] MAY
+include additional properties. [=Verification methods=] SHOULD be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
               </p>
               <p class="note">
@@ -1035,15 +1035,15 @@ documents, for which it is optional. See section [[[#proofs]]].
                 <dt>id</dt>
                 <dd>
                   <p>
-The value of the `id` property for a <a>verification method</a> MUST be a
+The value of the `id` property for a [=verification method=] MUST be a
 [=string=] that conforms to the conforms to the [[URL]] syntax.
                   </p>
                 </dd>
                 <dt>type</dt>
                 <dd>
 The value of the `type` property MUST be a [=string=] that references exactly
-one <a>verification method</a> type. In order to maximize global
-interoperability, the <a>verification method</a> type SHOULD be registered in
+one [=verification method=] type. In order to maximize global
+interoperability, the [=verification method=] type SHOULD be registered in
 the Data Integrity Specification Registries [TBD -- DIS-REGISTRIES].
                 </dd>
                 <dt><span id="defn-controller">controller</span></dt>
@@ -1054,24 +1054,24 @@ the [[URL]] syntax.
                 <dt id="defn-vm-expires">expires</dt>
                 <dd>
 The `expires` property is OPTIONAL. It is set, in advance, by the
-<a>controller</a> of a  <a>verification method</a> to signal when that method
+[=controller=] of a  [=verification method=] to signal when that method
 can no longer be used for verification purposes. If provided, it MUST be an
 [[XMLSCHEMA11-2]] `dateTimeStamp` string specifying when the
-<a>verification method</a> SHOULD cease to be used. Once the value is set, it is
+[=verification method=] SHOULD cease to be used. Once the value is set, it is
 not expected to be updated, and systems depending on the value are expected to
-not verify any proofs associated with the <a>verification method</a> at or after
+not verify any proofs associated with the [=verification method=] at or after
 the time of expiration.
                 </dd>
                 <dt><dfn class="lint-ignore">revoked</dfn></dt>
                 <dd>
-The `revoked` property is OPTIONAL. It is set by the <a>controller</a> of a
-<a>verification method</a> to signal when that method is to no longer to be used
+The `revoked` property is OPTIONAL. It is set by the [=controller=] of a
+[=verification method=] to signal when that method is to no longer to be used
 for verification purposes, such as after a security compromise of the
-<a>verification method</a>. If provided, it MUST be an [[XMLSCHEMA11-2]]
-`dateTimeStamp` string specifying when the <a>verification method</a>
+[=verification method=]. If provided, it MUST be an [[XMLSCHEMA11-2]]
+`dateTimeStamp` string specifying when the [=verification method=]
 SHOULD cease to be used. Once the value is set, it is not expected to be
 updated, and systems depending on the value are expected to not verify any
-proofs associated with the <a>verification method</a> at or after the time of
+proofs associated with the [=verification method=] at or after the time of
 revocation.
                 </dd>
               </dl>
@@ -1104,15 +1104,15 @@ revocation.
           <p class="note"
             title="Verification method controller(s) and controller(s)">
 The semantics of the `controller` property are the same when the
-subject of the relationship is the <a>controller document</a> as when the subject of
-the relationship is a <a>verification method</a>, such as a cryptographic public
+subject of the relationship is the [=controller document=] as when the subject of
+the relationship is a [=verification method=], such as a cryptographic public
 key. Since a key can't control itself, and the key controller cannot be inferred
-from the <a>controller document</a>, it is necessary to explicitly express the identity
+from the [=controller document=], it is necessary to explicitly express the identity
 of the controller of the key. The difference is that the value of
-`controller` for a <a>verification method</a> is <em>not</em>
-necessarily a <a>controller</a>. <a>controllers</a> are expressed
-using the `<a>controller</a>` property at the highest level of the
-<a>controller document</a>.
+`controller` for a [=verification method=] is <em>not</em>
+necessarily a [=controller=]. [=controllers=] are expressed
+using the `[=controller=]` property at the highest level of the
+[=controller document=].
           </p>
 
           <section>
@@ -1120,11 +1120,11 @@ using the `<a>controller</a>` property at the highest level of the
 
             <p>
 Verification material is any information that is used by a process that applies
-a <a>verification method</a>. The `type` of a <a>verification method</a> is
+a [=verification method=]. The `type` of a [=verification method=] is
 expected to be used to determine its compatibility with such processes. Examples
 of verification methods include `JsonWebKey` and `Multikey`.
-A <a>cryptographic suite</a> specification is responsible for specifying the
-<a>verification method</a> `type` and its associated verification material
+A [=cryptographic suite=] specification is responsible for specifying the
+[=verification method=] `type` and its associated verification material
 format. For examples, see
 <a href="https://www.w3.org/TR/vc-di-ecdsa/">the Data Integrity ECDSA
 Cryptosuites</a> and <a href="https://w3c-ccg.github.io/lds-ed25519-2020/">
@@ -1135,21 +1135,21 @@ method</a> types, please see the [[?SECURITY-VOCABULARY]].
             <p>
 To increase the likelihood of interoperable implementations, this specification
 limits the number of formats for expressing verification material in a
-<a>controller document</a>. The fewer formats that implementers have to
+[=controller document=]. The fewer formats that implementers have to
 implement, the more likely it will be that they will support all of them. This
 approach attempts to strike a delicate balance between easing implementation
 and providing support for formats that have historically had broad deployment.
             </p>
 
             <p>
-A <a>verification method</a> MUST NOT contain multiple verification material
+A [=verification method=] MUST NOT contain multiple verification material
 properties for the same material. For example, expressing key material in a
-<a>verification method</a> using both `publicKeyJwk` and
+[=verification method=] using both `publicKeyJwk` and
 `publicKeyMultibase` at the same time is prohibited.
             </p>
 
             <p>
-An example of a <a>controller document</a> containing <a>verification
+An example of a [=controller document=] containing <a>verification
 methods</a> using both properties above is shown below.
             </p>
 
@@ -1188,7 +1188,7 @@ methods</a> using both properties above is shown below.
           <section>
             <h3>Multikey</h3>
             <p>
-The Multikey data model is a specific type of <a>verification method</a> that
+The Multikey data model is a specific type of [=verification method=] that
 encodes key types into a single binary stream that is then encoded as a
 Multibase value as described in Section [[[#multibase-0]]].
             </p>
@@ -1234,7 +1234,7 @@ In the example above, the `publicKeyMultibase` value starts with the letter `z`,
 which is the <a href="#multibase-0">Multibase</a> header that conveys that the
 binary data is base-58-btc-encoded using the Bitcoin base-encoding alphabet. The
 decoded binary data header is `0xed01`, which specifies that the
-remaining data is a 32-byte raw Ed25519 <a>public key</a>.
+remaining data is a 32-byte raw Ed25519 [=public key=].
             </p>
 
             <p>
@@ -1266,7 +1266,7 @@ remaining data is a 32-byte raw Ed25519 private key.
           <section>
             <h3>JsonWebKey</h3>
             <p>
-The JSON Web Key (JWK) data model is a specific type of <a>verification method</a>
+The JSON Web Key (JWK) data model is a specific type of [=verification method=]
 that uses the JWK specification [[RFC7517]] to encode key types into a
 set of parameters.
             </p>
@@ -1288,7 +1288,7 @@ conforms to [[RFC7517]]. The [=map=] MUST NOT
 include any members of the private information class, such as `d`, as described
 in the <a href="https://datatracker.ietf.org/doc/html/rfc7517#section-8.1.1">JWK
 Registration Template</a>. It is RECOMMENDED that verification methods that use
-JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
+JWKs [[RFC7517]] to represent their [=public keys=] use the value of `kid` as
 their fragment identifier. It is RECOMMENDED that JWK `kid` values are set to
 the public key fingerprint [[RFC7638]]. See the first key in
 [[[#example-various-verification-method-types]]] for an example of a
@@ -1375,20 +1375,20 @@ the Ed25519 curve that is associated with the public key).
           <section>
             <h3>Referring to Verification Methods</h3>
             <p>
-<a>Verification methods</a> can be embedded in or referenced from properties
-associated with various <a>verification relationships</a> as described in
-[[[#verification-relationships]]]. Referencing <a>verification methods</a>
-allows them to be used by more than one <a>verification relationship</a>.
+[=Verification methods=] can be embedded in or referenced from properties
+associated with various [=verification relationships=] as described in
+[[[#verification-relationships]]]. Referencing [=verification methods=]
+allows them to be used by more than one [=verification relationship=].
             </p>
 
             <p>
-If the value of a <a>verification method</a> property is a [=map=], the
-<a>verification method</a> has been embedded and its properties can be accessed
+If the value of a [=verification method=] property is a [=map=], the
+[=verification method=] has been embedded and its properties can be accessed
 directly. However, if the value is a URL [=string=], the <a>verification
 method</a> has been included by reference and its properties will need to be
-retrieved from elsewhere in the <a>controller document</a> or from another
-<a>controller document</a>. This is done by dereferencing the URL and searching
-the resulting <a>resource</a> for a <a>verification method</a> [=map=] with
+retrieved from elsewhere in the [=controller document=] or from another
+[=controller document=]. This is done by dereferencing the URL and searching
+the resulting [=resource=] for a [=verification method=] [=map=] with
 an `id` property whose value matches the URL.
             </p>
 
@@ -1420,37 +1420,37 @@ an `id` property whose value matches the URL.
           <h2>Verification Relationships</h2>
 
           <p>
-A <a>verification relationship</a> expresses the relationship between the
-<a>controller</a> and a <a>verification method</a>.
+A [=verification relationship=] expresses the relationship between the
+[=controller=] and a [=verification method=].
           </p>
           <p>
-Different <a>verification relationships</a> enable the associated
-<a>verification methods</a> to be used for different purposes. It is up to a
+Different [=verification relationships=] enable the associated
+[=verification methods=] to be used for different purposes. It is up to a
 <em>verifier</em> to ascertain the validity of a verification attempt by
-checking that the <a>verification method</a> used is contained in the
-appropriate <a>verification relationship</a> property of the
-<a>controller document</a>.
+checking that the [=verification method=] used is contained in the
+appropriate [=verification relationship=] property of the
+[=controller document=].
           </p>
           <p>
-The <a>verification relationship</a> between the <a>controller</a> and the
-<a>verification method</a> is explicit in the <a>controller document</a>.
-<a>Verification methods</a> that are not associated with a particular
-<a>verification relationship</a> cannot be used for that <a>verification
-relationship</a>. For example, a <a>verification method</a> in the value of
-the `<a>authentication</a>` property cannot be used to engage in
-key agreement protocols with the <a>controller</a>&mdash;the value of the
-`<a>keyAgreement</a>` property needs to be used for that.
+The [=verification relationship=] between the [=controller=] and the
+[=verification method=] is explicit in the [=controller document=].
+[=Verification methods=] that are not associated with a particular
+[=verification relationship=] cannot be used for that <a>verification
+relationship</a>. For example, a [=verification method=] in the value of
+the `[=authentication=]` property cannot be used to engage in
+key agreement protocols with the [=controller=]&mdash;the value of the
+`[=keyAgreement=]` property needs to be used for that.
           </p>
           <p>
-The <a>controller document</a> does not express revoked keys using a <a>verification
+The [=controller document=] does not express revoked keys using a <a>verification
 relationship</a>. If a referenced verification method is not in the latest
-<a>controller document</a> used to dereference it, then that verification method is
+[=controller document=] used to dereference it, then that verification method is
 considered invalid or revoked.
           </p>
           <p>
-The following sections define several useful <a>verification relationships</a>.
-A <a>controller document</a> MAY include any of these, or other properties, to
-express a specific <a>verification relationship</a>. In order to maximize global
+The following sections define several useful [=verification relationships=].
+A [=controller document=] MAY include any of these, or other properties, to
+express a specific [=verification relationship=]. In order to maximize global
 interoperability, any such properties used SHOULD be registered in the
 Data Integrity Specification Registries [TBD: DIS-REGISTRIES].
           </p>
@@ -1459,8 +1459,8 @@ Data Integrity Specification Registries [TBD: DIS-REGISTRIES].
             <h2>Authentication</h2>
 
             <p>
-The `authentication` <a>verification relationship</a> is used to
-specify how the <a>controller</a> is expected to be <a>authenticated</a>, for
+The `authentication` [=verification relationship=] is used to
+specify how the [=controller=] is expected to be [=authenticated=], for
 purposes such as logging into a website or engaging in any sort of
 challenge-response protocol.
             </p>
@@ -1470,7 +1470,7 @@ challenge-response protocol.
               <dd>
 The `authentication` property is OPTIONAL. If present, the associated
 value MUST be a [=set=] of one or more
-<a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
+[=verification methods=]. Each [=verification method=] MAY be embedded or
 referenced.
               </dd>
             </dl>
@@ -1507,22 +1507,22 @@ do with that information.
             </p>
             <p>
 This is useful to any <em>authentication verifier</em> that needs to check to
-see if an entity that is attempting to <a>authenticate</a> is, in fact,
+see if an entity that is attempting to [=authenticate=] is, in fact,
 presenting a valid proof of authentication. When a <em>verifier</em> receives
 some data (in some protocol-specific format) that contains a proof that was made
 for the purpose of "authentication", and that says that an entity is identified
 by the `id`, then that <em>verifier</em> checks to ensure that the proof can be
-verified using a <a>verification method</a> (e.g., <a>public key</a>) listed
-under `<a>authentication</a>` in the <a>controller document</a>.
+verified using a [=verification method=] (e.g., [=public key=]) listed
+under `[=authentication=]` in the [=controller document=].
             </p>
             <p>
-Note that the <a>verification method</a> indicated by the
-`<a>authentication</a>` property of a <a>controller document</a> can
-only be used to <a>authenticate</a> the <a>controller</a>. To
-<a>authenticate</a> a different <a>controller</a>, the entity associated with
-the value of `controller` needs to <a>authenticate</a> with its
-<em>own</em> <a>controller document</a> and associated
-`<a>authentication</a>` <a>verification relationship</a>.
+Note that the [=verification method=] indicated by the
+`[=authentication=]` property of a [=controller document=] can
+only be used to [=authenticate=] the [=controller=]. To
+[=authenticate=] a different [=controller=], the entity associated with
+the value of `controller` needs to [=authenticate=] with its
+<em>own</em> [=controller document=] and associated
+`[=authentication=]` [=verification relationship=].
             </p>
           </section>
 
@@ -1530,17 +1530,21 @@ the value of `controller` needs to <a>authenticate</a> with its
             <h2>Assertion</h2>
 
             <p>
-The `assertionMethod` <a>verification relationship</a> is used to
-specify how the <a>controller</a> is expected to express claims, such as for
+The `assertionMethod` [=verification relationship=] is used to
+specify how the [=controller=] is expected to express claims, such as for
 the purposes of issuing a Verifiable Credential [[?VC-DATA-MODEL-2.0]].
             </p>
 
             <dl>
-              <dt><dfn id="defn-assertionMethod">assertionMethod</dfn></dt>
+              <dt>
+                <dfn id="defn-assertionMethod" class="lint-ignore">
+                  assertionMethod
+                </dfn>
+              </dt>
               <dd>
 The `assertionMethod` property is OPTIONAL. If present, the
 associated value MUST be a [=set=] of
-one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
+one or more [=verification methods=]. Each [=verification method=] MAY be
 embedded or referenced.
               </dd>
             </dl>
@@ -1548,10 +1552,10 @@ embedded or referenced.
             <p>
 This property is useful, for example, during the processing of a <a>verifiable
 credential</a> by a verifier. During verification, a verifier checks to see if a
-<a>verifiable credential</a> contains a proof created by the <a>controller</a>
-by checking that the <a>verification method</a> used to assert the proof is
-associated with the `<a>assertionMethod</a>` property in the
-corresponding <a>controller document</a>.
+[=verifiable credential=] contains a proof created by the [=controller=]
+by checking that the [=verification method=] used to assert the proof is
+associated with the `[=assertionMethod=]` property in the
+corresponding [=controller document=].
             </p>
 
             <pre class="example nohighlight" title="Assertion method property
@@ -1585,26 +1589,30 @@ corresponding <a>controller document</a>.
             <h2>Key Agreement</h2>
 
             <p>
-The `keyAgreement` <a>verification relationship</a> is used to
+The `keyAgreement` [=verification relationship=] is used to
 specify how an entity can generate encryption material in order to transmit
-confidential information intended for the <a>controller</a>, such as for
+confidential information intended for the [=controller=], such as for
 the purposes of establishing a secure communication channel with the recipient.
             </p>
 
             <dl>
-              <dt><dfn id="defn-keyAgreement">keyAgreement</dfn></dt>
+              <dt>
+                <dfn id="defn-keyAgreement" class="lint-ignore">
+                  keyAgreement
+                </dfn>
+              </dt>
               <dd>
 The `keyAgreement` property is OPTIONAL. If present, the associated
 value MUST be a [=set=] of one or more
-<a>verification methods</a>. Each <a>verification method</a> MAY be embedded or
+[=verification methods=]. Each [=verification method=] MAY be embedded or
 referenced.
               </dd>
             </dl>
 
             <p>
 An example of when this property is useful is when encrypting a message intended
-for the <a>controller</a>. In this case, the counterparty uses the
-cryptographic <a>public key</a> information in the <a>verification method</a> to
+for the [=controller=]. In this case, the counterparty uses the
+cryptographic [=public key=] information in the [=verification method=] to
 wrap a decryption key for the recipient.
             </p>
 
@@ -1636,26 +1644,30 @@ wrap a decryption key for the recipient.
             <h2>Capability Invocation</h2>
 
             <p>
-The `capabilityInvocation` <a>verification relationship</a> is used
-to specify a <a>verification method</a> that might be used by the
-<a>controller</a> to invoke a cryptographic capability, such as the
-authorization to update the <a>controller document</a>.
+The `capabilityInvocation` [=verification relationship=] is used
+to specify a [=verification method=] that might be used by the
+[=controller=] to invoke a cryptographic capability, such as the
+authorization to update the [=controller document=].
             </p>
 
             <dl>
-              <dt><dfn id="defn-capabilityInvocation">capabilityInvocation</dfn></dt>
+              <dt>
+                <dfn id="defn-capabilityInvocation" class="lint-ignore">
+                  capabilityInvocation
+                </dfn>
+              </dt>
               <dd>
 The `capabilityInvocation` property is OPTIONAL. If present, the
 associated value MUST be a [=set=] of
-one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
+one or more [=verification methods=]. Each [=verification method=] MAY be
 embedded or referenced.
               </dd>
             </dl>
 
             <p>
-An example of when this property is useful is when a <a>controller</a> needs to
+An example of when this property is useful is when a [=controller=] needs to
 access a protected HTTP API that requires authorization in order to use it. In
-order to authorize when using the HTTP API, the <a>controller</a>
+order to authorize when using the HTTP API, the [=controller=]
 uses a capability that is associated with a particular URL that is
 exposed via the HTTP API. The invocation of the capability could be
 expressed in a number of ways, e.g., as a digitally signed
@@ -1663,9 +1675,9 @@ message that is placed into the HTTP Headers.
             </p>
             <p>
 The server providing the HTTP API is the <em>verifier</em> of the capability and
-it would need to verify that the <a>verification method</a> referred to by the
-invoked capability exists in the `<a>capabilityInvocation</a>`
-property of the <a>controller document</a>. The verifier would also check to make sure
+it would need to verify that the [=verification method=] referred to by the
+invoked capability exists in the `[=capabilityInvocation=]`
+property of the [=controller document=]. The verifier would also check to make sure
 that the action being performed is valid and the capability is appropriate for
 the resource being accessed. If the verification is successful, the server has
 cryptographically determined that the invoker is authorized to access the
@@ -1703,8 +1715,8 @@ protected resource.
             <h2>Capability Delegation</h2>
 
             <p>
-The `capabilityDelegation` <a>verification relationship</a> is used
-to specify a mechanism that might be used by the <a>controller</a> to delegate
+The `capabilityDelegation` [=verification relationship=] is used
+to specify a mechanism that might be used by the [=controller=] to delegate
 a cryptographic capability to another party, such as delegating the authority
 to access a specific HTTP API to a subordinate.
             </p>
@@ -1714,18 +1726,18 @@ to access a specific HTTP API to a subordinate.
               <dd>
 The `capabilityDelegation` property is OPTIONAL. If present, the
 associated value MUST be a [=set=] of
-one or more <a>verification methods</a>. Each <a>verification method</a> MAY be
+one or more [=verification methods=]. Each [=verification method=] MAY be
 embedded or referenced.
               </dd>
             </dl>
 
             <p>
-An example of when this property is useful is when a <a>controller</a> chooses
+An example of when this property is useful is when a [=controller=] chooses
 to delegate their capability to access a protected HTTP API to a party other
-than themselves. In order to delegate the capability, the <a>controller</a>
-would use a <a>verification method</a> associated with the
-`capabilityDelegation` <a>verification relationship</a> to
-cryptographically sign the capability over to another <a>controller</a>. The
+than themselves. In order to delegate the capability, the [=controller=]
+would use a [=verification method=] associated with the
+`capabilityDelegation` [=verification relationship=] to
+cryptographically sign the capability over to another [=controller=]. The
 delegate would then use the capability in a manner that is similar to the
 example described in [[[#capability-invocation]]].
             </p>
@@ -1930,14 +1942,14 @@ are arguments for and against unification that the WG is currently debating.
 
         <p>
 When a link to an external resource is included in a
-<a>conforming secured document</a>, it is desirable to know whether the resource
+[=conforming secured document=], it is desirable to know whether the resource
 that is identified has changed since the proof was created. This applies to
 cases where there is an external resource that is remotely retrieved as well as
-to cases where the <a>verifier</a> might have a locally cached copy of the
+to cases where the [=verifier=] might have a locally cached copy of the
 resource.
         </p>
         <p>
-To enable confirmation that a resource referenced by a <a>conforming secured document</a>
+To enable confirmation that a resource referenced by a [=conforming secured document=]
 has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
@@ -2012,7 +2024,7 @@ be appropriate when processing those types of documents.
 
         <p>
 There are some use cases where it is important to ensure that the
-<a>verification method</a> used in a proof is associated with the
+[=verification method=] used in a proof is associated with the
 <a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
 verifiable credential</a>, or the
@@ -2021,14 +2033,14 @@ verifiable credential</a>, or the
 verifiable presentation</a>, during the process of
 <a data-cite="?VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
 way to check for such an association is to ensure that the value of the
-`controller` property of a proof's <a>verification method</a>
+`controller` property of a proof's [=verification method=]
 matches the URL value used to identify the
 <a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively.
 This particular association indicates that the
 <a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively,
-is the controller of the <a>verification method</a> used to verify
+is the controller of the [=verification method=] used to verify
 the proof.
         </p>
 
@@ -2049,7 +2061,7 @@ validity period for the proof (that is, between
 <a href="#dfn-created">`created`</a> and
 <a href="#defn-proof-expires">`expires`</a> ).
 When <a data-cite="?VC-DATA-MODEL-2.0#validation">validating</a> a
-<a>verifiable credential</a>, it is important to ensure that the time of
+[=verifiable credential=], it is important to ensure that the time of
 interest is within the validity period for the
 <a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a> (that is,
 betweeen
@@ -2064,17 +2076,17 @@ in accepting data that ought to have been rejected.
         <p>
 Finally, implementers are also urged to understand that there is a difference
 between the <a href="#dfn-revoked">revocation time</a> and
-<a href="#defn-vm-expires">expiration time</a> for a <a>verification method</a>,
-and the revocation information associated with a <a>verifiable credential</a>.
+<a href="#defn-vm-expires">expiration time</a> for a [=verification method=],
+and the revocation information associated with a [=verifiable credential=].
 The <a href="#dfn-revoked">revocation time</a> and
-<a href="#defn-vm-expires">expiration time</a> for a <a>verification method</a>
+<a href="#defn-vm-expires">expiration time</a> for a [=verification method=]
 are expressed using the `revocation` and `expires` properties, respectively, and
 are related to events such as a private key being compromised or expiring and
 can provide timing information which might reveal details about a controller
 such as their security practices or when they might have been compromised. The
-revocation information for a <a>verifiable credential</a> is expressed using
+revocation information for a [=verifiable credential=] is expressed using
 the `credentialStatus` property and is related to events such as an individual
-losing the privilege that is granted by the <a>verifiable credential</a> and
+losing the privilege that is granted by the [=verifiable credential=] and
 does not provide timing information, which enhances privacy.
         </p>
       </section>
@@ -2212,13 +2224,13 @@ mechanism.
         <p>
 Implementations MAY load application-specific JSON-LD context files from the
 network during development, but SHOULD permanently cache JSON-LD context files
-used in <a>conforming documents</a> in production settings to increase their
+used in [=conforming documents=] in production settings to increase their
 security and privacy characteristics. Caching goals MAY be achieved through
 approaches such as those described above or functionally equivalent mechanisms.
         </p>
         <p>
 Some applications, such as digital wallets, that are capable of holding arbitrary
-<a>verifiable credentials</a> or other data-integrity-protected documents, from
+[=verifiable credentials=] or other data-integrity-protected documents, from
 any issuer and using any contexts, might need to be able to load externally
 linked resources, such as JSON-LD context files, in production settings. This is
 expected to increase user choice, scalability, and decentralized upgrades in the
@@ -2293,9 +2305,9 @@ such as when an undefined term is detected in an input document.
           </p>
 
           <p>
-Similarly, since <a>conforming secured documents</a> can be transferred from one
-security domain to another, <a>conforming processors</a> that process the
-<a>conforming secured document</a> cannot assume any particular base URL for
+Similarly, since [=conforming secured documents=] can be transferred from one
+security domain to another, [=conforming processors=] that process the
+[=conforming secured document=] cannot assume any particular base URL for
 the document. When deserializing to RDF, implementations MUST ensure that the
 base URL is set to null.
           </p>
@@ -2410,9 +2422,9 @@ The canonical mapping consists of using the lexical-to-value mapping.
       <p>
 A data integrity proof is designed to be easy to use by developers and therefore
 strives to minimize the amount of information one has to remember to generate a
-proof. Often, just the <a>cryptographic suite</a> name (e.g.
+proof. Often, just the [=cryptographic suite=] name (e.g.
 `eddsa-2022`) is required from developers to initiate the creation of
-a proof. These <a>cryptographic suite</a>s are often created or reviewed by
+a proof. These [=cryptographic suite=]s are often created or reviewed by
 people that have the requisite cryptographic training to ensure that safe
 combinations of cryptographic primitives are used. This section specifies the
 requirements for authoring cryptographic suite specifications.
@@ -2432,22 +2444,22 @@ The specification MUST identify a cryptographic suite `type` and any
 parameters that can be used with the suite.
         </li>
         <li>
-The specification MUST detail the <a>transformation algorithms</a> (if any),
+The specification MUST detail the [=transformation algorithms=] (if any),
 parameters, and other necessary details, used to modify input data into the data
 to be protected.
         </li>
         <li>
-The specification MUST detail the <a>hashing algorithms</a>
+The specification MUST detail the [=hashing algorithms=]
 parameters, and other necessary details used to perform cryptographic hashing to
 the data to be protected.
         </li>
         <li>
-The specification MUST detail the <a>proof serialization algorithms</a>,
+The specification MUST detail the [=proof serialization algorithms=],
 parameters, and other necessary details used to perform cryptographic protection
 of the data.
         </li>
         <li>
-The specification MUST detail the <a>proof verification algorithms</a>,
+The specification MUST detail the [=proof verification algorithms=],
 parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
@@ -2553,7 +2565,7 @@ The `type` property MUST contain the string `DataIntegrityProof`.
           <dt>cryptosuite</dt>
           <dd>
 The value of the `cryptosuite` property MUST be a string that identifies the
-<a>cryptographic suite</a>. If the processing environment supports subtypes
+[=cryptographic suite=]. If the processing environment supports subtypes
 of `string`, the type of the `cryptosuite` value MUST be the
 `https://w3id.org/security#cryptosuiteString` subtype of `string`.
           </dd>
@@ -2924,11 +2936,11 @@ function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
 
         <p>
 The following algorithm specifies how a digital proof can be added to an
-<a>unsecured data document</a>, and can then be used to verify the output
+[=unsecured data document=], and can then be used to verify the output
 document's authenticity and integrity. Required inputs are an <a>unsecured data
 document</a> ([=map=] |unsecuredDocument|), a [=cryptosuite instance=]
 ([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). Output is
-a <a>secured data document</a> ([=map=]) or an error. Whenever this algorithm
+a [=secured data document=] ([=map=]) or an error. Whenever this algorithm
 encodes strings, it MUST use UTF-8 encoding.
         </p>
 
@@ -2963,7 +2975,7 @@ Let |securedDataDocument| be a copy of |unsecuredDocument|.
 Set |securedDataDocument|.|proof| to the value of |proof|.
           </li>
           <li>
-Return |securedDataDocument| as the <a>secured data document</a>.
+Return |securedDataDocument| as the [=secured data document=].
           </li>
         </ol>
 
@@ -2973,10 +2985,10 @@ Return |securedDataDocument| as the <a>secured data document</a>.
         <p>
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
-proof set/chain. Required inputs are a <a>secured data document</a>
-([=map=] |securedDocument|), a <a>cryptographic suite</a>
+proof set/chain. Required inputs are a [=secured data document=]
+([=map=] |securedDocument|), a [=cryptographic suite=]
 (|suite:cryptosuite instance|), and a set of options ([=map=] |options|). Output
-is a new <a>secured data document</a> ([=map=]). Whenever this algorithm
+is a new [=secured data document=] ([=map=]). Whenever this algorithm
 encodes strings, it MUST use UTF-8 encoding.
         </p>
 
@@ -3027,7 +3039,7 @@ the generated |proof| value to the |allProofs|; otherwise, raise the exception.
 Set |output|.|proof| to the value of |allProofs|.
           </li>
           <li>
-Return |output| as the new <a>secured data document</a>.
+Return |output| as the new [=secured data document=].
           </li>
         </ol>
       </section>
@@ -3037,7 +3049,7 @@ Return |output| as the new <a>secured data document</a>.
 
         <p>
 The following algorithm specifies how to check the authenticity and integrity of
-a <a>secured data document</a> by verifying its digital proof. The algorithm
+a [=secured data document=] by verifying its digital proof. The algorithm
 takes as input:
         </p>
 
@@ -3167,11 +3179,11 @@ Return a [=verification result=] with [=struct/items=]:
       <section>
         <h3>Verify Proof Sets and Chains</h3>
         <p>
-In a proof set or proof chain, a <a>secured data document</a> has a
+In a proof set or proof chain, a [=secured data document=] has a
 `proof` attribute which contains a list of proofs
 (|allProofs|).
 The following algorithm provides one method of checking the authenticity and
-integrity of a <a>secured data document</a>, achieved by verifying every
+integrity of a [=secured data document=], achieved by verifying every
 proof in |allProofs|. Other approaches are possible, particularly if
 it is only desired to verify a subset of the proofs contained in
 |allProofs|. If another approach is taken to verify only a subset of the
@@ -3181,7 +3193,7 @@ references are also considered verified.
         </p>
         <p>
 Required input is a
-<a>secured data document</a> (|securedDocument|). A list of
+[=secured data document=] (|securedDocument|). A list of
 verification results corresponding to each proof in |allProofs| is
 produced as output.
         </p>
@@ -3237,9 +3249,9 @@ Return the |allProofs| along with each proof's associated
 
         <p>
 The following algorithm specifies how to safely retrieve a verification method,
-such as a cryptographic <a>public key</a>, by using a <a>verification method</a>
-identifier contained in a <a>data integrity proof</a>. Required inputs are a
-<strong><a>data integrity proof</a></strong> (|proof|) and a set of
+such as a cryptographic [=public key=], by using a [=verification method=]
+identifier contained in a [=data integrity proof=]. Required inputs are a
+<strong>[=data integrity proof=]</strong> (|proof|) and a set of
 <strong>dereferencing options</strong> (|options|). A
 <strong>verification method</strong> is produced as output.
         </p>
@@ -3279,7 +3291,7 @@ convey an error type of
 <a href="#INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID</a>.
           </li>
           <li>
-If |controllerDocument| is not a valid <a>controller document</a>,
+If |controllerDocument| is not a valid [=controller document=],
 an error MUST be raised and SHOULD
 convey an error type of
 <a href="#INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT</a>.
@@ -3290,7 +3302,7 @@ Let |verificationMethod| be the result of dereferencing the
 rules of the media type of the |controllerDocument|.
           </li>
           <li>
-If |verificationMethod| is not a valid <a>verification method</a>,
+If |verificationMethod| is not a valid [=verification method=],
 an error MUST be raised and SHOULD convey an error type of
 <a href="#INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD</a>.
           </li>
@@ -3309,8 +3321,8 @@ Return |verificationMethod| as the
 
         <p>
 The following example provides a minimum conformant
-<a>controller document</a> containing a minimum conformant
-<a>verification method</a> as required by the algorithm in this section:
+[=controller document=] containing a minimum conformant
+[=verification method=] as required by the algorithm in this section:
         </p>
 
         <pre class="example" title="Minimum conformant controller document">
@@ -3396,23 +3408,23 @@ The `verificationMethod` value in a proof was malformed. See Section
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID (-22)</dt>
           <dd>
-The `id` value in a <a>controller document</a> was malformed. See Section
+The `id` value in a [=controller document=] was malformed. See Section
 [[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT (-23)</dt>
           <dd>
-The <a>controller document</a> was malformed. See Section
+The [=controller document=] was malformed. See Section
 [[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD (-24)</dt>
           <dd>
-The <a>verification method</a> in a <a>controller document</a> was malformed.
+The [=verification method=] in a [=controller document=] was malformed.
 See Section [[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD (-25)</dt>
           <dd>
-The <a>verification method</a> in a <a>controller document</a> was not
-associated using the expected <a>verification relationship</a> as expressed in
+The [=verification method=] in a [=controller document=] was not
+associated using the expected [=verification relationship=] as expressed in
 the `proofPurpose` property in the proof. See Section
 [[[#retrieve-verification-method]]].
           </dd>
@@ -3854,8 +3866,8 @@ method.
 
         <p>
 When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
-imperative that it verify not only that the <a>verification method</a> used to
-generate the proof is listed in the <a>controller document</a>, but also that it
+imperative that it verify not only that the [=verification method=] used to
+generate the proof is listed in the [=controller document=], but also that it
 was intended to be used to generate the proof that is being verified. This process
 is known as "verification relationship validation".
         </p>
@@ -3883,19 +3895,19 @@ versus as an unencrypted file on a laptop.
 
         <p>
 When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
-imperative that it verify that the <a>proof purpose</a> match the intended use.
+imperative that it verify that the [=proof purpose=] match the intended use.
         </p>
 
         <p>
 This process is used to ensure that proofs are not misused by an application for
 an unintended purpose, as this is dangerous for the proof creator. An example of
 misuse would be if a proof that stated its purpose was for securing assertions
-in <a>verifiable credentials</a> was instead used for <a>authentication</a> to
+in [=verifiable credentials=] was instead used for [=authentication=] to
 log into a website. In this case, the proof creator attached proofs to any
-number of <a>verifiable credentials</a> that they expected to be distributed to
+number of [=verifiable credentials=] that they expected to be distributed to
 an unbounded number of other parties. Any one of these parties could log into a
 website as the proof creator if the website erroneously accepted such a proof as
-<a>authentication</a> instead of its intended purpose.
+[=authentication=] instead of its intended purpose.
         </p>
 
       </section>
@@ -3939,17 +3951,17 @@ by the approach detailed in this specification.
 
         <p>
 One of the algorithmic processes used by this specification is canonicalization,
-which is a type of <a>transformation</a>. Canonicalization is the process of
+which is a type of [=transformation=]. Canonicalization is the process of
 taking information that might be expressed in a variety of semantically
 equivalent ways as input, and expressing all output in a single way, called a
 "canonical form".
         </p>
         <p>
-The security of a resulting <a>data integrity proof</a> that utilizes
+The security of a resulting [=data integrity proof=] that utilizes
 canonicalization is highly dependent on the correctness of the algorithm. For
 example, if a canonicalization algorithm converts two inputs that have different
 meanings into the same output, then the author's intentions can be
-misrepresented to a <a>verifier</a>. This can be used as an attack vector by
+misrepresented to a [=verifier=]. This can be used as an attack vector by
 adversaries.
         </p>
         <p>
@@ -3963,7 +3975,7 @@ considered secure.
         </p>
         <p>
 Implementers are strongly urged to ensure proper vetting of any canonicalization
-algorithms to be used for <a>transformation</a> of input to a <a>hashing</a>
+algorithms to be used for [=transformation=] of input to a [=hashing=]
 process. Proper vetting includes, at a minimum, association with a peer reviewed
 mathematical proof of algorithm correctness; multiple implementations and vetting
 by experts in a standards setting organization is preferred. Implementers are
@@ -3979,9 +3991,9 @@ correctness.
 
         <p>
 This specification is designed in such a way that no network requests are
-required when verifying a proof on a <a>conforming secured document</a>.
+required when verifying a proof on a [=conforming secured document=].
 Readers might note, however, that <a href="#data-model">JSON-LD contexts</a>
-and <a>verification methods</a> can contain URLs that might be retrieved
+and [=verification methods=] can contain URLs that might be retrieved
 over a network connection. This concern exists for any URL that might be
 loaded from the network during or after verification.
         </p>
@@ -3990,12 +4002,12 @@ To the extent possible, implementers are urged to permanently or aggressively
 cache such information to reduce the attack surface on an implementation that
 might need to fetch such URLs over the network. For example, caching techniques
 for <a href="#data-model">JSON-LD contexts</a> are described in Section
-[[[#contexts-and-vocabularies]]], and some <a>verification methods</a>, such as
+[[[#contexts-and-vocabularies]]], and some [=verification methods=], such as
 `did:key` [[?DID-KEY]], do not need to be fetched from the network at all.
         </p>
         <p>
 When it is not possible to use cached information, such as when a specific HTTP
-URL-based instance of a <a>verification method</a> is encountered for the first
+URL-based instance of a [=verification method=] is encountered for the first
 time, implementers are cautioned to use defensive measures to mitigate <a
 href="https://en.wikipedia.org/wiki/Denial-of-service_attack">
 denial-of-service attacks</a> during any process that might fetch a resource
@@ -4012,7 +4024,7 @@ generalized in nature, the security implications of its use might not be
 immediately apparent to readers. To understand the sort of security
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
-<a>verifiable credentials</a> ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
+[=verifiable credentials=] ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
 on <a data-cite="?VC-DATA-MODEL-2.0#security-considerations">
 Verifiable Credential Security Considerations</a> for more information.
         </p>
@@ -4124,7 +4136,7 @@ so as to include them in the secured payload. This inevitably exposes
 information related to each entity that added a previous proof.
         </p>
         <p>
-At minimum, the <a>verification method</a> for the previous proof, such as a
+At minimum, the [=verification method=] for the previous proof, such as a
 public key, is seen by the creator of the next proof in a proof chain. This
 can be a privacy concern if the creator of the previous proof did not intend
 to be included in a proof chain, but is an inevitable outcome when
@@ -4146,18 +4158,18 @@ to mitigate this privacy concern.
 Fingerprinting concerns exist for any URL that might be loaded from the network
 during or after <a href="#verify-proof">proof verification</a>. This
 specification is designed in such a way that no network requests are necessary
-when verifying a proof on a <a>conforming secured document</a>. Readers might
+when verifying a proof on a [=conforming secured document=]. Readers might
 note, however, that <a href="#data-model">JSON-LD contexts</a> and
-<a>verification methods</a> can contain resource URLs that might be retrieved
+[=verification methods=] can contain resource URLs that might be retrieved
 over a network connection leading to fingerprinting concerns.
         </p>
 
         <p>
-For example, creators of <a>conforming documents</a> might craft unique
+For example, creators of [=conforming documents=] might craft unique
 per-document URLs for <a href="#data-model">JSON-LD contexts</a> and
-<a>verification methods</a>. When verifying such a document, a verifier fetching
+[=verification methods=]. When verifying such a document, a verifier fetching
 that information from the network would reveal their interest in the
-<a>conforming document</a> to the creator of the document, which might lead to
+[=conforming document=] to the creator of the document, which might lead to
 a mismatch in privacy expectations for any entity that is not the creator of
 the document.
         </p>
@@ -4169,7 +4181,7 @@ Usage of techniques such as
 <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">
 Oblivious HTTP</a> to retrieve resources from the network, without revealing the
 client that is making the request, are encouraged. Additionally, heuristics
-might be used to determine whether creators of <a>conforming documents</a> are
+might be used to determine whether creators of [=conforming documents=] are
 using fingerprinting URLs in a way that might violate privacy expectations.
 These heuristics could be used to display warnings to entities that might
 process documents containing suspected fingerprinting URLs.
@@ -4218,7 +4230,7 @@ generalized in nature, the privacy implications of its use might not be
 immediately apparent to readers. To understand the sort of privacy
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
-<a>verifiable credentials</a> ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
+[=verifiable credentials=] ecosystem [[?VC-DATA-MODEL-2.0]]; see the section
 on <a data-cite="?VC-DATA-MODEL-2.0#privacy-considerations">
 Verifiable Credential Privacy Considerations</a> for more information.
         </p>
