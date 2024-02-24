@@ -448,8 +448,8 @@ following priority of constituencies: application developers over cryptographic
 suite implementers, over cryptographic suite designers, over cryptographic
 algorithm specification authors.  The solution focuses on sensible defaults to
 prevent the selection of ineffective protection mechanisms. See section
-<a href="#protecting-application-developers"></a> and
-<a href="#versioning-cryptography-suites"></a> for further details.
+[[[#protecting-application-developers]]] and
+[[[#versioning-cryptography-suites]]] for further details.
           </dd>
           <dt>Composability</dt>
           <dd>
@@ -458,9 +458,8 @@ designs which limited use cases by combining data transformation, syntax,
 digital signature, and serialization into a single specification. This
 specification layers each component such that a broader range of use cases are
 enabled, including generalized selective disclosure and serialization-agnostic
-signatures. See section <a href="#transformations"></a>, section
-<a href="#data-opacity"></a>, and <a href="#versioning-cryptography-suites"></a>
-for further rationale.
+signatures. See section [[[#transformations]]], section [[[#data-opacity]]], and
+[[[#versioning-cryptography-suites]]] for further rationale.
           </dd>
           <dt>Resilience</dt>
           <dd>
@@ -469,8 +468,7 @@ technological advancements, it is important that <a>cryptographic suites</a>
 provide multiple layers of protection and can be rapidly upgraded. This
 specification provides for both algorithmic agility and cryptographic layering,
 while still keeping the digital proof format easy for developers to understand
-and use. See section <a href="#agility-and-layering"></a> to understand the
-particulars.
+and use. See section [[[#agility-and-layering]]] to understand the particulars.
           </dd>
           <dt>Progressive Extensibility</dt>
           <dd>
@@ -479,8 +477,8 @@ a deliberate, iterative, and careful process that acknowledges that extension
 happens in phases from experimentation, to implementation, to standardization.
 This specification strives to balance the need for an increase in the rate of
 innovation in cryptography with the need for stable production-grade
-cryptography suites. See section <a href="#cryptographic-suites"></a> for
-instructions on establishing new types of cryptographic proofs.
+cryptography suites. See section [[[#cryptographic-suites]]] for instructions on
+establishing new types of cryptographic proofs.
           </dd>
           <dt>Serialization Flexibility</dt>
           <dd>
@@ -490,8 +488,8 @@ specification enables one to create cryptographic proofs that are not
 bound to the original document syntax, which enables more advanced use cases
 such as being able to use a single digital signature across a variety of
 serialization syntaxes such as JSON and CBOR without the need to regenerate the
-cryptographic proof. See section <a href="#transformations"></a> for an
-explanation of the benefits of such an approach.
+cryptographic proof. See section [[[#transformations]]] for an explanation of
+the benefits of such an approach.
           </dd>
         </dl>
 
@@ -509,23 +507,20 @@ applicability of the technology to their use case.
         <p>
 A <dfn>conforming secured document</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
-<a href="#proofs"></a>, <a href="#proof-purposes"></a>,
-<a href="#contexts-and-vocabularies"></a>, and
-<a href="#dataintegrityproof"></a>.
+[[[#proofs]]], [[[#proof-purposes]]], [[[#contexts-and-vocabularies]]], and
+[[[#dataintegrityproof]]].
         </p>
 
         <p>
 A <dfn>conforming controller document</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
-<a href="#controller-documents"></a> and
-<a href="#contexts-and-vocabularies"></a>.
+[[[#controller-documents]]] and [[[#contexts-and-vocabularies]]].
         </p>
 
         <p>
 A <dfn>conforming verification method</dfn> is any concrete expression of the
 data model that follows the relevant normative requirements in Sections
-<a href="#verification-methods"></a> and
-<a href="#contexts-and-vocabularies"></a>.
+[[[#verification-methods]]] and [[[#contexts-and-vocabularies]]].
         </p>
 
         <p>
@@ -537,14 +532,14 @@ secured document</a>, a <a>conforming controller document</a>, or a
         <p>
 A <dfn class="lint-ignore">conforming cryptographic suite specification</dfn> is
 any document that follows the relevant normative requirements in Section
-<a href="#cryptographic-suites"></a>.
+[[[#cryptographic-suites]]].
         </p>
 
         <p>
 A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized
 as software and/or hardware that generates and/or consumes a
 <a>conforming document</a> according to the relevant normative statements in
-Section <a href="#algorithms"></a>. Conforming processors MUST produce errors
+Section [[[#algorithms]]]. Conforming processors MUST produce errors
 when non-conforming documents are consumed.
         </p>
 
@@ -620,8 +615,7 @@ using the properties below:
           <dd>
 An optional identifier for the proof, which MUST be a URL [[URL]], such as
 a UUID as a URN (`urn:uuid:6a1676b8-b51f-11ed-937b-d76685a20ff5`).
-The usage of this property is further explained in Section
-<a href="#proof-chains"></a>.
+The usage of this property is further explained in Section [[[#proof-chains]]].
           </dd>
 
           <dt>type</dt>
@@ -699,7 +693,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 A string value that contains the base-encoded binary data necessary to verify
 the digital proof using the `verificationMethod` specified. The contents of the
 value MUST be expressed with a header and encoding as described in Section
-<a href="#multibase-0"></a>. The contents of this value are determined by a
+[[[#multibase-0]]]. The contents of this value are determined by a
 specific cryptosuite and set to the <em>proof value</em> generated by the
 <a href="#add-proof">Add Proof Algorithm</a> for that cryptosuite. Alternative
 properties with different encodings specified by the cryptosuite MAY be used,
@@ -711,9 +705,8 @@ proof.
           <dd>
 An OPTIONAL string value or unordered list of string values. Each value
 identifies another <a>data integrity proof</a> that MUST verify before the
-current proof is processed. If an unordered list, all referenced
-proofs in the array MUST verify. This property is used in Section
-<a href="#proof-chains"></a>.
+current proof is processed. If an unordered list, all referenced proofs in the
+array MUST verify. This property is used in Section [[[#proof-chains]]].
           </dd>
 
           <dt><dfn class="lint-ignore">nonce</dfn></dt>
@@ -823,13 +816,13 @@ that can be used along with an algorithm to deterministically generate
 nonces that are concatenated with each N-Quad to prevent rainbow
 table or similar attacks.</div>
 
-  <div class="issue">Add a note indicating that this specification should not
-  be construed to indicate that public key controllers should be restricted to a
-  single public key or that systems that use this spec and involve real people
-  should identify each person as only ever being a single entity rather than
-  perhaps N entities with M keys. There are no such restrictions and in many
-  cases those kinds of restrictions are ill-advised due to privacy
-  considerations.</div>
+<div class="issue">Add a note indicating that this specification should not
+be construed to indicate that public key controllers should be restricted to a
+single public key or that systems that use this spec and involve real people
+should identify each person as only ever being a single entity rather than
+perhaps N entities with M keys. There are no such restrictions and in many
+cases those kinds of restrictions are ill-advised due to privacy
+considerations.</div>
 
       <p>
 The Data Integrity specification supports the concept of multiple
@@ -1029,13 +1022,13 @@ methods</a>, where each <a>verification method</a> is expressed using a
 [=map=]. The <a>verification method</a> [=map=] MUST include the `id`,
 `type`, `controller`, and specific verification material
 properties that are determined by the value of `type` and are defined
-in <a href="#verification-material"></a>. A <a>verification method</a> MAY
+in [[[#verification-material]]]. A <a>verification method</a> MAY
 include additional properties. <a>Verification methods</a> SHOULD be registered
 in the Data Integrity Specification Registries [TBD - DIS-REGISTRIES].
               </p>
               <p class="note">
 The `verificationMethod` property is REQUIRED for proofs, unlike controller
-documents, for which it is optional. See section <a href="#proofs"></a>.
+documents, for which it is optional. See section [[[#proofs]]].
               </p>
 
               <dl>
@@ -1197,7 +1190,7 @@ methods</a> using both properties above is shown below.
             <p>
 The Multikey data model is a specific type of <a>verification method</a> that
 encodes key types into a single binary stream that is then encoded as a
-Multibase value as described in Section <a href="#multibase-0"></a>.
+Multibase value as described in Section [[[#multibase-0]]].
             </p>
 
             <p>
@@ -1212,12 +1205,12 @@ The value of the `type` property MUST contain the string `Multikey`.
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-Multibase encoded value as described in Section <a href="#multibase-0"></a>.
+Multibase encoded value as described in Section [[[#multibase-0]]].
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
 The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-Multibase encoded value as described in Section <a href="#multibase-0"></a>.
+Multibase encoded value as described in Section [[[#multibase-0]]].
               </dd>
             </dl>
 
@@ -1298,7 +1291,7 @@ Registration Template</a>. It is RECOMMENDED that verification methods that use
 JWKs [[RFC7517]] to represent their <a>public keys</a> use the value of `kid` as
 their fragment identifier. It is RECOMMENDED that JWK `kid` values are set to
 the public key fingerprint [[RFC7638]]. See the first key in
-<a href="#example-various-verification-method-types"></a> for an example of a
+[[[#example-various-verification-method-types]]] for an example of a
 public key with a compound key identifier.
               </dd>
               <dt><dfn class="lint-ignore">secretKeyJwk</dfn></dt>
@@ -1383,8 +1376,8 @@ the Ed25519 curve that is associated with the public key).
             <h3>Referring to Verification Methods</h3>
             <p>
 <a>Verification methods</a> can be embedded in or referenced from properties
-associated with various <a>verification relationships</a> as described in <a
-href="#verification-relationships"></a>. Referencing <a>verification methods</a>
+associated with various <a>verification relationships</a> as described in
+[[[#verification-relationships]]]. Referencing <a>verification methods</a>
 allows them to be used by more than one <a>verification relationship</a>.
             </p>
 
@@ -1734,7 +1727,7 @@ would use a <a>verification method</a> associated with the
 `capabilityDelegation` <a>verification relationship</a> to
 cryptographically sign the capability over to another <a>controller</a>. The
 delegate would then use the capability in a manner that is similar to the
-example described in <a href="#capability-invocation"></a>.
+example described in [[[#capability-invocation]]].
             </p>
 
             <pre class="example nohighlight" title="Capability Delegation property
@@ -1826,7 +1819,7 @@ guaranteed between implementations using such values.
 
         <p>
 To base-encode a binary value into a Multibase string, an implementation MUST
-apply the algorithm in Section <a href="#base-encode"></a> to the binary value,
+apply the algorithm in Section [[[#base-encode]]] to the binary value,
 with the desired base encoding and alphabet from the table above, ensuring to
 prepend the associated Multibase header from the table above to the result.
 Any algorithm with equivalent output MAY be used.
@@ -1834,7 +1827,7 @@ Any algorithm with equivalent output MAY be used.
 
         <p>
 To base-decode a Multibase string, an implementation MUST apply the algorithm
-in Section <a href="#base-decode"></a> to the string following the first
+in Section [[[#base-decode]]] to the string following the first
 character (Multibase header), with the alphabet associated with the
 Multibase header. Any algorithm with equivalent output MAY be used.
         </p>
@@ -2345,7 +2338,7 @@ collection of all Data Integrity cryptosuite specifications.
             <dt>The value space</dt>
             <dd>
 The union of all cryptosuite types that are expressed using the `cryptosuite`
-property, as defined in Section <a href="#dataintegrityproof"></a>.
+property, as defined in Section [[[#dataintegrityproof]]].
             </dd>
             <dt>The lexical-to-value mapping</dt>
             <dd>
@@ -2519,10 +2512,10 @@ protected from unsafe redefinition, by use of the `@protected` keyword.
       </ul>
 
       <p>
-A [=cryptosuite instance=] is instantiated using a [=cryptosuite
-instantiation algorithm=] and is made available to algorithms in an
-implementation-specific manner. Implementations MAY use [[[VC-SPECS]]]
-[[VC-SPECS]] to discover known [=cryptosuite instantiation algorithms=].
+A [=cryptosuite instance=] is instantiated using a [=cryptosuite instantiation
+algorithm=] and is made available to algorithms in an implementation-specific
+manner. Implementations MAY use [[[VC-SPECS]]] [[VC-SPECS]] to discover known
+[=cryptosuite instantiation algorithms=].
       </p>
 
       <p class="issue" title="Require interoperability report?">
@@ -2566,14 +2559,14 @@ of `string`, the type of the `cryptosuite` value MUST be the
           </dd>
           <dt>proofValue</dt>
           <dd>
-The `proofValue` property MUST be used, as specified in <a href="#proofs"></a>.
+The `proofValue` property MUST be used, as specified in [[[#proofs]]].
           </dd>
         </dl>
 
         <p>
 Cryptographic suite designers MUST use mandatory `proof` value properties
-defined in Section <a href="#proofs"></a>, and MAY define other properties
-specific to their cryptographic suite.
+defined in Section [[[#proofs]]], and MAY define other properties specific to
+their cryptographic suite.
         </p>
 
         <p class="note" title="Design Patterns of Legacy Cryptographic Suites">
@@ -3003,22 +2996,18 @@ the |unsecuredDocument|.
 Let |matchingProofs| be an empty list.
           </li>
           <li>
-If |options| has a `previousProof` [=struct/item=] that
-is a string, add the element from |allProofs| with an
-`id` attribute matching `previousProof` to
-|matchingProofs|. If a proof with
-`id` equal to `previousProof`does not exist in
+If |options| has a `previousProof` [=struct/item=] that is a string, add the
+element from |allProofs| with an `id` attribute matching `previousProof` to
+|matchingProofs|. If a proof with `id` equal to `previousProof`does not exist in
 |allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If |options| has a `previousProof` [=struct/item=] that
-is an array, add each element from
-|allProofs| with an `id` attribute that matches an element
-of that array. If any element of `previousProof` array has an
-`id` attribute that does not match the `id` attribute
-of any element of |allProofs|, an error MUST be raised and SHOULD
-convey an error type of
+If |options| has a `previousProof` [=struct/item=] that is an array, add each
+element from |allProofs| with an `id` attribute that matches an element of that
+array. If any element of `previousProof` array has an `id` attribute that does
+not match the `id` attribute of any element of |allProofs|, an error MUST be
+raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
@@ -3030,10 +3019,9 @@ in a later step of this algorithm.
             </p>
           </li>
           <li>
-Run steps 1 through 6 of the algorithm in section <a href="#add-proof"></a>,
-passing |unsecuredDocument|, |suite|, and |options|. If no exceptions are
-raised, append the generated |proof| value to the |allProofs|; otherwise, raise
-the exception.
+Run steps 1 through 6 of the algorithm in section [[[#add-proof]]], passing
+|unsecuredDocument|, |suite|, and |options|. If no exceptions are raised, append
+the generated |proof| value to the |allProofs|; otherwise, raise the exception.
           </li>
           <li>
 Set |output|.|proof| to the value of |allProofs|.
@@ -3069,8 +3057,8 @@ A [=cryptosuite instance=]
           <dt>|expectedProofPurpose|</dt>
           <dd>
 An optional [=string=], used to ensure that the |proof| was generated by the
-proof creator for the expected reason by the verifier. See
-[[[#proof-purposes]]] for common values
+proof creator for the expected reason by the verifier. See [[[#proof-purposes]]]
+for common values
           <dt>|domain|</dt>
           <dd>
 An optional [=set=] of [=strings=], used by the proof creator to lock a proof to
@@ -3209,37 +3197,31 @@ For each |proof| in |allProofs|, do the following steps:
 Let |matchingProofs| be an empty list.
             </li>
             <li>
-If |proof| contains a `previousProof` attribute and that
-attribute is a string, add the element from |allProofs| with an
-`id` attribute matching `previousProof` to
-`matchingProofs`.
-If a proof with `id` does not exist in |allProofs|, an error
-MUST be raised and SHOULD convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-If the `previousProof` attribute is an array, add each element from
-|allProofs| with an `id` attribute that matches an element
-of that array. If any element of `previousProof` array has an
-`id` attribute that does not match the `id` attribute
-of any element of |allProofs|, an error MUST be raised and SHOULD
+If |proof| contains a `previousProof` attribute and that attribute is a string,
+add the element from |allProofs| with an `id` attribute matching `previousProof`
+to `matchingProofs`. If a proof with `id` does not exist in |allProofs|, an
+error MUST be raised and SHOULD convey an error type of
+<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>. If the
+`previousProof` attribute is an array, add each element from |allProofs| with an
+`id` attribute that matches an element of that array. If any element of
+`previousProof` array has an `id` attribute that does not match the `id`
+attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
             </li>
             <li>
-Let |unsecuredDocument| be a copy of |securedDocument| with
-the proof value removed and then set |unsecuredDocument.proof|
-to |matchingProofs|.
+Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
+removed and then set |unsecuredDocument.proof| to |matchingProofs|.
             </li>
             <li>
 Run steps 5 through 8 to validate the contents of |proof|.
             </li>
             <li>
-Run steps 10 through 15 of the algorithm in
-section <a href="#verify-proof"></a>; if no exceptions are raised, associate
-the |isProofVerified| value with this |proof|.
+Run steps 10 through 15 of the algorithm in section [[[#verify-proof]]]; if no
+exceptions are raised, associate the |isProofVerified| value with this |proof|.
               <p class="note">
-We specifically use the value of |unsecuredDocument| as set above,
-rather than using the value from step 5 of the algorithm in section
-<a href="#verify-proof"></a>.
+We specifically use the value of |unsecuredDocument| as set above, rather than
+using the value from step 5 of the algorithm in section [[[#verify-proof]]].
               </p>
             </li>
           </ol>
@@ -3385,55 +3367,54 @@ The `detail` value SHOULD provide a longer human-readable string for the error.
         <dl>
           <dt id="PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR (-16)</dt>
           <dd>
-A request to generate a proof failed. See Section
-<a href="#add-proof"></a>, and Section <a href="#add-proof-set-chain"></a>.
+A request to generate a proof failed. See Section [[[#add-proof]]], and Section
+[[[#add-proof-set-chain]]].
           </dd>
           <dt id="MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR (-17)</dt>
           <dd>
-A proof that is malformed was detected. See Section
-<a href="#verify-proof"></a>.
+A proof that is malformed was detected. See Section [[[#verify-proof]]].
           </dd>
           <dt id="MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR (-18)</dt>
           <dd>
 The `proofPurpose` value in a proof did not match the expected value. See
-Section <a href="#verify-proof"></a>.
+Section [[[#verify-proof]]].
           </dd>
           <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
           <dd>
 The `domain` value in a proof did not match the expected value. See Section
-<a href="#verify-proof"></a>.
+[[[#verify-proof]]].
           </dd>
           <dt id="INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR (-20)</dt>
           <dd>
 The `challenge` value in a proof did not match the expected value. See Section
-<a href="#verify-proof"></a>.
+[[[#verify-proof]]].
           </dd>
           <dt id="INVALID_VERIFICATION_METHOD_URL">INVALID_VERIFICATION_METHOD_URL (-21)</dt>
           <dd>
 The `verificationMethod` value in a proof was malformed. See Section
-<a href="#retrieve-verification-method"></a>.
+[[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT_ID">INVALID_CONTROLLER_DOCUMENT_ID (-22)</dt>
           <dd>
 The `id` value in a <a>controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method"></a>.
+[[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_CONTROLLER_DOCUMENT">INVALID_CONTROLLER_DOCUMENT (-23)</dt>
           <dd>
 The <a>controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method"></a>.
+[[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_VERIFICATION_METHOD">INVALID_VERIFICATION_METHOD (-24)</dt>
           <dd>
-The <a>verification method</a> in a <a>controller document</a> was malformed. See Section
-<a href="#retrieve-verification-method"></a>.
+The <a>verification method</a> in a <a>controller document</a> was malformed.
+See Section [[[#retrieve-verification-method]]].
           </dd>
           <dt id="INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD">INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD (-25)</dt>
           <dd>
 The <a>verification method</a> in a <a>controller document</a> was not
-associated using the expected <a>verification relationship</a> as expressed
-in the `proofPurpose` property in the proof. See Section
-<a href="#retrieve-verification-method"></a>.
+associated using the expected <a>verification relationship</a> as expressed in
+the `proofPurpose` property in the proof. See Section
+[[[#retrieve-verification-method]]].
           </dd>
         </dl>
       </section>
@@ -3617,17 +3598,16 @@ appropriate override flags.
       <section>
         <h3>Conventions for Naming Cryptography Suites</h3>
         <p>
-Section <a href="#versioning-cryptography-suites"></a> emphasized the
-importance of providing relatively easy to understand information concerning the
-timeliness of particular cryptographic suite, while section
-<a href="#protecting-application-developers"></a> further emphasized minimizing
-the number of options to be specified. Indeed, section
-<a href="#cryptographic-suites"></a> lists requirements for cryptographic suites
-which include detailed specification of algorithm, transformation, hashing, and
-serialization. Hence, the name of the cryptographic suite does not need to
-include all this detail, which implies the <em>parametric versioning</em> mentioned
-in section <a href="#versioning-cryptography-suites"></a> is neither necessary nor
-desirable.
+Section [[[#versioning-cryptography-suites]]] emphasized the importance of
+providing relatively easy to understand information concerning the timeliness of
+particular cryptographic suite, while section
+[[[#protecting-application-developers]]] further emphasized minimizing the
+number of options to be specified. Indeed, section [[[#cryptographic-suites]]]
+lists requirements for cryptographic suites which include detailed specification
+of algorithm, transformation, hashing, and serialization. Hence, the name of the
+cryptographic suite does not need to include all this detail, which implies the
+<em>parametric versioning</em> mentioned in section
+[[[#versioning-cryptography-suites]]] is neither necessary nor desirable.
         </p>
         <p>
 The recommended naming convention for cryptographic suites is a
@@ -3880,8 +3860,8 @@ was intended to be used to generate the proof that is being verified. This proce
 is known as "verification relationship validation".
         </p>
         <p>
-The process for verification relationship validation is outlined in
-Section <a href="#retrieve-verification-method"></a>.
+The process for verification relationship validation is outlined in Section
+[[[#retrieve-verification-method]]].
         </p>
         <p>
 This process is used to ensure that cryptographic material, such as a private
@@ -4007,12 +3987,11 @@ loaded from the network during or after verification.
         </p>
         <p>
 To the extent possible, implementers are urged to permanently or aggressively
-cache such information to reduce the attack surface on an
-implementation that might need to fetch such URLs over the network. For
-example, caching techniques for <a href="#data-model">JSON-LD contexts</a> are
-described in Section <a href="#contexts-and-vocabularies"></a>, and some
-<a>verification methods</a>, such as `did:key` [[?DID-KEY]], do not need to be
-fetched from the network at all.
+cache such information to reduce the attack surface on an implementation that
+might need to fetch such URLs over the network. For example, caching techniques
+for <a href="#data-model">JSON-LD contexts</a> are described in Section
+[[[#contexts-and-vocabularies]]], and some <a>verification methods</a>, such as
+`did:key` [[?DID-KEY]], do not need to be fetched from the network at all.
         </p>
         <p>
 When it is not possible to use cached information, such as when a specific HTTP
@@ -4114,25 +4093,24 @@ full name and address are not shared.
 
         <p>
 Not all software or cryptosuites are capable of providing selective disclosure.
-If the author of a message wishes it to be selectively disclosable by
-its recipient, then they need to enable selective disclosure on the specific
-message, and both need to use a capable cryptosuite. The author might
-also make it mandatory
-to disclose certain parts of the message. A recipient that wants to selectively
-disclose partial content of the message needs to utilize software that is able to perform the
-technique. An example of a cryptosuite that supports selective disclosure is
-`bbs-2022`.
+If the author of a message wishes it to be selectively disclosable by its
+recipient, then they need to enable selective disclosure on the specific
+message, and both need to use a capable cryptosuite. The author might also make
+it mandatory to disclose certain parts of the message. A recipient that wants to
+selectively disclose partial content of the message needs to utilize software
+that is able to perform the technique. An example of a cryptosuite that supports
+selective disclosure is `bbs-2022`.
         </p>
 
         <p>
-It is possible to selectively disclose information in a way that does not preserve
-unlinkability. For example, one might want to disclose the inspection results related
-to a shipment, which include the shipment identifier or lot number, which might
-have to be correlatable due to regulatory requirements. However, disclosure of
-the entire inspection result might not be required as selectively disclosing just
-the pass/fail status could be deemed adequate. For more information on
-disclosing information while preserving privacy, see
-Section <a href="#unlinkability"></a>.
+It is possible to selectively disclose information in a way that does not
+preserve unlinkability. For example, one might want to disclose the inspection
+results related to a shipment, which include the shipment identifier or lot
+number, which might have to be correlatable due to regulatory requirements.
+However, disclosure of the entire inspection result might not be required as
+selectively disclosing just the pass/fail status could be deemed adequate. For
+more information on disclosing information while preserving privacy, see Section
+[[[#unlinkability]]].
         </p>
       </section>
 
@@ -4140,11 +4118,10 @@ Section <a href="#unlinkability"></a>.
         <h3>Previous Proofs</h3>
 
         <p>
-When using the `previousProof` feature defined in
-<a href="#proof-chains"></a>, implementations are required to digitally sign
-over one or more previous proofs, so as to include them in the
-secured payload. This inevitably exposes information related to each
-entity that added a previous proof.
+When using the `previousProof` feature defined in [[[#proof-chains]]],
+implementations are required to digitally sign over one or more previous proofs,
+so as to include them in the secured payload. This inevitably exposes
+information related to each entity that added a previous proof.
         </p>
         <p>
 At minimum, the <a>verification method</a> for the previous proof, such as a
@@ -4186,12 +4163,12 @@ the document.
         </p>
 
         <p>
-Implementers are urged to follow the guidance in Section
-<a href="#network-requests"></a> on URL caching and implementing defensively
-when fetching URLs from the network. Usage of techniques such as
+Implementers are urged to follow the guidance in Section [[[#network-requests]]]
+on URL caching and implementing defensively when fetching URLs from the network.
+Usage of techniques such as
 <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp">
-Oblivious HTTP</a> to retrieve resources from the network, without revealing
-the client that is making the request, are encouraged. Additionally, heuristics
+Oblivious HTTP</a> to retrieve resources from the network, without revealing the
+client that is making the request, are encouraged. Additionally, heuristics
 might be used to determine whether creators of <a>conforming documents</a> are
 using fingerprinting URLs in a way that might violate privacy expectations.
 These heuristics could be used to display warnings to entities that might
@@ -4566,9 +4543,9 @@ way, checking each proof in the chain.
 
       <p>
 The specification authors would like to thank the base-x software library
-contributors and the Bitcoin Core developers who wrote the original code,
-shared under an MIT License, found in Section <a href="#base-encode"></a> and
-Section <a href="#base-decode"></a>.
+contributors and the Bitcoin Core developers who wrote the original code, shared
+under an MIT License, found in Section [[[#base-encode]]] and Section
+[[[#base-decode]]].
       </p>
   </body>
 </html>
