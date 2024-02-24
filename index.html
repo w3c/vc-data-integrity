@@ -986,14 +986,14 @@ represented by associating a set of proofs with the `proof` key in a document.
   "myWebsite": "https://hello.world.example/",
   "proof": [{
     "type": "DataIntegrityProof",
-    "cryptosuite": "eddsa-2022",
+    "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T19:23:24Z",
     "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnkeW<wbr>cmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
     "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8<wbr>nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
     "type": "DataIntegrityProof",
-    "cryptosuite": "eddsa-2022",
+    "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T13:08:49Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gK<wbr>S2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
@@ -1025,14 +1025,14 @@ another proof with a `previousProof` value that identifies the previous proof.
   "proof": [{
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
-    "cryptosuite": "eddsa-2022",
+    "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T19:23:42Z",
     "verificationMethod": "https://ldi.example/issuer/1#z6MkjLrk3gKS2nnke<wbr>WcmcxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
     "proofValue": "zVbY8nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV64oey5q2M3XKaxup<wbr>3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQe"
   }, {
     "type": "DataIntegrityProof",
-    "cryptosuite": "eddsa-2022",
+    "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T21:28:14Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3g<wbr>KS2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
@@ -2561,7 +2561,7 @@ The canonical mapping consists of using the lexical-to-value mapping.
 A data integrity proof is designed to be easy to use by developers and therefore
 strives to minimize the amount of information one has to remember to generate a
 proof. Often, just the [=cryptographic suite=] name (e.g.
-`eddsa-2022`) is required from developers to initiate the creation of
+`eddsa-rdfc-2022`) is required from developers to initiate the creation of
 a proof. These [=cryptographic suite=]s are often created or reviewed by
 people that have the requisite cryptographic training to ensure that safe
 combinations of cryptographic primitives are used. This section specifies the
