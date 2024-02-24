@@ -3203,12 +3203,11 @@ Set |allProofs| to </var>|securedDocument|.|proof|.
           </li>
           <li>
 For each |proof| in |allProofs|, do the following steps:
-          </li>
-          <ol class="algorithm">
-            <li>
+            <ol class="algorithm">
+              <li>
 Let |matchingProofs| be an empty list.
-            </li>
-            <li>
+              </li>
+              <li>
 If |proof| contains a `previousProof` attribute and that attribute is a string,
 add the element from |allProofs| with an `id` attribute matching `previousProof`
 to `matchingProofs`. If a proof with `id` does not exist in |allProofs|, an
@@ -3220,23 +3219,24 @@ error MUST be raised and SHOULD convey an error type of
 attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
-            </li>
-            <li>
+              </li>
+              <li>
 Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
 removed and then set |unsecuredDocument.proof| to |matchingProofs|.
-            </li>
-            <li>
+              </li>
+              <li>
 Run steps 5 through 8 to validate the contents of |proof|.
-            </li>
-            <li>
+              </li>
+              <li>
 Run steps 10 through 15 of the algorithm in section [[[#verify-proof]]]; if no
 exceptions are raised, associate the |isProofVerified| value with this |proof|.
-              <p class="note">
+                <p class="note">
 We specifically use the value of |unsecuredDocument| as set above, rather than
 using the value from step 5 of the algorithm in section [[[#verify-proof]]].
-              </p>
-            </li>
-          </ol>
+                </p>
+                </li>
+            </ol>
+          </li>
           <li>
 Return the |allProofs| along with each proof's associated
 |isProofVerified| information.
