@@ -729,7 +729,7 @@ A proof can be added to a JSON document like the following:
         </pre>
 
         <p>
-The following proof secures the document above using the `jcs-eddsa-2022`
+The following proof secures the document above using the `eddsa-jcs-2022`
 cryptography suite [[?DI-EDDSA]], which produces a verifiable digital proof by
 transforming the input data using the JSON Canonicalization Scheme (JCS)
 [[?RFC8785]] and then digitally signing it using an Edwards Digital Signature
@@ -742,7 +742,7 @@ Algorithm (EdDSA).
   "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
-    "cryptosuite": "jcs-eddsa-2022",
+    "cryptosuite": "eddsa-jcs-2022",
     "created": "2023-03-05T19:23:24Z",
     "verificationMethod": "https://di.example/issuer#z6MkjLrk3gKS2nnkeWcm<wbr>cxiZPGskmesDpuwRBorgHxUXfxnG",
     "proofPurpose": "assertionMethod",
@@ -4398,7 +4398,7 @@ When constructing a [=proof set=] where each of the signatories signs an
       <pre class="example nohighlight" title="Symbolic expression of how a proof is created">
 {
   "type": "DataIntegrityProof",
-  "cryptosuite": "jcs-eddsa-2022",
+  "cryptosuite": "eddsa-jcs-2022",
   "created": "2023-03-05T19:23:24Z",
   "proofPurpose": "assertionMethod",
   "verificationMethod": <code>publicCEO</code>,
