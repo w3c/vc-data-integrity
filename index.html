@@ -2928,7 +2928,8 @@ encodes strings, it MUST use UTF-8 encoding.
           <li>
 Let |proof| be the result of calling the [=cryptosuite instance/createProof=]
 algorithm specified in |cryptosuite|.|createProof| with |unsecuredDocument|
-and |options| passed as a parameters.
+and |options| passed as a parameters. If the algorithm produces an error,
+the error MUST be propagated and SHOULD convey the error type.
           </li>
           <li>
 If one or more of the |proof|.|type|, |proof|.|verificationMethod|, and
