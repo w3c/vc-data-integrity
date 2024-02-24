@@ -2477,11 +2477,26 @@ produces a [=data integrity proof=] ([=map=]) or an error.
             <dt><dfn>verifyProof</dfn></dt>
             <dd>
 An algorithm that takes a [=secured data document=] ([=map=]
-|securedDocument|) as input, and produces a verification result
-([=map=]) or an error. The verification result MUST contain a
-verification status ([=boolean=] |verified|) value and an [=unsecured data
-document=] ([=map=] |verifiedDocument|), and MAY contain information
-that is useful for debugging purposes.
+|securedDocument|) as input, and produces a <dfn>cryptosuite verification
+result</dfn> or an error. The [=cryptosuite verification result=] is a
+[=struct=] that contains the following [=struct/items=]:
+              <dl data-dfn-for="cryptosuite verification result">
+                <dt><dfn class="lint-ignore">verified</dfn></dt>
+                <dd>
+A [=boolean=] that is `true` if the verification succeeded, or `false`
+otherwise.
+                </dd>
+                <dt><dfn class="lint-ignore">verifiedDocument</dfn></dt>
+                <dd>
+A [=map=] that represents the [=secured data document=] with the verified
+proofs removed if [=cryptosuite verification result/verified=] is `true`, or
+<a data-cite="INFRA#nulls">null</a> otherwise.
+                </dd>
+              </dl>
+The structure MAY contain other implementation-specific information that is
+useful for developers, such as debugging information. If an error is produced,
+the verification process failed to complete. An error, such as a network error,
+does not mean that a future attempt at verification would fail.
             </dd>
           </dl>
         </li>
@@ -3073,10 +3088,10 @@ attacker is not replaying previously created proofs
 This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
 [=struct/items=] are:
         </p>
-        <dl>
+        <dl data-dfn-for="verification result">
           <dt><dfn data-dfn-for="verification result">verified</dfn></dt>
           <dd>`true` or `false`</dd>
-          <dt><dfn data-dfn-for="verification result">document</dfn></dt>
+          <dt><dfn data-dfn-for="verification result">verifiedDocument</dfn></dt>
           <dd>
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
 `false`; otherwise, an [=unsecured data document=]
@@ -3152,7 +3167,7 @@ Return a [=verification result=] with [=struct/items=]:
             <dl data-link-for="verification result">
               <dt>[=verified=]</dt>
               <dd>|cryptosuiteVerificationResult|.|verified|</dd>
-              <dt>[=document=]</dt>
+              <dt>[=verifiedDocument=]</dt>
               <dd>|cryptosuiteVerificationResult|.|verifiedDocument|</dd>
               <dt>[=media type=]</dt>
               <dd>|mediaType|</dd>
