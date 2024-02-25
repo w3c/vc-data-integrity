@@ -1294,32 +1294,33 @@ methods</a> using both properties above is shown below.
             <pre id="example-various-verification-method-types"
               class="example nohighlight"
               title="Verification methods using publicKeyJwk and publicKeyMultibase">
-    {
-      "@context": [
-        "https://www.w3.org/ns/did/v1",
-        "https://w3id.org/security/jwk/v1",
-        "https://w3id.org/security/multikey/v1"
-      ]
-      "id": "did:example:123456789abcdefghi",
-      <span class="comment">...</span>
-      "verificationMethod": [{
-        "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
-        "type": "JsonWebKey", <span class="comment">// external (property value)</span>
-        "controller": "did:example:123",
-        "publicKeyJwk": {
-          "crv": "Ed25519", <span class="comment">// external (property name)</span>
-          "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ", <span class="comment">// external (property name)</span>
-          "kty": "OKP", <span class="comment">// external (property name)</span>
-          "kid": "_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A" <span class="comment">// external (property name)</span>
-        }
-      }, {
-        "id": "did:example:123456789abcdefghi#keys-1",
-        "type": "Multikey", <span class="comment">// external (property value)</span>
-        "controller": "did:example:pqrstuvwxyz0987654321",
-        "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
-      }],
-      <span class="comment">...</span>
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/jwk/v1",
+    "https://w3id.org/security/multikey/v1"
+  ]
+  "id": "did:example:123456789abcdefghi",
+  <span class="comment">...</span>
+  "verificationMethod": [{
+    "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+    "type": "JsonWebKey",
+    "controller": "did:example:123",
+    "publicKeyJwk": {
+      <span class="comment">// the four properties below are defined by JWK (RFC 7517)</span>
+      "crv": "Ed25519",
+      "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ",
+      "kty": "OKP",
+      "kid": "_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"
     }
+  }, {
+    "id": "did:example:123456789abcdefghi#keys-1",
+    "type": "Multikey",
+    "controller": "did:example:pqrstuvwxyz0987654321",
+    "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
+  }],
+  <span class="comment">...</span>
+}
             </pre>
           </section>
 
@@ -1542,7 +1543,7 @@ an `id` property whose value matches the URL.
         <span class="comment">// this key is embedded and may *only* be used for authentication</span>
         {
           "id": "did:example:123456789abcdefghi#keys-2",
-          "type": "Multikey", <span class="comment">// external (property value)</span>
+          "type": "Multikey",
           "controller": "did:example:123456789abcdefghi",
           "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1713,7 +1714,7 @@ corresponding [=controller document=].
         <span class="comment">// embedded here rather than using a reference</span>
         {
           "id": "did:example:123456789abcdefghi#keys-2",
-          "type": "Multikey", <span class="comment">// external (property value)</span>
+          "type": "Multikey",
           "controller": "did:example:123456789abcdefghi",
           "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1839,7 +1840,7 @@ protected resource.
         <span class="comment">// embedded here rather than using only a reference</span>
         {
         "id": "did:example:123456789abcdefghi#keys-2",
-        "type": "Multikey", <span class="comment">// external (property value)</span>
+        "type": "Multikey",
         "controller": "did:example:123456789abcdefghi",
         "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
@@ -1897,7 +1898,7 @@ example described in [[[#capability-invocation]]].
         <span class="comment">// embedded here rather than using only a reference</span>
         {
         "id": "did:example:123456789abcdefghi#keys-2",
-        "type": "Multikey", <span class="comment">// external (property value)</span>
+        "type": "Multikey",
         "controller": "did:example:123456789abcdefghi",
         "publicKeyMultibase": "z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu"
         }
