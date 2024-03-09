@@ -906,7 +906,7 @@ Similarly, a proof can be added to a JSON-LD data document like the following:
         </pre>
 
         <p>
-The following proof secures the document above by using the `ecdsa-2019`
+The following proof secures the document above by using the `ecdsa-rdfc-2019`
 cryptography suite [[?DI-ECDSA]], which produces a verifiable digital proof by
 transforming the input data using the RDF Dataset Canonicalization Scheme
 [[?RDF-CANON]] and then digitally signing it using the Elliptic Curve Digital
@@ -923,7 +923,7 @@ Signature Algorithm (ECDSA).
   "myWebsite": "https://hello.world.example/",
   "proof": {
     "type": "DataIntegrityProof",
-    "cryptosuite": "ecdsa-2019",
+    "cryptosuite": "ecdsa-rdfc-2019",
     "created": "2020-06-11T19:14:04Z",
     "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVK<wbr>w8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
@@ -4254,7 +4254,7 @@ message, and both need to use a capable cryptosuite. The author might also make
 it mandatory to disclose certain parts of the message. A recipient that wants to
 selectively disclose partial content of the message needs to utilize software
 that is able to perform the technique. An example of a cryptosuite that supports
-selective disclosure is `bbs-2022`.
+selective disclosure is `bbs-2023`.
         </p>
 
         <p>
