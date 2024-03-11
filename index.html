@@ -1178,15 +1178,18 @@ documents, for which it is optional. See section [[[#proofs]]].
                 <dd>
                   <p>
 The value of the `id` property for a [=verification method=] MUST be a
-[=string=] that conforms to the conforms to the [[URL]] syntax.
+[=string=] that conforms to the [[URL]] syntax.
                   </p>
                 </dd>
                 <dt>type</dt>
                 <dd>
-The value of the `type` property MUST be a [=string=] that references exactly
-one [=verification method=] type. In order to maximize global
-interoperability, the [=verification method=] type SHOULD be registered in
-the Data Integrity Specification Registries [TBD -- DIS-REGISTRIES].
+The value of the `type` property MUST be a [=string=] that conforms to the [[URL]] syntax,
+and that references exactly one [=verification method=] type. 
+This specification defines two
+verification methods types (<a href="#multikey">`Multikey`</a> and <a href="#jsonwebkey">`JsonWebKey`</a>);
+others may be defined by the community.
+In order to maximize global interoperability, the [=verification method=] type SHOULD be registered in
+the Data Integrity Specification Registries [TBD -- DIS-REGISTRIES]. 
                 </dd>
                 <dt><span id="defn-controller">controller</span></dt>
                 <dd>
