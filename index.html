@@ -1183,7 +1183,8 @@ The value of the `id` property for a [=verification method=] MUST be a
                 </dd>
                 <dt>type</dt>
                 <dd>
-The value of the `type` property MUST be a [=string=] that conforms to the [[URL]] syntax,
+The value of the `type` property MUST be a [=string=] that either conforms to the
+[[URL]] syntax or maps (through interpretation of the `@context` property) to a [[URL]],
 and that references exactly one [=verification method=] type. 
 This specification defines two
 verification methods types (<a href="#multikey">`Multikey`</a> and <a href="#jsonwebkey">`JsonWebKey`</a>);
