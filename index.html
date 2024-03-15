@@ -2251,43 +2251,46 @@ the corresponding hash values below:
         <table class="simple">
           <thead>
             <tr>
-              <th>URL and Media Type</th>
-              <th>Content</th>
+              <th>URL</th>
+              <th>Hash</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td style="white-space: nowrap;">
-https://w3id.org/security/data-integrity/v2<br>
-application/ld+json
+https://w3id.org/security/data-integrity/v2
+
               </td>
               <td>
-sha256: v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=<br><br>
-sha3-512: Sg1PLFxKyEYQns9Zr0BoYXtFeDNfrHUDNMkyq4QEWv<wbr>wGIaX1v5xovnCG+dfceZEzr7BhBjm396noZF1HEeCM8g==
+sha256: `v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=`
               </td>
             </tr>
             <tr>
               <td style="white-space: nowrap;">
-https://w3id.org/security/multikey/v1<br>
-application/ld+json
+https://w3id.org/security/multikey/v1
               </td>
               <td>
-sha256: uiwYLeLZL35HGEvMqPzwvq7m05hsUnv2ZMGVu8fFhZc=<br><br>
-sha3-512: En0TOOp/cC10XtW/aQDtqKrEQZ2lRjGB/KAsJ+BQhRB<wbr>ufT7s6eoOFWvP9cP5nurTl3hcRTvFeffdVJapkeELXw==
+sha256: `uiwYLeLZL35HGEvMqPzwvq7m05hsUnv2ZMGVu8fFhZc=`
               </td>
             </tr>
             <tr>
               <td style="white-space: nowrap;">
-https://w3id.org/security/jwk/v1<br>
-application/ld+json
+https://w3id.org/security/jwk/v1
               </td>
               <td>
-sha256: 9h/GLRVuGCl0rn/ye6lzf219aN7Sgzq9yBFqUoOI54k=<br><br>
-sha3-512: VDH85TsaX6kH2nwmII0WXKzAi2MRNsJd+rJfYL5cw0b<wbr>12sAVPKDsVvRNJo0MMGd1RhV5W6Ii6D9GM7PCFeq97A==
+sha256: `9h/GLRVuGCl0rn/ye6lzf219aN7Sgzq9yBFqUoOI54k=`
               </td>
             </tr>
           </tbody>
         </table>
+
+        <p>
+          It is possible to confirm the cryptographic digests listed above by running
+          a command like the following (replacing `&lt;DOCUMENT_URL>`
+          with the appropriate value) through a modern UNIX-like OS command line interface:
+          `curl -sL -H "Accept: application/ld+json" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad
+          -a`.
+        </p>
 
         <p>
 The security vocabulary terms that the JSON-LD contexts listed above resolve
@@ -2297,22 +2300,22 @@ namespace. That is, all security terms in this vocabulary are of the form
         </p>
 
         <p>
-Implementations that perform RDF processing MUST treat the following
-JSON-LD vocabulary URL as already resolved, where the resolved document matches
-the corresponding hash values below.
+Implementations that perform RDF processing MUST treat
+the JSON-LD serialization of the vocabulary URL as already resolved, where the resolved document matches
+the corresponding hash value below.
         </p>
 
         <p>
 When dereferencing the
 <a href="https://w3id.org/security">https://w3id.org/security#</a> URL,
-the data returned depends on HTTP content negotiation. These are as follows:
+the media type of the data that is returned depends on HTTP content negotiation. These are as follows:
         </p>
 
         <table class="simple">
           <thead>
             <tr>
               <th>Media Type</th>
-              <th>Description and Cryptographic Hashes</th>
+              <th>Description and Hash</th>
             </tr>
           </thead>
           <tbody>
@@ -2323,9 +2326,7 @@ application/ld+json
               <td>
 The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
 
-sha256: LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=<br><br>
-
-sha3-512: f4DhJ3xhT8nT+GZ8UUZi4QC+HT//wXE2fRTgUP4UNw<wbr>e4kvel2PFfd6jcofHBm9BjwEiGzVFGv4K+fFTKXRD2NA==
+sha256: `LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=`
               </td>
             </tr>
             <tr>
@@ -2334,8 +2335,7 @@ text/turtle
               </td>
               <td>
 The vocabulary in Turtle format [[?TURTLE]].<br><br>
-sha256: McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=<br><br>
-sha3-512: jZtZsqgPPPo+jphAcN8/St4VdRLLAmN3nEQhzs0twE<wbr>MTmCY45euQ01Z4Zo7VlJMYNTf0KC6BMpogpSTAi/1J7Q==
+sha256: `McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=`
               </td>
             </tr>
             <tr>
@@ -2344,17 +2344,17 @@ text/html
               </td>
               <td>
 The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
-sha256: eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=<br><br>
-sha3-512: z53j8ryjVeX16Z/dby//ujhw37degwi09+LAZCTUB8<wbr>WJZjjzW1AydhdEWmgHM0P5KUcPMmSe7edMlGr7G9rmcA==
+sha256: `eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=`
               </td>
             </tr>
           </tbody>
         </table>
 
         <p>
-It is possible to confirm the digests listed above by running the following
-command from a modern Unix command interface line:
-`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -&ltDIGEST_ALGORITHM> -binary | openssl base64 -nopad -a`.
+It is possible to confirm the cryptographic digests listed above by running
+a command like the following (replacing `&lt;MEDIA_TYPE>` and `&lt;DOCUMENT_URL>`
+with the appropriate values) through a modern UNIX-like OS command line interface:
+`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad -a`.
         </p>
 
         <p>
