@@ -33,6 +33,12 @@ class:
     label: Verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-methods
 
+  - id: VerificationRelationship
+    comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as the values of the <a href="#proofPurpose">proofPurpose</a> property.
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-relationships
+    upper_value: rdf:Property
+    context: none
+
   - id: DataIntegrityProof
     label: A Data Integrity Proof
     upper_value: sec:Proof
@@ -219,7 +225,7 @@ property:
   - id: proofPurpose
     label: Proof purpose
     domain: sec:Proof
-    range: xsd:string
+    range: sec:VerificationRelationship
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-proofpurpose
     context: [vocab, https://www.w3.org/ns/credentials/v2]
 
@@ -256,18 +262,21 @@ property:
   - id: authentication
     label: Authentication method
     range: sec:VerificationMethod
+    type: sec:VerificationRelationship
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-authentication
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
+    type: sec:VerificationRelationship
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-assertionmethod
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityDelegationMethod
     label: Capability delegation method
     range: sec:VerificationMethod
+    type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilitydelegation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
@@ -275,12 +284,14 @@ property:
   - id: capabilityInvocationMethod
     label: Capability invocation method
     range: sec:VerificationMethod
+    type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: keyAgreementMethod
     label: Key agreement protocols
+    type: sec:VerificationRelationship
     range: sec:VerificationMethod
     comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-keyagreement
@@ -462,61 +473,61 @@ property:
 
 individual:
   - id: PROOF_GENERATION_ERROR
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Proof generation error
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
     context: none
 
   - id: MALFORMED_PROOF_ERROR
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Malformed proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
     context: none
 
   - id: MISMATCHED_PROOF_PURPOSE_ERROR
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Mismatched proof purpose
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
     context: none
 
   - id: INVALID_DOMAIN_ERROR
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid proof domain
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
     context: none
 
   - id: INVALID_CHALLENGE_ERROR
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid challenge
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
     context: none
 
   - id: INVALID_VERIFICATION_METHOD_URL
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid verification method URL
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
     context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT_ID
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid controller document id
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
     context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid controller document
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
     context: none
 
   - id: INVALID_VERIFICATION_METHOD
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
     context: none
 
   - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
-    upper_value: sec:ProcessingError
+    type: sec:ProcessingError
     label: Invalid proof purpose for verification method
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     context: none

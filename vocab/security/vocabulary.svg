@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#fff" viewBox="-0.5 -0.5 1624 879">
-    <rect width="1330" height="54.5" x="140" y="803.5" fill="none" stroke="#000" stroke-dasharray="3 3" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m1374 830.25 63.26.19" pointer-events="stroke"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1444.76 830.46-10.01 4.97 2.51-4.99-2.48-5.01Z" pointer-events="all"/>
-    <rect width="70" height="40" x="1290" y="804.75" fill="none" pointer-events="all"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-0.5 -0.5 1623 1309">
+    <rect width="1453" height="54.5" x="57.16" y="1233.5" fill="none" stroke="#000" stroke-dasharray="3 3" pointer-events="all"/>
+    <g fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path stroke-dasharray="2 8" d="m1411.16 1260.25 63.27.19" pointer-events="stroke"/>
+        <path d="m1481.93 1260.46-10.02 4.97 2.52-4.99-2.49-5.01Z" pointer-events="all"/>
+    </g>
+    <rect width="70" height="40" x="1327.16" y="1234.75" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe flex-start;justify-content:unsafe center;width:68px;height:1px;padding-top:812px;margin-left:1291px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe flex-start;justify-content:unsafe center;width:68px;height:1px;padding-top:1242px;margin-left:1328px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                         <span style="color:#000;font-family:Helvetica;font-size:12px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0;text-transform:none;widows:2;word-spacing:0;-webkit-text-stroke-width:0;background-color:#fbfbfb;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;float:none;display:inline!important">
@@ -15,13 +17,13 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="1325" y="828" font-family="Helvetica" font-size="16" text-anchor="middle">Graph con...</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="1362" y="1258" font-family="Helvetica" font-size="16" text-anchor="middle">Graph con...</text>
     </switch>
-    <ellipse cx="261.5" cy="831.14" fill="none" stroke="#82b366" stroke-width="2" pointer-events="all" rx="50" ry="14.002"/>
-    <rect width="50" height="30" x="151.5" y="812.19" fill="none" pointer-events="all"/>
+    <ellipse cx="178.66" cy="1261.14" fill="none" stroke="#82b366" stroke-width="2" pointer-events="all" rx="50" ry="14.002"/>
+    <rect width="50" height="30" x="68.66" y="1242.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:827px;margin-left:177px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1257px;margin-left:94px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
                         Class
@@ -29,13 +31,13 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="177" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Class</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="94" y="1261" font-family="Helvetica" font-size="12" text-anchor="middle">Class</text>
     </switch>
-    <rect width="80" height="23.69" x="422" y="817.14" fill="none" stroke="#300" stroke-width="2" pointer-events="all" rx="3.55" ry="3.55"/>
-    <rect width="70" height="30" x="339" y="812.19" fill="none" pointer-events="all"/>
+    <rect width="80" height="23.69" x="328.16" y="1247.14" fill="none" stroke="#300" stroke-width="2" pointer-events="all" rx="3.55" ry="3.55"/>
+    <rect width="70" height="30" x="245.16" y="1242.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:827px;margin-left:374px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1257px;margin-left:280px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
                         Property
@@ -43,14 +45,16 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="374" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Property</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="280" y="1261" font-family="Helvetica" font-size="12" text-anchor="middle">Property</text>
     </switch>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m810 830.13 71.76.56" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m887.76 830.73-8.03 3.94 2.03-3.98-1.96-4.02Z" pointer-events="all"/>
-    <rect width="80" height="30" x="718" y="812.19" fill="none" pointer-events="all"/>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="m696.16 1260.13 71.77.56" pointer-events="stroke"/>
+        <path d="m773.93 1260.73-8.03 3.94 2.03-3.98-1.97-4.02Z" pointer-events="all"/>
+    </g>
+    <rect width="80" height="30" x="604.16" y="1242.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:827px;margin-left:758px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1257px;margin-left:644px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
                         Superclass
@@ -58,14 +62,16 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="758" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Superclass</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="644" y="1261" font-family="Helvetica" font-size="12" text-anchor="middle">Superclass</text>
     </switch>
-    <path fill="none" stroke="#f33" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1007 830.75 56 .05 15.76-.03" pointer-events="stroke"/>
-    <path fill="#f33" stroke="#f33" stroke-miterlimit="10" stroke-width="2" d="m1084.76 830.75-7.99 4.02 1.99-4-2-4Z" pointer-events="all"/>
-    <rect width="60" height="30" x="933" y="812.19" fill="none" pointer-events="all"/>
+    <g stroke="#f33" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m882.16 1260.75 56.04.05 15.73-.03" pointer-events="stroke"/>
+        <path fill="#f33" d="m959.93 1260.75-7.99 4.02 1.99-4-2.01-4Z" pointer-events="all"/>
+    </g>
+    <rect width="60" height="30" x="808.16" y="1242.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:827px;margin-left:963px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1257px;margin-left:838px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
                         Domain
@@ -73,14 +79,16 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="963" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Domain</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="838" y="1261" font-family="Helvetica" font-size="12" text-anchor="middle">Domain</text>
     </switch>
-    <path fill="none" stroke="#00c" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1180 830.75h71.76" pointer-events="stroke"/>
-    <path fill="#00c" stroke="#00c" stroke-miterlimit="10" stroke-width="2" d="m1257.76 830.75-8 4 2-4-2-4Z" pointer-events="all"/>
-    <rect width="60" height="30" x="1113" y="812.19" fill="none" pointer-events="all"/>
+    <g stroke="#00c" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1045.16 1260.75h71.77" pointer-events="stroke"/>
+        <path fill="#00c" d="m1122.93 1260.75-8 4 2-4-2-4Z" pointer-events="all"/>
+    </g>
+    <rect width="60" height="30" x="978.16" y="1242.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:827px;margin-left:1143px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1257px;margin-left:1008px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                     <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
                         Range
@@ -88,13 +96,13 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="1143" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Range</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="1008" y="1261" font-family="Helvetica" font-size="12" text-anchor="middle">Range</text>
     </switch>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M629 822.25h48.4l20 8.5-20 8.5H629l-20-8.5Z" pointer-events="all"/>
-    <rect width="90" height="40" x="534" y="810.75" fill="none" pointer-events="all"/>
+    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M526.16 1252.25h48.4l20 8.5-20 8.5h-48.4l-20-8.5Z" pointer-events="all"/>
+    <rect width="90" height="40" x="431.16" y="1240.75" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe flex-start;justify-content:unsafe flex-start;width:88px;height:1px;padding-top:818px;margin-left:536px">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe flex-start;justify-content:unsafe flex-start;width:88px;height:1px;padding-top:1248px;margin-left:433px">
                 <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:left">
                     <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                         <span style="color:#000;font-family:Helvetica;font-size:12px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-align:center;text-indent:0;text-transform:none;widows:2;word-spacing:0;-webkit-text-stroke-width:0;background-color:#fbfbfb;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;float:none;display:inline!important">
@@ -104,30 +112,30 @@
                 </div>
             </div>
         </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="536" y="834" font-family="Helvetica" font-size="16">Datatype</text>
+        <text xmlns="http://www.w3.org/2000/svg" x="433" y="1264" font-family="Helvetica" font-size="16">Datatype</text>
     </switch>
-    <a xlink:href="https://w3id.org/security#VerificationMethod">
-        <ellipse cx="1222.03" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:44px;margin-left:1119px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                VerificationMethod
-                            </i>
-                        </div>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1231.16 1264.31h71.77" pointer-events="stroke"/>
+        <path fill="#006601" d="m1308.93 1264.31-8 4 2-4-2-4Z" pointer-events="all"/>
+    </g>
+    <rect width="50" height="30" x="1169.16" y="1245.75" fill="none" pointer-events="all"/>
+    <switch transform="translate(-.5 -.5)">
+        <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:1px;height:1px;padding-top:1261px;margin-left:1194px">
+                <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                    <div style="display:inline-block;font-size:12px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:nowrap">
+                        Type
                     </div>
                 </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="49" font-family="Helvetica" font-size="16" text-anchor="middle">VerificationMethod</text>
-        </switch>
-    </a>
+            </div>
+        </foreignObject>
+        <text xmlns="http://www.w3.org/2000/svg" x="1194" y="1264" font-family="Helvetica" font-size="12" text-anchor="middle">Type</text>
+    </switch>
     <a xlink:href="https://w3id.org/security#controller">
-        <rect width="163.73" height="32.54" x="881" y="290" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="881" y="720" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:306px;margin-left:882px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:736px;margin-left:882px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -137,14 +145,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="963" y="311" font-family="Helvetica" font-size="16" text-anchor="middle">controller</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="963" y="741" font-family="Helvetica" font-size="16" text-anchor="middle">controller</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#revoked">
-        <rect width="163.73" height="32.54" x="881" y="338.99" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="881" y="768.99" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:355px;margin-left:882px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:785px;margin-left:882px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -154,30 +162,22 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="963" y="360" font-family="Helvetica" font-size="16" text-anchor="middle">revoked</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="963" y="790" font-family="Helvetica" font-size="16" text-anchor="middle">revoked</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 97.03q-52-6.03-88.52-30.69" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1298.26 62.14 11.09 1.46-4.87 2.74-.73 5.54Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 144.87q-62-33.87-91.06-75.96" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.68 62.73 9.8 5.39-5.54.79-2.69 4.89Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 192.72Q1341 141 1301.14 69.4" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.5 62.85 9.23 6.3-5.59.25-3.15 4.62Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 240.57Q1331 161 1299.59 70.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.14 63.01 7.99 7.82-5.54-.73-3.91 3.99Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 288.42q-72-97.42-94.78-217.96" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.82 63.09 6.77 8.9-5.37-1.53-4.45 3.39Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 336.27Q1311 221 1297.29 70.59" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.61 63.12 5.89 9.51-5.21-2.04-4.75 2.94Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.42 297.73Q1141 131 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.81 304.31.43-11.18 3.18 4.6 5.59.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.93 347.03Q1161 171 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.93 353.37 1.11-11.12 2.89 4.78 5.56.55Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1049.68 727.88Q1148 561 1147.66 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1045.87 734.34.77-11.16 3.04 4.7 5.57.38Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1049.93 777.03Q1161 601 1147.66 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1045.93 783.37 1.11-11.12 2.89 4.78 5.56.55Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#Ed25519VerificationKey2020">
-        <ellipse cx="1226.51" cy="404.44" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="113.84" ry="23.445"/>
+        <ellipse cx="1226.51" cy="834.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="113.84" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:226px;height:1px;padding-top:404px;margin-left:1114px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:226px;height:1px;padding-top:834px;margin-left:1114px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -187,37 +187,26 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1227" y="409" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519VerificationKey2020</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1227" y="839" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519VerificationKey2020</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1423.61 441Q1231 291 1222.43 77.62" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.12 70.13 5.4 9.79-5.09-2.3-4.9 2.7Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1226.51 381-4.34-303.37" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.07 70.13 5.14 9.92-5.04-2.42-4.96 2.57Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1036.87 441Q1222 281 1222.03 77.63" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.03 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security#Proof">
-        <ellipse cx="352.29" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:44px;margin-left:249px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                Proof
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="352" y="49" font-family="Helvetica" font-size="16" text-anchor="middle">Proof</text>
-        </switch>
-    </a>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M1423.61 871Q1231 721 1222.43 507.62" pointer-events="stroke"/>
+        <path d="m1222.12 500.13 5.4 9.79-5.09-2.3-4.9 2.7Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="m1226.51 811-4.34-303.37" pointer-events="stroke"/>
+        <path d="m1222.07 500.13 5.14 9.92-5.04-2.42-4.96 2.57Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M1036.87 871Q1222 711 1222.03 507.63" pointer-events="stroke"/>
+        <path d="m1222.03 500.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#ProofGraph">
-        <ellipse cx="179.94" cy="178.42" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <ellipse cx="179.94" cy="608.42" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:178px;margin-left:77px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:608px;margin-left:77px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -227,16 +216,18 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="180" y="183" font-family="Helvetica" font-size="16" text-anchor="middle">ProofGraph</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="180" y="613" font-family="Helvetica" font-size="16" text-anchor="middle">ProofGraph</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m179.94 154.97 90.96-87.33" pointer-events="stroke"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m276.31 62.44-3.75 10.53-1.66-5.33-5.27-1.88Z" pointer-events="all"/>
+    <g fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path stroke-dasharray="2 8" d="m179.94 584.97 90.96-87.33" pointer-events="stroke"/>
+        <path d="m276.31 492.44-3.75 10.53-1.66-5.33-5.27-1.88Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#proof">
-        <rect width="163.73" height="32.54" x="98.56" y="308.09" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="98.56" y="738.09" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:324px;margin-left:100px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:754px;margin-left:100px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -246,16 +237,18 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="180" y="329" font-family="Helvetica" font-size="16" text-anchor="middle">proof</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="180" y="759" font-family="Helvetica" font-size="16" text-anchor="middle">proof</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m180.42 308.09-.43-96.49" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m179.95 204.1 5.05 9.98-5.01-2.48-4.99 2.52Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m180.42 738.09-.43-96.49" pointer-events="stroke"/>
+        <path fill="#009" d="m179.95 634.1 5.05 9.98-5.01-2.48-4.99 2.52Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#domain">
-        <rect width="163.73" height="32.54" x="568.35" y="134" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="631" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:150px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:647px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -265,14 +258,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="155" font-family="Helvetica" font-size="16" text-anchor="middle">domain</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="652" font-family="Helvetica" font-size="16" text-anchor="middle">domain</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#challenge">
-        <rect width="163.73" height="32.54" x="568.35" y="239" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="689" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:255px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:705px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -282,14 +275,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="260" font-family="Helvetica" font-size="16" text-anchor="middle">challenge</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="710" font-family="Helvetica" font-size="16" text-anchor="middle">challenge</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#previousProof">
-        <rect width="163.73" height="32.54" x="568.35" y="87.89" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="573.91" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:104px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:590px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -299,14 +292,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="109" font-family="Helvetica" font-size="16" text-anchor="middle">previousProof</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="595" font-family="Helvetica" font-size="16" text-anchor="middle">previousProof</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#proofPurpose">
-        <rect width="163.73" height="32.54" x="568.35" y="290.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="483" y="254.54" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:306px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:271px;margin-left:484px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -317,15 +310,15 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="311" font-family="Helvetica" font-size="16" text-anchor="middle">proofPurpose
+            <text xmlns="http://www.w3.org/2000/svg" x="565" y="276" font-family="Helvetica" font-size="16" text-anchor="middle">proofPurpose
 </text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#proofValue">
-        <rect width="163.73" height="32.54" x="568.35" y="431.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="861.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:448px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:878px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -335,14 +328,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="452" font-family="Helvetica" font-size="16" text-anchor="middle">proofValue</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="882" font-family="Helvetica" font-size="16" text-anchor="middle">proofValue</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#expiration">
-        <rect width="163.73" height="32.54" x="881" y="238" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="881" y="668" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:254px;margin-left:882px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:684px;margin-left:882px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -352,14 +345,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="963" y="259" font-family="Helvetica" font-size="16" text-anchor="middle">expiration</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="963" y="689" font-family="Helvetica" font-size="16" text-anchor="middle">expiration</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#nonce">
-        <rect width="163.73" height="32.54" x="568.35" y="338" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="746" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:354px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:762px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -369,14 +362,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="359" font-family="Helvetica" font-size="16" text-anchor="middle">nonce</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="767" font-family="Helvetica" font-size="16" text-anchor="middle">nonce</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#created">
-        <rect width="163.73" height="32.54" x="568.35" y="385" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="568.35" y="804" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:401px;margin-left:569px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:820px;margin-left:569px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -386,30 +379,46 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="650" y="406" font-family="Helvetica" font-size="16" text-anchor="middle">created</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="650" y="825" font-family="Helvetica" font-size="16" text-anchor="middle">created</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M559.67 145.86Q491 111 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.36 149.26-11.18-.07 4.49-3.33.03-5.59Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M562.89 247.21Q491 141 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.1 253.42-9.75-5.48 5.54-.73 2.74-4.88Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M558.97 101.55Q521 91 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.19 103.56-10.97 2.14 3.75-4.15-1.07-5.48Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M563.68 297.88Q506.45 193.25 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.28 304.46-9.19-6.38 5.59-.2 3.18-4.6Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M562.51 439.78Q421 251 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.01 445.78-10-5.01 5.5-.99 2.5-5Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M871.31 253.29Q551 221 426.98 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m878.77 254.04-10.45 3.98 2.99-4.73-1.98-5.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M561 347.88Q461 261 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.66 352.8-10.83-2.78 5.17-2.14 1.39-5.41Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M561.55 394.3Q451 281 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="M566.79 399.67 556.23 396l5.32-1.7 1.83-5.28Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M561.81 640.05 426.67 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.85 645.61-10.42-4.05 5.38-1.51 2.03-5.21Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M562.71 697.33Q473 571 426.67 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m567.05 703.45-9.86-5.26 5.52-.86 2.63-4.93Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m560.38 584.59-133.71-93.7" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.52 588.9-11.06-1.65 4.92-2.66.82-5.53Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M560.16 295.6Q513 381 426.67 458" pointer-events="stroke"/>
+        <path fill="#c00" d="m563.78 289.03-.45 11.17-3.17-4.6-5.59-.23Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M562.51 869.78Q421 681 426.67 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m567.01 875.78-10-5.01 5.5-.99 2.5-5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M956.73 660.44Q803 471 426.67 458" pointer-events="stroke"/>
+        <path fill="#c00" d="m961.46 666.26-10.19-4.61 5.46-1.21 2.31-5.09Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M561.7 755.16Q483 671 426.67 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.82 760.64-10.48-3.89 5.36-1.59 1.94-5.24Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M561.59 813.26Q463 711 426.67 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.8 818.66-10.54-3.73 5.33-1.67 1.87-5.27Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#DataIntegrityProof">
-        <ellipse cx="352.29" cy="475.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <ellipse cx="352.29" cy="905.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:475px;margin-left:249px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:905px;margin-left:249px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -419,14 +428,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="352" y="480" font-family="Helvetica" font-size="16" text-anchor="middle">DataIntegrityProof</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="352" y="910" font-family="Helvetica" font-size="16" text-anchor="middle">DataIntegrityProof</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#Ed25519Signature2020">
-        <ellipse cx="125.37" cy="475.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <ellipse cx="125.37" cy="905.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:475px;margin-left:22px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:905px;margin-left:22px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -436,18 +445,22 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="125" y="480" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519Signature2020</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="125" y="910" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519Signature2020</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M352.29 451.63v-374" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.29 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M194.25 457.35Q349.42 317.66 352.18 77.63" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.27 70.13 4.88 10.05-4.97-2.55-5.03 2.44Z" pointer-events="all"/>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M352.29 881.63v-374" pointer-events="stroke"/>
+        <path d="m352.29 500.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M194.25 887.35q155.17-139.69 157.93-379.72" pointer-events="stroke"/>
+        <path d="m352.27 500.13 4.88 10.05-4.97-2.55-5.03 2.44Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#cryptosuite">
-        <rect width="163.73" height="32.54" x="270.91" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="163.73" height="32.54" x="270.91" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:566px;margin-left:272px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:272px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -457,14 +470,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="353" y="571" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuite</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="353" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuite</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#cryptosuiteString">
-        <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M297.61 643.02h109.37l20 14.36-20 14.35H297.61l-20-14.35Z" pointer-events="all"/>
+        <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M297.61 1073.02h109.37l20 14.36-20 14.35H297.61l-20-14.35Z" pointer-events="all"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:657px;margin-left:279px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:1087px;margin-left:279px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             cryptosuiteString
@@ -472,20 +485,265 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="352" y="662" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuiteString</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="352" y="1092" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuiteString</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m352.68 540.46-.39-41.94" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m352.75 547.96-5.09-9.95 5.02 2.45 4.98-2.55Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m352.77 582.73-.4 50.56" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m352.31 640.79-4.92-10.04 4.98 2.54 5.02-2.46Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 104.16q9.92.04 9.92-29.86T466.4 44.44" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m458.9 44.45 9.99-5.01-2.49 5 2.5 5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security#verificationMethod">
-        <rect width="210" height="32.54" x="1393" y="80.76" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m352.68 970.46-.39-41.94" pointer-events="stroke"/>
+        <path fill="#c00" d="m352.75 977.96-5.09-9.95 5.02 2.45 4.98-2.55Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m352.77 1012.73-.4 50.56" pointer-events="stroke"/>
+        <path fill="#009" d="m352.31 1070.79-4.92-10.04 4.98 2.54 5.02-2.46Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#cryptosuiteString">
+        <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M743.18 1073.02h109.37l20 14.36-20 14.35H743.18l-20-14.35Z" pointer-events="all"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:97px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:1087px;margin-left:724px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            multibase
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="798" y="1092" font-family="Helvetica" font-size="16" text-anchor="middle">multibase</text>
+        </switch>
+    </a>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M732.08 877.57q65.82.03 65.78 185.72" pointer-events="stroke"/>
+        <path fill="#009" d="m797.86 1070.79-4.99-10.01 4.99 2.51 5.01-2.5Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#Multikey">
+        <ellipse cx="1036.87" cy="894.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:894px;margin-left:934px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                Multikey
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="1037" y="899" font-family="Helvetica" font-size="16" text-anchor="middle">Multikey</text>
+        </switch>
+    </a>
+    <rect width="343.74" height="32.54" x="865" y="980.2" fill="none"/>
+    <a xlink:href="https://w3id.org/security#publicKeyMultibase">
+        <rect width="163.73" height="32.54" x="1050.75" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:1052px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                publicKeyMultibase
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="1133" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyMultibase</text>
+        </switch>
+    </a>
+    <a xlink:href="https://w3id.org/security#secretKeyMultibase">
+        <rect width="163.73" height="32.54" x="860.21" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:861px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                secretKeyMultibase
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="942" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyMultibase</text>
+        </switch>
+    </a>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m950.21 974.85 86.66-56.96" pointer-events="stroke"/>
+        <path fill="#c00" d="m943.95 978.97 5.61-9.67.65 5.55 4.84 2.8Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1124.46 974.89-87.59-57" pointer-events="stroke"/>
+        <path fill="#c00" d="m1130.75 978.98-11.11-1.27 4.82-2.82.63-5.56Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#JsonWebKey">
+        <ellipse cx="1423.61" cy="894.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:894px;margin-left:1320px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                JsonWebKey
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="1424" y="899" font-family="Helvetica" font-size="16" text-anchor="middle">JsonWebKey</text>
+        </switch>
+    </a>
+    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1368.93 1073.02h109.37l20 14.36-20 14.35h-109.37l-20-14.35Z" pointer-events="all"/>
+    <switch transform="translate(-.5 -.5)">
+        <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:1087px;margin-left:1350px">
+                <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                    <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                        rdf:JSON
+                    </div>
+                </div>
+            </div>
+        </foreignObject>
+        <text xmlns="http://www.w3.org/2000/svg" x="1424" y="1092" font-family="Helvetica" font-size="16" text-anchor="middle">rdf:JSON</text>
+    </switch>
+    <rect width="355.23" height="32.54" x="1246" y="980.2" fill="none"/>
+    <a xlink:href="https://w3id.org/security#secretKeyJwk">
+        <rect width="163.73" height="32.54" x="1246" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:1247px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                secretKeyJwk
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="1328" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyJwk</text>
+        </switch>
+    </a>
+    <a xlink:href="https://w3id.org/security#publicKeyJwk">
+        <rect width="163.73" height="32.54" x="1437.5" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:1438px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                publicKeyJwk
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="1519" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyJwk</text>
+        </switch>
+    </a>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1336.03 974.89 87.58-57" pointer-events="stroke"/>
+        <path fill="#c00" d="m1329.74 978.98 5.65-9.65.64 5.56 4.82 2.82Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1511.2 974.89-87.59-57" pointer-events="stroke"/>
+        <path fill="#c00" d="m1517.49 978.98-11.11-1.27 4.82-2.82.64-5.56Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m1327.87 1012.73 87.51 55.1" pointer-events="stroke"/>
+        <path fill="#009" d="m1421.72 1071.83-11.12-1.1 4.78-2.9.54-5.56Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m1519.36 1012.73-87.51 55.1" pointer-events="stroke"/>
+        <path fill="#009" d="m1425.51 1071.83 5.8-9.56.54 5.56 4.78 2.9Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M942.08 1012.73Q931 1061 881.42 1083.37" pointer-events="stroke"/>
+        <path fill="#009" d="m874.59 1086.46 7.05-8.67-.22 5.58 4.34 3.53Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1132.62 1012.73q-71.62 58.27-250.37 73.8" pointer-events="stroke"/>
+        <path fill="#009" d="m874.77 1087.18 9.53-5.84-2.05 5.19 2.92 4.77Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#digestMultibase">
+        <rect width="163.73" height="32.54" x="559.45" y="980.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:996px;margin-left:560px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                digestMultibase
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="641" y="1001" font-family="Helvetica" font-size="16" text-anchor="middle">digestMultibase</text>
+        </switch>
+    </a>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M641.31 1012.73q-.01 74.67 72.13 74.65" pointer-events="stroke"/>
+        <path fill="#009" d="m720.94 1087.38-10 5 2.5-5-2.5-5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1050.99 676.81Q1123 591 1147.66 490.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1046.17 682.56 2.6-10.88 2.22 5.13 5.44 1.3Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#VerificationRelationship">
+        <ellipse cx="787.16" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:44px;margin-left:684px">
+                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
+                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
+                            <i>
+                                VerificationRelationship
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </foreignObject>
+            <text xmlns="http://www.w3.org/2000/svg" x="787" y="49" font-family="Helvetica" font-size="16" text-anchor="middle">VerificationRelationship</text>
+        </switch>
+    </a>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M564.86 254.54 706.88 68.63" pointer-events="stroke"/>
+        <path fill="#009" d="m711.43 62.67-2.09 10.98-2.46-5.02-5.49-1.05Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M650.21 573.91Q583 481 466.38 474.95" pointer-events="stroke"/>
+        <path fill="#009" d="m458.89 474.56 10.25-4.47-2.76 4.86 2.24 5.12Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 117.27 871.05 62.99" pointer-events="stroke"/>
+        <path fill="#006601" d="m863.72 61.38 10.84-2.73-3.51 4.34 1.36 5.42Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 165.11 870.55 64.57" pointer-events="stroke"/>
+        <path fill="#006601" d="m863.61 61.74 11.15-.85-4.21 3.68.43 5.57Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 212.96 869.9 65.87" pointer-events="stroke"/>
+        <path fill="#006601" d="m863.46 62.04 11.15.82-4.71 3.01-.4 5.58Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 260.81 869.21 66.89" pointer-events="stroke"/>
+        <path fill="#006601" d="m863.3 62.27 10.96 2.23-5.05 2.39-1.12 5.48Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 308.66 868.53 67.67" pointer-events="stroke"/>
+        <path fill="#006601" d="m863.14 62.45 10.66 3.37-5.27 1.85-1.69 5.33Z" pointer-events="all"/>
+    </g>
+    <g stroke="#006601" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 8" d="M1117.03 356.51 867.9 68.26" pointer-events="stroke"/>
+        <path fill="#006601" d="m863 62.59 10.32 4.29-5.42 1.38-2.14 5.16Z" pointer-events="all"/>
+    </g>
+    <rect width="210" height="271.78" x="1117.03" y="101" fill="none"/>
+    <a xlink:href="https://w3id.org/security#verificationMethod">
+        <rect width="210" height="32.54" x="1117.03" y="101" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <switch transform="translate(-.5 -.5)">
+            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:117px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -495,14 +753,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="102" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="122" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#authentication">
-        <rect width="210" height="32.54" x="1393" y="128.6" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1117.03" y="148.84" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:145px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:165px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -512,14 +770,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="150" font-family="Helvetica" font-size="16" text-anchor="middle">authentication</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="170" font-family="Helvetica" font-size="16" text-anchor="middle">authentication</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#assertionMethod">
-        <rect width="210" height="32.54" x="1393" y="176.45" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1117.03" y="196.69" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:193px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:213px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -529,14 +787,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="198" font-family="Helvetica" font-size="16" text-anchor="middle">assertionMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="218" font-family="Helvetica" font-size="16" text-anchor="middle">assertionMethod</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#capabilityDelegationMethod">
-        <rect width="210" height="32.54" x="1393" y="224.3" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1117.03" y="244.54" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:241px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:261px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -546,14 +804,14 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="245" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityDelegationMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="266" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityDelegationMethod</text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#capabilityInvocationMethod">
-        <rect width="210" height="32.54" x="1393" y="272.15" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1117.03" y="292.39" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:288px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:309px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -564,15 +822,15 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="293" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityInvocationMethod
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="313" font-family="Helvetica" font-size="16" text-anchor="middle">capabilityInvocationMethod
 </text>
         </switch>
     </a>
     <a xlink:href="https://w3id.org/security#keyAgreementMethod">
-        <rect width="210" height="32.54" x="1393" y="320" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+        <rect width="210" height="32.54" x="1117.03" y="340.24" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:336px;margin-left:1394px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:208px;height:1px;padding-top:357px;margin-left:1118px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
@@ -582,178 +840,86 @@
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1498" y="341" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreementMethod</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="361" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreementMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#cryptosuiteString">
-        <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M743.18 643.02h109.37l20 14.36-20 14.35H743.18l-20-14.35Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 356.51q55.97 84.49 7.75 112.98" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.33 473.31 6.06-9.39.39 5.57 4.7 3.04Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 308.66Q1423 441 1335.6 471.26" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.51 473.71 7.82-7.99-.73 5.54 4 3.91Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 260.81Q1473 431 1335.74 471.68" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.55 473.81 8.16-7.64-.97 5.51 3.81 4.08Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 212.96Q1523 421 1335.8 471.89" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.56 473.86 8.34-7.45-1.1 5.48 3.72 4.17Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 165.11Q1443 261 1463 346q20 85-127.22 125.84" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.56 473.85 8.3-7.49-1.08 5.48 3.75 4.15Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1327.03 117.27Q1503 251 1503 346t-167.03 126.63" pointer-events="stroke"/>
+        <path fill="#009" d="m1328.6 474.03 8.89-6.77-1.52 5.37 3.38 4.45Z" pointer-events="all"/>
+    </g>
+    <a xlink:href="https://w3id.org/security#VerificationMethod">
+        <ellipse cx="1222.03" cy="474.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:657px;margin-left:724px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            multibase
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="798" y="662" font-family="Helvetica" font-size="16" text-anchor="middle">multibase</text>
-        </switch>
-    </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 447.57q65.82.03 65.78 185.72" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m797.86 640.79-4.99-10.01 4.99 2.51 5.01-2.5Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security#Multikey">
-        <ellipse cx="1036.87" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:464px;margin-left:934px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:474px;margin-left:1119px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                Multikey
+                                VerificationMethod
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1037" y="469" font-family="Helvetica" font-size="16" text-anchor="middle">Multikey</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="1222" y="479" font-family="Helvetica" font-size="16" text-anchor="middle">VerificationMethod</text>
         </switch>
     </a>
-    <rect width="343.74" height="32.54" x="865" y="539.57" fill="none"/>
-    <a xlink:href="https://w3id.org/security#publicKeyMultibase">
-        <rect width="163.73" height="32.54" x="1050.75" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <a xlink:href="https://w3id.org/security#Proof">
+        <ellipse cx="352.29" cy="474.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:556px;margin-left:1052px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:474px;margin-left:249px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                publicKeyMultibase
+                                Proof
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1133" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyMultibase</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="352" y="479" font-family="Helvetica" font-size="16" text-anchor="middle">Proof</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#secretKeyMultibase">
-        <rect width="163.73" height="32.54" x="860.21" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
+    <a xlink:href="https://w3id.org/security#verificationMethod">
+        <rect width="163.73" height="32.54" x="793" y="458.18" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:556px;margin-left:861px">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:474px;margin-left:794px">
                     <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
                         <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
                             <i>
-                                secretKeyMultibase
+                                verificationMethod
                             </i>
                         </div>
                     </div>
                 </div>
             </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="942" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyMultibase</text>
+            <text xmlns="http://www.w3.org/2000/svg" x="875" y="479" font-family="Helvetica" font-size="16" text-anchor="middle">verificationMethod</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m950.63 534.91 86.24-47.02" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m944.04 538.5 6.39-9.18.2 5.59 4.58 3.19Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1124.05 534.94-87.18-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1130.65 538.5-11.17-.34 4.57-3.22.18-5.58Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security#JsonWebKey">
-        <ellipse cx="1423.61" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:207px;height:1px;padding-top:464px;margin-left:1320px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                JsonWebKey
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1424" y="469" font-family="Helvetica" font-size="16" text-anchor="middle">JsonWebKey</text>
-        </switch>
-    </a>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1368.93 632.39h109.37l20 14.36-20 14.35h-109.37l-20-14.35Z" pointer-events="all"/>
-    <switch transform="translate(-.5 -.5)">
-        <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-            <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:147px;height:1px;padding-top:647px;margin-left:1350px">
-                <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                    <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                        rdf:JSON
-                    </div>
-                </div>
-            </div>
-        </foreignObject>
-        <text xmlns="http://www.w3.org/2000/svg" x="1424" y="652" font-family="Helvetica" font-size="16" text-anchor="middle">rdf:JSON</text>
-    </switch>
-    <rect width="355.23" height="32.54" x="1246" y="539.57" fill="none"/>
-    <a xlink:href="https://w3id.org/security#secretKeyJwk">
-        <rect width="163.73" height="32.54" x="1246" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:556px;margin-left:1247px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                secretKeyJwk
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1328" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyJwk</text>
-        </switch>
-    </a>
-    <a xlink:href="https://w3id.org/security#publicKeyJwk">
-        <rect width="163.73" height="32.54" x="1437.5" y="539.57" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:556px;margin-left:1438px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                publicKeyJwk
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="1519" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyJwk</text>
-        </switch>
-    </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1336.43 534.94 87.18-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1329.83 538.5 6.43-9.14.17 5.58 4.58 3.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1510.8 534.94-87.19-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1517.4 538.5-11.18-.34 4.58-3.22.17-5.58Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m1327.87 572.1 87.51 55.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1421.72 631.2-11.12-1.1 4.78-2.9.54-5.56Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m1519.36 572.1-87.51 55.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1425.51 631.2 5.8-9.56.54 5.56 4.78 2.9Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M942.08 572.1Q931 631 881.42 653.37" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.59 656.46 7.05-8.67-.22 5.58 4.34 3.53Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1132.62 572.1Q1061 641 882.25 656.53" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.77 657.18 9.53-5.84-2.05 5.19 2.92 4.77Z" pointer-events="all"/>
-    <a xlink:href="https://w3id.org/security#digestMultibase">
-        <rect width="163.73" height="32.54" x="559.45" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
-        <switch transform="translate(-.5 -.5)">
-            <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
-                <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:unsafe center;justify-content:unsafe center;width:162px;height:1px;padding-top:566px;margin-left:560px">
-                    <div data-drawio-colors="color: rgb(0, 0, 0);" style="box-sizing:border-box;font-size:0;text-align:center">
-                        <div style="display:inline-block;font-size:16px;font-family:Helvetica;color:#000;line-height:1.2;pointer-events:all;white-space:normal;overflow-wrap:normal">
-                            <i>
-                                digestMultibase
-                            </i>
-                        </div>
-                    </div>
-                </div>
-            </foreignObject>
-            <text xmlns="http://www.w3.org/2000/svg" x="641" y="571" font-family="Helvetica" font-size="16" text-anchor="middle">digestMultibase</text>
-        </switch>
-    </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M641.31 582.73q-.01 74.67 72.13 74.65" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m720.94 657.38-10 5 2.5-5-2.5-5Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.99 246.07Q1111 151 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.94 252.39 1.19-11.12 2.86 4.8 5.56.6Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M956.73 474.45h151.2" pointer-events="stroke"/>
+        <path fill="#009" d="m1115.43 474.45-10 5 2.5-5-2.5-5Z" pointer-events="all"/>
+    </g>
 </svg>

@@ -155,10 +155,6 @@
         is used to include them in the RDFS representations).
       </p>
       <figure id="vocabulary-diagram" style="text-align:center">
-        <!--
-                Original diagram is in https://drive.google.com/file/d/1-kg7AzhahSzIwiIHeh5ANGJB_JK-kugs/view?usp=drive_link
-                using the draw.io (diagrams.net plugin for google).
-              -->
         <div data-include="vocabulary.svg" data-include-replace="true" data-oninclude="massageSVGLinks"></div>
         <figcaption>Overview diagram of the vocabulary (without the reserved and deprecated items, error codes, and `xsd` datatypes).<br />
           A separate, stand-alone <a href="vocabulary.svg" target="_blank">SVG version</a> of the diagram, as well as a <a
@@ -260,16 +256,19 @@
           The diagram uses boxes, ellipses, and connecting lines with different "styles" 
           (border color, end marker, line type) to differentiate their semantic meaning; 
           these styles identify Property, Class, or Datatype, via the shapes used for the 
-          graph nodes, and Superclass, Domain Of, Range, or Contains, via the styles of the connecting lines.
+          graph nodes, and Superclass, Domain Of, Range, Type, or Contains, via the styles of the connecting lines.
           These style names are used in the explanation text that follows, below.
         </p>
         <p>
-          The diagram is roughly divided into left and right sections 
-          (although there are some common nodes; see later).
-          To make this description easier to understand, these will be referred to as the 
-          "Proof Section" and the "Verification Section". 
+          The diagram is roughly divided into (lower) left and (lower) right sections, and a top section.
+          These sections are connected by connecting lines of different types, and there is also one 
+          box, labeled as "multibase" and of a shape Datatype, that is shared by the two lower sections.
+          To make this description easier to understand, these sections will be referred to as the 
+          "Proof Section", "Verification Section", and "Verification Relationship Section", respectively. 
+        </p>
+        <p>
           Each of these sections has an ellipse at the top, styled as Class, 
-          and respectively labeled as "Proof" and "VerificationMethod".
+          and respectively labeled as "Proof", "VerificationMethod", and "VerificationRelationship".
         </p>
         <section>
           <h3>Proof Section</h3>
@@ -298,7 +297,7 @@
           <p>
             The right side of the Section contains a column of labeled boxes, 
             all styled as Property. The labels, from top to 
-            bottom, are "previousProof", "domain", "challenge", "proofPurpose", 
+            bottom, are "previousProof", "domain", "challenge",
             "nonce", "created", "proofValue". 
             The ellipse labeled as "Proof" is connected to all of these with 
             connecting lines styled as Domain Of. 
@@ -312,17 +311,8 @@
           </p>
         </section>
         <section>
-          <h3>VerificationMethod Section</h3>
+          <h3>Verification Section</h3>
 
-          <p>
-            The right side of this Section contains a column of labeled boxes, 
-            all styled as Property. The labels, from top to bottom, are 
-            "verificationMethod", "authentication", "assertionMethod", 
-            "capabilityDelegation", "capabilityInvocation", and "keyAgreement". 
-            Each of these boxes is connected to 
-            the ellipse labeled "VerificationMethod",
-            with a connecting line styled as Range.
-          </p>
           <p>
             The left side of this Section contains a column of three labeled 
             boxes, all styled as Property. The labels, from top to bottom, are 
@@ -335,7 +325,13 @@
           </p>
 
           <p>
-            The middle of this section contains three ellipses,
+            There is also a separate box, styled as Property and labeled as "verificationMethod". 
+            This box is connected to the ellipse labeled as "VerificationMethod" with a 
+            connecting line styled as Range.
+          </p>
+
+          <p>
+            The middle of this section contains three more ellipses,
             styled as Class, and labeled as 
             "Multikey, "Ed25519VerificationKey2020", and "JsonWebKey".
             Each of these is connected to 
@@ -362,11 +358,28 @@
           </p>
 
         </section>
+        <section>
+          <h3>Verification Relationship Section</h3>
+          <p>
+            The left side of the section contains a single box, styled as Property
+            and labeled as "proofPurpose". This box is connected to the ellipse
+            "VerificationRelationship" with a connecting line styled as Range, 
+            and is also connected to the ellipse labeled "Proof" in the Proof Section, 
+            with a connecting line styled as Domain Of.
+          </p>
 
-
+          <p>
+            The right side of this Section contains a column of labeled boxes,
+            all styled as Property. The labels, from top to bottom, are
+            "verificationMethod", "authentication", "assertionMethod",
+            "capabilityDelegation", "capabilityInvocation", and "keyAgreement".
+            Each of these boxes is connected to the ellipse labeled "VerificationMethod" in the 
+            Verification section, with a connecting line styled as Range, 
+            and to the ellipse labeled "VerificationRelationship"
+            with a connecting line styled as Type.
+          </p>
+        </section>
       </details>
     </section>
-
-
   </body>
 </html>
