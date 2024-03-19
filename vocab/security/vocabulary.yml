@@ -34,7 +34,7 @@ class:
     defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-methods
 
   - id: VerificationRelationship
-    comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as the values of the <a href="#proofPurpose">proofPurpose</a> property.
+    comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as values of the <a href="#proofPurpose">proofPurpose</a> property.
     defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-relationships
     upper_value: rdf:Property
     context: none
