@@ -254,18 +254,18 @@
         <summary>Overview diagram of the vocabulary (without the reserved and deprecated items, error codes, and `xsd` datatypes).</summary>
         <p>
           The diagram uses boxes, ellipses, and connecting lines with different "styles" 
-          (border color, end marker, line type) to differentiate their semantic meaning; 
-          these styles identify "Property", "Class", or "Datatype" via the shapes used for the 
-          graph nodes, and "Superclass", "Domain Of", "Range", "Type", or "Contains", 
-          via the styles of the connecting lines. In particular, <em>all</em> ellipses are styled as "Class".
+          (border color, end marker, line type) to differentiate their semantic meaning:
+          "Property", "Class", and "Datatype" are identified by the shape of the 
+          graph node (e.g., an ellipse signifies a "Class"); "Superclass", "Domain Of", "Range",
+          "Type", and "Contains" relationships are identified by the style of the connecting line.
           These style names are used in the explanation text that follows, below.
         </p>
         <p>
           The diagram is roughly divided into three sections — lower left, lower right, and upper.
           To make this description easier to understand, these sections will be respectively referred to
           as the "Proof", "Verification Method", and "Verification Relationship" sections.
-          The three sections are connected by lines of different types; additionally, one box,
-          labeled as "multibase", and having shape "Datatype", is shared by the two lower sections 
+          Shapes in the three sections are connected by lines of different styles; additionally, one box,
+          labeled as "multibase" and shaped as "Datatype", bridges the two lower sections 
           ("Proof" and "Verification Method").
         </p>
         <p>
@@ -276,27 +276,27 @@
           <h3>Proof Section</h3>
           <p>
             The left side of the section contains another ellipse, 
-            labeled as "ProofGraph", and connected to the ellipse labeled as "Proof" with a connecting line, 
-            styled as "Contains". 
-            A separate box, styled as "Property" and labeled as "proof", is connected to the ellipse labeled as "ProofGraph",
-            with a connecting line styled as "Range".
+            labeled as "ProofGraph", and connected with a line
+            styled as "Contains" to the "Proof" ellipse. 
+            A separate box, styled as "Property" and labeled as "proof", is connected
+            with a line styled as "Range" to the "ProofGraph" ellipse.
           </p>
           <p>
             There are two more ellipses in this section, 
-            labeled as "Ed25519Signature2020" and "DataIntegrityProof", respectively,
-            each connected to the ellipse labeled as "Proof" through connecting lines styled as "Superclass". 
-            The ellipse labeled as "DataIntegrityProof" is also connected to a box, styled as "Property" and labeled as 
-            "cryptosuite", with a connecting line styled as "Domain Of". 
+            labeled as "Ed25519Signature2020" and "DataIntegrityProof", and
+            each connected to the "Proof" ellipse with lines styled as "Superclass". 
+            The "DataIntegrityProof" ellipse is also connected to a box, styled as "Property" and labeled as 
+            "cryptosuite", with a line styled as "Domain Of". 
             The "cryptosuite" Property box is connected to a shape, styled as "Datatype" and labeled as "cryptosuiteString", 
-            with a connecting  line styled as "Range".
+            with a line styled as "Range".
           </p>
           <p>
             The right side of the section contains a column of labeled boxes, all styled as "Property".
             The labels, from top to bottom, are "previousProof", "domain", "challenge", "nonce", "created", and "proofValue". 
-            The ellipse, labeled as "Proof", is connected to all of these with connecting lines styled as "Domain Of". 
-            The box labeled as "previousProof" is also connected to the ellipse, labeled as "Proof", with a connecting line styled as "Range". 
-            The box labeled as "proofValue" is connected to a shape, styled as "Datatype" and labeled as "multibase", with a connecting line styled as "Range".
-            Finally, another box, styled as "Property" and labeled as "digestMultibase", is connected to the same "multibase" shape, styled as "Datatype", with a connecting line styled as "Range".
+            The "Proof" ellipse is connected to all of these boxes with lines styled as "Domain Of". 
+            The "previousProof" box is also connected to the "Proof" ellipse, with a line styled as "Range". 
+            The "proofValue" box is connected to a shape, styled as "Datatype" and labeled as "multibase", with a line styled as "Range".
+            Finally, the same "multibase" "Datatype" shape is connected to another box, styled as "Property" and labeled as "digestMultibase", with a line styled as "Range".
           </p>
         </section>
         <section>
@@ -305,34 +305,35 @@
           <p>
             The left side of this section contains a column of three labeled boxes, all styled as "Property". 
             The labels, from top to bottom, are "expires", "controller", and "revoked". 
-            Each of these is connected to the ellipse, labeled "VerificationMethod", with connecting lines styled as "Domain Of".
-            The "expires" "Property" box is also connected to the ellipse labeled "Proof" in the Proof section, 
-            with a connecting line styled as "Domain Of".
+            Each of these is connected to the "VerificationMethod" ellipse, with a line styled as "Domain Of".
+            The "expires" "Property" box is also connected to the "Proof" ellipse (in the Proof section), 
+            with a line styled as "Domain Of".
           </p>
 
           <p>
             There is also a distinct box, styled as "Property" and labeled as "verificationMethod". 
-            This box is connected to the ellipse, labeled as "VerificationMethod", with a connecting line styled as "Range".
+            This "verificationMethod" box is connected to the "VerificationMethod" 
+ellipse, with a connecting line styled as "Range".
           </p>
 
           <p>
             The middle of this section contains three more ellipses, labeled as "Multikey, "Ed25519VerificationKey2020", 
-            and "JsonWebKey", respectively.
-            Each of these is connected to the ellipse, labeled as "VerificationMethod", with a connecting line styled as "Superclass".
+            and "JsonWebKey".
+            Each of these is connected to the "VerificationMethod" ellipse, with a line styled as "Superclass".
           </p>
 
           <p>
             Two boxes, styled as "Property" and labeled as "secretKeyMultibase" and "publicKeyMultibase", 
-            respectively, are connected to the ellipse labeled as "Multikey" with a connecting line styled as "Domain Of".
-            Each of these boxes is also connected to the shape in the Proof section, styled as "Datatype" 
-            and labeled as "multibase", with connecting lines styled as "Range".
+            are connected to the ellipse labeled as "Multikey" with a line styled as "Domain Of".
+            Each of these boxes is also connected to the "multibase" "Datatype" shape in the Proof section, 
+            with lines styled as "Range".
           </p>
 
           <p>
             Finally, two boxes, styled as "Property" and labeled as "secretKeyJwk" 
-            and "publicKeyJwk", respectively, are connected to the ellipse labeled "JsonWebKey",
-            with a connecting line styled as "Domain Of". 
-            Both boxes are also connected to a shape, styled as "Datatype" and labeled as "rdf:JSON", with connecting 
+            and "publicKeyJwk", are connected to the "JsonWebKey" ellipse,
+            with a line styled as "Domain Of". 
+            Both boxes are also connected to a shape, styled as "Datatype" and labeled as "rdf:JSON", with
             lines styled as "Range".
           </p>
 
@@ -342,20 +343,20 @@
           <p>
             The left side of the section contains a single box, styled as "Property"
             and labeled as "proofPurpose". 
-            This box is connected to the ellipse, labeled as "VerificationRelationship", 
-            with a connecting line styled as "Range". 
-            It is also connected to the ellipse in the Proof section, labeled "Proof", 
-            with a connecting line styled as "Domain Of".
+            This box is connected to the "VerificationRelationship" ellipse,
+            with a line styled as "Range". 
+            It is also connected to the "Proof" ellipse in the Proof section,
+            with a line styled as "Domain Of".
           </p>
 
           <p>
             The right side of the section contains a column of labeled boxes,
             all styled as "Property". 
             The labels, from top to bottom, are "verificationMethod", "authentication", "assertionMethod", "capabilityDelegation", "capabilityInvocation", and "keyAgreement".
-            Each of these boxes is connected to the ellipse in the Verification Method section, labeled "VerificationMethod", 
-            with a connecting line styled as "Range". 
-            Finally, each of these boxes is also connected to the ellipse, labeled "VerificationRelationship",
-            with a connecting line styled as "Type".
+            Each of these boxes is connected to the "VerificationMethod" ellipse in the Verification Method section,
+            with a line styled as "Range". 
+            Finally, each of these boxes is also connected to the "VerificationRelationship" ellipse,
+            with a line styled as "Type".
           </p>
         </section>
       </details>
