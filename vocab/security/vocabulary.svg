@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:#fff" viewBox="-0.5 -0.5 1624 879">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-0.5 -0.5 1624 879">
     <rect width="1330" height="54.5" x="140" y="803.5" fill="none" stroke="#000" stroke-dasharray="3 3" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m1374 830.25 63.26.19" pointer-events="stroke"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1444.76 830.46-10.01 4.97 2.51-4.99-2.48-5.01Z" pointer-events="all"/>
+    <g fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path stroke-dasharray="2 8" d="m1374 830.25 63.26.19" pointer-events="stroke"/>
+        <path d="m1444.76 830.46-10.01 4.97 2.51-4.99-2.48-5.01Z" pointer-events="all"/>
+    </g>
     <rect width="70" height="40" x="1290" y="804.75" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -45,8 +47,10 @@
         </foreignObject>
         <text xmlns="http://www.w3.org/2000/svg" x="374" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Property</text>
     </switch>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m810 830.13 71.76.56" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m887.76 830.73-8.03 3.94 2.03-3.98-1.96-4.02Z" pointer-events="all"/>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="m810 830.13 71.76.56" pointer-events="stroke"/>
+        <path d="m887.76 830.73-8.03 3.94 2.03-3.98-1.96-4.02Z" pointer-events="all"/>
+    </g>
     <rect width="80" height="30" x="718" y="812.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -60,8 +64,10 @@
         </foreignObject>
         <text xmlns="http://www.w3.org/2000/svg" x="758" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Superclass</text>
     </switch>
-    <path fill="none" stroke="#f33" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1007 830.75 56 .05 15.76-.03" pointer-events="stroke"/>
-    <path fill="#f33" stroke="#f33" stroke-miterlimit="10" stroke-width="2" d="m1084.76 830.75-7.99 4.02 1.99-4-2-4Z" pointer-events="all"/>
+    <g stroke="#f33" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1007 830.75 56 .05 15.76-.03" pointer-events="stroke"/>
+        <path fill="#f33" d="m1084.76 830.75-7.99 4.02 1.99-4-2-4Z" pointer-events="all"/>
+    </g>
     <rect width="60" height="30" x="933" y="812.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -75,8 +81,10 @@
         </foreignObject>
         <text xmlns="http://www.w3.org/2000/svg" x="963" y="831" font-family="Helvetica" font-size="12" text-anchor="middle">Domain</text>
     </switch>
-    <path fill="none" stroke="#00c" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1180 830.75h71.76" pointer-events="stroke"/>
-    <path fill="#00c" stroke="#00c" stroke-miterlimit="10" stroke-width="2" d="m1257.76 830.75-8 4 2-4-2-4Z" pointer-events="all"/>
+    <g stroke="#00c" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1180 830.75h71.76" pointer-events="stroke"/>
+        <path fill="#00c" d="m1257.76 830.75-8 4 2-4-2-4Z" pointer-events="all"/>
+    </g>
     <rect width="60" height="30" x="1113" y="812.19" fill="none" pointer-events="all"/>
     <switch transform="translate(-.5 -.5)">
         <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -157,22 +165,38 @@
             <text xmlns="http://www.w3.org/2000/svg" x="963" y="360" font-family="Helvetica" font-size="16" text-anchor="middle">revoked</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 97.03q-52-6.03-88.52-30.69" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1298.26 62.14 11.09 1.46-4.87 2.74-.73 5.54Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 144.87q-62-33.87-91.06-75.96" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.68 62.73 9.8 5.39-5.54.79-2.69 4.89Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 192.72Q1341 141 1301.14 69.4" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.5 62.85 9.23 6.3-5.59.25-3.15 4.62Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 240.57Q1331 161 1299.59 70.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1297.14 63.01 7.99 7.82-5.54-.73-3.91 3.99Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 288.42q-72-97.42-94.78-217.96" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.82 63.09 6.77 8.9-5.37-1.53-4.45 3.39Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1393 336.27Q1311 221 1297.29 70.59" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1296.61 63.12 5.89 9.51-5.21-2.04-4.75 2.94Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.42 297.73Q1141 131 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.81 304.31.43-11.18 3.18 4.6 5.59.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.93 347.03Q1161 171 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.93 353.37 1.11-11.12 2.89 4.78 5.56.55Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 97.03q-52-6.03-88.52-30.69" pointer-events="stroke"/>
+        <path fill="#009" d="m1298.26 62.14 11.09 1.46-4.87 2.74-.73 5.54Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 144.87q-62-33.87-91.06-75.96" pointer-events="stroke"/>
+        <path fill="#009" d="m1297.68 62.73 9.8 5.39-5.54.79-2.69 4.89Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 192.72Q1341 141 1301.14 69.4" pointer-events="stroke"/>
+        <path fill="#009" d="m1297.5 62.85 9.23 6.3-5.59.25-3.15 4.62Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 240.57Q1331 161 1299.59 70.1" pointer-events="stroke"/>
+        <path fill="#009" d="m1297.14 63.01 7.99 7.82-5.54-.73-3.91 3.99Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 288.42q-72-97.42-94.78-217.96" pointer-events="stroke"/>
+        <path fill="#009" d="m1296.82 63.09 6.77 8.9-5.37-1.53-4.45 3.39Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1393 336.27Q1311 221 1297.29 70.59" pointer-events="stroke"/>
+        <path fill="#009" d="m1296.61 63.12 5.89 9.51-5.21-2.04-4.75 2.94Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1049.42 297.73Q1141 131 1147.66 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1045.81 304.31.43-11.18 3.18 4.6 5.59.22Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1049.93 347.03Q1161 171 1147.66 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1045.93 353.37 1.11-11.12 2.89 4.78 5.56.55Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#Ed25519VerificationKey2020">
         <ellipse cx="1226.51" cy="404.44" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="113.84" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
@@ -190,12 +214,18 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1227" y="409" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519VerificationKey2020</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1423.61 441Q1231 291 1222.43 77.62" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.12 70.13 5.4 9.79-5.09-2.3-4.9 2.7Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1226.51 381-4.34-303.37" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.07 70.13 5.14 9.92-5.04-2.42-4.96 2.57Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M1036.87 441Q1222 281 1222.03 77.63" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m1222.03 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M1423.61 441Q1231 291 1222.43 77.62" pointer-events="stroke"/>
+        <path d="m1222.12 70.13 5.4 9.79-5.09-2.3-4.9 2.7Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="m1226.51 381-4.34-303.37" pointer-events="stroke"/>
+        <path d="m1222.07 70.13 5.14 9.92-5.04-2.42-4.96 2.57Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M1036.87 441Q1222 281 1222.03 77.63" pointer-events="stroke"/>
+        <path d="m1222.03 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#Proof">
         <ellipse cx="352.29" cy="44.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
@@ -230,8 +260,10 @@
             <text xmlns="http://www.w3.org/2000/svg" x="180" y="183" font-family="Helvetica" font-size="16" text-anchor="middle">ProofGraph</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-dasharray="2 8" stroke-miterlimit="10" stroke-width="2" d="m179.94 154.97 90.96-87.33" pointer-events="stroke"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m276.31 62.44-3.75 10.53-1.66-5.33-5.27-1.88Z" pointer-events="all"/>
+    <g fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path stroke-dasharray="2 8" d="m179.94 154.97 90.96-87.33" pointer-events="stroke"/>
+        <path d="m276.31 62.44-3.75 10.53-1.66-5.33-5.27-1.88Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#proof">
         <rect width="163.73" height="32.54" x="98.56" y="308.09" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
@@ -249,8 +281,10 @@
             <text xmlns="http://www.w3.org/2000/svg" x="180" y="329" font-family="Helvetica" font-size="16" text-anchor="middle">proof</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m180.42 308.09-.43-96.49" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m179.95 204.1 5.05 9.98-5.01-2.48-4.99 2.52Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m180.42 308.09-.43-96.49" pointer-events="stroke"/>
+        <path fill="#009" d="m179.95 204.1 5.05 9.98-5.01-2.48-4.99 2.52Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#domain">
         <rect width="163.73" height="32.54" x="568.35" y="134" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
@@ -389,22 +423,38 @@
             <text xmlns="http://www.w3.org/2000/svg" x="650" y="406" font-family="Helvetica" font-size="16" text-anchor="middle">created</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M559.67 145.86Q491 111 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.36 149.26-11.18-.07 4.49-3.33.03-5.59Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M562.89 247.21Q491 141 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.1 253.42-9.75-5.48 5.54-.73 2.74-4.88Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M558.97 101.55Q521 91 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.19 103.56-10.97 2.14 3.75-4.15-1.07-5.48Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M563.68 297.88Q506.45 193.25 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.28 304.46-9.19-6.38 5.59-.2 3.18-4.6Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M562.51 439.78Q421 251 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m567.01 445.78-10-5.01 5.5-.99 2.5-5Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M871.31 253.29Q551 221 426.98 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m878.77 254.04-10.45 3.98 2.99-4.73-1.98-5.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M561 347.88Q461 261 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m566.66 352.8-10.83-2.78 5.17-2.14 1.39-5.41Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M561.55 394.3Q451 281 426.67 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="M566.79 399.67 556.23 396l5.32-1.7 1.83-5.28Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M559.67 145.86Q491 111 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.36 149.26-11.18-.07 4.49-3.33.03-5.59Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M562.89 247.21Q491 141 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m567.1 253.42-9.75-5.48 5.54-.73 2.74-4.88Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M558.97 101.55Q521 91 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.19 103.56-10.97 2.14 3.75-4.15-1.07-5.48Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M563.68 297.88Q506.45 193.25 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m567.28 304.46-9.19-6.38 5.59-.2 3.18-4.6Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M562.51 439.78Q421 251 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m567.01 445.78-10-5.01 5.5-.99 2.5-5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M871.31 253.29Q551 221 426.98 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m878.77 254.04-10.45 3.98 2.99-4.73-1.98-5.22Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M561 347.88Q461 261 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m566.66 352.8-10.83-2.78 5.17-2.14 1.39-5.41Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M561.55 394.3Q451 281 426.67 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="M566.79 399.67 556.23 396l5.32-1.7 1.83-5.28Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#DataIntegrityProof">
         <ellipse cx="352.29" cy="475.08" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
@@ -439,10 +489,14 @@
             <text xmlns="http://www.w3.org/2000/svg" x="125" y="480" font-family="Helvetica" font-size="16" text-anchor="middle">Ed25519Signature2020</text>
         </switch>
     </a>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M352.29 451.63v-374" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.29 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
-    <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M194.25 457.35Q349.42 317.66 352.18 77.63" pointer-events="stroke"/>
-    <path stroke="#000" stroke-miterlimit="10" stroke-width="2" d="m352.27 70.13 4.88 10.05-4.97-2.55-5.03 2.44Z" pointer-events="all"/>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M352.29 451.63v-374" pointer-events="stroke"/>
+        <path d="m352.29 70.13 5 10-5-2.5-5 2.5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#000" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" d="M194.25 457.35Q349.42 317.66 352.18 77.63" pointer-events="stroke"/>
+        <path d="m352.27 70.13 4.88 10.05-4.97-2.55-5.03 2.44Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#cryptosuite">
         <rect width="163.73" height="32.54" x="270.91" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
@@ -475,12 +529,18 @@
             <text xmlns="http://www.w3.org/2000/svg" x="352" y="662" font-family="Helvetica" font-size="16" text-anchor="middle">cryptosuiteString</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m352.68 540.46-.39-41.94" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m352.75 547.96-5.09-9.95 5.02 2.45 4.98-2.55Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m352.77 582.73-.4 50.56" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m352.31 640.79-4.92-10.04 4.98 2.54 5.02-2.46Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 104.16q9.92.04 9.92-29.86T466.4 44.44" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m458.9 44.45 9.99-5.01-2.49 5 2.5 5Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m352.68 540.46-.39-41.94" pointer-events="stroke"/>
+        <path fill="#c00" d="m352.75 547.96-5.09-9.95 5.02 2.45 4.98-2.55Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m352.77 582.73-.4 50.56" pointer-events="stroke"/>
+        <path fill="#009" d="m352.31 640.79-4.92-10.04 4.98 2.54 5.02-2.46Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M732.08 104.16q9.92.04 9.92-29.86T466.4 44.44" pointer-events="stroke"/>
+        <path fill="#009" d="m458.9 44.45 9.99-5.01-2.49 5 2.5 5Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#verificationMethod">
         <rect width="210" height="32.54" x="1393" y="80.76" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
@@ -585,7 +645,7 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1498" y="341" font-family="Helvetica" font-size="16" text-anchor="middle">keyAgreementMethod</text>
         </switch>
     </a>
-    <a xlink:href="https://w3id.org/security#cryptosuiteString">
+    <a xlink:href="https://w3id.org/security#multibase">
         <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" d="M743.18 643.02h109.37l20 14.36-20 14.35H743.18l-20-14.35Z" pointer-events="all"/>
         <switch transform="translate(-.5 -.5)">
             <foreignObject width="100%" height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow:visible;text-align:left">
@@ -600,8 +660,10 @@
             <text xmlns="http://www.w3.org/2000/svg" x="798" y="662" font-family="Helvetica" font-size="16" text-anchor="middle">multibase</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M732.08 447.57q65.82.03 65.78 185.72" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m797.86 640.79-4.99-10.01 4.99 2.51 5.01-2.5Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M732.08 447.57q65.82.03 65.78 185.72" pointer-events="stroke"/>
+        <path fill="#009" d="m797.86 640.79-4.99-10.01 4.99 2.51 5.01-2.5Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#Multikey">
         <ellipse cx="1036.87" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
@@ -654,10 +716,14 @@
             <text xmlns="http://www.w3.org/2000/svg" x="942" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">secretKeyMultibase</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m950.63 534.91 86.24-47.02" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m944.04 538.5 6.39-9.18.2 5.59 4.58 3.19Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1124.05 534.94-87.18-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1130.65 538.5-11.17-.34 4.57-3.22.18-5.58Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m950.63 534.91 86.24-47.02" pointer-events="stroke"/>
+        <path fill="#c00" d="m944.04 538.5 6.39-9.18.2 5.59 4.58 3.19Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1124.05 534.94-87.18-47.05" pointer-events="stroke"/>
+        <path fill="#c00" d="m1130.65 538.5-11.17-.34 4.57-3.22.18-5.58Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#JsonWebKey">
         <ellipse cx="1423.61" cy="464.45" fill="none" stroke="#360" stroke-width="2" pointer-events="all" rx="104.367" ry="23.445"/>
         <switch transform="translate(-.5 -.5)">
@@ -723,18 +789,30 @@
             <text xmlns="http://www.w3.org/2000/svg" x="1519" y="561" font-family="Helvetica" font-size="16" text-anchor="middle">publicKeyJwk</text>
         </switch>
     </a>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1336.43 534.94 87.18-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1329.83 538.5 6.43-9.14.17 5.58 4.58 3.22Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="m1510.8 534.94-87.19-47.05" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1517.4 538.5-11.18-.34 4.58-3.22.17-5.58Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m1327.87 572.1 87.51 55.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1421.72 631.2-11.12-1.1 4.78-2.9.54-5.56Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="m1519.36 572.1-87.51 55.1" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m1425.51 631.2 5.8-9.56.54 5.56 4.78 2.9Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M942.08 572.1Q931 631 881.42 653.37" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.59 656.46 7.05-8.67-.22 5.58 4.34 3.53Z" pointer-events="all"/>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M1132.62 572.1Q1061 641 882.25 656.53" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m874.77 657.18 9.53-5.84-2.05 5.19 2.92 4.77Z" pointer-events="all"/>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1336.43 534.94 87.18-47.05" pointer-events="stroke"/>
+        <path fill="#c00" d="m1329.83 538.5 6.43-9.14.17 5.58 4.58 3.22Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="m1510.8 534.94-87.19-47.05" pointer-events="stroke"/>
+        <path fill="#c00" d="m1517.4 538.5-11.18-.34 4.58-3.22.17-5.58Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m1327.87 572.1 87.51 55.1" pointer-events="stroke"/>
+        <path fill="#009" d="m1421.72 631.2-11.12-1.1 4.78-2.9.54-5.56Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="m1519.36 572.1-87.51 55.1" pointer-events="stroke"/>
+        <path fill="#009" d="m1425.51 631.2 5.8-9.56.54 5.56 4.78 2.9Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M942.08 572.1Q931 631 881.42 653.37" pointer-events="stroke"/>
+        <path fill="#009" d="m874.59 656.46 7.05-8.67-.22 5.58 4.34 3.53Z" pointer-events="all"/>
+    </g>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M1132.62 572.1Q1061 641 882.25 656.53" pointer-events="stroke"/>
+        <path fill="#009" d="m874.77 657.18 9.53-5.84-2.05 5.19 2.92 4.77Z" pointer-events="all"/>
+    </g>
     <a xlink:href="https://w3id.org/security#digestMultibase">
         <rect width="163.73" height="32.54" x="559.45" y="550.2" fill="none" stroke="#000" stroke-width="2" pointer-events="all" rx="4.88" ry="4.88"/>
         <switch transform="translate(-.5 -.5)">
@@ -752,8 +830,12 @@
             <text xmlns="http://www.w3.org/2000/svg" x="641" y="571" font-family="Helvetica" font-size="16" text-anchor="middle">digestMultibase</text>
         </switch>
     </a>
-    <path fill="none" stroke="#009" stroke-dasharray="6 6" stroke-miterlimit="10" stroke-width="2" d="M641.31 582.73q-.01 74.67 72.13 74.65" pointer-events="stroke"/>
-    <path fill="#009" stroke="#009" stroke-miterlimit="10" stroke-width="2" d="m720.94 657.38-10 5 2.5-5-2.5-5Z" pointer-events="all"/>
-    <path fill="none" stroke="#c00" stroke-dasharray="2 2" stroke-miterlimit="10" stroke-width="2" d="M1049.99 246.07Q1111 151 1147.66 60.89" pointer-events="stroke"/>
-    <path fill="#c00" stroke="#c00" stroke-miterlimit="10" stroke-width="2" d="m1045.94 252.39 1.19-11.12 2.86 4.8 5.56.6Z" pointer-events="all"/>
+    <g stroke="#009" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="6 6" d="M641.31 582.73q-.01 74.67 72.13 74.65" pointer-events="stroke"/>
+        <path fill="#009" d="m720.94 657.38-10 5 2.5-5-2.5-5Z" pointer-events="all"/>
+    </g>
+    <g stroke="#c00" stroke-miterlimit="10" stroke-width="2">
+        <path fill="none" stroke-dasharray="2 2" d="M1049.99 246.07Q1111 151 1147.66 60.89" pointer-events="stroke"/>
+        <path fill="#c00" d="m1045.94 252.39 1.19-11.12 2.86 4.8 5.56.6Z" pointer-events="all"/>
+    </g>
 </svg>
