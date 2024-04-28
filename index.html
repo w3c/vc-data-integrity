@@ -1341,7 +1341,7 @@ Multibase value as described in Section [[[#multibase-0]]].
             </p>
 
             <p>
-When specifing a `Multikey`, the object takes the following form:
+When specifying a `Multikey`, the object takes the following form:
             </p>
 
             <dl>
@@ -1352,14 +1352,23 @@ The value of the `type` property MUST contain the string `Multikey`.
               <dt><dfn class="lint-ignore">publicKeyMultibase</dfn></dt>
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-Multibase encoded value as described in Section [[[#multibase-0]]].
+Multibase-encoded value as described in Section [[[#multibase-0]]]. The value format itself,
+which is encoded in Multibase, MUST be defined by the cryptographic suite specification used by 
+the [=verification method=].
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
               <dd>
 The `secretKeyMultibase` property is OPTIONAL. If present, its value MUST be a
-Multibase encoded value as described in Section [[[#multibase-0]]].
+Multibase-encoded value as described in Section [[[#multibase-0]]]. The value format itself,
+which is encoded in Multibase, MUST be defined by the cryptographic suite specification used by
+the [=verification method=].
               </dd>
             </dl>
+
+            <p>
+              Implementations that perform JSON-LD processing MUST use the `https://w3id.org/security/multikey/v1` context URL for 
+              Multikey. 
+            </p>
 
             <p>
 An example of a Multikey is provided below:
@@ -1392,7 +1401,7 @@ include <em>symmetric keys</em> and <em>private keys</em>.
             <pre class="example nohighlight"
               title="Multikey encoding of a Ed25519 secret key">
 {
-  "@context": ["https://w3id.org/security/suites/secrets/v1"],
+  "@context": ["https://w3id.org/security/multikey/v1"],
   "id": "did:example:123456789abcdefghi#keys-1",
   "type": "Multikey",
   "controller": "did:example:123456789abcdefghi",
@@ -1449,13 +1458,18 @@ representing a JSON Web Key that conforms to [[RFC7517]].
             </dl>
 
             <p>
+              Implementations that perform JSON-LD processing MUST use the `https://w3id.org/security/jwk/v1` context URL for
+              JsonWebKey.
+            </p>
+
+            <p>
 An example of an object that conforms to this data model is provided below:
             </p>
 
             <pre class="example nohighlight"
               title="JSON Web Key encoding of an Ed25519 public key">
 {
-  "@context": ["https://www.w3.org/ns/security/jwk/v1"],
+  "@context": ["https://w3id.org/security/jwk/v1"],
   "id": "did:example:123456789abcdefghi#key-1",
   "type": "JsonWebKey",
   "controller": "did:example:123456789abcdefghi",
@@ -1494,7 +1508,7 @@ referred to as <em>private keys</em>.
             <pre class="example nohighlight"
               title="JSON Web Key encoding of an Ed25519 secret key">
 {
-  "@context": ["https://www.w3.org/ns/security/jwk/v1"],
+  "@context": ["https://w3id.org/security/jwk/v1"],
   "id": "did:example:123456789abcdefghi#key-1",
   "type": "JsonWebKey",
   "controller": "did:example:123456789abcdefghi",
