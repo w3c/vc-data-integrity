@@ -340,7 +340,7 @@
             <mxPoint x="661.0107052896725" y="566.0839272123158" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <UserObject label="multibase" link="https://w3id.org/security#cryptosuiteString" id="aMvtbWUda6Bs1y7FLRK9-2">
+        <UserObject label="multibase" link="https://w3id.org/security#multibase" id="aMvtbWUda6Bs1y7FLRK9-2">
           <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=16;fillColor=none;strokeWidth=2;" parent="1" vertex="1">
             <mxGeometry x="710.1783123425694" y="652.0213235294117" width="149.3690176322418" height="28.708676470588237" as="geometry" />
           </mxCell>
