@@ -3355,12 +3355,15 @@ references are also considered verified.
         <p>
 Required input is a
 [=secured data document=] (|securedDocument|). A list of
-verification results corresponding to each proof in |allProofs| is
-produced as output.
+[=verification result=]s corresponding to each proof in |allProofs| is
+generated, and a single boolean result is returned as output.
         </p>
         <ol class="algorithm">
           <li>
 Set |allProofs| to </var>|securedDocument|.|proof|.
+          </li>
+          <li>
+Set |verificationResults| to an empty list.
           </li>
           <li>
 For each |proof| in |allProofs|, do the following steps:
@@ -3383,24 +3386,29 @@ convey an error type of
               </li>
               <li>
 Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
-removed and then set |unsecuredDocument.proof| to |matchingProofs|.
+removed and then set |unsecuredDocument|.|proof| to |matchingProofs|.
               </li>
               <li>
-Run steps 5 through 8 to validate the contents of |proof|.
-              </li>
-              <li>
-Run steps 10 through 15 of the algorithm in section [[[#verify-proof]]]; if no
-exceptions are raised, associate the |isProofVerified| value with this |proof|.
-                <p class="note">
-We specifically use the value of |unsecuredDocument| as set above, rather than
-using the value from step 5 of the algorithm in section [[[#verify-proof]]].
-                </p>
+Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
+|unsecuredDocument|; if no exceptions are raised, add |cryptosuiteVerificationResult|
+to |verificationResults|.
                 </li>
             </ol>
           </li>
           <li>
-Return the |allProofs| along with each proof's associated
-|isProofVerified| information.
+Let |combinedVerificationResult| be `true`.
+          </li>
+          <li>
+For each |cryptosuiteVerificationResult| in |verificationResults|:
+            <ol class="algorithm">
+              <li>
+If |cryptosuiteVerificationResult|.|verified| is `false`, set |combinedVerificationResult|
+to `false`.
+              </li>
+            </ol>
+          </li>
+          <li>
+Return |combinedVerificationResult|.
           </li>
         </ol>
       </section>
