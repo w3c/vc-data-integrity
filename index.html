@@ -3356,7 +3356,9 @@ references are also considered verified.
 Required input is a
 [=secured data document=] (|securedDocument|). A list of
 [=verification result=]s corresponding to each proof in |allProofs| is
-generated, and a single boolean result is returned as output.
+generated, and a single combined [=verification result=] is returned as output.
+Implementations MAY return any of the other [=verification result=]s or Any
+other metadata alongside the combined [=verification result=].
         </p>
         <ol class="algorithm">
           <li>
@@ -3396,16 +3398,28 @@ to |verificationResults|.
             </ol>
           </li>
           <li>
-Let |combinedVerificationResult| be `true`.
+Let |combinedVerificationResult| be an empty struct. Set |combinedVerificationResult|.|verified|
+to `true`, |combinedVerificationResult|.|verifiedDocument| to `null`, and 
+|combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
 For each |cryptosuiteVerificationResult| in |verificationResults|:
             <ol class="algorithm">
               <li>
-If |cryptosuiteVerificationResult|.|verified| is `false`, set |combinedVerificationResult|
+If |cryptosuiteVerificationResult|.|verified| is `false`, set |combinedVerificationResult|.|verified|
 to `false`.
               </li>
+              <li>
+Otherwise, set |combinedVerificationResult|.|verifiedDocument| to 
+|cryptosuiteVerificationResult|.|verifiedDocument|, and set
+|combinedVerificationResult|.|mediaType| to |cryptosuiteVerificationResult|.|mediaType|.
+              </li>
             </ol>
+          </li>
+          <li>
+If |combinedVerificationResult|.|verified| is `false`, set 
+|combinedVerificationResult|.|verifiedDocument| to `null` and 
+|combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
 Return |combinedVerificationResult|.
