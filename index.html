@@ -2885,7 +2885,7 @@ Return |baseEncoding| as the base-encoded value.
 
         <pre class="example" title="An implementation of the general base-encoding algorithm above in Javascript">
 /**
-* @param {UInt8Array} bytes 
+* @param {Uint8Array} bytes 
 * @param {number} targetBase 
 * @param {string} baseAlphabet 
 * @returns string
@@ -3042,7 +3042,7 @@ to |decodedSize|, starting at offset |decodedOffset| to
 * @param {string} sourceEncoding
 * @param {number} sourceBase 
 * @param {string} baseAlphabet 
-* @returns UInt8Array
+* @returns Uint8Array
 */
 function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
   // build the base-alphabet to integer value map
