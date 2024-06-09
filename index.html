@@ -2119,9 +2119,10 @@ a single string value, or an array of string values that are
 values.
         </p>
         <p>
-`digestMultibase` is expected to be added to the context of documents that need to refer to
-other resources and include an associated content integrity hash. For example, the Verifiable
-Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`) includes it.
+JSON-LD context authors are expected to add `digestMultibase` to contexts that will 
+be used in documents that refer to other resources and include an associated 
+content integrity hash. For example, the [[[VC-DATA-MODEL-2.0]]]
+context (`https://www.w3.org/ns/credentials/v2`) includes it.
         </p>
 
         <p>
@@ -4521,7 +4522,7 @@ Added `cryptosuiteString` type to proofs to enable proof compression.
         </li>
         <li>
 Added `digestMultibase` property and `multibase` data type for securing remote
-content, and discussion on adding `digestMultibase` to contexts.
+content, and guidance on adding `digestMultibase` to contexts.
         </li>
         <li>
 Narrowed date time values to use `dateTimeStamp`.
