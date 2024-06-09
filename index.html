@@ -3427,8 +3427,11 @@ to |verificationResults|.
             </ol>
           </li>
           <li>
-Let |combinedVerificationResult| be an empty struct. Set |combinedVerificationResult|.|verified|
-to `true`, |combinedVerificationResult|.|verifiedDocument| to `null`, and 
+Set |successfulVerificationResults| to an empty list.
+          </li>
+          <li>
+Let |combinedVerificationResult| be an empty struct. Set |combinedVerificationResult|.|status|
+to `true`, |combinedVerificationResult|.|document| to `null`, and 
 |combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
@@ -3439,19 +3442,20 @@ If |cryptosuiteVerificationResult|.|verified| is `false`, set |combinedVerificat
 to `false`.
               </li>
               <li>
-Otherwise, set |combinedVerificationResult|.|verifiedDocument| to 
-|cryptosuiteVerificationResult|.|verifiedDocument|, and set
-|combinedVerificationResult|.|mediaType| to |cryptosuiteVerificationResult|.|mediaType|.
+Otherwise, set |combinedVerificationResult|.|document| to 
+|cryptosuiteVerificationResult|.|verifiedDocument|, set
+|combinedVerificationResult|.|mediaType| to |cryptosuiteVerificationResult|.|mediaType|, and
+append |cryptosuiteVerificationResult| to |successfulVerificationResults|.
               </li>
             </ol>
           </li>
           <li>
-If |combinedVerificationResult|.|verified| is `false`, set 
-|combinedVerificationResult|.|verifiedDocument| to `null` and 
+If |combinedVerificationResult|.|status| is `false`, set 
+|combinedVerificationResult|.|document| to `null` and 
 |combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
-Return |combinedVerificationResult|.
+Return |combinedVerificationResult|, |successfulVerificationResults|.
           </li>
         </ol>
       </section>
