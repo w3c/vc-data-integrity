@@ -3384,9 +3384,9 @@ references are also considered verified.
         <p>
 Required input is a
 [=secured data document=] (|securedDocument|). A list of
-[=verification result=]s corresponding to each proof in |allProofs| is
+[=verification results=] corresponding to each proof in |allProofs| is
 generated, and a single combined [=verification result=] is returned as output.
-Implementations MAY return any of the other [=verification result=]s or Any
+Implementations MAY return any of the other [=verification result=]s and/or any
 other metadata alongside the combined [=verification result=].
         </p>
         <ol class="algorithm">
@@ -3421,7 +3421,7 @@ removed and then set |unsecuredDocument|.|proof| to |matchingProofs|.
               </li>
               <li>
 Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
-|unsecuredDocument|; if no exceptions are raised, add |cryptosuiteVerificationResult|
+|unsecuredDocument|; if no exceptions are raised, append |cryptosuiteVerificationResult|
 to |verificationResults|.
                 </li>
             </ol>
