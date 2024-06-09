@@ -784,9 +784,9 @@ which was to merely logging into a website.
 
           <dt>verificationMethod</dt>
           <dd>
-If included, `verificationMethod`, the means and information needed to verify the proof,
-MUST be specified as a string that maps to a [[URL]]. An example of a verification method
-is a link to a [=public key=] which includes cryptographic material that is used
+A verification method is the means and information needed to verify the proof.
+If included, the value MUST be a string that maps to a [[URL]]. An example of a 
+verification method is a link to a [=public key=] which includes cryptographic material that is used
 by a verifier during the verification process. Inclusion of `verificationMethod` is OPTIONAL, 
 but if it is not included, other properties such as `cryptosuite` MUST provide a mechanism
 by which to obtain the required information to verify the proof.
@@ -794,8 +794,10 @@ by which to obtain the required information to verify the proof.
 
           <dt>cryptosuite</dt>
           <dd>
-Information about the cryptographic suite that was used to generate the proof. See
-[[[#cryptographic-suites]]] for more information. `cryptosuite` is REQUIRED.
+An identifier for the cryptographic suite that can be used to verify the proof. See
+[[[#cryptographic-suites]]] for more information. If the proof type is
+`DataIntegrityProof`, `cryptosuite` MUST be specified; otherwise,  `cryptosuite`
+MAY be specified. If specified, its value MUST be a string.
           </dd>
 
           <dt><dfn class="lint-ignore">created</dfn></dt>
@@ -4533,7 +4535,7 @@ Narrowed date time values to use `dateTimeStamp`.
 Ensure that base URL is set to null when processing as RDF.
         </li>
         <li>
-Updated requirements for `proof` objects.
+Added requirement that `DataIntegrityProof` objects need to contain the `cryptosuite` property.
         </li>
       </ul>
     </section>
