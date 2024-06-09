@@ -785,11 +785,12 @@ which was to merely logging into a website.
           <dt>verificationMethod</dt>
           <dd>
 A verification method is the means and information needed to verify the proof.
-If included, the value MUST be a string that maps to a [[URL]]. An example of a 
-verification method is a link to a [=public key=] which includes cryptographic material that is used
-by a verifier during the verification process. Inclusion of `verificationMethod` is OPTIONAL, 
-but if it is not included, other properties such as `cryptosuite` MUST provide a mechanism
-by which to obtain the required information to verify the proof.
+If included, the value MUST be a string that maps to a [[URL]]. An example of a
+verification method is a link to a [=public key=] which includes cryptographic
+material that is used by a verifier during the verification process. Inclusion
+of `verificationMethod` is OPTIONAL, but if it is not included, other properties
+such as `cryptosuite` might provide a mechanism by which to obtain the required
+information to verify the proof.
           </dd>
 
           <dt>cryptosuite</dt>
@@ -1195,12 +1196,12 @@ The value of the `id` property for a [=verification method=] MUST be a
                 <dd>
 The value of the `type` property MUST be a [=string=] that either conforms to the
 [[URL]] syntax or maps (through interpretation of the `@context` property) to a [[URL]],
-and that references exactly one [=verification method=] type. 
+and that references exactly one [=verification method=] type.
 This specification defines two
 [=verification method=] types (<a href="#multikey">`Multikey`</a> and
 <a href="#jsonwebkey">`JsonWebKey`</a>); others might be defined by the community.
 To maximize global interoperability, such community-defined [=verification method=]
-types SHOULD be registered in the [[[VC-SPECS]]] [[[?VC-SPECS]]]. 
+types SHOULD be registered in the [[[VC-SPECS]]] [[[?VC-SPECS]]].
                 </dd>
                 <dt><span id="defn-controller">controller</span></dt>
                 <dd>
@@ -1363,7 +1364,7 @@ The value of the `type` property MUST contain the string `Multikey`.
               <dd>
 The `publicKeyMultibase` property is OPTIONAL. If present, its value MUST be a
 Multibase-encoded value as described in Section [[[#multibase-0]]]. The value format itself,
-which is encoded in Multibase, MUST be defined by the cryptographic suite specification used by 
+which is encoded in Multibase, MUST be defined by the cryptographic suite specification used by
 the [=verification method=].
               </dd>
               <dt><dfn class="lint-ignore">secretKeyMultibase</dfn></dt>
@@ -1376,8 +1377,8 @@ the [=verification method=].
             </dl>
 
             <p>
-              Implementations that perform JSON-LD processing MUST use the `https://w3id.org/security/multikey/v1` context URL for 
-              Multikey. 
+              Implementations that perform JSON-LD processing MUST use the `https://w3id.org/security/multikey/v1` context URL for
+              Multikey.
             </p>
 
             <p>
