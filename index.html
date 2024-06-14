@@ -1946,20 +1946,6 @@ example described in [[[#capability-invocation]]].
       <section>
         <h2>Multibase</h2>
 
-        <p class="issue"
-           title="Multibase may be standardized at IETF">
-The [[?MULTIBASE]] specification has been dispatched at IETF and may be
-standardized there. There is active discussion on this initiative in
-the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
-Multiformats mailing list at IETF</a>. If the Multibase draft is stabilized
-before this specification goes to the Proposed Recommendation phase, the table
-below will be replaced with normative references to the Multibase
-specification at IETF. It is the intention of the Working Group to ensure
-alignment between the Multibase values used in this specification and the
-Multibase values defined by the current Multibase community and any potential
-future IETF Multiformats Working Group.
-        </p>
-
         <p>
 A Multibase string includes a single character header which identifies the
 base and encoding alphabet used to encode a binary value, followed by the
@@ -2020,19 +2006,6 @@ Multibase header. Any algorithm with equivalent output MAY be used.
 
       <section>
         <h2>Multihash</h2>
-
-        <p class="issue" title="Multihash may be standardized at IETF">
-The [[?MULTIHASH]] specification has been dispatched at IETF and may be
-standardized. There is active discussion on this initiative in
-the <a href="https://mailarchive.ietf.org/arch/browse/multiformats/">
-Multiformats mailing list at IETF</a>. If the IETF draft is stabilized
-before this specification goes to the Proposed Recommendation phase, the table
-below will be replaced with normative references to the Multihash
-specification. It is the intention of the Working Group to ensure
-alignment between the Multihash values used in this specification and the
-Multihash values defined by the current Multihash community and any potential
-future IETF Multiformats Working Group.
-        </p>
 
         <p>
 A Multihash value starts with a binary header, which identifies the specific
@@ -2104,13 +2077,6 @@ value which MUST match the output length associated with the Multihash header.
 
       <section>
         <h2>Resource Integrity</h2>
-
-        <p class="issue atrisk" title="Unification of cryptographic hash expression formats are under discussion">
-The Working Group is currently attempting to determine whether cryptographic hash
-expression formats can be unified across all of the VCWG core specifications.
-Candidates for this mechanism include `digestSRI` and `digestMultibase`. There
-are arguments for and against unification that the WG is currently debating.
-        </p>
 
         <p>
 When a link to an external resource is included in a
@@ -2798,14 +2764,6 @@ data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows
 <dfn class="export">unsecured data document</dfn> is a [=map=] with no
 `proof` [=map/key=]. A <dfn class="export">secured data document</dfn> is a
 [=map=] with a `proof` [=map/key=].
-      </p>
-
-      <p class="issue" title="Verification hash algorithm definition">
-At present the creation of the verification hash is delegated to the
-cryptographic suite specification when generating and verifying a proof. It is
-expected that this algorithm is going to be common to most cryptographic suites.
-It is predicted that the algorithm that generates the verification hash
-will eventually be defined in this specification.
       </p>
 
       <section class="normative">
@@ -3720,23 +3678,6 @@ suites might not expire for 5-10 years, prompting the developer to go
 searching for a newer cryptographic suite only to not find one that is newer.
 While this might be an inconvenience, it is one that results in safer
 ecosystem behavior.
-        </p>
-        <p class="issue" data-number="38">
-The following text is currently under debate:<br><br>
-It is highly encouraged that cryptographic suite identifiers are versioned
-using a year designation. For example, the cryptographic suite identifier
-`ecdsa-2022` implies that the suite is probably an acceptable of ECDSA in the
-year 2025, but might not be a safe choice in the year 2042. A date-based
-versioning mechanism, however, is not enough by itself. All cryptographic
-suites that follow this specification are intended to be registered
-[[?VC-SPECS]] in a way that clearly signal which cryptosuites
-are deprecated, standardized, or experimental. Cryptosuite registration will
-follow CFRG, IETF, NIST, FIPS, and safecurves guidance. Use of deprecated suites
-are expected to throw errors in implementations unless a `useUnsafeCryptosuites`
-option is used specifying exactly the unsafe cryptosuite to use.
-Use of experimental suites are expected to throw errors in implementations
-unless a `useExperimentalCryptosuites` option is used specifying exactly
-the experimental cryptosuite to use.
         </p>
 
       </section>
