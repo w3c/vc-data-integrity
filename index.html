@@ -785,12 +785,15 @@ which was to merely logging into a website.
           <dt>verificationMethod</dt>
           <dd>
 A verification method is the means and information needed to verify the proof.
-If included, the value MUST be a string that maps to a [[URL]]. An example of a
-verification method is a link to a [=public key=] which includes cryptographic
-material that is used by a verifier during the verification process. Inclusion
-of `verificationMethod` is OPTIONAL, but if it is not included, other properties
+If included, the value MUST be a string that maps to a [[URL]]. Inclusion of
+`verificationMethod` is OPTIONAL, but if it is not included, other properties
 such as `cryptosuite` might provide a mechanism by which to obtain the required
-information to verify the proof.
+information to verify the proof. Note that when `verificationMethod` is
+expressed in a [=data integrity proof=], the value points to the actual location
+of the data. That is, the `verificationMethod` references, via a URL, the
+location of the [=public key=] that can be used to verify the proof. This
+[=public key=] data is stored in a [=controller document=], which contains a
+full description of the verification method.
           </dd>
 
           <dt>cryptosuite</dt>
