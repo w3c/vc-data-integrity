@@ -2096,8 +2096,8 @@ a single string value, or an array of string values that are
 values.
         </p>
         <p>
-JSON-LD context authors are expected to add `digestMultibase` to contexts that will 
-be used in documents that refer to other resources and include an associated 
+JSON-LD context authors are expected to add `digestMultibase` to contexts that will
+be used in documents that refer to other resources and include an associated
 content integrity hash. For example, the [[[VC-DATA-MODEL-2.0]]]
 context (`https://www.w3.org/ns/credentials/v2`) includes it.
         </p>
@@ -2860,9 +2860,9 @@ Return |baseEncoding| as the base-encoded value.
 
         <pre class="example" title="An implementation of the general base-encoding algorithm above in Javascript">
 /**
-* @param {Uint8Array} bytes 
-* @param {number} targetBase 
-* @param {string} baseAlphabet 
+* @param {Uint8Array} bytes
+* @param {number} targetBase
+* @param {string} baseAlphabet
 * @returns string
 */
 function baseEncode(bytes, targetBase, baseAlphabet) {
@@ -3015,8 +3015,8 @@ to |decodedSize|, starting at offset |decodedOffset| to
         <pre class="example" title="An implementation of the general base-decoding algorithm above in Javascript">
 /**
 * @param {string} sourceEncoding
-* @param {number} sourceBase 
-* @param {string} baseAlphabet 
+* @param {number} sourceBase
+* @param {string} baseAlphabet
 * @returns Uint8Array
 */
 function baseDecode(sourceEncoding, sourceBase, baseAlphabet) {
@@ -3389,7 +3389,7 @@ Set |successfulVerificationResults| to an empty list.
           </li>
           <li>
 Let |combinedVerificationResult| be an empty struct. Set |combinedVerificationResult|.|status|
-to `true`, |combinedVerificationResult|.|document| to `null`, and 
+to `true`, |combinedVerificationResult|.|document| to `null`, and
 |combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
@@ -3400,7 +3400,7 @@ If |cryptosuiteVerificationResult|.|verified| is `false`, set |combinedVerificat
 to `false`.
               </li>
               <li>
-Otherwise, set |combinedVerificationResult|.|document| to 
+Otherwise, set |combinedVerificationResult|.|document| to
 |cryptosuiteVerificationResult|.|verifiedDocument|, set
 |combinedVerificationResult|.|mediaType| to |cryptosuiteVerificationResult|.|mediaType|, and
 append |cryptosuiteVerificationResult| to |successfulVerificationResults|.
@@ -3408,8 +3408,8 @@ append |cryptosuiteVerificationResult| to |successfulVerificationResults|.
             </ol>
           </li>
           <li>
-If |combinedVerificationResult|.|status| is `false`, set 
-|combinedVerificationResult|.|document| to `null` and 
+If |combinedVerificationResult|.|status| is `false`, set
+|combinedVerificationResult|.|document| to `null` and
 |combinedVerificationResult|.|mediaType| to `null`.
           </li>
           <li>
