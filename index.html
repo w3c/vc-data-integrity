@@ -1061,7 +1061,46 @@ another proof with a `previousProof` value that identifies the previous proof.
         </pre>
 
       </section>
+
+      <section>
+        <h3>Proof Graphs</h3>
+
+        <p>
+When securing a document, it is important to clearly delinate the data being
+protected, called the <dfn class="export">default graph</dfn>, from the data
+associated with the securing mechanism, called a <dfn class="export">proof
+graph</dfn>. Doing so enables the processing algorithms to be able to
+deterministically protect and verify a secured document. This is especially
+important because a single document can contain multiple proofs that might be
+independent of one another and a mechanism needs to be used to clearly
+dilineate one proof from another.
+        </p>
+
+        <p>
+To ensure that information from different [=data integrity proofs=] are not
+accidentally co-mingled, the concept of a [=proof graph=]
+is used to encapsulate each [=data integrity proof=]. For simple documents,
+i.e., when the document contains some data with, possibly, associated proofs,
+this graph is the [=default graph=]. Each value associated with the `proof`
+property of the document is a separate graph, called a
+<dfn class="export">named graph</dfn>, of type
+<dfn class="export">ProofGraph</dfn>, which contains a single
+[=data integrity proof=].
+        </p>
+        <p>
+Using these graphs has a concrete effect when performing JSON-LD processing,
+which properly separates graph node identifiers in one graph from those in
+another graph. Implementers that limit their inputs to other document types,
+such as JSON, YAML, or CBOR, will also need to keep this in mind if they merge
+data from one document with data from another, such as when an `id` value is the
+same in both documents. It is important to not merge objects that seem to have
+similar properties but do not contain an `id` property, or other type of global
+identifier such as a URL, as it is not possible to tell if two unidentified
+objects are expressing information about the same object or not.
+        </p>
       </section>
+
+    </section>
 
       <section>
         <h3>Proof Purposes</h3>
