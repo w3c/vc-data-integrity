@@ -3285,13 +3285,13 @@ If one or more of |proof|.|type|,
 |proof|.|verificationMethod|, and
 |proof|.|proofPurpose| does not [=map/exist=],
 an error MUST be raised and SHOULD convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
+<a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
           </li>
           <li>
 If |expectedProofPurpose| was given, and it does not match
 |proof|.|proofPurpose|,
 an error MUST be raised and SHOULD convey an error type of
-<a href="#MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR</a>.
+<a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
           </li>
           <li>
 If |domain| was given, and it does not contain the same [=strings=] as
@@ -3365,13 +3365,13 @@ If |proof| contains a `previousProof` attribute and that attribute is a string,
 add the element from |allProofs| with an `id` attribute matching `previousProof`
 to `matchingProofs`. If a proof with `id` does not exist in |allProofs|, an
 error MUST be raised and SHOULD convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>. If the
+<a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
 `previousProof` attribute is an array, add each element from |allProofs| with an
 `id` attribute that matches an element of that array. If any element of
 `previousProof` array has an `id` attribute that does not match the `id`
 attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
-<a href="#MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR</a>.
+<a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
               </li>
               <li>
 Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
@@ -3556,14 +3556,13 @@ The `detail` value SHOULD provide a longer human-readable string for the error.
 A request to generate a proof failed. See Section [[[#add-proof]]], and Section
 [[[#add-proof-set-chain]]].
           </dd>
-          <dt id="MALFORMED_PROOF_ERROR">MALFORMED_PROOF_ERROR (-17)</dt>
+          <dt id="PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR (-17)</dt>
           <dd>
-A proof that is malformed was detected. See Section [[[#verify-proof]]].
+An error was encountered during proof verification. See Section [[[#verify-proof]]].
           </dd>
-          <dt id="MISMATCHED_PROOF_PURPOSE_ERROR">MISMATCHED_PROOF_PURPOSE_ERROR (-18)</dt>
+          <dt id="PROOF_TRANSFORMATION_ERROR ">PROOF_TRANSFORMATION_ERROR  (-18)</dt>
           <dd>
-The `proofPurpose` value in a proof did not match the expected value. See
-Section [[[#verify-proof]]].
+An error was encountered during the transformation process.
           </dd>
           <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
           <dd>
