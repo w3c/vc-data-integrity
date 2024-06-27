@@ -1066,27 +1066,27 @@ another proof with a `previousProof` value that identifies the previous proof.
         <h3>Proof Graphs</h3>
 
         <p>
-When securing a document, it is important to clearly delineate the data being
-protected, called the <dfn class="export">default graph</dfn>, from the data
-associated with the securing mechanism, called a <dfn class="export">proof
-graph</dfn>. Doing so enables the processing algorithms to be able to
-deterministically protect and verify a secured document. This is especially
-important because a single document can contain multiple proofs that might be
-independent of one another and a mechanism needs to be used to clearly
-delineate one proof from another.
+When securing data in a document, it is important to clearly delineate the data
+being protected, called the <dfn class="export">default graph</dfn>, from the
+data associated with a securing mechanism, called a
+<dfn class="export">proof graph</dfn>. Creating this separation enables the
+processing algorithms to be able to deterministically protect and verify a
+secured document.
         </p>
 
         <p>
-To ensure that information from different [=data integrity proofs=] are not
-accidentally co-mingled, the concept of a [=proof graph=]
-is used to encapsulate each [=data integrity proof=]. For simple documents,
-i.e., when the document contains some data with, possibly, associated proofs,
-this graph is the [=default graph=]. Each value associated with the `proof`
-property of the document is a separate graph, called a
+For an unsecured document, the information contained in the document before a
+[=data integrity proof=] is added to the document is called the [=default
+graph=]. A single document can contain multiple proof graphs. To ensure that
+information from different [=data integrity proofs=] are not accidentally
+co-mingled, the concept of a [=proof graph=] is used to encapsulate each [=data
+integrity proof=]. Each value associated with the `proof` property of the
+document is a separate graph, which is sometimes referred to as a
 <dfn class="export">named graph</dfn>, of type
-<dfn class="export">ProofGraph</dfn>, which contains a single
-[=data integrity proof=].
+<dfn class="export">ProofGraph</dfn>, which contains a single [=data integrity
+proof=].
         </p>
+
         <p>
 Using these graphs has a concrete effect when performing JSON-LD processing,
 which properly separates statements expressed in one graph from those in
