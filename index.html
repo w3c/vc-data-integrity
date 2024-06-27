@@ -1066,14 +1066,14 @@ another proof with a `previousProof` value that identifies the previous proof.
         <h3>Proof Graphs</h3>
 
         <p>
-When securing a document, it is important to clearly delinate the data being
+When securing a document, it is important to clearly delineate the data being
 protected, called the <dfn class="export">default graph</dfn>, from the data
 associated with the securing mechanism, called a <dfn class="export">proof
 graph</dfn>. Doing so enables the processing algorithms to be able to
 deterministically protect and verify a secured document. This is especially
 important because a single document can contain multiple proofs that might be
 independent of one another and a mechanism needs to be used to clearly
-dilineate one proof from another.
+delineate one proof from another.
         </p>
 
         <p>
@@ -1089,7 +1089,7 @@ property of the document is a separate graph, called a
         </p>
         <p>
 Using these graphs has a concrete effect when performing JSON-LD processing,
-which properly separates graph node identifiers in one graph from those in
+which properly separates statements expressed in one graph from those in
 another graph. Implementers that limit their inputs to other document types,
 such as JSON, YAML, or CBOR, will also need to keep this in mind if they merge
 data from one document with data from another, such as when an `id` value is the
