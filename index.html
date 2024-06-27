@@ -787,10 +787,10 @@ which was to merely logging into a website.
 A verification method is the means and information needed to verify the proof.
 If included, the value MUST be a string that maps to a [[URL]]. Inclusion of
 `verificationMethod` is OPTIONAL, but if it is not included, other properties
-such as `cryptosuite` might provide a mechanism by which to obtain the required
-information to verify the proof. Note that when `verificationMethod` is
+such as `cryptosuite` might provide a mechanism by which to obtain the information
+necessary to verify the proof. Note that when `verificationMethod` is
 expressed in a [=data integrity proof=], the value points to the actual location
-of the data. That is, the `verificationMethod` references, via a URL, the
+of the data; that is, the `verificationMethod` references, via a URL, the
 location of the [=public key=] that can be used to verify the proof. This
 [=public key=] data is stored in a [=controller document=], which contains a
 full description of the verification method.
@@ -2100,9 +2100,12 @@ values.
         </p>
         <p>
 JSON-LD context authors are expected to add `digestMultibase` to contexts that will
-be used in documents that refer to other resources and include an associated
-content integrity hash. For example, the [[[VC-DATA-MODEL-2.0]]]
-context (`https://www.w3.org/ns/credentials/v2`) includes it.
+be used in documents that refer to other resources and to include an associated
+cryptographic digest. For example, the [[[VC-DATA-MODEL-2.0]]] refers to
+context (`https://www.w3.org/ns/credentials/v2`) which includes
+`digestMultibase`, and the [[[VC-DATA-MODEL-2.0]]] includes
+<data cite="VC-DATA-MODEL-2.0/#base-context">the hexadecimal encoded
+SHA2-256 digest value</data> of that context document.
         </p>
 
         <p>
