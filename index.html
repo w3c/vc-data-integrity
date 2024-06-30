@@ -595,14 +595,6 @@ their identifiers, and other related properties. See Section
 [[[#cryptographic-suites]]] for further detail.
           </dd>
 
-          <dt><dfn data-lt="decentralized identifiers|DID|DIDs">decentralized identifier</dfn> (DID)</dt>
-
-          <dd>
-A globally unique persistent identifier that does not require a centralized
-registration authority and is often generated and/or registered
-cryptographically. The generic format of a is defined in [[?DID-CORE]].
-          </dd>
-
           <dt><dfn class="export" data-lt="controller(s)">controller</dfn></dt>
 
           <dd>
@@ -623,14 +615,6 @@ A set of data that specifies one or more relationships between a
 The entity identified by the `id` property in a [=controller document=].
 Anything can be a subject: person, group, organization, physical thing, digital
 thing, logical thing, etc.
-          </dd>
-
-          <dt><dfn data-lt="resources">resource</dfn></dt>
-
-          <dd>
-As defined by [[RFC3986]]: "...the term 'resource' is used in a general sense
-for whatever might be identified by a URI." Similarly, any resource might serve
-as a [=subject=] identified by a [=DID=].
           </dd>
 
           <dt><dfn data-lt="verifier|verifiers|verifier's">verifier</dfn></dt>
@@ -1161,8 +1145,8 @@ has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
 a single string value, or an array of string values that are
-<a href="#multibase-0">Multibase</a>-encoded <a href="#multihash">Multihash</a>
-values.
+<a data-cite="CONTROLLER-DOCUMENT#multibase">Multibase</a>-encoded
+<a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> values.
         </p>
         <p>
 JSON-LD context authors are expected to add `digestMultibase` to contexts that will
@@ -1293,19 +1277,21 @@ in accepting data that ought to have been rejected.
 
         <p>
 Finally, implementers are also urged to understand that there is a difference
-between the <a href="#dfn-revoked">revocation time</a> and
-<a href="#defn-vm-expires">expiration time</a> for a [=verification method=],
-and the revocation information associated with a [=verifiable credential=].
-The <a href="#dfn-revoked">revocation time</a> and
-<a href="#defn-vm-expires">expiration time</a> for a [=verification method=]
-are expressed using the `revocation` and `expires` properties, respectively, and
-are related to events such as a private key being compromised or expiring and
-can provide timing information which might reveal details about a controller
-such as their security practices or when they might have been compromised. The
-revocation information for a [=verifiable credential=] is expressed using
-the `credentialStatus` property and is related to events such as an individual
-losing the privilege that is granted by the [=verifiable credential=] and
-does not provide timing information, which enhances privacy.
+between the <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation time</a>
+and <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration time</a> for a
+[=verification method=], and the revocation information associated with a
+[=verifiable credential=]. The
+<a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation time</a> and
+<a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration time</a> for a
+[=verification method=] are expressed using the `revocation` and `expires`
+properties, respectively, and are related to events such as a private key being
+compromised or expiring and can provide timing information which might reveal
+details about a controller such as their security practices or when they might
+have been compromised. The revocation information for a [=verifiable
+credential=] is expressed using the `credentialStatus` property and is related
+to events such as an individual losing the privilege that is granted by the
+[=verifiable credential=] and does not provide timing information, which
+enhances privacy.
         </p>
       </section>
 
