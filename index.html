@@ -1144,9 +1144,9 @@ To enable confirmation that a resource referenced by a [=conforming secured docu
 has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
-a single string value, or an array of string values that are
+a single string value, or an array of string values, each of which is a
 <a data-cite="CONTROLLER-DOCUMENT#multibase">Multibase</a>-encoded
-<a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> values.
+<a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> value.
         </p>
         <p>
 JSON-LD context authors are expected to add `digestMultibase` to contexts that will
@@ -1277,20 +1277,20 @@ in accepting data that ought to have been rejected.
 
         <p>
 Finally, implementers are also urged to understand that there is a difference
-between the <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation time</a>
-and <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration time</a> for a
-[=verification method=], and the revocation information associated with a
-[=verifiable credential=]. The
-<a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation time</a> and
-<a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration time</a> for a
+between the revocation information associated with a [=verifiable credential=],
+and the <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a>
+and <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times
+for a [=verification method=]. The
+<a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a> and
+<a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times for a
 [=verification method=] are expressed using the `revocation` and `expires`
-properties, respectively, and are related to events such as a private key being
-compromised or expiring and can provide timing information which might reveal
+properties, respectively; are related to events such as a private key being
+compromised or expiring; and can provide timing information which might reveal
 details about a controller such as their security practices or when they might
 have been compromised. The revocation information for a [=verifiable
-credential=] is expressed using the `credentialStatus` property and is related
+credential=] is expressed using the `credentialStatus` property; is related
 to events such as an individual losing the privilege that is granted by the
-[=verifiable credential=] and does not provide timing information, which
+[=verifiable credential=]; and does not provide timing information, which
 enhances privacy.
         </p>
       </section>
@@ -1428,10 +1428,10 @@ mechanism.
         <p>
 Implementations MAY load application-specific JSON-LD context files from the
 network during development, but SHOULD permanently cache JSON-LD context files
-used in [=conforming secured documents=] in production settings to increase
-their security and privacy characteristics. Caching goals MAY be achieved
-through approaches such as those described above or functionally equivalent
-mechanisms.
+used by [=conforming secured documents=] in production settings, to increase
+their security and privacy characteristics. Goals of processing speed MAY be
+achieved through caching approaches such as those described above or
+functionally equivalent mechanisms.
         </p>
         <p>
 Some applications, such as digital wallets, that are capable of holding arbitrary
@@ -2699,7 +2699,7 @@ was intended to be used to generate the proof that is being verified. This proce
 is known as "verification relationship validation".
         </p>
         <p>
-The process for verification relationship validation is outlined in
+The process of validating a verification relationship is outlined in
 Section
 <a data-cite="CONTROLLER-DOCUMENT#retrieve-verification-method">
 3.3 Retrieve Verification Method</a> of the [[[CONTROLLER-DOCUMENT]]]
