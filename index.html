@@ -1093,9 +1093,9 @@ graph. Implementers that limit their processing to other media types, such as
 JSON, YAML, or CBOR, will need to keep this in mind if they merge data from one
 document with data from another, such as when an `id` value string is the same
 in both documents. It is important to not merge objects that seem to have similar
-properties, but which properties do not contain an `id` property or use a global
-identifier type such as a URL, as it is not possible to tell whether two such
-objects are expressing information about the same property of the same object.
+properties, when those objects do not have an `id` property and/or use a global
+identifier type such as a URL, as without these, is not possible to tell whether
+two such objects are expressing information about the same entity.
         </p>
       </section>
 
