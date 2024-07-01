@@ -1070,32 +1070,32 @@ When securing data in a document, it is important to clearly delineate the data
 being protected, which is every graph expressed in the document except the
 one containing the data associated with a securing mechanism, which is called
 a <dfn class="export">proof graph</dfn>. Creating this separation enables the
-processing algorithms to be able to deterministically protect and verify a secured
+processing algorithms to deterministically protect and verify a secured
 document.
         </p>
 
         <p>
-For an unsecured document, the information contained in the document before a
+The information contained in an unsecured document before a
 [=data integrity proof=] is added to the document is expressed in one or more
-graphs. To ensure that information from different [=data integrity proofs=] are not
+graphs. To ensure that information from different [=data integrity proofs=] is not
 accidentally co-mingled, the concept of a [=proof graph=] is used to encapsulate
 each [=data integrity proof=]. Each value associated with the `proof` property of the
-document is a separate graph, which is sometimes referred to as a
+document identifies a separate graph, which is sometimes referred to as a
 <dfn class="export">named graph</dfn>, of type
 <dfn class="export">ProofGraph</dfn>, which contains a single [=data integrity
 proof=].
         </p>
 
         <p>
-Using these graphs has a concrete effect when performing JSON-LD processing,
-which properly separates statements expressed in one graph from those in
-another graph. Implementers that limit their inputs to other document types,
-such as JSON, YAML, or CBOR, will also need to keep this in mind if they merge
-data from one document with data from another, such as when an `id` value is the
-same in both documents. It is important to not merge objects that seem to have
-similar properties but do not contain an `id` property, or other type of global
-identifier such as a URL, as it is not possible to tell if two unidentified
-objects are expressing information about the same object or not.
+Using these graphs has a concrete effect when performing JSON-LD processing, as
+this properly separates statements expressed in one graph from those in another
+graph. Implementers that limit their processing to other media types, such as
+JSON, YAML, or CBOR, will need to keep this in mind if they merge data from one
+document with data from another, such as when an `id` value string is the same
+in both documents. It is important to not merge objects that seem to have similar
+properties, but which properties do not contain an `id` property or use a global
+identifier type such as a URL, as it is not possible to tell whether two such
+objects are expressing information about the same property of the same object.
         </p>
       </section>
 
