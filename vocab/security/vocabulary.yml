@@ -31,11 +31,11 @@ class:
 
   - id: VerificationMethod
     label: Verification method
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-methods
+    defined_by: https://www.w3.org/TR/controller-document/#verification-methods
 
   - id: VerificationRelationship
     comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as values of the <a href="#proofPurpose">proofPurpose</a> property.
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#verification-relationships
+    defined_by: https://www.w3.org/TR/controller-document/#verification-relationships
     upper_value: rdf:Property
     context: none
 
@@ -48,16 +48,20 @@ class:
   - id: Multikey
     label: Multikey Verification Method
     upper_value: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#multikey
+    defined_by: https://www.w3.org/TR/controller-document/#multikey
     see_also:
-      - label: EdDSA Cryptosuite v2022
+      - label: EdDSA Cryptosuites
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
+      - label: ECDSA Cryptosuites
+        url: https://www.w3.org/TR/vc-di-ecdsa/#multikey
+      - label: BBS Cryptosuites
+        url: https://www.w3.org/TR/vc-di-bbs/#multikey
     context: https://w3id.org/security/multikey/v1
 
   - id: JsonWebKey
     label: JSON Web Key Verification Method
     upper_value: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#jsonwebkey
+    defined_by: https://www.w3.org/TR/controller-document/#jsonwebkey
     context: https://w3id.org/security/jwk/v1 
 
   - id: Ed25519VerificationKey2020
@@ -74,7 +78,7 @@ class:
 
   - id: ProcessingError
     label: Processing error
-    defined_by: https://www.w3.org/TR/vc-di-eddsa/#errors
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#processing-errors
     context: none
 
 # These are the class definitions in the CCG documents that are not defined in a VCWG document; they are all deprecated.
@@ -182,7 +186,7 @@ property:
   - id: verificationMethod
     label: Verification method
     range: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-verificationmethod
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-verificationmethod
     see_also:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
@@ -192,7 +196,7 @@ property:
     label: Controller
     domain: sec:VerificationMethod
     range: IRI
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#defn-controller
+    defined_by: https://www.w3.org/TR/controller-document/#defn-controller
     context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]
 
   - id: proof
@@ -263,14 +267,14 @@ property:
     label: Authentication method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-authentication
+    defined_by: https://www.w3.org/TR/controller-document/#defn-authentication
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-assertionmethod
+    defined_by: https://www.w3.org/TR/controller-document/#defn-assertionmethod
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityDelegationMethod
@@ -278,7 +282,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilitydelegation
+    defined_by: https://www.w3.org/TR/controller-document/#defn-capabilityDelegation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityInvocationMethod
@@ -286,7 +290,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-capabilityinvocation
+    defined_by: https://www.w3.org/TR/controller-document/#defn-capabilityInvocation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: keyAgreementMethod
@@ -294,7 +298,7 @@ property:
     type: sec:VerificationRelationship
     range: sec:VerificationMethod
     comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-keyagreement
+    defined_by: https://www.w3.org/TR/controller-document/#defn-keyAgreement
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: cryptosuite
@@ -308,35 +312,31 @@ property:
     label: Public key multibase
     domain: sec:Multikey
     range: sec:multibase
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeymultibase
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-publickeymultibase
     see_also:
       - label: multibase
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
       - label: multicodec
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
-      - label: ed25519-2020
-        url: https://w3c-ccg.github.io/lds-ed25519-2020/
     context: https://w3id.org/security/multikey/v1
 
   - id: secretKeyMultibase
     label: Secret key multibase
     domain: sec:Multikey
     range: sec:multibase
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeymultibase
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-secretkeymultibase
     see_also:
       - label: multibase format
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
       - label: multicodec format
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
-      - label: ed25519-2020
-        url: https://w3c-ccg.github.io/lds-ed25519-2020/
     context: https://w3id.org/security/multikey/v1
 
   - id: publicKeyJwk
     label: Public key JWK
     range: rdf:JSON
     domain: sec:JsonWebKey
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-publickeyjwk
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-publickeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
@@ -348,7 +348,7 @@ property:
     label: Secret key JWK
     range: rdf:JSON
     domain: sec:JsonWebKey
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-secretkeyjwk
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-secretkeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
@@ -359,7 +359,7 @@ property:
   - id: revoked
     label: Revocation time
     range: xsd:dateTime
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-revoked
+    defined_by: https://www.w3.org/TR/controller-document/#dfn-revoked
     domain: sec:VerificationMethod
     context: https://w3id.org/security/jwk/v1
 
@@ -474,61 +474,61 @@ property:
 individual:
   - id: PROOF_GENERATION_ERROR
     type: sec:ProcessingError
-    label: Proof generation error
+    label: Proof generation error (-16)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
     context: none
 
   - id: MALFORMED_PROOF_ERROR
     type: sec:ProcessingError
-    label: Malformed proof
+    label: Malformed proof (-17)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
     context: none
 
   - id: MISMATCHED_PROOF_PURPOSE_ERROR
     type: sec:ProcessingError
-    label: Mismatched proof purpose
+    label: Mismatched proof purpose (-18)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
     context: none
 
   - id: INVALID_DOMAIN_ERROR
     type: sec:ProcessingError
-    label: Invalid proof domain
+    label: Invalid proof domain (-19)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
     context: none
 
   - id: INVALID_CHALLENGE_ERROR
     type: sec:ProcessingError
-    label: Invalid challenge
+    label: Invalid challenge (-20)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
     context: none
 
   - id: INVALID_VERIFICATION_METHOD_URL
     type: sec:ProcessingError
-    label: Invalid verification method URL
+    label: Invalid verification method URL (-21)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
     context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT_ID
     type: sec:ProcessingError
-    label: Invalid controller document id
+    label: Invalid controller document id (-22)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
     context: none
 
   - id: INVALID_CONTROLLER_DOCUMENT
     type: sec:ProcessingError
-    label: Invalid controller document
+    label: Invalid controller document (-23)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
     context: none
 
   - id: INVALID_VERIFICATION_METHOD
     type: sec:ProcessingError
-    label: Invalid verification method
+    label: Invalid verification method (-24)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
     context: none
 
   - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     type: sec:ProcessingError
-    label: Invalid proof purpose for verification method
+    label: Invalid proof purpose for verification method (-25)
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
     context: none
 
@@ -541,5 +541,5 @@ datatype:
   - id: multibase
     label: Datatype for multibase values
     upper_value: xsd:string
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#multibase
+    defined_by: https://www.w3.org/TR/controller-document/#multibase
     context: https://w3id.org/security/multikey/v1
