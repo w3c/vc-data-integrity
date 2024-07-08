@@ -62,7 +62,7 @@ class:
     label: JSON Web Key Verification Method
     upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/controller-document/#jsonwebkey
-    context: https://w3id.org/security/jwk/v1 
+    context: https://w3id.org/security/jwk/v1
 
   - id: Ed25519VerificationKey2020
     label: ED2559 Verification Key, 2020 version
@@ -365,7 +365,7 @@ property:
 
   - id: digestMultibase
     label: Digest multibase
-    comment: <b><i>(Feature at Risk)</i></b> The Working Group is currently attempting to determine whether cryptographic hash expression formats can be unified across all of the VCWG core specifications. Candidates for this mechanism include `digestSRI` and `digestMultibase`. 
+    comment: <b><i>(Feature at Risk)</i></b> The Working Group is currently attempting to determine whether cryptographic hash expression formats can be unified across all of the VCWG core specifications. Candidates for this mechanism include `digestSRI` and `digestMultibase`.
     range: multibase
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-digestmultibase
     context: https://www.w3.org/ns/credentials/v2
@@ -478,16 +478,16 @@ individual:
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
     context: none
 
-  - id: MALFORMED_PROOF_ERROR
+  - id: PROOF_VERIFICATION_ERROR
     type: sec:ProcessingError
     label: Malformed proof (-17)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#MALFORMED_PROOF_ERROR
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_VERIFICATION_ERROR
     context: none
 
-  - id: MISMATCHED_PROOF_PURPOSE_ERROR
+  - id: PROOF_TRANSFORMATION_ERROR
     type: sec:ProcessingError
     label: Mismatched proof purpose (-18)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#MISMATCHED_PROOF_PURPOSE_ERROR
+    defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_TRANSFORMATION_ERROR
     context: none
 
   - id: INVALID_DOMAIN_ERROR
