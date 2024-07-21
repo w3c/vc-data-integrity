@@ -1877,6 +1877,10 @@ algorithms provided in Section [[[#verify-proof]]] or Section
 [[[#verify-proof-sets-and-chains]]].
           </li>
           <li>
+Validates that the incoming document follows an expected schema used by
+the application via JSON Schema or equivalent mechanism.
+          </li>
+          <li>
 Verifies the integrity of the incoming document using the algorithms provided in
 Section [[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]].
           </li>
@@ -2226,6 +2230,116 @@ If |combinedVerificationResult|.|status| is `false`, set
 Return |combinedVerificationResult|, |successfulVerificationResults|.
           </li>
         </ol>
+      </section>
+
+      <section class="normative">
+        <h3>Context Validation</h3>
+
+        <p>
+This section contains an algorithm that applications MUST run after running the
+algorithm in Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]], when validating a [=conforming secured
+document=]. This algorithm takes a document ([=map=] |inputDocument|) and a set
+of approved JSON-LD Contexts ([=map=] |approvedContexts|) and returns a [=map=]
+that contains the following:
+        </p>
+
+        <ul>
+          <li>
+a status ([=boolean=] |status|)
+          </li>
+          <li>
+a validated document ([=map=] |document|)
+          </li>
+          <li>
+zero or more warnings ([=list=] of [=ProblemDetails=] |warnings|)
+          </li>
+          <li>
+zero or more errors ([=list=] of [=ProblemDetails=] |errors|)
+          </li>
+        </ul>
+
+        <p>
+The context validation algorithm is as follows:
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Set |result|.|status| to `false`.
+          </li>
+          <li>
+For each |contextValue| expressed in every `@context` property, ensure that
+either:
+            <ol class="algorithm">
+              <li>
+The |contextValue| exists in |approvedContexts| and matches a cryptographic hash
+associated with the matching approved context, or
+              </li>
+              <li>
+optionally, for the context values that do not exist in |approvedContexts|,
+remove the |contextValue| from the `@context` property values. Set
+|result|.|document| to the result of running the
+<a data-cite="JSON-LD11-API#compaction-algorithm">
+JSON-LD Compaction Algorithm</a> with the modified |inputDocument| as input.
+              </li>
+            </ol>
+          </li>
+          <li>
+If no errors occurred in the previous step, set |result|.|status| to `true` and,
+if |result|.|document| is not set, set it to |inputDocument|. If errors
+occurred, set |result|.|status| to `false`, remove the |document| property from
+|result|, and add at least one error to |result|.|errors|.
+          </li>
+          <li>
+Return the value of |result|.
+          </li>
+        </ol>
+
+        <p>
+The purpose of the algorithm above is to ensure that a consuming application has
+explicitly approved of the types of input documents that it will process. Not
+checking JSON-LD Context values against known good values, and the semantics
+that they convey, can lead to security vulnerabilities. While the algorithm
+above provides one way of checking these values, and one optional way of safely
+processing unknown values, there are other approaches that provide the same
+protections.
+        </p>
+
+        <p>
+For example, if no JSON-LD processing is to occur, this check can be ignored.
+        </p>
+
+        <p>
+Another approach would be to configure an application to use a JSON-LD Context
+loader, sometimes referred to as a document loader, to use only local copies of
+approved context files which would guarantee that 1) context files will never
+change, and 2) the cryptographic hashes will never change, effectively resulting
+in the same result as the algorithm above.
+        </p>
+
+        <p>
+An alternative approach an application could use would be to use a list of well
+known context URLs and their associated approved cryptographic hashes, without
+storing every context file locally, which would allow contexts to be safely
+loaded and cached from the network without compromising the security
+expectations of the application. This approach would also be effectively
+equivalent to the algorithm provided in this section.
+        </p>
+
+        <p>
+Yet another valid approach would be for a transmitting application to
+<a data-cite="JSON-LD11-API#compaction-algorithm">compact</a> a document to
+exactly what a receiving application requests, omitting additional
+sender-specific context values that it used when securing the original document.
+As long as the cryptography suite's verification algorithm provides a successful
+verification result, such transformations are valid and would result in full
+URLs for terms that were previously compacted by the omitted context. That is, a
+term that was previously compacted to `foo` based on a sender-supplied context
+that is unknown to a receiver would instead be "compacted" to something like
+`https://vocabulary.example#foo` once the unknown context is omitted and the
+compaction algorithm is applied by the receiving application.
+        </p>
+
       </section>
 
       <section class="normative">
