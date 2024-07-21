@@ -1837,6 +1837,59 @@ measures that could contribute to a safer and more efficient ecosystem.
       </p>
 
       <section class="normative">
+        <h3>Processing Model</h3>
+
+        <p>
+The processing model used by a [=conforming processor=] and its
+application-specific software is described in this section. When software
+needs to transmit information in a way that protects the data from being
+tampered with, it:
+        </p>
+
+        <ol>
+          <li>
+Arranges the information into a document, such as a JSON or JSON-LD document.
+          </li>
+          <li>
+Selects one or more JSON-LD Contexts and expresses them using the `@context`
+property if the document is a JSON-LD document.
+          </li>
+          <li>
+Selects a cryptography suite that meets the needs of the use case, such as
+one that uses acceptable cryptographic key material and provides full
+disclosure, selective disclosure, or unlinkable disclosure functionality.
+          </li>
+          <li>
+Adds one or more proofs using the algorithms in Section [[[#add-proof]]] or
+Section [[[#add-proof-set-chain]]].
+          </li>
+        </ol>
+
+        <p>
+When software needs to use information that was transmitted to it using
+a mechanism described by this specification, it:
+        </p>
+
+        <ol>
+          <li>
+Transforms the incoming data into a document that can be understood by the
+algorithms provided in Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]].
+          </li>
+          <li>
+Verifies the integrity of the incoming document using the algorithms provided in
+Section [[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]].
+          </li>
+          <li>
+Validates all JSON-LD Context values used in the document using the
+algorithm provided in Section [[[#context-validation]]] if the document is a
+JSON-LD document.
+          </li>
+        </ol>
+
+      </section>
+
+      <section class="normative">
         <h3>Add Proof</h3>
 
         <p>
