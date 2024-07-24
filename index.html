@@ -2267,21 +2267,31 @@ The context validation algorithm is as follows:
 Set |result|.|status| to `false`.
           </li>
           <li>
-For each |contextValue| expressed in every `@context` property, ensure that
-either:
-            <ol class="algorithm">
+For each |contextValue| expressed in every `@context` property:
+            <ul class="algorithm">
               <li>
-The |contextValue| exists in |approvedContexts| and matches a cryptographic hash
-associated with the matching approved context, or
+If the |contextValue| exists in |approvedContexts|:
+                <ol class="algorithm">
+                  <li>
+confirm that it matches a cryptographic hash associated with the matching
+approved context.
+                  </li>
+                </ol>
               </li>
               <li>
-optionally, for the context values that do not exist in |approvedContexts|,
-remove the |contextValue| from the `@context` property values. Set
-|result|.|document| to the result of running the
-<a data-cite="JSON-LD11-API#compaction-algorithm">
-JSON-LD Compaction Algorithm</a> with the modified |inputDocument| as input.
+If the context value does not exist in |approvedContexts|:
+                <ol class="algorithm">
+                  <li>
+Optionally, remove the |contextValue| from the `@context` property values. 
+                  </li>
+                  <li>
+Set |result|.|document| to the result of running the
+<a data-cite="JSON-LD11-API#compaction-algorithm"> JSON-LD Compaction
+Algorithm</a> with the modified |inputDocument| as input.
+                  </li>
+                </ol>
               </li>
-            </ol>
+            </ul>
           </li>
           <li>
 If no errors occurred in the previous step, set |result|.|status| to `true` and,
