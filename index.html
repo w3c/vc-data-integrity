@@ -2235,12 +2235,16 @@ Return |combinedVerificationResult|, |successfulVerificationResults|.
         <h3>Context Validation</h3>
 
         <p>
-This section contains an algorithm that applications validating a [=conforming
-secured document=] MUST run after running the algorithm in Section
-[[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]]. This
-algorithm takes a document ([=map=] |inputDocument|) and a set of approved
-JSON-LD Contexts ([=map=] |approvedContexts|), and returns a [=map=] that
-contains the following:
+The purpose of the algorithm in this section is to ensure that a consuming
+application has explicitly approved of the types, and therefore the semantics,
+of input documents that it will process. Not checking JSON-LD context values
+against known good values can lead to security vulnerabilities, due to variance
+in the semantics that they convey. The context validation algorithm is one
+that applications validating a [=conforming secured document=] MUST run after
+running the algorithm in Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]]. This algorithm takes a document ([=map=]
+|inputDocument|) and a set of approved JSON-LD Contexts ([=map=]
+|approvedContexts|), and returns a [=map=] that contains the following:
         </p>
 
         <ul>
@@ -2282,7 +2286,7 @@ approved context.
 If the context value does not exist in |approvedContexts|:
                 <ol class="algorithm">
                   <li>
-Optionally, remove the |contextValue| from the `@context` property values. 
+Optionally, remove the |contextValue| from the `@context` property values.
                   </li>
                   <li>
 Set |result|.|document| to the result of running the
@@ -2305,13 +2309,10 @@ Return the value of |result|.
         </ol>
 
         <p>
-The purpose of the algorithm above is to ensure that a consuming application has
-explicitly approved of the types, and therefore the semantics, of input documents
-that it will process. Not checking JSON-LD context values against known good values
-can lead to security vulnerabilities, due to variance in the semantics that they
-convey. While the algorithm above provides one way of checking these context values,
-and one optional way of safely processing unknown values, there are other approaches
-that can provide the same protections.
+While the algorithm above provides one way of checking these values, and one
+optional way of safely processing unknown values, implementers MAY use
+alternative approaches, or a different ordering of the steps, that provide the
+same protections.
         </p>
 
         <p>
