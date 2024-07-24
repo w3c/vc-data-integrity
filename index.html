@@ -1842,8 +1842,7 @@ measures that could contribute to a safer and more efficient ecosystem.
         <p>
 The processing model used by a [=conforming processor=] and its
 application-specific software is described in this section. When software
-needs to transmit information in a way that protects the data from being
-tampered with, it:
+needs to ensure information is tamper-evident, it:
         </p>
 
         <ol>
@@ -1851,8 +1850,8 @@ tampered with, it:
 Arranges the information into a document, such as a JSON or JSON-LD document.
           </li>
           <li>
-Selects one or more JSON-LD Contexts and expresses them using the `@context`
-property if the document is a JSON-LD document.
+If the document is a JSON-LD document, selects one or more JSON-LD Contexts
+and expresses them using the `@context` property.
           </li>
           <li>
 Selects a cryptography suite that meets the needs of the use case, such as
@@ -1885,9 +1884,9 @@ Verifies the integrity of the incoming document using the algorithms provided in
 Section [[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]].
           </li>
           <li>
-Validates all JSON-LD Context values used in the document using the
-algorithm provided in Section [[[#context-validation]]] if the document is a
-JSON-LD document.
+If the document is a JSON-LD document, validates all JSON-LD Context
+values used in the document using the algorithm provided in Section
+[[[#context-validation]]].
           </li>
         </ol>
 
@@ -2236,12 +2235,12 @@ Return |combinedVerificationResult|, |successfulVerificationResults|.
         <h3>Context Validation</h3>
 
         <p>
-This section contains an algorithm that applications MUST run after running the
-algorithm in Section [[[#verify-proof]]] or Section
-[[[#verify-proof-sets-and-chains]]], when validating a [=conforming secured
-document=]. This algorithm takes a document ([=map=] |inputDocument|) and a set
-of approved JSON-LD Contexts ([=map=] |approvedContexts|) and returns a [=map=]
-that contains the following:
+This section contains an algorithm that applications validating a [=conforming
+secured document=] MUST run after running the algorithm in Section
+[[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]]. This
+algorithm takes a document ([=map=] |inputDocument|) and a set of approved
+JSON-LD Contexts ([=map=] |approvedContexts|), and returns a [=map=] that
+contains the following:
         </p>
 
         <ul>
@@ -2297,40 +2296,42 @@ Return the value of |result|.
 
         <p>
 The purpose of the algorithm above is to ensure that a consuming application has
-explicitly approved of the types of input documents that it will process. Not
-checking JSON-LD Context values against known good values, and the semantics
-that they convey, can lead to security vulnerabilities. While the algorithm
-above provides one way of checking these values, and one optional way of safely
-processing unknown values, there are other approaches that provide the same
-protections.
+explicitly approved of the types, and therefore the semantics, of input documents
+that it will process. Not checking JSON-LD context values against known good values
+can lead to security vulnerabilities, due to variance in the semantics that they
+convey. While the algorithm above provides one way of checking these context values,
+and one optional way of safely processing unknown values, there are other approaches
+that can provide the same protections.
         </p>
 
         <p>
-For example, if no JSON-LD processing is to occur, this check can be ignored.
+For example, if no JSON-LD processing is to occur, then, rather than performing
+this check, an application could follow the guidance in whatever trusted
+documentation is provided out of band for properly understanding the semantics
+of that type of document.
         </p>
 
         <p>
 Another approach would be to configure an application to use a JSON-LD Context
 loader, sometimes referred to as a document loader, to use only local copies of
-approved context files which would guarantee that 1) context files will never
-change, and 2) the cryptographic hashes will never change, effectively resulting
-in the same result as the algorithm above.
+approved context files. This would guarantee that neither context files nor
+their cryptographic hashes would ever change, effectively resulting in the
+same result as the algorithm above.
         </p>
 
         <p>
-An alternative approach an application could use would be to use a list of well
-known context URLs and their associated approved cryptographic hashes, without
-storing every context file locally, which would allow contexts to be safely
-loaded and cached from the network without compromising the security
-expectations of the application. This approach would also be effectively
-equivalent to the algorithm provided in this section.
+An alternative approach, also effectively equivalent to the algorithm provided in
+this section, would be for an application to keep a list of well known context
+URLs and their associated approved cryptographic hashes, without storing every
+context file locally. This would allow contexts to be safely loaded from the
+network without compromising the security expectations of the application.
         </p>
 
         <p>
 Yet another valid approach would be for a transmitting application to
 <a data-cite="JSON-LD11-API#compaction-algorithm">compact</a> a document to
 exactly what a receiving application requests, omitting additional
-sender-specific context values that it used when securing the original document.
+sender-specific context values that were used when securing the original document.
 As long as the cryptography suite's verification algorithm provides a successful
 verification result, such transformations are valid and would result in full
 URLs for terms that were previously compacted by the omitted context. That is, a
