@@ -1929,11 +1929,17 @@ raised and SHOULD convey an error type of
           </li>
           <li>
 Set |unsecuredDocument|.|proof| to |matchingProofs|.
-            <p class="note">
-This step is critical, as it <q>binds</q> the previous proofs to the document
+            <div class="note">
+                <p>
+This step means to add references to the graph names, as well as adding a copy 
+of <em>all</em> the claims contained in the proof graphs.
+                </p>
+                <p>
+The step is also critical, as it <q>binds</q> the previous proofs to the document
 prior to signing. The |proof| value for the document will be updated
 in a later step of this algorithm.
-            </p>
+                </p>
+            </div>
           </li>
           <li>
 Run steps 1 through 6 of the algorithm in section [[[#add-proof]]], passing
@@ -2133,6 +2139,11 @@ convey an error type of
               <li>
 Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
 removed and then set |unsecuredDocument|.|proof| to |matchingProofs|.
+
+                        <p class="note">
+See also the note in <a href="#add-proof-set-chain"></a> on
+what this step entails in terms of claims.
+                        </p>
               </li>
               <li>
 Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
