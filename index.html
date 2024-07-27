@@ -216,7 +216,7 @@
             restrictRefs,
             window.respecVc.createVcExamples
           ],
-          xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0"],
+          xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0", "CONTROLLER-DOCUMENT"],
           otherLinks: [{
             key: "Related Specifications",
             data: [{
@@ -573,16 +573,19 @@ is included whenever they appear in this specification.
           <dt><dfn class="export">data integrity proof</dfn></dt>
           <dd>
 A set of attributes that represent a digital proof and the parameters required
-to verify it.
+to verify it. A <strong>digital signature</strong> is a type of data integrity
+proof.
           </dd>
           <dt><dfn>public key</dfn></dt>
           <dd>
 Cryptographic material that can be used to verify digital proofs created with a
-corresponding [=private key=].
+corresponding [=secret key=].
           </dd>
-          <dt><dfn>private key</dfn></dt>
+          <dt><dfn>secret key</dfn></dt>
           <dd>
-Cryptographic material that can be used to generate digital proofs.
+Cryptographic material, sometimes referred to as a
+<strong>private key</strong>, that is not to be shared with anyone, and is used
+to generate digital proofs and/or digital signatures.
           </dd>
           <dt><dfn>proof type</dfn></dt>
           <dd>
@@ -597,26 +600,6 @@ The specific intent for the proof; the reason why an entity created it. The
 protected declaration acts as a safeguard to prevent the proof from being
 misused for a purpose other than the one it was intended for.
           </dd>
-          <dt><dfn>challenge</dfn></dt>
-          <dd>
-A random or pseudo-random value used by some authentication protocols to
-mitigate replay attacks.
-          </dd>
-          <dt><dfn>domain</dfn></dt>
-          <dd>
-A string value that specifies the operational domain of a digital proof.
-This could be an Internet domain name like <code>example.com</code>, an
-ad-hoc value such as <code>mycorp-level3-access</code>, or a very
-specific transaction value like <code>8zF6T8J34qP3mqP</code>. A signer could
-include a [=domain=] in its digital proof to restrict its use
-to particular target, identified by the specified [=domain=].
-          </dd>
-
-          <dt><dfn data-lt="authenticated|authenticate">authentication</dfn></dt>
-          <dd>
-A process by which an entity can prove to a verifier that it has a specific
-attribute or controls a specific secret.
-          </dd>
 
           <dt><dfn class="export" data-lt="cryptosuite">cryptographic suite</dfn></dt>
           <dd>
@@ -627,33 +610,18 @@ their identifiers, and other related properties. See Section
 [[[#cryptographic-suites]]] for further detail.
           </dd>
 
-          <dt><dfn class="export" data-lt="controller(s)">controller</dfn></dt>
+          <dt><dfn>controller document</dfn></dt>
 
           <dd>
-An entity that has the capability to make changes to a
-[=controller document=].
-          </dd>
-
-          <dt><dfn class="export" data-lt="controller documents">controller document</dfn></dt>
-
-          <dd>
-A set of data that specifies one or more relationships between a
-[=controller=] and a set of data, such as a set of public cryptographic keys.
-          </dd>
-
-          <dt><dfn data-lt="subjects">subject</dfn></dt>
-
-          <dd>
-The entity identified by the `id` property in a [=controller document=].
-Anything can be a subject: person, group, organization, physical thing, digital
-thing, logical thing, etc.
+A document that contains public cryptographic material as defined in the
+[[[CONTROLLER-DOCUMENT]]] specification.
           </dd>
 
           <dt><dfn data-lt="verifier|verifiers|verifier's">verifier</dfn></dt>
           <dd>
 A role an entity performs by receiving data containing one or more
 [=data integrity proofs=] and then determining whether or not the proof
-is valid.
+is legitimate.
           </dd>
 
           <dt><dfn class="export">verification method</dfn></dt>
@@ -661,9 +629,9 @@ is valid.
           <dd>
             <p>
 A set of parameters that can be used together with a process to independently
-verify a proof. For example, a cryptographic public key can be used as a
+verify a proof. For example, a cryptographic [=public key=] can be used as a
 verification method with respect to a digital signature; in such usage, it
-verifies that the signer possessed the associated cryptographic private key.
+verifies that the signer possessed the associated cryptographic [=secret key=].
             </p>
             <p>
 "Verification" and "proof" in this definition are intended to apply broadly. For
@@ -832,7 +800,7 @@ include: `domain.example` (DNS domain), `https://domain.example:8443`
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt id="defn-challenge">challenge</dt>
+          <dt id="defn-challenge"><dfn>challenge</dfn></dt>
           <dd>
 A string value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular [=domain=] and window of time. This
@@ -964,7 +932,7 @@ N-Quads and then sign the root hash. Disclosure would involve including
 the merkle paths for each N-Quad that is to be revealed. This mechanism
 would merely consume the normalized output differently (this, and the
 proof mechanism would be modifications to this core spec). It might also
-be necessary to generate proof parameters such as a private key/seed
+be necessary to generate proof parameters such as a [=secret key=]/seed
 that can be used along with an algorithm to deterministically generate
 nonces that are concatenated with each N-Quad to prevent rainbow
 table or similar attacks.</div>
@@ -1125,7 +1093,7 @@ The following is a list of commonly used [=proof purpose=] values.
         </p>
 
         <dl>
-          <dt>authentication</dt>
+          <dt><dfn>authentication</dfn></dt>
           <dd>
 Indicates that a given proof is only to be used for the purposes of an
 authentication protocol.
@@ -1709,7 +1677,7 @@ for a [=verification method=]. The
 <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a> and
 <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times for a
 [=verification method=] are expressed using the `revocation` and `expires`
-properties, respectively; are related to events such as a private key being
+properties, respectively; are related to events such as a [=secret key=] being
 compromised or expiring; and can provide timing information which might reveal
 details about a controller, such as their security practices or when they might
 have been compromised. The revocation information for a [=verifiable
