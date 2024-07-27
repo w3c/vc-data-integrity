@@ -2275,33 +2275,29 @@ Set |result|.|status| to `false`, |result|.|warnings| to an empty list,
 and clone |inputDocument| to |result|.|document|.
           </li>
           <li>
-For each subtree in |result|.|document| that contains a `@context` property:
+Let |contextValue| be the value of the `@context` property of |result|.|document|,
+which might be undefined.
+          </li>
+          <li>
+If |contextValue| does not deeply equal |expectedContext|, then if any subtree in
+|result|.|document| contains an `@context` property or any URI in
+|contextValue| dereferences to a JSON-LD Context file that does not match a
+known good value or cryptographic hash, then perform the applicable action:
             <ol class="algorithm">
               <li>
-For each value (|contextValue|) associated with the property:
-                <ol class="algorithm">
-                  <li>
-If |recompact| is `true` and the |contextValue| exists in |approvedContexts|,
-add the |contextValue| to the |compactionContext|.
-                  </li>
-                  <li>
-Otherwise, ensure that the contents of the |contextValue|, which is a JSON-LD
-Context file, match a known good value or cryptographic hash. If the check
-fails, add at least one error to |result|.|errors|.
-                  </li>
-                </ol>
-              </li>
-              <li>
-If |recompact| is `true`, set the subtree in |result|.|document| to the result
+If |recompact| is `true`, set |result|.|document| to the result
 of running the <a data-cite="JSON-LD11-API#compaction-algorithm">
 JSON-LD Compaction Algorithm</a> with the |inputDocument| and
-|compactionContext| as inputs. If the compaction fails, add at least one error
+|expectedContext| as inputs. If the compaction fails, add at least one error
 to |result|.|errors|.
+              </li>
+              <li>
+If |recompact| is not `true`, add at least one error to |result|.|errors|.
               </li>
             </ol>
           </li>
           <li>
-If |result|.|errors| is empty, set |result|.|status| to `true`. Otherwise, set
+If |result|.|errors| is empty, set |result|.|status| to `true`; otherwise, set
 |result|.|status| to `false`, and remove the |document| property from |result|.
           </li>
           <li>
