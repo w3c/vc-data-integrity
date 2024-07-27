@@ -587,13 +587,6 @@ Cryptographic material, sometimes referred to as a
 <strong>private key</strong>, that is not to be shared with anyone, and is used
 to generate digital proofs and/or digital signatures.
           </dd>
-          <dt><dfn>proof type</dfn></dt>
-          <dd>
-A specified set of cryptographic primitives bundled together into a
-[=cryptographic suite=] for the purposes of safety and convenience, by
-cryptographers for developers (see the section on
-<a href="https://www.w3.org/TR/vc-data-integrity/#cryptographic-suites">cryptographic suites</a>).
-          </dd>
           <dt><dfn class="export">proof purpose</dfn></dt>
           <dd>
 The specific intent for the proof; the reason why an entity created it. The
@@ -726,11 +719,10 @@ The usage of this property is further explained in Section [[[#proof-chains]]].
 
           <dt>type</dt>
           <dd>
-The specific [=proof type=] used for the cryptographic proof MUST be
-specified as a string that maps to a URL [[URL]]. Examples of proof types
-include `DataIntegrityProof` and `Ed25519Signature2020`.
-Proof types determine what other fields are required to secure and
-verify the proof.
+The specific type of proof MUST be specified as a string that maps to a URL
+[[URL]]. Examples of proof types include `DataIntegrityProof` and
+`Ed25519Signature2020`. Proof types determine what other fields are required to
+secure and verify the proof.
           </dd>
 
           <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
@@ -763,7 +755,7 @@ full description of the verification method.
           <dt>cryptosuite</dt>
           <dd>
 An identifier for the cryptographic suite that can be used to verify the proof. See
-[[[#cryptographic-suites]]] for more information. If the proof type is
+[[[#cryptographic-suites]]] for more information. If the proof `type` is
 `DataIntegrityProof`, `cryptosuite` MUST be specified; otherwise,  `cryptosuite`
 MAY be specified. If specified, its value MUST be a string.
           </dd>
