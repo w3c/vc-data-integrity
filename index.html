@@ -509,8 +509,8 @@ A <dfn>conforming secured document</dfn> is any [=byte sequence=] that can be
 converted to a
 <a data-cite="INFRA#parse-json-bytes-to-a-javascript-value">
 JSON document</a> that follows the relevant normative requirements in
-Sections [[[#proofs]]], [[[#proof-purposes]]], [[[#contexts-and-vocabularies]]],
-and [[[#dataintegrityproof]]].
+Sections [[[#proofs]]], [[[#proof-purposes]]], [[[#resource-integrity]]],
+[[[#contexts-and-vocabularies]]], and [[[#dataintegrityproof]]].
         </p>
 
         <p>
@@ -1040,7 +1040,7 @@ document.
         </p>
 
         <p>
-The information contained in an unsecured document before a
+The information contained in an input document before a
 [=data integrity proof=] is added to the document is expressed in one or more
 graphs. To ensure that information from different [=data integrity proofs=] is not
 accidentally co-mingled, the concept of a [=proof graph=] is used to encapsulate
@@ -1744,8 +1744,8 @@ cryptographic suite instance</dfn> [=struct=] has the following
           <dl data-dfn-for="cryptosuite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
-An algorithm that takes an [=unsecured data document=] ([=map=]
-|unsecuredDocument|) and proof options ([=map=] |options|) as input, and
+An algorithm that takes an [=input document=] ([=map=]
+|inputDocument|) and proof options ([=map=] |options|) as input, and
 produces a [=data integrity proof=] ([=map=]) or an error.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
@@ -1885,12 +1885,13 @@ the Verifiable Credentials Specifications Directory</a>.
       <p>
 The algorithms defined below operate on documents represented as <dfn
 data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows the
-[[[JSON-LD11-API]]] specification in representing a JSON object as an
-[[[Infra]]] [=map=]. An <dfn class="export">unsecured data document</dfn> is an
-[[[Infra]]] [=map=] that has not yet had the current proof added to it, but it
-MAY contain a proof value that was added to it by a previous process. A <dfn
-class="export">secured data document</dfn> is a [=map=] that has had the current
-proof(s) added to it.
+[[[JSON-LD11-API]]] specification in representing a JSON object as an [=map=].
+An <dfn class="export">unsecured data document</dfn> is a [=map=] that contains
+no proof values. An <dfn>input document</dfn> is an [=map=] that has not yet had
+the current proof added to it, but it MAY contain a proof value that was added
+to it by a previous process. A <dfn class="export">secured data document</dfn>
+is a [=map=] that contains one or more proof value, one of which might be the
+current proof(s) being generated to be added to it.
       </p>
 
       <p>
@@ -1964,19 +1965,19 @@ to validate all JSON-LD Context values used in the document.
         <h3>Add Proof</h3>
 
         <p>
-The following algorithm specifies how a digital proof can be added to an
-[=unsecured data document=], and can then be used to verify the output
-document's authenticity and integrity. Required inputs are an <a>unsecured data
-document</a> ([=map=] |unsecuredDocument|), a [=cryptosuite instance=]
-([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). Output is
-a [=secured data document=] ([=map=]) or an error. Whenever this algorithm
-encodes strings, it MUST use UTF-8 encoding.
+The following algorithm specifies how a digital proof can be added to an [=input
+document=], and can then be used to verify the output document's authenticity
+and integrity. Required inputs are an [=input document=] ([=map=]
+|inputDocument|), a [=cryptosuite instance=] ([=struct=] |cryptosuite|), and a
+set of options ([=map=] |options|). Output is a [=secured data document=]
+([=map=]) or an error. Whenever this algorithm encodes strings, it MUST use
+UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
           <li>
 Let |proof| be the result of calling the [=cryptosuite instance/createProof=]
-algorithm specified in |cryptosuite|.|createProof| with |unsecuredDocument|
+algorithm specified in |cryptosuite|.|createProof| with |inputDocument|
 and |options| passed as a parameters. If the algorithm produces an error,
 the error MUST be propagated and SHOULD convey the error type.
           </li>
@@ -1998,7 +1999,7 @@ convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Let |securedDataDocument| be a copy of |unsecuredDocument|.
+Let |securedDataDocument| be a copy of |inputDocument|.
           </li>
           <li>
 Set |securedDataDocument|.|proof| to the value of |proof|.
@@ -2029,9 +2030,9 @@ the elements of |proof| to |allProofs|. If |proof|
 is an object add a copy of that object to |allProofs|.
           </li>
           <li>
-Let the |unsecuredDocument| be a copy of the |securedDocument|
+Let the |inputDocument| be a copy of the |securedDocument|
 with the |proof| attribute removed. Let |output| be a copy of
-the |unsecuredDocument|.
+the |inputDocument|.
           </li>
           <li>
 Let |matchingProofs| be an empty list.
@@ -2052,7 +2053,7 @@ raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Set |unsecuredDocument|.|proof| to |matchingProofs|.
+Set |inputDocument|.|proof| to |matchingProofs|.
             <p class="note">
 This step is critical, as it <q>binds</q> the previous proofs to the document
 prior to signing. The |proof| value for the document will be updated
@@ -2061,7 +2062,7 @@ in a later step of this algorithm.
           </li>
           <li>
 Run steps 1 through 6 of the algorithm in section [[[#add-proof]]], passing
-|unsecuredDocument|, |suite|, and |options|. If no exceptions are raised, append
+|inputDocument|, |suite|, and |options|. If no exceptions are raised, append
 the generated |proof| value to the |allProofs|; otherwise, raise the exception.
           </li>
           <li>
@@ -2123,7 +2124,7 @@ This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
           <dt><dfn data-dfn-for="verification result">verifiedDocument</dfn></dt>
           <dd>
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
-`false`; otherwise, an [=unsecured data document=]
+`false`; otherwise, an [=input document=]
           </dd>
           <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
           <dd>
@@ -2255,12 +2256,12 @@ convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
               </li>
               <li>
-Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
-removed and then set |unsecuredDocument|.|proof| to |matchingProofs|.
+Let |inputDocument| be a copy of |securedDocument| with the proof value
+removed and then set |inputDocument|.|proof| to |matchingProofs|.
               </li>
               <li>
 Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
-|unsecuredDocument|; if no exceptions are raised, append |cryptosuiteVerificationResult|
+|inputDocument|; if no exceptions are raised, append |cryptosuiteVerificationResult|
 to |verificationResults|.
                 </li>
             </ol>
@@ -3348,7 +3349,7 @@ a document. We denote the secret/public keys of each of these signatories by
       </p>
       <p>
 When constructing a [=proof set=] where each of the signatories signs an
-|unsecuredDataDocument| without concern, we construct a proof symbolically as:
+|inputDocument| without concern, we construct a proof symbolically as:
       </p>
       <pre class="example nohighlight" title="Symbolic expression of how a proof is created">
 {
@@ -3357,13 +3358,13 @@ When constructing a [=proof set=] where each of the signatories signs an
   "created": "2023-03-05T19:23:24Z",
   "proofPurpose": "assertionMethod",
   "verificationMethod": <code>publicCEO</code>,
-  "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+  "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
 }
       </pre>
       <p>
 Where <em>publicCEO</em> is used as a placeholder for a reference that resolves
 to the CEO's public key and <strong>signature(`secretKey`,
-`unsecuredDataDocument`)</strong> denotes the computation of a digital signature
+`inputDocument`)</strong> denotes the computation of a digital signature
 by a particular data integrity cryptosuite using a particular secret key over a
 particular document. The `type`, `cryptosuite`, `created`, and `proofPurpose`
 attributes do not factor into our discussion so we will omit them. In
@@ -3375,13 +3376,13 @@ has been signed by the VP of Engineering, the CFO, and the CEO:
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCFO</code>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCEO</code>,
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
   }]
 }
       </pre>
@@ -3402,10 +3403,10 @@ approved something without the VP of Engineering's concurrence.
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
     "verificationMethod": <code>publicCFO</code>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCEO</code>,
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
   }]
 }
       </code></pre>
@@ -3425,7 +3426,7 @@ Engineering's signature and a review, the CFO then signs off on the document;
 and finally, based on both prior signatures and a review, the CEO signs off on
 the document. Since others will be referring to the VP of Engineering's
 signature, we need to add an `id` to the proof. First the VP of
-Engineering signs the [=unsecured data document=]:
+Engineering signs the [=input document=]:
       </p>
       <pre class="example nohighlight"
         title="Proof chain containing first proof with `id` property set">
@@ -3434,7 +3435,7 @@ Engineering signs the [=unsecured data document=]:
   "proof": {
     <span class="highlight">"id": "urn:proof-1"</span>,
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }
 }
       </pre>
@@ -3454,12 +3455,12 @@ is created:
   "proof": [{
     "id": "urn:proof-1",
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "id": "urn:proof-2",
     "verificationMethod": <code>publicCFO</code>,
     <span class="highlight">"previousProof": "urn:proof-1"</span>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocumentWithProof1</code>)</strong>
   }]
 }
       </pre>
@@ -3485,17 +3486,17 @@ over the document which includes `urn:proof-1` and `urn:proof-2`. The final
   "proof": [{
     "id": "urn:proof-1",
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "id": "urn:proof-2",
     "verificationMethod": <code>publicCFO</code>,
     "previousProof": "urn:proof-1",
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocumentWithProof1</code>)</strong>
   }, {
     "id": "urn:proof-3",
     "verificationMethod": <code>publicCEO</code>,
     "previousProof": "urn:proof-2",
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocumentWithProof2</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocumentWithProof2</code>)</strong>
   }]
 }
       </pre>
