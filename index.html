@@ -10,6 +10,8 @@
      -->
     <script src='//www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <script class='remove' src="./common.js"></script>
+    <script class="remove"
+      src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-vc@3.2.0/dist/main.js"></script>
 
     <script type="text/javascript" class="remove">
       var respecConfig = {
@@ -210,7 +212,10 @@
               publisher:  "The IETF OAuth Working Group"
             }
           },
-          postProcess: [restrictRefs],
+          postProcess: [
+            restrictRefs,
+            window.respecVc.createVcExamples
+          ],
           xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0"],
           otherLinks: [{
             key: "Related Specifications",
@@ -262,6 +267,33 @@ pre .comment {
 ol.algorithm { counter-reset:numsection; list-style-type: none; }
 ol.algorithm li { margin: 0.5em 0; }
 ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
+
+table.simple {
+    border-collapse: collapse;
+    margin: 25px 0;
+    min-width: 400px;
+    border: 1px solid #dddddd;
+}
+table.simple thead tr {
+    background-color: #005a9c;
+    color: #ffffff;
+    text-align: left;
+}
+table.simple th,
+table.simple td {
+    padding: 12px 15px;
+    vertical-align: top;
+    text-align: left;
+}
+table.simple tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+table.simple tbody tr:nth-of-type(even) {
+    background-color: #00000008;
+}
+table.simple tbody tr:last-of-type {
+    border-bottom: 2px solid #005a9c;
+}
     </style>
 </head>
 <body>
@@ -1186,116 +1218,6 @@ choosing a hash algorithm that is appropriate for their use case.
       </section>
 
       <section>
-        <h2>Relationship to Linked Data</h2>
-        <p>
-The term Linked Data is used to describe a recommended best practice for
-exposing, sharing, and connecting information on the Web using standards, such
-as URLs, to identify things and their properties. When information is presented
-as Linked Data, other related information can be easily discovered and new
-information can be easily linked to it. Linked Data is extensible in a
-decentralized way, greatly reducing barriers to large scale integration.
-        </p>
-
-        <p>
-With the increase in usage of Linked Data for a variety of applications, there
-is a need to be able to verify the authenticity and integrity of Linked Data
-documents. This specification adds authentication and integrity protection to
-data documents through the use of mathematical proofs without sacrificing Linked
-Data features such as extensibility and composability.
-        </p>
-
-        <p class="note" title="Use of Linked Data is an optional feature">
-While  this specification provides mechanisms to digitally sign Linked Data, the
-use  of Linked Data is not necessary to gain some of the advantages provided by
-this specification.
-        </p>
-
-      </section>
-
-      <section>
-        <h2>Relationship to Verifiable Credentials</h2>
-
-        <p>
-Cryptographic suites that implement this specification can be used to secure
-[=verifiable credentials=] and [=verifiable presentations=]. Implementers
-that are addressing those use cases are cautioned that additional checks might
-be appropriate when processing those types of documents.
-        </p>
-
-        <p>
-There are some use cases where it is important to ensure that the
-[=verification method=] used in a proof is associated with the
-<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
-verifiable credential</a>, or the
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
-verifiable presentation</a>, during the process of
-<a data-cite="?VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
-way to check for such an association is to ensure that the value of the
-`controller` property of a proof's [=verification method=]
-matches the URL value used to identify the
-<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively, and
-that the verification method is expressed under a verification relationship that
-is acceptable given the proof's purpose. This particular association indicates
-that the
-<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively,
-is the controller of the [=verification method=] used to verify
-the proof.
-        </p>
-
-        <p>
-Document authors and implementers are advised to understand the difference
-between the validity period of a <a href="#proofs">proof</a>, which is expressed
-using the <a href="#dfn-created">`created`</a> and <a
-href="#defn-proof-expires">`expires`</a> properties, and the validity period of
-a <a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>,
-which is expressed using the
-<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
-<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a> properties.
-While these properties might sometimes express the same validity periods, at
-other times they might not be aligned. When verifying a
-<a href="#proofs">proof</a>, it is important to ensure that the time of interest
-(which might be the current time or any other time) is within the
-validity period for the proof (that is, between
-<a href="#dfn-created">`created`</a> and
-<a href="#defn-proof-expires">`expires`</a> ).
-When <a data-cite="?VC-DATA-MODEL-2.0#validation">validating</a> a
-[=verifiable credential=], it is important to ensure that the time of
-interest is within the validity period for the
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a> (that is,
-betweeen
-<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
-<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>). Note that a
-failure to validate either the validity period for the <a
-href="#proofs">proof</a>, or the validity period for the
-<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>, might result
-in accepting data that ought to have been rejected.
-        </p>
-
-        <p>
-Finally, implementers are also urged to understand that there is a difference
-between the revocation information associated with a [=verifiable credential=],
-and the <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a>
-and <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times
-for a [=verification method=]. The
-<a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a> and
-<a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times for a
-[=verification method=] are expressed using the `revocation` and `expires`
-properties, respectively; are related to events such as a private key being
-compromised or expiring; and can provide timing information which might reveal
-details about a controller, such as their security practices or when they might
-have been compromised. The revocation information for a [=verifiable
-credential=] is expressed using the `credentialStatus` property; is related
-to events such as an individual losing the privilege that is granted by the
-[=verifiable credential=]; and does not provide timing information, which
-enhances privacy.
-        </p>
-      </section>
-
-      <section>
         <h2>Contexts and Vocabularies</h2>
 
         <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
@@ -1311,46 +1233,41 @@ the corresponding hash values below:
 
         <table class="simple">
           <thead>
-            <tr>
-              <th>URL</th>
-              <th>Hash</th>
-            </tr>
+            <th>Context URL and Hash</th>
           </thead>
           <tbody>
             <tr>
               <td style="white-space: nowrap;">
-https://w3id.org/security/data-integrity/v2
-
-              </td>
-              <td>
-sha256: `v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=`
-              </td>
-            </tr>
-            <tr>
-              <td style="white-space: nowrap;">
-https://w3id.org/security/multikey/v1
-              </td>
-              <td>
-sha256: `uiwYLeLZL35HGEvMqPzwvq7m05hsUnv2ZMGVu8fFhZc=`
+<strong>URL:</strong> https://w3id.org/security/data-integrity/v2<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/data-integrity/v2"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
             </tr>
             <tr>
               <td style="white-space: nowrap;">
-https://w3id.org/security/jwk/v1
+<strong>URL:</strong> https://w3id.org/security/multikey/v1<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/multikey/v1"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
-              <td>
-sha256: `9h/GLRVuGCl0rn/ye6lzf219aN7Sgzq9yBFqUoOI54k=`
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+<strong>URL:</strong> https://w3id.org/security/jwk/v1<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/jwk/v1"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
             </tr>
           </tbody>
         </table>
 
         <p>
-          It is possible to confirm the cryptographic digests listed above by running
-          a command like the following (replacing `&lt;DOCUMENT_URL>`
-          with the appropriate value) through a modern UNIX-like OS command line interface:
-          `curl -sL -H "Accept: application/ld+json" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad
-          -a`.
+It is possible to confirm the cryptographic digests listed above by running a
+command like the following (replacing `&lt;DOCUMENT_URL>` with the appropriate
+value) through a modern UNIX-like OS command line interface: `curl -sL -H
+"Accept: application/ld+json" &lt;DOCUMENT_URL> | openssl dgst -sha256`
         </p>
 
         <p>
@@ -1387,7 +1304,9 @@ application/ld+json
               <td>
 The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
 
-sha256: `LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=`
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
             </tr>
             <tr>
@@ -1396,7 +1315,10 @@ text/turtle
               </td>
               <td>
 The vocabulary in Turtle format [[?TURTLE]].<br><br>
-sha256: `McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=`
+
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
             </tr>
             <tr>
@@ -1405,7 +1327,11 @@ text/html
               </td>
               <td>
 The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
-sha256: `eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=`
+
+
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html"
+data-hash-format="openssl dgst -sha256" /></code>
               </td>
             </tr>
           </tbody>
@@ -1415,7 +1341,7 @@ sha256: `eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=`
 It is possible to confirm the cryptographic digests listed above by running
 a command like the following (replacing `&lt;MEDIA_TYPE>` and `&lt;DOCUMENT_URL>`
 with the appropriate values) through a modern UNIX-like OS command line interface:
-`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad -a`.
+`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -sha256`
         </p>
 
         <p>
@@ -1683,6 +1609,116 @@ The canonical mapping consists of using the lexical-to-value mapping.
       </section>
 
     </section>
+
+      <section>
+        <h2>Relationship to Linked Data</h2>
+        <p>
+The term Linked Data is used to describe a recommended best practice for
+exposing, sharing, and connecting information on the Web using standards, such
+as URLs, to identify things and their properties. When information is presented
+as Linked Data, other related information can be easily discovered and new
+information can be easily linked to it. Linked Data is extensible in a
+decentralized way, greatly reducing barriers to large scale integration.
+        </p>
+
+        <p>
+With the increase in usage of Linked Data for a variety of applications, there
+is a need to be able to verify the authenticity and integrity of Linked Data
+documents. This specification adds authentication and integrity protection to
+data documents through the use of mathematical proofs without sacrificing Linked
+Data features such as extensibility and composability.
+        </p>
+
+        <p class="note" title="Use of Linked Data is an optional feature">
+While  this specification provides mechanisms to digitally sign Linked Data, the
+use  of Linked Data is not necessary to gain some of the advantages provided by
+this specification.
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Relationship to Verifiable Credentials</h2>
+
+        <p>
+Cryptographic suites that implement this specification can be used to secure
+[=verifiable credentials=] and [=verifiable presentations=]. Implementers
+that are addressing those use cases are cautioned that additional checks might
+be appropriate when processing those types of documents.
+        </p>
+
+        <p>
+There are some use cases where it is important to ensure that the
+[=verification method=] used in a proof is associated with the
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> in a
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-credential">
+verifiable credential</a>, or the
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a> in a
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-verifiable-presentation">
+verifiable presentation</a>, during the process of
+<a data-cite="?VC-DATA-MODEL-2.0#issuer-0">validation</a>. One
+way to check for such an association is to ensure that the value of the
+`controller` property of a proof's [=verification method=]
+matches the URL value used to identify the
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively, and
+that the verification method is expressed under a verification relationship that
+is acceptable given the proof's purpose. This particular association indicates
+that the
+<a data-cite="?VC-DATA-MODEL-2.0#issuer">`issuer`</a> or
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-holders">`holder`</a>, respectively,
+is the controller of the [=verification method=] used to verify
+the proof.
+        </p>
+
+        <p>
+Document authors and implementers are advised to understand the difference
+between the validity period of a <a href="#proofs">proof</a>, which is expressed
+using the <a href="#dfn-created">`created`</a> and <a
+href="#defn-proof-expires">`expires`</a> properties, and the validity period of
+a <a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>,
+which is expressed using the
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a> properties.
+While these properties might sometimes express the same validity periods, at
+other times they might not be aligned. When verifying a
+<a href="#proofs">proof</a>, it is important to ensure that the time of interest
+(which might be the current time or any other time) is within the
+validity period for the proof (that is, between
+<a href="#dfn-created">`created`</a> and
+<a href="#defn-proof-expires">`expires`</a> ).
+When <a data-cite="?VC-DATA-MODEL-2.0#validation">validating</a> a
+[=verifiable credential=], it is important to ensure that the time of
+interest is within the validity period for the
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a> (that is,
+betweeen
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validFrom">`validFrom`</a> and
+<a data-cite="?VC-DATA-MODEL-2.0#defn-validUntil">`validUntil`</a>). Note that a
+failure to validate either the validity period for the <a
+href="#proofs">proof</a>, or the validity period for the
+<a data-cite="?VC-DATA-MODEL-2.0#dfn-credential">credential</a>, might result
+in accepting data that ought to have been rejected.
+        </p>
+
+        <p>
+Finally, implementers are also urged to understand that there is a difference
+between the revocation information associated with a [=verifiable credential=],
+and the <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a>
+and <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times
+for a [=verification method=]. The
+<a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a> and
+<a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times for a
+[=verification method=] are expressed using the `revocation` and `expires`
+properties, respectively; are related to events such as a private key being
+compromised or expiring; and can provide timing information which might reveal
+details about a controller, such as their security practices or when they might
+have been compromised. The revocation information for a [=verifiable
+credential=] is expressed using the `credentialStatus` property; is related
+to events such as an individual losing the privilege that is granted by the
+[=verifiable credential=]; and does not provide timing information, which
+enhances privacy.
+        </p>
+      </section>
 
     </section>
 
