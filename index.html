@@ -2324,17 +2324,17 @@ of that type of document.
         <p>
 Another approach would be to configure an application to use a JSON-LD Context
 loader, sometimes referred to as a document loader, to use only local copies of
-approved context files. This would guarantee that neither context files nor
+approved context files. This would guarantee that neither the context files nor
 their cryptographic hashes would ever change, effectively resulting in the
 same result as the algorithm above.
         </p>
 
         <p>
-An alternative approach, also effectively equivalent to the algorithm provided in
-this section, would be for an application to keep a list of well known context
+Another alternative approach, also effectively equivalent to the algorithm provided
+in this section, would be for an application to keep a list of well known context
 URLs and their associated approved cryptographic hashes, without storing every
-context file locally. This would allow contexts to be safely loaded from the
-network without compromising the security expectations of the application.
+context file locally. This would allow these contexts to be safely loaded from
+the network without compromising the security expectations of the application.
         </p>
 
         <p>
@@ -2346,9 +2346,10 @@ As long as the cryptography suite's verification algorithm provides a successful
 verification result, such transformations are valid and would result in full
 URLs for terms that were previously compacted by the omitted context. That is, a
 term that was previously compacted to `foo` based on a sender-supplied context
-that is unknown to a receiver would instead be "compacted" to something like
-`https://vocabulary.example#foo` once the unknown context is omitted and the
-compaction algorithm is applied by the receiving application.
+that is unknown to a receiver (e.g., ``https://ontology.example`) would instead
+be "expanded" to a URL like `https://ontology.example#foo`, which would then
+be "compacted" to the same URL, once the unknown context is omitted and the
+JSON-LD compaction algorithm is applied by the receiving application.
         </p>
 
       </section>
