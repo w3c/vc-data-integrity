@@ -1451,6 +1451,70 @@ Verifiable Credentials v2.0: Vocabularies</a>.
         </p>
 
         <section>
+          <h3>Validating Contexts</h3>
+
+          <p>
+It is necessary to ensure that a consuming application has explicitly approved
+of the types, and therefore the semantics, of input documents that it will
+process. Not checking JSON-LD context values against known good values can lead
+to security vulnerabilities, due to variance in the semantics that they convey.
+Applications MUST use the algorithm in Section [[[#context-validation]]], or one
+that achieves equivalent protections, to validate contexts in a [=conforming
+secured document=]. Context validation MUST be run <em>after</em> running the
+applicable algorithm in either Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]].
+          </p>
+
+          <p>
+While the algorithm described in Section [[[#context-validation]]] provides one
+way of checking context values, and one optional way of safely processing
+unknown context values, implementers MAY use alternative approaches, or a
+different ordering of the steps, that provide the same protections.
+          </p>
+
+          <p>
+For example, if no JSON-LD processing is to occur, then, rather than performing
+this check, an application could follow the guidance in whatever trusted
+documentation is provided out of band for properly understanding the semantics
+of that type of document.
+          </p>
+
+          <p>
+Another approach would be to configure an application to use a JSON-LD Context
+loader, sometimes referred to as a document loader, to use only local copies of
+approved context files. This would guarantee that neither the context files nor
+their cryptographic hashes would ever change, effectively resulting in the same
+result as the algorithm in Section [[[#context-validation]]].
+          </p>
+
+          <p>
+Another alternative approach, also effectively equivalent to the algorithm in
+Section [[[#context-validation]]], would be for an application to keep a list of
+well known context URLs and their associated approved cryptographic hashes,
+without storing every context file locally. This would allow these contexts to
+be safely loaded from the network without compromising the security expectations
+of the application.
+          </p>
+
+          <p>
+Yet another valid approach would be for a transmitting application to
+<a data-cite="JSON-LD11-API#compaction-algorithm">compact</a> a document to
+exactly what a receiving application requests, via a protocol such as one
+requesting a [=verifiable presentation=], omitting additional sender-specific
+context values that were used when securing the original document. As long as
+the cryptography suite's verification algorithm provides a successful
+verification result, such transformations are valid and would result in full
+URLs for terms that were previously compacted by the omitted context. That is, a
+term that was previously compacted to `foo` based on a sender-supplied context
+that is unknown to a receiver (e.g., ``https://ontology.example/v1`) would
+instead be "expanded" to a URL like `https://ontology.example#foo`, which would
+then be "compacted" to the same URL, once the unknown context is omitted and the
+JSON-LD compaction algorithm is applied by the receiving application.
+          </p>
+
+        </section>
+
+        <section>
           <h3>Context Injection</h3>
 
           <p>
@@ -2237,14 +2301,10 @@ Return |combinedVerificationResult|, |successfulVerificationResults|.
         <h3>Context Validation</h3>
 
         <p>
-The purpose of the algorithm in this section is to ensure that a consuming
-application has explicitly approved of the types, and therefore the semantics,
-of input documents that it will process. Not checking JSON-LD context values
-against known good values can lead to security vulnerabilities, due to variance
-in the semantics that they convey. Applications MAY use this context validation
-algorithm to validate contexts in a [=conforming secured document=]. If used,
-it MUST be run <em>after</em> running the applicable algorithm in either
-Section [[[#verify-proof]]] or Section [[[#verify-proof-sets-and-chains]]].
+The following algorithm provides one mechanism that can be used to ensure that
+an application understands the contexts associated with a document before it
+executed business rules specific to the input in the document. For more
+rationale related to this algorithm, see Section [[[#validating-contexts]]].
 This algorithm takes inputs of a document ([=map=] |inputDocument|), a set of
 approved JSON-LD Contexts ([=map=] |approvedContexts|), and a boolean to
 recompact when unknown contexts are detected ([=boolean=] |recompact|), and
@@ -2306,51 +2366,6 @@ If |result|.|errors| is empty, set |result|.|status| to `true`; otherwise, set
 Return the value of |result|.
           </li>
         </ol>
-
-        <p>
-While the algorithm above provides one way of checking these values, and one
-optional way of safely processing unknown values, implementers MAY use
-alternative approaches, or a different ordering of the steps, that provide the
-same protections.
-        </p>
-
-        <p>
-For example, if no JSON-LD processing is to occur, then, rather than performing
-this check, an application could follow the guidance in whatever trusted
-documentation is provided out of band for properly understanding the semantics
-of that type of document.
-        </p>
-
-        <p>
-Another approach would be to configure an application to use a JSON-LD Context
-loader, sometimes referred to as a document loader, to use only local copies of
-approved context files. This would guarantee that neither the context files nor
-their cryptographic hashes would ever change, effectively resulting in the
-same result as the algorithm above.
-        </p>
-
-        <p>
-Another alternative approach, also effectively equivalent to the algorithm provided
-in this section, would be for an application to keep a list of well known context
-URLs and their associated approved cryptographic hashes, without storing every
-context file locally. This would allow these contexts to be safely loaded from
-the network without compromising the security expectations of the application.
-        </p>
-
-        <p>
-Yet another valid approach would be for a transmitting application to
-<a data-cite="JSON-LD11-API#compaction-algorithm">compact</a> a document to
-exactly what a receiving application requests, omitting additional
-sender-specific context values that were used when securing the original document.
-As long as the cryptography suite's verification algorithm provides a successful
-verification result, such transformations are valid and would result in full
-URLs for terms that were previously compacted by the omitted context. That is, a
-term that was previously compacted to `foo` based on a sender-supplied context
-that is unknown to a receiver (e.g., ``https://ontology.example`) would instead
-be "expanded" to a URL like `https://ontology.example#foo`, which would then
-be "compacted" to the same URL, once the unknown context is omitted and the
-JSON-LD compaction algorithm is applied by the receiving application.
-        </p>
 
       </section>
 
