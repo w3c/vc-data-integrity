@@ -1414,20 +1414,22 @@ as `DataIntegrityProof`, are used.
           </p>
 
           <p>
-When securing a document, if an `@context` property is not provided in the document
-or the Data Integrity terms used in the document are not mapped by
-existing values in the `@context` property, implementations MUST inject or add
-an `@context` property with a value of
-`https://w3id.org/security/data-integrity/v2`.
+When an application is securing a document, if an `@context` property is not
+provided in the document or the Data Integrity terms used in the document are
+not mapped by existing values in the `@context` property, implementations SHOULD
+inject or add a `@context` property with a value of
+`https://w3id.org/security/data-integrity/v2` or one or more contexts with at
+least the same declarations, such as the Verifiable Credential Data Model v2.0
+context (`https://www.w3.org/ns/credentials/v2`).
           </p>
 
           <p>
-Context injection is expected to be unnecessary sometimes, such as when the Verifiable
-Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`)
-exists as a value in the `@context` property, as that context maps all of the
-necessary Data Integrity terms that were previously mapped by
-`https://w3id.org/security/data-integrity/v2`.
+Implementations that do no desire to use JSON-LD processing MAY choose to not
+include a `@context` declaration at the top-level of the document. If a
+`@context` declaration is not provided, extensions to this specification, or
+corresponding cryptosuites MUST NOT be made.
           </p>
+
         </section>
 
         <section>
