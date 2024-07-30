@@ -2308,7 +2308,7 @@ an application understands the contexts associated with a document before it
 executed business rules specific to the input in the document. For more
 rationale related to this algorithm, see Section [[[#validating-contexts]]].
 This algorithm takes inputs of a document ([=map=] |inputDocument|), a set of
-approved JSON-LD Contexts ([=map=] |expectedContext|), and a boolean to
+known JSON-LD Contexts ([=array=] |knownContext|), and a boolean to
 recompact when unknown contexts are detected ([=boolean=] |recompact|), and
 returns a [=map=] that contains the following:
         </p>
