@@ -2343,7 +2343,7 @@ Let |contextValue| be the value of the `@context` property of |result|.|document
 which might be undefined.
           </li>
           <li>
-If |contextValue| does not deeply equal |expectedContext|, any subtree in
+If |contextValue| does not deeply equal |knownContext|, any subtree in
 |result|.|document| contains an `@context` property, or any URI in
 |contextValue| dereferences to a JSON-LD Context file that does not match a
 known good value or cryptographic hash, then perform the applicable action:
@@ -2352,7 +2352,7 @@ known good value or cryptographic hash, then perform the applicable action:
 If |recompact| is `true`, set |result|.|document| to the result
 of running the <a data-cite="JSON-LD11-API#compaction-algorithm">
 JSON-LD Compaction Algorithm</a> with the |inputDocument| and
-|expectedContext| as inputs. If the compaction fails, add at least one error
+|knownContext| as inputs. If the compaction fails, add at least one error
 to |result|.|errors|.
               </li>
               <li>
