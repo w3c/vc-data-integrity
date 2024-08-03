@@ -2051,15 +2051,15 @@ raised and SHOULD convey an error type of
           <li>
 Set |inputDocument|.|proof| to |matchingProofs|.
             <div class="note">
-                <p>
+              <p>
 This step adds references to the graph names, as well as adding a copy 
 of <em>all</em> the claims contained in the proof graphs.
-                </p>
-                <p>
+              </p>
+              <p>
 The step is also critical, as it <q>binds</q> the previous proofs to the document
 prior to signing. The |proof| value for the document will be updated
 in a later step of this algorithm.
-                </p>
+              </p>
             </div>
           </li>
           <li>
@@ -2261,10 +2261,10 @@ convey an error type of
 Let |inputDocument| be a copy of |securedDocument| with the proof value
 removed and then set |inputDocument|.|proof| to |matchingProofs|.
 
-                        <p class="note">
+                <p class="note">
 See the note in <a href="#add-proof-set-chain"></a> to learn what
 claims this step entails.
-                        </p>
+                </p>
               </li>
               <li>
 Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
