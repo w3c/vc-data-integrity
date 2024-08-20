@@ -267,14 +267,14 @@ property:
     label: Authentication method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/controller-document/#defn-authentication
+    defined_by: https://www.w3.org/TR/controller-document/#authentication
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/controller-document/#defn-assertionmethod
+    defined_by: https://www.w3.org/TR/controller-document/#assertion
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityDelegationMethod
@@ -282,7 +282,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/controller-document/#defn-capabilityDelegation
+    defined_by: https://www.w3.org/TR/controller-document/#capability-delegation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityInvocationMethod
@@ -290,7 +290,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/controller-document/#defn-capabilityInvocation
+    defined_by: https://www.w3.org/TR/controller-document/#capability-invocation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: keyAgreementMethod
@@ -298,7 +298,7 @@ property:
     type: sec:VerificationRelationship
     range: sec:VerificationMethod
     comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/controller-document/#defn-keyAgreement
+    defined_by: https://www.w3.org/TR/controller-document/#key-agreement
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: cryptosuite
