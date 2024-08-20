@@ -1245,6 +1245,13 @@ Implementations that perform RDF processing MUST treat
 the JSON-LD serialization of the vocabulary URL as already dereferenced, where the dereferenced document matches
 the corresponding hash value below.
         </p>
+        
+        <p class="note">
+          Beyond the security terms defined by this specification, the
+          <a href="https://w3id.org/security">https://w3id.org/security#</a> namespace
+          also includes the terms defined in the [[[CONTROLLER-DOCUMENT]]] [[CONTROLLER-DOCUMENT]]
+          specification, with the corresponding mappings in the context files listed above.
+        </p>
 
         <p>
 When dereferencing the
@@ -1523,51 +1530,6 @@ other possible cryptosuite types.
             <dd>
 Any element of the value space is mapped to the corresponding string in the
 lexical space.
-            </dd>
-          </dl>
-        </section>
-
-        <section>
-          <h4 id="multibase">The `multibase` Datatype</h3>
-
-          <p>
-<a href="#multibase">Multibase</a>-encoded strings are used to encode binary
-data into ASCII-only formats, which are useful in environments that cannot
-directly represent binary values. This specification makes use of this encoding.
-In environments that support data types for string values, such as RDF
-[[?RDF-CONCEPTS]], <a href="#multibase">Multibase</a>-encoded content is
-indicated using a literal value whose datatype is set to
-`https://w3id.org/security#multibase`.
-          </p>
-
-          <p>
-The `multibase` datatype is defined as follows:
-          </p>
-
-          <dl>
-            <dt>The URL denoting this datatype</dt>
-            <dd>
-`https://w3id.org/security#multibase`
-            </dd>
-            <dt>The lexical space</dt>
-            <dd>
-Any string that starts with a <a href="#multibase">Multibase</a> character and
-the rest of the characters consist of allowable characters in the respective
-base-encoding alphabet.
-            </dd>
-            <dt>The value space</dt>
-            <dd>
-The standard mathematical concept of all integer numbers.
-            </dd>
-            <dt>The lexical-to-value mapping</dt>
-            <dd>
-Any element of the lexical space is mapped to the value space by base-decoding
-the value based on the base-decoding alphabet associated with the
-first <a href="#multibase">Multibase</a> character in the lexical string.
-            </dd>
-            <dt>The canonical mapping</dt>
-            <dd>
-The canonical mapping consists of using the lexical-to-value mapping.
             </dd>
           </dl>
         </section>
