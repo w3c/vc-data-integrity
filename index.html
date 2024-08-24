@@ -334,12 +334,13 @@ used to:
       <ul>
         <li>
 Make statements that can be shared without loss of trust, because their
-authorship can be verified by a third party, for example as part of Verifiable
-Credentials [[?VC-DATA-MODEL-2.0]] or social media posts.
+authorship can be verified by a third party, for example as part of a
+[=verifiable credential=] [[?VC-DATA-MODEL-2.0]], [=verifiable presentation=],
+or social media post.
         </li>
         <li>
 Authenticate as an entity identified by a particular identifier, for example, as
-the subject identified by a Decentralized Identifier (DID) [[DID-CORE]].
+the subject identified by a Decentralized Identifier (DID) [[?DID-CORE]].
         </li>
         <li>
 Delegate authorization for actions in a remote execution environment, via
@@ -414,9 +415,11 @@ desired threshold of trust. This process is conceptually similar to the way a
 wax seal can be used on an envelope containing a letter to establish trust in
 the sender and show that the letter has not been tampered with in transit.
 Examples of proof serialization functions include
-<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
-and
-<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+<a href="https://en.wikipedia.org/wiki/Digital_signature">
+digital signatures</a>,
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>, and
+<a href="https://en.wikipedia.org/wiki/Proof_of_knowledge">
+proofs of knowledge</a>, in general.
         </p>
 
         <p>
@@ -450,9 +453,11 @@ conceptually the same as described above.
 by a <dfn>proof verification algorithm</dfn> that applies a cryptographic proof
 verification function to see if the input data can be trusted. Possible proof
 verification functions include
-<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
-and
-<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+<a href="https://en.wikipedia.org/wiki/Digital_signature">
+digital signatures</a>,
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>, and
+<a href="https://en.wikipedia.org/wiki/Proof_of_knowledge">
+proofs of knowledge</a>, in general.
         </p>
 
         <p>
@@ -526,11 +531,11 @@ the benefits of such an approach.
         </dl>
 
       <p class="note" title="Application of technology to broader use cases">
-While this specification primarily focuses on Verifiable Credentials, the
-design of this technology is generalized, such that it can be used for
-non-Verifiable Credential use cases. In these instances, implementers are
-expected to perform their own due diligence and expert review as to the
-applicability of the technology to their use case.
+While this specification primarily focuses on [=verifiable credentials=], the
+design of this technology is generalized, such that it can be used for other use
+cases. In these instances, implementers are expected to perform their own due
+diligence and expert review as to the applicability of the technology to their
+use case.
       </p>
 
       </section>
