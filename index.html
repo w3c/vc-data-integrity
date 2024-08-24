@@ -1055,21 +1055,22 @@ two such objects are expressing information about the same entity.
 
         <p>
 A proof that describes its purpose helps prevent it from being misused for some
-other purpose.
+other purpose. [=Proof purposes=] enable [=verifiers=] to know the
+intent of the creator of a proof so a message cannot be accidentally abused for
+another purpose. For example, a message signed for the purpose of merely making an
+assertion (perhaps intended to be widely shared) being abused as a
+message to authenticate to a service or take some action (such as invoking a
+capability to do something).
         </p>
 
-        <p class="issue">
-Add a mention of JWK's `key_ops` parameter and WebCrypto's
-`KeyUsage` restrictions; explain that Proof Purpose serves a
-different goal and allows for finer-grained restrictions.
-<br><br>
-Dave Longley suggested that proof purposes enable verifiers to know what the
-proof creator's intent was so the message can't be accidentally abused for
-another purpose, e.g., a message signed for the purpose of merely making an
-assertion (and thus perhaps intended to be widely shared) being abused as a
-message to authenticate to a service or take some action (invoke a capability).
-It's a goal to keep the number of them limited to as few categories as are
-really needed to accomplish this goal.
+        <p>
+It is important to note that [=proof purposes=] are a different mechanism from
+the `key_ops` restrictions in [[[?RFC7517]]], the `KeyUsage` restriction in the
+[[[?WEBCRYPTOAPI]]] and the [[[?RFC5280]]]. [=Proof purposes=] are expressions
+on why a [=proof=] was created and its intended domain of usage whereas the
+other mechanisms mentioned are intended to limit what a private key can be used
+to do. A [=proof purpose=] "travels" with the [=proof=] while a key restriction
+does not.
         </p>
 
         <p>
@@ -1077,39 +1078,34 @@ The following is a list of commonly used [=proof purpose=] values.
         </p>
 
         <dl>
-          <dt><dfn>authentication</dfn></dt>
+          <dt><dfn class="external">authentication</dfn></dt>
           <dd>
 Indicates that a given proof is only to be used for the purposes of an
 authentication protocol.
           </dd>
-          <dt>assertionMethod</dt>
+          <dt><dfn class="external lint-ignore">assertionMethod</dfn></dt>
           <dd>
 Indicates that a proof can only be used for making assertions, for example
 signing a [=verifiable credential=].
           </dd>
-          <dt>keyAgreement</dt>
+          <dt><dfn class="external lint-ignore">keyAgreement</dfn></dt>
           <dd>
 Indicates that a proof is used for for key agreement protocols, such as
 Elliptic Curve Diffie Hellman key agreement used by popular encryption
 libraries.
           </dd>
-          <dt>capabilityDelegation</dt>
+          <dt><dfn class="external lint-ignore">capabilityDelegation</dfn></dt>
           <dd>
 Indicates that the proof can only be used for delegating capabilities. See the
 Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
-          <dt>capabilityInvocation</dt>
+          <dt><dfn class="external lint-ignore">capabilityInvocation</dfn></dt>
           <dd>
 Indicates that the proof can only be used for invoking capabilities. See the
 Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
         </dl>
 
-        <p>
-Note: The Authorization Capabilities [[?ZCAP]] specification defines additional
-proof purposes for that use case, such as `capabilityInvocation` and
-`capabilityDelegation`.
-        </p>
       </section>
 
       <section>
