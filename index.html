@@ -300,7 +300,7 @@ table.simple tbody tr:last-of-type {
     <section id='abstract'>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of Verifiable Credentials and similar types of constrained digital
+integrity of [=verifiable credentials=] and similar types of constrained digital
 documents using cryptography, especially through the use of digital
 signatures and related mathematical proofs.
       </p>
@@ -324,7 +324,7 @@ implementation report</a>.
       <h2>Introduction</h2>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of Verifiable Credentials and similar types of constrained digital
+integrity of [=verifiable credentials=] and similar types of constrained digital
 documents using cryptography, especially through the use of digital signatures
 and related mathematical proofs. Cryptographic proofs enable functionality that
 is useful to implementors of distributed systems. For example, proofs can be
@@ -725,7 +725,7 @@ The usage of this property is further explained in Section [[[#proof-chains]]].
 
           <dt>type</dt>
           <dd>
-The specific type of proof MUST be specified as a string that maps to a URL
+The specific type of proof MUST be specified as a [=string=] that maps to a URL
 [[URL]]. Examples of proof types include `DataIntegrityProof` and
 `Ed25519Signature2020`. Proof types determine what other fields are required to
 secure and verify the proof.
@@ -733,20 +733,20 @@ secure and verify the proof.
 
           <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
           <dd>
-The reason the proof was created MUST be specified as a string that maps to a
+The reason the proof was created MUST be specified as a [=string=] that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
 being misused by being applied to a purpose other than the one that was
 intended. For example, without this value the creator of a proof could be
 tricked into using cryptographic material typically used to create a Verifiable
 Credential (`assertionMethod`) during a login process (`authentication`) which
-would then result in the creation of a Verifiable Credential they never meant to
+would then result in the creation of a [=verifiable credential=] they never meant to
 create instead of the intended action, which was to merely log in to a website.
           </dd>
 
           <dt>verificationMethod</dt>
           <dd>
 A verification method is the means and information needed to verify the proof.
-If included, the value MUST be a string that maps to a [[URL]]. Inclusion of
+If included, the value MUST be a [=string=] that maps to a [[URL]]. Inclusion of
 `verificationMethod` is OPTIONAL, but if it is not included, other properties
 such as `cryptosuite` might provide a mechanism by which to obtain the information
 necessary to verify the proof. Note that when `verificationMethod` is
@@ -802,7 +802,7 @@ include: `domain.example` (DNS domain), `https://domain.example:8443`
 
           <dt id="defn-challenge"><dfn>challenge</dfn></dt>
           <dd>
-A string value that SHOULD be included in a proof if a `domain` is specified.
+A [=string=] value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular [=domain=] and window of time. This
 value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
@@ -810,7 +810,7 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 
           <dt><dfn class="lint-ignore">proofValue</dfn></dt>
           <dd>
-A string value that expresses base-encoded binary data necessary to verify the
+A [=string=] value that expresses base-encoded binary data necessary to verify the
 digital proof using the `verificationMethod` specified. The value MUST use a
 header and encoding as described in Section
 <a data-cite="CONTROLLER-DOCUMENT#multibase-0">2.4 Multibase</a> of the
@@ -824,7 +824,7 @@ to verify the digital proof.
 
           <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
-An OPTIONAL string value or unordered list of string values. Each value
+An OPTIONAL [=string=] value or unordered list of [=string=] values. Each value
 identifies another [=data integrity proof=] that MUST verify before the
 current proof is processed. If an unordered list, all referenced proofs in the
 array MUST verify. This property is used in Section [[[#proof-chains]]].
@@ -832,7 +832,7 @@ array MUST verify. This property is used in Section [[[#proof-chains]]].
 
           <dt><dfn class="lint-ignore">nonce</dfn></dt>
           <dd>
-An OPTIONAL string value supplied by the proof creator. One use of this
+An OPTIONAL [=string=] value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
@@ -1101,7 +1101,7 @@ authentication protocol.
           <dt>assertionMethod</dt>
           <dd>
 Indicates that a proof can only be used for making assertions, for example
-signing a Verifiable Credential.
+signing a [=verifiable credential=].
           </dd>
           <dt>keyAgreement</dt>
           <dd>
@@ -1144,7 +1144,7 @@ To enable confirmation that a resource referenced by a [=conforming secured docu
 has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
-a single string value, or an array of string values, each of which is a
+a single [=string=] value, or an [=list=] of [=string=] values, each of which is a
 <a data-cite="CONTROLLER-DOCUMENT#multibase">Multibase</a>-encoded
 <a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> value.
         </p>
@@ -1500,7 +1500,7 @@ This section defines datatypes that are used by this specification.
 This specification encodes cryptographic suite identifiers as enumerable
 strings, which is useful in processes that need to efficiently encode such
 strings, such as compression algorithms. In environments that support data types
-for string values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier
+for [=string=] values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier
 content is indicated using a literal value whose datatype is set to
 `https://w3id.org/security#cryptosuiteString`.
           </p>
@@ -1798,11 +1798,11 @@ When specifing a cryptographic suite that utilizes this design pattern, the
         <dl>
           <dt>type</dt>
           <dd>
-The `type` property MUST contain the string `DataIntegrityProof`.
+The `type` property MUST contain the [=string=] `DataIntegrityProof`.
           </dd>
           <dt>cryptosuite</dt>
           <dd>
-The value of the `cryptosuite` property MUST be a string that identifies the
+The value of the `cryptosuite` property MUST be a [=string=] that identifies the
 [=cryptographic suite=]. If the processing environment supports subtypes
 of `string`, the type of the `cryptosuite` value MUST be the
 `https://w3id.org/security#cryptosuiteString` subtype of `string`.
@@ -2016,7 +2016,7 @@ element from |allProofs| with an `id` attribute matching `previousProof` to
           <li>
 If |options| has a `previousProof` [=struct/item=] that is an array, add each
 element from |allProofs| with an `id` attribute that matches an element of that
-array. If any element of `previousProof` array has an `id` attribute that does
+array. If any element of `previousProof` [=list=] has an `id` attribute that does
 not match the `id` attribute of any element of |allProofs|, an error MUST be
 raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
@@ -2225,7 +2225,7 @@ error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
 `previousProof` attribute is an array, add each element from |allProofs| with an
 `id` attribute that matches an element of that array. If any element of
-`previousProof` array has an `id` attribute that does not match the `id`
+`previousProof` [=list=] has an `id` attribute that does not match the `id`
 attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
@@ -2386,11 +2386,11 @@ The `code` value MUST be the integer code described in the table below
 (in parentheses, beside the type name).
           </li>
           <li>
-The `title` value SHOULD provide a short but specific human-readable string for
+The `title` value SHOULD provide a short but specific human-readable [=string=] for
 the error.
           </li>
           <li>
-The `detail` value SHOULD provide a longer human-readable string for the error.
+The `detail` value SHOULD provide a longer human-readable [=string=] for the error.
           </li>
         </ul>
 
@@ -2635,7 +2635,7 @@ be reconfigured to use a newer primitive via a simple configuration file change.
 Cryptographic agility is most effective when the client and the server in
 the information security system are in regular contact. However, when the
 messages protected by a particular cryptographic algorithm are long-lived, as
-with Verifiable Credentials, and/or when the client (holder) might not be
+with [=verifiable credentials=], and/or when the client (holder) might not be
 able to easily recontact the server (issuer), then cryptographic agility does
 not provide the desired protections.
         </p>
@@ -2901,7 +2901,7 @@ specification.
 This process is used to ensure that cryptographic material, such as a private
 cryptographic key, is not misused by application to an unintended purpose. An
 example of cryptographic material misuse would be if a private cryptographic
-key meant to be used to issue a Verifiable Credential was instead used to
+key meant to be used to issue a [=verifiable credential=] was instead used to
 log into a website (that is, for authentication). Not checking a verification relationship
 is dangerous because the restriction and protection profile for some
 cryptographic material could be determined by its intended use. For example,
@@ -3307,8 +3307,8 @@ calculation.
 Sections [[[#proof-sets]]] and [[[#proof-chains]]] describe how multiple proofs
 can be expressed in a [=secured data document=]; that is, instead of a single
 [=proof=] included in the [=secured data document=], one can express multiple
-proofs in an array as shown in [[[#example-a-proof-set-in-a-data-document]]] and
-[[[#example-a-proof-chain-in-a-data-document]]]. The elements of this array are
+proofs in an [=list=] as shown in [[[#example-a-proof-set-in-a-data-document]]] and
+[[[#example-a-proof-chain-in-a-data-document]]]. The elements of this [=list=] are
 members of a [=proof set=] and, optionally, a [=proof chain=]. The purpose of
 this section is to explain the intended use of each of these features and, in
 particular, their differing security properties. These differing security
@@ -3527,7 +3527,7 @@ Added cryptographic hashes for context and vocabulary files and note that those
 files are to be cached.
         </li>
         <li>
-Added section on relationship to Linked Data and Verifiable Credentials.
+Added section on relationship to Linked Data and [=verifiable credentials=].
         </li>
         <li>
 Added algorithms for proof sets and chains.
