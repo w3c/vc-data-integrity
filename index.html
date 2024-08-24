@@ -1129,13 +1129,11 @@ a single [=string=] value, or an [=list=] of [=string=] values, each of which is
 <a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> value.
         </p>
         <p>
-JSON-LD context authors are expected to add `digestMultibase` to contexts that will
-be used in documents that refer to other resources and to include an associated
-cryptographic digest. For example, the [[[VC-DATA-MODEL-2.0]]] refers to
-context (`https://www.w3.org/ns/credentials/v2`) which includes
-`digestMultibase`, and the [[[VC-DATA-MODEL-2.0]]] includes
-<a data-cite="VC-DATA-MODEL-2.0#base-context">the hexadecimal encoded
-SHA2-256 digest value</a> of that context document.
+JSON-LD context authors are expected to add `digestMultibase` to contexts that
+will be used in documents that refer to other resources and to include an
+associated cryptographic digest. For example, the [[[VC-DATA-MODEL-2.0]]] base
+context (`https://www.w3.org/ns/credentials/v2`) includes the
+`digestMultibase` property.
         </p>
 
         <p>
@@ -1148,7 +1146,7 @@ An example of a resource integrity protected object is shown below:
   ...
   "image": {
     "id": "https://university.example.org/images/58473",
-    "digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"
+    <span class="highlight">"digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"</span>
   },
   ...
 }
