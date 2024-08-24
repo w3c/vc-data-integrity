@@ -925,18 +925,6 @@ expectations of the individual. See
 representing time values to individuals.
         </p>
 
-<div class="issue">Add a note indicating that selective disclosure proof
-mechanisms can be compatible with Data Integrity; for example,
-an algorithm could produce a merkle tree from a canonicalized set of
-N-Quads and then sign the root hash. Disclosure would involve including
-the merkle paths for each N-Quad that is to be revealed. This mechanism
-would merely consume the normalized output differently (this, and the
-proof mechanism would be modifications to this core spec). It might also
-be necessary to generate proof parameters such as a [=secret key=]/seed
-that can be used along with an algorithm to deterministically generate
-nonces that are concatenated with each N-Quad to prevent rainbow
-table or similar attacks.</div>
-
 <div class="issue">Add a note indicating that this specification should not
 be construed to indicate that public key controllers should be restricted to a
 single public key or that systems that use this spec and involve real people
