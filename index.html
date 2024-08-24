@@ -945,9 +945,10 @@ represented by associating a set of proofs with the `proof` key in a document.
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
-],
+  ],
   "myWebsite": "https://hello.world.example/",
-  "proof": [{
+  <span class="highlight">"proof": [{
+    <span class="comment">// This is one of the proofs in the set</span>
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T19:23:24Z",
@@ -955,13 +956,14 @@ represented by associating a set of proofs with the `proof` key in a document.
     "proofPurpose": "assertionMethod",
     "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8<wbr>nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
+    <span class="comment">// This is the other proof in the set</span>
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T13:08:49Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gK<wbr>S2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
     "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9<wbr>876zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
-  }]
+  }]</span>
 }
         </pre>
 
@@ -974,7 +976,7 @@ A <dfn>proof chain</dfn> is useful when the same data needs to be signed by
 multiple entities and the order of when the proofs occurred matters, such as in
 the case of a notary counter-signing a proof that had been created on a
 document. A proof chain, where proof order needs to be preserved, is expressed
-by providing at least one proof with an `id`, such as a UUID as a URN, and
+by providing at least one proof with an `id`, such as a UUID [[?RFC9562]], and
 another proof with a `previousProof` value that identifies the previous proof.
         </p>
         <pre class="example nohighlight"
@@ -985,7 +987,8 @@ another proof with a `previousProof` value that identifies the previous proof.
     "https://w3id.org/security/data-integrity/v2"
 ],
   "myWebsite": "https://hello.world.example/",
-  "proof": [{
+  <span class="highlight">"proof": [{
+    <span class="comment">// The 'id' value identifies this specific proof</span>
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
@@ -1000,8 +1003,9 @@ another proof with a `previousProof` value that identifies the previous proof.
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3g<wbr>KS2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
     "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19Ki<wbr>WXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
+    <span class="comment">// The 'previousProof' value identifies which proof is verified before this one</span>
     "previousProof": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7"
-  }]
+  }]</span>
 }
         </pre>
 
