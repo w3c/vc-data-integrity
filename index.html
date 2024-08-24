@@ -2020,7 +2020,7 @@ raised and SHOULD convey an error type of
 Set |inputDocument|.|proof| to |matchingProofs|.
             <div class="note">
               <p>
-This step adds references to the graph names, as well as adding a copy 
+This step adds references to the graph names, as well as adding a copy
 of <em>all</em> the claims contained in the proof graphs.
               </p>
               <p>
@@ -2284,7 +2284,7 @@ an application understands the contexts associated with a document before it
 executed business rules specific to the input in the document. For more
 rationale related to this algorithm, see Section [[[#validating-contexts]]].
 This algorithm takes inputs of a document ([=map=] |inputDocument|), a set of
-known JSON-LD Contexts ([=array=] |knownContext|), and a boolean to
+known JSON-LD Contexts ([=list=] |knownContext|), and a boolean to
 recompact when unknown contexts are detected ([=boolean=] |recompact|), and
 returns a [=map=] that contains the following:
         </p>
@@ -3626,7 +3626,7 @@ Eric Elliott,
 Raphael Flechtner,
 Julien Fraichot,
 Benjamin Goering,
-Kim Hamilton Duffy, 
+Kim Hamilton Duffy,
 Joseph Heenan,
 Helge,
 Ivan Herman,
