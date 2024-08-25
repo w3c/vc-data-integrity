@@ -170,9 +170,9 @@
               status: "Internet-Draft",
               publisher: "IETF"
             },
-            "VC-SPECS": {
-              title: "The Verifiable Credential Specifications Directory",
-              href: "https://w3c.github.io/vc-specs-dir/",
+            "VC-EXTENSIONS": {
+              title: "Verifiable Credential Extensions",
+              href: "https://w3c.github.io/vc-extensions/",
               authors: [
                 "Manu Sporny"
               ],
@@ -1680,14 +1680,13 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-The specification MUST define a <dfn class="export"
-data-lt="cryptosuite instantiation algorithm">data integrity cryptographic
-suite instantiation algorithm</dfn> that accepts a set of options
-([=map=] |options|) and returns a [=cryptosuite instance=]
-([=struct=] |cryptosuite|). This algorithm SHOULD be listed in [[[VC-SPECS]]].
-A <dfn class="export" data-local-lt="cryptosuite instance">data integrity
-cryptographic suite instance</dfn> [=struct=] has the following
-[=struct/items=].
+The specification MUST define a <dfn class="export" data-lt="cryptosuite
+instantiation algorithm">data integrity cryptographic suite instantiation
+algorithm</dfn> that accepts a set of options ([=map=] |options|) and returns a
+[=cryptosuite instance=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
+listed in the [[[VC-EXTENSIONS]]] document. A <dfn class="export"
+data-local-lt="cryptosuite instance">data integrity cryptographic suite
+instance</dfn> [=struct=] has the following [=struct/items=].
           <dl data-dfn-for="cryptosuite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
@@ -1742,8 +1741,8 @@ protected from unsafe redefinition, by use of the `@protected` keyword.
       <p>
 A [=cryptosuite instance=] is instantiated using a [=cryptosuite instantiation
 algorithm=] and is made available to algorithms in an implementation-specific
-manner. Implementations MAY use [[[VC-SPECS]]] [[VC-SPECS]] to discover known
-[=cryptosuite instantiation algorithms=].
+manner. Implementations MAY use the [[[VC-EXTENSIONS]]] document to discover
+known [=cryptosuite instantiation algorithms=].
       </p>
 
       <section>
@@ -1808,8 +1807,8 @@ the identifier for the cryptosuite; and any cryptosuite-specific cryptographic
 data is encapsulated (i.e., not directly exposed as application layer data)
 within `proofValue`. A list of cryptographic suite specifications that are
 known to follow this pattern is provided in the
-<a href="https://w3c.github.io/vc-specs-dir/#proof">Proof types section of
-the Verifiable Credentials Specifications Directory</a>.
+<a href="https://w3c.github.io/vc-extensions/#proof">Proof types section of
+the Verifiable Credentials Extensions</a> document.
         </p>
       </section>
 
