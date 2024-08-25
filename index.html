@@ -1749,15 +1749,15 @@ known [=cryptosuite instantiation algorithms=].
         <h3>DataIntegrityProof</h3>
 
         <p>
-A number of cryptographic suites follow the same basic pattern when expressing a
-data integrity proof. This section specifies that general design pattern, a
-cryptographic suite type called a `DataIntegrityProof`, which reduces the burden
-of writing and implementing cryptographic suites through the reuse of design
-primitives and source code.
+A number of [=cryptographic suites=] follow the same basic pattern when
+expressing a [=data integrity proof=]. This section specifies that general
+design pattern, a [=cryptographic suite=] type called a `DataIntegrityProof`,
+which reduces the burden of writing and implementing [=cryptographic suites=]
+through the reuse of design primitives and source code.
         </p>
 
         <p>
-When specifing a cryptographic suite that utilizes this design pattern, the
+When specifing a [=cryptographic suite=] that utilizes this design pattern, the
 `proof` value takes the following form:
         </p>
 
@@ -1769,18 +1769,18 @@ The `type` property MUST contain the [=string=] `DataIntegrityProof`.
           <dt>cryptosuite</dt>
           <dd>
 The value of the `cryptosuite` property MUST be a [=string=] that identifies the
-[=cryptographic suite=]. If the processing environment supports subtypes
-of `string`, the type of the `cryptosuite` value MUST be the
-`https://w3id.org/security#cryptosuiteString` subtype of `string`.
+[=cryptographic suite=]. If the processing environment supports [=string=]
+subtypes, the subtype of the `cryptosuite` value MUST be the
+`https://w3id.org/security#cryptosuiteString` subtype.
           </dd>
           <dt>proofValue</dt>
           <dd>
-The `proofValue` property MUST be used, as specified in [[[#proofs]]].
+The `proofValue` property MUST be used, as specified in Section [[[#proofs]]].
           </dd>
         </dl>
 
         <p>
-Cryptographic suite designers MUST use mandatory `proof` value properties
+[=Cryptographic suite=] designers MUST use mandatory `proof` value properties
 defined in Section [[[#proofs]]], and MAY define other properties specific to
 their cryptographic suite.
         </p>
@@ -1807,8 +1807,9 @@ the identifier for the cryptosuite; and any cryptosuite-specific cryptographic
 data is encapsulated (i.e., not directly exposed as application layer data)
 within `proofValue`. A list of cryptographic suite specifications that are
 known to follow this pattern is provided in the
-<a href="https://w3c.github.io/vc-extensions/#proof">Proof types section of
-the Verifiable Credentials Extensions</a> document.
+<a href="https://w3c.github.io/vc-extensions/#securing-mechanisms">
+Securing Mechanisms section of the Verifiable Credentials Extensions</a>
+document.
         </p>
       </section>
 
