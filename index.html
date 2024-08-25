@@ -1636,14 +1636,14 @@ enhances privacy.
     <section>
       <h2>Cryptographic Suites</h2>
       <p>
-A data integrity proof is designed to be easy to use by developers and therefore
-strives to minimize the amount of information one has to remember to generate a
-proof. Often, just the [=cryptographic suite=] name (e.g.
-`eddsa-rdfc-2022`) is required from developers to initiate the creation of
-a proof. These [=cryptographic suite=]s are often created or reviewed by
-people that have the requisite cryptographic training to ensure that safe
-combinations of cryptographic primitives are used. This section specifies the
-requirements for authoring cryptographic suite specifications.
+A [=data integrity proof=] is designed to be easy to use by developers and
+therefore strives to minimize the amount of information one has to remember to
+generate a proof. Often, just the [=cryptographic suite=] name (such as
+`eddsa-rdfc-2022`) is required from developers to initiate the creation of a
+proof. These [=cryptographic suite=]s are often created and reviewed by people
+that have the requisite cryptographic training to ensure that safe combinations
+of cryptographic primitives are used. This section specifies the requirements
+for authoring cryptographic suite specifications.
       </p>
 
       <p>
@@ -1744,17 +1744,6 @@ A [=cryptosuite instance=] is instantiated using a [=cryptosuite instantiation
 algorithm=] and is made available to algorithms in an implementation-specific
 manner. Implementations MAY use [[[VC-SPECS]]] [[VC-SPECS]] to discover known
 [=cryptosuite instantiation algorithms=].
-      </p>
-
-      <p class="issue" title="Require interoperability report?">
-The following language was deemed to be contentious: <em>The specification MUST
-provide a link to an interoperability test report to document which
-implementations are conformant with the cryptographic suite specification.</em>
-        <br>
-        <br>
-The Working Group is seeking feedback on whether or not this is desired given
-the important role that cryptographic suite specifications play in ensuring
-data integrity.
       </p>
 
       <section>
