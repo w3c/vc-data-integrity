@@ -1826,17 +1826,17 @@ An <dfn class="export">unsecured data document</dfn> is a [=map=] that contains
 no proof values. An <dfn>input document</dfn> is an [=map=] that has not yet had
 the current proof added to it, but it MAY contain a proof value that was added
 to it by a previous process. A <dfn class="export">secured data document</dfn>
-is a [=map=] that contains one or more proof value, one of which might be the
-current proof(s) being generated to be added to it.
+is a [=map=] that contains one or more proof values.
       </p>
 
       <p>
 Implementers MAY implement reasonable defaults and safeguards in addition to the
 algorithms below, to help mitigate developer error, excessive resource
 consumption, newly discovered attack models against which there is a particular
-protection, etc. The algorithms provided below are the minimum requirements for
-an interoperable implementation, and developers are urged to include additional
-measures that could contribute to a safer and more efficient ecosystem.
+protection, and other improvements. The algorithms provided below are the
+minimum requirements for an interoperable implementation, and developers are
+urged to include additional measures that could contribute to a safer and more
+efficient ecosystem.
       </p>
 
       <section class="normative">
@@ -1951,11 +1951,11 @@ Return |securedDataDocument| as the [=secured data document=].
         <p>
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
-proof set/chain. Required inputs are a [=secured data document=]
-([=map=] |securedDocument|), a [=cryptographic suite=]
-(|suite:cryptosuite instance|), and a set of options ([=map=] |options|). Output
-is a new [=secured data document=] ([=map=]). Whenever this algorithm
-encodes strings, it MUST use UTF-8 encoding.
+proof set/chain. Required inputs are a [=secured data document=] ([=map=]
+|securedDocument|), a [=cryptographic suite=] ([=cryptosuite
+instance=] |suite|), and a set of options ([=map=] |options|). Output is a new
+[=secured data document=] ([=map=]). Whenever this algorithm encodes strings, it
+MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
@@ -1990,15 +1990,13 @@ raised and SHOULD convey an error type of
           </li>
           <li>
 Set |inputDocument|.|proof| to |matchingProofs|.
-            <div class="note">
+            <div class="note" title="This step protects the document and existing proofs">
               <p>
-This step adds references to the graph names, as well as adding a copy
-of <em>all</em> the claims contained in the proof graphs.
-              </p>
-              <p>
-The step is critical, as it <q>binds</q> any matching proofs to the document prior
-to applying the current signature. The |proof| value for the document will be updated
-in a later step of this algorithm.
+This step adds references to the [=named graphs=], as well as adding a copy of
+<em>all</em> the claims contained in the [=proof graphs=]. The step is critical,
+as it <q>binds</q> any matching proofs to the document prior to applying the
+current proof. The |proof| value for the document will be updated in a later
+step of this algorithm.
               </p>
             </div>
           </li>
@@ -2068,7 +2066,7 @@ This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
 `false`; otherwise, an [=input document=]
           </dd>
-          <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
+          <dt><dfn data-dfn-for="verification result">mediaType</dfn></dt>
           <dd>
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
 `false`; otherwise, a [=MIME type|media type=], which MAY include [=MIME
@@ -2076,18 +2074,18 @@ type/parameters=]
           </dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
           <dd>
-a [=list=] of
-<dfn data-cite="VC-DATA-MODEL-2.0#dfn-problemdetails">ProblemDetails</dfn>,
-which defaults to an empty [=list=]</dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
           <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
           <dd>
-a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]</dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
         </dl>
 
         <p>
 When a step says "an error MUST be raised", it means that a [=verification
-result=] MUST be returned with a [=verification result/verified=] of `false`
-and a non-empty [=verification result/errors=] list.
+result=] MUST be returned with a [=verification result/verified=] value of
+`false` and a non-empty [=verification result/errors=] list.
         </p>
 
         <ol class="algorithm">
@@ -2141,7 +2139,7 @@ Return a [=verification result=] with [=struct/items=]:
               <dd>|cryptosuiteVerificationResult|.|verified|</dd>
               <dt>[=verifiedDocument=]</dt>
               <dd>|cryptosuiteVerificationResult|.|verifiedDocument|</dd>
-              <dt>[=media type=]</dt>
+              <dt>[=mediaType=]</dt>
               <dd>|mediaType|</dd>
             </dl>
           </li>
@@ -2151,21 +2149,18 @@ Return a [=verification result=] with [=struct/items=]:
       <section>
         <h3>Verify Proof Sets and Chains</h3>
         <p>
-In a proof set or proof chain, a [=secured data document=] has a
-`proof` attribute which contains a list of proofs
-(|allProofs|).
-The following algorithm provides one method of checking the authenticity and
-integrity of a [=secured data document=], achieved by verifying every
-proof in |allProofs|. Other approaches are possible, particularly if
-it is only desired to verify a subset of the proofs contained in
-|allProofs|. If another approach is taken to verify only a subset of the
-proofs, then it is important to note that any proof in that subset with a
-`previousProof` can only be considered verified if the proofs it
-references are also considered verified.
+In a [=proof set=] or [=proof chain=], a [=secured data document=] has a `proof`
+attribute which contains a list of [=proofs=] (|allProofs|). The following
+algorithm provides one method of checking the authenticity and integrity of a
+[=secured data document=], achieved by verifying every proof in |allProofs|.
+Other approaches are possible, particularly if it is only desired to verify a
+subset of the proofs contained in |allProofs|. If another approach is taken to
+verify only a subset of the proofs, then it is important to note that any proof
+in that subset with a `previousProof` can only be considered verified if the
+proofs it references are also considered verified.
         </p>
         <p>
-Required input is a
-[=secured data document=] (|securedDocument|). A list of
+Required input is a [=secured data document=] (|securedDocument|). A list of
 [=verification results=] corresponding to each proof in |allProofs| is
 generated, and a single combined [=verification result=] is returned as output.
 Implementations MAY return any of the other [=verification result=]s and/or any
@@ -2185,13 +2180,13 @@ For each |proof| in |allProofs|, do the following steps:
 Let |matchingProofs| be an empty list.
               </li>
               <li>
-If |proof| contains a `previousProof` attribute and that attribute is a string,
-add the element from |allProofs| with an `id` attribute matching `previousProof`
-to `matchingProofs`. If a proof with `id` does not exist in |allProofs|, an
-error MUST be raised and SHOULD convey an error type of
+If |proof| contains a `previousProof` attribute and that attribute is a
+[=string=], add the element from |allProofs| with an `id` attribute matching
+`previousProof` to `matchingProofs`. If a proof with `id` does not exist in
+|allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
-`previousProof` attribute is an array, add each element from |allProofs| with an
-`id` attribute that matches an element of that array. If any element of
+`previousProof` attribute is a [=list=], add each element from |allProofs| with an
+`id` attribute that matches an element of that [=list=]. If any element of
 `previousProof` [=list=] has an `id` attribute that does not match the `id`
 attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
@@ -2201,9 +2196,9 @@ convey an error type of
 Let |inputDocument| be a copy of |securedDocument| with the proof value
 removed and then set |inputDocument|.|proof| to |matchingProofs|.
 
-                <p class="note">
-See the note in <a href="#add-proof-set-chain"></a> to learn what
-claims this step entails.
+                <p class="note" title="Secure document and previous proofs">
+See the note in Step 6 of Section [[[#add-proof-set-chain]]] to learn about
+what document properties and previous proofs this step secures.
                 </p>
               </li>
               <li>
@@ -2339,7 +2334,8 @@ specification might interoperate more effectively when errors occur.
 
         <p>
 When exposing these errors through an HTTP interface, implementers SHOULD use
-[[RFC9457]] to encode the error data structure. If [[RFC9457]] is used:
+[[RFC9457]] to encode the error data structure as a <dfn>ProblemDetails</dfn>
+[=map=]. If [[RFC9457]] is used:
         </p>
 
         <ul>
