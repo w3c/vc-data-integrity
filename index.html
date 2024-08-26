@@ -2252,24 +2252,30 @@ executed business rules specific to the input in the document. For more
 rationale related to this algorithm, see Section [[[#validating-contexts]]].
 This algorithm takes inputs of a document ([=map=] |inputDocument|), a set of
 known JSON-LD Contexts ([=list=] |knownContext|), and a boolean to
-recompact when unknown contexts are detected ([=boolean=] |recompact|), and
-returns a [=map=] that contains the following:
+recompact when unknown contexts are detected ([=boolean=] |recompact|).
         </p>
 
-        <ul>
-          <li>
-a status ([=boolean=] |status|)
-          </li>
-          <li>
-a validated document ([=map=] |document|) if no errors occurred
-          </li>
-          <li>
-zero or more warnings ([=list=] of [=ProblemDetails=] |warnings|)
-          </li>
-          <li>
-zero or more errors ([=list=] of [=ProblemDetails=] |errors|)
-          </li>
-        </ul>
+        <p>
+This algorithm returns a <dfn class="lint-ignore">context validation result</dfn>,
+a [=struct=] whose [=struct/items=] are:
+        </p>
+        <dl data-dfn-for="context validation result">
+          <dt><dfn data-dfn-for="context validation result">validated</dfn></dt>
+          <dd>`true` or `false`</dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">validatedDocument</dfn></dt>
+          <dd>
+<a data-cite="INFRA#nulls">Null</a>, if [=context validation result/validated=] is
+`false`; otherwise, the [=input document=]
+          </dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">warnings</dfn></dt>
+          <dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">errors</dfn></dt>
+          <dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
+        </dl>
 
         <p>
 The context validation algorithm is as follows:
@@ -2277,22 +2283,22 @@ The context validation algorithm is as follows:
 
         <ol class="algorithm">
           <li>
-Set |result|.|status| to `false`, |result|.|warnings| to an empty list,
+Set |result|.|validated| to `false`, |result|.|warnings| to an empty list,
 |result|.|errors| to an empty list, |compactionContext| to an empty list;
-and clone |inputDocument| to |result|.|document|.
+and clone |inputDocument| to |result|.|validatedDocument|.
           </li>
           <li>
-Let |contextValue| be the value of the `@context` property of |result|.|document|,
+Let |contextValue| be the value of the `@context` property of |result|.|validatedDocument|,
 which might be undefined.
           </li>
           <li>
 If |contextValue| does not deeply equal |knownContext|, any subtree in
-|result|.|document| contains an `@context` property, or any URI in
+|result|.|validatedDocument| contains an `@context` property, or any URI in
 |contextValue| dereferences to a JSON-LD Context file that does not match a
 known good value or cryptographic hash, then perform the applicable action:
             <ol class="algorithm">
               <li>
-If |recompact| is `true`, set |result|.|document| to the result
+If |recompact| is `true`, set |result|.|validatedDocument| to the result
 of running the <a data-cite="JSON-LD11-API#compaction-algorithm">
 JSON-LD Compaction Algorithm</a> with the |inputDocument| and
 |knownContext| as inputs. If the compaction fails, add at least one error
@@ -2304,8 +2310,8 @@ If |recompact| is not `true`, add at least one error to |result|.|errors|.
             </ol>
           </li>
           <li>
-If |result|.|errors| is empty, set |result|.|status| to `true`; otherwise, set
-|result|.|status| to `false`, and remove the |document| property from |result|.
+If |result|.|errors| is empty, set |result|.|validated| to `true`; otherwise, set
+|result|.|validated| to `false`, and remove the |document| property from |result|.
           </li>
           <li>
 Return the value of |result|.
