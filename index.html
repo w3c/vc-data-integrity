@@ -2525,6 +2525,14 @@ experts to fine tune their use of the library, use of those options by the gener
 application developer population is to be discouraged.
           </li>
           <li>
+Cryptographic library implementers can provide deprecated and experimental
+cryptographic functionality, but are advised to do so in a way where the
+libraries do not enable such functionality unless explicitly requested by the
+developer, such as via a library option, and if enabled, the library produces
+warnings that deprecated or experimental cryptography has been enabled for the
+application.
+          </li>
+          <li>
 Application developers are advised to choose from a number of pre-set
 cryptography library configurations and to avoid modifying cryptographic
 options and parameters, or using experimental or deprecated cryptography.
@@ -2538,15 +2546,6 @@ exposing those options and parameters to application developers who may not
 fully understand the balancing benefits and drawbacks of each option.
         </p>
 
-        <p class="issue"
-          title="Use of experimental and deprecated cryptography">
-The VCWG is seeking guidance on adding language to allow the use of experimental
-or deprecated cryptography. By default, those features will be disabled and will
-require the application developer to specifically allow use on a per-cryptographic suite
-basis. There will be requirements for all implementing libraries to throw errors
-or warnings when deprecated or experimental options are selected without the
-appropriate override flags.
-        </p>
       </section>
 
       <section>
