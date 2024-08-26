@@ -2690,31 +2690,6 @@ deliberately slow connections, thus starving connections on the server.
 Implementers are advised to consider these sorts of attacks when implementing
 defensive security strategies.
         </p>
-        <p class="issue"
-          title="Collision-resistant canonicalization requirements">
-The VCWG is seeking feedback on normative language that cryptographic suite
-implementers need to follow to ensure that they do not utilize data
-transformation mechanisms that can map to the same output. That is, given
-different inputs for canonicalization scheme #1 and canonicalization scheme #2,
-they must not produce the same output value. As an analogy, this is the same
-requirement for cryptographic hashing mechanisms and is why those schemes are
-designed to be collision resistant. Cryptographic canonicalization mechanisms
-have the same requirement. At present, this isn't a problem because the three
-expected canonicalization schemes &mdash; the Universal RDF Dataset
-Canonicalization Algorithm 2015 [[?RDF-CANON]], JSON Canonicalization
-Scheme [[?RFC8785]], and a theoretical future base-encoding canonicalization
-&mdash; have entirely different outputs.
-        </p>
-        <p class="issue"
-          title="Avoiding the pitfalls of XML Canonicalization">
-The VCWG is seeking feedback on whether to explain why modern canonicalization
-schemes are simpler than the far more complex XML Canonicalization schemes of
-the early 2000s. Some readers seem to be under the impression that all
-canonicalization is difficult and has to be avoided at all costs (including costs
-to application developers). The WG would like to understand if it would be helpful
-to include a section explaining why some simpler data syntaxes (such as JSON) are
-easier to canonicalize than more complex data syntaxes (such as XML).
-        </p>
       </section>
 
       <section>
