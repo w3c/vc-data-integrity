@@ -2182,8 +2182,8 @@ Let |matchingProofs| be an empty list.
               <li>
 If |proof| contains a `previousProof` attribute and that attribute is a
 [=string=], add the element from |allProofs| with an `id` attribute matching
-`previousProof` to `matchingProofs`. If a proof with `id` does not exist in
-|allProofs|, an error MUST be raised and SHOULD convey an error type of
+`previousProof` to `matchingProofs`. If a proof with `id` equal to `previousProof`
+does not exist in |allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
 `previousProof` attribute is a [=list=], add each element from |allProofs| with an
 `id` attribute that matches an element of that [=list=]. If any element of
