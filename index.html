@@ -10,6 +10,8 @@
      -->
     <script src='//www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <script class='remove' src="./common.js"></script>
+    <script class="remove"
+      src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-vc@3.2.0/dist/main.js"></script>
 
     <script type="text/javascript" class="remove">
       var respecConfig = {
@@ -168,9 +170,9 @@
               status: "Internet-Draft",
               publisher: "IETF"
             },
-            "VC-SPECS": {
-              title: "The Verifiable Credential Specifications Directory",
-              href: "https://w3c.github.io/vc-specs-dir/",
+            "VC-EXTENSIONS": {
+              title: "Verifiable Credential Extensions",
+              href: "https://w3c.github.io/vc-extensions/",
               authors: [
                 "Manu Sporny"
               ],
@@ -210,8 +212,11 @@
               publisher:  "The IETF OAuth Working Group"
             }
           },
-          postProcess: [restrictRefs],
-          xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0"],
+          postProcess: [
+            restrictRefs,
+            window.respecVc.createVcExamples
+          ],
+          xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0", "CONTROLLER-DOCUMENT"],
           otherLinks: [{
             key: "Related Specifications",
             data: [{
@@ -262,13 +267,40 @@ pre .comment {
 ol.algorithm { counter-reset:numsection; list-style-type: none; }
 ol.algorithm li { margin: 0.5em 0; }
 ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
+
+table.simple {
+    border-collapse: collapse;
+    margin: 25px 0;
+    min-width: 400px;
+    border: 1px solid #dddddd;
+}
+table.simple thead tr {
+    background-color: #005a9c;
+    color: #ffffff;
+    text-align: left;
+}
+table.simple th,
+table.simple td {
+    padding: 12px 15px;
+    vertical-align: top;
+    text-align: left;
+}
+table.simple tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+table.simple tbody tr:nth-of-type(even) {
+    background-color: #00000008;
+}
+table.simple tbody tr:last-of-type {
+    border-bottom: 2px solid #005a9c;
+}
     </style>
 </head>
 <body>
     <section id='abstract'>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of Verifiable Credentials and similar types of constrained digital
+integrity of [=verifiable credentials=] and similar types of constrained digital
 documents using cryptography, especially through the use of digital
 signatures and related mathematical proofs.
       </p>
@@ -292,7 +324,7 @@ implementation report</a>.
       <h2>Introduction</h2>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of Verifiable Credentials and similar types of constrained digital
+integrity of [=verifiable credentials=] and similar types of constrained digital
 documents using cryptography, especially through the use of digital signatures
 and related mathematical proofs. Cryptographic proofs enable functionality that
 is useful to implementors of distributed systems. For example, proofs can be
@@ -302,12 +334,13 @@ used to:
       <ul>
         <li>
 Make statements that can be shared without loss of trust, because their
-authorship can be verified by a third party, for example as part of Verifiable
-Credentials [[?VC-DATA-MODEL-2.0]] or social media posts.
+authorship can be verified by a third party, for example as part of a
+[=verifiable credential=] [[?VC-DATA-MODEL-2.0]], [=verifiable presentation=],
+or social media post.
         </li>
         <li>
 Authenticate as an entity identified by a particular identifier, for example, as
-the subject identified by a Decentralized Identifier (DID) [[DID-CORE]].
+the subject identified by a Decentralized Identifier (DID) [[?DID-CORE]].
         </li>
         <li>
 Delegate authorization for actions in a remote execution environment, via
@@ -382,9 +415,11 @@ desired threshold of trust. This process is conceptually similar to the way a
 wax seal can be used on an envelope containing a letter to establish trust in
 the sender and show that the letter has not been tampered with in transit.
 Examples of proof serialization functions include
-<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
-and
-<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+<a href="https://en.wikipedia.org/wiki/Digital_signature">
+digital signatures</a>,
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>, and
+<a href="https://en.wikipedia.org/wiki/Proof_of_knowledge">
+proofs of knowledge</a>, in general.
         </p>
 
         <p>
@@ -418,9 +453,11 @@ conceptually the same as described above.
 by a <dfn>proof verification algorithm</dfn> that applies a cryptographic proof
 verification function to see if the input data can be trusted. Possible proof
 verification functions include
-<a href="https://en.wikipedia.org/wiki/Digital_signature">digital signatures</a>
-and
-<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>.
+<a href="https://en.wikipedia.org/wiki/Digital_signature">
+digital signatures</a>,
+<a href="https://en.wikipedia.org/wiki/Proof_of_stake">proofs of stake</a>, and
+<a href="https://en.wikipedia.org/wiki/Proof_of_knowledge">
+proofs of knowledge</a>, in general.
         </p>
 
         <p>
@@ -494,11 +531,11 @@ the benefits of such an approach.
         </dl>
 
       <p class="note" title="Application of technology to broader use cases">
-While this specification primarily focuses on Verifiable Credentials, the
-design of this technology is generalized, such that it can be used for
-non-Verifiable Credential use cases. In these instances, implementers are
-expected to perform their own due diligence and expert review as to the
-applicability of the technology to their use case.
+While this specification primarily focuses on [=verifiable credentials=], the
+design of this technology is generalized, such that it can be used for other use
+cases. In these instances, implementers are expected to perform their own due
+diligence and expert review as to the applicability of the technology to their
+use case.
       </p>
 
       </section>
@@ -509,8 +546,8 @@ A <dfn>conforming secured document</dfn> is any [=byte sequence=] that can be
 converted to a
 <a data-cite="INFRA#parse-json-bytes-to-a-javascript-value">
 JSON document</a> that follows the relevant normative requirements in
-Sections [[[#proofs]]], [[[#proof-purposes]]], [[[#contexts-and-vocabularies]]],
-and [[[#dataintegrityproof]]].
+Sections [[[#proofs]]], [[[#proof-purposes]]], [[[#resource-integrity]]],
+[[[#contexts-and-vocabularies]]], and [[[#dataintegrityproof]]].
         </p>
 
         <p>
@@ -541,49 +578,25 @@ is included whenever they appear in this specification.
           <dt><dfn class="export">data integrity proof</dfn></dt>
           <dd>
 A set of attributes that represent a digital proof and the parameters required
-to verify it.
+to verify it. A <strong>digital signature</strong> is a type of data integrity
+proof.
           </dd>
           <dt><dfn>public key</dfn></dt>
           <dd>
 Cryptographic material that can be used to verify digital proofs created with a
-corresponding [=private key=].
+corresponding [=secret key=].
           </dd>
-          <dt><dfn>private key</dfn></dt>
+          <dt><dfn>secret key</dfn></dt>
           <dd>
-Cryptographic material that can be used to generate digital proofs.
-          </dd>
-          <dt><dfn>proof type</dfn></dt>
-          <dd>
-A specified set of cryptographic primitives bundled together into a
-[=cryptographic suite=] for the purposes of safety and convenience, by
-cryptographers for developers (see the section on
-<a href="https://www.w3.org/TR/vc-data-integrity/#cryptographic-suites">cryptographic suites</a>).
+Cryptographic material, sometimes referred to as a
+<strong>private key</strong>, that is not to be shared with anyone, and is used
+to generate digital proofs and/or digital signatures.
           </dd>
           <dt><dfn class="export">proof purpose</dfn></dt>
           <dd>
 The specific intent for the proof; the reason why an entity created it. The
 protected declaration acts as a safeguard to prevent the proof from being
 misused for a purpose other than the one it was intended for.
-          </dd>
-          <dt><dfn>challenge</dfn></dt>
-          <dd>
-A random or pseudo-random value used by some authentication protocols to
-mitigate replay attacks.
-          </dd>
-          <dt><dfn>domain</dfn></dt>
-          <dd>
-A string value that specifies the operational domain of a digital proof.
-This could be an Internet domain name like <code>example.com</code>, an
-ad-hoc value such as <code>mycorp-level3-access</code>, or a very
-specific transaction value like <code>8zF6T8J34qP3mqP</code>. A signer could
-include a [=domain=] in its digital proof to restrict its use
-to particular target, identified by the specified [=domain=].
-          </dd>
-
-          <dt><dfn data-lt="authenticated|authenticate">authentication</dfn></dt>
-          <dd>
-A process by which an entity can prove to a verifier that it has a specific
-attribute or controls a specific secret.
           </dd>
 
           <dt><dfn class="export" data-lt="cryptosuite">cryptographic suite</dfn></dt>
@@ -595,33 +608,18 @@ their identifiers, and other related properties. See Section
 [[[#cryptographic-suites]]] for further detail.
           </dd>
 
-          <dt><dfn class="export" data-lt="controller(s)">controller</dfn></dt>
+          <dt><dfn>controller document</dfn></dt>
 
           <dd>
-An entity that has the capability to make changes to a
-[=controller document=].
-          </dd>
-
-          <dt><dfn class="export" data-lt="controller documents">controller document</dfn></dt>
-
-          <dd>
-A set of data that specifies one or more relationships between a
-[=controller=] and a set of data, such as a set of public cryptographic keys.
-          </dd>
-
-          <dt><dfn data-lt="subjects">subject</dfn></dt>
-
-          <dd>
-The entity identified by the `id` property in a [=controller document=].
-Anything can be a subject: person, group, organization, physical thing, digital
-thing, logical thing, etc.
+A document that contains public cryptographic material as defined in the
+[[[CONTROLLER-DOCUMENT]]] specification.
           </dd>
 
           <dt><dfn data-lt="verifier|verifiers|verifier's">verifier</dfn></dt>
           <dd>
 A role an entity performs by receiving data containing one or more
 [=data integrity proofs=] and then determining whether or not the proof
-is valid.
+is legitimate.
           </dd>
 
           <dt><dfn class="export">verification method</dfn></dt>
@@ -629,9 +627,9 @@ is valid.
           <dd>
             <p>
 A set of parameters that can be used together with a process to independently
-verify a proof. For example, a cryptographic public key can be used as a
+verify a proof. For example, a cryptographic [=public key=] can be used as a
 verification method with respect to a digital signature; in such usage, it
-verifies that the signer possessed the associated cryptographic private key.
+verifies that the signer possessed the associated cryptographic [=secret key=].
             </p>
             <p>
 "Verification" and "proof" in this definition are intended to apply broadly. For
@@ -663,57 +661,58 @@ An expression of the relationship between the [=subject=] and a
 
       <p>
 This section specifies the data model that is used for expressing
-[=data integrity proofs=], [=controller documents=], and
-[=verification methods=].
+[=data integrity proofs=] and the integrity of related resources.
       </p>
 
       <p>
 All of the data model properties and types in this specification map to URLs.
-The vocabulary where these URLs are defined is the [[?SECURITY-VOCABULARY]]. The
-explicit mechanism that is used to perform this mapping in a secured document is
-the `@context` property.
+The vocabulary where these URLs are defined is the [[[?SECURITY-VOCABULARY]]].
+The explicit mechanism that is used to perform this mapping in a secured
+document is the `@context` property.
       </p>
 
       <p>
-The mapping mechanism is defined by JSON-LD [[JSON-LD11]]. To ensure a document
-can be interoperably consumed without the use of a JSON-LD library, document authors
-are advised to ensure that domain experts have 1) specified the expected order for
-all values associated with a `@context` property, 2) published cryptographic hashes
-for each `@context` file, and 3) deemed that the contents of each `@context` file
-are appropriate for the intended use case.
+The mapping mechanism is defined by [[[JSON-LD11]]]. To ensure a document can be
+interoperably consumed without the use of a JSON-LD library, document authors
+are advised to ensure that domain experts have 1) specified the expected order
+for all values associated with a `@context` property, 2) published cryptographic
+hashes for each `@context` file, and 3) deemed that the contents of each
+`@context` file are appropriate for the intended use case.
       </p>
 
       <p>
-When a document is processed by a non-JSON-LD processor and there is a
-requirement to use the same semantics as those used in a JSON-LD environment,
-implementers are advised to 1) enforce the expected order and values in the
-`@context` property, and 2) ensure that each `@context` file matches the known
-cryptographic hashes for each `@context` file.
+When a document is processed by a processor that does not utilize JSON-LD
+libraries, and there is a requirement to use the same semantics as those used in
+a JSON-LD environment, implementers are advised to 1) enforce the expected order
+and values in the `@context` property, and 2) ensure that each `@context` file
+matches the known cryptographic hashes for each `@context` file.
       </p>
 
       <p>
-Using static, versioned `@context` files with published cryptographic hashes in
+Using static, versioned, `@context` files with published cryptographic hashes in
 conjunction with JSON Schema is one acceptable approach to implementing the
 mechanisms described above, which ensures proper term identification, typing,
-and order, when a non-JSON-LD processor is used.
+and order, when a processor that does not utilize a JSON-LD library is used.
+See the section on
+<a data-cite="?VC-DATA-MODEL-2.0#type-specific-credential-processing">
+Type-Specific Processing</a> in [[[?VC-DATA-MODEL-2.0]]] for more details.
       </p>
 
       <section>
         <h3>Proofs</h3>
         <p>
 A [=data integrity proof=] provides information about the proof mechanism,
-parameters required to verify that proof, and the proof value itself. All of this
-information is provided using Linked Data vocabularies such as the
-[[?SECURITY-VOCABULARY]].
+parameters required to verify that proof, and the proof value itself. All of
+this information is provided using Linked Data vocabularies such as
+[[[?SECURITY-VOCABULARY]]].
         </p>
 
         <p>
 When expressing a [=data integrity proof=] on an object, a
-<dfn class="lint-ignore">`proof`</dfn> property MUST be used.
-The `proof` property within a Verifiable Credential is a named graph.
-If present, its
-value MUST be either a single object, or an unordered set of objects, expressed
-using the properties below:
+<dfn class="lint-ignore">`proof`</dfn> property MUST be used. The `proof`
+property within a [=verifiable credential=] is a [=named graph=]. If present,
+its value MUST be either a single object, or an unordered set of objects,
+expressed using the properties below:
         </p>
 
         <dl style="margin-left: 1em;">
@@ -726,30 +725,28 @@ The usage of this property is further explained in Section [[[#proof-chains]]].
 
           <dt>type</dt>
           <dd>
-The specific [=proof type=] used for the cryptographic proof MUST be
-specified as a string that maps to a URL [[URL]]. Examples of proof types
-include `DataIntegrityProof` and `Ed25519Signature2020`.
-Proof types determine what other fields are required to secure and
-verify the proof.
+The specific type of proof MUST be specified as a [=string=] that maps to a URL
+[[URL]]. Examples of proof types include `DataIntegrityProof` and
+`Ed25519Signature2020`. Proof types determine what other fields are required to
+secure and verify the proof.
           </dd>
 
           <dt><dfn class="lint-ignore">proofPurpose</dfn></dt>
           <dd>
-The reason the proof was created MUST be specified as a string that maps to a
+The reason the proof was created MUST be specified as a [=string=] that maps to a
 URL [[URL]]. The proof purpose acts as a safeguard to prevent the proof from
 being misused by being applied to a purpose other than the one that was
 intended. For example, without this value the creator of a proof could be
 tricked into using cryptographic material typically used to create a Verifiable
-Credential (`assertionMethod`) during a login process
-(`authentication`) which would then result in the creation of a
-Verifiable Credential they never meant to create instead of the intended action,
-which was to merely logging into a website.
+Credential (`assertionMethod`) during a login process (`authentication`) which
+would then result in the creation of a [=verifiable credential=] they never meant to
+create instead of the intended action, which was to merely log in to a website.
           </dd>
 
           <dt>verificationMethod</dt>
           <dd>
 A verification method is the means and information needed to verify the proof.
-If included, the value MUST be a string that maps to a [[URL]]. Inclusion of
+If included, the value MUST be a [=string=] that maps to a [[URL]]. Inclusion of
 `verificationMethod` is OPTIONAL, but if it is not included, other properties
 such as `cryptosuite` might provide a mechanism by which to obtain the information
 necessary to verify the proof. Note that when `verificationMethod` is
@@ -763,7 +760,7 @@ full description of the verification method.
           <dt>cryptosuite</dt>
           <dd>
 An identifier for the cryptographic suite that can be used to verify the proof. See
-[[[#cryptographic-suites]]] for more information. If the proof type is
+[[[#cryptographic-suites]]] for more information. If the proof `type` is
 `DataIntegrityProof`, `cryptosuite` MUST be specified; otherwise,  `cryptosuite`
 MAY be specified. If specified, its value MUST be a string.
           </dd>
@@ -773,8 +770,9 @@ MAY be specified. If specified, its value MUST be a string.
 The date and time the proof was created is OPTIONAL and, if included, MUST be
 specified as an [[XMLSCHEMA11-2]] `dateTimeStamp` string, either in Universal
 Coordinated Time (UTC), denoted by a Z at the end of the value, or with a time
-zone offset relative to UTC. Time values that are incorrectly serialized without
-an offset MUST be interpreted as UTC.
+zone offset relative to UTC. A [=conforming processor=] MAY chose to consume
+time values that were incorrectly serialized without an offset. Incorrectly
+serialized time values without an offset are to be interpreted as UTC.
           </dd>
 
           <dt id="defn-proof-expires">expires</dt>
@@ -782,8 +780,10 @@ an offset MUST be interpreted as UTC.
 The `expires` property is OPTIONAL and, if present, specifies when the proof
 expires. If present, it MUST be an [[XMLSCHEMA11-2]] `dateTimeStamp` string,
 either in Universal Coordinated Time (UTC), denoted by a Z at the end of the
-value, or with a time zone offset relative to UTC. Time values that are
-incorrectly serialized without an offset MUST be interpreted as UTC.
+value, or with a time zone offset relative to UTC. A [=conforming processor=]
+MAY chose to consume time values that were incorrectly serialized without an
+offset. Incorrectly serialized time values without an offset are to be
+interpreted as UTC.
           </dd>
 
           <dt id="defn-domain">domain</dt>
@@ -800,9 +800,9 @@ include: `domain.example` (DNS domain), `https://domain.example:8443`
 `b31d37d4-dd59-47d3-9dd8-c973da43b63a` (UUID).
           </dd>
 
-          <dt id="defn-challenge">challenge</dt>
+          <dt id="defn-challenge"><dfn>challenge</dfn></dt>
           <dd>
-A string value that SHOULD be included in a proof if a `domain` is specified.
+A [=string=] value that SHOULD be included in a proof if a `domain` is specified.
 The value is used once for a particular [=domain=] and window of time. This
 value is used to mitigate replay attacks. Examples of a challenge value include:
 `1235abcd6789`, `79d34551-ae81-44ae-823b-6dadbab9ebd4`, and `ruby`.
@@ -810,14 +810,14 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 
           <dt><dfn class="lint-ignore">proofValue</dfn></dt>
           <dd>
-A string value that contains the base-encoded binary data necessary to verify
-the digital proof using the `verificationMethod` specified. The contents of the
-value MUST be expressed with a header and encoding as described in Section
-<a data-cite="CONTROLLER-DOCUMENT#multibase-0">2.4 Multibase</a> of
-the [[[CONTROLLER-DOCUMENT]]] specification. The contents of this value are
-determined by a specific cryptosuite and set to the <em>proof value</em>
-generated by the <a href="#add-proof">Add Proof Algorithm</a> for that
-cryptosuite. Alternative properties with different encodings specified by the
+A [=string=] value that expresses base-encoded binary data necessary to verify the
+digital proof using the `verificationMethod` specified. The value MUST use a
+header and encoding as described in Section
+<a data-cite="CONTROLLER-DOCUMENT#multibase-0">2.4 Multibase</a> of the
+[[[CONTROLLER-DOCUMENT]]] specification to express the binary data.
+The contents of this value are determined by a specific cryptosuite and set
+to the <em>proof value</em> generated by the <a href="#add-proof">Add Proof Algorithm</a>
+for that cryptosuite. Alternative properties with different encodings specified by the
 cryptosuite MAY be used, instead of this property, to encode the data necessary
 to verify the digital proof.
           </dd>
@@ -833,7 +833,7 @@ Section [[[#proof-chains]]].
 
           <dt><dfn class="lint-ignore">nonce</dfn></dt>
           <dd>
-An OPTIONAL string value supplied by the proof creator. One use of this
+An OPTIONAL [=string=] value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
@@ -926,26 +926,6 @@ expectations of the individual. See
 representing time values to individuals.
         </p>
 
-<div class="issue">Add a note indicating that selective disclosure proof
-mechanisms can be compatible with Data Integrity; for example,
-an algorithm could produce a merkle tree from a canonicalized set of
-N-Quads and then sign the root hash. Disclosure would involve including
-the merkle paths for each N-Quad that is to be revealed. This mechanism
-would merely consume the normalized output differently (this, and the
-proof mechanism would be modifications to this core spec). It might also
-be necessary to generate proof parameters such as a private key/seed
-that can be used along with an algorithm to deterministically generate
-nonces that are concatenated with each N-Quad to prevent rainbow
-table or similar attacks.</div>
-
-<div class="issue">Add a note indicating that this specification should not
-be construed to indicate that public key controllers should be restricted to a
-single public key or that systems that use this spec and involve real people
-should identify each person as only ever being a single entity rather than
-perhaps N entities with M keys. There are no such restrictions and in many
-cases those kinds of restrictions are ill-advised due to privacy
-considerations.</div>
-
       <p>
 The Data Integrity specification supports the concept of multiple
 proofs in a single document. There are two types of multi-proof
@@ -966,9 +946,10 @@ represented by associating a set of proofs with the `proof` key in a document.
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
     "https://w3id.org/security/data-integrity/v2"
-],
+  ],
   "myWebsite": "https://hello.world.example/",
-  "proof": [{
+  <span class="highlight">"proof": [{
+    <span class="comment">// This is one of the proofs in the set</span>
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T19:23:24Z",
@@ -976,13 +957,14 @@ represented by associating a set of proofs with the `proof` key in a document.
     "proofPurpose": "assertionMethod",
     "proofValue": "z4oey5q2M3XKaxup3tmzN4DRFTLVqpLMweBrSxMY2xHX5XTYVQeVbY8<wbr>nQAVHMrXFkXJpmEcqdoDwLWxaqA3Q1geV6"
   }, {
+    <span class="comment">// This is the other proof in the set</span>
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
     "created": "2020-11-05T13:08:49Z",
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3gK<wbr>S2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
     "proofValue": "z5QLBrp19KiWXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ6Qnzr5CG9<wbr>876zNht8BpStWi8H2Mi7XCY3inbLrZrm95"
-  }]
+  }]</span>
 }
         </pre>
 
@@ -995,7 +977,7 @@ A <dfn>proof chain</dfn> is useful when the same data needs to be signed by
 multiple entities and the order of when the proofs occurred matters, such as in
 the case of a notary counter-signing a proof that had been created on a
 document. A proof chain, where proof order needs to be preserved, is expressed
-by providing at least one proof with an `id`, such as a UUID as a URN, and
+by providing at least one proof with an `id`, such as a UUID [[?RFC9562]], and
 another proof with a `previousProof` value that identifies the previous proof.
         </p>
         <pre class="example nohighlight"
@@ -1006,7 +988,8 @@ another proof with a `previousProof` value that identifies the previous proof.
     "https://w3id.org/security/data-integrity/v2"
 ],
   "myWebsite": "https://hello.world.example/",
-  "proof": [{
+  <span class="highlight">"proof": [{
+    <span class="comment">// The 'id' value identifies this specific proof</span>
     "id": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7",
     "type": "DataIntegrityProof",
     "cryptosuite": "eddsa-rdfc-2022",
@@ -1021,8 +1004,9 @@ another proof with a `previousProof` value that identifies the previous proof.
     "verificationMethod": "https://pfps.example/issuer/2#z6MkGskxnGjLrk3g<wbr>KS2mesDpuwRBokeWcmrgHxUXfnncxiZP",
     "proofPurpose": "assertionMethod",
     "proofValue": "z6Qnzr5CG9876zNht8BpStWi8H2Mi7XCY3inbLrZrm955QLBrp19Ki<wbr>WXerb8ByPnAZ9wujVFN8PDsxxXeMoyvDqhZ",
+    <span class="comment">// The 'previousProof' value identifies which proof is verified before this one</span>
     "previousProof": "urn:uuid:60102d04-b51e-11ed-acfe-2fcd717666a7"
-  }]
+  }]</span>
 }
         </pre>
 
@@ -1041,7 +1025,7 @@ document.
         </p>
 
         <p>
-The information contained in an unsecured document before a
+The information contained in an input document before a
 [=data integrity proof=] is added to the document is expressed in one or more
 graphs. To ensure that information from different [=data integrity proofs=] is not
 accidentally co-mingled, the concept of a [=proof graph=] is used to encapsulate
@@ -1072,21 +1056,22 @@ two such objects are expressing information about the same entity.
 
         <p>
 A proof that describes its purpose helps prevent it from being misused for some
-other purpose.
+other purpose. [=Proof purposes=] enable [=verifiers=] to know the
+intent of the creator of a proof so a message cannot be accidentally abused for
+another purpose. For example, a message signed for the purpose of merely making an
+assertion (perhaps intended to be widely shared) being abused as a
+message to authenticate to a service or take some action (such as invoking a
+capability to do something).
         </p>
 
-        <p class="issue">
-Add a mention of JWK's `key_ops` parameter and WebCrypto's
-`KeyUsage` restrictions; explain that Proof Purpose serves a
-different goal and allows for finer-grained restrictions.
-<br><br>
-Dave Longley suggested that proof purposes enable verifiers to know what the
-proof creator's intent was so the message can't be accidentally abused for
-another purpose, e.g., a message signed for the purpose of merely making an
-assertion (and thus perhaps intended to be widely shared) being abused as a
-message to authenticate to a service or take some action (invoke a capability).
-It's a goal to keep the number of them limited to as few categories as are
-really needed to accomplish this goal.
+        <p>
+It is important to note that [=proof purposes=] are a different mechanism from
+the `key_ops` restrictions in [[[?RFC7517]]], the `KeyUsage` restriction in the
+[[[?WEBCRYPTOAPI]]] and the [[[?RFC5280]]]. [=Proof purposes=] are expressions
+on why a [=proof=] was created and its intended domain of usage whereas the
+other mechanisms mentioned are intended to limit what a private key can be used
+to do. A [=proof purpose=] "travels" with the [=proof=] while a key restriction
+does not.
         </p>
 
         <p>
@@ -1094,39 +1079,34 @@ The following is a list of commonly used [=proof purpose=] values.
         </p>
 
         <dl>
-          <dt>authentication</dt>
+          <dt><dfn class="external">authentication</dfn></dt>
           <dd>
 Indicates that a given proof is only to be used for the purposes of an
 authentication protocol.
           </dd>
-          <dt>assertionMethod</dt>
+          <dt><dfn class="external lint-ignore">assertionMethod</dfn></dt>
           <dd>
 Indicates that a proof can only be used for making assertions, for example
-signing a Verifiable Credential.
+signing a [=verifiable credential=].
           </dd>
-          <dt>keyAgreement</dt>
+          <dt><dfn class="external lint-ignore">keyAgreement</dfn></dt>
           <dd>
 Indicates that a proof is used for for key agreement protocols, such as
 Elliptic Curve Diffie Hellman key agreement used by popular encryption
 libraries.
           </dd>
-          <dt>capabilityDelegation</dt>
+          <dt><dfn class="external lint-ignore">capabilityDelegation</dfn></dt>
           <dd>
 Indicates that the proof can only be used for delegating capabilities. See the
 Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
-          <dt>capabilityInvocation</dt>
+          <dt><dfn class="external lint-ignore">capabilityInvocation</dfn></dt>
           <dd>
 Indicates that the proof can only be used for invoking capabilities. See the
 Authorization Capabilities [[?ZCAP]] specification for more detail.
           </dd>
         </dl>
 
-        <p>
-Note: The Authorization Capabilities [[?ZCAP]] specification defines additional
-proof purposes for that use case, such as `capabilityInvocation` and
-`capabilityDelegation`.
-        </p>
       </section>
 
       <section>
@@ -1145,18 +1125,16 @@ To enable confirmation that a resource referenced by a [=conforming secured docu
 has not changed since the document was secured, an implementer MAY include a
 property named <dfn class="lint-ignore">`digestMultibase`</dfn> in any object
 that includes an `id` property. If present, the `digestMultibase` value MUST be
-a single string value, or an array of string values, each of which is a
+a single [=string=] value, or an [=list=] of [=string=] values, each of which is a
 <a data-cite="CONTROLLER-DOCUMENT#multibase">Multibase</a>-encoded
 <a data-cite="CONTROLLER-DOCUMENT#multihash">Multihash</a> value.
         </p>
         <p>
-JSON-LD context authors are expected to add `digestMultibase` to contexts that will
-be used in documents that refer to other resources and to include an associated
-cryptographic digest. For example, the [[[VC-DATA-MODEL-2.0]]] refers to
-context (`https://www.w3.org/ns/credentials/v2`) which includes
-`digestMultibase`, and the [[[VC-DATA-MODEL-2.0]]] includes
-<a data-cite="VC-DATA-MODEL-2.0#base-context">the hexadecimal encoded
-SHA2-256 digest value</a> of that context document.
+JSON-LD context authors are expected to add `digestMultibase` to contexts that
+will be used in documents that refer to other resources and to include an
+associated cryptographic digest. For example, the [[[?VC-DATA-MODEL-2.0]]] base
+context (`https://www.w3.org/ns/credentials/v2`) includes the
+`digestMultibase` property.
         </p>
 
         <p>
@@ -1169,7 +1147,7 @@ An example of a resource integrity protected object is shown below:
   ...
   "image": {
     "id": "https://university.example.org/images/58473",
-    "digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"
+    <span class="highlight">"digestMultibase": "zQmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n"</span>
   },
   ...
 }
@@ -1185,6 +1163,364 @@ choosing a hash algorithm that is appropriate for their use case.
         </p>
 
       </section>
+
+      <section>
+        <h2>Contexts and Vocabularies</h2>
+
+        <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
+This section lists cryptographic hash values that might change during the
+Candidate Recommendation phase based on implementer feedback that requires
+the referenced files to be modified.
+        </p>
+        <p>
+Implementations that perform JSON-LD processing MUST treat the following
+JSON-LD context URLs as already resolved, where the resolved document matches
+the corresponding hash values below:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <th>Context URL and Hash</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="white-space: nowrap;">
+<strong>URL:</strong> https://w3id.org/security/data-integrity/v2<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/data-integrity/v2"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+<strong>URL:</strong> https://w3id.org/security/multikey/v1<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/multikey/v1"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+            <tr>
+              <td style="white-space: nowrap;">
+<strong>URL:</strong> https://w3id.org/security/jwk/v1<br>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3id.org/security/jwk/v1"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+It is possible to confirm the cryptographic digests listed above by running a
+command like the following (replacing `&lt;DOCUMENT_URL>` with the appropriate
+value) through a modern UNIX-like OS command line interface: `curl -sL -H
+"Accept: application/ld+json" &lt;DOCUMENT_URL> | openssl dgst -sha256`
+        </p>
+
+        <p>
+The security vocabulary terms that the JSON-LD contexts listed above resolve
+to are in the <a href="https://w3id.org/security">https://w3id.org/security#</a>
+namespace. That is, all security terms in this vocabulary are of the form
+`https://w3id.org/security#TERM`, where `TERM` is the name of a term.
+        </p>
+
+        <p>
+Implementations that perform RDF processing MUST treat
+the JSON-LD serialization of the vocabulary URL as already dereferenced, where the dereferenced document matches
+the corresponding hash value below.
+        </p>
+
+        <p class="note">
+Beyond the security terms defined by this specification, the
+<a href="https://w3id.org/security">https://w3id.org/security#</a> namespace
+also includes the terms defined in the [[[CONTROLLER-DOCUMENT]]] [[CONTROLLER-DOCUMENT]]
+specification, with the corresponding mappings in the context files listed above.
+        </p>
+
+        <p>
+When dereferencing the
+<a href="https://w3id.org/security">https://w3id.org/security#</a> URL,
+the media type of the data that is returned depends on HTTP content negotiation. These are as follows:
+        </p>
+
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Media Type</th>
+              <th>Description and Hash</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+application/ld+json
+              </td>
+              <td>
+The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
+
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+text/turtle
+              </td>
+              <td>
+The vocabulary in Turtle format [[?TURTLE]].<br><br>
+
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+text/html
+              </td>
+              <td>
+The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
+
+
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash"
+data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html"
+data-hash-format="openssl dgst -sha256" /></code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+It is possible to confirm the cryptographic digests listed above by running
+a command like the following (replacing `&lt;MEDIA_TYPE>` and `&lt;DOCUMENT_URL>`
+with the appropriate values) through a modern UNIX-like OS command line interface:
+`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -sha256`
+        </p>
+
+        <p>
+Authors of application-specific vocabularies and specifications SHOULD ensure
+that their JSON-LD context and vocabulary files are permanently cacheable
+using the approaches to caching described above or a functionally equivalent
+mechanism.
+        </p>
+
+        <p>
+Implementations MAY load application-specific JSON-LD context files from the
+network during development, but SHOULD permanently cache JSON-LD context files
+used by [=conforming secured documents=] in production settings, to increase
+their security and privacy characteristics. Goals of processing speed MAY be
+achieved through caching approaches such as those described above or
+functionally equivalent mechanisms.
+        </p>
+        <p>
+Some applications, such as digital wallets, that are capable of holding arbitrary
+[=verifiable credentials=] or other data-integrity-protected documents, from
+any issuer and using any contexts, might need to be able to load externally
+linked resources, such as JSON-LD context files, in production settings. This is
+expected to increase user choice, scalability, and decentralized upgrades in the
+ecosystem over time. Authors of such applications are advised to read the
+security and privacy sections of this document for further considerations.
+        </p>
+
+        <p>
+For further information regarding processing of JSON-LD contexts and
+vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
+Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
+Verifiable Credentials v2.0: Vocabularies</a>.
+        </p>
+
+        <section>
+          <h3>Validating Contexts</h3>
+
+          <p>
+It is necessary to ensure that a consuming application has explicitly approved
+of the types, and therefore the semantics, of input documents that it will
+process. Not checking JSON-LD context values against known good values can lead
+to security vulnerabilities, due to variance in the semantics that they convey.
+Applications MUST use the algorithm in Section [[[#context-validation]]], or one
+that achieves equivalent protections, to validate contexts in a [=conforming
+secured document=]. Context validation MUST be run <em>after</em> running the
+applicable algorithm in either Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]].
+          </p>
+
+          <p>
+While the algorithm described in Section [[[#context-validation]]] provides one
+way of checking context values, and one optional way of safely processing
+unknown context values, implementers MAY use alternative approaches, or a
+different ordering of the steps, that provide the same protections.
+          </p>
+
+          <p>
+For example, if no JSON-LD processing is to occur, then, rather than performing
+this check, an application could follow the guidance in whatever trusted
+documentation is provided out of band for properly understanding the semantics
+of that type of document.
+          </p>
+
+          <p>
+Another approach would be to configure an application to use a JSON-LD Context
+loader, sometimes referred to as a document loader, to use only local copies of
+approved context files. This would guarantee that neither the context files nor
+their cryptographic hashes would ever change, effectively resulting in the same
+result as the algorithm in Section [[[#context-validation]]].
+          </p>
+
+          <p>
+Another alternative approach, also effectively equivalent to the algorithm in
+Section [[[#context-validation]]], would be for an application to keep a list of
+well known context URLs and their associated approved cryptographic hashes,
+without storing every context file locally. This would allow these contexts to
+be safely loaded from the network without compromising the security expectations
+of the application.
+          </p>
+
+          <p>
+Yet another valid approach would be for a transmitting application to
+<a data-cite="JSON-LD11-API#compaction-algorithm">compact</a> a document to
+exactly what a receiving application requests, via a protocol such as one
+requesting a [=verifiable presentation=], omitting additional sender-specific
+context values that were used when securing the original document. As long as
+the cryptography suite's verification algorithm provides a successful
+verification result, such transformations are valid and would result in full
+URLs for terms that were previously compacted by the omitted context. That is, a
+term that was previously compacted to `foo` based on a sender-supplied context
+that is unknown to a receiver (e.g., ``https://ontology.example/v1`) would
+instead be "expanded" to a URL like `https://ontology.example#foo`, which would
+then be "compacted" to the same URL, once the unknown context is omitted and the
+JSON-LD compaction algorithm is applied by the receiving application.
+          </p>
+
+        </section>
+
+        <section>
+          <h3>Context Injection</h3>
+
+          <p>
+The `@context` property is used to ensure that implementations are using the
+same semantics when terms in this specification are processed. For example, this
+can be important when properties like `type` are processed and its value, such
+as `DataIntegrityProof`, are used.
+          </p>
+
+          <p>
+When an application is securing a document, if an `@context` property is not
+provided in the document or the Data Integrity terms used in the document are
+not mapped by existing values in the `@context` property, implementations SHOULD
+inject or append an `@context` property with a value of
+`https://w3id.org/security/data-integrity/v2` or one or more contexts with at
+least the same declarations, such as the Verifiable Credential Data Model v2.0
+context (`https://www.w3.org/ns/credentials/v2`).
+          </p>
+
+          <p>
+Implementations that do not intend to use JSON-LD processing MAY choose to not
+include an `@context` declaration at the top-level of the document. However, if
+an `@context` declaration is not included, extensions (such as the addition of
+new properties) related to this specification or corresponding cryptosuites
+MUST NOT be made.
+          </p>
+
+        </section>
+
+        <section>
+          <h3>Securing Data Losslessly</h3>
+
+          <p>
+HTML processors are designed to continue processing if recoverable errors are
+detected. JSON-LD processors operate in a similar manner. This design philosophy
+was meant to ensure that developers could use only the parts of the JSON-LD
+language that they find useful, without causing the processor to throw errors
+on things that might not be important to the developer. Among other effects,
+this philosophy led to JSON-LD processors being designed to not throw errors,
+but rather warn developers, when encountering things such as undefined terms.
+          </p>
+
+          <p>
+When converting from JSON-LD to an RDF Dataset, such as when canonicalizing a
+document [[?RDF-CANON]], undefined terms and relative URLs can be dropped
+silently. When values are dropped, they are not protected by a digital proof. This
+creates a mismatch of expectations, where a developer, who is unaware of how
+a JSON-LD processor works, might think that certain data was being secured,
+and then be surprised to find that it was not, when no error was thrown.
+This specification requires that any recoverable loss of data when
+performing JSON-LD transformations result in an error, to avoid a mismatch
+in the security expectations of developers.
+          </p>
+
+          <p>
+Implementations that use JSON-LD processing, such as RDF Dataset
+Canonicalization [[?RDF-CANON]], MUST throw an error, which SHOULD be
+`DATA_LOSS_DETECTION_ERROR`, when data is dropped by a JSON-LD processor,
+such as when an undefined term is detected in an input document.
+          </p>
+
+          <p>
+Similarly, since [=conforming secured documents=] can be transferred from one
+security domain to another, [=conforming processors=] that process the
+[=conforming secured document=] cannot assume any particular base URL for
+the document. When deserializing to RDF, implementations MUST ensure that the
+base URL is set to null.
+          </p>
+        </section>
+
+        <section>
+          <h3>Datatypes</h3>
+
+          <p>
+This section defines datatypes that are used by this specification.
+          </p>
+
+        <section>
+          <h4 id="cryptosuiteString">The `cryptosuiteString` Datatype</h3>
+
+          <p>
+This specification encodes cryptographic suite identifiers as enumerable
+strings, which is useful in processes that need to efficiently encode such
+strings, such as compression algorithms. In environments that support data types
+for [=string=] values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier
+content is indicated using a literal value whose datatype is set to
+`https://w3id.org/security#cryptosuiteString`.
+          </p>
+
+          <p>
+The `cryptosuiteString` datatype is defined as follows:
+          </p>
+
+          <dl>
+            <dt>The URL denoting this datatype</dt>
+            <dd>
+`https://w3id.org/security#cryptosuiteString`
+            </dd>
+            <dt>The lexical space</dt>
+            <dd>
+The union of all cryptosuite strings, expressed using American Standard Code
+for Information Interchange [[ASCII]] strings, that are defined by the
+collection of all Data Integrity cryptosuite specifications.
+            </dd>
+            <dt>The value space</dt>
+            <dd>
+The union of all cryptosuite types that are expressed using the `cryptosuite`
+property, as defined in Section [[[#dataintegrityproof]]].
+            </dd>
+            <dt>The lexical-to-value mapping</dt>
+            <dd>
+Any element of the lexical space is mapped to the result of parsing it into an
+internal representation that uniquely identifies the cryptosuite type from all
+other possible cryptosuite types.
+            </dd>
+            <dt>The canonical mapping</dt>
+            <dd>
+Any element of the value space is mapped to the corresponding string in the
+lexical space.
+            </dd>
+          </dl>
+        </section>
+
+      </section>
+
+    </section>
 
       <section>
         <h2>Relationship to Linked Data</h2>
@@ -1285,7 +1621,7 @@ for a [=verification method=]. The
 <a data-cite="CONTROLLER-DOCUMENT#dfn-revoked">revocation</a> and
 <a data-cite="CONTROLLER-DOCUMENT#defn-vm-expires">expiration</a> times for a
 [=verification method=] are expressed using the `revocation` and `expires`
-properties, respectively; are related to events such as a private key being
+properties, respectively; are related to events such as a [=secret key=] being
 compromised or expiring; and can provide timing information which might reveal
 details about a controller, such as their security practices or when they might
 have been compromised. The revocation information for a [=verifiable
@@ -1296,344 +1632,19 @@ enhances privacy.
         </p>
       </section>
 
-      <section>
-        <h2>Contexts and Vocabularies</h2>
-
-        <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
-This section lists cryptographic hash values that might change during the
-Candidate Recommendation phase based on implementer feedback that requires
-the referenced files to be modified.
-        </p>
-        <p>
-Implementations that perform JSON-LD processing MUST treat the following
-JSON-LD context URLs as already resolved, where the resolved document matches
-the corresponding hash values below:
-        </p>
-
-        <table class="simple">
-          <thead>
-            <tr>
-              <th>URL</th>
-              <th>Hash</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="white-space: nowrap;">
-https://w3id.org/security/data-integrity/v2
-
-              </td>
-              <td>
-sha256: `v/POI0jhSjPansxhJAP1fwepCBZ2HK77fRZfCCyBDs0=`
-              </td>
-            </tr>
-            <tr>
-              <td style="white-space: nowrap;">
-https://w3id.org/security/multikey/v1
-              </td>
-              <td>
-sha256: `uiwYLeLZL35HGEvMqPzwvq7m05hsUnv2ZMGVu8fFhZc=`
-              </td>
-            </tr>
-            <tr>
-              <td style="white-space: nowrap;">
-https://w3id.org/security/jwk/v1
-              </td>
-              <td>
-sha256: `9h/GLRVuGCl0rn/ye6lzf219aN7Sgzq9yBFqUoOI54k=`
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p>
-          It is possible to confirm the cryptographic digests listed above by running
-          a command like the following (replacing `&lt;DOCUMENT_URL>`
-          with the appropriate value) through a modern UNIX-like OS command line interface:
-          `curl -sL -H "Accept: application/ld+json" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad
-          -a`.
-        </p>
-
-        <p>
-The security vocabulary terms that the JSON-LD contexts listed above resolve
-to are in the <a href="https://w3id.org/security">https://w3id.org/security#</a>
-namespace. That is, all security terms in this vocabulary are of the form
-`https://w3id.org/security#TERM`, where `TERM` is the name of a term.
-        </p>
-
-        <p>
-Implementations that perform RDF processing MUST treat
-the JSON-LD serialization of the vocabulary URL as already dereferenced, where the dereferenced document matches
-the corresponding hash value below.
-        </p>
-
-        <p>
-When dereferencing the
-<a href="https://w3id.org/security">https://w3id.org/security#</a> URL,
-the media type of the data that is returned depends on HTTP content negotiation. These are as follows:
-        </p>
-
-        <table class="simple">
-          <thead>
-            <tr>
-              <th>Media Type</th>
-              <th>Description and Hash</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-application/ld+json
-              </td>
-              <td>
-The vocabulary in JSON-LD format [[?JSON-LD11]].<br><br>
-
-sha256: `LEaoTyf796eTaSlYWjfPe3Yb+poCW9TjWYTbFDmC0tc=`
-              </td>
-            </tr>
-            <tr>
-              <td>
-text/turtle
-              </td>
-              <td>
-The vocabulary in Turtle format [[?TURTLE]].<br><br>
-sha256: `McnhLyt7+/A/0iLb3CUXD0itNw+7bwwjtzOww/zwoyI=`
-              </td>
-            </tr>
-            <tr>
-              <td>
-text/html
-              </td>
-              <td>
-The vocabulary in HTML+RDFa Format [[?HTML-RDFA]].<br><br>
-sha256: `eUHP1xiSC157iTPDydZmxg/hvmX3g/nnCn+FO25d4dc=`
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p>
-It is possible to confirm the cryptographic digests listed above by running
-a command like the following (replacing `&lt;MEDIA_TYPE>` and `&lt;DOCUMENT_URL>`
-with the appropriate values) through a modern UNIX-like OS command line interface:
-`curl -sL -H "Accept: &lt;MEDIA_TYPE>" &lt;DOCUMENT_URL> | openssl dgst -sha256 -binary | openssl base64 -nopad -a`.
-        </p>
-
-        <p>
-Authors of application-specific vocabularies and specifications SHOULD ensure
-that their JSON-LD context and vocabulary files are permanently cacheable
-using the approaches to caching described above or a functionally equivalent
-mechanism.
-        </p>
-
-        <p>
-Implementations MAY load application-specific JSON-LD context files from the
-network during development, but SHOULD permanently cache JSON-LD context files
-used by [=conforming secured documents=] in production settings, to increase
-their security and privacy characteristics. Goals of processing speed MAY be
-achieved through caching approaches such as those described above or
-functionally equivalent mechanisms.
-        </p>
-        <p>
-Some applications, such as digital wallets, that are capable of holding arbitrary
-[=verifiable credentials=] or other data-integrity-protected documents, from
-any issuer and using any contexts, might need to be able to load externally
-linked resources, such as JSON-LD context files, in production settings. This is
-expected to increase user choice, scalability, and decentralized upgrades in the
-ecosystem over time. Authors of such applications are advised to read the
-security and privacy sections of this document for further considerations.
-        </p>
-
-        <p>
-For further information regarding processing of JSON-LD contexts and
-vocabularies, see <a data-cite="?VC-DATA-MODEL-2.0#base-context">Verifiable
-Credentials v2.0: Base Context</a> and <a data-cite="?VC-DATA-MODEL-2.0#vocabularies">
-Verifiable Credentials v2.0: Vocabularies</a>.
-        </p>
-
-        <section>
-          <h3>Context Injection</h3>
-
-          <p>
-The `@context` property is used to ensure that implementations are using the
-same semantics when terms in this specification are processed. For example, this
-can be important when properties like `type` are processed and its value, such
-as `DataIntegrityProof`, are used.
-          </p>
-
-          <p>
-If an `@context` property is not provided in a document that is being secured or
-verified, or the Data Integrity terms used in the document are not mapped by
-existing values in the `@context` property, implementations MUST inject or add
-an `@context` property with a value of
-`https://w3id.org/security/data-integrity/v2`.
-          </p>
-
-          <p>
-Context injection is expected to be unnecessary sometimes, such as when the Verifiable
-Credential Data Model v2.0 context (`https://www.w3.org/ns/credentials/v2`)
-exists as a value in the `@context` property, as that context maps all of the
-necessary Data Integrity terms that were previously mapped by
-`https://w3id.org/security/data-integrity/v2`.
-          </p>
-        </section>
-
-        <section>
-          <h3>Securing Data Losslessly</h3>
-
-          <p>
-HTML processors are designed to continue processing if recoverable errors are
-detected. JSON-LD processors operate in a similar manner. This design philosophy
-was meant to ensure that developers could use only the parts of the JSON-LD
-language that they find useful, without causing the processor to throw errors
-on things that might not be important to the developer. Among other effects,
-this philosophy led to JSON-LD processors being designed to not throw errors,
-but rather warn developers, when encountering things such as undefined terms.
-          </p>
-
-          <p>
-When converting from JSON-LD to an RDF Dataset, such as when canonicalizing a
-document [[?RDF-CANON]], undefined terms and relative URLs can be dropped
-silently. When values are dropped, they are not protected by a digital proof. This
-creates a mismatch of expectations, where a developer, who is unaware of how
-a JSON-LD processor works, might think that certain data was being secured,
-and then be surprised to find that it was not, when no error was thrown.
-This specification requires that any recoverable loss of data when
-performing JSON-LD transformations result in an error, to avoid a mismatch
-in the security expectations of developers.
-          </p>
-
-          <p>
-Implementations that use JSON-LD processing, such as RDF Dataset
-Canonicalization [[?RDF-CANON]], MUST throw an error, which SHOULD be
-`DATA_LOSS_DETECTION_ERROR`, when data is dropped by a JSON-LD processor,
-such as when an undefined term is detected in an input document.
-          </p>
-
-          <p>
-Similarly, since [=conforming secured documents=] can be transferred from one
-security domain to another, [=conforming processors=] that process the
-[=conforming secured document=] cannot assume any particular base URL for
-the document. When deserializing to RDF, implementations MUST ensure that the
-base URL is set to null.
-          </p>
-        </section>
-
-        <section>
-          <h3>Datatypes</h3>
-
-          <p>
-This section defines datatypes that are used by this specification.
-          </p>
-
-        <section>
-          <h4 id="cryptosuiteString">The `cryptosuiteString` Datatype</h3>
-
-          <p>
-This specification encodes cryptographic suite identifiers as enumerable
-strings, which is useful in processes that need to efficiently encode such
-strings, such as compression algorithms. In environments that support data types
-for string values, such as RDF [[?RDF-CONCEPTS]], cryptographic identifier
-content is indicated using a literal value whose datatype is set to
-`https://w3id.org/security#cryptosuiteString`.
-          </p>
-
-          <p>
-The `cryptosuiteString` datatype is defined as follows:
-          </p>
-
-          <dl>
-            <dt>The URL denoting this datatype</dt>
-            <dd>
-`https://w3id.org/security#cryptosuiteString`
-            </dd>
-            <dt>The lexical space</dt>
-            <dd>
-The union of all cryptosuite strings, expressed using American Standard Code
-for Information Interchange [[ASCII]] strings, that are defined by the
-collection of all Data Integrity cryptosuite specifications.
-            </dd>
-            <dt>The value space</dt>
-            <dd>
-The union of all cryptosuite types that are expressed using the `cryptosuite`
-property, as defined in Section [[[#dataintegrityproof]]].
-            </dd>
-            <dt>The lexical-to-value mapping</dt>
-            <dd>
-Any element of the lexical space is mapped to the result of parsing it into an
-internal representation that uniquely identifies the cryptosuite type from all
-other possible cryptosuite types.
-            </dd>
-            <dt>The canonical mapping</dt>
-            <dd>
-Any element of the value space is mapped to the corresponding string in the
-lexical space.
-            </dd>
-          </dl>
-        </section>
-
-        <section>
-          <h4 id="multibase">The `multibase` Datatype</h3>
-
-          <p>
-<a href="#multibase">Multibase</a>-encoded strings are used to encode binary
-data into ASCII-only formats, which are useful in environments that cannot
-directly represent binary values. This specification makes use of this encoding.
-In environments that support data types for string values, such as RDF
-[[?RDF-CONCEPTS]], <a href="#multibase">Multibase</a>-encoded content is
-indicated using a literal value whose datatype is set to
-`https://w3id.org/security#multibase`.
-          </p>
-
-          <p>
-The `multibase` datatype is defined as follows:
-          </p>
-
-          <dl>
-            <dt>The URL denoting this datatype</dt>
-            <dd>
-`https://w3id.org/security#multibase`
-            </dd>
-            <dt>The lexical space</dt>
-            <dd>
-Any string that starts with a <a href="#multibase">Multibase</a> character and
-the rest of the characters consist of allowable characters in the respective
-base-encoding alphabet.
-            </dd>
-            <dt>The value space</dt>
-            <dd>
-The standard mathematical concept of all integer numbers.
-            </dd>
-            <dt>The lexical-to-value mapping</dt>
-            <dd>
-Any element of the lexical space is mapped to the value space by base-decoding
-the value based on the base-decoding alphabet associated with the
-first <a href="#multibase">Multibase</a> character in the lexical string.
-            </dd>
-            <dt>The canonical mapping</dt>
-            <dd>
-The canonical mapping consists of using the lexical-to-value mapping.
-            </dd>
-          </dl>
-        </section>
-
-      </section>
-
-    </section>
-
     </section>
 
     <section>
       <h2>Cryptographic Suites</h2>
       <p>
-A data integrity proof is designed to be easy to use by developers and therefore
-strives to minimize the amount of information one has to remember to generate a
-proof. Often, just the [=cryptographic suite=] name (e.g.
-`eddsa-rdfc-2022`) is required from developers to initiate the creation of
-a proof. These [=cryptographic suite=]s are often created or reviewed by
-people that have the requisite cryptographic training to ensure that safe
-combinations of cryptographic primitives are used. This section specifies the
-requirements for authoring cryptographic suite specifications.
+A [=data integrity proof=] is designed to be easy to use by developers and
+therefore strives to minimize the amount of information one has to remember to
+generate a proof. Often, just the [=cryptographic suite=] name (such as
+`eddsa-rdfc-2022`) is required from developers to initiate the creation of a
+proof. These [=cryptographic suite=]s are often created and reviewed by people
+that have the requisite cryptographic training to ensure that safe combinations
+of cryptographic primitives are used. This section specifies the requirements
+for authoring cryptographic suite specifications.
       </p>
 
       <p>
@@ -1670,19 +1681,18 @@ parameters, and other necessary details used to perform cryptographic
 verification of the data.
         </li>
         <li>
-The specification MUST define a <dfn class="export"
-data-lt="cryptosuite instantiation algorithm">data integrity cryptographic
-suite instantiation algorithm</dfn> that accepts a set of options
-([=map=] |options|) and returns a [=cryptosuite instance=]
-([=struct=] |cryptosuite|). This algorithm SHOULD be listed in [[[VC-SPECS]]].
-A <dfn class="export" data-local-lt="cryptosuite instance">data integrity
-cryptographic suite instance</dfn> [=struct=] has the following
-[=struct/items=].
+The specification MUST define a <dfn class="export" data-lt="cryptosuite
+instantiation algorithm">data integrity cryptographic suite instantiation
+algorithm</dfn> that accepts a set of options ([=map=] |options|) and returns a
+[=cryptosuite instance=] ([=struct=] |cryptosuite|). This algorithm SHOULD be
+listed in the [[[?VC-EXTENSIONS]]] document. A <dfn class="export"
+data-local-lt="cryptosuite instance">data integrity cryptographic suite
+instance</dfn> [=struct=] has the following [=struct/items=].
           <dl data-dfn-for="cryptosuite instance">
             <dt><dfn>createProof</dfn></dt>
             <dd>
-An algorithm that takes an [=unsecured data document=] ([=map=]
-|unsecuredDocument|) and proof options ([=map=] |options|) as input, and
+An algorithm that takes an [=input document=] ([=map=]
+|inputDocument|) and proof options ([=map=] |options|) as input, and
 produces a [=data integrity proof=] ([=map=]) or an error.
             </dd>
             <dt><dfn>verifyProof</dfn></dt>
@@ -1732,57 +1742,46 @@ protected from unsafe redefinition, by use of the `@protected` keyword.
       <p>
 A [=cryptosuite instance=] is instantiated using a [=cryptosuite instantiation
 algorithm=] and is made available to algorithms in an implementation-specific
-manner. Implementations MAY use [[[VC-SPECS]]] [[VC-SPECS]] to discover known
-[=cryptosuite instantiation algorithms=].
-      </p>
-
-      <p class="issue" title="Require interoperability report?">
-The following language was deemed to be contentious: <em>The specification MUST
-provide a link to an interoperability test report to document which
-implementations are conformant with the cryptographic suite specification.</em>
-        <br>
-        <br>
-The Working Group is seeking feedback on whether or not this is desired given
-the important role that cryptographic suite specifications play in ensuring
-data integrity.
+manner. Implementations MAY use the [[[?VC-EXTENSIONS]]] document to discover
+known [=cryptosuite instantiation algorithms=].
       </p>
 
       <section>
         <h3>DataIntegrityProof</h3>
 
         <p>
-A number of cryptographic suites follow the same basic pattern when expressing a
-data integrity proof. This section specifies that general design pattern, a
-cryptographic suite type called a `DataIntegrityProof`, which reduces the burden
-of writing and implementing cryptographic suites through the reuse of design
-primitives and source code.
+A number of [=cryptographic suites=] follow the same basic pattern when
+expressing a [=data integrity proof=]. This section specifies that general
+design pattern, a [=cryptographic suite=] type called a `DataIntegrityProof`,
+which reduces the burden of writing and implementing [=cryptographic suites=]
+through the reuse of design primitives and source code.
         </p>
 
         <p>
-When specifing a cryptographic suite that utilizes this design pattern, the
+When specifing a [=cryptographic suite=] that utilizes this design pattern, the
 `proof` value takes the following form:
         </p>
 
         <dl>
           <dt>type</dt>
           <dd>
-The `type` property MUST contain the string `DataIntegrityProof`.
+The `type` property MUST contain the [=string=] `DataIntegrityProof`.
           </dd>
           <dt>cryptosuite</dt>
           <dd>
-The value of the `cryptosuite` property MUST be a string that identifies the
-[=cryptographic suite=]. If the processing environment supports subtypes
-of `string`, the type of the `cryptosuite` value MUST be the
-`https://w3id.org/security#cryptosuiteString` subtype of `string`.
+The value of the `cryptosuite` property MUST be a [=string=] that identifies the
+[=cryptographic suite=]. If the processing environment supports [=string=]
+subtypes, the subtype of the `cryptosuite` value MUST be the
+`https://w3id.org/security#cryptosuiteString` subtype.
           </dd>
           <dt>proofValue</dt>
           <dd>
-The `proofValue` property MUST be used, as specified in [[[#proofs]]].
+The `proofValue` property MUST be used, as specified in Section [[[#proofs]]].
           </dd>
         </dl>
 
         <p>
-Cryptographic suite designers MUST use mandatory `proof` value properties
+[=Cryptographic suite=] designers MUST use mandatory `proof` value properties
 defined in Section [[[#proofs]]], and MAY define other properties specific to
 their cryptographic suite.
         </p>
@@ -1790,11 +1789,11 @@ their cryptographic suite.
         <p class="note" title="Design Patterns of Legacy Cryptographic Suites">
 One of the design patterns seen in Data Integrity cryptosuites from
 2012 to 2020 was use of the `type` property to establish a specific type for a
-cryptographic suite. For example, the
+cryptographic suite; the
 <a href="https://www.w3.org/TR/vc-di-eddsa/#the-ed25519signature2020-suite">
 Ed25519Signature2020 cryptographic suite</a> was one such specification. This
 led to a greater burden on cryptographic suite implementations, where every new
-cryptographic suite required a new JSON-LD Context to be specified, resulting
+cryptographic suite required specification of a new JSON-LD Context, resulting
 in a sub-optimal developer experience. A streamlined version of this design
 pattern emerged in 2020, such that a developer would only need to include a
 single JSON-LD Context to support all modern cryptographic suites. This
@@ -1809,8 +1808,9 @@ the identifier for the cryptosuite; and any cryptosuite-specific cryptographic
 data is encapsulated (i.e., not directly exposed as application layer data)
 within `proofValue`. A list of cryptographic suite specifications that are
 known to follow this pattern is provided in the
-<a href="https://w3c.github.io/vc-specs-dir/#proof">Proof types section of
-the Verifiable Credentials Specifications Directory</a>.
+<a href="https://w3c.github.io/vc-extensions/#securing-mechanisms">
+Securing Mechanisms section of the Verifiable Credentials Extensions</a>
+document.
         </p>
       </section>
 
@@ -1821,39 +1821,100 @@ the Verifiable Credentials Specifications Directory</a>.
 
       <p>
 The algorithms defined below operate on documents represented as <dfn
-data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows
-[[JSON-LD-API]] in representing a JSON object as an [[Infra]] [=map=]. An
-<dfn class="export">unsecured data document</dfn> is a [=map=] with no
-`proof` [=map/key=]. A <dfn class="export">secured data document</dfn> is a
-[=map=] with a `proof` [=map/key=].
+data-cite="RFC8259#section-4">JSON objects</dfn>. This specification follows the
+[[[JSON-LD11-API]]] specification in representing a JSON object as a [=map=].
+An <dfn class="export">unsecured data document</dfn> is a [=map=] that contains
+no proof values. An <dfn>input document</dfn> is an [=map=] that has not yet had
+the current proof added to it, but it MAY contain a proof value that was added
+to it by a previous process. A <dfn class="export">secured data document</dfn>
+is a [=map=] that contains one or more proof values.
       </p>
 
       <p>
 Implementers MAY implement reasonable defaults and safeguards in addition to the
 algorithms below, to help mitigate developer error, excessive resource
 consumption, newly discovered attack models against which there is a particular
-protection, etc. The algorithms provided below are the minimum requirements for
-an interoperable implementation, and developers are urged to include additional
-measures that could contribute to a safer and more efficient ecosystem.
+protection, and other improvements. The algorithms provided below are the
+minimum requirements for an interoperable implementation, and developers are
+urged to include additional measures that could contribute to a safer and more
+efficient ecosystem.
       </p>
+
+      <section class="normative">
+        <h3>Processing Model</h3>
+
+        <p>
+The processing model used by a [=conforming processor=] and its
+application-specific software is described in this section. When software
+is to ensure information is tamper-evident, it performs the following steps:
+        </p>
+
+        <ol>
+          <li>
+The software arranges the information into a document, such as a JSON or
+JSON-LD document.
+          </li>
+          <li>
+If the document is a JSON-LD document, the software selects one or more
+JSON-LD Contexts and expresses them using the `@context` property.
+          </li>
+          <li>
+The software selects one or more cryptography suites that meet the needs of
+the use case, such as one that provides full, selective, or unlinkable
+disclosure, using acceptable cryptographic key material.
+          </li>
+          <li>
+The software uses the applicable algorithm(s) provided in Section [[[#add-proof]]]
+or Section [[[#add-proof-set-chain]]] to add one or more proofs.
+          </li>
+        </ol>
+
+        <p>
+When software needs to use information that was transmitted to it using
+a mechanism described by this specification, it performs the following steps:
+        </p>
+
+        <ol>
+          <li>
+The software transforms the incoming data into a document that can be understood
+by the applicable algorithm provided in Section [[[#verify-proof]]] or Section
+[[[#verify-proof-sets-and-chains]]].
+          </li>
+          <li>
+The software uses JSON Schema or an equivalent mechanism to validate that the
+incoming document follows an expected schema used by the application.
+          </li>
+          <li>
+The software uses the applicable algorithm(s) provided in Section [[[#verify-proof]]]
+or Section [[[#verify-proof-sets-and-chains]]] to verify the integrity of the
+incoming document.
+          </li>
+          <li>
+If the document is a JSON-LD document, the software uses the algorithm provided
+in Section [[[#context-validation]]], or one providing equivalent protections,
+to validate all JSON-LD Context values used in the document.
+          </li>
+        </ol>
+
+      </section>
 
       <section class="normative">
         <h3>Add Proof</h3>
 
         <p>
-The following algorithm specifies how a digital proof can be added to an
-[=unsecured data document=], and can then be used to verify the output
-document's authenticity and integrity. Required inputs are an <a>unsecured data
-document</a> ([=map=] |unsecuredDocument|), a [=cryptosuite instance=]
-([=struct=] |cryptosuite|), and a set of options ([=map=] |options|). Output is
-a [=secured data document=] ([=map=]) or an error. Whenever this algorithm
-encodes strings, it MUST use UTF-8 encoding.
+The following algorithm specifies how a digital proof can be added to an [=input
+document=], and can then be used to verify the output document's authenticity
+and integrity. Required inputs are an [=input document=] ([=map=]
+|inputDocument|), a [=cryptosuite instance=] ([=struct=] |cryptosuite|), and a
+set of options ([=map=] |options|). Output is a [=secured data document=]
+([=map=]) or an error. Whenever this algorithm encodes strings, it MUST use
+UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
           <li>
 Let |proof| be the result of calling the [=cryptosuite instance/createProof=]
-algorithm specified in |cryptosuite|.|createProof| with |unsecuredDocument|
+algorithm specified in |cryptosuite|.|createProof| with |inputDocument|
 and |options| passed as a parameters. If the algorithm produces an error,
 the error MUST be propagated and SHOULD convey the error type.
           </li>
@@ -1875,7 +1936,7 @@ convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Let |securedDataDocument| be a copy of |unsecuredDocument|.
+Let |securedDataDocument| be a copy of |inputDocument|.
           </li>
           <li>
 Set |securedDataDocument|.|proof| to the value of |proof|.
@@ -1891,11 +1952,11 @@ Return |securedDataDocument| as the [=secured data document=].
         <p>
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
-proof set/chain. Required inputs are a [=secured data document=]
-([=map=] |securedDocument|), a [=cryptographic suite=]
-(|suite:cryptosuite instance|), and a set of options ([=map=] |options|). Output
-is a new [=secured data document=] ([=map=]). Whenever this algorithm
-encodes strings, it MUST use UTF-8 encoding.
+proof set/chain. Required inputs are a [=secured data document=] ([=map=]
+|securedDocument|), a [=cryptographic suite=] ([=cryptosuite
+instance=] |suite|), and a set of options ([=map=] |options|). Output is a new
+[=secured data document=] ([=map=]). Whenever this algorithm encodes strings, it
+MUST use UTF-8 encoding.
         </p>
 
         <ol class="algorithm">
@@ -1906,9 +1967,9 @@ the elements of |proof| to |allProofs|. If |proof|
 is an object add a copy of that object to |allProofs|.
           </li>
           <li>
-Let the |unsecuredDocument| be a copy of the |securedDocument|
+Let the |inputDocument| be a copy of the |securedDocument|
 with the |proof| attribute removed. Let |output| be a copy of
-the |unsecuredDocument|.
+the |inputDocument|.
           </li>
           <li>
 Let |matchingProofs| be an empty list.
@@ -1923,22 +1984,26 @@ element from |allProofs| with an `id` attribute matching `previousProof` to
           <li>
 If |options| has a `previousProof` [=struct/item=] that is an array, add each
 element from |allProofs| with an `id` attribute that matches an element of that
-array. If any element of `previousProof` array has an `id` attribute that does
+array. If any element of `previousProof` [=list=] has an `id` attribute that does
 not match the `id` attribute of any element of |allProofs|, an error MUST be
 raised and SHOULD convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-Set |unsecuredDocument|.|proof| to |matchingProofs|.
-            <p class="note">
-This step is critical, as it <q>binds</q> the previous proofs to the document
-prior to signing. The |proof| value for the document will be updated
-in a later step of this algorithm.
-            </p>
+Set |inputDocument|.|proof| to |matchingProofs|.
+            <div class="note" title="This step protects the document and existing proofs">
+              <p>
+This step adds references to the [=named graphs=], as well as adding a copy of
+<em>all</em> the claims contained in the [=proof graphs=]. The step is critical,
+as it <q>binds</q> any matching proofs to the document prior to applying the
+current proof. The |proof| value for the document will be updated in a later
+step of this algorithm.
+              </p>
+            </div>
           </li>
           <li>
 Run steps 1 through 6 of the algorithm in section [[[#add-proof]]], passing
-|unsecuredDocument|, |suite|, and |options|. If no exceptions are raised, append
+|inputDocument|, |suite|, and |options|. If no exceptions are raised, append
 the generated |proof| value to the |allProofs|; otherwise, raise the exception.
           </li>
           <li>
@@ -2000,9 +2065,9 @@ This algorithm returns a <dfn>verification result</dfn>, a [=struct=] whose
           <dt><dfn data-dfn-for="verification result">verifiedDocument</dfn></dt>
           <dd>
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
-`false`; otherwise, an [=unsecured data document=]
+`false`; otherwise, an [=input document=]
           </dd>
-          <dt><dfn data-dfn-for="verification result">media type</dfn></dt>
+          <dt><dfn data-dfn-for="verification result">mediaType</dfn></dt>
           <dd>
 <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
 `false`; otherwise, a [=MIME type|media type=], which MAY include [=MIME
@@ -2010,18 +2075,18 @@ type/parameters=]
           </dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore">warnings</dfn></dt>
           <dd>
-a [=list=] of
-<dfn data-cite="VC-DATA-MODEL-2.0#dfn-problemdetails">ProblemDetails</dfn>,
-which defaults to an empty [=list=]</dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
           <dt><dfn data-dfn-for="verification result">errors</dfn></dt>
           <dd>
-a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]</dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
         </dl>
 
         <p>
 When a step says "an error MUST be raised", it means that a [=verification
-result=] MUST be returned with a [=verification result/verified=] of `false`
-and a non-empty [=verification result/errors=] list.
+result=] MUST be returned with a [=verification result/verified=] value of
+`false` and a non-empty [=verification result/errors=] list.
         </p>
 
         <ol class="algorithm">
@@ -2075,7 +2140,7 @@ Return a [=verification result=] with [=struct/items=]:
               <dd>|cryptosuiteVerificationResult|.|verified|</dd>
               <dt>[=verifiedDocument=]</dt>
               <dd>|cryptosuiteVerificationResult|.|verifiedDocument|</dd>
-              <dt>[=media type=]</dt>
+              <dt>[=mediaType=]</dt>
               <dd>|mediaType|</dd>
             </dl>
           </li>
@@ -2085,21 +2150,18 @@ Return a [=verification result=] with [=struct/items=]:
       <section>
         <h3>Verify Proof Sets and Chains</h3>
         <p>
-In a proof set or proof chain, a [=secured data document=] has a
-`proof` attribute which contains a list of proofs
-(|allProofs|).
-The following algorithm provides one method of checking the authenticity and
-integrity of a [=secured data document=], achieved by verifying every
-proof in |allProofs|. Other approaches are possible, particularly if
-it is only desired to verify a subset of the proofs contained in
-|allProofs|. If another approach is taken to verify only a subset of the
-proofs, then it is important to note that any proof in that subset with a
-`previousProof` can only be considered verified if the proofs it
-references are also considered verified.
+In a [=proof set=] or [=proof chain=], a [=secured data document=] has a `proof`
+attribute which contains a list of [=proofs=] (|allProofs|). The following
+algorithm provides one method of checking the authenticity and integrity of a
+[=secured data document=], achieved by verifying every proof in |allProofs|.
+Other approaches are possible, particularly if it is only desired to verify a
+subset of the proofs contained in |allProofs|. If another approach is taken to
+verify only a subset of the proofs, then it is important to note that any proof
+in that subset with a `previousProof` can only be considered verified if the
+proofs it references are also considered verified.
         </p>
         <p>
-Required input is a
-[=secured data document=] (|securedDocument|). A list of
+Required input is a [=secured data document=] (|securedDocument|). A list of
 [=verification results=] corresponding to each proof in |allProofs| is
 generated, and a single combined [=verification result=] is returned as output.
 Implementations MAY return any of the other [=verification result=]s and/or any
@@ -2119,25 +2181,30 @@ For each |proof| in |allProofs|, do the following steps:
 Let |matchingProofs| be an empty list.
               </li>
               <li>
-If |proof| contains a `previousProof` attribute and that attribute is a string,
-add the element from |allProofs| with an `id` attribute matching `previousProof`
-to `matchingProofs`. If a proof with `id` does not exist in |allProofs|, an
-error MUST be raised and SHOULD convey an error type of
+If |proof| contains a `previousProof` attribute and that attribute is a
+[=string=], add the element from |allProofs| with an `id` attribute matching
+`previousProof` to `matchingProofs`. If a proof with `id` does not exist in
+|allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
-`previousProof` attribute is an array, add each element from |allProofs| with an
-`id` attribute that matches an element of that array. If any element of
-`previousProof` array has an `id` attribute that does not match the `id`
+`previousProof` attribute is a [=list=], add each element from |allProofs| with an
+`id` attribute that matches an element of that [=list=]. If any element of
+`previousProof` [=list=] has an `id` attribute that does not match the `id`
 attribute of any element of |allProofs|, an error MUST be raised and SHOULD
 convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
               </li>
               <li>
-Let |unsecuredDocument| be a copy of |securedDocument| with the proof value
-removed and then set |unsecuredDocument|.|proof| to |matchingProofs|.
+Let |inputDocument| be a copy of |securedDocument| with the proof value
+removed and then set |inputDocument|.|proof| to |matchingProofs|.
+
+                <p class="note" title="Secure document and previous proofs">
+See the note in Step 6 of Section [[[#add-proof-set-chain]]] to learn about
+what document properties and previous proofs this step secures.
+                </p>
               </li>
               <li>
 Run steps 4 through 8 of the algorithm in section [[[#verify-proof]]] on
-|unsecuredDocument|; if no exceptions are raised, append |cryptosuiteVerificationResult|
+|inputDocument|; if no exceptions are raised, append |cryptosuiteVerificationResult|
 to |verificationResults|.
                 </li>
             </ol>
@@ -2177,6 +2244,90 @@ Return |combinedVerificationResult|, |successfulVerificationResults|.
       </section>
 
       <section class="normative">
+        <h3>Context Validation</h3>
+
+        <p>
+The following algorithm provides one mechanism that can be used to ensure that
+an application understands the contexts associated with a document before it
+executed business rules specific to the input in the document. For more
+rationale related to this algorithm, see Section [[[#validating-contexts]]].
+This algorithm takes inputs of a document ([=map=] |inputDocument|), a set of
+known JSON-LD Contexts ([=list=] |knownContext|), and a boolean to
+recompact when unknown contexts are detected ([=boolean=] |recompact|).
+        </p>
+
+        <p>
+This algorithm returns a <dfn class="lint-ignore">context validation result</dfn>,
+a [=struct=] whose [=struct/items=] are:
+        </p>
+        <dl data-dfn-for="context validation result">
+          <dt><dfn data-dfn-for="context validation result">validated</dfn></dt>
+          <dd>`true` or `false`</dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">validatedDocument</dfn></dt>
+          <dd>
+<a data-cite="INFRA#nulls">Null</a>, if [=context validation result/validated=] is
+`false`; otherwise, an [=input document=]
+          </dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">warnings</dfn></dt>
+          <dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
+          <dt><dfn data-dfn-for="context validation result" class="lint-ignore">errors</dfn></dt>
+          <dd>
+a [=list=] of [=ProblemDetails=], which defaults to an empty [=list=]
+          </dd>
+        </dl>
+
+        <p>
+The context validation algorithm is as follows:
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Set |result|.|validated| to `false`, |result|.|warnings| to an empty list,
+|result|.|errors| to an empty list, |compactionContext| to an empty list;
+and clone |inputDocument| to |result|.|validatedDocument|.
+          </li>
+          <li>
+Let |contextValue| be the value of the `@context` property of |result|.|validatedDocument|,
+which might be undefined.
+          </li>
+          <li>
+If |contextValue| does not deeply equal |knownContext|, any subtree in
+|result|.|validatedDocument| contains an `@context` property, or any URI in
+|contextValue| dereferences to a JSON-LD Context file that does not match a
+known good value or cryptographic hash, then perform the applicable action:
+            <ol class="algorithm">
+              <li>
+If |recompact| is `true`, set |result|.|validatedDocument| to the result
+of running the <a data-cite="JSON-LD11-API#compaction-algorithm">
+JSON-LD Compaction Algorithm</a> with the |inputDocument| and
+|knownContext| as inputs. If the compaction fails, add at least one error
+to |result|.|errors|.
+              </li>
+              <li>
+If |recompact| is not `true`, add at least one error to |result|.|errors|.
+              </li>
+            </ol>
+          </li>
+          <li>
+If |result|.|errors| is empty, set |result|.|validated| to `true`; otherwise, set
+|result|.|validated| to `false`, and remove the |document| property from |result|.
+          </li>
+          <li>
+Return the value of |result|.
+          </li>
+        </ol>
+
+        <p>
+Implementations MAY include additional warnings or errors that enforce
+further validation rules that are specific to the implementation or a
+particular use case.
+        </p>
+
+      </section>
+
+      <section class="normative">
         <h3>Processing Errors</h3>
 
         <p>
@@ -2190,7 +2341,8 @@ specification might interoperate more effectively when errors occur.
 
         <p>
 When exposing these errors through an HTTP interface, implementers SHOULD use
-[[RFC9457]] to encode the error data structure. If [[RFC9457]] is used:
+[[RFC9457]] to encode the error data structure as a <dfn>ProblemDetails</dfn>
+[=map=]. If [[RFC9457]] is used:
         </p>
 
         <ul>
@@ -2204,11 +2356,11 @@ The `code` value MUST be the integer code described in the table below
 (in parentheses, beside the type name).
           </li>
           <li>
-The `title` value SHOULD provide a short but specific human-readable string for
+The `title` value SHOULD provide a short but specific human-readable [=string=] for
 the error.
           </li>
           <li>
-The `detail` value SHOULD provide a longer human-readable string for the error.
+The `detail` value SHOULD provide a longer human-readable [=string=] for the error.
           </li>
         </ul>
 
@@ -2453,7 +2605,7 @@ be reconfigured to use a newer primitive via a simple configuration file change.
 Cryptographic agility is most effective when the client and the server in
 the information security system are in regular contact. However, when the
 messages protected by a particular cryptographic algorithm are long-lived, as
-with Verifiable Credentials, and/or when the client (holder) might not be
+with [=verifiable credentials=], and/or when the client (holder) might not be
 able to easily recontact the server (issuer), then cryptographic agility does
 not provide the desired protections.
         </p>
@@ -2538,31 +2690,6 @@ category as any resource starvation attack, such as HTTP clients that
 deliberately slow connections, thus starving connections on the server.
 Implementers are advised to consider these sorts of attacks when implementing
 defensive security strategies.
-        </p>
-        <p class="issue"
-          title="Collision-resistant canonicalization requirements">
-The VCWG is seeking feedback on normative language that cryptographic suite
-implementers need to follow to ensure that they do not utilize data
-transformation mechanisms that can map to the same output. That is, given
-different inputs for canonicalization scheme #1 and canonicalization scheme #2,
-they must not produce the same output value. As an analogy, this is the same
-requirement for cryptographic hashing mechanisms and is why those schemes are
-designed to be collision resistant. Cryptographic canonicalization mechanisms
-have the same requirement. At present, this isn't a problem because the three
-expected canonicalization schemes &mdash; the Universal RDF Dataset
-Canonicalization Algorithm 2015 [[?RDF-CANON]], JSON Canonicalization
-Scheme [[?RFC8785]], and a theoretical future base-encoding canonicalization
-&mdash; have entirely different outputs.
-        </p>
-        <p class="issue"
-          title="Avoiding the pitfalls of XML Canonicalization">
-The VCWG is seeking feedback on whether to explain why modern canonicalization
-schemes are simpler than the far more complex XML Canonicalization schemes of
-the early 2000s. Some readers seem to be under the impression that all
-canonicalization is difficult and has to be avoided at all costs (including costs
-to application developers). The WG would like to understand if it would be helpful
-to include a section explaining why some simpler data syntaxes (such as JSON) are
-easier to canonicalize than more complex data syntaxes (such as XML).
         </p>
       </section>
 
@@ -2719,7 +2846,7 @@ specification.
 This process is used to ensure that cryptographic material, such as a private
 cryptographic key, is not misused by application to an unintended purpose. An
 example of cryptographic material misuse would be if a private cryptographic
-key meant to be used to issue a Verifiable Credential was instead used to
+key meant to be used to issue a [=verifiable credential=] was instead used to
 log into a website (that is, for authentication). Not checking a verification relationship
 is dangerous because the restriction and protection profile for some
 cryptographic material could be determined by its intended use. For example,
@@ -3125,8 +3252,8 @@ calculation.
 Sections [[[#proof-sets]]] and [[[#proof-chains]]] describe how multiple proofs
 can be expressed in a [=secured data document=]; that is, instead of a single
 [=proof=] included in the [=secured data document=], one can express multiple
-proofs in an array as shown in [[[#example-a-proof-set-in-a-data-document]]] and
-[[[#example-a-proof-chain-in-a-data-document]]]. The elements of this array are
+proofs in an [=list=] as shown in [[[#example-a-proof-set-in-a-data-document]]] and
+[[[#example-a-proof-chain-in-a-data-document]]]. The elements of this [=list=] are
 members of a [=proof set=] and, optionally, a [=proof chain=]. The purpose of
 this section is to explain the intended use of each of these features and, in
 particular, their differing security properties. These differing security
@@ -3147,7 +3274,7 @@ a document. We denote the secret/public keys of each of these signatories by
       </p>
       <p>
 When constructing a [=proof set=] where each of the signatories signs an
-|unsecuredDataDocument| without concern, we construct a proof symbolically as:
+|inputDocument| without concern, we construct a proof symbolically as:
       </p>
       <pre class="example nohighlight" title="Symbolic expression of how a proof is created">
 {
@@ -3156,13 +3283,13 @@ When constructing a [=proof set=] where each of the signatories signs an
   "created": "2023-03-05T19:23:24Z",
   "proofPurpose": "assertionMethod",
   "verificationMethod": <code>publicCEO</code>,
-  "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+  "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
 }
       </pre>
       <p>
 Where <em>publicCEO</em> is used as a placeholder for a reference that resolves
 to the CEO's public key and <strong>signature(`secretKey`,
-`unsecuredDataDocument`)</strong> denotes the computation of a digital signature
+`inputDocument`)</strong> denotes the computation of a digital signature
 by a particular data integrity cryptosuite using a particular secret key over a
 particular document. The `type`, `cryptosuite`, `created`, and `proofPurpose`
 attributes do not factor into our discussion so we will omit them. In
@@ -3174,13 +3301,13 @@ has been signed by the VP of Engineering, the CFO, and the CEO:
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCFO</code>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCEO</code>,
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
   }]
 }
       </pre>
@@ -3201,10 +3328,10 @@ approved something without the VP of Engineering's concurrence.
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
     "verificationMethod": <code>publicCFO</code>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocument</code>)</strong>
   }, {
     "verificationMethod": <code>publicCEO</code>,
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocument</code>)</strong>
   }]
 }
       </code></pre>
@@ -3224,7 +3351,7 @@ Engineering's signature and a review, the CFO then signs off on the document;
 and finally, based on both prior signatures and a review, the CEO signs off on
 the document. Since others will be referring to the VP of Engineering's
 signature, we need to add an `id` to the proof. First the VP of
-Engineering signs the [=unsecured data document=]:
+Engineering signs the [=input document=]:
       </p>
       <pre class="example nohighlight"
         title="Proof chain containing first proof with `id` property set">
@@ -3233,7 +3360,7 @@ Engineering signs the [=unsecured data document=]:
   "proof": {
     <span class="highlight">"id": "urn:proof-1"</span>,
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }
 }
       </pre>
@@ -3253,12 +3380,12 @@ is created:
   "proof": [{
     "id": "urn:proof-1",
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "id": "urn:proof-2",
     "verificationMethod": <code>publicCFO</code>,
     <span class="highlight">"previousProof": "urn:proof-1"</span>,
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocumentWithProof1</code>)</strong>
   }]
 }
       </pre>
@@ -3284,17 +3411,17 @@ over the document which includes `urn:proof-1` and `urn:proof-2`. The final
   "proof": [{
     "id": "urn:proof-1",
     "verificationMethod": <code>publicVPE</code>,
-    "proofValue": <strong>signature(<code>secretVPE</code>, <code>unsecuredDataDocument</code>)</strong>
+    "proofValue": <strong>signature(<code>secretVPE</code>, <code>inputDocument</code>)</strong>
   }, {
     "id": "urn:proof-2",
     "verificationMethod": <code>publicCFO</code>,
     "previousProof": "urn:proof-1",
-    "proofValue": <strong>signature(<code>secretCFO</code>, <code>unsecuredDataDocumentWithProof1</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCFO</code>, <code>inputDocumentWithProof1</code>)</strong>
   }, {
     "id": "urn:proof-3",
     "verificationMethod": <code>publicCEO</code>,
     "previousProof": "urn:proof-2",
-    "proofValue": <strong>signature(<code>secretCEO</code>, <code>unsecuredDataDocumentWithProof2</code>)</strong>
+    "proofValue": <strong>signature(<code>secretCEO</code>, <code>inputDocumentWithProof2</code>)</strong>
   }]
 }
       </pre>
@@ -3345,7 +3472,7 @@ Added cryptographic hashes for context and vocabulary files and note that those
 files are to be cached.
         </li>
         <li>
-Added section on relationship to Linked Data and Verifiable Credentials.
+Added section on relationship to Linked Data and [=verifiable credentials=].
         </li>
         <li>
 Added algorithms for proof sets and chains.
@@ -3396,6 +3523,108 @@ Added requirement that `DataIntegrityProof` objects need to contain the `cryptos
 
     <section class="informative">
       <h2>Acknowledgements</h2>
+
+      <p>
+Work on this specification has been supported by the Rebooting the
+Web of Trust community facilitated by Christopher Allen, Shannon Appelcline,
+Kiara Robles, Brian Weller, Betty Dhamers, Kaliya Young, Manu Sporny,
+Drummond Reed, Joe Andrieu, Heather Vescent, Kim Hamilton Duffy, Samantha Chase,
+and Andrew Hughes. The participants in the Internet Identity Workshop,
+facilitated by Phil Windley, Kaliya Young, Doc Searls, and Heidi Nobantu Saul,
+also supported the refinement of this work through numerous working sessions
+designed to educate about, debate on, and improve this specification.
+      </p>
+
+      <p>
+The Working Group also thanks our Chairs, Brent Zundel and Kristina Yasuda, as
+well as our W3C Staff Contact, Ivan Herman, for their expert management and steady
+guidance of the group through the W3C standardization process.
+      </p>
+
+      <p>
+Portions of the work on this specification have been funded by the United States
+Department of Homeland Security's Science and Technology Directorate under
+contracts 70RSAT20T00000029, 70RSAT21T00000016, and 70RSAT23T00000005. The
+content of this specification does not necessarily reflect the position or the
+policy of the U.S. Government and no official endorsement should be inferred.
+      </p>
+
+      <p>
+The Working Group would like to thank the following individuals for reviewing
+and providing feedback on the specification (in alphabetical order):
+      </p>
+
+      <p>
+Will Abramson,
+Mahmoud Alkhraishi,
+Christopher Allen,
+Joe Andrieu,
+Bohdan Andriyiv,
+Anthony,
+George Aristy,
+Greg Bernstein,
+Bob420,
+Sarven Capadisli,
+Melvin Carvalho,
+David Chadwick,
+Matt Collier,
+Gabe Cohen,
+Sebastian Crane,
+Kyle Den Hartog,
+Veikko Eeva,
+Eric Elliott,
+Raphael Flechtner,
+Julien Fraichot,
+Benjamin Goering,
+Kim Hamilton Duffy,
+Joseph Heenan,
+Helge,
+Ivan Herman,
+Michael Herman,
+Anil John,
+Andrew Jones,
+Michael B. Jones,
+Rieks Joosten,
+Gregory K,
+Gregg Kellogg,
+Filip Kolarik,
+David I. Lehn,
+Charles E. Lehner,
+Christine Lemmer-Webber,
+Eric Lim,
+Dave Longley,
+Tobias Looker,
+Jer Miller,
+nightpool,
+Luis Osta,
+Nate Otto,
+George J. Padayatti,
+Addison Phillips,
+Mike Prorock,
+Brian Richter,
+Anders Rundgren,
+Eugeniu Rusu,
+Markus Sabadello,
+silverpill,
+Wesley Smith,
+Manu Sporny,
+Patrick St-Louis,
+Orie Steele,
+Henry Story,
+Oliver Terbu,
+Ted Thibodeau Jr,
+John Toohey,
+Bert Van Nuffelen,
+Mike Varley,
+Snorre Lothar von Gohren Edwin,
+Jeffrey Yasskin,
+Kristina Yasuda,
+Benjamin Young,
+Dmitri Zagidulin,
+and
+Brent Zundel.
+      </p>
+
     </section>
 
   </body>
