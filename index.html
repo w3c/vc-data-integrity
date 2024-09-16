@@ -2526,11 +2526,10 @@ application developer population is to be discouraged.
           </li>
           <li>
 Cryptographic library implementers can provide deprecated and experimental
-cryptographic functionality, but are advised to do so in a way where the
-libraries do not enable such functionality unless explicitly requested by the
-developer, such as via a library option, and if enabled, the library produces
-warnings that deprecated or experimental cryptography has been enabled for the
-application.
+cryptographic functionality, but are advised to only do so when explicitly
+requested by the developer, such as through a library option, and such that the
+library produces warnings that deprecated or experimental cryptography has
+been enabled for the application.
           </li>
           <li>
 Application developers are advised to choose from a number of pre-set
