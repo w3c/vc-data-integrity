@@ -824,10 +824,11 @@ to verify the digital proof.
 
           <dt><dfn class="lint-ignore">previousProof</dfn></dt>
           <dd>
-An OPTIONAL [=string=] value or unordered list of [=string=] values. Each value
-identifies another [=data integrity proof=] that MUST verify before the
-current proof is processed. If an unordered list, all referenced proofs in the
-array MUST verify. This property is used in Section [[[#proof-chains]]].
+The `previousProof` property is OPTIONAL. If present, it MUST be a string
+value or an unordered list of string values. Each value identifies another
+[=data integrity proof=], all of which MUST also verify for the current
+proof to be considered verified. This property is used in Section
+[[[#proof-chains]]].
           </dd>
 
           <dt><dfn class="lint-ignore">nonce</dfn></dt>
