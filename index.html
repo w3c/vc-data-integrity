@@ -2181,16 +2181,18 @@ For each |proof| in |allProofs|, do the following steps:
 Let |matchingProofs| be an empty list.
               </li>
               <li>
-If |proof| contains a `previousProof` attribute and that attribute is a
-[=string=], add the element from |allProofs| with an `id` attribute matching
-`previousProof` to `matchingProofs`. If a proof with `id` equal to `previousProof`
-does not exist in |allProofs|, an error MUST be raised and SHOULD convey an error type of
+If |proof| contains a `previousProof` attribute and the value of that
+attribute is a [=string=], add the element from |allProofs| with an `id`
+attribute value matching the value of `previousProof` to `matchingProofs`.
+If a proof with `id` value equal to the value of `previousProof` does not
+exist in |allProofs|, an error MUST be raised and SHOULD convey an error
+type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
-`previousProof` attribute is a [=list=], add each element from |allProofs| with an
-`id` attribute that matches an element of that [=list=]. If any element of
-`previousProof` [=list=] has an `id` attribute that does not match the `id`
-attribute of any element of |allProofs|, an error MUST be raised and SHOULD
-convey an error type of
+`previousProof` attribute is a [=list=], add each element from |allProofs|
+with an `id` attribute value that matches the value of an element of that
+[=list=]. If any element of `previousProof` [=list=] has an `id` attribute
+value that does not match the `id` attribute value of any element of
+|allProofs|, an error MUST be raised and SHOULD convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
               </li>
               <li>
