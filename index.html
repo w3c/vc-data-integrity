@@ -16,7 +16,7 @@
     <script type="text/javascript" class="remove">
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          specStatus:           "CRD",
+          specStatus:           "CR",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "vc-data-integrity",
@@ -25,7 +25,7 @@
           subtitle: "Securing the Integrity of Verifiable Credential Data",
 
           // if you wish the publication date to be other than today, set this
-          //publishDate:  "2023-11-14",
+          publishDate:  "2024-11-05",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
@@ -37,7 +37,7 @@
 
           // if this is a LCWD, uncomment and set the end of its review period
           implementationReportURI: "https://w3c.github.io/vc-data-integrity/implementations/",
-          crEnd: "2024-01-17",
+          crEnd: "2024-12-05",
 
           // if you want to have extra CSS, append them to this list
           // it is recommended that the respec.css stylesheet be kept
@@ -316,6 +316,15 @@ implementations for each mandatory feature in the specification. For details
 on the conformance testing process, see the test suites listed in the
 <a href="https://w3c.github.io/vc-data-integrity/implementations/">
 implementation report</a>.
+      </p>
+
+      <p class="atrisk issue"
+        title="Features with less than two independent implementations">
+Any feature with less than two independent implementations in the
+Data Integrity portions of each
+<a href="https://w3c.github.io/vc-data-integrity/implementations/">
+cryptosuite implementation report</a> is an "at risk" feature and might be
+removed before the transition to W3C Proposed Recommendation.
       </p>
 
     </section>
@@ -3438,6 +3447,35 @@ way, checking each proof in the chain.
 This section contains the substantive changes that have been made to this
 specification over time.
       </p>
+
+      <p>
+Changes since the
+<a href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20231121/">
+First Candidate Recommendation</a>:
+      </p>
+
+      <ul>
+        <li>
+Various editorial changes in algorithms and descriptions to improve readability.
+        </li>
+        <li>
+Moved Multikey definitions to Controller Document.
+        </li>
+        <li>
+Unify error handling between all Data Integrity cryptosuites.
+        </li>
+        <li>
+Ensure that the `created` proof option is not required and additional proof
+options are included in the generated proof.
+        </li>
+        <li>
+Add language related to context injection.
+        </li>
+        <li>
+Update proof serialization format and algorithm arguments for
+cryptosuite interfaces.
+        </li>
+      </ul>
 
       <p>
 Changes since the
