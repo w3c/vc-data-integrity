@@ -927,7 +927,7 @@ representing time values to individuals.
         </p>
 
         <pre class="example nohighlight"
-        title="A proof attached to a data document that uses the 'expires' property">
+        title="A data document with an attached proof that uses the 'expires' property">
 {
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
@@ -938,8 +938,8 @@ representing time values to individuals.
     "type": "DataIntegrityProof",
     "cryptosuite": "ecdsa-rdfc-2019",
     "created": "2020-06-11T19:14:04Z",
-    <span class="comment">// the proof expires a month after it was issued</span>
-    <span class="highlight">expires": "2020-07-11T19:14:04Z"</span>,
+    <span class="comment">// the proof expires a month after it was created</span>
+    <span class="highlight">"expires": "2020-07-11T19:14:04Z"</span>,
     "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVK<wbr>w8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
     "proofPurpose": "assertionMethod",
     "proofValue": "z98X7RLrkjnXEADJNUhiTEdwyE5GXX8cyJZRLQZ7vZyUXb23Zkdakf<wbr>RJ7adYY8hn35EetqBkNw813SGsJHWrcpo4"
