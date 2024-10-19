@@ -1381,6 +1381,28 @@ expectations of the individual. See
 representing time values to individuals.
         </p></div>
 
+        <div class="example" id="example-a-data-document-with-an-attached-proof-that-uses-the-expires-property">
+        <div class="marker">
+    <a class="self-link" href="#example-a-data-document-with-an-attached-proof-that-uses-the-expires-property">Example<bdi> 5</bdi></a><span class="example-title">: A data document with an attached proof that uses the 'expires' property</span>
+  </div> <pre class="nohighlight">{
+  "@context": [
+    {"myWebsite": "https://vocabulary.example/myWebsite"},
+    "https://w3id.org/security/data-integrity/v2"
+  ],
+  "myWebsite": "https://hello.world.example/",
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "ecdsa-rdfc-2019",
+    "created": "2020-06-11T19:14:04Z",
+    <span class="comment">// the proof expires a month after it was created</span>
+    <span class="highlight">"expires": "2020-07-11T19:14:04Z"</span>,
+    "verificationMethod": "https://ldi.example/issuer#zDnaepBuvsQ8cpsWrVK<wbr>w8fbpGpvPeNSjVPTWoq6cRqaYzBKVP",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z98X7RLrkjnXEADJNUhiTEdwyE5GXX8cyJZRLQZ7vZyUXb23Zkdakf<wbr>RJ7adYY8hn35EetqBkNw813SGsJHWrcpo4"
+  }
+}</pre>
+      </div>
+
       <p>
 The Data Integrity specification supports the concept of multiple
 proofs in a single document. There are two types of multi-proof
@@ -1398,7 +1420,7 @@ represented by associating a set of proofs with the <code>proof</code> key in a 
         </p>
         <div class="example" id="example-a-proof-set-in-a-data-document">
         <div class="marker">
-    <a class="self-link" href="#example-a-proof-set-in-a-data-document">Example<bdi> 5</bdi></a><span class="example-title">: A proof set in a data document</span>
+    <a class="self-link" href="#example-a-proof-set-in-a-data-document">Example<bdi> 6</bdi></a><span class="example-title">: A proof set in a data document</span>
   </div> <pre class="nohighlight">{
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
@@ -1439,7 +1461,7 @@ another proof with a <code>previousProof</code> value that identifies the previo
         </p>
         <div class="example" id="example-a-proof-chain-in-a-data-document">
         <div class="marker">
-    <a class="self-link" href="#example-a-proof-chain-in-a-data-document">Example<bdi> 6</bdi></a><span class="example-title">: A proof chain in a data document</span>
+    <a class="self-link" href="#example-a-proof-chain-in-a-data-document">Example<bdi> 7</bdi></a><span class="example-title">: A proof chain in a data document</span>
   </div> <pre class="nohighlight">{
   "@context": [
     {"myWebsite": "https://vocabulary.example/myWebsite"},
@@ -1600,7 +1622,7 @@ An example of a resource integrity protected object is shown below:
 
         <div class="example" id="example-an-integrity-protected-image-that-is-associated-with-an-object">
         <div class="marker">
-    <a class="self-link" href="#example-an-integrity-protected-image-that-is-associated-with-an-object">Example<bdi> 7</bdi></a><span class="example-title">: An integrity-protected image that is associated with an object</span>
+    <a class="self-link" href="#example-an-integrity-protected-image-that-is-associated-with-an-object">Example<bdi> 8</bdi></a><span class="example-title">: An integrity-protected image that is associated with an object</span>
   </div> <pre class="nohighlight">{
   ...
   "image": {
@@ -1710,7 +1732,7 @@ application/ld+json
               <td>
 The vocabulary in JSON-LD format [<cite><a class="bibref" data-link-type="biblio" href="#bib-json-ld11" title="JSON-LD 1.1">JSON-LD11</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">b3b13c6db415597cd65af7816351829832e8d74002b76d3676443802a4ac4409</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">10a012489a3abe38f9871b986f27fbfa49a54d8d9edbe857a60bb2ce7baed416</span></code>
               </td>
             </tr>
             <tr>
@@ -1720,7 +1742,7 @@ text/turtle
               <td>
 The vocabulary in Turtle format [<cite><a class="bibref" data-link-type="biblio" href="#bib-turtle" title="RDF 1.1 Turtle">TURTLE</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">ee513554388a5a76f71878a257d3bad30eba76a6d21cfef890eba894652c12d8</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">2f7e055d789cbde920ac0279bfd147f56e07140811abcf273a8d8164a4afdfcb</span></code>
               </td>
             </tr>
             <tr>
@@ -1731,7 +1753,7 @@ text/html
 The vocabulary in HTML+RDFa Format [<cite><a class="bibref" data-link-type="biblio" href="#bib-html-rdfa" title="HTML+RDFa 1.1 - Second Edition">HTML-RDFA</a></cite>].<br><br>
 
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">237304135da080e730d93079f6a34a616e8d10c77be0012051b1fa6cbedb4605</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">eeea4710c7cb7640bb70f9d016e86eab7dc06ab804dc70057cc7c05cce1f8489</span></code>
               </td>
             </tr>
           </tbody>
@@ -3249,12 +3271,15 @@ the application layer.
       <section id="verification-method-binding"><div class="header-wrapper"><h3 id="x5-8-verification-method-binding"><bdi class="secno">5.8 </bdi>Verification Method Binding</h3><a class="self-link" href="#verification-method-binding" aria-label="Permalink for Section 5.8"></a></div>
         
 
-        <div class="issue" id="issue-container-number-3"><div role="heading" class="issue-title marker" id="h-issue-1" aria-level="4"><span>Issue 3</span></div><p class="">
-Implementers must ensure that a verification method is bound to a particular
-controller by going from the verification method to the controller document,
-and then ensuring that the controller document also contains the verification
-method.
-        </p></div>
+        <p>
+Implementers ensure that a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-8">verification method</a> is bound to a particular
+controller by going from the definition of the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-9">verification method</a> to the
+<a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-2">controller document</a>, and then ensuring that the <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-3">controller document</a> also
+contains a reference to the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-10">verification method</a>. This process is described
+in the algorithm for
+<a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
+retrieving a verification method</a>.
+        </p>
       </section>
 
       <section id="verification-relationship-validation"><div class="header-wrapper"><h3 id="x5-9-verification-relationship-validation"><bdi class="secno">5.9 </bdi>Verification Relationship Validation</h3><a class="self-link" href="#verification-relationship-validation" aria-label="Permalink for Section 5.9"></a></div>
@@ -3262,8 +3287,8 @@ method.
 
         <p>
 When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
-imperative that it verify not only that the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-8">verification method</a> used to
-generate the proof is listed in the <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-2">controller document</a>, but also that it
+imperative that it verify not only that the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-11">verification method</a> used to
+generate the proof is listed in the <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-4">controller document</a>, but also that it
 was intended to be used to generate the proof that is being verified. This process
 is known as "verification relationship validation".
         </p>
@@ -3392,7 +3417,7 @@ correctness.
 This specification is designed in such a way that no network requests are
 required when verifying a proof on a <a data-link-type="dfn|abstract-op" href="#dfn-conforming-secured-document" class="internalDFN" id="ref-for-dfn-conforming-secured-document-8">conforming secured document</a>.
 Readers might note, however, that <a href="#data-model">JSON-LD contexts</a>
-and <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-9">verification methods</a> can contain URLs that might be retrieved
+and <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-12">verification methods</a> can contain URLs that might be retrieved
 over a network connection. This concern exists for any URL that might be
 loaded from the network during or after verification.
         </p>
@@ -3401,12 +3426,12 @@ To the extent possible, implementers are urged to permanently or aggressively
 cache such information to reduce the attack surface on an implementation that
 might need to fetch such URLs over the network. For example, caching techniques
 for <a href="#data-model">JSON-LD contexts</a> are described in Section
-<a href="#contexts-and-vocabularies" data-matched-text="[[[#contexts-and-vocabularies]]]" class="sec-ref"><bdi class="secno">2.4 </bdi>Contexts and Vocabularies</a>, and some <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-10">verification methods</a>, such as
+<a href="#contexts-and-vocabularies" data-matched-text="[[[#contexts-and-vocabularies]]]" class="sec-ref"><bdi class="secno">2.4 </bdi>Contexts and Vocabularies</a>, and some <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-13">verification methods</a>, such as
 <code>did:key</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-did-key" title="The did:key Method">DID-KEY</a></cite>], do not need to be fetched from the network at all.
         </p>
         <p>
 When it is not possible to use cached information, such as when a specific HTTP
-URL-based instance of a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-11">verification method</a> is encountered for the first
+URL-based instance of a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-14">verification method</a> is encountered for the first
 time, implementers are cautioned to use defensive measures to mitigate <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">
 denial-of-service attacks</a> during any process that might fetch a resource
 from the network.
@@ -3534,7 +3559,7 @@ so as to include them in the secured payload. This inevitably exposes
 information related to each entity that added a previous proof.
         </p>
         <p>
-At minimum, the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-12">verification method</a> for the previous proof, such as a
+At minimum, the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-15">verification method</a> for the previous proof, such as a
 public key, is seen by the creator of the next proof in a proof chain. This
 can be a privacy concern if the creator of the previous proof did not intend
 to be included in a proof chain, but is an inevitable outcome when
@@ -3558,14 +3583,14 @@ during or after <a href="#verify-proof">proof verification</a>. This
 specification is designed in such a way that no network requests are necessary
 when verifying a proof on a <a data-link-type="dfn|abstract-op" href="#dfn-conforming-secured-document" class="internalDFN" id="ref-for-dfn-conforming-secured-document-9">conforming secured document</a>. Readers might
 note, however, that <a href="#data-model">JSON-LD contexts</a> and
-<a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-13">verification methods</a> can contain resource URLs that might be retrieved
+<a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-16">verification methods</a> can contain resource URLs that might be retrieved
 over a network connection leading to fingerprinting concerns.
         </p>
 
         <p>
 For example, creators of <a data-link-type="dfn|abstract-op" href="#dfn-conforming-secured-document" class="internalDFN" id="ref-for-dfn-conforming-secured-document-10">conforming secured documents</a> might craft unique
 per-document URLs for <a href="#data-model">JSON-LD contexts</a> and
-<a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-14">verification methods</a>. When verifying such a document, a verifier fetching
+<a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-17">verification methods</a>. When verifying such a document, a verifier fetching
 that information from the network would reveal their interest in the
 <a data-link-type="dfn|abstract-op" href="#dfn-conforming-secured-document" class="internalDFN" id="ref-for-dfn-conforming-secured-document-11">conforming secured document</a> to the creator of the document, which might lead
 to a mismatch in privacy expectations for any entity that is not the creator of
@@ -3683,8 +3708,8 @@ calculation.
 Sections <a href="#proof-sets" data-matched-text="[[[#proof-sets]]]" class="sec-ref"><bdi class="secno">2.1.1 </bdi>Proof Sets</a> and <a href="#proof-chains" data-matched-text="[[[#proof-chains]]]" class="sec-ref"><bdi class="secno">2.1.2 </bdi>Proof Chains</a> describe how multiple proofs
 can be expressed in a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-12">secured data document</a>; that is, instead of a single
 <a data-link-type="dfn|abstract-op" href="#dfn-proof" class="internalDFN" id="ref-for-dfn-proof-4">proof</a> included in the <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-13">secured data document</a>, one can express multiple
-proofs in an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> as shown in <a href="#example-a-proof-set-in-a-data-document" data-matched-text="[[[#example-a-proof-set-in-a-data-document]]]" class="box-ref">Example<bdi> 5</bdi></a> and
-<a href="#example-a-proof-chain-in-a-data-document" data-matched-text="[[[#example-a-proof-chain-in-a-data-document]]]" class="box-ref">Example<bdi> 6</bdi></a>. The elements of this <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are
+proofs in an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> as shown in <a href="#example-a-proof-set-in-a-data-document" data-matched-text="[[[#example-a-proof-set-in-a-data-document]]]" class="box-ref">Example<bdi> 6</bdi></a> and
+<a href="#example-a-proof-chain-in-a-data-document" data-matched-text="[[[#example-a-proof-chain-in-a-data-document]]]" class="box-ref">Example<bdi> 7</bdi></a>. The elements of this <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are
 members of a <a data-link-type="dfn|abstract-op" href="#dfn-proof-set" class="internalDFN" id="ref-for-dfn-proof-set-2">proof set</a> and, optionally, a <a data-link-type="dfn|abstract-op" href="#dfn-proof-chain" class="internalDFN" id="ref-for-dfn-proof-chain-2">proof chain</a>. The purpose of
 this section is to explain the intended use of each of these features and, in
 particular, their differing security properties. These differing security
@@ -3709,7 +3734,7 @@ When constructing a <a data-link-type="dfn|abstract-op" href="#dfn-proof-set" cl
       </p>
       <div class="example" id="example-symbolic-expression-of-how-a-proof-is-created">
         <div class="marker">
-    <a class="self-link" href="#example-symbolic-expression-of-how-a-proof-is-created">Example<bdi> 8</bdi></a><span class="example-title">: Symbolic expression of how a proof is created</span>
+    <a class="self-link" href="#example-symbolic-expression-of-how-a-proof-is-created">Example<bdi> 9</bdi></a><span class="example-title">: Symbolic expression of how a proof is created</span>
   </div> <pre class="nohighlight">{
   "type": "DataIntegrityProof",
   "cryptosuite": "eddsa-jcs-2022",
@@ -3731,7 +3756,7 @@ has been signed by the VP of Engineering, the CFO, and the CEO:
       </p>
       <div class="example" id="example-symbolic-expression-of-a-proof-set">
         <div class="marker">
-    <a class="self-link" href="#example-symbolic-expression-of-a-proof-set">Example<bdi> 9</bdi></a><span class="example-title">: Symbolic expression of a proof set</span>
+    <a class="self-link" href="#example-symbolic-expression-of-a-proof-set">Example<bdi> 10</bdi></a><span class="example-title">: Symbolic expression of a proof set</span>
   </div> <pre class="nohighlight">{
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
@@ -3758,7 +3783,7 @@ approved something without the VP of Engineering's concurrence.
       </p>
       <div class="example" id="example-removal-of-a-signature-in-a-proof-set">
         <div class="marker">
-    <a class="self-link" href="#example-removal-of-a-signature-in-a-proof-set">Example<bdi> 10</bdi></a><span class="example-title">: Removal of a signature in a proof set</span>
+    <a class="self-link" href="#example-removal-of-a-signature-in-a-proof-set">Example<bdi> 11</bdi></a><span class="example-title">: Removal of a signature in a proof set</span>
   </div> <pre class="nohighlight">{
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
@@ -3790,7 +3815,7 @@ Engineering signs the <a data-link-type="dfn|abstract-op" href="#dfn-input-docum
       </p>
       <div class="example" id="example-proof-chain-containing-first-proof-with-id-property-set">
         <div class="marker">
-    <a class="self-link" href="#example-proof-chain-containing-first-proof-with-id-property-set">Example<bdi> 11</bdi></a><span class="example-title">: Proof chain containing first proof with `id` property set</span>
+    <a class="self-link" href="#example-proof-chain-containing-first-proof-with-id-property-set">Example<bdi> 12</bdi></a><span class="example-title">: Proof chain containing first proof with `id` property set</span>
   </div> <pre class="nohighlight">{
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": {
@@ -3812,7 +3837,7 @@ is created:
       </p>
       <div class="example" id="example-proof-chain-containing-two-proofs">
         <div class="marker">
-    <a class="self-link" href="#example-proof-chain-containing-two-proofs">Example<bdi> 12</bdi></a><span class="example-title">: Proof chain containing two proofs</span>
+    <a class="self-link" href="#example-proof-chain-containing-two-proofs">Example<bdi> 13</bdi></a><span class="example-title">: Proof chain containing two proofs</span>
   </div> <pre class="nohighlight">{
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
@@ -3845,7 +3870,7 @@ over the document which includes <code>urn:proof-1</code> and <code>urn:proof-2<
       </p>
       <div class="example" id="example-proof-chain-containing-three-proofs">
         <div class="marker">
-    <a class="self-link" href="#example-proof-chain-containing-three-proofs">Example<bdi> 13</bdi></a><span class="example-title">: Proof chain containing three proofs</span>
+    <a class="self-link" href="#example-proof-chain-containing-three-proofs">Example<bdi> 14</bdi></a><span class="example-title">: Proof chain containing three proofs</span>
   </div> <pre class="nohighlight">{
   <span class="comment">// Remainder of secured data document not shown (above)</span>
   "proof": [{
@@ -4013,9 +4038,12 @@ guidance of the group through the <abbr title="World Wide Web Consortium">W3C</a
       <p>
 Portions of the work on this specification have been funded by the United States
 Department of Homeland Security's Science and Technology Directorate under
-contracts 70RSAT20T00000029, 70RSAT21T00000016, and 70RSAT23T00000005. The
-content of this specification does not necessarily reflect the position or the
-policy of the U.S. Government and no official endorsement should be inferred.
+contracts 70RSAT20T00000029, 70RSAT21T00000016, 70RSAT23T00000005,
+70RSAT20T00000010/P00001, 70RSAT20T00000029, 70RSAT21T00000016/P00001,
+70RSAT23T00000005, 70RSAT23C00000030, 70RSAT23R00000006, and the National
+Science Foundation through NSF 22-572. The content of this specification does
+not necessarily reflect the position or the policy of the U.S. Government and no
+official endorsement should be inferred.
       </p>
 
       <p>
@@ -4103,7 +4131,7 @@ Brent Zundel.
     <dl class="bibliography"><dt id="bib-ascii">[ASCII]</dt><dd>
       <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/"><cite>ISO/IEC 646:1991, Information technology -- ISO 7-bit coded character set for information interchange</cite></a>.  Ecma International. URL: <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/">https://www.ecma-international.org/publications-and-standards/standards/ecma-6/</a>
     </dd><dt id="bib-controller-document">[CONTROLLER-DOCUMENT]</dt><dd>
-      <a href="https://www.w3.org/TR/controller-document/"><cite>Controller Documents 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 8 September 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
+      <a href="https://www.w3.org/TR/controller-document/"><cite>Controller Documents 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 15 October 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd>
@@ -4127,7 +4155,7 @@ Brent Zundel.
     </dd><dt id="bib-url">[URL]</dt><dd>
       <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Anne van Kesteren.  WHATWG. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
     </dd><dt id="bib-vc-data-model-2.0">[VC-DATA-MODEL-2.0]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Michael Jones; Gabe Cohen.  W3C. 28 August 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Manu Sporny; Ted Thibodeau Jr; Ivan Herman; Michael Jones; Gabe Cohen.  W3C. 19 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
     </dd><dt id="bib-xmlschema11-2">[XMLSCHEMA11-2]</dt><dd>
       <a href="https://www.w3.org/TR/xmlschema11-2/"><cite>W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes</cite></a>. David Peterson; Sandy Gao; Ashok Malhotra; Michael Sperberg-McQueen; Henry Thompson; Paul V. Biron et al.  W3C. 5 April 2012. W3C Recommendation. URL: <a href="https://www.w3.org/TR/xmlschema11-2/">https://www.w3.org/TR/xmlschema11-2/</a>
     </dd></dl>
@@ -4168,9 +4196,9 @@ Brent Zundel.
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-di-ecdsa">[VC-DI-ECDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Martin Reed; Greg Bernstein; Sebastian Crane.  W3C. 28 August 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Martin Reed; Greg Bernstein; Sebastian Crane.  W3C. 15 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
     </dd><dt id="bib-vc-di-eddsa">[VC-DI-EDDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dmitri Zagidulin; Greg Bernstein; Sebastian Crane.  W3C. 28 August 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dmitri Zagidulin; Greg Bernstein; Sebastian Crane.  W3C. 15 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
     </dd><dt id="bib-vc-extensions">[VC-EXTENSIONS]</dt><dd>
       <a href="https://w3c.github.io/vc-extensions/"><cite>Verifiable Credential Extensions</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-extensions/">https://w3c.github.io/vc-extensions/</a>
     </dd><dt id="bib-webcryptoapi">[WEBCRYPTOAPI]</dt><dd>
@@ -4311,7 +4339,9 @@ Brent Zundel.
     <li>
       <a href="#ref-for-dfn-controller-document-1" title="§ 2.1 Proofs">§ 2.1 Proofs</a> 
     </li><li>
-      <a href="#ref-for-dfn-controller-document-2" title="§ 5.9 Verification Relationship Validation">§ 5.9 Verification Relationship Validation</a> 
+      <a href="#ref-for-dfn-controller-document-2" title="§ 5.8 Verification Method Binding">§ 5.8 Verification Method Binding</a> <a href="#ref-for-dfn-controller-document-3" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-controller-document-4" title="§ 5.9 Verification Relationship Validation">§ 5.9 Verification Relationship Validation</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-cryptosuite" aria-label="Links in this document to definition: cryptographic suite">
@@ -4417,13 +4447,15 @@ Brent Zundel.
     </li><li>
       <a href="#ref-for-dfn-verification-method-3" title="§ 2.6 Relationship to Verifiable Credentials">§ 2.6 Relationship to Verifiable Credentials</a> <a href="#ref-for-dfn-verification-method-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-verification-method-6" title="Reference 4">(4)</a> <a href="#ref-for-dfn-verification-method-7" title="Reference 5">(5)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-8" title="§ 5.9 Verification Relationship Validation">§ 5.9 Verification Relationship Validation</a> 
+      <a href="#ref-for-dfn-verification-method-8" title="§ 5.8 Verification Method Binding">§ 5.8 Verification Method Binding</a> <a href="#ref-for-dfn-verification-method-9" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-10" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-9" title="§ 5.13 Network Requests">§ 5.13 Network Requests</a> <a href="#ref-for-dfn-verification-method-10" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-11" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-verification-method-11" title="§ 5.9 Verification Relationship Validation">§ 5.9 Verification Relationship Validation</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-12" title="§ 6.3 Previous Proofs">§ 6.3 Previous Proofs</a> 
+      <a href="#ref-for-dfn-verification-method-12" title="§ 5.13 Network Requests">§ 5.13 Network Requests</a> <a href="#ref-for-dfn-verification-method-13" title="Reference 2">(2)</a> <a href="#ref-for-dfn-verification-method-14" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-verification-method-13" title="§ 6.4 Fingerprinting Network Requests">§ 6.4 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-verification-method-14" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-verification-method-15" title="§ 6.3 Previous Proofs">§ 6.3 Previous Proofs</a> 
+    </li><li>
+      <a href="#ref-for-dfn-verification-method-16" title="§ 6.4 Fingerprinting Network Requests">§ 6.4 Fingerprinting Network Requests</a> <a href="#ref-for-dfn-verification-method-17" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-verifier" aria-label="Links in this document to definition: verifier">
