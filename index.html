@@ -2847,11 +2847,14 @@ the application layer.
       <section>
         <h3>Verification Method Binding</h3>
 
-        <p class="issue">
-Implementers must ensure that a verification method is bound to a particular
-controller by going from the verification method to the controller document,
-and then ensuring that the controller document also contains the verification
-method.
+        <p>
+Implementers ensure that a [=verification method=] is bound to a particular
+controller by going from the definition of the [=verification method=] to the
+[=controller document=], and then ensuring that the [=controller document=] also
+contains a reference to the [=verification method=]. This process is described
+in the algorithm for
+<a data-cite="?CONTROLLER-DOCUMENT#retrieve-verification-method">
+retrieving a verification method</a>.
         </p>
       </section>
 
