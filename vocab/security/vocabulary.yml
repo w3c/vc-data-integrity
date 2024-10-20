@@ -26,11 +26,12 @@ class:
 
   - id: ProofGraph
     label: An RDF Graph for a digital proof
-    comment: Instances of this class are <a href="https://www.w3.org/TR/rdf12-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF12-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a> instance.
+    comment: Instances of this class are <a href="https://www.w3.org/TR/rdf11-concepts/#section-rdf-graph">RDF Graphs</a> [[RDF11-CONCEPTS]], where each of these graphs must include exactly one <a href="#Proof">Proof</a> instance.
     context: none
 
   - id: VerificationMethod
     label: Verification method
+    comment: Instances of this class must be <a href="https://www.w3.org/TR/rdf11-concepts/#resources-and-statements">denoted by URLs</a>, i.e., they cannot be blank nodes.
     defined_by: https://www.w3.org/TR/controller-document/#verification-methods
 
   - id: VerificationRelationship
