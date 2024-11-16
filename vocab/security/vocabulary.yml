@@ -19,6 +19,10 @@ ontology:
     value: https://www.w3.org/TR/vc-data-integrity/
 
 class:
+  - id: ControllerDocument
+    label: Controller document
+    defined_by: https://www.w3.org/TR/controller-document/#controller-documents
+
   - id: Proof
     label: Digital proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof
