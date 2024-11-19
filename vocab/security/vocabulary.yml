@@ -199,7 +199,9 @@ property:
 
   - id: controller
     label: Controller
-    domain: sec:VerificationMethod
+    domain:
+      - sec:VerificationMethod
+      - sec:ControllerDocument
     range: IRI
     defined_by: https://www.w3.org/TR/controller-document/#defn-controller
     context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]

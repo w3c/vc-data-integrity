@@ -270,7 +270,9 @@
         </p>
         <p>
           Each of these sections has an ellipse at the top, labeled as "Proof", "VerificationMethod", 
-          and "VerificationRelationship", respectively.
+          and "VerificationRelationship", respectively. Additionally, the Verification Method section also
+          includes an additional ellipse, labeled as "ControllerDocument", side-by-side with the ellipse
+          labeled as "VerificationMethod".
         </p>
         <section>
           <h3>Proof Section</h3>
@@ -304,16 +306,17 @@
 
           <p>
             The left side of this section contains a column of three labeled boxes, all styled as "Property". 
-            The labels, from top to bottom, are "expires", "controller", and "revoked". 
+            The labels, from top to bottom, are "controller", "expires", and "revoked".
             Each of these is connected to the "VerificationMethod" ellipse, with a line styled as "Domain Of".
-            The "expires" "Property" box is also connected to the "Proof" ellipse (in the Proof section), 
-            with a line styled as "Domain Of".
+            The "controller" "Property" box is also connected to the "ControllerDocument" ellipse, while
+            the "expires" "Property" box is also connected to the "Proof" ellipse (in the Proof section);
+            both these extra connections are also with a line styled as "Domain Of".
           </p>
 
           <p>
             There is also a distinct box, styled as "Property" and labeled as "verificationMethod". 
             This "verificationMethod" box is connected to the "VerificationMethod" 
-ellipse, with a connecting line styled as "Range".
+            ellipse, with a connecting line styled as "Range".
           </p>
 
           <p>
