@@ -21,7 +21,7 @@ ontology:
 class:
   - id: ControllerDocument
     label: Controller document
-    defined_by: https://www.w3.org/TR/cid/#controller-documents
+    defined_by: https://www.w3.org/TR/cid-1.0/#controller-documents
 
   - id: Proof
     label: Digital proof
@@ -36,11 +36,11 @@ class:
   - id: VerificationMethod
     label: Verification method
     comment: Instances of this class must be <a href="https://www.w3.org/TR/rdf11-concepts/#resources-and-statements">denoted by URLs</a>, i.e., they cannot be blank nodes.
-    defined_by: https://www.w3.org/TR/cid/#verification-methods
+    defined_by: https://www.w3.org/TR/cid-1.0/#verification-methods
 
   - id: VerificationRelationship
     comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as values of the <a href="#proofPurpose">proofPurpose</a> property.
-    defined_by: https://www.w3.org/TR/cid/#verification-relationships
+    defined_by: https://www.w3.org/TR/cid-1.0/#verification-relationships
     upper_value: rdf:Property
     context: none
 
@@ -53,7 +53,7 @@ class:
   - id: Multikey
     label: Multikey Verification Method
     upper_value: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/cid/#multikey
+    defined_by: https://www.w3.org/TR/cid-1.0/#multikey
     see_also:
       - label: EdDSA Cryptosuites
         url: https://www.w3.org/TR/vc-di-eddsa/#multikey
@@ -66,7 +66,7 @@ class:
   - id: JsonWebKey
     label: JSON Web Key Verification Method
     upper_value: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/cid/#jsonwebkey
+    defined_by: https://www.w3.org/TR/cid-1.0/#jsonwebkey
     context: https://w3id.org/security/jwk/v1
 
   - id: Ed25519VerificationKey2020
@@ -191,7 +191,7 @@ property:
   - id: verificationMethod
     label: Verification method
     range: sec:VerificationMethod
-    defined_by: https://www.w3.org/TR/cid/#dfn-verificationmethod
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-verificationmethod
     see_also:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
@@ -203,7 +203,7 @@ property:
       - sec:VerificationMethod
       - sec:ControllerDocument
     range: IRI
-    defined_by: https://www.w3.org/TR/cid/#defn-controller
+    defined_by: https://www.w3.org/TR/cid-1.0/#defn-controller
     context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]
 
   - id: proof
@@ -255,7 +255,7 @@ property:
 
   - id: expiration
     label: Expiration time for a proof or verification method
-    defined_by: [https://www.w3.org/TR/vc-data-integrity/#defn-proof-expires, https://www.w3.org/TR/cid/#defn-vm-expires]
+    defined_by: [https://www.w3.org/TR/vc-data-integrity/#defn-proof-expires, https://www.w3.org/TR/cid-1.0/#defn-vm-expires]
     comment: Historically, this property has often been expressed using `expires` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`expires`) and the property identifier (`...#expiration`) is expected and should not trigger an error.
     domain:
       - sec:Proof
@@ -274,14 +274,14 @@ property:
     label: Authentication method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/cid/#authentication
+    defined_by: https://www.w3.org/TR/cid-1.0/#authentication
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
-    defined_by: https://www.w3.org/TR/cid/#assertion
+    defined_by: https://www.w3.org/TR/cid-1.0/#assertion
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityDelegationMethod
@@ -289,7 +289,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/cid/#capability-delegation
+    defined_by: https://www.w3.org/TR/cid-1.0/#capability-delegation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: capabilityInvocationMethod
@@ -297,7 +297,7 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/cid/#capability-invocation
+    defined_by: https://www.w3.org/TR/cid-1.0/#capability-invocation
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: keyAgreementMethod
@@ -305,7 +305,7 @@ property:
     type: sec:VerificationRelationship
     range: sec:VerificationMethod
     comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
-    defined_by: https://www.w3.org/TR/cid/#key-agreement
+    defined_by: https://www.w3.org/TR/cid-1.0/#key-agreement
     context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
 
   - id: cryptosuite
@@ -319,7 +319,7 @@ property:
     label: Public key multibase
     domain: sec:Multikey
     range: sec:multibase
-    defined_by: https://www.w3.org/TR/cid/#dfn-publickeymultibase
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-publickeymultibase
     see_also:
       - label: multibase
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
@@ -331,7 +331,7 @@ property:
     label: Secret key multibase
     domain: sec:Multikey
     range: sec:multibase
-    defined_by: https://www.w3.org/TR/cid/#dfn-secretkeymultibase
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-secretkeymultibase
     see_also:
       - label: multibase format
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
@@ -343,7 +343,7 @@ property:
     label: Public key JWK
     range: rdf:JSON
     domain: sec:JsonWebKey
-    defined_by: https://www.w3.org/TR/cid/#dfn-publickeyjwk
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-publickeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
@@ -355,7 +355,7 @@ property:
     label: Secret key JWK
     range: rdf:JSON
     domain: sec:JsonWebKey
-    defined_by: https://www.w3.org/TR/cid/#dfn-secretkeyjwk
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-secretkeyjwk
     see_also:
       - label: IANA JOSE
         url: https://www.iana.org/assignments/jose/jose.xhtml
@@ -366,7 +366,7 @@ property:
   - id: revoked
     label: Revocation time
     range: xsd:dateTime
-    defined_by: https://www.w3.org/TR/cid/#dfn-revoked
+    defined_by: https://www.w3.org/TR/cid-1.0/#dfn-revoked
     domain: sec:VerificationMethod
     context: https://w3id.org/security/jwk/v1
 
@@ -548,5 +548,5 @@ datatype:
   - id: multibase
     label: Datatype for multibase values
     upper_value: xsd:string
-    defined_by: https://www.w3.org/TR/cid/#multibase
+    defined_by: https://www.w3.org/TR/cid-1.0/#multibase
     context: https://w3id.org/security/multikey/v1
