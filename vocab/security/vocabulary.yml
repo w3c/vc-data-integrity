@@ -19,9 +19,9 @@ ontology:
     value: https://www.w3.org/TR/vc-data-integrity/
 
 class:
-  - id: ControllerDocument
-    label: Controller document
-    defined_by: https://www.w3.org/TR/cid-1.0/#controller-documents
+  - id: ControlledIdentifierDocument
+    label: Controlled Identifier Document
+    defined_by: https://www.w3.org/TR/cid-1.0/#controlled-identifier-documents
 
   - id: Proof
     label: Digital proof
@@ -201,7 +201,7 @@ property:
     label: Controller
     domain:
       - sec:VerificationMethod
-      - sec:ControllerDocument
+      - sec:ControlledIdentifierDocument
     range: IRI
     defined_by: https://www.w3.org/TR/cid-1.0/#defn-controller
     context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]
