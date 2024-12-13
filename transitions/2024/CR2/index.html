@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="ReSpec 35.1.2">
+<meta name="generator" content="ReSpec 35.2.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -394,10 +394,10 @@ li.sd-jwt-tab {
   "specStatus": "CR",
   "shortName": "vc-data-integrity",
   "subtitle": "Securing the Integrity of Verifiable Credential Data",
-  "publishDate": "2024-11-05",
+  "publishDate": "2024-12-19",
+  "crEnd": "2024-01-19",
   "edDraftURI": "https://w3c.github.io/vc-data-integrity/",
   "implementationReportURI": "https://w3c.github.io/vc-data-integrity/implementations/",
-  "crEnd": "2024-12-05",
   "editors": [
     {
       "name": "Manu Sporny",
@@ -624,20 +624,20 @@ li.sd-jwt-tab {
       ]
     }
   ],
-  "publishISODate": "2024-11-05T00:00:00.000Z",
-  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 05 November 2024"
+  "publishISODate": "2024-12-19T00:00:00.000Z",
+  "generatedSubtitle": "W3C Candidate Recommendation Snapshot 19 December 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-CR"></head>
 <body class="h-entry" data-cite="INFRA MIMESNIFF VC-DATA-MODEL-2.0 CONTROLLER-DOCUMENT"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Verifiable Credential Data Integrity 1.0</h1> <h2 id="subtitle" class="subtitle">Securing the Integrity of Verifiable Credential Data</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2024-11-05">05 November 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#CR">W3C Candidate Recommendation Snapshot</a> <time class="dt-published" datetime="2024-12-19">19 December 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2024/CR-vc-data-integrity-20241105/">https://www.w3.org/TR/2024/CR-vc-data-integrity-20241105/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2024/CR-vc-data-integrity-20241219/">https://www.w3.org/TR/2024/CR-vc-data-integrity-20241219/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
@@ -708,7 +708,7 @@ li.sd-jwt-tab {
     <section id="abstract" class="introductory"><h2>Abstract</h2>
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and similar types of constrained digital
+integrity of <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and similar types of constrained digital
 documents using cryptography, especially through the use of digital
 signatures and related mathematical proofs.
       </p>
@@ -751,7 +751,7 @@ removed before the transition to <abbr title="World Wide Web Consortium">W3C</ab
         <a href="https://www.w3.org/policies/patent-policy/#sec-Requirements">royalty-free licensing</a>
         for implementations.</p><p>
           This Candidate Recommendation is not expected to advance to Proposed
-          Recommendation any earlier than 05 December 2024.
+          Recommendation any earlier than 19 January 2024.
         </p><p>
     
         This document was produced by a group
@@ -779,7 +779,7 @@ removed before the transition to <abbr title="World Wide Web Consortium">W3C</ab
       
       <p>
 This specification describes mechanisms for ensuring the authenticity and
-integrity of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and similar types of constrained digital
+integrity of <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and similar types of constrained digital
 documents using cryptography, especially through the use of digital signatures
 and related mathematical proofs. Cryptographic proofs enable functionality that
 is useful to implementors of distributed systems. For example, proofs can be
@@ -790,7 +790,7 @@ used to:
         <li>
 Make statements that can be shared without loss of trust, because their
 authorship can be verified by a third party, for example as part of a
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>], <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentation</a>,
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>], <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentation</a>,
 or social media post.
         </li>
         <li>
@@ -984,7 +984,7 @@ the benefits of such an approach.
         </dl>
 
       <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span><span class="issue-label">: Application of technology to broader use cases</span></div><p class="">
-While this specification primarily focuses on <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>, the
+While this specification primarily focuses on <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>, the
 design of this technology is generalized, such that it can be used for other use
 cases. In these instances, implementers are expected to perform their own due
 diligence and expert review as to the applicability of the technology to their
@@ -1001,7 +1001,7 @@ use case.
         when, and only when, they appear in all capitals, as shown here.
       </p>
         <p>
-A <dfn data-plurals="conforming secured documents" id="dfn-conforming-secured-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">conforming secured document</dfn> is any <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence">byte sequence</a> that can be
+A <dfn data-plurals="conforming secured documents" id="dfn-conforming-secured-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">conforming secured document</dfn> is any <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence">byte sequence</a> that can be
 converted to a
 <a href="https://infra.spec.whatwg.org/#parse-json-bytes-to-a-javascript-value">
 JSON document</a> that follows the relevant normative requirements in
@@ -1037,7 +1037,7 @@ is included whenever they appear in this specification.
 
           <dd data-defines="#dfn-controller-document">
 A document that contains public cryptographic material as defined in the
-<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite> specification.
+<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite> specification.
           </dd>
 
           <dt><dfn class="export" data-lt="cryptosuite|cryptographic suite" data-export="" data-plurals="cryptographic suites|cryptosuites" id="dfn-cryptosuite" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">cryptographic suite</dfn></dt>
@@ -1160,7 +1160,7 @@ this information is provided using Linked Data vocabularies such as
         <p>
 When expressing a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-proof" class="internalDFN" id="ref-for-dfn-data-integrity-proof-4">data integrity proof</a> on an object, a
 <dfn class="lint-ignore" data-plurals="proofs" id="dfn-proof" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn"><code>proof</code></dfn> property <em class="rfc2119">MUST</em> be used. The <code>proof</code>
-property within a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> is a <a data-link-type="dfn|abstract-op" href="#dfn-named-graph" class="internalDFN" id="ref-for-dfn-named-graph-1">named graph</a>. If present,
+property within a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> is a <a data-link-type="dfn|abstract-op" href="#dfn-named-graph" class="internalDFN" id="ref-for-dfn-named-graph-1">named graph</a>. If present,
 its value <em class="rfc2119">MUST</em> be either a single object, or an unordered set of objects,
 expressed using the properties below:
         </p>
@@ -1175,7 +1175,7 @@ The usage of this property is further explained in Section <a href="#proof-chain
 
           <dt>type</dt>
           <dd>
-The specific type of proof <em class="rfc2119">MUST</em> be specified as a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a URL
+The specific type of proof <em class="rfc2119">MUST</em> be specified as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a URL
 [<cite><a class="bibref" data-link-type="biblio" href="#bib-url" title="URL Standard">URL</a></cite>]. Examples of proof types include <code>DataIntegrityProof</code> and
 <code>Ed25519Signature2020</code>. Proof types determine what other fields are required to
 secure and verify the proof.
@@ -1183,20 +1183,20 @@ secure and verify the proof.
 
           <dt><dfn class="lint-ignore" id="dfn-proofpurpose" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">proofPurpose</dfn></dt>
           <dd>
-The reason the proof was created <em class="rfc2119">MUST</em> be specified as a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a
+The reason the proof was created <em class="rfc2119">MUST</em> be specified as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a
 URL [<cite><a class="bibref" data-link-type="biblio" href="#bib-url" title="URL Standard">URL</a></cite>]. The proof purpose acts as a safeguard to prevent the proof from
 being misused by being applied to a purpose other than the one that was
 intended. For example, without this value the creator of a proof could be
 tricked into using cryptographic material typically used to create a Verifiable
 Credential (<code>assertionMethod</code>) during a login process (<code>authentication</code>) which
-would then result in the creation of a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> they never meant to
+would then result in the creation of a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> they never meant to
 create instead of the intended action, which was to merely log in to a website.
           </dd>
 
           <dt>verificationMethod</dt>
           <dd>
 A verification method is the means and information needed to verify the proof.
-If included, the value <em class="rfc2119">MUST</em> be a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-url" title="URL Standard">URL</a></cite>]. Inclusion of
+If included, the value <em class="rfc2119">MUST</em> be a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that maps to a [<cite><a class="bibref" data-link-type="biblio" href="#bib-url" title="URL Standard">URL</a></cite>]. Inclusion of
 <code>verificationMethod</code> is <em class="rfc2119">OPTIONAL</em>, but if it is not included, other properties
 such as <code>cryptosuite</code> might provide a mechanism by which to obtain the information
 necessary to verify the proof. Note that when <code>verificationMethod</code> is
@@ -1252,19 +1252,19 @@ include: <code>domain.example</code> (DNS domain), <code>https://domain.example:
 
           <dt id="defn-challenge"><dfn id="dfn-challenge" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">challenge</dfn></dt>
           <dd>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value that <em class="rfc2119">SHOULD</em> be included in a proof if a <code>domain</code> is specified.
-The value is used once for a particular <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://url.spec.whatwg.org/#concept-domain">domain</a> and window of time. This
+A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value that <em class="rfc2119">SHOULD</em> be included in a proof if a <code>domain</code> is specified.
+The value is used once for a particular <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-domain">domain</a> and window of time. This
 value is used to mitigate replay attacks. Examples of a challenge value include:
 <code>1235abcd6789</code>, <code>79d34551-ae81-44ae-823b-6dadbab9ebd4</code>, and <code>ruby</code>.
           </dd>
 
           <dt><dfn class="lint-ignore" id="dfn-proofvalue" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">proofValue</dfn></dt>
           <dd>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value that expresses base-encoded binary data necessary to verify the
+A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value that expresses base-encoded binary data necessary to verify the
 digital proof using the <code>verificationMethod</code> specified. The value <em class="rfc2119">MUST</em> use a
 header and encoding as described in Section
 <a href="https://www.w3.org/TR/controller-document/#multibase-0">2.4 Multibase</a> of the
-<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite> specification to express the binary data.
+<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite> specification to express the binary data.
 The contents of this value are determined by a specific cryptosuite and set
 to the <em>proof value</em> generated by the <a href="#add-proof">Add Proof Algorithm</a>
 for that cryptosuite. Alternative properties with different encodings specified by the
@@ -1283,7 +1283,7 @@ proof to be considered verified. This property is used in Section
 
           <dt><dfn class="lint-ignore" id="dfn-nonce" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">nonce</dfn></dt>
           <dd>
-An <em class="rfc2119">OPTIONAL</em> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value supplied by the proof creator. One use of this
+An <em class="rfc2119">OPTIONAL</em> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value supplied by the proof creator. One use of this
 field is to increase privacy by decreasing linkability that is the result
 of deterministically generated signatures.
           </dd>
@@ -1566,7 +1566,7 @@ authentication protocol.
           <dt><dfn class="external lint-ignore" id="dfn-assertionmethod" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">assertionMethod</dfn></dt>
           <dd>
 Indicates that a proof can only be used for making assertions, for example
-signing a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>.
+signing a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>.
           </dd>
           <dt><dfn class="external lint-ignore" id="dfn-keyagreement" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">keyAgreement</dfn></dt>
           <dd>
@@ -1604,7 +1604,7 @@ To enable confirmation that a resource referenced by a <a data-link-type="dfn|ab
 has not changed since the document was secured, an implementer <em class="rfc2119">MAY</em> include a
 property named <dfn class="lint-ignore" id="dfn-digestmultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn"><code>digestMultibase</code></dfn> in any object
 that includes an <code>id</code> property. If present, the <code>digestMultibase</code> value <em class="rfc2119">MUST</em> be
-a single <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value, or an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> values, each of which is a
+a single <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value, or an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> values, each of which is a
 <a href="https://www.w3.org/TR/controller-document/#multibase">Multibase</a>-encoded
 <a href="https://www.w3.org/TR/controller-document/#multihash">Multihash</a> value.
         </p>
@@ -1707,7 +1707,7 @@ the corresponding hash value below.
         <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><p class="">
 Beyond the security terms defined by this specification, the
 <a href="https://w3id.org/security">https://w3id.org/security#</a> namespace
-also includes the terms defined in the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>&nbsp;[<cite><a class="bibref" data-link-type="biblio" href="#bib-controller-document" title="Controller Documents 1.0">CONTROLLER-DOCUMENT</a></cite>]
+also includes the terms defined in the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>&nbsp;[<cite><a class="bibref" data-link-type="biblio" href="#bib-controller-document" title="Controlled Identifier Document 1.0">CONTROLLER-DOCUMENT</a></cite>]
 specification, with the corresponding mappings in the context files listed above.
         </p></div>
 
@@ -1732,7 +1732,7 @@ application/ld+json
               <td>
 The vocabulary in JSON-LD format [<cite><a class="bibref" data-link-type="biblio" href="#bib-json-ld11" title="JSON-LD 1.1">JSON-LD11</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">10a012489a3abe38f9871b986f27fbfa49a54d8d9edbe857a60bb2ce7baed416</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">0825e3f71462e105e85ea144e2eb1521c2755e6679bd2eb459a9a796c56b18e8</span></code>
               </td>
             </tr>
             <tr>
@@ -1742,7 +1742,7 @@ text/turtle
               <td>
 The vocabulary in Turtle format [<cite><a class="bibref" data-link-type="biblio" href="#bib-turtle" title="RDF 1.1 Turtle">TURTLE</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">2f7e055d789cbde920ac0279bfd147f56e07140811abcf273a8d8164a4afdfcb</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">2fefc7e645fdfa34491c772d0e9c2eed9f95cde3b205e4667abe876580be7f7d</span></code>
               </td>
             </tr>
             <tr>
@@ -1753,7 +1753,7 @@ text/html
 The vocabulary in HTML+RDFa Format [<cite><a class="bibref" data-link-type="biblio" href="#bib-html-rdfa" title="HTML+RDFa 1.1 - Second Edition">HTML-RDFA</a></cite>].<br><br>
 
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">eeea4710c7cb7640bb70f9d016e86eab7dc06ab804dc70057cc7c05cce1f8489</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">0f989a247fb87f514640f1080ad40713b6c950edeb1d29e8c5b45f647699b3d4</span></code>
               </td>
             </tr>
           </tbody>
@@ -1783,7 +1783,7 @@ functionally equivalent mechanisms.
         </p>
         <p>
 Some applications, such as digital wallets, that are capable of holding arbitrary
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> or other data-integrity-protected documents, from
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> or other data-integrity-protected documents, from
 any issuer and using any contexts, might need to be able to load externally
 linked resources, such as JSON-LD context files, in production settings. This is
 expected to increase user choice, scalability, and decentralized upgrades in the
@@ -1847,7 +1847,7 @@ of the application.
 Yet another valid approach would be for a transmitting application to
 <a href="https://www.w3.org/TR/json-ld11-api/#compaction-algorithm">compact</a> a document to
 exactly what a receiving application requests, via a protocol such as one
-requesting a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentation</a>, omitting additional sender-specific
+requesting a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentation</a>, omitting additional sender-specific
 context values that were used when securing the original document. As long as
 the cryptography suite's verification algorithm provides a successful
 verification result, such transformations are valid and would result in full
@@ -1946,7 +1946,7 @@ This section defines datatypes that are used by this specification.
 This specification encodes cryptographic suite identifiers as enumerable
 strings, which is useful in processes that need to efficiently encode such
 strings, such as compression algorithms. In environments that support data types
-for <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> values, such as RDF [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-concepts" title="Resource Description Framework (RDF): Concepts and Abstract Syntax">RDF-CONCEPTS</a></cite>], cryptographic identifier
+for <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> values, such as RDF [<cite><a class="bibref" data-link-type="biblio" href="#bib-rdf-concepts" title="Resource Description Framework (RDF): Concepts and Abstract Syntax">RDF-CONCEPTS</a></cite>], cryptographic identifier
 content is indicated using a literal value whose datatype is set to
 <code>https://w3id.org/security#cryptosuiteString</code>.
           </p>
@@ -2021,7 +2021,7 @@ this specification.
 
         <p>
 Cryptographic suites that implement this specification can be used to secure
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentations</a>. Implementers
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> and <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-presentation">verifiable presentations</a>. Implementers
 that are addressing those use cases are cautioned that additional checks might
 be appropriate when processing those types of documents.
         </p>
@@ -2066,7 +2066,7 @@ validity period for the proof (that is, between
 <a href="#dfn-created" id="ref-for-dfn-created-2"><code>created</code></a> and
 <a href="#defn-proof-expires"><code>expires</code></a> ).
 When <a href="https://www.w3.org/TR/vc-data-model-2.0/#validation">validating</a> a
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>, it is important to ensure that the time of
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>, it is important to ensure that the time of
 interest is within the validity period for the
 <a href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a> (that is,
 betweeen
@@ -2079,7 +2079,7 @@ in accepting data that ought to have been rejected.
 
         <p>
 Finally, implementers are also urged to understand that there is a difference
-between the revocation information associated with a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>,
+between the revocation information associated with a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>,
 and the <a href="https://www.w3.org/TR/controller-document/#dfn-revoked">revocation</a>
 and <a href="https://www.w3.org/TR/controller-document/#defn-vm-expires">expiration</a> times
 for a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-6">verification method</a>. The
@@ -2089,9 +2089,9 @@ for a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class=
 properties, respectively; are related to events such as a <a data-link-type="dfn|abstract-op" href="#dfn-secret-key" class="internalDFN" id="ref-for-dfn-secret-key-3">secret key</a> being
 compromised or expiring; and can provide timing information which might reveal
 details about a controller, such as their security practices or when they might
-have been compromised. The revocation information for a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> is expressed using the <code>credentialStatus</code> property; is related
+have been compromised. The revocation information for a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> is expressed using the <code>credentialStatus</code> property; is related
 to events such as an individual losing the privilege that is granted by the
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>; and does not provide timing information, which
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>; and does not provide timing information, which
 enhances privacy.
         </p>
       </section>
@@ -2146,32 +2146,32 @@ verification of the data.
         </li>
         <li>
 The specification <em class="rfc2119">MUST</em> define a <dfn class="export" data-lt="cryptosuite instantiation algorithm|data integrity cryptographic suite instantiation algorithm" data-export="" data-plurals="cryptosuite instantiation algorithms" id="dfn-cryptosuite-instantiation-algorithm" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">data integrity cryptographic suite instantiation
-algorithm</dfn> that accepts a set of options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) and returns a
-<a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-1">cryptosuite instance</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>). This algorithm <em class="rfc2119">SHOULD</em> be
+algorithm</dfn> that accepts a set of options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) and returns a
+<a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-1">cryptosuite instance</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>). This algorithm <em class="rfc2119">SHOULD</em> be
 listed in the <cite><a data-matched-text="[[[?VC-EXTENSIONS]]]" href="https://w3c.github.io/vc-extensions/">Verifiable Credential Extensions</a></cite> document. A <dfn class="export" data-local-lt="cryptosuite instance" data-export="" data-lt="data integrity cryptographic suite instance|cryptosuite instance" id="dfn-data-integrity-cryptographic-suite-instance" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">data integrity cryptographic suite
-instance</dfn> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> has the following <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>.
+instance</dfn> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> has the following <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>.
           <dl data-dfn-for="cryptosuite instance">
             <dt><dfn id="dfn-createproof" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">createProof</dfn></dt>
             <dd>
-An algorithm that takes an <a data-link-type="dfn|abstract-op" href="#dfn-input-document" class="internalDFN" id="ref-for-dfn-input-document-1">input document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
-<var>inputDocument</var>) and proof options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) as input, and
-produces a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-proof" class="internalDFN" id="ref-for-dfn-data-integrity-proof-12">data integrity proof</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>) or an error.
+An algorithm that takes an <a data-link-type="dfn|abstract-op" href="#dfn-input-document" class="internalDFN" id="ref-for-dfn-input-document-1">input document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
+<var>inputDocument</var>) and proof options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>) as input, and
+produces a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-proof" class="internalDFN" id="ref-for-dfn-data-integrity-proof-12">data integrity proof</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>) or an error.
             </dd>
             <dt><dfn id="dfn-verifyproof" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verifyProof</dfn></dt>
             <dd>
-An algorithm that takes a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-1">secured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
+An algorithm that takes a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-1">secured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
 <var>securedDocument</var>) as input, and produces a <dfn id="dfn-cryptosuite-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">cryptosuite verification
 result</dfn> or an error. The <a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite-verification-result" class="internalDFN" id="ref-for-dfn-cryptosuite-verification-result-1">cryptosuite verification result</a> is a
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> that contains the following <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
+<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> that contains the following <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
               <dl data-dfn-for="cryptosuite verification result">
                 <dt><dfn class="lint-ignore" id="dfn-verified" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verified</dfn></dt>
                 <dd>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#boolean">boolean</a> that is <code>true</code> if the verification succeeded, or <code>false</code>
+A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#boolean">boolean</a> that is <code>true</code> if the verification succeeded, or <code>false</code>
 otherwise.
                 </dd>
                 <dt><dfn class="lint-ignore" id="dfn-verifieddocument" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verifiedDocument</dfn></dt>
                 <dd>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that represents the <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-2">secured data document</a> with the verified
+A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that represents the <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-2">secured data document</a> with the verified
 proofs removed if <a data-link-type="dfn|abstract-op" href="#dfn-verified" class="internalDFN" id="ref-for-dfn-verified-1">verified</a> is <code>true</code>, or
 <a href="https://infra.spec.whatwg.org/#nulls">null</a> otherwise.
                 </dd>
@@ -2226,12 +2226,12 @@ When specifing a <a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite" cla
         <dl>
           <dt>type</dt>
           <dd>
-The <code>type</code> property <em class="rfc2119">MUST</em> contain the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <code>DataIntegrityProof</code>.
+The <code>type</code> property <em class="rfc2119">MUST</em> contain the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <code>DataIntegrityProof</code>.
           </dd>
           <dt>cryptosuite</dt>
           <dd>
-The value of the <code>cryptosuite</code> property <em class="rfc2119">MUST</em> be a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that identifies the
-<a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite" class="internalDFN" id="ref-for-dfn-cryptosuite-9">cryptographic suite</a>. If the processing environment supports <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>
+The value of the <code>cryptosuite</code> property <em class="rfc2119">MUST</em> be a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> that identifies the
+<a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite" class="internalDFN" id="ref-for-dfn-cryptosuite-9">cryptographic suite</a>. If the processing environment supports <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>
 subtypes, the subtype of the <code>cryptosuite</code> value <em class="rfc2119">MUST</em> be the
 <code>https://w3id.org/security#cryptosuiteString</code> subtype.
           </dd>
@@ -2282,12 +2282,12 @@ document.
 
       <p>
 The algorithms defined below operate on documents represented as <dfn id="dfn-json-objects" class="externalDFN" data-no-export="" data-dfn-type="dfn"><a href="https://www.rfc-editor.org/rfc/rfc8259#section-4">JSON objects</a></dfn>. This specification follows the
-<cite><a data-matched-text="[[[JSON-LD11-API]]]" href="https://www.w3.org/TR/json-ld11-api/">JSON-LD 1.1 Processing Algorithms and API</a></cite> specification in representing a JSON object as a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>.
-An <dfn class="export" data-export="" id="dfn-unsecured-data-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">unsecured data document</dfn> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that contains
-no proof values. An <dfn id="dfn-input-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">input document</dfn> is an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that has not yet had
+<cite><a data-matched-text="[[[JSON-LD11-API]]]" href="https://www.w3.org/TR/json-ld11-api/">JSON-LD 1.1 Processing Algorithms and API</a></cite> specification in representing a JSON object as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>.
+An <dfn class="export" data-export="" id="dfn-unsecured-data-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">unsecured data document</dfn> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that contains
+no proof values. An <dfn id="dfn-input-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">input document</dfn> is an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that has not yet had
 the current proof added to it, but it <em class="rfc2119">MAY</em> contain a proof value that was added
 to it by a previous process. A <dfn class="export" data-export="" data-plurals="secured data documents" id="dfn-secured-data-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">secured data document</dfn>
-is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that contains one or more proof values.
+is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> that contains one or more proof values.
       </p>
 
       <p>
@@ -2363,10 +2363,10 @@ to validate all JSON-LD Context values used in the document.
 
         <p>
 The following algorithm specifies how a digital proof can be added to an <a data-link-type="dfn|abstract-op" href="#dfn-input-document" class="internalDFN" id="ref-for-dfn-input-document-2">input document</a>, and can then be used to verify the output document's authenticity
-and integrity. Required inputs are an <a data-link-type="dfn|abstract-op" href="#dfn-input-document" class="internalDFN" id="ref-for-dfn-input-document-3">input document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
-<var>inputDocument</var>), a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-3">cryptosuite instance</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>), and a
-set of options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). Output is a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-3">secured data document</a>
-(<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>) or an error. Whenever this algorithm encodes strings, it <em class="rfc2119">MUST</em> use
+and integrity. Required inputs are an <a data-link-type="dfn|abstract-op" href="#dfn-input-document" class="internalDFN" id="ref-for-dfn-input-document-3">input document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
+<var>inputDocument</var>), a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-3">cryptosuite instance</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> <var>cryptosuite</var>), and a
+set of options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). Output is a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-3">secured data document</a>
+(<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>) or an error. Whenever this algorithm encodes strings, it <em class="rfc2119">MUST</em> use
 UTF-8 encoding.
         </p>
 
@@ -2384,12 +2384,12 @@ convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var> has a non-null <var>domain</var> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a>, it <em class="rfc2119">MUST</em> be equal to
+If <var>options</var> has a non-null <var>domain</var> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a>, it <em class="rfc2119">MUST</em> be equal to
 <var>proof</var>.<var>domain</var> or an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey
 an error type of <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var> has a non-null <var>challenge</var> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a>, it <em class="rfc2119">MUST</em> be equal to
+If <var>options</var> has a non-null <var>challenge</var> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a>, it <em class="rfc2119">MUST</em> be equal to
 <var>proof</var>.<var>challenge</var> or an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em>
 convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
@@ -2411,9 +2411,9 @@ Return <var>securedDataDocument</var> as the <a data-link-type="dfn|abstract-op"
         <p>
 The following algorithm specifies how to incrementally add a proof to a proof
 set or proof chain starting with a secured document containing either a proof or
-proof set/chain. Required inputs are a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-5">secured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
-<var>securedDocument</var>), a <a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite" class="internalDFN" id="ref-for-dfn-cryptosuite-11">cryptographic suite</a> (<a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-4">cryptosuite instance</a> <var>suite</var>), and a set of options (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). Output is a new
-<a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-6">secured data document</a> (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>). Whenever this algorithm encodes strings, it
+proof set/chain. Required inputs are a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-5">secured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>
+<var>securedDocument</var>), a <a data-link-type="dfn|abstract-op" href="#dfn-cryptosuite" class="internalDFN" id="ref-for-dfn-cryptosuite-11">cryptographic suite</a> (<a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-suite-instance" class="internalDFN" id="ref-for-dfn-data-integrity-cryptographic-suite-instance-4">cryptosuite instance</a> <var>suite</var>), and a set of options (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>options</var>). Output is a new
+<a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-6">secured data document</a> (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>). Whenever this algorithm encodes strings, it
 <em class="rfc2119">MUST</em> use UTF-8 encoding.
         </p>
 
@@ -2433,16 +2433,16 @@ the <var>inputDocument</var>.
 Let <var>matchingProofs</var> be an empty list.
           </li>
           <li>
-If <var>options</var> has a <code>previousProof</code> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a> that is a string, add the
+If <var>options</var> has a <code>previousProof</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a> that is a string, add the
 element from <var>allProofs</var> with an <code>id</code> attribute matching <code>previousProof</code> to
 <var>matchingProofs</var>. If a proof with <code>id</code> equal to <code>previousProof</code> does not exist in
 <var>allProofs</var>, an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
           </li>
           <li>
-If <var>options</var> has a <code>previousProof</code> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a> that is an array, add each
+If <var>options</var> has a <code>previousProof</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">item</a> that is an array, add each
 element from <var>allProofs</var> with an <code>id</code> attribute that matches an element of that
-array. If any element of <code>previousProof</code> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> has an <code>id</code> attribute that does
+array. If any element of <code>previousProof</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> has an <code>id</code> attribute that does
 not match the <code>id</code> attribute of any element of <var>allProofs</var>, an error <em class="rfc2119">MUST</em> be
 raised and <em class="rfc2119">SHOULD</em> convey an error type of
 <a href="#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>.
@@ -2485,11 +2485,11 @@ takes as input:
         <dl>
           <dt><var>mediaType</var></dt>
           <dd>
-A <a data-link-type="dfn|abstract-op" data-lt="MIME type" data-type="dfn" href="https://mimesniff.spec.whatwg.org/#mime-type">media type</a> as defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-mimesniff" title="MIME Sniffing Standard">MIMESNIFF</a></cite>]
+A <a data-link-type="dfn" data-lt="MIME type" href="https://mimesniff.spec.whatwg.org/#mime-type">media type</a> as defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-mimesniff" title="MIME Sniffing Standard">MIMESNIFF</a></cite>]
           </dd>
           <dt><var>documentBytes</var></dt>
           <dd>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence">byte sequence</a> whose media type is <var>mediaType</var>
+A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#byte-sequence">byte sequence</a> whose media type is <var>mediaType</var>
           </dd>
           <dt><var>cryptosuite</var></dt>
           <dd>
@@ -2497,25 +2497,25 @@ A <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-cryptographic-su
           </dd>
           <dt><var>expectedProofPurpose</var></dt>
           <dd>
-An optional <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>, used to ensure that the <var>proof</var> was generated by the
+An optional <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>, used to ensure that the <var>proof</var> was generated by the
 proof creator for the expected reason by the verifier. See <a href="#proof-purposes" data-matched-text="[[[#proof-purposes]]]" class="sec-ref"><bdi class="secno">2.2 </bdi>Proof Purposes</a>
 for common values
           </dd><dt><var>domain</var></dt>
           <dd>
-An optional <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set">set</a> of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">strings</a>, used by the proof creator to lock a proof to
+An optional <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set">set</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">strings</a>, used by the proof creator to lock a proof to
 a particular security domain, and used by the verifier to ensure that a proof is
 not being used across different security domains
           </dd>
           <dt><var>challenge</var></dt>
           <dd>
-An optional <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <a data-link-type="dfn|abstract-op" href="#dfn-challenge" class="internalDFN" id="ref-for-dfn-challenge-1">challenge</a>, used by the verifier to ensure that an
+An optional <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> <a data-link-type="dfn|abstract-op" href="#dfn-challenge" class="internalDFN" id="ref-for-dfn-challenge-1">challenge</a>, used by the verifier to ensure that an
 attacker is not replaying previously created proofs
           </dd>
         </dl>
 
         <p>
-This algorithm returns a <dfn data-plurals="verification results" id="dfn-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verification result</dfn>, a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
+This algorithm returns a <dfn data-plurals="verification results" id="dfn-verification-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verification result</dfn>, a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose
+<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
         </p>
         <dl data-dfn-for="verification result">
           <dt><dfn data-dfn-for="verification result" id="dfn-verified-0" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">verified</dfn></dt>
@@ -2528,15 +2528,15 @@ This algorithm returns a <dfn data-plurals="verification results" id="dfn-verifi
           <dt><dfn data-dfn-for="verification result" id="dfn-mediatype" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">mediaType</dfn></dt>
           <dd>
 <a href="https://infra.spec.whatwg.org/#nulls">Null</a>, if <a data-link-type="dfn|abstract-op" href="#dfn-verified-0" class="internalDFN" id="ref-for-dfn-verified-0-2">verified</a> is
-<code>false</code>; otherwise, a <a data-link-type="dfn|abstract-op" data-lt="MIME type" data-type="dfn" href="https://mimesniff.spec.whatwg.org/#mime-type">media type</a>, which <em class="rfc2119">MAY</em> include <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://mimesniff.spec.whatwg.org/#parameters">parameters</a>
+<code>false</code>; otherwise, a <a data-link-type="dfn" data-lt="MIME type" href="https://mimesniff.spec.whatwg.org/#mime-type">media type</a>, which <em class="rfc2119">MAY</em> include <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#parameters">parameters</a>
           </dd>
           <dt><dfn data-dfn-for="verification result" class="lint-ignore" id="dfn-warnings" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">warnings</dfn></dt>
           <dd>
-a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-1">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
+a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-1">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
           </dd>
           <dt><dfn data-dfn-for="verification result" id="dfn-errors" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">errors</dfn></dt>
           <dd>
-a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-2">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
+a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-2">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
           </dd>
         </dl>
 
@@ -2547,11 +2547,11 @@ When a step says "an error <em class="rfc2119">MUST</em> be raised", it means th
 
         <ol class="algorithm">
           <li>
-Let <var data-type="map">securedDocument</var> be the result of running <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#parse-json-bytes-to-an-infra-value">parse JSON bytes to an Infra value</a> on <var>documentBytes</var>.
+Let <var data-type="map">securedDocument</var> be the result of running <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#parse-json-bytes-to-an-infra-value">parse JSON bytes to an Infra value</a> on <var>documentBytes</var>.
           </li>
           <li>
-If either <var data-type="map">securedDocument</var> is not a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> or <var data-type="map">securedDocument</var>.<var>proof</var>
-is not a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>, an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of
+If either <var data-type="map">securedDocument</var> is not a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> or <var data-type="map">securedDocument</var>.<var>proof</var>
+is not a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>, an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of
 <a href="https://www.w3.org/TR/VC-DATA-MODEL-2.0#PARSING_ERROR">
 PARSING_ERROR</a>.
           </li>
@@ -2561,7 +2561,7 @@ Let <var data-type="map">proof</var> be <var data-type="map">securedDocument</va
           <li>
 If one or more of <var data-type="map">proof</var>.<var>type</var>,
 <var data-type="map">proof</var>.<var>verificationMethod</var>, and
-<var data-type="map">proof</var>.<var>proofPurpose</var> does not <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exist</a>,
+<var data-type="map">proof</var>.<var>proofPurpose</var> does not <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-exists">exist</a>,
 an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
           </li>
@@ -2572,9 +2572,9 @@ an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD<
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
           </li>
           <li>
-If <var>domain</var> was given, and it does not contain the same <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">strings</a> as
-<var data-type="map">proof</var>.<var>domain</var> (treating a single <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> as a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set">set</a> containing just
-that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>), an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
+If <var>domain</var> was given, and it does not contain the same <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">strings</a> as
+<var data-type="map">proof</var>.<var>domain</var> (treating a single <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> as a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-set">set</a> containing just
+that <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>), an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of <a href="#INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</a>.
           </li>
           <li>
 If <var>challenge</var> was given, and it does not match
@@ -2588,7 +2588,7 @@ Let <var>cryptosuiteVerificationResult</var> be the result of running the
 <var data-type="map">securedDocument</var> provided as input.
           </li>
           <li>
-Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-2">verification result</a> with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
+Return a <a data-link-type="dfn|abstract-op" href="#dfn-verification-result" class="internalDFN" id="ref-for-dfn-verification-result-2">verification result</a> with <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a>:
             <dl data-link-for="verification result">
               <dt><a data-link-type="dfn|abstract-op" href="#dfn-verified-0" class="internalDFN" id="ref-for-dfn-verified-0-4">verified</a></dt>
               <dd><var>cryptosuiteVerificationResult</var>.<var>verified</var></dd>
@@ -2636,15 +2636,15 @@ Let <var>matchingProofs</var> be an empty list.
               </li>
               <li>
 If <var>proof</var> contains a <code>previousProof</code> attribute and the value of that
-attribute is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>, add the element from <var>allProofs</var> with an <code>id</code>
+attribute is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a>, add the element from <var>allProofs</var> with an <code>id</code>
 attribute value matching the value of <code>previousProof</code> to <code>matchingProofs</code>.
 If a proof with <code>id</code> value equal to the value of <code>previousProof</code> does not
 exist in <var>allProofs</var>, an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error
 type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>. If the
-<code>previousProof</code> attribute is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>, add each element from <var>allProofs</var>
+<code>previousProof</code> attribute is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>, add each element from <var>allProofs</var>
 with an <code>id</code> attribute value that matches the value of an element of that
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>. If any element of <code>previousProof</code> <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> has an <code>id</code> attribute
+<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>. If any element of <code>previousProof</code> <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> has an <code>id</code> attribute
 value that does not match the <code>id</code> attribute value of any element of
 <var>allProofs</var>, an error <em class="rfc2119">MUST</em> be raised and <em class="rfc2119">SHOULD</em> convey an error type of
 <a href="#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
@@ -2707,14 +2707,14 @@ The following algorithm provides one mechanism that can be used to ensure that
 an application understands the contexts associated with a document before it
 executed business rules specific to the input in the document. For more
 rationale related to this algorithm, see Section <a href="#validating-contexts" data-matched-text="[[[#validating-contexts]]]" class="sec-ref"><bdi class="secno">2.4.1 </bdi>Validating Contexts</a>.
-This algorithm takes inputs of a document (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>inputDocument</var>), a set of
-known JSON-LD Contexts (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> <var>knownContext</var>), and a boolean to
-recompact when unknown contexts are detected (<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#boolean">boolean</a> <var>recompact</var>).
+This algorithm takes inputs of a document (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a> <var>inputDocument</var>), a set of
+known JSON-LD Contexts (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> <var>knownContext</var>), and a boolean to
+recompact when unknown contexts are detected (<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#boolean">boolean</a> <var>recompact</var>).
         </p>
 
         <p>
 This algorithm returns a <dfn class="lint-ignore" id="dfn-context-validation-result" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">context validation result</dfn>,
-a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
+a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct">struct</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#struct-item">items</a> are:
         </p>
         <dl data-dfn-for="context validation result">
           <dt><dfn data-dfn-for="context validation result" id="dfn-validated" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">validated</dfn></dt>
@@ -2726,11 +2726,11 @@ a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.w
           </dd>
           <dt><dfn data-dfn-for="context validation result" class="lint-ignore" id="dfn-warnings-0" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">warnings</dfn></dt>
           <dd>
-a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-3">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
+a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-3">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
           </dd>
           <dt><dfn data-dfn-for="context validation result" class="lint-ignore" id="dfn-errors-0" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">errors</dfn></dt>
           <dd>
-a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-4">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
+a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn|abstract-op" href="#dfn-problemdetails" class="internalDFN" id="ref-for-dfn-problemdetails-4">ProblemDetails</a>, which defaults to an empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a>
           </dd>
         </dl>
 
@@ -2798,7 +2798,7 @@ specification might interoperate more effectively when errors occur.
         <p>
 When exposing these errors through an HTTP interface, implementers <em class="rfc2119">SHOULD</em> use
 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc9457" title="Problem Details for HTTP APIs">RFC9457</a></cite>] to encode the error data structure as a <dfn id="dfn-problemdetails" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">ProblemDetails</dfn>
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>. If [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc9457" title="Problem Details for HTTP APIs">RFC9457</a></cite>] is used:
+<a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map">map</a>. If [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc9457" title="Problem Details for HTTP APIs">RFC9457</a></cite>] is used:
         </p>
 
         <ul>
@@ -2812,11 +2812,11 @@ The <code>code</code> value <em class="rfc2119">MUST</em> be the integer code de
 (in parentheses, beside the type name).
           </li>
           <li>
-The <code>title</code> value <em class="rfc2119">SHOULD</em> provide a short but specific human-readable <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> for
+The <code>title</code> value <em class="rfc2119">SHOULD</em> provide a short but specific human-readable <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> for
 the error.
           </li>
           <li>
-The <code>detail</code> value <em class="rfc2119">SHOULD</em> provide a longer human-readable <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> for the error.
+The <code>detail</code> value <em class="rfc2119">SHOULD</em> provide a longer human-readable <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> for the error.
           </li>
         </ul>
 
@@ -3059,7 +3059,7 @@ be reconfigured to use a newer primitive via a simple configuration file change.
 Cryptographic agility is most effective when the client and the server in
 the information security system are in regular contact. However, when the
 messages protected by a particular cryptographic algorithm are long-lived, as
-with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>, and/or when the client (holder) might not be
+with <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>, and/or when the client (holder) might not be
 able to easily recontact the server (issuer), then cryptographic agility does
 not provide the desired protections.
         </p>
@@ -3296,14 +3296,14 @@ is known as "verification relationship validation".
 The process of validating a verification relationship is outlined in
 Section
 <a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
-3.3 Retrieve Verification Method</a> of the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controller Documents 1.0</a></cite>
+3.3 Retrieve Verification Method</a> of the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifier Document 1.0</a></cite>
 specification.
         </p>
         <p>
 This process is used to ensure that cryptographic material, such as a private
 cryptographic key, is not misused by application to an unintended purpose. An
 example of cryptographic material misuse would be if a private cryptographic
-key meant to be used to issue a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> was instead used to
+key meant to be used to issue a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> was instead used to
 log into a website (that is, for authentication). Not checking a verification relationship
 is dangerous because the restriction and protection profile for some
 cryptographic material could be determined by its intended use. For example,
@@ -3326,9 +3326,9 @@ imperative that it verify that the <a data-link-type="dfn|abstract-op" href="#df
 This process is used to ensure that proofs are not misused by an application for
 an unintended purpose, as this is dangerous for the proof creator. An example of
 misuse would be if a proof that stated its purpose was for securing assertions
-in <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> was instead used for <a data-link-type="dfn|abstract-op" href="#dfn-authentication" class="internalDFN" id="ref-for-dfn-authentication-1">authentication</a> to
+in <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> was instead used for <a data-link-type="dfn|abstract-op" href="#dfn-authentication" class="internalDFN" id="ref-for-dfn-authentication-1">authentication</a> to
 log into a website. In this case, the proof creator attached proofs to any
-number of <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> that they expected to be distributed to
+number of <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> that they expected to be distributed to
 an unbounded number of other parties. Any one of these parties could log into a
 website as the proof creator if the website erroneously accepted such a proof as
 <a data-link-type="dfn|abstract-op" href="#dfn-authentication" class="internalDFN" id="ref-for-dfn-authentication-2">authentication</a> instead of its intended purpose.
@@ -3447,7 +3447,7 @@ generalized in nature, the security implications of its use might not be
 immediately apparent to readers. To understand the sort of security
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> ecosystem [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>]; see the section
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> ecosystem [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>]; see the section
 on <a href="https://www.w3.org/TR/vc-data-model-2.0/#security-considerations">
 Verifiable Credential Security Considerations</a> for more information.
         </p>
@@ -3482,7 +3482,7 @@ correlatable tracking data while also providing some level of assurance that the
 payload is trustworthy for a given interaction. This characteristic is called
 <dfn class="lint-ignore" id="dfn-unlinkability" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">unlinkability</dfn> which ensures that no correlatable
 data are used in a digitally-signed payload while still providing some level of
-trust, the sufficiency of which must be determined by each verifier.
+trust, the sufficiency of which has to be determined by each verifier.
         </p>
 
         <p>
@@ -3653,7 +3653,7 @@ generalized in nature, the privacy implications of its use might not be
 immediately apparent to readers. To understand the sort of privacy
 concerns one might need to consider in a complete software system, implementers
 are urged to read about how this technology is used in the
-<a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> ecosystem [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>]; see the section
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a> ecosystem [<cite><a class="bibref" data-link-type="biblio" href="#bib-vc-data-model-2.0" title="Verifiable Credentials Data Model v2.0">VC-DATA-MODEL-2.0</a></cite>]; see the section
 on <a href="https://www.w3.org/TR/vc-data-model-2.0/#privacy-considerations">
 Verifiable Credential Privacy Considerations</a> for more information.
         </p>
@@ -3708,8 +3708,8 @@ calculation.
 Sections <a href="#proof-sets" data-matched-text="[[[#proof-sets]]]" class="sec-ref"><bdi class="secno">2.1.1 </bdi>Proof Sets</a> and <a href="#proof-chains" data-matched-text="[[[#proof-chains]]]" class="sec-ref"><bdi class="secno">2.1.2 </bdi>Proof Chains</a> describe how multiple proofs
 can be expressed in a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-12">secured data document</a>; that is, instead of a single
 <a data-link-type="dfn|abstract-op" href="#dfn-proof" class="internalDFN" id="ref-for-dfn-proof-4">proof</a> included in the <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-13">secured data document</a>, one can express multiple
-proofs in an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> as shown in <a href="#example-a-proof-set-in-a-data-document" data-matched-text="[[[#example-a-proof-set-in-a-data-document]]]" class="box-ref">Example<bdi> 6</bdi></a> and
-<a href="#example-a-proof-chain-in-a-data-document" data-matched-text="[[[#example-a-proof-chain-in-a-data-document]]]" class="box-ref">Example<bdi> 7</bdi></a>. The elements of this <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are
+proofs in an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> as shown in <a href="#example-a-proof-set-in-a-data-document" data-matched-text="[[[#example-a-proof-set-in-a-data-document]]]" class="box-ref">Example<bdi> 6</bdi></a> and
+<a href="#example-a-proof-chain-in-a-data-document" data-matched-text="[[[#example-a-proof-chain-in-a-data-document]]]" class="box-ref">Example<bdi> 7</bdi></a>. The elements of this <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> are
 members of a <a data-link-type="dfn|abstract-op" href="#dfn-proof-set" class="internalDFN" id="ref-for-dfn-proof-set-2">proof set</a> and, optionally, a <a data-link-type="dfn|abstract-op" href="#dfn-proof-chain" class="internalDFN" id="ref-for-dfn-proof-chain-2">proof chain</a>. The purpose of
 this section is to explain the intended use of each of these features and, in
 particular, their differing security properties. These differing security
@@ -3772,7 +3772,7 @@ has been signed by the VP of Engineering, the CFO, and the CEO:
 }</pre>
       </div>
       <p>
-A <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-holders">holder</a> or any other intermediary receiving a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-15">secured data document</a>
+A <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-holders">holder</a> or any other intermediary receiving a <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-15">secured data document</a>
 containing a <a data-link-type="dfn|abstract-op" href="#dfn-proof-set" class="internalDFN" id="ref-for-dfn-proof-set-5">proof set</a> is able to remove any of the <code>proof</code> values within
 the set prior to passing it on to another entity and the <a data-link-type="dfn|abstract-op" href="#dfn-secured-data-document" class="internalDFN" id="ref-for-dfn-secured-data-document-16">secured data document</a> will still verify. This might or might not have been the intent. For
 the signatories sending a birthday card to a valued employee, using a <a data-link-type="dfn|abstract-op" href="#dfn-proof-set" class="internalDFN" id="ref-for-dfn-proof-set-6">proof set</a> is probably fine. If we are trying to model a business process where
@@ -3966,7 +3966,7 @@ Added cryptographic hashes for context and vocabulary files and note that those
 files are to be cached.
         </li>
         <li>
-Added section on relationship to Linked Data and <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>.
+Added section on relationship to Linked Data and <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>.
         </li>
         <li>
 Added algorithms for proof sets and chains.
@@ -4040,7 +4040,7 @@ Portions of the work on this specification have been funded by the United States
 Department of Homeland Security's Science and Technology Directorate under
 contracts 70RSAT20T00000029, 70RSAT21T00000016, 70RSAT23T00000005,
 70RSAT20T00000010/P00001, 70RSAT20T00000029, 70RSAT21T00000016/P00001,
-70RSAT23T00000005, 70RSAT23C00000030, 70RSAT23R00000006, and the National
+70RSAT23T00000005, 70RSAT23C00000030, 70RSAT23R00000006, 70RSAT24T00000011, and the National
 Science Foundation through NSF 22-572. The content of this specification does
 not necessarily reflect the position or the policy of the U.S. Government and no
 official endorsement should be inferred.
@@ -4131,7 +4131,7 @@ Brent Zundel.
     <dl class="bibliography"><dt id="bib-ascii">[ASCII]</dt><dd>
       <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/"><cite>ISO/IEC 646:1991, Information technology -- ISO 7-bit coded character set for information interchange</cite></a>.  Ecma International. URL: <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/">https://www.ecma-international.org/publications-and-standards/standards/ecma-6/</a>
     </dd><dt id="bib-controller-document">[CONTROLLER-DOCUMENT]</dt><dd>
-      <a href="https://www.w3.org/TR/controller-document/"><cite>Controller Documents 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 15 October 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
+      <a href="https://www.w3.org/TR/controller-document/"><cite>Controlled Identifier Document 1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 December 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd>
@@ -4147,7 +4147,7 @@ Brent Zundel.
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
     </dd><dt id="bib-rfc8259">[RFC8259]</dt><dd>
-      <a href="https://www.rfc-editor.org/rfc/rfc8259"><cite>The JavaScript Object Notation (JSON) Data Interchange Format</cite></a>. T. Bray, Ed..  IETF. December 2017. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>
+      <a href="https://www.rfc-editor.org/rfc/rfc8259"><cite>The JavaScript Object Notation (JSON) Data Interchange Format</cite></a>. T. Bray, Ed. IETF. December 2017. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>
     </dd><dt id="bib-rfc8785">[RFC8785]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8785"><cite>JSON Canonicalization Scheme (JCS)</cite></a>. A. Rundgren; B. Jordan; S. Erdtman.  IETF. June 2020. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8785">https://www.rfc-editor.org/rfc/rfc8785</a>
     </dd><dt id="bib-rfc9457">[RFC9457]</dt><dd>
@@ -4196,9 +4196,9 @@ Brent Zundel.
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-di-ecdsa">[VC-DI-ECDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Martin Reed; Greg Bernstein; Sebastian Crane.  W3C. 15 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Martin Reed; Greg Bernstein; Sebastian Crane.  W3C. 8 December 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
     </dd><dt id="bib-vc-di-eddsa">[VC-DI-EDDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dmitri Zagidulin; Greg Bernstein; Sebastian Crane.  W3C. 15 October 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dmitri Zagidulin; Greg Bernstein; Sebastian Crane.  W3C. 8 December 2024. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
     </dd><dt id="bib-vc-extensions">[VC-EXTENSIONS]</dt><dd>
       <a href="https://w3c.github.io/vc-extensions/"><cite>Verifiable Credential Extensions</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-extensions/">https://w3c.github.io/vc-extensions/</a>
     </dd><dt id="bib-webcryptoapi">[WEBCRYPTOAPI]</dt><dd>
