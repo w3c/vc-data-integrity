@@ -512,31 +512,31 @@ individual:
   - id: INVALID_VERIFICATION_METHOD_URL
     type: sec:ProcessingError
     label: Invalid verification method URL
-    defined_by: https://www.w3.org/TR/controller-document/#INVALID_VERIFICATION_METHOD_URL
+    defined_by: https://www.w3.org/TR/cid-1.0/#INVALID_VERIFICATION_METHOD_URL
     context: none
 
   - id: INVALID_CONTROLLED_IDENTIFIER_DOCUMENT_ID
     type: sec:ProcessingError
     label: Invalid controlled identifier document id
-    defined_by: https://www.w3.org/TR/controller-document/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT_ID
+    defined_by: https://www.w3.org/TR/cid-1.0/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT_ID
     context: none
 
   - id: INVALID_CONTROLLED_IDENTIFIER_DOCUMENT
     type: sec:ProcessingError
     label: Invalid controlled identifier document
-    defined_by: https://www.w3.org/TR/controller-document/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT
+    defined_by: https://www.w3.org/TR/cid-1.0/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT
     context: none
 
   - id: INVALID_VERIFICATION_METHOD
     type: sec:ProcessingError
     label: Invalid verification method
-    defined_by: https://www.w3.org/TR/controller-document/#INVALID_VERIFICATION_METHOD
+    defined_by: https://www.w3.org/TR/cid-1.0/#INVALID_VERIFICATION_METHOD
     context: none
 
   - id: INVALID_RELATIONSHIP_FOR_VERIFICATION_METHOD
     type: sec:ProcessingError
     label: Invalid relationship for verification method
-    defined_by: https://www.w3.org/TR/controller-document/#INVALID_RELATIONSHIP_FOR_VERIFICATION_METHOD
+    defined_by: https://www.w3.org/TR/cid-1.0/#INVALID_RELATIONSHIP_FOR_VERIFICATION_METHOD
     context: none
 
 datatype:
