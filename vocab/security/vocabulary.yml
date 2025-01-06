@@ -481,62 +481,62 @@ property:
 individual:
   - id: PROOF_GENERATION_ERROR
     type: sec:ProcessingError
-    label: Proof generation error (-16)
+    label: Proof generation error
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_GENERATION_ERROR
     context: none
 
   - id: PROOF_VERIFICATION_ERROR
     type: sec:ProcessingError
-    label: Malformed proof (-17)
+    label: Malformed proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_VERIFICATION_ERROR
     context: none
 
   - id: PROOF_TRANSFORMATION_ERROR
     type: sec:ProcessingError
-    label: Mismatched proof purpose (-18)
+    label: Mismatched proof purpose
     defined_by: https://www.w3.org/TR/vc-data-integrity/#PROOF_TRANSFORMATION_ERROR
     context: none
 
   - id: INVALID_DOMAIN_ERROR
     type: sec:ProcessingError
-    label: Invalid proof domain (-19)
+    label: Invalid proof domain
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_DOMAIN_ERROR
     context: none
 
   - id: INVALID_CHALLENGE_ERROR
     type: sec:ProcessingError
-    label: Invalid challenge (-20)
+    label: Invalid challenge
     defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CHALLENGE_ERROR
     context: none
 
   - id: INVALID_VERIFICATION_METHOD_URL
     type: sec:ProcessingError
-    label: Invalid verification method URL (-21)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD_URL
+    label: Invalid verification method URL
+    defined_by: https://www.w3.org/TR/controller-document/#INVALID_VERIFICATION_METHOD_URL
     context: none
 
-  - id: INVALID_CONTROLLER_DOCUMENT_ID
+  - id: INVALID_CONTROLLED_IDENTIFIER_DOCUMENT_ID
     type: sec:ProcessingError
-    label: Invalid controller document id (-22)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT_ID
+    label: Invalid controlled identifier document id
+    defined_by: https://www.w3.org/TR/controller-document/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT_ID
     context: none
 
-  - id: INVALID_CONTROLLER_DOCUMENT
+  - id: INVALID_CONTROLLED_IDENTIFIER_DOCUMENT
     type: sec:ProcessingError
-    label: Invalid controller document (-23)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_CONTROLLER_DOCUMENT
+    label: Invalid controlled identifier document
+    defined_by: https://www.w3.org/TR/controller-document/#INVALID_CONTROLLED_IDENTIFIER_DOCUMENT
     context: none
 
   - id: INVALID_VERIFICATION_METHOD
     type: sec:ProcessingError
-    label: Invalid verification method (-24)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_VERIFICATION_METHOD
+    label: Invalid verification method
+    defined_by: https://www.w3.org/TR/controller-document/#INVALID_VERIFICATION_METHOD
     context: none
 
-  - id: INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+  - id: INVALID_RELATIONSHIP_FOR_VERIFICATION_METHOD
     type: sec:ProcessingError
-    label: Invalid proof purpose for verification method (-25)
-    defined_by: https://www.w3.org/TR/vc-data-integrity/#INVALID_PROOF_PURPOSE_FOR_VERIFICATION_METHOD
+    label: Invalid relationship for verification method
+    defined_by: https://www.w3.org/TR/controller-document/#INVALID_RELATIONSHIP_FOR_VERIFICATION_METHOD
     context: none
 
 datatype:

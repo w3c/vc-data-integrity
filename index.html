@@ -2366,7 +2366,7 @@ particular use case.
 The algorithms described in this specification, as well as in various cryptographic
 suite specifications, throw specific types of errors. Implementers might find
 it useful to convey these errors to other libraries or software systems. This
-section provides specific URLs, descriptions, and error codes for the errors,
+section provides specific URLs and descriptions for the errors,
 such that an ecosystem implementing technologies described by this
 specification might interoperate more effectively when errors occur.
         </p>
@@ -2384,38 +2384,34 @@ The `type` value of the error object MUST be a URL that starts with the value
 below.
           </li>
           <li>
-The `code` value MUST be the integer code described in the table below
-(in parentheses, beside the type name).
-          </li>
-          <li>
-The `title` value SHOULD provide a short but specific human-readable [=string=] for
+The `title` value MUST be present and SHOULD provide a short but specific human-readable [=string=] for
 the error.
           </li>
           <li>
-The `detail` value SHOULD provide a longer human-readable [=string=] for the error.
+The `detail` value MUST be present and SHOULD provide a longer human-readable [=string=] for the error.
           </li>
         </ul>
 
         <dl>
-          <dt id="PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR (-16)</dt>
+          <dt id="PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</dt>
           <dd>
 A request to generate a proof failed. See Section [[[#add-proof]]], and Section
 [[[#add-proof-set-chain]]].
           </dd>
-          <dt id="PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR (-17)</dt>
+          <dt id="PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</dt>
           <dd>
 An error was encountered during proof verification. See Section [[[#verify-proof]]].
           </dd>
-          <dt id="PROOF_TRANSFORMATION_ERROR">PROOF_TRANSFORMATION_ERROR  (-18)</dt>
+          <dt id="PROOF_TRANSFORMATION_ERROR">PROOF_TRANSFORMATION_ERROR </dt>
           <dd>
 An error was encountered during the transformation process.
           </dd>
-          <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR (-19)</dt>
+          <dt id="INVALID_DOMAIN_ERROR">INVALID_DOMAIN_ERROR</dt>
           <dd>
 The `domain` value in a proof did not match the expected value. See Section
 [[[#verify-proof]]].
           </dd>
-          <dt id="INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR (-20)</dt>
+          <dt id="INVALID_CHALLENGE_ERROR">INVALID_CHALLENGE_ERROR</dt>
           <dd>
 The `challenge` value in a proof did not match the expected value. See Section
 [[[#verify-proof]]].
