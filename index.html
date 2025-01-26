@@ -2680,32 +2680,31 @@ easy to use for developers.
         <h3>Safer Abstractions</h3>
 
         <p>
-A [=proof=] contains a `proofValue`, which itself can embed a number of
-parameters related to a cryptographic proof. For example,
+A [=proof=] contains a `proofValue`, in which a number of parameters
+related to a cryptographic proof can be embedded. For example,
 the selective disclosure algorithms in the [[[?VC-DI-ECDSA]]] specification
-include multiple cryptographic signatures in the `proofValue` for every
-item that is selectively disclosed. This has been done to make the
+include multiple cryptographic signatures in the `proofValue`, one for every
+item that is selectively disclosable. This has been done to make the
 technology easier and safer to use by application developers.
         </p>
 
         <p>
-For information that is rarely needed by the application layer, this
-specification urges specification authors to abstract that information into a
-single value. Much like a `data:` URL expressing an image encapsulates many of
-the image rendering parameters into a single value, the `proofValue` property
-(and other similar properties) abstracts information that is not useful to an
-application developer in order to simplify identification of fields that are of
-importance to the application. Abstracting information in this way leads to a
-data structure that is easier for developers to work with as well as one that is
-less susceptible to being corrupted by a programming mistake that accidentally
-adds or removes a critical property that could negatively impact the
-cryptographic layer.
+This specification urges specification authors to use a single value to abstract
+information that is rarely needed by the application layer. Much like a `data:`
+URL expressing an image encapsulates many of the image rendering parameters into
+a single value, the `proofValue` property (and other similar properties)
+abstracts information that is not useful to an application developer in order to
+simplify identification of fields that <em>are</em> important to the application.
+Abstracting information in this way leads to a data structure that is easier for
+developers to work with while being less susceptible to, for instance, accidental
+corruption due to a programming error that adds or removes a critical property,
+negatively impacting the cryptographic layer.
         </p>
 
         <p>
-The design of data integrity is such that information that is generally only
-useful to the cryptographic layer is abstracted into a single property to ease
-the burden on application developers and enhance the security of the system.
+The design of data integrity in this specification abstracts information that is
+generally only useful to the cryptographic layer into a single property to ease
+the burden on application developers and to enhance the security of the system.
         </p>
       </section>
 
