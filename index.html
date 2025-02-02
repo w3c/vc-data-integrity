@@ -16,7 +16,7 @@
     <script type="text/javascript" class="remove">
       var respecConfig = {
           // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-          specStatus:           "CR",
+          specStatus:           "PR",
 
           // the specification's short name, as in http://www.w3.org/TR/short-name/
           shortName:            "vc-data-integrity",
@@ -25,8 +25,9 @@
           subtitle: "Securing the Integrity of Verifiable Credential Data",
 
           // if you wish the publication date to be other than today, set this
-          publishDate:  "2024-12-19",
+          publishDate:  "2024-03-06",
           crEnd: "2024-01-19",
+          prEnd: "2024-04-03",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
@@ -325,15 +326,6 @@ implementations for each mandatory feature in the specification. For details
 on the conformance testing process, see the test suites listed in the
 <a href="https://w3c.github.io/vc-data-integrity/implementations/">
 implementation report</a>.
-      </p>
-
-      <p class="atrisk issue"
-        title="Features with less than two independent implementations">
-Any feature with less than two independent implementations in the
-Data Integrity portions of each
-<a href="https://w3c.github.io/vc-data-integrity/implementations/">
-cryptosuite implementation report</a> is an "at risk" feature and might be
-removed before the transition to W3C Proposed Recommendation.
       </p>
 
     </section>
@@ -1206,11 +1198,6 @@ choosing a hash algorithm that is appropriate for their use case.
       <section>
         <h2>Contexts and Vocabularies</h2>
 
-        <p class="issue" title="(AT RISK) Hash values might change during Candidate Recommendation">
-This section lists cryptographic hash values that might change during the
-Candidate Recommendation phase based on implementer feedback that requires
-the referenced files to be modified.
-        </p>
         <p>
 Implementations that perform JSON-LD processing MUST treat the following
 JSON-LD context URLs as already resolved, where the resolved document matches
