@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout/@v3
+        uses: actions/checkout/@v4
       - name: Setup Node 16
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16
       - name: Generate Security Vocabulary
@@ -36,12 +36,12 @@ jobs:
           ./node_modules/.bin/yml2vocab -v vocab/security/vocabulary.yml -t vocab/security/template.html
           rm -rf node_modules
       - name: Setup Github Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
