@@ -6,6 +6,12 @@ repository, discussions often occur on the
 [public-vc-wg](http://lists.w3.org/Archives/Public/public-vc-wg/) mailing list
 as well.
 
+## Meetings
+
+We meet every Friday at 12pm ET on this channel:
+
+https://meet.w3c-ccg.org/data-integrity
+
 ## Data Integrity (this document) editor's draft:
 * [Data Integrity](https://w3c.github.io/vc-data-integrity/)
 
