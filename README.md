@@ -8,7 +8,7 @@ as well.
 
 ## Meetings
 
-We meet every Friday at 12pm ET on this channel:
+We meet every Friday at 10am ET on this channel:
 
 https://meet.w3c-ccg.org/data-integrity
 
