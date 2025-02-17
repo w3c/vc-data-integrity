@@ -394,9 +394,9 @@ li.sd-jwt-tab {
   "specStatus": "PR",
   "shortName": "vc-data-integrity",
   "subtitle": "Securing the Integrity of Verifiable Credential Data",
-  "publishDate": "2024-03-06",
-  "crEnd": "2024-01-19",
-  "prEnd": "2024-04-03",
+  "publishDate": "2025-3-20",
+  "crEnd": "2025-01-19",
+  "prEnd": "2025-4-17",
   "edDraftURI": "https://w3c.github.io/vc-data-integrity/",
   "implementationReportURI": "https://w3c.github.io/vc-data-integrity/implementations/",
   "editors": [
@@ -612,7 +612,7 @@ li.sd-jwt-tab {
     "INFRA",
     "MIMESNIFF",
     "VC-DATA-MODEL-2.0",
-    "CONTROLLER-DOCUMENT"
+    "CID-1.0"
   ],
   "otherLinks": [
     {
@@ -637,20 +637,20 @@ li.sd-jwt-tab {
       ]
     }
   ],
-  "publishISODate": "2024-03-06T00:00:00.000Z",
-  "generatedSubtitle": "W3C Proposed Recommendation 06 March 2024"
+  "publishISODate": "2025-03-20T00:00:00.000Z",
+  "generatedSubtitle": "W3C Proposed Recommendation 20 March 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-PR"></head>
-<body class="h-entry" data-cite="INFRA MIMESNIFF VC-DATA-MODEL-2.0 CONTROLLER-DOCUMENT"><div class="head">
+<body class="h-entry" data-cite="INFRA MIMESNIFF VC-DATA-MODEL-2.0 CID-1.0"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Verifiable Credential Data Integrity 1.0</h1> <h2 id="subtitle" class="subtitle">Securing the Integrity of Verifiable Credential Data</h2>
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#PR">W3C Proposed Recommendation</a> <time class="dt-published" datetime="2024-03-06">06 March 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#PR">W3C Proposed Recommendation</a> <time class="dt-published" datetime="2025-03-20">20 March 2025</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://www.w3.org/TR/2024/PR-vc-data-integrity-20240306/">https://www.w3.org/TR/2024/PR-vc-data-integrity-20240306/</a>
+                <a class="u-url" href="https://www.w3.org/TR/2025/PR-vc-data-integrity-20250320/">https://www.w3.org/TR/2025/PR-vc-data-integrity-20250320/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
@@ -730,7 +730,7 @@ li.sd-jwt-tab {
     <p class="copyright">
     <a href="https://www.w3.org/policies/#copyright">Copyright</a>
     ©
-    2024
+    2025
     
     <a href="https://www.w3.org/">World Wide Web Consortium</a>.
     <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup>
@@ -777,11 +777,11 @@ implementation report</a>.
     
   </p><p>
         The <abbr title="World Wide Web Consortium">W3C</abbr> Membership and other interested parties are invited to review
-        the document and send comments through 03 April 2024.
+        the document and send comments through 17 April 2025.
         Advisory Committee Representatives should consult their
         <a href="https://www.w3.org/2002/09/wbs/myQuestionnaires">WBS questionnaires</a>. Note that substantive technical comments were expected during the
         Candidate Recommendation review period that ended
-        19 January 2024.
+        19 January 2025.
       </p><p>
     
         This document was produced by a group
@@ -1063,11 +1063,11 @@ This section defines the terms used in this specification. A link to these terms
 is included whenever they appear in this specification.
         </p>
 
-        <dl class="termlist definitions" data-sort="ascending"><dt><dfn id="dfn-controller-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">controller document</dfn></dt>
+        <dl class="termlist definitions" data-sort="ascending"><dt><dfn id="dfn-controlled-identifier-document" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">controlled identifier document</dfn></dt>
 
-          <dd data-defines="#dfn-controller-document">
+          <dd data-defines="#dfn-controlled-identifier-document">
 A document that contains public cryptographic material as defined in the
-<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite> specification.
+<cite><a data-matched-text="[[[CID-1.0]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification.
           </dd>
 
           <dt><dfn class="export" data-lt="cryptosuite|cryptographic suite" data-export="" data-plurals="cryptographic suites|cryptosuites" id="dfn-cryptosuite" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">cryptographic suite</dfn></dt>
@@ -1233,7 +1233,7 @@ necessary to verify the proof. Note that when <code>verificationMethod</code> is
 expressed in a <a data-link-type="dfn|abstract-op" href="#dfn-data-integrity-proof" class="internalDFN" id="ref-for-dfn-data-integrity-proof-5">data integrity proof</a>, the value points to the actual location
 of the data; that is, the <code>verificationMethod</code> references, via a URL, the
 location of the <a data-link-type="dfn|abstract-op" href="#dfn-public-key" class="internalDFN" id="ref-for-dfn-public-key-2">public key</a> that can be used to verify the proof. This
-<a data-link-type="dfn|abstract-op" href="#dfn-public-key" class="internalDFN" id="ref-for-dfn-public-key-3">public key</a> data is stored in a <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-1">controller document</a>, which contains a
+<a data-link-type="dfn|abstract-op" href="#dfn-public-key" class="internalDFN" id="ref-for-dfn-public-key-3">public key</a> data is stored in a <a data-link-type="dfn|abstract-op" href="#dfn-controlled-identifier-document" class="internalDFN" id="ref-for-dfn-controlled-identifier-document-1">controlled identifier document</a>, which contains a
 full description of the verification method.
           </dd>
 
@@ -1293,8 +1293,8 @@ value is used to mitigate replay attacks. Examples of a challenge value include:
 A <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value that expresses base-encoded binary data necessary to verify the
 digital proof using the <code>verificationMethod</code> specified. The value <em class="rfc2119">MUST</em> use a
 header and encoding as described in Section
-<a href="https://www.w3.org/TR/controller-document/#multibase-0">2.4 Multibase</a> of the
-<cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite> specification to express the binary data.
+<a href="https://www.w3.org/TR/cid-1.0/#multibase-0">2.4 Multibase</a> of the
+<cite><a data-matched-text="[[[CID-1.0]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification to express the binary data.
 The contents of this value are determined by a specific cryptosuite and set
 to the <em>proof value</em> generated by the <a href="#add-proof">Add Proof Algorithm</a>
 for that cryptosuite. Alternative properties with different encodings specified by the
@@ -1635,8 +1635,8 @@ has not changed since the document was secured, an implementer <em class="rfc211
 property named <dfn class="lint-ignore" id="dfn-digestmultibase" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn"><code>digestMultibase</code></dfn> in any object
 that includes an <code>id</code> property. If present, the <code>digestMultibase</code> value <em class="rfc2119">MUST</em> be
 a single <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> value, or an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list">list</a> of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string">string</a> values, each of which is a
-<a href="https://www.w3.org/TR/controller-document/#multibase">Multibase</a>-encoded
-<a href="https://www.w3.org/TR/controller-document/#multihash">Multihash</a> value.
+<a href="https://www.w3.org/TR/cid-1.0/#multibase">Multibase</a>-encoded
+<a href="https://www.w3.org/TR/cid-1.0/#multihash">Multihash</a> value.
         </p>
         <p>
 JSON-LD context authors are expected to add <code>digestMultibase</code> to contexts that
@@ -1732,7 +1732,7 @@ the corresponding hash value below.
         <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span></div><p class="">
 Beyond the security terms defined by this specification, the
 <a href="https://w3id.org/security">https://w3id.org/security#</a> namespace
-also includes the terms defined in the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>&nbsp;[<cite><a class="bibref" data-link-type="biblio" href="#bib-controller-document" title="Controlled Identifiers (CIDs) v1.0">CONTROLLER-DOCUMENT</a></cite>]
+also includes the terms defined in the <cite><a data-matched-text="[[[CID-1.0]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>&nbsp;[<cite><a class="bibref" data-link-type="biblio" href="#bib-cid-1.0" title="Controlled Identifiers v1.0">CID-1.0</a></cite>]
 specification, with the corresponding mappings in the context files listed above.
         </p></div>
 
@@ -1757,7 +1757,7 @@ application/ld+json
               <td>
 The vocabulary in JSON-LD format [<cite><a class="bibref" data-link-type="biblio" href="#bib-json-ld11" title="JSON-LD 1.1">JSON-LD11</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">03b791b30fd2163401ad16884e1c585105e49200b0f76bb961f7fb338e15ce54</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.jsonld" data-hash-format="openssl dgst -sha256">2fae64e0b541876205c453eed2ec375b1f06e184b8c0e4d1d9dd5bceaba427ad</span></code>
               </td>
             </tr>
             <tr>
@@ -1767,7 +1767,7 @@ text/turtle
               <td>
 The vocabulary in Turtle format [<cite><a class="bibref" data-link-type="biblio" href="#bib-turtle" title="RDF 1.1 Turtle">TURTLE</a></cite>].<br><br>
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">682d470f513ec390b9fc59ef5e005461cb312ec5452c237c74dd8dd267ecf94e</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.ttl" data-hash-format="openssl dgst -sha256">c668b69968f34633cbb32a1a1b040e79b43791e9a7cf9677909a80429b389bf8</span></code>
               </td>
             </tr>
             <tr>
@@ -1778,7 +1778,7 @@ text/html
 The vocabulary in HTML+RDFa Format [<cite><a class="bibref" data-link-type="biblio" href="#bib-html-rdfa" title="HTML+RDFa 1.1 - Second Edition">HTML-RDFA</a></cite>].<br><br>
 
 
-<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">aa287e6699603966a9072bdafcd162a416a68c70a3f79dbd1c3d97f457572280</span></code>
+<strong>SHA2-256 Digest:</strong> <code><span class="vc-hash" data-hash-url="https://w3c.github.io/vc-data-integrity/vocab/security/vocabulary.html" data-hash-format="openssl dgst -sha256">890997ce0cfdc0c9f93409a38030e3f4c9723a7846e06729c28eb442b83da5f6</span></code>
               </td>
             </tr>
           </tbody>
@@ -2105,11 +2105,11 @@ in accepting data that ought to have been rejected.
         <p>
 Finally, implementers are also urged to understand that there is a difference
 between the revocation information associated with a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a>,
-and the <a href="https://www.w3.org/TR/controller-document/#dfn-revoked">revocation</a>
-and <a href="https://www.w3.org/TR/controller-document/#defn-vm-expires">expiration</a> times
+and the <a href="https://www.w3.org/TR/cid-1.0/#dfn-revoked">revocation</a>
+and <a href="https://www.w3.org/TR/cid-1.0/#defn-vm-expires">expiration</a> times
 for a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-6">verification method</a>. The
-<a href="https://www.w3.org/TR/controller-document/#dfn-revoked">revocation</a> and
-<a href="https://www.w3.org/TR/controller-document/#defn-vm-expires">expiration</a> times for a
+<a href="https://www.w3.org/TR/cid-1.0/#dfn-revoked">revocation</a> and
+<a href="https://www.w3.org/TR/cid-1.0/#defn-vm-expires">expiration</a> times for a
 <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-7">verification method</a> are expressed using the <code>revocation</code> and <code>expires</code>
 properties, respectively; are related to events such as a <a data-link-type="dfn|abstract-op" href="#dfn-secret-key" class="internalDFN" id="ref-for-dfn-secret-key-3">secret key</a> being
 compromised or expiring; and can provide timing information which might reveal
@@ -3327,10 +3327,10 @@ the application layer.
         <p>
 Implementers ensure that a <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-8">verification method</a> is bound to a particular
 controller by going from the definition of the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-9">verification method</a> to the
-<a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-2">controller document</a>, and then ensuring that the <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-3">controller document</a> also
+<a data-link-type="dfn|abstract-op" href="#dfn-controlled-identifier-document" class="internalDFN" id="ref-for-dfn-controlled-identifier-document-2">controlled identifier document</a>, and then ensuring that the <a data-link-type="dfn|abstract-op" href="#dfn-controlled-identifier-document" class="internalDFN" id="ref-for-dfn-controlled-identifier-document-3">controlled identifier document</a> also
 contains a reference to the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-10">verification method</a>. This process is described
 in the algorithm for
-<a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
+<a href="https://www.w3.org/TR/cid-1.0/#retrieve-verification-method">
 retrieving a verification method</a>.
         </p>
       </section>
@@ -3341,15 +3341,15 @@ retrieving a verification method</a>.
         <p>
 When an implementation is <a href="#verify-proof">verifying a proof</a>, it is
 imperative that it verify not only that the <a data-link-type="dfn|abstract-op" href="#dfn-verification-method" class="internalDFN" id="ref-for-dfn-verification-method-11">verification method</a> used to
-generate the proof is listed in the <a data-link-type="dfn|abstract-op" href="#dfn-controller-document" class="internalDFN" id="ref-for-dfn-controller-document-4">controller document</a>, but also that it
+generate the proof is listed in the <a data-link-type="dfn|abstract-op" href="#dfn-controlled-identifier-document" class="internalDFN" id="ref-for-dfn-controlled-identifier-document-4">controlled identifier document</a>, but also that it
 was intended to be used to generate the proof that is being verified. This process
 is known as "verification relationship validation".
         </p>
         <p>
 The process of validating a verification relationship is outlined in
 Section
-<a href="https://www.w3.org/TR/controller-document/#retrieve-verification-method">
-3.3 Retrieve Verification Method</a> of the <cite><a data-matched-text="[[[CONTROLLER-DOCUMENT]]]" href="https://www.w3.org/TR/controller-document/">Controlled Identifiers (CIDs) v1.0</a></cite>
+<a href="https://www.w3.org/TR/cid-1.0/#retrieve-verification-method">
+3.3 Retrieve Verification Method</a> of the <cite><a data-matched-text="[[[CID-1.0]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite>
 specification.
         </p>
         <p>
@@ -3959,6 +3959,24 @@ specification over time.
 
       <p>
 Changes since the
+<a href="https://www.w3.org/TR/2024/CR-vc-data-integrity-20241219/">
+Second Candidate Recommendation</a>:
+      </p>
+
+      <ul>
+        <li>
+Various editorial changes in algorithms and descriptions to improve readability.
+        </li>
+        <li>
+Remove numerical error codes since implementations were not using them.
+        </li>
+        <li>
+Update to use newly published <cite><a data-matched-text="[[[CID]]]" href="https://www.w3.org/TR/cid-1.0/">Controlled Identifiers v1.0</a></cite> specification references.
+        </li>
+      </ul>
+
+      <p>
+Changes since the
 <a href="https://www.w3.org/TR/2023/CR-vc-data-integrity-20231121/">
 First Candidate Recommendation</a>:
       </p>
@@ -3968,7 +3986,7 @@ First Candidate Recommendation</a>:
 Various editorial changes in algorithms and descriptions to improve readability.
         </li>
         <li>
-Moved Multikey definitions to Controller Document.
+Moved Multikey definitions to controlled identifier document.
         </li>
         <li>
 Unify error handling between all Data Integrity cryptosuites.
@@ -4113,9 +4131,9 @@ Christopher Allen,
 Joe Andrieu,
 Bohdan Andriyiv,
 George Aristy,
-Anthony,
+<a href="https://github.com/Anthony">Anthony</a>,
 Greg Bernstein,
-Bob420,
+<a href="https://github.com/Bob420">Bob420</a>,
 Sarven Capadisli,
 Melvin Carvalho,
 David Chadwick,
@@ -4131,7 +4149,7 @@ Julien Fraichot,
 Benjamin Goering,
 Kyle Den Hartog,
 Joseph Heenan,
-Helge,
+Helge Krueger,
 Ivan Herman,
 Michael Herman,
 Alen Horvat,
@@ -4149,7 +4167,7 @@ Eric Lim,
 Dave Longley,
 Tobias Looker,
 Jer Miller,
-nightpool,
+<a href="https://github.com/nightpool">nightpool</a>,
 Bert Van Nuffelen,
 Luis Osta,
 Nate Otto,
@@ -4160,7 +4178,7 @@ Brian Richter,
 Anders Rundgren,
 Eugeniu Rusu,
 Markus Sabadello,
-silverpill,
+<a href="https://github.com/silverpill">silverpill</a>,
 Wesley Smith,
 Manu Sporny,
 Orie Steele,
@@ -4185,8 +4203,8 @@ Brent Zundel.
     
     <dl class="bibliography"><dt id="bib-ascii">[ASCII]</dt><dd>
       <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/"><cite>ISO/IEC 646:1991, Information technology -- ISO 7-bit coded character set for information interchange</cite></a>.  Ecma International. URL: <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-6/">https://www.ecma-international.org/publications-and-standards/standards/ecma-6/</a>
-    </dd><dt id="bib-controller-document">[CONTROLLER-DOCUMENT]</dt><dd>
-      <a href="https://www.w3.org/TR/controller-document/"><cite>Controlled Identifiers (CIDs) v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 26 January 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/controller-document/">https://www.w3.org/TR/controller-document/</a>
+    </dd><dt id="bib-cid-1.0">[CID-1.0]</dt><dd>
+      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 February 2025. CRD. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-json-ld11">[JSON-LD11]</dt><dd>
@@ -4216,7 +4234,9 @@ Brent Zundel.
     </dd></dl>
   </section><section id="informative-references"><div class="header-wrapper"><h3 id="d-2-informative-references"><bdi class="secno">D.2 </bdi>Informative references</h3><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix D.2"></a></div>
     
-    <dl class="bibliography"><dt id="bib-di-ecdsa">[DI-ECDSA]</dt><dd>
+    <dl class="bibliography"><dt id="bib-cid">[CID]</dt><dd>
+      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Manu Sporny; Michael Jones.  W3C. 9 February 2025. CRD. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
+    </dd><dt id="bib-di-ecdsa">[DI-ECDSA]</dt><dd>
       <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>The Elliptic Curve Digital Signature Algorithm Cryptosuites v1.0</cite></a>. David Longley; Manu Sporny; Marty Reed.  W3C Verifiable Credentials Working Group. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
     </dd><dt id="bib-di-eddsa">[DI-EDDSA]</dt><dd>
       <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>The Edwards Digital Signature Algorithm Cryptosuites v1.0</cite></a>. David Longley; Manu Sporny; Dmitri Zagidulin.  W3C Verifiable Credentials Working Group. W3C Working Draft. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
@@ -4251,9 +4271,9 @@ Brent Zundel.
     </dd><dt id="bib-turtle">[TURTLE]</dt><dd>
       <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
     </dd><dt id="bib-vc-di-ecdsa">[VC-DI-ECDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein.  W3C. 26 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-ecdsa/"><cite>Data Integrity ECDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Dave Longley; Greg Bernstein.  W3C. 2 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-ecdsa/">https://www.w3.org/TR/vc-di-ecdsa/</a>
     </dd><dt id="bib-vc-di-eddsa">[VC-DI-EDDSA]</dt><dd>
-      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Greg Bernstein; Ted Thibodeau Jr; Dmitri Zagidulin; Sebastian Crane.  W3C. 26 January 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
+      <a href="https://www.w3.org/TR/vc-di-eddsa/"><cite>Data Integrity EdDSA Cryptosuites v1.0</cite></a>. Manu Sporny; Greg Bernstein; Ted Thibodeau Jr; Dmitri Zagidulin; Sebastian Crane.  W3C. 2 February 2025. CRD. URL: <a href="https://www.w3.org/TR/vc-di-eddsa/">https://www.w3.org/TR/vc-di-eddsa/</a>
     </dd><dt id="bib-vc-extensions">[VC-EXTENSIONS]</dt><dd>
       <a href="https://w3c.github.io/vc-extensions/"><cite>Verifiable Credential Extensions</cite></a>. Manu Sporny.  W3C Verifiable Credentials Working Group. W3C Editor's Draft. URL: <a href="https://w3c.github.io/vc-extensions/">https://w3c.github.io/vc-extensions/</a>
     </dd><dt id="bib-webcryptoapi">[WEBCRYPTOAPI]</dt><dd>
@@ -4383,20 +4403,20 @@ Brent Zundel.
       <a href="#ref-for-dfn-conforming-processor-4" title="§ 4.1 Processing Model">§ 4.1 Processing Model</a> 
     </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-controller-document" aria-label="Links in this document to definition: controller document">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-controlled-identifier-document" aria-label="Links in this document to definition: controlled identifier document">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="#dfn-controller-document" aria-label="Permalink for definition: controller document. Activate to close this dialog.">Permalink</a>
+        <a class="self-link" href="#dfn-controlled-identifier-document" aria-label="Permalink for definition: controlled identifier document. Activate to close this dialog.">Permalink</a>
          
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-controller-document-1" title="§ 2.1 Proofs">§ 2.1 Proofs</a> 
+      <a href="#ref-for-dfn-controlled-identifier-document-1" title="§ 2.1 Proofs">§ 2.1 Proofs</a> 
     </li><li>
-      <a href="#ref-for-dfn-controller-document-2" title="§ 5.9 Verification Method Binding">§ 5.9 Verification Method Binding</a> <a href="#ref-for-dfn-controller-document-3" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-controlled-identifier-document-2" title="§ 5.9 Verification Method Binding">§ 5.9 Verification Method Binding</a> <a href="#ref-for-dfn-controlled-identifier-document-3" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-controller-document-4" title="§ 5.10 Verification Relationship Validation">§ 5.10 Verification Relationship Validation</a> 
+      <a href="#ref-for-dfn-controlled-identifier-document-4" title="§ 5.10 Verification Relationship Validation">§ 5.10 Verification Relationship Validation</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-cryptosuite" aria-label="Links in this document to definition: cryptographic suite">
