@@ -3330,8 +3330,13 @@ a document. We denote the secret/public keys of each of these signatories by
 <em>secretVPE/publicVPE</em>, respectively.
       </p>
       <p>
-When constructing a [=proof set=] where each of the signatories signs an
-|inputDocument| without concern, we construct a proof symbolically as:
+When multiple signatories intend to sign an |inputDocument| and the ordering of
+those signatures are not of concern and there are no dependencies amongst the
+signatures then a [=proof set=] is typically a more straight forward
+construction.
+      </p>
+      <p>
+We construct a proof symbolically as:
       </p>
       <pre class="example nohighlight" title="Symbolic expression of how a proof is created">
 {
