@@ -22,11 +22,13 @@ class:
   - id: ControlledIdentifierDocument
     label: Controlled Identifier Document
     defined_by: https://www.w3.org/TR/cid-1.0/#controlled-identifier-documents
+    context: none
 
   - id: Proof
     label: Digital proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof
     comment: This class represents a digital proof on serialized data.
+    context: none
 
   - id: ProofGraph
     label: An RDF Graph for a digital proof
@@ -37,6 +39,7 @@ class:
     label: Verification method
     comment: Instances of this class must be <a href="https://www.w3.org/TR/rdf11-concepts/#resources-and-statements">denoted by URLs</a>, i.e., they cannot be blank nodes.
     defined_by: https://www.w3.org/TR/cid-1.0/#verification-methods
+    context: none
 
   - id: VerificationRelationship
     comment: Instances of this class are verification relationships like, for example, <a href="#authentication">authentication</a> or <a href="#assertionMethod">assertionMethod</a>. These resources can also appear as values of the <a href="#proofPurpose">proofPurpose</a> property.
@@ -48,7 +51,7 @@ class:
     label: A Data Integrity Proof
     upper_value: sec:Proof
     defined_by: https://www.w3.org/TR/vc-data-integrity/#dataintegrityproof
-    context: [vocab,https://www.w3.org/ns/credentials/v2]
+    context: none
 
   - id: Multikey
     label: Multikey Verification Method
@@ -61,13 +64,13 @@ class:
         url: https://www.w3.org/TR/vc-di-ecdsa/#multikey
       - label: BBS Cryptosuites
         url: https://www.w3.org/TR/vc-di-bbs/#multikey
-    context: https://w3id.org/security/multikey/v1
+    context: [https://w3id.org/security/multikey/v1, https://www.w3.org/ns/cid/v1]
 
   - id: JsonWebKey
     label: JSON Web Key Verification Method
     upper_value: sec:VerificationMethod
     defined_by: https://www.w3.org/TR/cid-1.0/#jsonwebkey
-    context: https://w3id.org/security/jwk/v1
+    context: [https://w3id.org/security/jwk/v1, https://www.w3.org/ns/cid/v1]
 
   - id: Ed25519VerificationKey2020
     label: ED2559 Verification Key, 2020 version
@@ -195,7 +198,7 @@ property:
     see_also:
       - label: Decentralized Identifiers (DIDs) v1.0
         url: https://www.w3.org/TR/did-core/#verification-methods
-    context: [vocab, https://www.w3.org/ns/credentials/v2]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/cid/v1]
 
   - id: controller
     label: Controller
@@ -204,7 +207,7 @@ property:
       - sec:ControlledIdentifierDocument
     range: IRI
     defined_by: https://www.w3.org/TR/cid-1.0/#defn-controller
-    context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1]
+    context: [https://w3id.org/security/multikey/v1, https://w3id.org/security/jwk/v1, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: proof
     label: Proof sets
@@ -261,7 +264,7 @@ property:
       - sec:Proof
       - sec:VerificationMethod
     range: xsd:dateTime
-    context: [vocab, https://www.w3.org/ns/credentials/v2]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/cid/v1]
 
   - id: nonce
     label: Nonce supplied by proof creator
@@ -275,14 +278,14 @@ property:
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     defined_by: https://www.w3.org/TR/cid-1.0/#authentication
-    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: assertionMethod
     label: Assertion method
     range: sec:VerificationMethod
     type: sec:VerificationRelationship
     defined_by: https://www.w3.org/TR/cid-1.0/#assertion
-    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: capabilityDelegationMethod
     label: Capability delegation method
@@ -290,7 +293,7 @@ property:
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityDelegation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityDelegation`) and the property identifier (`...#capabilityDelegationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/cid-1.0/#capability-delegation
-    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: capabilityInvocationMethod
     label: Capability invocation method
@@ -298,7 +301,7 @@ property:
     type: sec:VerificationRelationship
     comment: Historically, this property has often been expressed using `capabilityInvocation` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`capabilityInvocation`) and the property identifier (`...#capabilityInvocationMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/cid-1.0/#capability-invocation
-    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: keyAgreementMethod
     label: Key agreement protocols
@@ -306,7 +309,7 @@ property:
     range: sec:VerificationMethod
     comment: Historically, this property has often been expressed using `keyAgreement` as a shortened term in JSON-LD. Since this shortened term and its mapping to this property are in significant use in the ecosystem, the inconsistency between the short term name (`keyAgreement`) and the property identifier (`...#keyAgreementMethod`) is expected and should not trigger an error.
     defined_by: https://www.w3.org/TR/cid-1.0/#key-agreement
-    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1]
+    context: [vocab, https://www.w3.org/ns/credentials/v2, https://www.w3.org/ns/did/v1, https://www.w3.org/ns/cid/v1]
 
   - id: cryptosuite
     label: Cryptographic suite
@@ -325,7 +328,7 @@ property:
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
       - label: multicodec
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
-    context: https://w3id.org/security/multikey/v1
+    context: [https://w3id.org/security/multikey/v1, https://www.w3.org/ns/cid/v1]
 
   - id: secretKeyMultibase
     label: Secret key multibase
@@ -337,7 +340,7 @@ property:
         url: https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-03
       - label: multicodec format
         url: https://github.com/multiformats/multicodec/blob/master/table.csv
-    context: https://w3id.org/security/multikey/v1
+    context: [https://w3id.org/security/multikey/v1, https://www.w3.org/ns/cid/v1]
 
   - id: publicKeyJwk
     label: Public key JWK
@@ -349,7 +352,7 @@ property:
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
-    context: https://w3id.org/security/jwk/v1
+    context: [https://w3id.org/security/jwk/v1, https://www.w3.org/ns/cid/v1]
 
   - id: secretKeyJwk
     label: Secret key JWK
@@ -361,14 +364,14 @@ property:
         url: https://www.iana.org/assignments/jose/jose.xhtml
       - label: RFC 7517
         url: https://tools.ietf.org/html/rfc7517
-    context: https://w3id.org/security/jwk/v1
+    context: [https://w3id.org/security/jwk/v1, https://www.w3.org/ns/cid/v1]
 
   - id: revoked
     label: Revocation time
     range: xsd:dateTime
     defined_by: https://www.w3.org/TR/cid-1.0/#dfn-revoked
     domain: sec:VerificationMethod
-    context: https://w3id.org/security/jwk/v1
+    context: [https://w3id.org/security/jwk/v1, https://www.w3.org/ns/cid/v1, https://w3id.org/security/multikey/v1]
 
   - id: digestMultibase
     label: Digest multibase
