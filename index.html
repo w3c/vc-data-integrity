@@ -224,9 +224,11 @@
             }
           },
           postProcess: [
-            restrictRefs,
             window.respecVc.createVcExamples
           ],
+          lint: {
+            "informative-dfn": false
+          },
           xref: ["INFRA", "MIMESNIFF", "VC-DATA-MODEL-2.0", "CID"],
           otherLinks: [{
             key: "Related Specifications",
@@ -580,8 +582,12 @@ non-conforming documents are consumed.
         <h3>Terminology</h3>
 
         <p>
-This section defines the terms used in this specification. A link to these terms
-is included whenever they appear in this specification.
+Some terminology used throughout this document is defined in the
+<a data-cite="VC-DATA-MODEL-2.0#terminology">Terminology</a> section of the
+[[[VC-DATA-MODEL-2.0]]] specification as well as the
+<a data-cite="CID#terminology">Terminology</a> section of the [[[CID]]]
+specification. This section defines addition terms used throughout this
+specification.
         </p>
 
         <dl class="termlist definitions" data-sort="ascending">
@@ -616,49 +622,6 @@ order to achieve a particular security goal. These documents are often used
 to specify [=verification methods=], digital signature types,
 their identifiers, and other related properties. See Section
 [[[#cryptographic-suites]]] for further detail.
-          </dd>
-
-          <dt><dfn>controlled identifier document</dfn></dt>
-
-          <dd>
-A document that contains public cryptographic material as defined in the
-[[[CID]]] specification.
-          </dd>
-
-          <dt><dfn data-lt="verifier|verifiers|verifier's">verifier</dfn></dt>
-          <dd>
-A role an entity performs by receiving data containing one or more
-[=data integrity proofs=] and then determining whether or not the proof
-is legitimate.
-          </dd>
-
-          <dt><dfn class="export">verification method</dfn></dt>
-
-          <dd>
-            <p>
-A set of parameters that can be used together with a process to independently
-verify a proof. For example, a cryptographic [=public key=] can be used as a
-verification method with respect to a digital signature; in such usage, it
-verifies that the signer possessed the associated cryptographic [=secret key=].
-            </p>
-            <p>
-"Verification" and "proof" in this definition are intended to apply broadly. For
-example, a cryptographic public key might be used during Diffie-Hellman key
-exchange to negotiate a shared symmetric key for encryption. This guarantees the
-integrity of the key agreement process. It is thus another type of verification
-method, even though descriptions of the process might not use the words
-"verification" or "proof."
-            </p>
-          </dd>
-
-          <dt><dfn class="export">verification relationship</dfn></dt>
-
-          <dd>
-            <p>
-An expression of the relationship between the [=subject=] and a
-[=verification method=]. An example of a verification relationship is
-<a data-cite="CID#authentication">authentication</a>.
-            </p>
           </dd>
 
         </dl>
