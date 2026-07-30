@@ -480,7 +480,121 @@ purposes of protecting the integrity of application data in transit and at rest.
         </p>
 
       </section>
-
+      <section id="GeneralSelectiveDisclosure" class="informative">
+        <h3>Selective  Disclosure</h3>
+        <p>
+From the [[[VC-DATA-MODEL-2.0]]], a verifiable credential is a set of one or 
+more claims 
+made by the same issuer. A particular holder will typically have verifiable 
+credentials from many issuers. When presenting to a verifier a holder can choose 
+just one or a subset from their existing verifiable credentials to form a 
+verifiable presentation. By minimizing the subset of credentials in a verifiable
+presentation presented to a given verifier privacy is enhanced.
+        </p>
+        <p>
+To further enhance the privacy of a holder an issuer can create a verifiable 
+credential that supports <em>selective disclosure</em>. <em>Selective 
+disclosure</em> is a cryptographic technique which allow a issuer to create a
+verifiable credential 
+while allowing a holder to selectively reveal only a  subset of claims from the 
+original credential in a <em>derived credential</em> that will be presented to a 
+verifier. This is achieved with assurances from the issuer to the verifier of 
+the data integrity and authenticity of the <em>derived credential</em>. 
+        </p>
+        <p>
+Note that typically <em>selective disclosure</em> applies at the <em>claim</em> 
+level. A holder cannot alter the meaning of an issued claim and have the 
+<em>derived credential</em> verify. They can only limit which claims end up in 
+the <em>derived credential</em>  via a set of <em>selective disclosure 
+constraints</em>. However, more advanced techniques such as <em>committed 
+disclosure</em> combined with ZKPs can, in some situations, allow a holder to
+reveal less than "full claim" information while maintaining issuer based 
+authenticity and data integrity.
+Furthermore, as an option, the issuer can specify that certain claims from the 
+original credential must be revealed via <em>mandatory disclosure 
+constraints</em>. Though it is typically the responsibility of the verifier to
+indicate what claims they want to verify.
+        </p>
+      </section>
+      <section class="informative">
+        <h3>How Selective Disclosure Works</h3>
+        <p>
+In Section [[[#how-it-works]]] the fundamental processes of creating and verifying a  
+cryptographic proof are explained. In the case  of selective disclosure there 
+are three processes rather than two: (1) issuer creates a base proof, (2) holder 
+creates a derived proof from the base proof, and  (3) verifier verifies a 
+derived proof.  The reasoning for this extra step is that methods for creating
+a derived proof are much more efficient when used in combination with a base
+proof created in a particular manner.
+        </p>
+        <p>
+In [[[#hiw-base-creation]]] the issuer performs the steps of transformation,
+hashing, and base proof generation to produce the <em>data with base proof</em>.
+The imposition of mandatory disclosure constraints is optional and, more 
+typically reveal requirements would come from the verifier.
+        </p>
+        <figure id="hiw-base-creation">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-base-creation.svg" alt="
+Diagram showing the three steps involved in the creation of a cryptographic
+base proof. The diagram is laid out left to right with a blue box labeled 'Data'
+on the far left. The blue box travels, left to right, through three subsequent
+yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Base Proof'. 
+The resulting blue box at the far right is labeled 'Data with Base Proof'. An 
+additional blue box  labeled  'Mandatory Disclosure Constraints' also connects 
+to the yellow arrow labeled 'Transform Data'.">
+          <figcaption style="text-align: center;">
+To create a cryptographic base proof, data is 
+transformed subject to manditory disclosure constraints, hashed, and 
+cryptographically protected.
+          </figcaption>
+        </figure>
+        <p>
+In [[[#hiw-derived-creation]]] the holder get to specify what subset of 
+information gets revealed to the verifier via the selective disclosure
+constraints. These are used to produce a derived credential via transformation
+and derived proof generation steps. These are carried out in such a way as to
+preserve the authenticty and integrity of the derived data with repect to the
+issuers intent.  The selective disclosure constraints would be typically set to
+meet the minimum requirements of acceptance of the derived credential by 
+the verifier.
+        </p>
+        <figure id="hiw-derived-creation">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-derived-creation.svg" alt="
+Diagram showing the three steps involved in the creation of a cryptographic
+derived proof. The diagram is laid out left to right with a blue box labeled 
+'Data with Base Proof' on the far left. The blue box travels, left to right, 
+through two subsequent yellow arrows labeled 'Transform Data' and 
+'Generate Derived Proof'. The resulting blue box at the far right is labeled 
+'Selectively Disclosed Data with Derived Proof'. An 
+additional blue box  labeled  'Selective Disclosure Constraints' also connects 
+to the yellow arrow labeled 'Transform Data'.">
+          <figcaption style="text-align: center;">
+To create a seletively disclosed document with cryptographic derived proof, data 
+together with a base proof is transformed subject to selective disclosure 
+constraints, and appropriate cryptograph processing.
+          </figcaption>
+        </figure>
+        <p>
+Finally, in [[[#hiw-derived-verification]]] the process of verifying the 
+selectively disclosed data is shown.
+        </p>
+        <figure id="hiw-derived-verification">
+          <img style="margin: auto; display: block; width: 100%;"
+               src="diagrams/hiw-derived-verification.svg" alt="Diagram showing 
+the three steps involved in the verification of a cryptographic derived
+proof. The diagram is laid out left to right with a blue box labeled
+'Selectively Disclosed Data with Derived Proof' on the far left. The blue box 
+travels, left to right, through three subsequent yellow arrows labeled 
+'Transform Data', 'Hash Data', and 'Verify Derived Proof'. The resulting green
+and red diamond at the far right is labeled 'Valid/Invalid'.">
+          <figcaption style="text-align: center;">
+To verify a selectively dislosed document with cryptographic derived proof, data 
+is transformed, hashed, and checked for correctness.
+          </figcaption>
+        </figure>
+      </section>
       <section class="informative">
         <h3>Design Goals and Rationale</h3>
 
