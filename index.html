@@ -492,46 +492,58 @@ verifiable presentation. By minimizing the subset of credentials in a verifiable
 presentation presented to a given verifier privacy is enhanced.
         </p>
         <p>
-To further enhance the privacy of a holder an issuer can create a verifiable 
-credential that supports <em>selective disclosure</em>. <em>Selective 
-disclosure</em> is a cryptographic technique which allow a issuer to create a
-verifiable credential 
-while allowing a holder to selectively reveal only a  subset of claims from the 
-original credential in a <em>derived credential</em> that will be presented to a 
-verifier. This is achieved with assurances from the issuer to the verifier of 
-the data integrity and authenticity of the <em>derived credential</em>. 
+In the simplest deployment, only entire verifiable credentials can be shared
+through verifiable presentations. In other words, to share a single claim from
+a given verifiable credential, the entire verifiable credential must be part of
+the verifiable presentation. This has obvious and significant implications for
+the privacy of both subjects and holders.
         </p>
         <p>
-Note that typically <em>selective disclosure</em> applies at the <em>claim</em> 
-level. A holder cannot alter the meaning of an issued claim and have the 
-<em>derived credential</em> verify. They can only limit which claims end up in 
-the <em>derived credential</em>  via a set of <em>selective disclosure 
-constraints</em>. However, more advanced techniques such as <em>committed 
-disclosure</em> combined with ZKPs can, in some situations, allow a holder to
-reveal less than "full claim" information while maintaining issuer based 
-authenticity and data integrity.
-Furthermore, as an option, the issuer can specify that certain claims from the 
-original credential must be revealed via <em>mandatory disclosure 
+To further enhance the privacy of a holder, an issuer can create a verifiable 
+credential that supports <em>selective disclosure</em>. <em>Selective 
+disclosure</em> is a cryptographic technique which allows an issuer to create a
+verifiable credential 
+that enables a holder to selectively reveal only a subset of claims from the 
+original credential in a <em>derived credential</em> that will be presented to a 
+verifier. This is achieved with assurances from the issuer to the verifier of 
+the integrity and authenticity of the data in the <em>derived credential</em>. 
+        </p>
+        <p>
+Note that <em>selective disclosure</em> typically applies at the <em>claim</em> 
+level. A holder cannot alter the meaning of an issued claim and preserve the 
+verifiability of the <em>derived credential</em>. They can only limit which
+claims end up in 
+the <em>derived credential</em> via a set of <em>selective disclosure 
+constraints</em>. However, in some situations, more advanced techniques, such
+as <em>committed disclosure</em> combined with ZKPs, can, allow a holder to
+reveal less than "full claim" information while maintaining issuer-based 
+authenticity and data integrity assurances.
+Furthermore, the issuer can optionally specify that certain claims from the 
+original credential need to be revealed via <em>mandatory disclosure 
 constraints</em>. Though it is typically the responsibility of the verifier to
-indicate what claims they want to verify.
+indicate which claims they understand and want to verify, so they are expected to
+always ask for what they need, regardless of the possibility of this constraint.
         </p>
       </section>
       <section class="informative">
         <h3>How Selective Disclosure Works</h3>
         <p>
-In Section [[[#how-it-works]]] the fundamental processes of creating and verifying a  
-cryptographic proof are explained. In the case  of selective disclosure there 
+In Section [[[#how-it-works]]], the fundamental processes of creating and verifying a  
+cryptographic proof are explained. In selective disclosure, there 
 are three processes rather than two: (1) issuer creates a base proof, (2) holder 
-creates a derived proof from the base proof, and  (3) verifier verifies a 
-derived proof.  The reasoning for this extra step is that methods for creating
+creates a derived proof from the base proof, and  (3) verifier verifies the
+derived proof.  The reason for this extra step is that methods for creating
 a derived proof are much more efficient when used in combination with a base
-proof created in a particular manner.
+proof that is created in a particular manner. Holders are expected never to reveal
+base proofs when presenting, as some of the information in the base proofs might
+be intended only for the holder's use; for example, to create privacy-preserving
+derived proofs.
         </p>
         <p>
-In [[[#hiw-base-creation]]] the issuer performs the steps of transformation,
-hashing, and base proof generation to produce the <em>data with base proof</em>.
+In [[[#hiw-base-creation]]], the issuer performs the steps of transformation,
+hashing, and base proof generation, to produce the <em>data with base proof</em>.
 The imposition of mandatory disclosure constraints is optional and, more 
-typically reveal requirements would come from the verifier.
+typically, reveal requirements would come from the verifier.
         </p>
         <figure id="hiw-base-creation">
           <img style="margin: auto; display: block; width: 100%;"
@@ -545,18 +557,18 @@ additional blue box  labeled  'Mandatory Disclosure Constraints' also connects
 to the yellow arrow labeled 'Transform Data'.">
           <figcaption style="text-align: center;">
 To create a cryptographic base proof, data is 
-transformed subject to manditory disclosure constraints, hashed, and 
+transformed, subject to mandatory disclosure constraints, hashed, and 
 cryptographically protected.
           </figcaption>
         </figure>
         <p>
-In [[[#hiw-derived-creation]]] the holder get to specify what subset of 
-information gets revealed to the verifier via the selective disclosure
+In [[[#hiw-derived-creation]]], the holder get to specify what subset of 
+information gets revealed to the verifier, via the selective disclosure
 constraints. These are used to produce a derived credential via transformation
 and derived proof generation steps. These are carried out in such a way as to
-preserve the authenticty and integrity of the derived data with repect to the
-issuers intent.  The selective disclosure constraints would be typically set to
-meet the minimum requirements of acceptance of the derived credential by 
+preserve the authenticty and integrity of the derived data with respect to the
+issuer's intent. The selective disclosure constraints would typically be set to
+meet the minimum requirements for acceptance of the derived credential by 
 the verifier.
         </p>
         <figure id="hiw-derived-creation">
@@ -571,13 +583,13 @@ through two subsequent yellow arrows labeled 'Transform Data' and
 additional blue box  labeled  'Selective Disclosure Constraints' also connects 
 to the yellow arrow labeled 'Transform Data'.">
           <figcaption style="text-align: center;">
-To create a seletively disclosed document with cryptographic derived proof, data 
-together with a base proof is transformed subject to selective disclosure 
-constraints, and appropriate cryptograph processing.
+To create a seletively disclosed document with cryptographic derived proof, data, 
+together with a base proof, is transformed, subject to selective disclosure 
+constraints, and appropriate cryptographic processing.
           </figcaption>
         </figure>
         <p>
-Finally, in [[[#hiw-derived-verification]]] the process of verifying the 
+Finally, in [[[#hiw-derived-verification]]], the process of verifying the 
 selectively disclosed data is shown.
         </p>
         <figure id="hiw-derived-verification">
