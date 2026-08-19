@@ -374,7 +374,7 @@ tamper-evident.
         <p>
 From the [[[VC-DATA-MODEL-2.0]]], a [=verifiable credential=] is a set of one or
 more [=claims=]
-made by the same [=issuer=]. A particular [=holder=] will typically have verifiable
+made by the same [=issuer=]. A particular [=holder=] can have verifiable
 credentials from many issuers. When presenting to a verifier, a holder can
 choose
 just one or a subset from their existing verifiable credentials to form a
@@ -385,7 +385,7 @@ presentation=] presented to a given [=verifier=], privacy is enhanced.
         <p>
 In the simplest deployment, only entire verifiable credentials can be shared
 through verifiable presentations. In other words, to share a single claim from
-a given verifiable credential, the entire verifiable credential must be part of
+a given verifiable credential, the entire verifiable credential has to be part of
 the verifiable presentation.
 This approach is referred to as a <dfn>full disclosure</dfn>.
         </p>
@@ -555,8 +555,8 @@ be intended only for the holder's use, for example, to create privacy-preserving
         </p>
         <p>
 In [[[#hiw-base-creation]]], the issuer may define [=mandatory disclosure constraints=]
-that separate the claims between <dfn>mandatory claims</dfn> (i.e., claims that must appear in the derived credential
-regardless of other constraints) from the <dfn>non-mandatory claims</dfn> that may or may not appear in the [=derived credential=].
+that separate the claims between <dfn>mandatory claims</dfn> (i.e., claims that have to appear in the derived credential
+regardless of other constraints) from the <dfn>non-mandatory claims</dfn> that do not have to appear in the [=derived credential=].
 The imposition of mandatory disclosure constraints is optional.
        </p>
        <p>
@@ -567,7 +567,7 @@ The details of the these steps depend on the underlying cryptographic algorithm.
       <ul>
       <li>
 The simple approach (referred to as [=SIC=], i.e., "Sign Individual Claims"), involves the generation of an ephemeral
-encryption key-pair.
+cryptographic key-pair.
 This key-pair is scoped to the specific [=base proof|proof=], and its private key is thrown away once the [=base proof=] is generated.
 This ephemeral key-pair is used to sign the block of [=mandatory claims|mandatory=] and, one-by-one, the
 [=non-mandatory claims|non-mandatory=] claims. The data structure for the [=base proof=], which is then signed, includes these signature
@@ -579,7 +579,10 @@ are large, which is the case of some quantum resistant signature schemes, and th
 An alternative approach (referred to as [=SHoC=], i.e., "Salted Hashes of Claims") may be used in this case: a salt value
 (i.e., a random nonce) is created for each [=claim=], then a hash function is applied to the salt+claim pair.
 The data structure for the [=base proof=], which is then signed, includes the list of hashes, one for each salt+claim,
-paired with the corresponding salt values.
+paired with the corresponding salt values. The [=SHoC=] approach has the downside
+of a more complex implementation, it can leak information about the total number of
+signed claims, and that all of the hashes have to be included in a proof, even for claims
+that are not revealed, increasing its size (but based on hash size, not signature size).
         </li>
     </ul>
 
