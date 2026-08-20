@@ -368,8 +368,31 @@ tamper-evident.
         </li>
       </ul>
 
+
       <section class="informative">
-        <h3>How it Works</h3>
+        <h3>Full Disclosure</h3>
+        <p>
+From the [[[VC-DATA-MODEL-2.0]]], a [=verifiable credential=] is a set of one or
+more [=claims=]
+made by the same [=issuer=]. A particular [=holder=] can have verifiable
+credentials from many issuers. When presenting to a verifier, a holder can
+choose
+just one or a subset from their existing verifiable credentials to form a
+verifiable presentation. By minimizing the subset of credentials in a [=verifiable
+presentation=] presented to a given [=verifier=], privacy is enhanced.
+        </p>
+
+        <p>
+In the simplest deployment, only entire verifiable credentials can be shared
+through verifiable presentations. In other words, to share a single claim from
+a given verifiable credential, the entire verifiable credential has to be part of
+the verifiable presentation.
+This approach is referred to as a <dfn>full disclosure</dfn>.
+        </p>
+
+      <!-- An explicit ID has been set to avoid dangling links elsewhere -->
+      <section class="informative" id="how-it-works">
+        <h3>How Full Disclosure Works</h3>
 
         <p>
 The operation of Data Integrity is conceptually simple. To create a
@@ -480,137 +503,168 @@ purposes of protecting the integrity of application data in transit and at rest.
         </p>
 
       </section>
+    </section>
       <section id="GeneralSelectiveDisclosure" class="informative">
         <h3>Selective  Disclosure</h3>
+
+        <aside class="ednote">The missing references in the section anticipate the merge of <a
+        href="https://github.com/w3c/vc-data-integrity/pull/358">PR #358</a> including `&lt;dfn>` tags.</aside>
+
         <p>
-From the [[[VC-DATA-MODEL-2.0]]], a verifiable credential is a set of one or 
-more claims 
-made by the same issuer. A particular holder will typically have verifiable 
-credentials from many issuers. When presenting to a verifier, a holder can 
-choose 
-just one or a subset from their existing verifiable credentials to form a 
-verifiable presentation. By minimizing the subset of credentials in a verifiable
-presentation presented to a given verifier, privacy is enhanced.
+[=Full disclosure=] has obvious and significant implications for the privacy of both subjects and holders.
+To further enhance the privacy of a holder, an issuer can create a verifiable
+credential that supports <dfn>selective disclosure</dfn>. This is a cryptographic technique that allows an [=issuer=] to create a
+[=verifiable credential=]
+that enables a holder to selectively reveal only a subset of [=claims=] from the
+original credential in a <dfn>derived credential</dfn> that will be presented to a
+[=verifier=]. This is achieved with assurances from the issuer to the verifier of
+the integrity and authenticity of the data in the [=derived credential=].
         </p>
         <p>
-In the simplest deployment, only entire verifiable credentials can be shared
-through verifiable presentations. In other words, to share a single claim from
-a given verifiable credential, the entire verifiable credential must be part of
-the verifiable presentation. This has obvious and significant implications for
-the privacy of both subjects and holders.
-        </p>
-        <p>
-To further enhance the privacy of a holder, an issuer can create a verifiable 
-credential that supports <em>selective disclosure</em>. <em>Selective 
-disclosure</em> is a cryptographic technique that allows an issuer to create a
-verifiable credential 
-that enables a holder to selectively reveal only a subset of claims from the 
-original credential in a <em>derived credential</em> that will be presented to a 
-verifier. This is achieved with assurances from the issuer to the verifier of 
-the integrity and authenticity of the data in the <em>derived credential</em>. 
-        </p>
-        <p>
-Note that <em>selective disclosure</em> typically applies at the <em>claim</em> 
-level. A holder cannot alter the meaning of an issued claim and preserve the 
-verifiability of the <em>derived credential</em>. They can only limit which
-claims end up in 
-the <em>derived credential</em> via a set of <em>selective disclosure 
-constraints</em>. However, in some situations, more advanced techniques, such
-as <em>committed disclosure</em> combined with Zero Knowledge Proofs (ZKPs), 
+Note that [=selective disclosure=] typically applies at the [=claim=]
+level. A holder cannot alter the meaning of an issued claim and preserve the
+verifiability of the [=derived credential=]. They can only limit which
+claims end up in
+the [=derived credential=] via a set of <dfn>selective disclosure
+constraints</dfn>. However, in some situations, more advanced techniques, such
+as <em>committed disclosure</em> combined with Zero Knowledge Proofs (ZKPs),
 can allow a holder to
-reveal less than "full claim" information while maintaining issuer-based 
+reveal less than "full claim" information while maintaining issuer-based
 authenticity and data integrity assurances.
-Furthermore, the issuer can optionally specify that certain claims from the 
-original credential need to be revealed via <em>mandatory disclosure 
-constraints</em>. Though it is typically the responsibility of the verifier to
+Furthermore, the issuer can optionally specify that certain claims from the
+original credential need to be revealed via <dfn>mandatory disclosure
+constraints</dfn>. Though it is typically the responsibility of the verifier to
 indicate which claims they understand and want to verify, they are expected to
 always ask for what they need, regardless of the possibility of this constraint.
         </p>
-      </section>
       <section class="informative">
         <h3>How Selective Disclosure Works</h3>
         <p>
-In Section [[[#how-it-works]]], the fundamental processes of creating and 
-verifying a  
-cryptographic proof are explained. In selective disclosure, there 
-are three processes rather than two: (1) the issuer creates a base proof, (2) the 
-holder creates a derived proof from the base proof, and (3) the verifier 
-verifies the derived proof.
+In Section [[[#how-it-works]]], the fundamental processes of creating and
+verifying a
+cryptographic proof are explained. In selective disclosure, there
+are three processes rather than two: 1) the issuer creates a <dfn>base proof</dfn>, 2) the
+holder creates a <dfn>derived proof</dfn> from the [=base proof=], and 3) the verifier
+verifies the [=derived proof=].
 The reason for this extra step is that methods for creating
-a derived proof are much more efficient when used in combination with a base
-proof that is created in a particular manner. Holders are expected never to reveal
-base proofs when presenting, as some of the information in the base proofs might
+a [=derived proof=] are much more efficient when used in combination with a [=base
+proof=] that is created in a particular manner. Holders are expected never to reveal
+[=base proofs=] when presenting, as some of the information in the base proofs might
 be intended only for the holder's use, for example, to create privacy-preserving
-derived proofs.
+[=derived proofs=].
         </p>
         <p>
-In [[[#hiw-base-creation]]], the issuer performs the steps of transformation,
-hashing, and base proof generation to produce the <em>data with base proof</em>.
-The imposition of mandatory disclosure constraints is optional, and, more 
-typically, reveal requirements would come from the verifier.
+In [[[#hiw-base-creation]]], the issuer may define [=mandatory disclosure constraints=]
+that separate the claims between <dfn>mandatory claims</dfn> (i.e., claims that have to appear in the derived credential
+regardless of other constraints) from the <dfn>non-mandatory claims</dfn> that do not have to appear in the [=derived credential=].
+The imposition of mandatory disclosure constraints is optional.
+       </p>
+       <p>
+The [=transformation=] and [=hashing=] steps are similar to the full disclosure case except that the [=mandatory claims|mandatory=] and [=non-mandatory claims|non-mandatory=] claims are
+transformed and hashed separately.
+The details of the these steps depend on the underlying cryptographic algorithm.
+      </p>
+      <ul>
+      <li>
+The simple approach (referred to as [=SIC=], i.e., "Sign Individual Claims"), involves the generation of an ephemeral
+cryptographic key-pair.
+This key-pair is scoped to the specific [=base proof|proof=], and its private key is thrown away once the [=base proof=] is generated.
+This ephemeral key-pair is used to sign the block of [=mandatory claims|mandatory=] and, one-by-one, the
+[=non-mandatory claims|non-mandatory=] claims. The data structure for the [=base proof=], which is then signed, includes these signature
+values, alongside the public key of the ephemeral key-pair.
+        </li>
+        <li>
+[=SIC=] has the downside of possibly producing very large data structures for the [=base proof=]. This happens if the signature sizes
+are large, which is the case of some quantum resistant signature schemes, and this may become prohibitive for some applications.
+An alternative approach (referred to as [=SHoC=], i.e., "Salted Hashes of Claims") may be used in this case: a salt value
+(i.e., a random nonce) is created for each [=claim=], then a hash function is applied to the salt+claim pair.
+The data structure for the [=base proof=], which is then signed, includes the list of hashes, one for each salt+claim,
+paired with the corresponding salt values. The [=SHoC=] approach has the downside
+of a more complex implementation, it can leak information about the total number of
+signed claims, and that all of the hashes have to be included in a proof, even for claims
+that are not revealed, increasing its size (but based on hash size, not signature size).
+        </li>
+    </ul>
+
+        <p>
+See <a href="#introduction-1"></a> and [[[#SDApproachTable]]] for the technical details and comparisons of [=SIC=] and [=SHoC=]
+(plus a third approach, adapted to a very specific signature scheme, i.e., [[VC-DI-BBS]]).
         </p>
+
         <figure id="hiw-base-creation">
           <img style="margin: auto; display: block; width: 100%;"
                src="diagrams/hiw-base-creation.svg" alt="
 Diagram showing the three steps involved in the creation of a cryptographic
 base proof. The diagram is laid out left to right with a blue box labeled 'Data'
 on the far left. The blue box travels, left to right, through three subsequent
-yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Base Proof'. 
-The resulting blue box at the far right is labeled 'Data with Base Proof'. An 
-additional blue box  labeled  'Mandatory Disclosure Constraints' also connects 
+yellow arrows labeled 'Transform Data', 'Hash Data', and 'Generate Base Proof'.
+The resulting blue box at the far right is labeled 'Data with Base Proof'. An
+additional blue box  labeled  'Mandatory Disclosure Constraints' also connects
 to the yellow arrow labeled 'Transform Data'.">
           <figcaption style="text-align: center;">
-To create a cryptographic base proof, data is 
-transformed, subject to mandatory disclosure constraints, hashed, and 
+To create a cryptographic base proof, data is
+transformed, subject to [=mandatory disclosure constraints=], hashed, and
 cryptographically protected.
           </figcaption>
         </figure>
         <p>
-In [[[#hiw-derived-creation]]], the holder gets to specify what subset of 
+In [[[#hiw-derived-creation]]], the holder gets to specify what subset of
 information gets revealed to the verifier via the selective disclosure
-constraints. These are used to produce a derived credential via transformation
-and derived proof generation steps. These are carried out in such a way as to
+constraints. These are used to produce a [=derived credential=] via transformation
+and [=derived proof=] generation steps. They are carried out in such a way as to
 preserve the authenticity and integrity of the derived data with respect to the
-issuer's intent. The selective disclosure constraints would typically be set to
-meet the minimum requirements for acceptance of the derived credential by 
+issuer's intent.
+The [=derived proof=] data structure contains a reference to each [=claim=] that is
+either [=mandatory claim|mandatory=] or is determined by the [=selective disclosure constraints=].
+The details depend on whether the [=SIC=] or [=SHoC=] approach is used.
+In the [=SIC=] case this contains the list of signed claims.
+In the [=SHoC=] case the structure is more complex; it includes the list of the selected
+salt+claim entries, their corresponding hash values, and the overall list
+of hash+salt pairs for <em>all</em> [=non-mandatory claims=] (needed for verification).
+</p>
+<p>
+The selective disclosure constraints would typically be set to
+meet the minimum requirements for acceptance of the [=derived credential=] by
 the verifier.
         </p>
         <figure id="hiw-derived-creation">
           <img style="margin: auto; display: block; width: 100%;"
                src="diagrams/hiw-derived-creation.svg" alt="
 Diagram showing the three steps involved in the creation of a cryptographic
-derived proof. The diagram is laid out left to right with a blue box labeled 
-'Data with Base Proof' on the far left. The blue box travels, left to right, 
-through two subsequent yellow arrows labeled 'Transform Data' and 
-'Generate Derived Proof'. The resulting blue box at the far right is labeled 
-'Selectively Disclosed Data with Derived Proof'. An 
-additional blue box  labeled  'Selective Disclosure Constraints' also connects 
+derived proof. The diagram is laid out left to right with a blue box labeled
+'Data with Base Proof' on the far left. The blue box travels, left to right,
+through two subsequent yellow arrows labeled 'Transform Data' and
+'Generate Derived Proof'. The resulting blue box at the far right is labeled
+'Selectively Disclosed Data with Derived Proof'. An
+additional blue box  labeled  'Selective Disclosure Constraints' also connects
 to the yellow arrow labeled 'Transform Data'.">
           <figcaption style="text-align: center;">
-To create a selectively disclosed document with cryptographic derived proof, data, 
-together with a base proof, is transformed, subject to selective disclosure 
-constraints and appropriate cryptographic processing.
+To create a selectively disclosed document with cryptographic derived proof, data,
+together with a base proof, is transformed, subject to [=selective disclosure
+constraints=] and appropriate cryptographic processing.
           </figcaption>
         </figure>
         <p>
-Finally, in [[[#hiw-derived-verification]]], the process of verifying the 
+Finally, in [[[#hiw-derived-verification]]], the process of verifying the
 selectively disclosed data is shown.
         </p>
         <figure id="hiw-derived-verification">
           <img style="margin: auto; display: block; width: 100%;"
-               src="diagrams/hiw-derived-verification.svg" alt="Diagram showing 
+               src="diagrams/hiw-derived-verification.svg" alt="Diagram showing
 the three steps involved in the verification of a cryptographic derived
 proof. The diagram is laid out left to right with a blue box labeled
-'Selectively Disclosed Data with Derived Proof' on the far left. The blue box 
-travels, left to right, through three subsequent yellow arrows labeled 
+'Selectively Disclosed Data with Derived Proof' on the far left. The blue box
+travels, left to right, through three subsequent yellow arrows labeled
 'Transform Data', 'Hash Data', and 'Verify Derived Proof'. The resulting green
 and red diamond at the far right is labeled 'Valid/Invalid'.">
           <figcaption style="text-align: center;">
-To verify a selectively dislosed document with cryptographic derived proof, data 
+To verify a selectively disclosed document with cryptographic [=derived proof=], data
 is transformed, hashed, and checked for correctness.
           </figcaption>
         </figure>
       </section>
+     </section>
+
       <section class="informative">
         <h3>Design Goals and Rationale</h3>
 
@@ -2516,12 +2570,12 @@ Return |combinedVerificationResult|, |successfulVerificationResults|.
         <section class="informative">
           <h4>Introduction</h4>
           <p class="ednote">
-These algorithms are for the non-selective disclosure case.  There are 
+These algorithms are for the non-selective disclosure case.  There are
 two key algorithms which are built from a common set of functions. These
-are "Create Proof" and "Verify Proof" which are called by the [[[#add-proof]]] 
-and [[[#verify-proof]]] general algorithms respectively. 
-These algorithms have a common 
-structure for all non-selective disclosure cryptosuites. We give these 
+are "Create Proof" and "Verify Proof" which are called by the [[[#add-proof]]]
+and [[[#verify-proof]]] general algorithms respectively.
+These algorithms have a common
+structure for all non-selective disclosure cryptosuites. We give these
 algorithms in the following two sections along with the common functions
 that are used therein.
 May want to explain all the parameters here, i.e., canonicalization
@@ -2534,7 +2588,7 @@ proof encoding.
 
           <p>
 The following algorithm specifies how to create a [=data integrity proof=] given
-an <a>unsecured data document</a> and properly specified cryptosuite. 
+an <a>unsecured data document</a> and properly specified cryptosuite.
 The choice of cryptosuite sets the values of |canonScheme|,
 |hashName|, |sigFunc|, |verifyFunc|, and |proofEncoding|, which are used
 in the algorithm below. Additional required inputs are an
@@ -2570,7 +2624,7 @@ Let |proof| be a clone of the proof options, |options|.
                 </li>
                 <li>
         Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0">
-        base64-url-encoded Multibase encoding</a> of the |proofBytes| if 
+        base64-url-encoded Multibase encoding</a> of the |proofBytes| if
         |proofEncoding| is  `base64` otherwise let |proof|.|proofValue|
         be a <a data-cite="CID#multibase-0">
         base58-btc-encoded Multibase value</a> of the |proofBytes| if
@@ -2659,7 +2713,7 @@ Let |proof| be a clone of the proof options, |options|.
                 </ol>
 
         </section>
-        
+
         <section>
                 <h4>Common Functions</h4>
                 <section id="HashingAlg">
