@@ -2978,6 +2978,2217 @@ Let |proof| be a clone of the proof options, |options|.
                 </section>
         </section>
         </section>
+
+<section id="SDAlgorithms">
+        <h3>Selective Disclosure Algorithms</h3>
+        <section class="informative">
+          <h3>Introduction</h3>
+          <p>
+There are three high-level algorithms used with credentials that support
+cryptographic selective disclosure. First, the issuer uses the <em>Add Base 
+Proof</em> algorithm to create a signed credential that supports selective 
+disclosure. The holder then uses the <em>Add Derived Proof</em> algorithm to
+create a selectively disclosed version of the issuer-signed credential along 
+with a derived proof. Finally, the verifier uses the <em>Verify Derived 
+Proof</em> algorithm to verify the received selectively disclosed credential
+with derived proof against the <strong>issuer's</strong> verification 
+information.
+          </p>
+          <p>
+This specification allows for three different implementation approaches to 
+selective disclosure that work primarily at the level of the [=claims=] 
+within a verifiable credential; that is, they allow the holder to selectively 
+disclose, or not, each particular claim in the credential. The three approaches 
+take into account the efficiency of the fundamental cryptographic signature 
+algorithm used. Only one (to be) standardized cryptographic signature 
+algorithm, BBS, natively supports selective disclosure, i.e., it produces a base 
+signature over an ordered list of claims and facilitates the creation 
+of a "derived signature" over a subset of that list of claims. In other 
+cryptographic signature algorithms, two approaches are typically used: 
+(1) provide individual signatures for each claim, or (2) sign a list of 
+"salted hashes" for all claims. We will refer to the first as <dfn class="export">SIC</dfn> (Sign
+Individual Claims), and the second as <dfn class="export">SHoC</dfn< (Salted Hashes of Claims).
+Cases where the signature algorithm naturally supports multiple claims,
+will be referred to as <dfn class="export">MCS</dfn> (Multiple Claim Support).
+          </p>
+          <p>
+All approaches use similar mechanisms to protect the proof-related metadata,
+and to minimize data leakage of non-disclosed information from the derived
+proof. They all incur roughly similar overhead in the base and derived proofs
+for these purposes. Similarly, all approaches use the same encoding of the
+individual data items that go into a proof, CBOR, and the final encoding of
+raw octets into a string, `base64-url`. Hence, this information is not shown
+in the summary [[[#SDApproachTable]]].
+          </p>
+          <p>
+The [=SIC=] approaches sign individual claims after the transformation step. Hence,
+their base proof sizes scale as the number of claims times the size of the 
+signature produced by the chosen signature algorithm. Thus this approach is
+good for signature algorithms that produce small signatures. Along similar
+lines, the size of the derived proof scales as the number of revealed claims
+times the signature size, i.e., the fewer claims revealed, the smaller the
+proof. This is a nice property, not shared by the other two approaches.
+          </p>
+          <p>
+When following the [=SHoC=] approach, a salt value (random nonce) is created for
+each claim. That salt value is concatenated with the claim, and a cryptographic
+collision-resistant hash function is applied to the list of paired salts+claims,
+to produce a list of hashes, one for each claim. The newly paired lists of salts
+and hashes are combined and signed with a selected signature algorithm. Only one
+signature is needed; thus, this approach is good for signature algorithms with
+larger signature sizes. A downside of this approach is that the complete list of
+salts and hashes must be conveyed to both holder and verifier. To verify a
+revealed claim, the verifier needs first to verify the signature for the combined
+list of salts and hashes; then they need to be told the index of the claim in
+that list; and then, using the appropriate salt value from the list, they verify
+the value of the hash of the salt concatenated with the received claim and the
+hash from the table.
+          </p>
+          <p>
+In one MCS signature algorithm, BBS, the produced base proof is extremely short,
+80 bytes, while the derived proof grows by 32 bytes per non-revealed claim.
+          </p>
+
+          <p>
+We summarize the properties of these approaches in 
+[[[#SDApproachTable]]]. 
+          </p>
+          <table id="SDApproachTable" class="data numbered">
+            <caption><em>Selective Disclosure Approaches.</em> </caption>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Base Proof Contents</th>
+                <th>Base Proof Size</th>
+                <th>Derived Proof Contents</th>
+                <th>Derived Proof Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Signed Individual Claims (SIC)</td>
+                <td>list of signatures, one for each claim.</td>
+                <td>N<sub>claims</sub> &times; (signature size) </td>
+                <td>sub-list of signatures, one for each revealed claim.</td>
+                <td>N<sub>revealed claims</sub> &times; (signature size) </td>
+              </tr>
+              <tr>
+                <td>Signed Hash of Claims (SHoC)</td>
+                <td>list of salts, list of salted hashes, one for each claim, 
+                  plus signature over these two lists.</td>
+                <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
+                <td>list of salts, list of salted hashes, one for each claim, 
+                  plus one signature over these two lists.</td>
+                <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
+              </tr>
+              <tr>
+                <td>Multi Claim Signature, BBS</td>
+                <td>BBS signature</td>
+                <td>80 bytes</td>
+                <td>BBS <em>proof</em></td>
+                <td>272 + 32 &times; (N<sub>claims</sub> - N<sub>revealed claims</sub>) bytes</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+In the following sections, we define the three main selective disclosure 
+algorithms in terms of sub-algorithms. These sub-algorithms are of two types: 
+those that are independent of the selective disclosure implementation approaches
+discussed above, and those that have approach-specific implementations.
+          </p>
+        </section>  <!-- end Introduction to SD Algorithms section -->
+
+        <section>
+          <h3>Create Base Proof</h3>
+          <p>
+The following algorithm specifies how to create a [=data integrity proof=] given
+an <a>unsecured data document</a>. Required inputs are an
+<a>unsecured data document</a> ([=map=] |unsecuredDocument|), and a set of proof
+options ([=map=] |options|). A [=data integrity proof=] ([=map=]), or an error,
+is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Let |proof| be a clone of the proof options, |options|.
+            </li>
+            <li>
+Let |proofConfig| be the result of running the algorithm in
+Section [[[#ProofConfigurationAlg]]] with
+|options| passed as a parameter.
+            </li>
+            <li>
+Let |transformedData| be the result of running the algorithm in
+[[[#TransformSD]]] with |unsecuredDocument|,
+|proofConfig|, and |options| passed as parameters.
+            </li>
+            <li>
+Let |hashData| be the result of running the algorithm in
+[[[#HashSD]]] with |transformedData| and |proofConfig|
+passed as a parameters.
+            </li>
+            <li>
+In a SHoC approach, add to |hashData| the |saltedHash| data that results
+from running the algorithm in [[[#SaltedHashSD]]].
+            </li>
+            <li>
+Let |proofBytes| be the result of running the approach-specific 
+<em>SerializeBase</em> algorithm. For example, use [[[#SerializeBase-SIC]]] for
+the SIC approach, and use [[[#SerializeBase-SHoC]]] for the SHoC approach. In
+all cases, pass |hashData| and |options| as parameters.
+            </li>
+            <li>
+Let |proof|.|proofValue| be a <a data-cite="CID#multibase-0"
+>`base64-url-encoded` Multibase value</a> of the |proofBytes|.
+            </li>
+            <li>
+Return |proof| as the [=data integrity proof=].
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>Add Derived Proof</h3>
+          <p>
+The following algorithm creates a selective disclosure derived proof. It is
+called by a holder of a [=verifiable credential=] that is protected by a
+selective disclosure 'base proof'. The derived proof is to be given to a
+[=verifier=]. The algorithm inputs include a JSON-LD document (|document|); a
+selective disclosure base proof (|proof|); an array of JSON pointers to use to
+selectively disclose statements (|selectivePointers|); and any custom JSON-LD
+API options, such as a document loader. A single <em>selectively revealed
+document</em> value, represented as an object, is produced as output.
+          </p>
+
+          <ol>
+            <li>
+Let the |proofData| object be the result returned from the approach-specific
+<em>ParseBase</em> sub-algorithm. For example, for the SIC approach use
+[[[#ParseBase-SIC]]], and for the SHoC approach use [[[#ParseBase-SHoC]]].
+At a minimum, the |proofData| object will contain the fields |hmacKey| and
+|mandatoryPointers|.
+            </li>
+            <li>
+Initialize |disclosureData| to the object returned when calling the algorithm in
+[[[#CreateDisclosureData]]], passing the |document|, |proofData|,
+|selectivePointers|, and any custom JSON-LD API options, such as a document
+loader. The |disclosureData| object will contain the following fields: 
+|revealDocument|, |mandatoryIndexes|, |selectiveIndexes|, |verifierLabelMap|
+|mandatory|, and |nonMandatory|.
+            </li>
+            <li>
+Initialize |newProof| to a shallow copy of |proof|.
+            </li>
+            <li>
+Replace |proofValue| in |newProof| with the result of calling the approach-specific
+<em>SerializeDerived</em> algorithm. For example, for the SIC approach, use
+[[[#SerializeDerived-SIC]]], and for the SHoC approach, use
+[[[#SerializeDerived-SHoC]]]. In all cases, pass |proofData| and |disclosureData|
+as parameters.
+            </li>
+            <li>
+Set the value of the "proof" property in |revealDocument| to |newProof|.
+            </li>
+            <li>
+Return |revealDocument| as the <em>selectively revealed document</em>.
+            </li>
+          </ol>
+
+
+        </section>
+
+        <section>
+          <h3>Verify Derived Proof</h3>
+          <p>
+The following algorithm attempts verification of a selective disclosure
+derived proof. This algorithm is called by a verifier of a selective
+disclosure protected [=verifiable credential=]. Algorithm inputs include
+a JSON-LD document (|document|); a selective disclosure derived proof
+(|proof|); and any custom JSON-LD API options, such as a document loader.
+This algorithm returns a [=verification result=]:
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
+            </li>
+            <li>
+Initialize the |proofData| object to the result returned by the approach-specific
+<em>ParseDerived</em> sub-algorithm. For example, for the SIC approach, use
+[[[#ParseDerived-SIC]]], and for the SHoC approach, use [[[#ParseDerived-SHoC]]].
+At a minimum, the |proofData| object will contain the fields |labelMap| and
+|mandatoryIndexes|.
+            </li>            
+            <li>
+Initialize the |verifyData| object to the value returned by calling the 
+algorithm in Section [[[#CreateVerifyData]]], passing the |document|, 
+|proofData|, and any custom JSON-LD API options, such as a document loader.
+The |verifyData| object will contain the following fields: |proofHash|, 
+|mandatoryHash|, and |nonMandatory|.
+            </li>
+            <li>
+Initialize |verified| to the result of calling the approach-specific 
+<em>VerifyDerived</em> algorithm. For example, for the SIC approach, use  
+[[[#VerifyDerived-SIC]]], and for the SHoC approach, use
+[[[#VerifyDerived-SHoC]]]. In all cases, pass |proofData| and
+|verifyData| as parameters.
+            </li>
+            <li>
+Return a [=verification result=] with [=struct/items=]:
+              <dl data-link-for="verification result">
+                <dt>[=verified=]</dt>
+                <dd>The value of |verified|</dd>
+                <dt>[=verifiedDocument=]</dt>
+                <dd>
+if |verified| is `true`, |unsecuredDocument|; otherwise <a
+data-cite="INFRA#nulls">Null</a>
+                </dd>
+              </dl>
+            </li>
+          </ol>
+
+        </section>
+
+      </section> <!-- Selective Disclosure  Algorithms-->
+
+      <section>
+        <h3>Selective Disclosure Common Sub-Algorithms</h3>
+        <section  id="TransformSD">
+          <h4>TransformSD</h4>
+
+          <p>
+The following algorithm specifies how to transform an unsecured input document
+into a transformed document that is ready to be provided as input to the
+hashing algorithm in Section [[[#HashSD]]] and, depending on approach, may be
+provided as input to the salted hashing algorithm, [[[#SaltedHashSD]]].
+          </p>
+
+          <p>
+Required inputs to this algorithm are an <a data-cite=
+"vc-data-integrity#dfn-unsecured-data-document">unsecured data document</a>
+(|unsecuredDocument|) and transformation options (|options|). The
+transformation options MUST contain a type identifier for the <a data-cite=
+"vc-data-integrity#dfn-cryptosuite">cryptographic suite</a> (|type|), a
+cryptosuite identifier (|cryptosuite|), and a verification method
+(|verificationMethod|). The transformation options MUST contain an array of
+mandatory JSON pointers (|mandatoryPointers|) and MAY contain additional
+options, such as a JSON-LD document loader. A <em>transformed data
+document</em> is produced as output. Whenever this algorithm encodes
+strings, it MUST use UTF-8 encoding.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |hmac| to an HMAC API using a locally generated and exportable HMAC
+key. The HMAC uses the same hash algorithm used in the signature algorithm,
+which is detected via the |verificationMethod| provided to the
+function, i.e., SHA-256 for a P-256 curve. Per the recommendations of
+[[RFC2104]], the HMAC key MUST be the same length as the digest size; for SHA-256,
+this is 256 bits or 32 bytes.
+            </li>
+            <li>
+If |cryptosuite| is set to `ecdsa-sd-2023` then
+initialize |labelMapFactoryFunction| to the result of calling the algorithm of
+Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise 
+initialize |labelMapFactoryFunction| to the result of calling the algorithm of
+Section [[[#createshuffledidlabelmapfunction]]], passing |hmac|;
+            </li>
+            <li>
+Initialize |groupDefinitions| to a map with an entry with a key of the string
+"mandatory" and a value of |mandatoryPointers|.
+            </li>
+            <li>
+Initialize |groups| to the result of calling the algorithm in Section
+[[[#canonicalizeandgroup]]], passing |labelMapFactoryFunction|,
+|groupDefinitions|, |unsecuredDocument| as |document|, and any custom JSON-LD
+API options. Note: This step transforms the document into an array of canonical
+N-Quads with pseudorandom blank node identifiers based on |hmac|, and groups
+the N-Quad strings according to selections based on JSON pointers.
+            </li>
+            <li>
+Initialize |mandatory| to the values in the |groups|.|mandatory|.|matching| map.
+            </li>
+            <li>
+Initialize |nonMandatory| to the values in the
+|groups|.|mandatory|.|nonMatching| map.
+            </li>
+            <li>
+Initialize |hmacKey| to the result of exporting the HMAC key from |hmac|.
+            </li>
+            <li>
+Return an object with `mandatoryPointers` set to |mandatoryPointers|,
+`mandatory` set to |mandatory|, `nonMandatory` set to |nonMandatory|,
+and `hmacKey` set to |hmacKey|.
+            </li>
+          </ol>
+
+        </section>
+        <section id="HashSD">
+          <h4>HashSD</h4>
+          <p>
+The following algorithm specifies how to cryptographically hash a
+<em>transformed data document</em> and <em>proof configuration</em>
+into cryptographic hash data that is ready to be provided as input to the
+approach specific algorithms such as [[[#SerializeBase-SIC]]] and  
+[[[#SerializeBase-SHoC]]].
+          </p>
+
+          <p>
+The required inputs to this algorithm are a <em>transformed data document</em>
+(|transformedDocument|) and <em>canonical proof configuration</em>
+(|canonicalProofConfig|). A <em>hash data</em> value represented
+as an object is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |proofHash| to the result of calling the RDF Dataset Canonicalization
+algorithm [[RDF-CANON]] on |canonicalProofConfig| and then cryptographically
+hashing the result using the same hash that is used by the signature algorithm,
+i.e., SHA-256 for a P-256 curve. Note: This step can be performed in parallel;
+it only needs to be completed before this algorithm terminates as the result is
+part of the return value.
+            </li>
+            <li>
+Initialize |mandatoryHash| to the result of calling the the algorithm in Section
+[[[#hashmandatorynquads]]], passing
+|transformedDocument|.|mandatory|.
+            </li>
+            <li>
+Initialize |hashData| as a deep copy of |transformedDocument| and
+add |proofHash| as `proofHash` and |mandatoryHash| as `mandatoryHash` to that
+object.
+            </li>
+            <li>
+Return |hashData| as <em>hash data</em>.
+            </li>
+          </ol>
+
+        </section>
+        <section id="CreateDisclosureData">
+          <h4>CreateDisclosureData</h4>
+          <p>
+The following algorithm creates data to be used to generate a derived proof. The
+inputs include a JSON-LD document (|document|), parsed base proof data
+(|proofData|), an array of JSON pointers to use to selectively disclose
+statements (|selectivePointers|), and any custom JSON-LD API options,
+such as a document loader). A single object, <em>disclosure data</em>, is
+produced as output, which contains the "revealDocument", "mandatoryIndexes",
+"selectiveIndexes", "verifierLabelMap", "mandatory", and
+"nonMandatory" fields.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |hmac| to an HMAC API using |proofData|.|hmacKey|. The HMAC uses the same hash
+algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
+            </li>
+            <li>
+If |cryptosuite| is set to `ecdsa-sd-2023` then
+initialize |labelMapFactoryFunction| to the result of calling the algorithm of
+Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise 
+initialize |labelMapFactoryFunction| to the result of calling the algorithm of
+Section [[[#createshuffledidlabelmapfunction]]], passing |hmac|.
+            </li>
+            <li>
+Initialize |combinedPointers| to the concatenation of |mandatoryPointers|
+and |selectivePointers|.
+            </li>
+            <li>
+Initialize |groupDefinitions| to a map with the following entries: key of
+the string `"mandatory"` and value of |proofData|.|mandatoryPointers|, key of 
+the string `"selective"` and value of |selectivePointers|, and key of the string
+ `"combined"` and value of |combinedPointers|.
+            </li>
+            <li>
+Initialize |groups| and |labelMap| to their associated values in the result
+of calling the algorithm in Section
+[[[#canonicalizeandgroup]]], passing |document|,
+|labelMapFactoryFunction|, |groupDefinitions|, and any custom
+JSON-LD API options as parameters. Note: This step transforms the document into
+an array of canonical N-Quad strings with pseudorandom blank node identifiers
+based on |hmac|, and groups the N-Quad strings according to selections based on
+JSON pointers.
+            </li>
+<li>
+Compute the mandatory indexes. Initialize |relativeIndex| to zero.
+            </li>
+            <li>
+Initialize |mandatoryIndexes| to an empty array.
+            </li>
+            <li>
+For each |absoluteIndex| in the keys in |groups|.|combined|.|matching|, convert
+the absolute index of any <em>mandatory</em> N-Quad to an index relative to the
+combined output that is to be revealed:
+              <ol class="algorithm">
+                <li>
+If |groups|.|mandatory|.|matching| has |absoluteIndex| as a key, then append
+|relativeIndex| to |mandatoryIndexes|.
+                </li>
+                <li>
+Increment |relativeIndex|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Compute the selective indexes. Initialize |relativeIndex| to zero.
+            </li>
+            <li>
+Initialize |selectiveIndexes| to an empty array.
+            </li>
+            <li>
+For each |absoluteIndex| in the keys in |groups|.|combined|.|matching|, convert
+the absolute index of any <em>selective</em> N-Quad to an index relative to the
+combined output that is to be revealed:
+              <ol class="algorithm">
+                <li>
+If |groups|.|selective|.|matching| has |absoluteIndex| as a key, then append
+|relativeIndex| to |selectiveIndexes|.
+                </li>
+                <li>
+Increment |relativeIndex|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Initialize |revealDocument| to the result of the calling the algorithm in Section
+[[[#selectjsonld]]], passing |document|, and |combinedPointers| as |pointers|.
+            </li>
+            <li>
+Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
+the joined |combinedGroup.deskolemizedNQuads|, passing any custom
+options, and get the canonical bnode identifier map, |canonicalIdMap|.
+Note: This map includes the canonical blank node identifiers that a verifier
+will produce when they canonicalize the reveal document.
+            </li>
+            <li>
+Initialize |verifierLabelMap| to an empty map. This map will map
+the canonical blank node identifiers the verifier will produce when they
+canonicalize the revealed document to the blank node identifiers that were
+originally signed in the base proof.
+            </li>
+            <li>
+For each key (|inputLabel|) and value (|verifierLabel|) in |canonicalIdMap|:
+              <ol class="algorithm">
+                <li>
+Add an entry to |verifierLabelMap| using |verifierLabel| as the key and the
+value associated with |inputLabel| as a key in |labelMap| as the value.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return an object with properties matching |revealDocument|, |mandatoryIndexes|,
+|selectiveIndexes|, |verifierLabelMap|, 
+|groups|.|mandatory|.|matching| for |mandatory|, and 
+|groups|.|mandatory|.|nonMatching| for |nonMandatory|.
+            </li>
+          </ol>
+
+
+        </section>
+        <section id="CreateVerifyData">
+          <h4>CreateVerifyData</h4>
+
+          <p>
+The following algorithm creates the additional data needed to perform 
+verification of a selective disclosed [=verifiable credential=] protected with 
+a derived proof. The inputs include a JSON-LD
+document (|document|), parsed derived proof data (|proofData|),
+and any custom JSON-LD API options, such as a document loader. A single
+<em>verify data</em> object value is produced as output containing the following
+fields: "proofHash", "mandatoryHash", and "nonMandatory".
+          </p>
+          <ol class="algorithm">
+            <li>
+Let  |proofHash| be the result of cryptographically hashing the 
+|canonicalProofConfig| value returned by the algorithm of section 
+[[[#ProofConfigurationAlg]]]. Using the same hash that is used by the signature 
+algorithm, i.e., SHA-256 for a P-256 curve.
+            </li>
+            <li>
+Initialize |labelMapFactoryFunction| to the result of calling the algorithm of
+Section [[[#createlabelmapfunction]]] with the parameter 
+|proofData|.|verifierLabelMap|.
+            </li>
+            <li>
+Initialize |nquads| to the result of calling the algorithm of section
+[[[#labelreplacementcanonicalizejsonld]]], passing |document|,
+|labelMapFactoryFunction|, and any custom
+JSON-LD API options. Note: This step transforms the document into an array of
+canonical N-Quads with pseudorandom blank node identifiers based on |labelMap|.
+            </li>
+            <li>
+Initialize |mandatory| to an empty array.
+            </li>
+            <li>
+Initialize |nonMandatory| to an empty array.
+            </li>
+            <li>
+For each entry (|index|, |nq|) in |nquads|, separate the N-Quads into mandatory
+and non-mandatory categories:
+              <ol class="algorithm">
+                <li>
+If |mandatoryIndexes| includes |index|, add |nq| to |mandatory|.
+                </li>
+                <li>
+Otherwise, add |nq| to |nonMandatory|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Initialize |mandatoryHash| to the result of calling the function 
+[[[#hashmandatorynquads]]], passing |mandatory|.
+            </li>
+            <li>
+Return an object with properties matching |proofHash|, |nonMandatory|, and 
+|mandatoryHash|.
+            </li>
+          </ol>
+
+
+        </section>
+      </section>
+
+      <section>
+        <h3>Signed Individual Claims (SIC) Specific Sub-Algorithms</h3>
+        <section id="SerializeBase-SIC">
+          <h4>SerializeBase-SIC</h4>
+
+          <p>
+The following algorithm specifies how to create a serialized base proof 
+in the signed individual claims (SIC) approach. 
+Required inputs are
+cryptographic hash data (|hashData|) and
+<em>proof options</em> (|options|). The
+<em>proof options</em> MUST contain a type identifier for the
+<a data-cite="vc-data-integrity#dfn-cryptosuite">
+cryptographic suite</a> (|type|) and MAY contain a cryptosuite
+identifier (|cryptosuite|). A single <em>digital proof</em> value
+represented as series of bytes is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |nonMandatory|,
+and |hmacKey| to the values associated with their property names in
+|hashData|.
+            </li>
+            <li>
+Initialize |proofScopedKeyPair| to a locally generated key pair corresponding to
+the signature algorithm use by the |crytosuite|.
+Note: This key pair is scoped to the specific proof; it is not used for anything
+else and the private key will be destroyed when this algorithm terminates.
+            </li>
+            <li>
+Initialize |signatures| to an array where each element holds the result of
+digitally signing the UTF-8 representation of each N-Quad string in
+|nonMandatory|, in order. The digital signature algorithm is the same as that 
+for the |cryptosuite| and uses the private key from
+|proofScopedKeyPair|. Note: This step generates individual signatures for each
+statement (claim) that can be selectively disclosed using a local, proof-scoped 
+key pair that binds them together; this key pair will be bound to the proof by a
+signature over its public key using the private key associated with the base
+proof verification method.
+            </li>
+            <li>
+Initialize |publicKeyProofScoped| to the multikey expression of the public key exported
+from |proofScopedKeyPair|.
+            </li>
+            <li>
+Initialize |toSign| to the concatenation of |proofHash|, |publicKeyProofScoped|, and
+|mandatoryHash|, in that order.
+            </li>
+            <li>
+Initialize |baseSignature| to the result of digitally signing |toSign| using the
+private key associated with the base proof verification method.
+            </li>
+
+            <li>
+If |cryptosuite| is set to `ecdsa-sd-2023` then
+initialize a byte array, |proofBytes|, so that starts with the legacay 
+ECDSA-SD base proof header bytes 0xd9, 0x5d, and 0x00. Otherwise initialize
+|proofValue| with the general SIC header bytes TBD. 
+            </li>
+            <li>
+Initialize |components| to an array with five elements containing the values of:
+|baseSignature|, |publicKeyProofScoped|, |hmacKey|, |signatures|, and |mandatoryPointers|.
+            </li>
+            <li>
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofBytes|.
+            </li>
+            <li>
+Return |proofBytes|.
+            </li>
+          </ol>
+
+        </section>
+
+        <section id="ParseBase-SIC">
+          <h4>ParseBase-SIC</h4>
+          <p>
+The following algorithm parses the components of a legacy `ecdsa-sd-2023` selective
+disclosure base proof value or a general signed individual claim (SIC) approach
+selective disclosure base proof. The required inputs are a proof value
+(|proofValue|). A single object <em>parsed base proof</em>, containing
+five elements, using the names `baseSignature`, `publicKeyProofScoped`, `hmacKey`,
+`signatures`, and `mandatoryPointers`, is produced  as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If the |proofValue| string does not start with `u`, indicating that it is
+a multibase-base64url-no-pad-encoded value, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
+            </li>
+            <li>
+
+If the |decodedProofValue| does not start with the ECDSA-SD base proof
+header bytes `0xd9`, `0x5d`, and `0x00`, or the general SIC header bytes TBD,
+an error MUST be raised and SHOULD
+convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |components| to an array that is the result of CBOR-decoding the
+bytes that follow the three-byte base proof header. Confirm that the result
+is an array of five elements.
+            </li>
+            <li>
+Return an object with properties set to the five elements, using the names
+`baseSignature`, `publicKeyProofScoped`, `hmacKey`, `signatures`, and `mandatoryPointers`,
+respectively.
+            </li>
+          </ol>
+
+
+        </section>
+
+        <section id="SerializeDerived-SIC">
+          <h4>SerializeDerived-SIC</h4>
+
+          <p>
+The following algorithm serializes a derived proof value. The required input is
+a |dislosureData| object containing the following fields:
+base signature (|baseSignature|), public key
+(|publicKey|), an array of signatures (|signatures|), a label
+map (|labelMap|), and an array of mandatory indexes
+(|mandatoryIndexes|). A single <em>derived proof</em> value, serialized
+as a byte string, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |compressedLabelMap| to the result of calling the algorithm in
+Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
+            </li>
+            <li>
+If |cryptosuite| is set to `ecdsa-sd-2023` then
+initialize a byte array, |proofValue|, that starts with the ECDSA-SD disclosure
+proof header bytes `0xd9`, `0x5d`, and `0x01`. Otherwise initialize a byte 
+array, |proofValue|, that starts with the general SIC derived proof header bytes
+TBD.
+            </li>
+            <li>
+Initialize |components| to an array with five elements containing the values of:
+|baseSignature|, |publicKeyProofScoped|, |signatures|, |compressedLabelMap|, and
+|mandatoryIndexes|.
+            </li>
+            <li>
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofValue|.
+            </li>
+            <li>
+Return the <em>derived proof</em> as a string with the
+base64url-no-pad-encoding of |proofValue| as described in the
+<a data-cite="CID#multibase-0">
+Multibase section</a> of [[[CID]]]. That is, return a string
+starting with "`u`" and ending with the base64url-no-pad-encoded value of
+|proofValue|.
+            </li>
+          </ol>
+
+        </section>
+        <section id="ParseDerived-SIC">
+          <h4>ParseDerived-SIC</h4>
+
+          <p>
+The following algorithm parses the components of the derived proof value.
+The required input is a derived proof value (|proofValue|).
+A single <em>derived proof value</em> value object is produced as output, which
+contains a set to five elements, using the names "baseSignature", "publicKeyProofScoped",
+"signatures", "labelMap", and "mandatoryIndexes".
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If the |proofValue| string does not start with `u`, indicating that it is a
+multibase-base64url-no-pad-encoded value, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
+            </li>
+            <li>
+If the |decodedProofValue| does not start with the ECDSA-SD disclosure proof
+header bytes `0xd9`, `0x5d`, and `0x01`, or the general SIC approach derived 
+proof header bytes TBD, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |components| to an array that is the result of CBOR-decoding the bytes
+that follow the three-byte derived proof header. If the result is not
+an array of five elements an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Replace the fourth element in |components| using the result of calling the
+algorithm in Section [[[#decompresslabelmap]]], passing the existing
+fourth element of |components| as |compressedLabelMap| and |cryptosuite|.
+            </li>
+            <li>
+Return <em>derived proof value</em> as an object with properties set to the five
+elements, using the names "baseSignature", "publicKey", "signatures",
+"labelMap", and "mandatoryIndexes", respectively.
+            </li>
+          </ol>
+
+        </section>
+
+        <section id="VerifyDerived-SIC">
+          <h4>VerifyDerived-SIC</h4>
+
+          <p>
+The following algorithm attempts verification of an `ecdsa-sd-2023` derived
+proof or a general SIC approach derived proof. This algorithm is called by a 
+verifier of an ECDSA-SD-protected or SIC approach protected
+[=verifiable credential=]. The inputs include a JSON-LD document
+(|document|), derived proof data (|proofData|), verification data 
+(|verifyData|), and any custom JSON-LD API options, such as a document loader. 
+This algorithm returns a [=verification result=]:
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
+            </li>
+            <li>
+Let |publicKeyBytes| be the result of retrieving the
+public key bytes associated with the
+|options|.|verificationMethod| value as described in the
+[[[CID]]] specification,
+<a data-cite="CID#retrieve-verification-method">
+Section: Retrieve Verification Method</a>.
+            </li>
+            <li>
+Initialize |baseSignature|,  |publicKeyProofScoped|, and |signatures| to the values 
+associated with their property names in the |proofData| object and
+|proofHash|, |mandatoryHash|, and |nonMandatory| to the values associated with 
+their property names in the |verifyData| object.
+            </li>
+            <li>
+If the length of |signatures| does not match the length of |nonMandatory|,
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
+indicating that the signature count does not match
+the non-mandatory message count.
+            </li>
+            <li>
+Initialize |toVerify| to the concatenation of |proofHash|, |publicKeyProofScoped|, and 
+|mandatoryHash|, in that order.
+            </li>
+            <li>
+Initialize |verified| to true.
+            </li>
+            <li>
+Initialize |verificationCheck| be the result of applying the verification
+algorithm of the signature algorithm appropriate to the |cryptosuite|,
+with |toVerify| as the data to be verified against the |baseSignature| using
+the public key specified by |publicKeyBytes|. If |verificationCheck| is
+`false`, set |verified| to false.
+            </li>
+            <li>
+For every entry (|index|, |signature|) in |signatures|, verify every signature
+for every selectively disclosed (non-mandatory) statement:
+              <ol class="algorithm">
+                <li>
+Initialize |verificationCheck| to the result of applying the verification
+algorithm for the signature algorithm of the  |cryptosuite|, with
+the UTF-8 representation of the value at |index| of |nonMandatory| as the data
+to be verified against |signature| using the public key specified by
+|publicKeyProofScoped|.
+                </li>
+                <li>
+If |verificationCheck| is `false`, set |verified| to false.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return a [=verification result=] with [=struct/items=]:
+              <dl data-link-for="verification result">
+                <dt>[=verified=]</dt>
+                <dd>The value of |verified|</dd>
+                <dt>[=verifiedDocument=]</dt>
+                <dd>
+|unsecuredDocument| if |verified| is `true`, otherwise <a
+data-cite="INFRA#nulls">Null</a>
+                </dd>
+              </dl>
+            </li>
+          </ol>
+
+        </section>
+      </section>
+
+      <section>
+        <h3>Salted Hash of Claims (SHoC) Specific Sub-Algorithms</h3>
+        <section id="SaltedHashSD">
+          <h4>SaltedHashSD</h4>
+
+          <p>
+The following algorithm specifies how to create salted hash data.
+          </p>
+
+          <p>
+The required inputs to this algorithm are a <em>transformed data document</em>
+(|transformedDocument|) and |cryptosuite|. A <em>salted hash data</em> value 
+represented as an object is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |salts| as an empty array. For each |nonMandatory| item in the
+|transformedDocument| create a cryptographically secure random number of
+byte length half the size of the hash length, e.g., for security category 1 or 2
+using SHA-256 the length of each salt would be 16 bytes.
+            </li>
+            <li>
+Initialize |saltedHashes| as an empty array. For each |nonMandatory| item in the
+|transformedDocument| compute the appropriate hash (SHA-256 for security
+category 1 or 2 signature algorithms) over the concatenation of each |salt| and
+its corresponding |nonMandatory| item. Add this hash value to the |saltedHashes|
+array.
+            </li>
+            <li>
+Add |salts| as `salts` and |saltedHashes| as  `saltedHashes` to  the |saltedHashData|
+object.
+            </li>
+            <li>
+Return |saltedHashData|.
+            </li>
+          </ol>
+          <p class="ednote">
+To do: provide background on <em>cryptographic random number generation</em> in the
+security considerations section. For example cite appropriate references such as
+NIST SP-800-90A,B,C documents and/or BSI AIS 20 and AIS 31 documents.
+          </p>
+
+        </section>
+        <section  id="SerializeBase-SHoC">
+          <h4>SerializeBase-SHoC</h4>
+
+          <p>
+The following algorithm specifies how to serialize SHoC approach base proof; 
+called by an
+issuer of an Quantum-Safe-SD-protected Verifiable Credential.
+The base proof is to be
+given only to the holder, who is responsible for generating a derived proof from
+it, exposing only selectively disclosed details in the proof to a verifier. This
+algorithm is designed to be used in conjunction with the algorithms defined
+in the Data Integrity [[VC-DATA-INTEGRITY]] specification,
+<a data-cite="vc-data-integrity#algorithms">
+Section 4: Algorithms</a>. Required inputs are
+cryptographic hash data (|hashData|) and
+<em>proof options</em> (|options|). The
+<em>proof options</em> MUST contain a type identifier for the
+<a data-cite="vc-data-integrity#dfn-cryptosuite">
+cryptographic suite</a> (|type|) and MAY contain a cryptosuite
+identifier (|cryptosuite|). A single <em>digital proof</em> value
+represented as series of bytes is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |salts|,
+|saltedHashes|,
+and |hmacKey| to the values associated with their property names
+|hashData|.
+            </li>
+            <li>
+Initialize |toSign| the hash of the concatenation of |proofHash|,
+|mandatoryHash|, |salts|,
+and |saltedHashes| where the order of the concatenation MUST be followed. The
+cryptographic hash algorithm is that specified for signature algorithm in
+the |cryptosuite|.
+            </li>
+            <li>
+Initialize |signature| to the result of digitally signing |toSign| using the
+private key associated with the base proof verification method.
+            </li>
+            <li>
+Initialize a byte array, |proofValue|, that starts with the SHoC approach
+base proof header bytes 0xd9, 0x5d, and 0x10.
+            </li>
+            <li>
+Initialize |components| to an array with five elements containing the values of:
+|signature|, |hmacKey|, |salts|, |saltedHashes|, and |mandatoryPointers|.
+            </li>
+            <li>
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofValue|.
+            </li>
+
+            <li>
+Return |proofValue| as <em>proof bytes</em>.
+            </li>
+          </ol>
+
+          <p class="ednote">
+The SHoC approach base proof header bytes 0xd9, 0x5d, and 0x10 were chosen
+to not collide with any of the [[VC-DI-ECDSA]] or [[VC-DI-BBS]] values. They are
+currently tentative.
+          </p>
+
+        </section>
+        <section id="ParseBase-SHoC">
+          <h4>ParseBase-SHoC</h4>
+
+          <p>
+The following algorithm parses the components of a SHoC approach selective
+disclosure base proof value. The required inputs are a proof value
+(|proofValue|). A single object <em>proof data</em>, containing
+five elements, using the names `signature`, `hmacKey`, `salts`
+`saltedHashes`, and `mandatoryPointers`, is produced  as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If the |proofValue| string does not start with `u`, indicating that it is
+a multibase-base64url-no-pad-encoded value, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
+            </li>
+            <li>
+If the |decodedProofValue| does not start with the SHoC approach base proof
+header bytes `0xd9`, `0x5d`, and `0x10`, an error MUST be raised and SHOULD
+convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |components| to an array that is the result of CBOR-decoding the
+bytes that follow the three-byte SHoC approach base proof header. Confirm that
+the result is an array of five elements.
+            </li>
+            <li>
+Return an object with properties set to the five elements, using the names
+`signature`, `hmacKey`, `salts`, `saltedHashes`, and `mandatoryPointers`,
+respectively.
+            </li>
+          </ol>
+        </section>
+
+        <section id="SerializeDerived-SHoC">
+          <h4>SerializeDerived-SHoC</h4>
+
+          <p>
+The following algorithm serializes a SHoC approach derived proof value.
+The required inputs are a base signature (|signature|), an array of salts
+(|salts|), an array of salted  hashes (|saltedHashes|), a label map
+(|labelMap|), an array of mandatory indexes (|mandatoryIndexes|), and an array
+of selective indexes (|selectiveIndexes|). A single <em>derived proof</em>
+value, serialized as a UTF-8 string, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |compressedLabelMap| to the result of calling the algorithm in
+[[[#compresslabelmap]]], passing |labelMap| as the parameter.
+            </li>
+            <li>
+Initialize a byte array, |proofValue|, that starts with the SHoC approach
+derived proof header bytes `0xd9`, `0x5d`, and `0x11`.
+            </li>
+            <li>
+Initialize |components| to an array with six elements containing the values of:
+|signature|, |salts|, |saltedHashes|, |compressedLabelMap|, |mandatoryIndexes|,
+|selectiveIndexes|.
+            </li>
+            <li>
+CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
+any of the |components|. Append the produced encoded value to |proofValue|.
+            </li>
+            <li>
+Return the <em>derived proof</em> as a string with the
+base64url-no-pad-encoding of |proofValue| as described in the
+<a data-cite="CID#multibase-0">
+Multibase section</a> of [[[CID]]]. That is, return a string
+starting with "`u`" and ending with the base64url-no-pad-encoded value of
+|proofValue|.
+            </li>
+          </ol>
+          <p class="ednote">
+The SHoC approach derived proof header bytes `0xd9`, `0x5d`, and `0x11`
+were chosen to not conflict with values used by [[VC-DI-ECDSA]] and
+[[VC-DI-BBS]] and are tentative.
+          </p>
+        </section>
+
+        <section id="ParseDerived-SHoC">
+          <h4>ParseDerived-SHoC</h4>
+
+          <p>
+The following algorithm parses the components of a SHoC approach derived proof 
+value. The required input is a derived proof value (|proofValue|).
+A single <em>proof data</em> object is produced as output, which
+contains a set to six elements, using the names "signature", "salts",
+"saltedHashes", "labelMap", "mandatoryIndexes", and "selectiveIndexes".
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If the |proofValue| string does not start with `u`, indicating that it is a
+multibase-base64url-no-pad-encoded value, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
+substring after the leading `u` in |proofValue|.
+            </li>
+            <li>
+If the |decodedProofValue| does not start with the SHoC approach derived proof
+header bytes `0xd9`, `0x5d`, and `0x11`, an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Initialize |components| to an array that is the result of CBOR-decoding the bytes
+that follow the three-byte SHoC approach derived proof header. If the
+result is not an array of the following six elements —
+a byte array of length corresponding to the signature  size;
+an array of byte arrays, each of length appropriate to the <em>salt size</em>;
+an array of byte arrays, each of length corresponding to the hash size;
+a map of integers to byte arrays, each of length 32;
+an array of integers; and another array of integers — an error MUST be raised
+and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Replace the fourth element in |components| using the result of calling the
+algorithm in [[[#decompresslabelmap]]], passing the existing
+fourth element of |components| as |compressedLabelMap|.
+            </li>
+            <li>
+Return <em>proof data</em> as an object with properties set to the five
+elements, using the names "signature", "salts", "saltedHashes",
+"labelMap", "mandatoryIndexes",  and "selectiveIndexes" respectively.
+            </li>
+          </ol>
+          <p class="ednote">
+Should we also mention additional checks on the values of |salts|,
+|saltedHashes|, |mandatoryIndexes|, and |selectiveIndexes|? In particular, the
+length of the the |salts| and |saltedHashes| must be the same. The all elements
+of the |mandatoryIndexes| and |selectiveIndexes| should be in the range of 0 to
+the length of |salts|. There should not be repeated items in the
+|mandatoryIndexes| and |selectiveIndexesArrays|. Also the elements of each of
+these arrays should be increasing order. Note that the minimal additional checks
+appear in [[[#VerifyDerived-SHoC]]].
+          </p>
+
+        </section>
+
+        <section id="VerifyDerived-SHoC">
+          <h4>VerifyDerived-SHoC</h4>
+
+          <p>
+The following algorithm attempts verification of an SHoC approach derived
+proof. This algorithm is called by a verifier of an SHoC approach protected
+[=verifiable credential=]. The inputs include a JSON-LD document
+(|document|), derived proof data (|proofData|), verification data 
+(|verifyData|), and any
+custom JSON-LD API options, such as a document loader. This algorithm returns
+a [=verification result=]:
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
+            </li>
+            <li>
+Initialize |signature|,  |salts|, |saltedHashes|, and |selectiveIndexes| to the 
+values associated with their property names in the |proofData| parameter and 
+|proofHash|, |nonMandatory|, and |mandatoryHash| to the values  associated  with 
+their property names in the |verifyData| parameter.
+            </li>
+            <li>
+If the length of |salts| does not match the length of |saltedHashes|,
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
+indicating that the salt count does not match the salted hashes count.
+            </li>
+            <li>
+The values of the elements of the |selectiveIndexes| array must be between 0 and
+the length of the |salts| array minus one. If not,
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
+indicating that the selective indexes are out of bounds.
+            </li>
+            <li>
+Initialize |toVerify| to the byte  concatenation of the values: |proofHash|,
+|mandatoryHash|, |salts|, and |saltedHashes| in that order with the array values
+themselves concatenated together.
+            </li>
+            <li>
+Initialize |verified| to true.
+            </li>
+            <li>
+Initialize |verificationCheck| be the result of applying the verification
+algorithm of the appropriate signature algorithms as indicated by
+the "cryptosuite" property,
+with |toVerify| as the data to be verified against the |signature|.
+If |verificationCheck| is
+`false`, set |verified| to false.
+            </li>
+            <li>
+For every entry (|nq|, |index|) in |nonMandatory|, verify the salted hash
+for every selectively disclosed (non-mandatory) statement:
+              <ol class="algorithm">
+                <li>
+Let |computedHash| be the  hash of the concatenation of
+|salts|[|selectiveIndexes|[index]] and |nq|.
+                </li>
+                <li>
+Initialize |verificationCheck| to the result of comparing the |computedHash|
+with the value of  |saltedHashes|[|selectedIndexes|[index]].
+
+                </li>
+                <li>
+If |verificationCheck| is `false`, set |verified| to false.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return a [=verification result=] with [=struct/items=]:
+              <dl data-link-for="verification result">
+                <dt>[=verified=]</dt>
+                <dd>The value of |verified|</dd>
+                <dt>[=verifiedDocument=]</dt>
+                <dd>
+|unsecuredDocument| if |verified| is `true`, otherwise <a
+data-cite="INFRA#nulls">Null</a>
+                </dd>
+              </dl>
+            </li>
+          </ol>
+
+        </section>
+      </section>
+        
+      <section>
+        <h4>Selective Disclosure Functions</h4>
+
+        <p>
+The following section contains a set of functions that are used throughout
+cryptographic suites that perform selective disclosure.
+        </p>
+
+        <section>
+          <h4>labelReplacementCanonicalizeNQuads</h4>
+
+          <p>
+The following algorithm canonicalizes an array of N-Quad [[N-QUADS]] strings and replaces
+any blank node identifiers in the canonicalized result using a label map
+factory function, |labelMapFactoryFunction|. The required inputs are
+an array of N-Quad strings (|nquads|), and a label map factory function
+(|labelMapFactoryFunction|). Any custom options can also be passed. An
+N-Quads representation of the <em>canonicalNQuads</em> as an array of N-Quad
+strings, with the replaced blank node labels, and a map from the old blank node
+IDs to the new blank node IDs, <em>labelMap</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Run the RDF Dataset Canonicalization Algorithm [[RDF-CANON]] on
+the joined |nquads|, passing any custom options, and as output,
+get the canonicalized dataset, which includes a canonical bnode identifier
+map, |canonicalIdMap|.
+            </li>
+            <li>
+Pass |canonicalIdMap| to |labelMapFactoryFunction| to produce
+a new bnode identifier map, <em>labelMap</em>.
+            </li>
+            <li>
+Use the canonicalized dataset and <em>labelMap</em> to produce the canonical
+N-Quads representation as an array of N-Quad strings, <em>canonicalNQuads</em>.
+            </li>
+            <li>
+Return an object containing <em>labelMap</em> and <em>canonicalNQuads</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>labelReplacementCanonicalizeJsonLd</h4>
+
+          <p>
+The following algorithm canonicalizes a JSON-LD document and replaces any blank
+node identifiers in the canonicalized result using a label map factory
+function, |labelMapFactoryFunction|. The required inputs are a JSON-LD
+document (|document|) and a label map factory function
+(|labelMapFactoryFunction|). Additional custom options (such as
+a document loader) can also be passed. An N-Quads representation of the
+<em>canonicalNQuads</em> as an array of N-Quad strings, with the replaced
+blank node labels, and a map from the old blank node IDs to the new blank node
+IDs, <em>labelMap</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Deserialize the JSON-LD document to RDF, |rdf|, using the <a
+href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
+Deserialize JSON-LD to RDF algorithm</a>, passing any custom options (such
+as a document loader).
+            </li>
+            <li>
+Serialize |rdf| to an array of N-Quad strings, |nquads|.
+            </li>
+            <li>
+Return the result of calling the algorithm in Section
+[[[#labelreplacementcanonicalizenquads]]], passing |nquads|,
+|labelMapFactoryFunction|, and any custom options.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>createLabelMapFunction</h4>
+
+          <p>
+The following algorithm creates a label map factory function that uses an
+input label map to replace canonical blank node identifiers with another
+value. The required input is a label map, |labelMap|. A
+function, <em>labelMapFactoryFunction</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a function, |labelMapFactoryFunction|, with one required input
+(a canonical node identifier map, |canonicalIdMap|), that will
+return a blank node identifier map, <em>bnodeIdMap</em>, as output. Set the
+function's implementation to:
+              <ol class="algorithm">
+                <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+                </li>
+                <li>
+For each map entry, <em>entry</em>, in |canonicalIdMap|:
+                  <ol class="algorithm">
+                    <li>
+Use the canonical identifier from the value in <em>entry</em> as a key
+in |labelMap| to get the new label, <em>newLabel</em>.
+                    </li>
+                    <li>
+Add a new entry, |newEntry|, to <em>bnodeIdMap</em> using the key
+from <em>entry</em> and <em>newLabel</em> as the value.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+Return <em>bnodeIdMap</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |labelMapFactoryFunction|.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>createShuffledIdLabelMapFunction</h4>
+          <p>
+The following algorithm creates a label map factory function that uses an
+HMAC to shuffle canonical blank node identifiers. The required input is an HMAC
+(previously initialized with a secret key), |HMAC|. A function,
+<em>labelMapFactoryFunction</em>, is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a function, |labelMapFactoryFunction|, with one required input
+(a canonical node identifier map, |canonicalIdMap|), that will
+return a blank node identifier map, <em>bnodeIdMap</em>, as output. Set the
+function's implementation to:
+              <ol class="algorithm">
+                <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+                </li>
+                <li>
+For each map entry, <em>entry</em>, in |canonicalIdMap|:
+                  <ol class="algorithm">
+                    <li>
+Perform an HMAC operation on the canonical identifier from the value in <em>entry</em> to get an HMAC
+digest, <em>digest</em>.
+                    </li>
+                    <li>
+Generate a new string value, <em>b64urlDigest</em>, and initialize it to "u"
+followed by appending a base64url-no-pad encoded version of the <em>digest</em>
+value.
+                    </li>
+                    <li>
+Add a new entry, |newEntry|, to <em>bnodeIdMap</em> using the key
+from <em>entry</em> and <em>b64urlDigest</em> as the value.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+Derive the shuffled mapping from the `bnodeIdMap` as follows:
+                  <ol class="algorithm">
+                    <li>
+Set `hmacIds` to be the sorted array of values from the `bnodeIdMap`, and set
+`bnodeKeys` to be the ordered array of keys from the `bnodeIdMap`.
+                    </li>
+                    <li>
+For each key in `bnodeKeys`, replace the `bnodeIdMap` value for that key with the
+index position of the value in the `hmacIds` array prefixed by "b", i.e.,
+`bnodeIdMap.set(bkey, 'b' + hmacIds.indexOf(bnodeIdMap.get(bkey)))`.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+Return <em>bnodeIdMap</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |labelMapFactoryFunction|.
+            </li>
+          </ol>
+
+          <p class="note informative">
+It should be noted that step 1.2 in the above algorithm is identical to step 1.2
+in <a href="https://www.w3.org/TR/vc-di-ecdsa/#createhmacidlabelmapfunction">
+Section 3.3.4 `createHmacIdLabelMapFunction`</a> of [[DI-ECDSA]],
+so developers might be able to reuse the code or call the function if implementing
+both.
+          </p>
+        </section>
+
+
+        <section>
+          <h4>createHmacIdLabelMapFunction</h4>
+
+          <p>
+The following algorithm creates a label map factory function that uses an
+HMAC to replace canonical blank node identifiers with their encoded HMAC
+digests. The required input is an HMAC (previously initialized with a
+secret key), |HMAC|. A function, <em>labelMapFactoryFunction</em>, is
+produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a function, |labelMapFactoryFunction|, with one required input
+(a canonical node identifier map, |canonicalIdMap|), that will
+return a blank node identifier map, <em>bnodeIdMap</em>, as output. Set the
+function's implementation to:
+              <ol class="algorithm">
+                <li>
+Generate a new empty bnode identifier map, <em>bnodeIdMap</em>.
+                </li>
+                <li>
+For each map entry, <em>entry</em>, in |canonicalIdMap|:
+                  <ol class="algorithm">
+                    <li>
+HMAC the canonical identifier from the value in <em>entry</em> to get an HMAC
+digest, <em>digest</em>.
+                    </li>
+                    <li>
+Generate a new string value, <em>b64urlDigest</em>, and initialize it to "u"
+followed by appending a base64url-no-pad encoded version of the <em>digest</em>
+value.
+                    </li>
+                    <li>
+Add a new entry, |newEntry|, to <em>bnodeIdMap</em> using the key
+from <em>entry</em> and <em>b64urlDigest</em> as the value.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+Return <em>bnodeIdMap</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |labelMapFactoryFunction|.
+            </li>
+          </ol>
+
+          <p class="note" title="Other algorithms are possible">
+A different primitive could be created that returned a label map factory
+function that would instead sort the resulting HMAC digests and assign labels
+in the produced label map using a prefix and integers based on their sorted
+order. This primitive might be useful for selective disclosure schemes,
+such as BBS, that favor unlinkability over minimizing unrevealed data leakage.
+          </p>
+
+        </section>
+
+        <section>
+          <h4>compressLabelMap</h4>
+
+          <p>
+The following algorithm compresses a label map. The required inputs are
+label map (|labelMap|) and the |cryptosuite|. The output is a 
+<em>compressed label map</em>.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |map| to an empty map.
+            </li>
+            <li>
+For each entry (|k|, |v|) in |labelMap|:
+              <ol class="algorithm">
+                <li>
+if |cryptosuite| is  set to  `ecdsa-sd-2023` then
+add an entry to |map| with a key that is a base-10 integer parsed from the
+characters following the "c14n" prefix in |k| and a value that is a byte array
+resulting from base64url-no-pad-decoding the characters after the "u" prefix in
+|v|. Otherwise add an entry to `map`, with a key that is a base-10 integer 
+parsed from the
+characters following the "c14n" prefix in |k|, and a value that is a base-10
+integer parsed from the characters following the "b" prefix in `v`.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |map| as <em>compressed label map</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>decompressLabelMap</h4>
+
+          <p>
+The following algorithm decompresses a label map. The required inputs are a
+compressed label map (|compressedLabelMap|) and the |cryptosuite|. The output 
+is a <em>decompressed label map</em>.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |map| to an empty map.
+            </li>
+            <li>
+For each entry (|k|, |v|) in |compressedLabelMap|:
+              <ol class="algorithm">
+                <li>
+If |cryptosuite| is set to `ecdsa-sd-2023` then
+add an entry to |map| with a key that adds the prefix "c14n" to |k| and a value
+that adds a prefix of "u" to the base64url-no-pad-encoded value for |v|;  
+Otherwise add an entry to `map`, with a key that adds the prefix "c14n" to `k`, and a value
+that adds a prefix of "b" to `v`.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |map| as <em>decompressed label map</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>skolemizeNQuads</h4>
+
+          <p>
+The following algorithm replaces all blank node identifiers in an array of
+N-Quad strings with custom scheme URNs. The required inputs are an array of
+N-Quad strings (|inputNQuads|) and a URN scheme (|urnScheme|).
+An array of N-Quad strings, <em>skolemizedNQuads</em>, is produced as output.
+This operation is intended to be reversible through the use of the algorithm in
+Section [[[#deskolemizenquads]]].
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a new array of N-Quad strings, <em>skolemizedNQuads</em>.
+            </li>
+            <li>
+For each N-Quad string, <em>s1</em>, in |inputNQuads|:
+              <ol class="algorithm">
+                <li>
+Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
+occurrence of a blank node identifier with a URN ("urn:"), plus the input
+custom scheme (|urnScheme|), plus a colon (":"), and
+the value of the blank node identifier. For example, a regular expression
+of a similar form to the following would achieve the desired result:
+<code>s1.replace(/(_:([^\s]+))/g, '&lt;urn:custom-scheme:$2>')</code>.
+                </li>
+                <li>
+Append <em>s2</em> to <em>skolemizedNQuads</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return <em>skolemizedNQuads</em>.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>deskolemizeNQuads</h4>
+
+          <p>
+The following algorithm replaces all custom scheme URNs in an array of
+N-Quad statements with a blank node identifier. The required inputs are an array
+of N-Quad strings (|inputNQuads|) and a URN scheme
+(|urnScheme|). An array of N-Quad strings,
+<em>deskolemizedNquads</em>, is produced as output. This operation is intended
+to reverse use of the algorithm in Section [[[#deskolemizenquads]]].
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a new array of N-Quad strings, <em>deskolemizedNQuads</em>.
+            </li>
+            <li>
+For each N-Quad string, <em>s1</em>, in |inputNQuads|:
+              <ol class="algorithm">
+                <li>
+Create a new string, <em>s2</em>, that is a copy of <em>s1</em> replacing any
+occurrence of a URN ("urn:"), plus the input
+custom scheme (|urnScheme|), plus a colon (":"), and
+the value of the blank node identifier with a blank node prefix ("_:"), plus
+the value of the blank node identifier. For example, a regular expression
+of a similar form to the following would achieve the desired result:
+<code>s1.replace(/(&lt;urn:custom-scheme:([^>]+)>)/g, '_:$2').</code>.
+                </li>
+                <li>
+Append <em>s2</em> to <em>deskolemizedNQuads</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return <em>deskolemizedNQuads</em>.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>skolemizeExpandedJsonLd</h4>
+
+          <p>
+The following algorithm replaces all blank node identifiers in an expanded
+JSON-LD document with custom-scheme URNs, including assigning such URNs to
+blank nodes that are unlabeled. The required inputs are an expanded JSON-LD document
+(|expanded|), a custom URN scheme
+(|urnScheme|), a UUID string or other comparably random string
+(|randomString|), and reference to a shared integer (|count|).
+Any additional custom options (such as a document loader) can also be passed.
+It produces the expanded form of the skolemized JSON-LD document
+(|skolemizedExpandedDocument| as output. The skolemization used in this
+operation is intended to be reversible through the use of the algorithm in
+Section [[[#todeskolemizednquads]]].
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |skolemizedExpandedDocument| to an empty array.
+            </li>
+            <li>
+For each |element| in |expanded|:
+              <ol class="algorithm">
+                <li>
+If either |element| is not an object or it contains the key
+<em>@value</em>, append a copy of |element| to
+|skolemizedExpandedDocument| and continue to the next
+|element|.
+                </li>
+                <li>
+Otherwise, initialize |skolemizedNode| to an object, and for
+each <em>property</em> and <em>value</em> in |element|:
+                  <ol class="algorithm">
+                    <li>
+If <em>value</em> is an array, set the value of <em>property</em> in
+|skolemizedNode| to the result of calling this algorithm
+recursively passing <em>value</em> for |expanded| and keeping the
+other parameters the same.
+                    </li>
+                    <li>
+Otherwise, set the value of <em>property</em> in |skolemizedNode| to
+the first element in the array result of calling this algorithm recursively
+passing an array with <em>value</em> as its only element for |expanded|
+and keeping the other parameters the same.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+If |skolemizedNode| has no <em>@id</em> property, set the value of
+the <em>@id</em> property in |skolemizedNode| to the concatenation
+of "urn:", |urnScheme|, "_",  |randomString|, "_" and the value of
+|count|, incrementing the value of |count| afterwards.
+                </li>
+                <li>
+Otherwise, if the value of the <em>@id</em> property in
+|skolemizedNode| starts with "_:", preserve the existing blank node
+identifier when skolemizing by setting the value of the <em>@id</em> property
+in |skolemizedNode| to the concatenation of "urn:",
+|urnScheme|, and the blank node identifier (i.e., the existing
+value of the <em>@id</em> property minus the "_:" prefix; e.g., if the
+existing value of the <em>@id</em> property is `_:b0`, the blank node
+identifier is `b0`).
+                </li>
+                <li>
+Append |skolemizedNode| to |skolemizedExpandedDocument|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |skolemizedExpandedDocument|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>skolemizeCompactJsonLd</h4>
+
+          <p>
+The following algorithm replaces all blank node identifiers in a compact
+JSON-LD document with custom-scheme URNs. The required inputs are a compact
+JSON-LD document (|document|) and a custom URN scheme
+(|urnScheme|) which defaults to "custom-scheme:". The |document| is assumed to
+use only one
+<em>@context</em> property at the top level of the document. Any additional
+custom options (such as a document loader) can also be passed. It produces both
+an expanded form of the skolemized JSON-LD document
+(|skolemizedExpandedDocument| and a compact form of the skolemized
+JSON-LD document (|skolemizedCompactDocument|) as output. The
+skolemization used in this operation is intended to be reversible through the
+use of the algorithm in Section [[[#todeskolemizednquads]]] which uses the
+same custom URN scheme (|urnScheme|).
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |expanded| to the result of the JSON-LD
+<a href="https://www.w3.org/TR/json-ld11-api/#expansion-algorithm">
+Expansion Algorithm</a>, passing |document| and any custom
+options.
+            </li>
+            <li>
+Initialize |skolemizedExpandedDocument| to the result of the
+algorithm in Section [[[#skolemizeexpandedjsonld]]].
+            </li>
+            <li>
+Initialize |skolemizedCompactDocument| to the result of the JSON-LD
+<a href="https://www.w3.org/TR/json-ld11-api/#compaction-algorithm">
+Compaction Algorithm</a>, passing |skolemizedExpandedDocument| and any
+custom options.
+            </li>
+            <li>
+Return an object with both |skolemizedExpandedDocument| and
+|skolemizedCompactDocument|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>toDeskolemizedNQuads</h4>
+
+          <p>
+The following algorithm converts a skolemized JSON-LD document, such as one
+created using the algorithm in Section [[[#skolemizecompactjsonld]]],
+to an array of deskolemized N-Quads. The required input is a JSON-LD document,
+<em>skolemizedDocument</em>. Additional custom options (such as a document
+loader) can be passed. An array of deskolemized N-Quad strings
+(|deskolemizedNQuads|) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |skolemizedDataset| to the result of the
+<a href="https://www.w3.org/TR/json-ld11-api/#deserialize-json-ld-to-rdf-algorithm">
+Deserialize JSON-LD to RDF</a> algorithm, passing any custom options (such as a
+document loader), to convert |skolemizedDocument| from JSON-LD to RDF in N-Quads
+format.
+            </li>
+            <li>
+Split |skolemizedDataset| into an array of individual N-Quads,
+|skolemizedNQuads|.
+            </li>
+            <li>
+Set |deskolemizedNQuads| to the result of the algorithm in Section
+[[[#deskolemizenquads]]] with |skolemizedNQuads| and "custom-scheme:"
+as parameters. Implementations MAY choose a different <em>urnScheme</em>
+that is different than "custom-scheme:" so long as the same scheme name was
+used to generate <em>skolemizedDocument</em>.
+            </li>
+            <li>
+Return |deskolemizedNQuads|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>jsonPointerToPaths</h4>
+
+          <p>
+The following algorithm converts a JSON Pointer [[RFC6901]] to an array of paths
+into a JSON tree. The required input is a JSON Pointer string
+(|pointer|). An array of paths (<em>paths</em>) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |paths| to an empty array.
+            </li>
+            <li>
+Initialize |splitPath| to an array by splitting |pointer| on the
+"/" character and skipping the first, empty, split element. In Javascript
+notation, this step is equivalent to the following code:
+`pointer.split('/').slice(1)`
+            </li>
+            <li>
+For each |path| in |splitPath|:
+              <ol class="algorithm">
+                <li>
+If |path| does not include `~`, then add |path| to |paths|, converting it to
+an integer if it parses as one, leaving it as a string if it does not.
+                </li>
+                <li>
+Otherwise, unescape any JSON pointer escape sequences in |path| and add the
+result to |paths|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |paths|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>createInitialSelection</h4>
+
+          <p>
+The following algorithm creates an initial selection (a fragment of a JSON-LD
+document) based on a JSON-LD object. This is a helper function used within the
+algorithm in Section [[[#selectjsonld]]]. The required input is a
+JSON-LD object (|source|). A JSON-LD document fragment object
+(|selection|) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |selection| to an empty object.
+            </li>
+            <li>
+If |source| has an `id` that is not a blank node identifier, set
+|selection|.|id| to its value. Note: All non-blank node identifiers in the path of
+any JSON Pointer MUST be included in the selection, this includes any root
+document identifier.
+            </li>
+            <li>
+If |source|.|type| is set, set |selection|.|type| to its value.
+Note: The selection MUST include all `type`s in the path of any JSON Pointer,
+including any root document `type`.
+            </li>
+            <li>
+Return |selection|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>selectPaths</h4>
+
+          <p>
+The following algorithm selects a portion of a compact JSON-LD document using
+paths parsed from a parsed JSON Pointer. This is a helper function used within
+the algorithm in Section [[[#selectjsonld]]]. The required inputs are an
+array of paths (|paths|) parsed from a JSON Pointer, a compact JSON-LD
+document (|document|), a selection document
+(|selectionDocument|) to be populated, and an array of arrays
+(|arrays|) for tracking selected arrays. This algorithm produces
+no output; instead it populates the given |selectionDocument| with
+any values selected via |paths|.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |parentValue| to |document|.
+            </li>
+            <li>
+Initialize |value| to |parentValue|.
+            </li>
+            <li>
+Initialize |selectedParent| to |selectionDocument|.
+            </li>
+            <li>
+Initialize |selectedValue| to |selectedParent|.
+            </li>
+            <li>
+For each |path| in |paths|:
+              <ol class="algorithm">
+                <li>
+Set |selectedParent| to |selectedValue|.
+                </li>
+                <li>
+Set |parentValue| to |value|.
+                </li>
+                <li>
+Set |value| to |parentValue|.|path|. If |value| is now undefined,
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_GENERATION_ERROR">PROOF_GENERATION_ERROR</a>,
+indicating that the JSON pointer does not match the given |document|.
+                </li>
+                <li>
+Set |selectedValue| to |selectedParent|.|path|.
+                </li>
+                <li>
+If |selectedValue| is now undefined:
+                  <ol class="algorithm">
+                    <li>
+If |value| is an array, set |selectedValue| to an empty array and append
+|selectedValue| to |arrays|.
+                    </li>
+                    <li>
+Otherwise, set |selectedValue| to an initial selection passing |value| as
+|source| to the algorithm in Section [[[#createinitialselection]]].
+                    </li>
+                    <li>
+Set |selectedParent|.|path| to |selectedValue|.
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li>
+Note: With path traversal complete at the target value, the selected value will
+now be computed.
+            </li>
+            <li>
+If |value| is a literal, set |selectedValue| to |value|.
+            </li>
+            <li>
+If |value| is an array, Set |selectedValue| to a copy of |value|.
+            </li>
+            <li>
+In all other cases, set |selectedValue| to an object that merges a shallow copy of
+|selectedValue| with a deep copy of |value|, e.g., `{...selectedValue,
+&hellip;deepCopy(value)}`.
+            </li>
+            <li>
+Get the last |path|, |lastPath|, from |paths|.
+            </li>
+            <li>
+Set |selectedParent|.|lastPath| to |selectedValue|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>selectJsonLd</h4>
+
+          <p>
+The following algorithm selects a portion of a compact JSON-LD document using
+an array of JSON Pointers. The required inputs are an array of JSON Pointers
+(|pointers|) and a compact JSON-LD document (|document|). The
+|document| is assumed to use a JSON-LD context that aliases `@id`
+and `@type` to `id` and `type`, respectively, and to use only one
+<em>`@context`</em> property at the top level of the document. A new JSON-LD
+document that represents a selection (<em>selectionDocument</em>) of the
+original JSON-LD document is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If |pointers| is empty, return `null`. This indicates nothing has been selected
+from the original document.
+            </li>
+            <li>
+Initialize |arrays| to an empty array. This variable will be used to track
+selected sparse arrays to make them dense after all |pointers| have
+been processed.
+            </li>
+            <li>
+Initialize |selectionDocument| to an initial selection passing |document| as
+|source| to the algorithm in Section [[[#createinitialselection]]].
+            </li>
+            <li>
+Set the value of the <em>`@context`</em> property in |selectionDocument| to
+a copy of the value of the <em>`@context`</em> property in |document|.
+            <li>
+For each |pointer| in |pointers|, walk the document from root to the pointer
+target value, building the |selectionDocument|:
+              <ol class="algorithm">
+                <li>
+Parse the |pointer| into an array of paths, |paths|, using the
+algorithm in Section [[[#jsonpointertopaths]]].
+                </li>
+                <li>
+Use the algorithm in Section [[[#selectpaths]]], passing
+|document|, |paths|, |selectionDocument|, and
+|arrays|.
+                </li>
+              </ol>
+            </li>
+            <li>
+For each |array| in |arrays|:
+              <ol class="algorithm">
+                <li>
+Make |array| dense by removing any undefined elements between
+elements that are defined.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |selectionDocument|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>relabelBlankNodes</h4>
+
+          <p>
+The following algorithm relabels the blank node identifiers in an array of
+N-Quad strings using a blank node label map. The required inputs are an array
+of N-Quad strings (|nquads|) and a blank node label map
+(|labelMap|). An array of N-Quad strings with relabeled blank node
+identifiers (|relabeledNQuads|) is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Create a new array of N-Quad strings, <em>relabeledNQuads</em>.
+            </li>
+            <li>
+For each N-Quad string, <em>s1</em>, in |nquads|:
+              <ol class="algorithm">
+                <li>
+Create a new string, <em>s2</em>, such it that is a copy of <em>s1</em> except
+each blank node identifier therein has been replaced with the value associated
+with it as a key in |labelMap|.
+                </li>
+                <li>
+Append <em>s2</em> to <em>relabeledNQuads</em>.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return <em>relabeledNQuads</em>.
+            </li>
+          </ol>
+
+        </section>
+
+        <section>
+          <h4>selectCanonicalNQuads</h4>
+
+          <p>
+The following algorithm selects a portion of a skolemized compact JSON-LD
+document using an array of JSON Pointers, and outputs the resulting canonical
+N-Quads with any blank node labels replaced using the given label map. The
+required inputs are an array of JSON Pointers (|pointers|), a
+skolemized compact JSON-LD document (|skolemizedCompactDocument|),
+and a blank node label map (|labelMap|). Additional custom options
+(such as a document loader) can be passed. The |document| is assumed
+to use a JSON-LD context that aliases `@id` and `@type` to `id` and `type`,
+respectively, and to use only one <em>`@context`</em> property at the top level
+of the document. An object containing the new JSON-LD document that represents
+a selection of the original JSON-LD document (|selectionDocument|), an
+array of deskolemized N-Quad strings (|deskolemizedNQuads|), and an
+array of canonical N-Quads with replacement blank node labels (|nquads|)
+is produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |selectionDocument| to the result of the algorithm
+in Section [[[#selectjsonld]]], passing |pointers|,
+and |skolemizedCompactDocument| as <em>document</em>.
+            </li>
+            <li>
+Initialize |deskolemizedNQuads| to the result of the algorithm
+in Section [[[#todeskolemizednquads]]], passing
+|selectionDocument| as |skolemizedCompactDocument|, and
+any custom options.
+            </li>
+            <li>
+Initialize |nquads| to the result of the algorithm
+in Section [[[#relabelblanknodes]]], passing |labelMap|,
+and |deskolemizedNQuads| as |nquads|.
+            </li>
+            <li>
+Return an object containing |selectionDocument|,
+|deskolemizedNQuads|, and |nquads|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>canonicalizeAndGroup</h4>
+
+          <p>
+The following algorithm is used to output canonical N-Quad strings that match
+custom selections of a compact JSON-LD document. It does this by canonicalizing
+a compact JSON-LD document (replacing any blank node identifiers using a label
+map) and grouping the resulting canonical N-Quad strings according to
+the selection associated with each group. Each group will be defined using an
+assigned name and array of JSON pointers. The JSON pointers will be used to
+select portions of the skolemized document, such that the output can be
+converted to canonical N-Quads to perform group matching.
+          </p>
+
+          <p>
+The required inputs are a compact JSON-LD document (|document|),
+a label map factory function (|labelMapFactoryFunction|), and a map
+of named group definitions (|groupDefinitions|). Additional custom
+options (such as a document loader) can be passed. The |document| is
+assumed to use a JSON-LD context that aliases `@id` and `@type` to `id` and
+`type`, respectively, and to use only one <em>`@context`</em> property at the top
+level of the document. An object containing the created groups
+(|groups|), the skolemized compact JSON-LD document
+(|skolemizedCompactDocument|), the skolemized expanded JSON-LD
+document (|skolemizedExpandedDocument|), the deskolemized N-Quad
+strings (|deskolemizedNQuads|), the blank node label map
+(|labelMap|), and the canonical N-Quad strings |nquads|, is
+produced as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |skolemizedExpandedDocument| and
+|skolemizedCompactDocument| to their associated values in the
+result of the algorithm in Section [[[#skolemizecompactjsonld]]],
+passing |document| and any custom options.
+            </li>
+            <li>
+Initialize |deskolemizedNQuads| to the result of the
+algorithm in Section [[[#todeskolemizednquads]]], passing
+|skolemizedExpandedDocument| and any custom options.
+            </li>
+            <li>
+Initialize |nquads| and |labelMap| to their associated
+values in the result of the algorithm in Section
+[[[#labelreplacementcanonicalizenquads]]], passing
+|labelMapFactoryFunction|, |deskolemizedNQuads| as
+|nquads|, and any custom options.
+            </li>
+            <li>
+Initialize |selections| to a new map.
+            </li>
+            <li>
+For each key (|name|) and value (|pointers|) entry in
+|groupDefinitions|:
+              <ol class="algorithm">
+                <li>
+Add an entry with a key of |name| and a value that is the result
+of the algorithm in Section [[[#selectcanonicalnquads]]], passing
+|pointers|, |labelMap|, |skolemizedCompactDocument|
+as |document|, and any custom options.
+                </li>
+              </ol>
+            </li>
+            <li>
+Initialize |groups| to an empty object.
+            </li>
+            <li>
+For each key (|name|) and value (|selectionResult|) entry in
+|selections|:
+              <ol class="algorithm">
+                <li>
+Initialize |matching| to an empty map.
+                </li>
+                <li>
+Initialize |nonMatching| to an empty map.
+                </li>
+                <li>
+Initialize |selectedNQuads| to <em>nquads</em> from
+|selectionResult|.
+                </li>
+                <li>
+Initialize |selectedDeskolemizedNQuads| from
+<em>deskolemizedNQuads</em> from |selectionResult|.
+                </li>
+                <li>
+For each element (|nq|) and index (|index|) in
+|nquads|:
+                  <ol class="algorithm">
+                    <li>
+Create a map entry, |entry|, with a key of |index| and a
+value of |nq|.
+                    </li>
+                    <li>
+If |selectedNQuads| includes |nq| then add |entry|
+to |matching|; otherwise, add |entry| to |nonMatching|.
+                    </li>
+                  </ol>
+                </li>
+                <li>
+Set |name| in |groups| to an object containing
+|matching|, |nonMatching|, and
+|selectedDeskolemizedNQuads| as |deskolemizedNQuads|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return an object containing |groups|,
+|skolemizedExpandedDocument|, |skolemizedCompactDocument|,
+|deskolemizedNQuads|, |labelMap|, and |nquads|.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h4>hashMandatoryNQuads</h4>
+
+          <p>
+The following algorithm cryptographically hashes an array of mandatory to
+disclose N-Quads using a provided hashing API. The required input is an array of
+mandatory to disclose N-Quads (|mandatory|) and a hashing function
+(|hasher|). A cryptographic hash (<em>mandatoryHash</em>) is produced
+as output.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize `bytes` to the UTF-8 representation of the joined `mandatory`
+N-Quads.
+            </li>
+            <li>
+Initialize `mandatoryHash` to the result of using `hasher` to hash `bytes`.
+            </li>
+            <li>
+Return `mandatoryHash`.
+            </li>
+          </ol>
+        </section>
+         
+      </section>
+
+
     </section>
 
     <section>
