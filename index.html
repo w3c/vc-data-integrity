@@ -2643,13 +2643,13 @@ Let |proof| be a clone of the proof options, |options|.
         The following algorithm specifies how to verify a [=data integrity proof=] given
         an <a>secured data document</a>. Required inputs are an
         <a>secured data document</a> ([=map=] |securedDocument|). This algorithm returns
-        a <dfn>verification result</dfn>, which is a [=struct=] whose
+        a [=verification result=], which is a [=struct=] whose
         [=struct/items=] are:
                 </p>
                 <dl>
-                <dt><dfn data-dfn-for="verification result">verified</dfn></dt>
+                <dt>[=verification result/verified=]</dt>
                 <dd>`true` or `false`</dd>
-                <dt><dfn data-dfn-for="verification result">verifiedDocument</dfn></dt>
+                <dt>[=verification result/verifiedDocument=]</dt>
                 <dd>
         <a data-cite="INFRA#nulls">Null</a>, if [=verification result/verified=] is
         `false`; otherwise, an [=unsecured data document=]
