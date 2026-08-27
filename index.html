@@ -2985,29 +2985,29 @@ Let |proof| be a clone of the proof options, |options|.
           <h3>Introduction</h3>
           <p>
 There are three high-level algorithms used with credentials that support
-cryptographic selective disclosure. First, the issuer uses the <em>Add Base 
-Proof</em> algorithm to create a signed credential that supports selective 
+cryptographic selective disclosure. First, the issuer uses the <em>Add Base
+Proof</em> algorithm to create a signed credential that supports selective
 disclosure. The holder then uses the <em>Add Derived Proof</em> algorithm to
-create a selectively disclosed version of the issuer-signed credential along 
-with a derived proof. Finally, the verifier uses the <em>Verify Derived 
+create a selectively disclosed version of the issuer-signed credential along
+with a derived proof. Finally, the verifier uses the <em>Verify Derived
 Proof</em> algorithm to verify the received selectively disclosed credential
-with derived proof against the <strong>issuer's</strong> verification 
+with derived proof against the <strong>issuer's</strong> verification
 information.
           </p>
           <p>
-This specification allows for three different implementation approaches to 
-selective disclosure that work primarily at the level of the [=claims=] 
-within a verifiable credential; that is, they allow the holder to selectively 
-disclose, or not, each particular claim in the credential. The three approaches 
-take into account the efficiency of the fundamental cryptographic signature 
-algorithm used. Only one (to be) standardized cryptographic signature 
-algorithm, BBS, natively supports selective disclosure, i.e., it produces a base 
-signature over an ordered list of claims and facilitates the creation 
-of a "derived signature" over a subset of that list of claims. In other 
-cryptographic signature algorithms, two approaches are typically used: 
-(1) provide individual signatures for each claim, or (2) sign a list of 
+This specification allows for three different implementation approaches to
+selective disclosure that work primarily at the level of the [=claims=]
+within a verifiable credential; that is, they allow the holder to selectively
+disclose, or not, each particular claim in the credential. The three approaches
+take into account the efficiency of the fundamental cryptographic signature
+algorithm used. Only one (to be) standardized cryptographic signature
+algorithm, BBS, natively supports selective disclosure, i.e., it produces a base
+signature over an ordered list of claims and facilitates the creation
+of a "derived signature" over a subset of that list of claims. In other
+cryptographic signature algorithms, two approaches are typically used:
+(1) provide individual signatures for each claim, or (2) sign a list of
 "salted hashes" for all claims. We will refer to the first as <dfn class="export">SIC</dfn> (Sign
-Individual Claims), and the second as <dfn class="export">SHoC</dfn< (Salted Hashes of Claims).
+Individual Claims), and the second as <dfn class="export">SHoC</dfn> (Salted Hashes of Claims).
 Cases where the signature algorithm naturally supports multiple claims,
 will be referred to as <dfn class="export">MCS</dfn> (Multiple Claim Support).
           </p>
@@ -3022,7 +3022,7 @@ in the summary [[[#SDApproachTable]]].
           </p>
           <p>
 The [=SIC=] approaches sign individual claims after the transformation step. Hence,
-their base proof sizes scale as the number of claims times the size of the 
+their base proof sizes scale as the number of claims times the size of the
 signature produced by the chosen signature algorithm. Thus this approach is
 good for signature algorithms that produce small signatures. Along similar
 lines, the size of the derived proof scales as the number of revealed claims
@@ -3050,8 +3050,8 @@ In one MCS signature algorithm, BBS, the produced base proof is extremely short,
           </p>
 
           <p>
-We summarize the properties of these approaches in 
-[[[#SDApproachTable]]]. 
+We summarize the properties of these approaches in
+[[[#SDApproachTable]]].
           </p>
           <table id="SDApproachTable" class="data numbered">
             <caption><em>Selective Disclosure Approaches.</em> </caption>
@@ -3074,10 +3074,10 @@ We summarize the properties of these approaches in
               </tr>
               <tr>
                 <td>Signed Hash of Claims (SHoC)</td>
-                <td>list of salts, list of salted hashes, one for each claim, 
+                <td>list of salts, list of salted hashes, one for each claim,
                   plus signature over these two lists.</td>
                 <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
-                <td>list of salts, list of salted hashes, one for each claim, 
+                <td>list of salts, list of salted hashes, one for each claim,
                   plus one signature over these two lists.</td>
                 <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
               </tr>
@@ -3091,8 +3091,8 @@ We summarize the properties of these approaches in
             </tbody>
           </table>
           <p>
-In the following sections, we define the three main selective disclosure 
-algorithms in terms of sub-algorithms. These sub-algorithms are of two types: 
+In the following sections, we define the three main selective disclosure
+algorithms in terms of sub-algorithms. These sub-algorithms are of two types:
 those that are independent of the selective disclosure implementation approaches
 discussed above, and those that have approach-specific implementations.
           </p>
@@ -3132,7 +3132,7 @@ In a SHoC approach, add to |hashData| the |saltedHash| data that results
 from running the algorithm in [[[#SaltedHashSD]]].
             </li>
             <li>
-Let |proofBytes| be the result of running the approach-specific 
+Let |proofBytes| be the result of running the approach-specific
 <em>SerializeBase</em> algorithm. For example, use [[[#SerializeBase-SIC]]] for
 the SIC approach, and use [[[#SerializeBase-SHoC]]] for the SHoC approach. In
 all cases, pass |hashData| and |options| as parameters.
@@ -3172,7 +3172,7 @@ At a minimum, the |proofData| object will contain the fields |hmacKey| and
 Initialize |disclosureData| to the object returned when calling the algorithm in
 [[[#CreateDisclosureData]]], passing the |document|, |proofData|,
 |selectivePointers|, and any custom JSON-LD API options, such as a document
-loader. The |disclosureData| object will contain the following fields: 
+loader. The |disclosureData| object will contain the following fields:
 |revealDocument|, |mandatoryIndexes|, |selectiveIndexes|, |verifierLabelMap|
 |mandatory|, and |nonMandatory|.
             </li>
@@ -3218,17 +3218,17 @@ Initialize the |proofData| object to the result returned by the approach-specifi
 [[[#ParseDerived-SIC]]], and for the SHoC approach, use [[[#ParseDerived-SHoC]]].
 At a minimum, the |proofData| object will contain the fields |labelMap| and
 |mandatoryIndexes|.
-            </li>            
+            </li>
             <li>
-Initialize the |verifyData| object to the value returned by calling the 
-algorithm in Section [[[#CreateVerifyData]]], passing the |document|, 
+Initialize the |verifyData| object to the value returned by calling the
+algorithm in Section [[[#CreateVerifyData]]], passing the |document|,
 |proofData|, and any custom JSON-LD API options, such as a document loader.
-The |verifyData| object will contain the following fields: |proofHash|, 
+The |verifyData| object will contain the following fields: |proofHash|,
 |mandatoryHash|, and |nonMandatory|.
             </li>
             <li>
-Initialize |verified| to the result of calling the approach-specific 
-<em>VerifyDerived</em> algorithm. For example, for the SIC approach, use  
+Initialize |verified| to the result of calling the approach-specific
+<em>VerifyDerived</em> algorithm. For example, for the SIC approach, use
 [[[#VerifyDerived-SIC]]], and for the SHoC approach, use
 [[[#VerifyDerived-SHoC]]]. In all cases, pass |proofData| and
 |verifyData| as parameters.
@@ -3289,7 +3289,7 @@ this is 256 bits or 32 bytes.
             <li>
 If |cryptosuite| is set to `ecdsa-sd-2023` then
 initialize |labelMapFactoryFunction| to the result of calling the algorithm of
-Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise 
+Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise
 initialize |labelMapFactoryFunction| to the result of calling the algorithm of
 Section [[[#createshuffledidlabelmapfunction]]], passing |hmac|;
             </li>
@@ -3329,7 +3329,7 @@ and `hmacKey` set to |hmacKey|.
 The following algorithm specifies how to cryptographically hash a
 <em>transformed data document</em> and <em>proof configuration</em>
 into cryptographic hash data that is ready to be provided as input to the
-approach specific algorithms such as [[[#SerializeBase-SIC]]] and  
+approach specific algorithms such as [[[#SerializeBase-SIC]]] and
 [[[#SerializeBase-SHoC]]].
           </p>
 
@@ -3386,7 +3386,7 @@ algorithm used in the signature algorithm, i.e., SHA-256 for a P-256 curve.
             <li>
 If |cryptosuite| is set to `ecdsa-sd-2023` then
 initialize |labelMapFactoryFunction| to the result of calling the algorithm of
-Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise 
+Section [[[#createhmacidlabelmapfunction]]], passing |hmac|; otherwise
 initialize |labelMapFactoryFunction| to the result of calling the algorithm of
 Section [[[#createshuffledidlabelmapfunction]]], passing |hmac|.
             </li>
@@ -3396,7 +3396,7 @@ and |selectivePointers|.
             </li>
             <li>
 Initialize |groupDefinitions| to a map with the following entries: key of
-the string `"mandatory"` and value of |proofData|.|mandatoryPointers|, key of 
+the string `"mandatory"` and value of |proofData|.|mandatoryPointers|, key of
 the string `"selective"` and value of |selectivePointers|, and key of the string
  `"combined"` and value of |combinedPointers|.
             </li>
@@ -3478,8 +3478,8 @@ value associated with |inputLabel| as a key in |labelMap| as the value.
             </li>
             <li>
 Return an object with properties matching |revealDocument|, |mandatoryIndexes|,
-|selectiveIndexes|, |verifierLabelMap|, 
-|groups|.|mandatory|.|matching| for |mandatory|, and 
+|selectiveIndexes|, |verifierLabelMap|,
+|groups|.|mandatory|.|matching| for |mandatory|, and
 |groups|.|mandatory|.|nonMatching| for |nonMandatory|.
             </li>
           </ol>
@@ -3490,8 +3490,8 @@ Return an object with properties matching |revealDocument|, |mandatoryIndexes|,
           <h4>CreateVerifyData</h4>
 
           <p>
-The following algorithm creates the additional data needed to perform 
-verification of a selective disclosed [=verifiable credential=] protected with 
+The following algorithm creates the additional data needed to perform
+verification of a selective disclosed [=verifiable credential=] protected with
 a derived proof. The inputs include a JSON-LD
 document (|document|), parsed derived proof data (|proofData|),
 and any custom JSON-LD API options, such as a document loader. A single
@@ -3500,14 +3500,14 @@ fields: "proofHash", "mandatoryHash", and "nonMandatory".
           </p>
           <ol class="algorithm">
             <li>
-Let  |proofHash| be the result of cryptographically hashing the 
-|canonicalProofConfig| value returned by the algorithm of section 
-[[[#ProofConfigurationAlg]]]. Using the same hash that is used by the signature 
+Let  |proofHash| be the result of cryptographically hashing the
+|canonicalProofConfig| value returned by the algorithm of section
+[[[#ProofConfigurationAlg]]]. Using the same hash that is used by the signature
 algorithm, i.e., SHA-256 for a P-256 curve.
             </li>
             <li>
 Initialize |labelMapFactoryFunction| to the result of calling the algorithm of
-Section [[[#createlabelmapfunction]]] with the parameter 
+Section [[[#createlabelmapfunction]]] with the parameter
 |proofData|.|verifierLabelMap|.
             </li>
             <li>
@@ -3536,11 +3536,11 @@ Otherwise, add |nq| to |nonMandatory|.
               </ol>
             </li>
             <li>
-Initialize |mandatoryHash| to the result of calling the function 
+Initialize |mandatoryHash| to the result of calling the function
 [[[#hashmandatorynquads]]], passing |mandatory|.
             </li>
             <li>
-Return an object with properties matching |proofHash|, |nonMandatory|, and 
+Return an object with properties matching |proofHash|, |nonMandatory|, and
 |mandatoryHash|.
             </li>
           </ol>
@@ -3555,8 +3555,8 @@ Return an object with properties matching |proofHash|, |nonMandatory|, and
           <h4>SerializeBase-SIC</h4>
 
           <p>
-The following algorithm specifies how to create a serialized base proof 
-in the signed individual claims (SIC) approach. 
+The following algorithm specifies how to create a serialized base proof
+in the signed individual claims (SIC) approach.
 Required inputs are
 cryptographic hash data (|hashData|) and
 <em>proof options</em> (|options|). The
@@ -3582,10 +3582,10 @@ else and the private key will be destroyed when this algorithm terminates.
             <li>
 Initialize |signatures| to an array where each element holds the result of
 digitally signing the UTF-8 representation of each N-Quad string in
-|nonMandatory|, in order. The digital signature algorithm is the same as that 
+|nonMandatory|, in order. The digital signature algorithm is the same as that
 for the |cryptosuite| and uses the private key from
 |proofScopedKeyPair|. Note: This step generates individual signatures for each
-statement (claim) that can be selectively disclosed using a local, proof-scoped 
+statement (claim) that can be selectively disclosed using a local, proof-scoped
 key pair that binds them together; this key pair will be bound to the proof by a
 signature over its public key using the private key associated with the base
 proof verification method.
@@ -3605,9 +3605,9 @@ private key associated with the base proof verification method.
 
             <li>
 If |cryptosuite| is set to `ecdsa-sd-2023` then
-initialize a byte array, |proofBytes|, so that starts with the legacay 
+initialize a byte array, |proofBytes|, so that starts with the legacay
 ECDSA-SD base proof header bytes 0xd9, 0x5d, and 0x00. Otherwise initialize
-|proofValue| with the general SIC header bytes TBD. 
+|proofValue| with the general SIC header bytes TBD.
             </li>
             <li>
 Initialize |components| to an array with five elements containing the values of:
@@ -3690,7 +3690,7 @@ Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
             <li>
 If |cryptosuite| is set to `ecdsa-sd-2023` then
 initialize a byte array, |proofValue|, that starts with the ECDSA-SD disclosure
-proof header bytes `0xd9`, `0x5d`, and `0x01`. Otherwise initialize a byte 
+proof header bytes `0xd9`, `0x5d`, and `0x01`. Otherwise initialize a byte
 array, |proofValue|, that starts with the general SIC derived proof header bytes
 TBD.
             </li>
@@ -3738,7 +3738,7 @@ substring after the leading `u` in |proofValue|.
             </li>
             <li>
 If the |decodedProofValue| does not start with the ECDSA-SD disclosure proof
-header bytes `0xd9`, `0x5d`, and `0x01`, or the general SIC approach derived 
+header bytes `0xd9`, `0x5d`, and `0x01`, or the general SIC approach derived
 proof header bytes TBD, an error MUST be raised
 and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
@@ -3769,11 +3769,11 @@ elements, using the names "baseSignature", "publicKey", "signatures",
 
           <p>
 The following algorithm attempts verification of an `ecdsa-sd-2023` derived
-proof or a general SIC approach derived proof. This algorithm is called by a 
+proof or a general SIC approach derived proof. This algorithm is called by a
 verifier of an ECDSA-SD-protected or SIC approach protected
 [=verifiable credential=]. The inputs include a JSON-LD document
-(|document|), derived proof data (|proofData|), verification data 
-(|verifyData|), and any custom JSON-LD API options, such as a document loader. 
+(|document|), derived proof data (|proofData|), verification data
+(|verifyData|), and any custom JSON-LD API options, such as a document loader.
 This algorithm returns a [=verification result=]:
           </p>
 
@@ -3790,9 +3790,9 @@ public key bytes associated with the
 Section: Retrieve Verification Method</a>.
             </li>
             <li>
-Initialize |baseSignature|,  |publicKeyProofScoped|, and |signatures| to the values 
+Initialize |baseSignature|,  |publicKeyProofScoped|, and |signatures| to the values
 associated with their property names in the |proofData| object and
-|proofHash|, |mandatoryHash|, and |nonMandatory| to the values associated with 
+|proofHash|, |mandatoryHash|, and |nonMandatory| to the values associated with
 their property names in the |verifyData| object.
             </li>
             <li>
@@ -3803,7 +3803,7 @@ indicating that the signature count does not match
 the non-mandatory message count.
             </li>
             <li>
-Initialize |toVerify| to the concatenation of |proofHash|, |publicKeyProofScoped|, and 
+Initialize |toVerify| to the concatenation of |proofHash|, |publicKeyProofScoped|, and
 |mandatoryHash|, in that order.
             </li>
             <li>
@@ -3860,7 +3860,7 @@ The following algorithm specifies how to create salted hash data.
 
           <p>
 The required inputs to this algorithm are a <em>transformed data document</em>
-(|transformedDocument|) and |cryptosuite|. A <em>salted hash data</em> value 
+(|transformedDocument|) and |cryptosuite|. A <em>salted hash data</em> value
 represented as an object is produced as output.
           </p>
 
@@ -3897,7 +3897,7 @@ NIST SP-800-90A,B,C documents and/or BSI AIS 20 and AIS 31 documents.
           <h4>SerializeBase-SHoC</h4>
 
           <p>
-The following algorithm specifies how to serialize SHoC approach base proof; 
+The following algorithm specifies how to serialize SHoC approach base proof;
 called by an
 issuer of an Quantum-Safe-SD-protected Verifiable Credential.
 The base proof is to be
@@ -4050,7 +4050,7 @@ were chosen to not conflict with values used by [[VC-DI-ECDSA]] and
           <h4>ParseDerived-SHoC</h4>
 
           <p>
-The following algorithm parses the components of a SHoC approach derived proof 
+The following algorithm parses the components of a SHoC approach derived proof
 value. The required input is a derived proof value (|proofValue|).
 A single <em>proof data</em> object is produced as output, which
 contains a set to six elements, using the names "signature", "salts",
@@ -4117,7 +4117,7 @@ appear in [[[#VerifyDerived-SHoC]]].
 The following algorithm attempts verification of an SHoC approach derived
 proof. This algorithm is called by a verifier of an SHoC approach protected
 [=verifiable credential=]. The inputs include a JSON-LD document
-(|document|), derived proof data (|proofData|), verification data 
+(|document|), derived proof data (|proofData|), verification data
 (|verifyData|), and any
 custom JSON-LD API options, such as a document loader. This algorithm returns
 a [=verification result=]:
@@ -4128,9 +4128,9 @@ a [=verification result=]:
 Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
             </li>
             <li>
-Initialize |signature|,  |salts|, |saltedHashes|, and |selectiveIndexes| to the 
-values associated with their property names in the |proofData| parameter and 
-|proofHash|, |nonMandatory|, and |mandatoryHash| to the values  associated  with 
+Initialize |signature|,  |salts|, |saltedHashes|, and |selectiveIndexes| to the
+values associated with their property names in the |proofData| parameter and
+|proofHash|, |nonMandatory|, and |mandatoryHash| to the values  associated  with
 their property names in the |verifyData| parameter.
             </li>
             <li>
@@ -4196,7 +4196,7 @@ data-cite="INFRA#nulls">Null</a>
 
         </section>
       </section>
-        
+
       <section>
         <h4>Selective Disclosure Functions</h4>
 
@@ -4455,7 +4455,7 @@ such as BBS, that favor unlinkability over minimizing unrevealed data leakage.
 
           <p>
 The following algorithm compresses a label map. The required inputs are
-label map (|labelMap|) and the |cryptosuite|. The output is a 
+label map (|labelMap|) and the |cryptosuite|. The output is a
 <em>compressed label map</em>.
           </p>
 
@@ -4471,7 +4471,7 @@ if |cryptosuite| is  set to  `ecdsa-sd-2023` then
 add an entry to |map| with a key that is a base-10 integer parsed from the
 characters following the "c14n" prefix in |k| and a value that is a byte array
 resulting from base64url-no-pad-decoding the characters after the "u" prefix in
-|v|. Otherwise add an entry to `map`, with a key that is a base-10 integer 
+|v|. Otherwise add an entry to `map`, with a key that is a base-10 integer
 parsed from the
 characters following the "c14n" prefix in |k|, and a value that is a base-10
 integer parsed from the characters following the "b" prefix in `v`.
@@ -4490,7 +4490,7 @@ Return |map| as <em>compressed label map</em>.
 
           <p>
 The following algorithm decompresses a label map. The required inputs are a
-compressed label map (|compressedLabelMap|) and the |cryptosuite|. The output 
+compressed label map (|compressedLabelMap|) and the |cryptosuite|. The output
 is a <em>decompressed label map</em>.
           </p>
 
@@ -4504,7 +4504,7 @@ For each entry (|k|, |v|) in |compressedLabelMap|:
                 <li>
 If |cryptosuite| is set to `ecdsa-sd-2023` then
 add an entry to |map| with a key that adds the prefix "c14n" to |k| and a value
-that adds a prefix of "u" to the base64url-no-pad-encoded value for |v|;  
+that adds a prefix of "u" to the base64url-no-pad-encoded value for |v|;
 Otherwise add an entry to `map`, with a key that adds the prefix "c14n" to `k`, and a value
 that adds a prefix of "b" to `v`.
                 </li>
@@ -5185,7 +5185,7 @@ Return `mandatoryHash`.
             </li>
           </ol>
         </section>
-         
+
       </section>
 
 
