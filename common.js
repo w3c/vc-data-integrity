@@ -133,29 +133,29 @@ var vcwg = {
     }
   }
 };
-require(["core/pubsubhub"], (respecEvents) => {
-  "use strict";
+// require(["core/pubsubhub"], (respecEvents) => {
+//   "use strict";
 
-  console.log("RESPEC EVENTS", respecEvents);
+//   console.log("RESPEC EVENTS", respecEvents);
 
-  respecEvents.sub('end-all', (message) => {
-    console.log("END EVENT", message);
-    // remove data-cite on where the citation is to ourselves.
-    const selfDfns = document.querySelectorAll("dfn[data-cite^='" + respecConfig.shortName.toUpperCase() + "#']");
-    for (const dfn of selfDfns) {
-      delete dfn.dataset.cite;
-    }
+//   respecEvents.sub('end-all', (message) => {
+//     console.log("END EVENT", message);
+//     // remove data-cite on where the citation is to ourselves.
+//     const selfDfns = document.querySelectorAll("dfn[data-cite^='" + respecConfig.shortName.toUpperCase() + "#']");
+//     for (const dfn of selfDfns) {
+//       delete dfn.dataset.cite;
+//     }
 
-    // Update data-cite references to ourselves.
-    const selfRefs = document.querySelectorAll("a[data-cite^='" + respecConfig.shortName.toUpperCase() + "#']");
-    for (const anchor of selfRefs) {
-      anchor.href= anchor.dataset.cite.replace(/^.*#/,"#");
-      delete anchor.dataset.cite;
-    }
+//     // Update data-cite references to ourselves.
+//     const selfRefs = document.querySelectorAll("a[data-cite^='" + respecConfig.shortName.toUpperCase() + "#']");
+//     for (const anchor of selfRefs) {
+//       anchor.href= anchor.dataset.cite.replace(/^.*#/,"#");
+//       delete anchor.dataset.cite;
+//     }
 
-  });
+//   });
 
-});
+// });
 
 // Removes dfns that aren't referenced anywhere in the spec.
 // To ensure a definition appears in the Terminology section, use
