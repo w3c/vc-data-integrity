@@ -8,10 +8,10 @@
       For the three scripts below, if your spec resides on dev.w3 you can check them
       out in the same tree and use relative links so that they'll work offline,
      -->
-    <script src='//www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <script class='remove' src="./common.js"></script>
     <script class="remove"
-      src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-vc@3.4.2/dist/main.js"></script>
+      src="https://cdn.jsdelivr.net/gh/digitalbazaar/respec-vc@3.5.2/dist/main.js"></script>
 
     <script type="text/javascript" class="remove">
       var respecConfig = {
@@ -224,6 +224,7 @@
             }
           },
           postProcess: [
+            restrictRefs,
             window.respecVc.createVcExamples
           ],
           lint: {
