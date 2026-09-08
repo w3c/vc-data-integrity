@@ -3602,10 +3602,8 @@ private key associated with the base proof verification method.
             </li>
 
             <li>
-If |cryptosuite| is set to `ecdsa-sd-2023` then
-initialize a byte array, |proofBytes|, so that starts with the legacay
-ECDSA-SD base proof header bytes 0xd9, 0x5d, and 0x00. Otherwise initialize
-|proofValue| with the general SIC header bytes TBD.
+Initialize a byte array, |proofBytes|, so that starts with the SIC approach
+base proof header bytes 0xd9, 0x5d, and 0x00.
             </li>
             <li>
 Initialize |components| to an array with five elements containing the values of:
@@ -3646,9 +3644,8 @@ substring after the leading `u` in |proofValue|.
             </li>
             <li>
 
-If the |decodedProofValue| does not start with the ECDSA-SD base proof
-header bytes `0xd9`, `0x5d`, and `0x00`, or the general SIC header bytes TBD,
-an error MUST be raised and SHOULD
+If the |decodedProofValue| does not start with the general SIC header bytes
+header bytes `0xd9`, `0x5d`, and `0x00`, an error MUST be raised and SHOULD
 convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
@@ -3686,11 +3683,8 @@ Initialize |compressedLabelMap| to the result of calling the algorithm in
 Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
             </li>
             <li>
-If |cryptosuite| is set to `ecdsa-sd-2023` then
-initialize a byte array, |proofValue|, that starts with the ECDSA-SD disclosure
-proof header bytes `0xd9`, `0x5d`, and `0x01`. Otherwise initialize a byte
-array, |proofValue|, that starts with the general SIC derived proof header bytes
-TBD.
+Initialize a byte array, |proofValue|, that starts with the general SIC derived
+proof header bytes `0xd9`, `0x5d`, and `0x01`.
             </li>
             <li>
 Initialize |components| to an array with five elements containing the values of:
@@ -3735,9 +3729,8 @@ Initialize |decodedProofValue| to the result of base64url-no-pad-decoding the
 substring after the leading `u` in |proofValue|.
             </li>
             <li>
-If the |decodedProofValue| does not start with the ECDSA-SD disclosure proof
-header bytes `0xd9`, `0x5d`, and `0x01`, or the general SIC approach derived
-proof header bytes TBD, an error MUST be raised
+If the |decodedProofValue| does not start with the general SIC approach derived
+proof header bytes `0xd9`, `0x5d`, and `0x01`, an error MUST be raised
 and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
