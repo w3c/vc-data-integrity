@@ -3602,7 +3602,7 @@ private key associated with the base proof verification method.
             </li>
 
             <li>
-Initialize a byte array, |proofBytes|, so that starts with the SIC approach
+Initialize a byte array, |proofBytes|, so that it starts with the SIC approach
 base proof header bytes 0xd9, 0x5d, and 0x00.
             </li>
             <li>
@@ -3645,8 +3645,8 @@ substring after the leading `u` in |proofValue|.
             <li>
 
 If the |decodedProofValue| does not start with the general SIC header bytes
-header bytes `0xd9`, `0x5d`, and `0x00`, an error MUST be raised and SHOULD
-convey an error type of
+`0xd9`, `0x5d`, and `0x00`, an error MUST be raised and SHOULD convey an
+error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
             <li>
@@ -3732,7 +3732,7 @@ substring after the leading `u` in |proofValue|.
 If the |decodedProofValue| does not start with the general SIC approach derived
 proof header bytes `0xd9`, `0x5d`, and `0x01`, an error MUST be raised
 and SHOULD convey an error type of
-<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">`PROOF_VERIFICATION_ERROR`</a>.
             </li>
             <li>
 Initialize |components| to an array that is the result of CBOR-decoding the bytes
