@@ -3031,13 +3031,13 @@ proof. This is a nice property, not shared by the other two approaches.
 When following the [=SHoC=] approach, a salt value (random nonce) is created for
 each claim. That salt value is concatenated with the claim, and a cryptographic
 collision-resistant hash function is applied to the list of paired salts+claims,
-to produce a list of hashes, one for each claim. The newly paired lists of salts
-and hashes are combined and signed with a selected signature algorithm. Only one
+to produce a list of hashes, one for each claim. The list of
+hashes is signed with a selected signature algorithm. Only one
 signature is needed; thus, this approach is good for signature algorithms with
 larger signature sizes. A downside of this approach is that the complete list of
-salts and hashes must be conveyed to both holder and verifier. To verify a
-revealed claim, the verifier needs first to verify the signature for the combined
-list of salts and hashes; then they need to be told the index of the claim in
+hashes must be conveyed to both holder and verifier. To verify a
+revealed claim, the verifier needs first to verify the signature for the
+list of hashes; then they need to be told the index of the claim in
 that list; and then, using the appropriate salt value from the list, they verify
 the value of the hash of the salt concatenated with the received claim and the
 hash from the table.
@@ -3077,7 +3077,7 @@ We summarize the properties of these approaches in
                 <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
                 <td>list of salts, list of salted hashes, one for each claim,
                   plus one signature over these two lists.</td>
-                <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
+                <td>N<sub>claims</sub> &times; (hash size) + N<sub>revealed claims</sub>  &times;  (salt  size) + signature size</td>
               </tr>
               <tr>
                 <td>Multi Claim Signature, BBS</td>
@@ -4011,7 +4011,11 @@ Initialize |compressedLabelMap| to the result of calling the algorithm in
 Initialize a byte array, |proofValue|, that starts with the SHoC approach
 derived proof header bytes `0xd9`, `0x5d`, and `0x11`.
             </li>
-            <!-- **TODO** filter salts to just those corresponding to revealed statements. -->
+            <li>
+Let |filteredSalts| be the array obtained by selecting the salt values from the
+|salts| array corresponding to the values in the |selectiveIndexes| array in
+increasing index order.
+            </li>
             <li>
 Initialize |components| to an array with six elements containing the values of:
 |signature|, |filteredSalts|, |saltedHashes|, |compressedLabelMap|, |mandatoryIndexes|,
@@ -4069,7 +4073,7 @@ and SHOULD convey an error type of
 Initialize |components| to an array that is the result of CBOR-decoding the bytes
 that follow the three-byte SHoC approach derived proof header. If the
 result is not an array of the following six elements —
-a byte array of length corresponding to the signature  size;
+a byte array of length corresponding to the signature size;
 an array of byte arrays, each of length appropriate to the <em>salt size</em>;
 an array of byte arrays, each of length corresponding to the hash size;
 a map of integers to byte arrays, each of length 32;
@@ -4091,12 +4095,12 @@ elements, using the names "signature", "salts", "saltedHashes",
           <p class="ednote">
 Should we also mention additional checks on the values of |salts|,
 |saltedHashes|, |mandatoryIndexes|, and |selectiveIndexes|? In particular, the
-length of the the |salts| and |saltedHashes| must be the same. The all elements
-of the |mandatoryIndexes| and |selectiveIndexes| should be in the range of 0 to
-the length of |salts|. There should not be repeated items in the
-|mandatoryIndexes| and |selectiveIndexesArrays|. Also the elements of each of
-these arrays should be increasing order. Note that the minimal additional checks
-appear in [[[#VerifyDerived-SHoC]]].
+length of the the |salts| and |selectiveIndexes| must be the same. The all 
+elements of the |mandatoryIndexes| and |selectiveIndexes| should be in the 
+range of 0 to the length of |saltedHashes|. There should not be repeated 
+items in the |mandatoryIndexes| and |selectiveIndexesArrays|. Also the elements 
+of each of these arrays should be increasing order. Note that the minimal 
+additional checks appear in [[[#VerifyDerived-SHoC]]].
           </p>
 
         </section>
@@ -4132,13 +4136,13 @@ indicating that the salt count does not match the salted hashes count.
             </li>
             <li>
 The values of the elements of the |selectiveIndexes| array must be between 0 and
-the length of the |salts| array minus one. If not,
+the length of the |saltedHash| array minus one. If not,
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
 indicating that the selective indexes are out of bounds.
             </li>
             <li>
-Initialize |toVerify| to the byte  concatenation of the values: |proofHash|,
+Initialize |toVerify| to the byte concatenation of the values: |proofHash|,
 |mandatoryHash|, and |saltedHashes| in that order with the array values
 themselves concatenated together.
             </li>
@@ -4159,11 +4163,11 @@ for every selectively disclosed (non-mandatory) statement:
               <ol class="algorithm">
                 <li>
 Let |computedHash| be the  hash of the concatenation of
-|salts|[|selectiveIndexes|[index]] and |nq|.
+|salts|[index] and |nq|.
                 </li>
                 <li>
 Initialize |verificationCheck| to the result of comparing the |computedHash|
-with the value of  |saltedHashes|[|selectedIndexes|[index]].
+with the value of |saltedHashes|[|selectedIndexes|[index]].
 
                 </li>
                 <li>
