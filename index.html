@@ -3916,10 +3916,9 @@ and |hmacKey| to the values associated with their property names
             </li>
             <li>
 Initialize |toSign| the hash of the concatenation of |proofHash|,
-|mandatoryHash|, |salts|,
-and |saltedHashes| where the order of the concatenation MUST be followed. The
-cryptographic hash algorithm is that specified for signature algorithm in
-the |cryptosuite|.
+|mandatoryHash|,and |saltedHashes| where the order of the concatenation MUST 
+be followed. The cryptographic hash algorithm is that specified for signature 
+algorithm in the |cryptosuite|.
             </li>
             <li>
 Initialize |signature| to the result of digitally signing |toSign| using the
@@ -3996,8 +3995,8 @@ respectively.
 
           <p>
 The following algorithm serializes a SHoC approach derived proof value.
-The required inputs are a base signature (|signature|), an array of salts
-(|salts|), an array of salted  hashes (|saltedHashes|), a label map
+The required inputs are a base signature (|signature|), an array of filtered 
+salts (|filteredSalts|), an array of salted  hashes (|saltedHashes|), a label map
 (|labelMap|), an array of mandatory indexes (|mandatoryIndexes|), and an array
 of selective indexes (|selectiveIndexes|). A single <em>derived proof</em>
 value, serialized as a UTF-8 string, is produced as output.
@@ -4012,9 +4011,10 @@ Initialize |compressedLabelMap| to the result of calling the algorithm in
 Initialize a byte array, |proofValue|, that starts with the SHoC approach
 derived proof header bytes `0xd9`, `0x5d`, and `0x11`.
             </li>
+            <!-- **TODO** filter salts to just those corresponding to revealed statements. -->
             <li>
 Initialize |components| to an array with six elements containing the values of:
-|signature|, |salts|, |saltedHashes|, |compressedLabelMap|, |mandatoryIndexes|,
+|signature|, |filteredSalts|, |saltedHashes|, |compressedLabelMap|, |mandatoryIndexes|,
 |selectiveIndexes|.
             </li>
             <li>
@@ -4125,7 +4125,7 @@ values associated with their property names in the |proofData| parameter and
 their property names in the |verifyData| parameter.
             </li>
             <li>
-If the length of |salts| does not match the length of |saltedHashes|,
+If the length of |salts| does not match the length of |slectiveIndexes|,
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
 indicating that the salt count does not match the salted hashes count.
@@ -4139,7 +4139,7 @@ indicating that the selective indexes are out of bounds.
             </li>
             <li>
 Initialize |toVerify| to the byte  concatenation of the values: |proofHash|,
-|mandatoryHash|, |salts|, and |saltedHashes| in that order with the array values
+|mandatoryHash|, and |saltedHashes| in that order with the array values
 themselves concatenated together.
             </li>
             <li>
