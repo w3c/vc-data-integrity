@@ -3672,7 +3672,7 @@ The following algorithm serializes a derived proof value. The required input is
 a |dislosureData| object containing the following fields:
 base signature (|baseSignature|), public key
 (|publicKey|), an array of signatures (|signatures|), a label
-map (|labelMap|), an array of selective indexes (|selectiveIndexes), and an 
+map (|labelMap|), an array of selective indexes (|selectiveIndexes|), and an 
 array of mandatory indexes
 (|mandatoryIndexes|). A single <em>derived proof</em> value, serialized
 as a byte string, is produced as output.
@@ -3696,7 +3696,7 @@ Initialize |filteredSignatures| to an empty list.
                 </li>
                 <li>
 For each |index| in increasing order in the |selectiveIndexes| array append the 
-|signature| at  that |index| to the |filteredSignatures| array.
+|signature| at that |index| to the |filteredSignatures| array.
                 </li>
               </ol>
             </li>
