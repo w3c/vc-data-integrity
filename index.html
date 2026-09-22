@@ -4129,7 +4129,7 @@ values associated with their property names in the |proofData| parameter and
 their property names in the |verifyData| parameter.
             </li>
             <li>
-If the length of |salts| does not match the length of |slectiveIndexes|,
+If the length of |salts| does not match the length of |selectiveIndexes|,
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
 indicating that the salt count does not match the salted hashes count.
@@ -4162,7 +4162,7 @@ For every entry (|nq|, |index|) in |nonMandatory|, verify the salted hash
 for every selectively disclosed (non-mandatory) statement:
               <ol class="algorithm">
                 <li>
-Let |computedHash| be the  hash of the concatenation of
+Let |computedHash| be the hash of the concatenation of
 |salts|[index] and |nq|.
                 </li>
                 <li>
