@@ -1,0 +1,1743 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 37.4.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+.issue-label{text-transform:initial}
+.warning>p:first-child{margin-top:0}
+.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
+span.warning{padding:.1em .5em .15em}
+.issue.closed span.issue-number{text-decoration:line-through}
+.issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
+.warning{border-color:#f11;border-color:var(--warning-border,#f11);border-width:.2em;border-style:solid;background:#fbe9e9;background:var(--warning-bg,#fbe9e9);color:#000;color:var(--text,#000)}
+.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
+li.task-list-item{list-style:none}
+input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
+.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
+</style>
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;border-bottom-color:var(--indextable-hover-bg,#fff);top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1;border-bottom-color:var(--indextable-hover-bg,#a2a9b1)}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;color:var(--text,#000);margin-top:.25em}
+.dfn-panel ul a[href]{color:#333;color:var(--text,#333)}
+.dfn-panel>div{display:flex}
+.dfn-panel a.self-link{font-weight:700;margin-right:auto}
+.dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+.dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel .marker.cddl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
+  
+  
+<title>Data Integrity Threat Model</title>
+  
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+@media (prefers-color-scheme:dark){
+#references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
+}
+body:has(input[name=color-scheme][value=dark]:checked) #references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
+cite .bibref{font-style:italic}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+#issue-summary>ul{column-count:2}
+#issue-summary li{list-style:none}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+.self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+aside.example .marker>a.self-link{color:inherit}
+.header-wrapper{display:flex;align-items:baseline}
+:is(h2,h3,h4,h5,h6):not(:where(#toc>h2,#abstract>h2,#sotd>h2,.head>h2)):has(+a.self-link){position:relative;left:-.5em}
+:is(h2,h3,h4,h5,h6):not(:where(#toch2))+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.8;text-decoration:none}
+:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§"}
+:is(h2,h3)+a.self-link{top:-.2em}
+:is(h2,h3)+a.self-link::before{color:var(--heading-text)}
+@media (max-width:767px){
+dd{margin-left:0}
+}
+@media print{
+.removeOnSave{display:none}
+}
+body:has(input[name=color-scheme][value=light]:checked),head:not(:has(meta[name=color-scheme][content~=dark]))+body{color-scheme:light}
+body:has(input[name=color-scheme][value=dark]:checked){color-scheme:dark}
+</style>
+  
+<link rel="stylesheet" href="threats/threat-model.css">
+  
+
+<meta name="color-scheme" content="light">
+<meta name="description" content="This document describes a threat model for the
+Data Integrity
+specification. It identifies and analyzes security and
+privacy threats specific to ecosystems that use Data Integrity proofs
+(created using cryptosuites such as ECDSA, EdDSA, and BBS) to secure the
+authenticity and integrity of documents such as verifiable credentials.">
+<link rel="canonical" href="https://www.w3.org/TR/vc-data-integrity/threat-model/">
+<style>
+var:hover{text-decoration:underline;cursor:pointer}
+var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
+@media (prefers-color-scheme:dark){
+var.respec-hl{filter:saturate(.9) brightness(.9)}
+}
+var.respec-hl-c1{--bg-color:#f4d200}
+var.respec-hl-c2{--bg-color:#ff87a2}
+var.respec-hl-c3{--bg-color:#96e885}
+var.respec-hl-c4{--bg-color:#3eeed2}
+var.respec-hl-c5{--bg-color:#eacfb6}
+var.respec-hl-c6{--bg-color:#82ddff}
+var.respec-hl-c7{--bg-color:#ffbcf2}
+@media print{
+var.respec-hl{background:0 0;color:#000;box-shadow:unset}
+}
+</style>
+<style>
+var[data-type]{position:relative}
+var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#222;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "shortName": "vc-data-integrity-threat-model-1.1",
+  "specStatus": "DNOTE",
+  "publishDate": "2026-10-08",
+  "group": "vc",
+  "edDraftURI": "https://w3c.github.io/vc-data-integrity/threat-model/",
+  "latestVersion": "https://www.w3.org/TR/vc-data-integrity/threat-model/",
+  "github": {
+    "repoURL": "https://github.com/w3c/vc-data-integrity/",
+    "branch": "main"
+  },
+  "editors": [
+    {
+      "name": "Manu Sporny",
+      "company": "Digital Bazaar",
+      "w3cid": 41758
+    }
+  ],
+  "noRecTrack": "true",
+  "maxTocLevel": 4,
+  "xref": [
+    "VC-DATA-MODEL-2.0",
+    "CID",
+    "DID",
+    "VC-DATA-INTEGRITY"
+  ],
+  "preProcess": [
+    null
+  ],
+  "postProcess": [
+    null
+  ],
+  "publishISODate": "2026-10-08T00:00:00.000Z",
+  "generatedSubtitle": "W3C Group Note Draft 08 October 2026"
+}</script>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-DNOTE">
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/dark.css" disabled=""></head>
+
+<body class="h-entry informative" data-cite="VC-DATA-MODEL-2.0 CID DID VC-DATA-INTEGRITY"><div class="head">
+    <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
+  </a></p>
+    <h1 id="title" class="title">Data Integrity Threat Model</h1> 
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#DNOTE">W3C Group Note Draft</a> <time class="dt-published" datetime="2026-10-08">08 October 2026</time></p>
+    <details open="">
+      <summary>More details about this document</summary>
+      <dl>
+        <dt>This version:</dt><dd>
+                  <a class="u-url" href="https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/threat-model/">https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/threat-model/</a>
+                </dd>
+        <dt>Latest published version:</dt><dd>
+                  <a href="https://www.w3.org/TR/vc-data-integrity/threat-model/">https://www.w3.org/TR/vc-data-integrity/threat-model/</a>
+                </dd>
+        <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/vc-data-integrity/threat-model/">https://w3c.github.io/vc-data-integrity/threat-model/</a></dd>
+        <dt>History:</dt><dd>
+                        <a href="https://www.w3.org/standards/history/vc-data-integrity-threat-model-1.1/">https://www.w3.org/standards/history/vc-data-integrity-threat-model-1.1/</a>
+                      </dd><dd>
+                        <a href="https://github.com/w3c/vc-data-integrity/commits/main">Commit history</a>
+                      </dd>
+        
+        
+        
+        
+        
+        <dt>
+                  Editor:
+                </dt><dd class="editor p-author h-card vcard" data-editor-id="41758">
+    <span class="p-name fn">Manu Sporny</span> (<span class="p-org org h-org">Digital Bazaar</span>)
+  </dd>
+        
+        
+        <dt>Feedback:</dt><dd>
+        <a href="https://github.com/w3c/vc-data-integrity/">GitHub w3c/vc-data-integrity</a>
+        (<a href="https://github.com/w3c/vc-data-integrity/pulls/">pull requests</a>,
+        <a href="https://github.com/w3c/vc-data-integrity/issues/new/choose">new issue</a>,
+        <a href="https://github.com/w3c/vc-data-integrity/issues/">open issues</a>)
+      </dd>
+        
+        
+      </dl>
+    </details>
+    
+    
+    <p class="copyright">
+    <a href="https://www.w3.org/policies/#copyright">Copyright</a>
+    ©
+    2026
+    
+    <a href="https://www.w3.org/">World Wide Web Consortium</a>.
+    <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup>
+    <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>,
+    <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and
+    <a rel="license" href="https://www.w3.org/copyright/software-license-2023/" title="W3C Software and Document Notice and License">permissive document license</a> rules apply.
+  </p>
+    <hr title="Separator for header">
+  </div>
+  <section id="abstract" class="introductory"><h2>Abstract</h2>
+    <p>
+This document describes a threat model for the
+<a href="https://www.w3.org/TR/vc-data-integrity/">Data Integrity</a>
+specification. It identifies and analyzes security and
+privacy threats specific to ecosystems that use <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">Data Integrity proofs</a>
+(created using <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a> such as ECDSA, EdDSA, and BBS) to secure the
+authenticity and integrity of documents such as <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credentials</a>.
+    </p>
+  </section>
+  <section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this
+      document at the time of its publication. A list of current <abbr title="World Wide Web Consortium">W3C</abbr>
+      publications and the latest revision of this technical report can be found
+      in the
+      <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> standards and drafts index</a>.</em></p>
+    <p>
+This threat model is a work in progress. It is published alongside the
+Data Integrity specification to inform implementers
+and ecosystem designers of the security and privacy considerations relevant
+to deployments of the specification and its associated <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a>.
+Feedback and proposed additions are welcome via the
+<a href="https://github.com/w3c/vc-data-integrity/issues">issue
+tracker</a>.
+    </p>
+  <p>
+    This document was published by the <a href="https://www.w3.org/groups/wg/vc">Verifiable Credentials Working Group</a> as
+    a Group Note Draft using the
+        <a href="https://www.w3.org/policies/process/20250818/#recs-and-notes">Note
+          track</a>. 
+  </p><p>Group Note Drafts are not endorsed by
+        <abbr title="World Wide Web Consortium">W3C</abbr> nor its Members. </p><p>
+    This is a draft document and may be updated, replaced, or obsoleted by other
+    documents at any time. It is inappropriate to cite this document as other
+    than a work in progress.
+    
+  </p><p data-deliverer="98922">
+    
+        The
+        <a href="https://www.w3.org/policies/patent-policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent
+          Policy</a>
+        does not carry any licensing requirements or commitments on this
+        document.
+      
+    
+  </p><p>
+                          This document is governed by the
+                          <a id="w3c_process_revision" href="https://www.w3.org/policies/process/20250818/">18 August 2025 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                        </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#Introduction"><bdi class="secno">1. </bdi>Introduction</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#threat-model-description"><bdi class="secno">1.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#threat-model-data-flow-diagram"><bdi class="secno">1.2 </bdi>Data Flow Diagram for the Data Integrity Ecosystem</a></li><li class="tocline"><a class="tocxref" href="#threat-model-architecture-dictionary"><bdi class="secno">1.3 </bdi>Dictionary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#threat-model-stakeholders"><bdi class="secno">2. </bdi>Stakeholders</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#e1-signer"><bdi class="secno">2.1 </bdi>E1 Signer</a></li><li class="tocline"><a class="tocxref" href="#e2-holder"><bdi class="secno">2.2 </bdi>E2 Holder</a></li><li class="tocline"><a class="tocxref" href="#e3-verifier"><bdi class="secno">2.3 </bdi>E3 Verifier</a></li></ol></li><li class="tocline"><a class="tocxref" href="#threat-model-threats"><bdi class="secno">3. </bdi>Threats</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#threat-list"><bdi class="secno">3.1 </bdi>Threat List</a></li><li class="tocline"><a class="tocxref" href="#threat-details"><bdi class="secno">3.2 </bdi>Threat Details</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#t1-signed-document-tampering"><bdi class="secno">3.2.1 </bdi>T1. Signed Document Tampering</a></li><li class="tocline"><a class="tocxref" href="#t2-canonicalization-resource-exhaustion"><bdi class="secno">3.2.2 </bdi>T2. Canonicalization Resource Exhaustion</a></li><li class="tocline"><a class="tocxref" href="#t3-signing-key-compromise-via-inadequate-key-protection"><bdi class="secno">3.2.3 </bdi>T3. Signing Key Compromise via Inadequate Key Protection</a></li><li class="tocline"><a class="tocxref" href="#t4-cross-context-correlation-via-proof-artifacts"><bdi class="secno">3.2.4 </bdi>T4. Cross-Context Correlation via Proof Artifacts</a></li><li class="tocline"><a class="tocxref" href="#t5-cryptographically-relevant-quantum-computer-breaks-signature-suites"><bdi class="secno">3.2.5 </bdi>T5. Cryptographically Relevant Quantum Computer Breaks Signature Suites</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#threat-model-contributing"><bdi class="secno">4. </bdi>Contributing</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#threat-model-adding-a-threat"><bdi class="secno">4.1 </bdi>Adding a Threat</a></li></ol></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
+  <section id="Introduction"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#Introduction" aria-label="Permalink for Section 1."></a></div>
+    
+    <p>
+Threat modeling is a vital part of specification development. This
+document provides a threat model for the Data Integrity
+specification, which defines a mechanism for ensuring the
+authenticity and integrity of structured data documents. The mechanism
+uses cryptographic proofs that are created and verified through
+transformation, hashing, and proof serialization algorithms.
+    </p>
+    <p>
+This threat model follows the methodology described in the
+<a href="https://www.w3.org/TR/threat-modeling-guide/"><abbr title="World Wide Web Consortium">W3C</abbr> Threat
+Modeling Guide</a> and classifies threats using the STRIDE taxonomy.
+Threats are grouped into five categories:
+    </p>
+    <ul>
+      <li>
+<strong>Target Threats</strong> are threats the specification was designed
+to address.
+      </li>
+      <li>
+<strong>Implementation Threats</strong> are threats that implementers must
+handle; the specification leaves the choice of mitigation open.
+      </li>
+      <li>
+<strong>Deployment Threats</strong> are threats that arise from how systems
+are configured and operated.
+      </li>
+      <li>
+<strong>External Threats</strong> are real-world risks acknowledged as out
+of scope for this version of the specification.
+      </li>
+      <li>
+<strong>Dependency Threats</strong> are threats inherited from technologies
+the specification depends upon.
+      </li>
+    </ul>
+
+    <section id="threat-model-description"><div class="header-wrapper"><h3 id="x1-1-description"><bdi class="secno">1.1 </bdi>Description</h3><a class="self-link" href="#threat-model-description" aria-label="Permalink for Section 1.1"></a></div>
+      
+      <p>
+The Data Integrity specification defines a mechanism
+for protecting the authenticity and integrity of documents through
+cryptographic proofs. A <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-1">signer</a> takes an <a data-link-type="dfn|abstract-op" data-lt="O1" href="#dfn-o1" class="internalDFN" id="ref-for-dfn-o1-1">input document</a>,
+<a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-1">transforms</a> it into a canonical form, <a data-link-type="dfn|abstract-op" data-lt="P2" href="#dfn-p2" class="internalDFN" id="ref-for-dfn-p2-1">hashes</a> the result, and
+<a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-1">signs</a> the hash using private key material held in a
+<a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-1">security module</a>, producing a <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-1">signed document</a> that carries one
+or more proofs. The <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-2">signed document</a> is <a data-link-type="dfn|abstract-op" data-lt="F1" href="#dfn-f1" class="internalDFN" id="ref-for-dfn-f1-1">transmitted to a holder</a>, who <a data-link-type="dfn|abstract-op" data-lt="P4" href="#dfn-p4" class="internalDFN" id="ref-for-dfn-p4-1">stores</a> it in <a data-link-type="dfn|abstract-op" data-lt="S2" href="#dfn-s2" class="internalDFN" id="ref-for-dfn-s2-1">holder storage</a> until it is needed
+and later <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-1">transmits it to a verifier</a>. The <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-1">verifier</a> runs the
+<a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-1">verify</a> process (re-transforming, re-hashing, and cryptographically
+checking each proof) to confirm that the document was created by the
+<a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-2">signer</a> and has not been modified since.
+      </p>
+      <p>
+The core property the specification provides is that a <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-2">verifier</a>
+receiving a <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-3">signed document</a> can determine, in an automated and
+cryptographically verifiable way, whether the information in the document
+is authentic. This holds even when the document arrives long after it was
+created, over untrusted networks, and through intermediaries such as
+<a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-1">holders</a>, and it requires no contact with the <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-3">signer</a>. The
+concrete cryptographic mechanisms are supplied by
+<dfn data-lt="cryptosuite" id="dfn-cryptosuite" class="externalDFN" data-no-export="" data-dfn-type="dfn"><a href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a></dfn>, such as those defined in the
+ECDSA, EdDSA, and BBS cryptosuite specifications, which instantiate the
+transformation, hashing, proof serialization, and proof verification
+algorithms that this threat model examines.
+      </p>
+      <p>
+For this threat model, we consider a minimal instantiation of a Data
+Integrity ecosystem consisting of three roles: the <strong><a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-4">Signer</a>
+(E1)</strong> who creates <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-4">signed documents</a>, the
+<strong><a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-2">Holder</a> (E2)</strong> who stores them and transmits them to
+other parties, and the <strong><a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-3">Verifier</a> (E3)</strong> who checks
+their proofs and decides whether to accept them. In <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> ecosystems, these roles correspond to the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-issuers">issuer</a>, holder,
+and verifier.
+      </p>
+      <div class="note" role="note" id="issue-container-generatedID"><div class="note-title marker" id="h-note"><span>Note</span></div><p class="" role="note">
+<span class="marker">Note:</span> We do NOT model potential attackers as
+first-class elements, as over-characterizing attackers can lead to analysis
+bias that is better avoided.
+      </p></div>
+    </section>
+
+    <section id="threat-model-data-flow-diagram"><div class="header-wrapper"><h3 id="x1-2-data-flow-diagram-for-the-data-integrity-ecosystem"><bdi class="secno">1.2 </bdi>Data Flow Diagram for the Data Integrity Ecosystem</h3><a class="self-link" href="#threat-model-data-flow-diagram" aria-label="Permalink for Section 1.2"></a></div>
+      
+      <p>
+The data flow diagram below illustrates the key elements and data flows in
+a minimal Data Integrity ecosystem. The diagram shows how an input document
+(O1) is transformed, hashed, and signed within the signing system (C1)
+using key material held in the security module (S1), producing a signed
+document (O2) that is <a data-link-type="dfn|abstract-op" data-lt="F1" href="#dfn-f1" class="internalDFN" id="ref-for-dfn-f1-2">transmitted to the holder</a> (E2), <a data-link-type="dfn|abstract-op" data-lt="P4" href="#dfn-p4" class="internalDFN" id="ref-for-dfn-p4-2">stored</a>
+in holder storage (S2), and later <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-2">transmitted to a verifier</a> (E3),
+whose <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-2">verify</a> process confirms its authenticity.
+      </p>
+
+      <img src="diagrams/dfd.svg" alt="Data flow diagram showing three dashed system boundaries from
+left to right: the Signing System (C1) where the Signer (E1) provides an
+Input Document (O1) to the Transform (P1), Hash (P2), and Sign (P3)
+processes, with the Security Module (S1) supplying keys to Sign; the
+Holder System (C2) where the Holder (E2) uses the Store (P4) process and
+Holder Storage (S2); and the Verifier System (C3) where the Verifier (E3)
+uses the Verify (P5) process. The Signed Document (O2) flows from the
+Signing System to the Holder System via flow F1 and from the Holder System
+to the Verifier System via flow F2.">
+
+      <p>
+The following notation is used in the diagram description and dictionary:
+      </p>
+      <ul>
+        <li>
+<strong>E</strong> denotes an External Entity (a human or legal person
+outside the system boundary)
+        </li>
+        <li>
+<strong>P</strong> denotes a Process (a running algorithm that transforms
+data)
+        </li>
+        <li>
+<strong>F</strong> denotes a Data Flow (movement of data between elements)
+        </li>
+        <li>
+<strong>S</strong> denotes a Data Store (persistent or ephemeral storage)
+        </li>
+        <li>
+<strong>O</strong> denotes a Data Object (a self-contained, transferable
+artifact)
+        </li>
+        <li>
+<strong>C</strong> denotes a Contained System Boundary (a collection of
+elements under a single authority)
+        </li>
+      </ul>
+    </section>
+
+    <section id="threat-model-architecture-dictionary"><div class="header-wrapper"><h3 id="x1-3-dictionary"><bdi class="secno">1.3 </bdi>Dictionary</h3><a class="self-link" href="#threat-model-architecture-dictionary" aria-label="Permalink for Section 1.3"></a></div>
+      
+      <table class="dictionary">
+        <tbody>
+          <tr>
+            <td class="left">
+              <dfn data-lt="E1|Signer|E1 Signer" data-plurals="signers" id="dfn-e1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">E1 Signer</dfn>
+            </td>
+            <td>
+An entity (such as a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a> <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-issuers">issuer</a>, a notary, a supply-chain
+participant, or an automated service) that makes cryptographically
+verifiable statements by creating <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">Data Integrity proofs</a> over input
+documents. The signer controls a
+<a data-link-type="dfn" data-lt="controlled identifier document" href="https://www.w3.org/TR/cid-1.0/#dfn-controlled-identifier-document">controller document</a>, such as a CID or a
+<a data-link-type="dfn" href="https://www.w3.org/TR/did-core/#dfn-did-documents">DID document</a>, that expresses its
+<dfn data-lt="verification method" id="dfn-verification-method" class="externalDFN" data-no-export="" data-dfn-type="dfn"><a href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification methods</a></dfn>, and controls
+the private key material corresponding to those
+<a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification methods</a>. In <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> ecosystems, this
+role is typically played by the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-issuers">issuer</a>.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="E2|Holder|E2 Holder" data-plurals="holders" id="dfn-e2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">E2 Holder</dfn>
+            </td>
+            <td>
+A person or organization that receives signed documents from a signer,
+stores them, and transmits them to verifiers. The holder typically operates
+a software application, such as a digital wallet, and controls when, to
+whom, and (when a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-selective-disclosure">selective disclosure</a> <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a> is used) how
+much of a signed document is disclosed.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="E3|Verifier|E3 Verifier" data-plurals="verifiers" id="dfn-e3" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">E3 Verifier</dfn>
+            </td>
+            <td>
+An entity that receives a signed document and must determine whether the
+information it contains is authentic, meaning that it was created by the
+claimed signer and has not been modified since. The verifier runs the
+<a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-3">Verify</a> process and accepts or rejects the document based on the
+result and on its own policy, such as which <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a> and
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-purpose">proof purposes</a> it accepts.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="P1|Transform|P1 Transform" data-plurals="transforms" id="dfn-p1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">P1 Transform</dfn>
+            </td>
+            <td>
+The process that converts an input document into the canonical form that is
+protected by a proof, using the transformation algorithm identified by the
+<a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a>, for example, RDF Dataset Canonicalization (RDFC-1.0) or the
+JSON Canonicalization Scheme (JCS). Transformation ensures that the proof
+protects the information expressed by the document rather than one
+particular byte serialization of it. This process runs during both proof
+creation and proof verification.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="P2|Hash|P2 Hash" data-plurals="hashes" id="dfn-p2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">P2 Hash</dfn>
+            </td>
+            <td>
+The process that applies the cryptographic hash function identified by the
+<a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a> to the transformed data, producing the compact value over which
+the proof is computed. This process runs during both proof creation and
+proof verification.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="P3|Sign|P3 Sign" data-plurals="signs" id="dfn-p3" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">P3 Sign</dfn>
+            </td>
+            <td>
+The process (called proof serialization by the specification) by which a
+signer produces a <code>proofValue</code> over the hashed data using
+private key material held in the <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-2">Security Module</a>, and assembles the
+complete proof, including its <code>type</code>, <code>cryptosuite</code>,
+<code>verificationMethod</code>, and <code>proofPurpose</code> properties
+and optional properties such as <code>created</code>, <code>expires</code>,
+<code>domain</code>, and <code>challenge</code>.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="P4|Store|P4 Store" data-plurals="stores" id="dfn-p4" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">P4 Store</dfn>
+            </td>
+            <td>
+The process by which a holder places a received signed document into
+<a data-link-type="dfn|abstract-op" data-lt="S2" href="#dfn-s2" class="internalDFN" id="ref-for-dfn-s2-2">Holder Storage</a> and retrieves it later for transmission to a
+verifier.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="P5|Verify|P5 Verify" id="dfn-p5" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">P5 Verify</dfn>
+            </td>
+            <td>
+The process by which a verifier checks a received signed document. It
+re-runs the <a data-link-type="dfn|abstract-op" data-lt="cryptosuite" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite's</a> transformation and hashing over the
+document, cryptographically verifies the <code>proofValue</code> using the
+<a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification method</a> referenced by the proof, and confirms that the
+<a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification method</a> is bound to its <a data-link-type="dfn" href="https://www.w3.org/TR/cid-1.0/#dfn-controller">controller</a> and expressed under the
+<a data-link-type="dfn" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-relationship">verification relationship</a> matching the proof's
+<code>proofPurpose</code>, that any expected <code>domain</code> and
+<code>challenge</code> values match, and that the document's contexts
+match known-good values.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="F1|Transmit to Holder|F1 Transmit to Holder" id="dfn-f1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">F1 Transmit to Holder</dfn>
+            </td>
+            <td>
+The data flow by which a signed document travels from the
+<a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-1">signing system</a> to the <a data-link-type="dfn|abstract-op" data-lt="C2" href="#dfn-c2" class="internalDFN" id="ref-for-dfn-c2-1">holder system</a>. This flow crosses the
+trust boundary between the signer's authority and the holder's
+authority.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="F2|Transmit to Verifier|F2 Transmit to Verifier" id="dfn-f2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">
+F2 Transmit to Verifier</dfn>
+            </td>
+            <td>
+The data flow by which a holder delivers a signed document to the
+<a data-link-type="dfn|abstract-op" data-lt="C3" href="#dfn-c3" class="internalDFN" id="ref-for-dfn-c3-1">verifier system</a>. This flow crosses the trust boundary between the
+holder's authority and the verifier's authority, and is typically
+the first point at which the document is exposed to a party whose interests
+differ from the holder's.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="S1|Security Module|S1 Security Module" id="dfn-s1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">S1 Security Module</dfn>
+            </td>
+            <td>
+The protected key store within the <a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-2">signing system</a> (such as a
+hardware security module, a trusted platform module, or an
+operating-system keystore) that holds the signer's private keys and
+performs signing operations without releasing private key material to
+application code.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="S2|Holder Storage|S2 Holder Storage" id="dfn-s2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">S2 Holder Storage</dfn>
+            </td>
+            <td>
+The persistent storage within the <a data-link-type="dfn|abstract-op" data-lt="C2" href="#dfn-c2" class="internalDFN" id="ref-for-dfn-c2-2">holder system</a> where signed
+documents are kept, typically the storage of a digital wallet
+application. This storage is accessible only to the holder's software
+within the <a data-link-type="dfn|abstract-op" data-lt="C2" href="#dfn-c2" class="internalDFN" id="ref-for-dfn-c2-3">holder system</a> boundary.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="O1|Input Document|O1 Input Document" id="dfn-o1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">O1 Input Document</dfn>
+            </td>
+            <td>
+A document, expressed in a syntax such as JSON or JSON-LD, that contains
+the information to be protected but does not yet carry a proof. It is the
+input to the proof-creation pipeline that runs within the
+<a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-3">signing system</a>.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="O2|Signed Document|O2 Signed Document" data-plurals="signed documents" id="dfn-o2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">O2 Signed Document</dfn>
+            </td>
+            <td>
+An input document combined with one or more <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">Data Integrity proofs</a>. A signed
+document can carry multiple proofs, either as a proof set (independent
+proofs over the same data, enabling cryptographic layering) or as a proof
+chain, where later proofs also protect earlier ones. It is self-contained:
+it can be transmitted and stored without losing its integrity protection.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="C1|Signing System|C1 Signing System" id="dfn-c1" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">C1 Signing System</dfn>
+            </td>
+            <td>
+The system boundary, typically a server or service operated by or for the
+signer, within which the <a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-2">Transform</a>, <a data-link-type="dfn|abstract-op" data-lt="P2" href="#dfn-p2" class="internalDFN" id="ref-for-dfn-p2-2">Hash</a>, and <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-2">Sign</a>
+processes run and the <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-3">Security Module</a> resides. Everything inside
+this boundary is under the signer's authority.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="C2|Holder System|C2 Holder System" id="dfn-c2" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">C2 Holder System</dfn>
+            </td>
+            <td>
+The system boundary, typically a mobile or desktop digital wallet
+application, within which the <a data-link-type="dfn|abstract-op" data-lt="P4" href="#dfn-p4" class="internalDFN" id="ref-for-dfn-p4-3">Store</a> process runs and
+<a data-link-type="dfn|abstract-op" data-lt="S2" href="#dfn-s2" class="internalDFN" id="ref-for-dfn-s2-3">Holder Storage</a> resides. Everything inside this boundary is under
+the holder's control.
+            </td>
+          </tr>
+          <tr>
+            <td class="left">
+              <dfn data-lt="C3|Verifier System|C3 Verifier System" id="dfn-c3" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">C3 Verifier System</dfn>
+            </td>
+            <td>
+The system boundary, typically an automated verification service, within
+which the <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-4">Verify</a> process runs. It is configured with the trust and
+policy decisions of the verifier, such as the <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a>,
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-proof-purpose">proof purposes</a>, and document contexts it accepts.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+
+  <section id="threat-model-stakeholders"><div class="header-wrapper"><h2 id="x2-stakeholders"><bdi class="secno">2. </bdi>Stakeholders</h2><a class="self-link" href="#threat-model-stakeholders" aria-label="Permalink for Section 2."></a></div>
+    
+
+    <section id="e1-signer"><div class="header-wrapper"><h3 id="x2-1-e1-signer"><bdi class="secno">2.1 </bdi>E1 Signer</h3><a class="self-link" href="#e1-signer" aria-label="Permalink for Section 2.1"></a></div>
+    <p>
+A signer is an entity that creates <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-integrity/#dfn-data-integrity-proof">Data Integrity proofs</a> over documents.
+Signers range from <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a> <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-issuers">issuers</a> (universities, government
+agencies, employers) to notaries, supply-chain participants, and automated
+services that make cryptographically verifiable statements. In
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-verifiable-credential">verifiable credential</a> ecosystems, the signer is most often the
+<a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-issuers">issuer</a> of a <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a>.
+    </p>
+    <p>
+The signer's primary goals are that only documents it intends to sign
+carry its proofs, that its private key material remains under its
+exclusive control, and that the documents it signs remain verifiable by
+the parties intended to rely on them. A signer whose keys are compromised,
+or whose proofs can be forged, suffers direct reputational, financial, and
+legal harm.
+    </p>
+
+    </section><section id="e2-holder"><div class="header-wrapper"><h3 id="x2-2-e2-holder"><bdi class="secno">2.2 </bdi>E2 Holder</h3><a class="self-link" href="#e2-holder" aria-label="Permalink for Section 2.2"></a></div>
+    <p>
+A holder is a person or organization that receives signed documents and
+transmits them to verifiers. In <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a> ecosystems, the holder is
+typically the subject of the <a data-link-type="dfn" href="https://www.w3.org/TR/vc-data-model-2.0/#dfn-credential">credential</a> (a student holding a diploma or
+an employee holding a professional certification) and stores signed
+documents in a digital wallet.
+    </p>
+    <p>
+The holder's primary goal is that the documents they present are
+accepted by verifiers. Holders also have a strong interest in privacy:
+they do not want the act of presenting documents to enable signers,
+verifiers, or third parties to track their activities across contexts,
+and they want to disclose no more information than each interaction
+requires.
+    </p>
+
+    </section><section id="e3-verifier"><div class="header-wrapper"><h3 id="x2-3-e3-verifier"><bdi class="secno">2.3 </bdi>E3 Verifier</h3><a class="self-link" href="#e3-verifier" aria-label="Permalink for Section 2.3"></a></div>
+    <p>
+A verifier is an entity that receives signed documents and must decide
+whether to rely on them. Verifiers range from automated services
+processing high volumes of documents (customs systems, age-verification
+services, hiring platforms) to individuals checking a single document.
+    </p>
+    <p>
+The verifier's primary goal is to accept only documents that are
+authentic: created by the claimed signer, unmodified since signing, and
+used for the purpose and in the context the signer intended. Verifiers
+also have a strong interest in availability: verification must complete
+within their operational time budgets even when processing untrusted, and
+potentially malicious, input.
+    </p>
+  </section></section>
+
+  <section id="threat-model-threats"><div class="header-wrapper"><h2 id="x3-threats"><bdi class="secno">3. </bdi>Threats</h2><a class="self-link" href="#threat-model-threats" aria-label="Permalink for Section 3."></a></div>
+    
+    <section class="tm-toc" id="threat-list-0"><div class="header-wrapper"><h3 id="threat-list"><bdi class="secno">3.1 </bdi>Threat List</h3><a class="self-link" href="#threat-list" aria-label="Permalink for Section 3.1"></a></div>
+      
+        
+        <p class="threatCategory">Target Threats</p>
+        <ol class="threat-toc">
+          <li value="1"><a href="#t1-signed-document-tampering">Signed Document Tampering</a> 
+          <span class="threat-tag threat-tag-security">security</span>
+        
+    </li>
+        </ol>
+        
+        <p class="threatCategory">Implementation Threats</p>
+        <ol class="threat-toc">
+          <li value="2"><a href="#t2-canonicalization-resource-exhaustion">Canonicalization Resource Exhaustion</a> 
+          <span class="threat-tag threat-tag-security">security</span>
+        
+    </li>
+        </ol>
+        
+        <p class="threatCategory">Deployment Threats</p>
+        <ol class="threat-toc">
+          <li value="3"><a href="#t3-signing-key-compromise-via-inadequate-key-protection">Signing Key Compromise via Inadequate Key Protection</a> 
+          <span class="threat-tag threat-tag-security">security</span>
+        
+    </li>
+        </ol>
+        
+        <p class="threatCategory">External Threats</p>
+        <ol class="threat-toc">
+          <li value="4"><a href="#t4-cross-context-correlation-via-proof-artifacts">Cross-Context Correlation via Proof Artifacts</a> 
+          <span class="threat-tag threat-tag-privacy">privacy</span>
+        
+    </li>
+        </ol>
+        
+        <p class="threatCategory">Dependency Threats</p>
+        <ol class="threat-toc">
+          <li value="5"><a href="#t5-cryptographically-relevant-quantum-computer-breaks-signature-suites">Cryptographically Relevant Quantum Computer Breaks Signature Suites</a> 
+          <span class="threat-tag threat-tag-security">security</span>
+        
+    </li>
+        </ol>
+        
+      </section>
+    <section class="tm-details" id="threat-details"><div class="header-wrapper"><h3 id="x3-2-threat-details"><bdi class="secno">3.2 </bdi>Threat Details</h3><a class="self-link" href="#threat-details" aria-label="Permalink for Section 3.2"></a></div>
+      
+        
+        <p class="threatCategory">Target Threats</p>
+          
+      <section class="threatDetail" id="t1-signed-document-tampering-0"><div class="header-wrapper"><h4 id="t1-signed-document-tampering"><bdi class="secno">3.2.1 </bdi>T1. Signed Document Tampering</h4><a class="self-link" href="#t1-signed-document-tampering" aria-label="Permalink for Section 3.2.1"></a></div>
+        
+      </section>
+        <table class="threat">
+          
+          <tbody><tr>
+            <td class="threat-name">
+              <section>
+                <div class="header-wrapper"><h4 id="T1.inner">T1. Signed Document Tampering
+                  
+          <span class="threat-tag threat-tag-security">security</span>
+        
+                </h4><a class="self-link" href="#T1.inner" aria-label="Permalink for this Section"></a></div>
+                <span class="index-link">[<a href="#threat-list">Threat List</a>]</span>
+              </section>
+            </td>
+          </tr>
+          
+        <tr>
+          <td class="threat-description">
+            An attacker with access to a <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-5">signed document</a> (while it is <a data-link-type="dfn|abstract-op" data-lt="F1" href="#dfn-f1" class="internalDFN" id="ref-for-dfn-f1-3">transmitted to a holder</a>, kept at rest in <a data-link-type="dfn|abstract-op" data-lt="S2" href="#dfn-s2" class="internalDFN" id="ref-for-dfn-s2-4">holder storage</a>, or <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-3">transmitted to a verifier</a>) modifies its contents to alter the claims it expresses. For example, an attacker might change the subject of a university degree credential, alter the amount on a signed invoice, or insert statements that the <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-5">signer</a> never made. A related variant strips the proof from a <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-6">signed document</a> entirely, or removes individual proofs from a proof set, in the hope that a downstream system will process the document without noticing the missing protection. Detecting modification of signed information, wherever it occurs in the document's lifecycle, is the central capability that the Data Integrity specification was designed to provide.
+          </td>
+        </tr>
+        
+          
+          
+          <tr>
+        <td class="response-name">R1. Cryptographic Proof Verification (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          The <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-5">verify</a> process re-executes the <a data-link-type="dfn|abstract-op" data-lt="cryptosuite" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite's</a> transformation and hashing over the received <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-7">signed document</a> and cryptographically verifies the <code>proofValue</code> against the <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-6">signer</a>'s public key, so any modification of the protected information causes verification to fail. Verification detects tampering rather than preventing it, and residual risks remain: an incorrect canonicalization algorithm could allow two semantically different documents to produce the same canonical form, some signature schemes allow new proofs to be created over already-signed messages (for example, ECDSA is not strongly unforgeable), and some signature libraries omit required verification checks. Proof stripping is not detectable by cryptographic means; <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-4">verifiers</a> reject documents that do not carry the proofs their policy requires.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R2. Transformation Binds Proofs to Information Content (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">Cryptosuites</a> <a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-3">transform</a> the document into a canonical form before <a data-link-type="dfn|abstract-op" data-lt="P2" href="#dfn-p2" class="internalDFN" id="ref-for-dfn-p2-3">hashing</a> and signing, binding the proof to the information content of the document rather than to one specific byte serialization. Benign changes such as whitespace, property ordering, or re-serialization between compatible syntaxes do not invalidate the proof, while any change to the meaning of the protected statements does. This narrows the tampering surface to semantic changes, which are exactly the changes that the <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-6">verify</a> process is designed to detect.
+        </td>
+          </tr>
+          
+          <tr>
+          <td class="affected-component">Affected Components: <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-8">O2: Signed Document</a>, <a data-link-type="dfn|abstract-op" data-lt="F1" href="#dfn-f1" class="internalDFN" id="ref-for-dfn-f1-4">F1: Transmit to Holder</a>, <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-4">F2: Transmit to Verifier</a>, <a data-link-type="dfn|abstract-op" data-lt="S2" href="#dfn-s2" class="internalDFN" id="ref-for-dfn-s2-5">S2: Holder Storage</a>, <a data-link-type="dfn|abstract-op" data-lt="P4" href="#dfn-p4" class="internalDFN" id="ref-for-dfn-p4-4">P4: Store</a>, <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-7">P5: Verify</a>, <a data-link-type="dfn|abstract-op" data-lt="C2" href="#dfn-c2" class="internalDFN" id="ref-for-dfn-c2-4">C2: Holder System</a></td>
+        </tr>
+          
+          <tr>
+            <td class="taxonomy">Threat Taxonomy: STRIDE (Tampering)</td>
+          </tr>
+        </tbody></table>
+        <p class="threatCategory">Implementation Threats</p>
+          
+      <section class="threatDetail" id="t2-canonicalization-resource-exhaustion-0"><div class="header-wrapper"><h4 id="t2-canonicalization-resource-exhaustion"><bdi class="secno">3.2.2 </bdi>T2. Canonicalization Resource Exhaustion</h4><a class="self-link" href="#t2-canonicalization-resource-exhaustion" aria-label="Permalink for Section 3.2.2"></a></div>
+        
+      </section>
+        <table class="threat">
+          
+          <tbody><tr>
+            <td class="threat-name">
+              <section>
+                <div class="header-wrapper"><h4 id="T2.inner">T2. Canonicalization Resource Exhaustion
+                  
+          <span class="threat-tag threat-tag-security">security</span>
+        
+                </h4><a class="self-link" href="#T2.inner" aria-label="Permalink for this Section"></a></div>
+                <span class="index-link">[<a href="#threat-list">Threat List</a>]</span>
+              </section>
+            </td>
+          </tr>
+          
+        <tr>
+          <td class="threat-description">
+            <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">Cryptosuites</a> based on RDF Dataset Canonicalization <a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-4">transform</a> documents through a canonical labeling algorithm whose worst-case behavior, for maliciously crafted inputs, requires excessive computation, a class of inputs known as poisoned datasets. An attacker submits such a crafted <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-9">signed document</a> to a <a data-link-type="dfn|abstract-op" data-lt="C3" href="#dfn-c3" class="internalDFN" id="ref-for-dfn-c3-2">verifier system</a>, whose <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-8">verify</a> process must canonicalize the untrusted input before any proof can be checked, consuming processor time and memory and denying service to legitimate requests. Signing services are exposed in the same way when they run the <a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-5">transform</a> process over an <a data-link-type="dfn|abstract-op" data-lt="O1" href="#dfn-o1" class="internalDFN" id="ref-for-dfn-o1-2">input document</a> supplied by a third party. The Data Integrity specification requires that this class of attack be mitigated, but leaves the selection and configuration of mitigations (detection heuristics, resource limits, timeouts) to implementers.
+          </td>
+        </tr>
+        
+          
+          
+          <tr>
+        <td class="response-name">R3. Poisoned Dataset Detection (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Conforming RDF Dataset Canonicalization implementations are required to detect potentially poisoned datasets and abort processing rather than attempt to canonicalize them, and the canonicalization test suite exercises this behavior. Implementers confirm that the canonicalization library they deploy enforces these protections, since bounded work is still consumed before detection triggers and detection heuristics are necessarily imperfect.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R4. Resource Limits and Timeouts (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Implementations bound the processing applied to any single document (input size limits, canonicalization timeouts, memory ceilings, and rate limiting on document intake) so that a single malicious <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-10">signed document</a> cannot exhaust the resources of the <a data-link-type="dfn|abstract-op" data-lt="C3" href="#dfn-c3" class="internalDFN" id="ref-for-dfn-c3-3">verifier system</a>. These are the same classes of defense applied to any other untrusted input processed on the Web.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R5. JCS-Based Cryptosuite Selection (Eliminate)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          For deployments that do not require RDF semantics, selecting a <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a> based on the JSON Canonicalization Scheme (such as <code>eddsa-jcs-2022</code> or <code>ecdsa-jcs-2019</code>) eliminates this specific attack vector, because JCS canonicalization runs in time proportional to the size of its input. The trade-off is the loss of protections that RDF-based canonicalization provides, such as proofs that survive re-serialization of the document into other compatible syntaxes.
+        </td>
+          </tr>
+          
+          <tr>
+          <td class="affected-component">Affected Components: <a data-link-type="dfn|abstract-op" data-lt="P1" href="#dfn-p1" class="internalDFN" id="ref-for-dfn-p1-6">P1: Transform</a>, <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-9">P5: Verify</a>, <a data-link-type="dfn|abstract-op" data-lt="O1" href="#dfn-o1" class="internalDFN" id="ref-for-dfn-o1-3">O1: Input Document</a>, <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-11">O2: Signed Document</a>, <a data-link-type="dfn|abstract-op" data-lt="C3" href="#dfn-c3" class="internalDFN" id="ref-for-dfn-c3-4">C3: Verifier System</a></td>
+        </tr>
+          
+          <tr>
+            <td class="taxonomy">Threat Taxonomy: STRIDE (Denial of Service)</td>
+          </tr>
+        </tbody></table>
+        <p class="threatCategory">Deployment Threats</p>
+          
+      <section class="threatDetail" id="t3-signing-key-compromise-via-inadequate-key-protection-0"><div class="header-wrapper"><h4 id="t3-signing-key-compromise-via-inadequate-key-protection"><bdi class="secno">3.2.3 </bdi>T3. Signing Key Compromise via Inadequate Key Protection</h4><a class="self-link" href="#t3-signing-key-compromise-via-inadequate-key-protection" aria-label="Permalink for Section 3.2.3"></a></div>
+        
+      </section>
+        <table class="threat">
+          
+          <tbody><tr>
+            <td class="threat-name">
+              <section>
+                <div class="header-wrapper"><h4 id="T3.inner">T3. Signing Key Compromise via Inadequate Key Protection
+                  
+          <span class="threat-tag threat-tag-security">security</span>
+        
+                </h4><a class="self-link" href="#T3.inner" aria-label="Permalink for this Section"></a></div>
+                <span class="index-link">[<a href="#threat-list">Threat List</a>]</span>
+              </section>
+            </td>
+          </tr>
+          
+        <tr>
+          <td class="threat-description">
+            A <a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-4">signing system</a> is deployed with its private signing keys inadequately protected: key material is stored in application memory or on disk instead of in a <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-4">security module</a>, keys remain in service far beyond recommended cryptoperiods, or a single key is reused across unrelated purposes such as both credential issuance and authentication. An attacker who obtains the key material can run the <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-3">sign</a> process at will, producing proofs that are indistinguishable from those created by the legitimate <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-7">signer</a>. The root event is a disclosure of the contents of the <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-5">security module</a>; the realized harm is the attacker spoofing the <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-8">signer</a>'s signing authority. Every document that a <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-10">verifier</a> checks against the compromised key is affected until the compromise is discovered and the key is rotated.
+          </td>
+        </tr>
+        
+          
+          
+          <tr>
+        <td class="response-name">R6. Security Module Key Storage (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Deployments generate and store signing keys inside a dedicated <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-6">security module</a> (such as a hardware security module, a trusted platform module, or an operating-system keystore) that performs the <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-4">sign</a> operation internally and never releases private key material to application code. This substantially raises the cost of key exfiltration, although it does not prevent an attacker who controls the <a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-5">signing system</a> from misusing the module to sign attacker-chosen documents while that access persists.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R7. Cryptoperiods and Key Rotation (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Deployments bound the lifetime of signing keys following key-management guidance such as NIST SP 800-57, which recommends cryptoperiods of one to three years for signing keys, and rotate keys on schedule and immediately upon suspicion of compromise. Bounded cryptoperiods limit the window during which a compromised key can produce proofs that <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-5">verifiers</a> trust.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R8. Verification Relationship and Proof Purpose Validation (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          The Data Integrity specification requires that a <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification method</a> be expressed under the <a data-link-type="dfn" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-relationship">verification relationship</a> that matches a proof's declared <code>proofPurpose</code>, and that the <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-11">verify</a> process confirm both the binding between the <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification method</a> and its <a data-link-type="dfn" href="https://www.w3.org/TR/cid-1.0/#dfn-controller">controller</a> and the match between the proof's purpose and the purpose the <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-6">verifier</a> expects. Keys deployed for a single purpose therefore cannot be silently repurposed for another, which contains the blast radius of any single key compromise.
+        </td>
+          </tr>
+          
+          <tr>
+          <td class="affected-component">Affected Components: <a data-link-type="dfn|abstract-op" data-lt="S1" href="#dfn-s1" class="internalDFN" id="ref-for-dfn-s1-7">S1: Security Module</a>, <a data-link-type="dfn|abstract-op" data-lt="C1" href="#dfn-c1" class="internalDFN" id="ref-for-dfn-c1-6">C1: Signing System</a>, <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-5">P3: Sign</a>, <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-9">E1: Signer</a>, <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-12">P5: Verify</a></td>
+        </tr>
+          
+          <tr>
+            <td class="taxonomy">Threat Taxonomy: STRIDE (Spoofing)</td>
+          </tr>
+        </tbody></table>
+        <p class="threatCategory">External Threats</p>
+          
+      <section class="threatDetail" id="t4-cross-context-correlation-via-proof-artifacts-0"><div class="header-wrapper"><h4 id="t4-cross-context-correlation-via-proof-artifacts"><bdi class="secno">3.2.4 </bdi>T4. Cross-Context Correlation via Proof Artifacts</h4><a class="self-link" href="#t4-cross-context-correlation-via-proof-artifacts" aria-label="Permalink for Section 3.2.4"></a></div>
+        
+      </section>
+        <table class="threat">
+          
+          <tbody><tr>
+            <td class="threat-name">
+              <section>
+                <div class="header-wrapper"><h4 id="T4.inner">T4. Cross-Context Correlation via Proof Artifacts
+                  
+          <span class="threat-tag threat-tag-privacy">privacy</span>
+        
+                </h4><a class="self-link" href="#T4.inner" aria-label="Permalink for this Section"></a></div>
+                <span class="index-link">[<a href="#threat-list">Threat List</a>]</span>
+              </section>
+            </td>
+          </tr>
+          
+        <tr>
+          <td class="threat-description">
+            Two or more <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-7">verifiers</a> (or a <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-10">signer</a> colluding with a <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-8">verifier</a>) compare the <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-12">signed documents</a> each has received and correlate them using the cryptographic artifacts those documents carry. Even when a <a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-3">holder</a> discloses only minimal document content, a static <code>proofValue</code> is effectively a globally unique identifier for the document, and the <code>verificationMethod</code>, <code>created</code> timestamp, and other proof metadata narrow the correlation further. Colluding parties can thereby link a <a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-4">holder</a>'s activities across unrelated contexts, building interaction profiles the <a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-5">holder</a> never consented to, and a <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-11">signer</a> can discover where and when the documents it signed are being used. The collusion itself takes place entirely outside the systems this specification defines, so no specification text can prevent it; the specification can only reduce what the proof artifacts reveal.
+          </td>
+        </tr>
+        
+          
+          
+          <tr>
+        <td class="response-name">R9. Unlinkable Derived Proofs (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">Cryptosuites</a> that support unlinkable derived proofs, such as <code>bbs-2023</code>, allow a <a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-6">holder</a> to present, for each <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-5">transmission to a verifier</a>, a freshly derived proof that is cryptographically unlinkable both to the original signature and to other derived proofs from the same <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-13">signed document</a>. Residual correlation signals remain even then: the total number of signed statements, the pattern of which statement indexes are revealed, and any globally unique <code>@id</code> values in the disclosed content can still narrow the anonymity set, and the BBS signature scheme is not post-quantum secure.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R10. Single-Use Documents (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-12">Signers</a> issue batches of single-use <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-14">signed documents</a> so that each presentation to a <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-9">verifier</a> carries a distinct <code>proofValue</code>, leaving colluding parties nothing stable to join on at the proof layer. This shifts cost onto issuance volume and does not address correlation through the disclosed document content itself.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R11. Herd Privacy Practices (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-13">Signers</a> keep the correlatable surface of the documents they sign small and common to many holders: <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/cid-1.0/#dfn-verification-method">verification methods</a> shared across large populations, <code>created</code> timestamps that are coarse-grained or omitted, and no per-document identifiers in proof metadata. Any individual <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-15">signed document</a> is then indistinguishable from those of a large herd of holders, and correlation yields little.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R12. Accept Where Linkability Is Required (Accept)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Some ecosystems require strong correlation by design (regulated audit trails, anti-money-laundering obligations, or the tracking of hazardous materials), and in those settings linkable proofs are the intended behavior rather than a defect. Deployments in such ecosystems accept this threat for the flows where linkability is mandated and disclose that acceptance to their participants.
+        </td>
+          </tr>
+          
+          <tr>
+          <td class="affected-component">Affected Components: <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-14">E1: Signer</a>, <a data-link-type="dfn|abstract-op" data-lt="E2" href="#dfn-e2" class="internalDFN" id="ref-for-dfn-e2-7">E2: Holder</a>, <a data-link-type="dfn|abstract-op" data-lt="E3" href="#dfn-e3" class="internalDFN" id="ref-for-dfn-e3-10">E3: Verifier</a>, <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-16">O2: Signed Document</a>, <a data-link-type="dfn|abstract-op" data-lt="F2" href="#dfn-f2" class="internalDFN" id="ref-for-dfn-f2-6">F2: Transmit to Verifier</a></td>
+        </tr>
+          
+          <tr>
+            <td class="taxonomy">Threat Taxonomy: STRIDE (Information Disclosure)</td>
+          </tr>
+        </tbody></table>
+        <p class="threatCategory">Dependency Threats</p>
+          
+      <section class="threatDetail" id="t5-cryptographically-relevant-quantum-computer-breaks-signature-suites-0"><div class="header-wrapper"><h4 id="t5-cryptographically-relevant-quantum-computer-breaks-signature-suites"><bdi class="secno">3.2.5 </bdi>T5. Cryptographically Relevant Quantum Computer Breaks Signature Suites</h4><a class="self-link" href="#t5-cryptographically-relevant-quantum-computer-breaks-signature-suites" aria-label="Permalink for Section 3.2.5"></a></div>
+        
+      </section>
+        <table class="threat">
+          
+          <tbody><tr>
+            <td class="threat-name">
+              <section>
+                <div class="header-wrapper"><h4 id="T5.inner">T5. Cryptographically Relevant Quantum Computer Breaks Signature Suites
+                  
+          <span class="threat-tag threat-tag-security">security</span>
+        
+                </h4><a class="self-link" href="#T5.inner" aria-label="Permalink for this Section"></a></div>
+                <span class="index-link">[<a href="#threat-list">Threat List</a>]</span>
+              </section>
+            </td>
+          </tr>
+          
+        <tr>
+          <td class="threat-description">
+            Every currently registered Data Integrity <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a> (ECDSA over the P-256 and P-384 curves, EdDSA over Ed25519, and BBS over BLS12-381) inherits its security from the hardness of elliptic-curve discrete logarithms. A cryptographically relevant quantum computer (CRQC) running Shor's algorithm would recover private keys from public keys, allowing an attacker to perform the <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-6">sign</a> process for any <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-15">signer</a> whose public key it has observed and to forge <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-17">signed documents</a> that <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-13">verify</a> as authentic. This collapses the mitigation on which the tamper-detection guarantee of this specification rests (see T1), and it applies retroactively: documents signed before migration become forgeable the moment the capability exists, even though the hash functions used by the <a data-link-type="dfn|abstract-op" data-lt="P2" href="#dfn-p2" class="internalDFN" id="ref-for-dfn-p2-4">hash</a> process are not practically broken by known quantum algorithms.
+          </td>
+        </tr>
+        
+          
+          
+          <tr>
+        <td class="response-name">R13. Cryptographic Agility (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          The <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuite</a> architecture separates the proof from the document it protects and identifies the suite in every proof, so deployments that remain connected can migrate to a post-quantum signature suite through a configuration change once one is standardized. Post-quantum Data Integrity <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a> based on NIST-standardized algorithms, such as ML-DSA, are under active incubation. Agility enables migration for newly created proofs; it does nothing for documents that cannot be re-issued.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R14. Cryptographic Layering via Proof Sets (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          Because a <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-18">signed document</a> can carry a proof set, <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-16">signers</a> of long-lived documents layer proofs from independent <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">cryptosuites</a> (for example, a classical suite alongside a post-quantum suite during the migration period) so that the compromise of one algorithm family leaves the other proof intact. The residual risk is retroactive forgery: proofs created before layering or migration become forgeable once a CRQC exists, and only re-issuance of those documents, together with verifier-side deprecation of broken suites, addresses the legacy population.
+        </td>
+          </tr>
+          
+          <tr>
+        <td class="response-name">R15. Date-Versioned Cryptosuite Names (Reduce)</td>
+          </tr>
+          <tr>
+        <td class="response-desc">
+          <a data-link-type="dfn|abstract-op" href="https://www.w3.org/TR/vc-data-integrity/#dfn-cryptosuite">Cryptosuite</a> identifiers embed their year of design (<code>eddsa-rdfc-2022</code>, <code>ecdsa-rdfc-2019</code>, <code>bbs-2023</code>), giving developers and auditors an immediate, human-readable signal of cryptographic age. Aging identifiers prompt the periodic review, upgrade, and deprecation decisions on which timely migration away from broken algorithms depends.
+        </td>
+          </tr>
+          
+          <tr>
+          <td class="affected-component">Affected Components: <a data-link-type="dfn|abstract-op" data-lt="P3" href="#dfn-p3" class="internalDFN" id="ref-for-dfn-p3-7">P3: Sign</a>, <a data-link-type="dfn|abstract-op" data-lt="P5" href="#dfn-p5" class="internalDFN" id="ref-for-dfn-p5-14">P5: Verify</a>, <a data-link-type="dfn|abstract-op" data-lt="O2" href="#dfn-o2" class="internalDFN" id="ref-for-dfn-o2-19">O2: Signed Document</a>, <a data-link-type="dfn|abstract-op" data-lt="E1" href="#dfn-e1" class="internalDFN" id="ref-for-dfn-e1-17">E1: Signer</a></td>
+        </tr>
+          
+          <tr>
+            <td class="taxonomy">Threat Taxonomy: STRIDE (Tampering)</td>
+          </tr>
+        </tbody></table>
+      </section>
+  </section>
+
+  <section id="threat-model-contributing"><div class="header-wrapper"><h2 id="x4-contributing"><bdi class="secno">4. </bdi>Contributing</h2><a class="self-link" href="#threat-model-contributing" aria-label="Permalink for Section 4."></a></div>
+    
+    <p>
+This threat model is maintained alongside the Data Integrity
+specification. Feedback, bug reports, and proposed additions are
+welcome via the <a href="https://github.com/w3c/vc-data-integrity/issues/new">issue
+tracker</a>.
+    </p>
+    <section id="threat-model-adding-a-threat"><div class="header-wrapper"><h3 id="x4-1-adding-a-threat"><bdi class="secno">4.1 </bdi>Adding a Threat</h3><a class="self-link" href="#threat-model-adding-a-threat" aria-label="Permalink for Section 4.1"></a></div>
+      
+      <p>
+To add a new threat to the model, provide the following components:
+      </p>
+      <ol>
+        <li>A short, descriptive name</li>
+        <li>
+A unique ID (letter <strong>T</strong> followed by an integer,
+e.g., <strong>T6</strong>)
+        </li>
+        <li>
+A description of the threat with enough detail for readers to understand
+its scope
+        </li>
+        <li>
+One or more responses, each with a name, unique ID (letter <strong>R
+</strong> followed by an integer), response type (Eliminate, Reduce,
+Transfer, or Accept), and description
+        </li>
+        <li>
+A list of affected DFD elements drawn from the dictionary above
+        </li>
+        <li>
+The threat taxonomy used (e.g., STRIDE) and the threat class within
+that taxonomy
+        </li>
+      </ol>
+      <p>
+Create a YAML file following the pattern of the existing threat files in
+the <code>threats/</code> directory, then register it in
+<code>threats/outline.yaml</code> by adding its filename to the
+<code>files</code> list and its threat ID to the appropriate category in
+the <code>categories</code> list. No changes to <code>index.html</code>
+are required.
+      </p>
+    </section>
+  </section>
+
+
+
+
+<section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-references"><bdi class="secno">A. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="informative-references"><div class="header-wrapper"><h3 id="a-1-informative-references"><bdi class="secno">A.1 </bdi>Informative references</h3><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix A.1"></a></div>
+    
+    <dl class="bibliography"><dt id="bib-cid">[CID]</dt><dd>
+      <a href="https://www.w3.org/TR/cid-1.0/"><cite>Controlled Identifiers v1.0</cite></a>. Michael Jones; Manu Sporny.  W3C. 15 May 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/cid-1.0/">https://www.w3.org/TR/cid-1.0/</a>
+    </dd><dt id="bib-did">[did]</dt><dd>
+      <a href="https://www.w3.org/TR/did-core/"><cite>Decentralized Identifiers (DIDs) v1.0</cite></a>. Manu Sporny; Amy Guy; Markus Sabadello; Drummond Reed.  W3C. 19 July 2022. W3C Recommendation. URL: <a href="https://www.w3.org/TR/did-core/">https://www.w3.org/TR/did-core/</a>
+    </dd><dt id="bib-vc-data-integrity">[VC-DATA-INTEGRITY]</dt><dd>
+      <a href="https://www.w3.org/TR/vc-data-integrity/"><cite>Verifiable Credential Data Integrity 1.0</cite></a>. Ivan Herman; Manu Sporny; Ted Thibodeau Jr; Dave Longley; Greg Bernstein.  W3C. 15 May 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-integrity/">https://www.w3.org/TR/vc-data-integrity/</a>
+    </dd><dt id="bib-vc-data-model-2-0">[vc-data-model-2.0]</dt><dd>
+      <a href="https://www.w3.org/TR/vc-data-model-2.0/"><cite>Verifiable Credentials Data Model v2.0</cite></a>. Ivan Herman; Michael Jones; Manu Sporny; Ted Thibodeau Jr; Gabe Cohen.  W3C. 15 May 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/vc-data-model-2.0/">https://www.w3.org/TR/vc-data-model-2.0/</a>
+    </dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-e1" aria-label="Links in this document to definition: E1 Signer">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-e1" aria-label="Permalink for definition: E1 Signer. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-e1-1" title="§ 1.1 Description">§ 1.1 Description</a> <a href="#ref-for-dfn-e1-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-e1-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-e1-4" title="Reference 4">(4)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-e1-5" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-e1-6" title="Reference 2">(2)</a> <a href="#ref-for-dfn-e1-7" title="Reference 3">(3)</a> <a href="#ref-for-dfn-e1-8" title="Reference 4">(4)</a> <a href="#ref-for-dfn-e1-9" title="Reference 5">(5)</a> <a href="#ref-for-dfn-e1-10" title="Reference 6">(6)</a> <a href="#ref-for-dfn-e1-11" title="Reference 7">(7)</a> <a href="#ref-for-dfn-e1-12" title="Reference 8">(8)</a> <a href="#ref-for-dfn-e1-13" title="Reference 9">(9)</a> <a href="#ref-for-dfn-e1-14" title="Reference 10">(10)</a> <a href="#ref-for-dfn-e1-15" title="Reference 11">(11)</a> <a href="#ref-for-dfn-e1-16" title="Reference 12">(12)</a> <a href="#ref-for-dfn-e1-17" title="Reference 13">(13)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-e2" aria-label="Links in this document to definition: E2 Holder">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-e2" aria-label="Permalink for definition: E2 Holder. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-e2-1" title="§ 1.1 Description">§ 1.1 Description</a> <a href="#ref-for-dfn-e2-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-e2-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-e2-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-e2-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-e2-6" title="Reference 4">(4)</a> <a href="#ref-for-dfn-e2-7" title="Reference 5">(5)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-e3" aria-label="Links in this document to definition: E3 Verifier">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-e3" aria-label="Permalink for definition: E3 Verifier. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-e3-1" title="§ 1.1 Description">§ 1.1 Description</a> <a href="#ref-for-dfn-e3-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-e3-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-e3-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-e3-5" title="Reference 2">(2)</a> <a href="#ref-for-dfn-e3-6" title="Reference 3">(3)</a> <a href="#ref-for-dfn-e3-7" title="Reference 4">(4)</a> <a href="#ref-for-dfn-e3-8" title="Reference 5">(5)</a> <a href="#ref-for-dfn-e3-9" title="Reference 6">(6)</a> <a href="#ref-for-dfn-e3-10" title="Reference 7">(7)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-p1" aria-label="Links in this document to definition: P1 Transform">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-p1" aria-label="Permalink for definition: P1 Transform. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-p1-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p1-2" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p1-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-p1-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-p1-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-p1-6" title="Reference 4">(4)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-p2" aria-label="Links in this document to definition: P2 Hash">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-p2" aria-label="Permalink for definition: P2 Hash. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-p2-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p2-2" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p2-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-p2-4" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-p3" aria-label="Links in this document to definition: P3 Sign">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-p3" aria-label="Permalink for definition: P3 Sign. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-p3-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p3-2" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p3-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-p3-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-p3-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-p3-6" title="Reference 4">(4)</a> <a href="#ref-for-dfn-p3-7" title="Reference 5">(5)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-p4" aria-label="Links in this document to definition: P4 Store">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-p4" aria-label="Permalink for definition: P4 Store. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-p4-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p4-2" title="§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem">§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p4-3" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p4-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-p5" aria-label="Links in this document to definition: P5 Verify">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-p5" aria-label="Permalink for definition: P5 Verify. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-p5-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p5-2" title="§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem">§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p5-3" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> <a href="#ref-for-dfn-p5-4" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-p5-5" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-p5-6" title="Reference 2">(2)</a> <a href="#ref-for-dfn-p5-7" title="Reference 3">(3)</a> <a href="#ref-for-dfn-p5-8" title="Reference 4">(4)</a> <a href="#ref-for-dfn-p5-9" title="Reference 5">(5)</a> <a href="#ref-for-dfn-p5-10" title="Reference 6">(6)</a> <a href="#ref-for-dfn-p5-11" title="Reference 7">(7)</a> <a href="#ref-for-dfn-p5-12" title="Reference 8">(8)</a> <a href="#ref-for-dfn-p5-13" title="Reference 9">(9)</a> <a href="#ref-for-dfn-p5-14" title="Reference 10">(10)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-f1" aria-label="Links in this document to definition: F1 Transmit to Holder">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-f1" aria-label="Permalink for definition: F1 Transmit to Holder. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-f1-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-f1-2" title="§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem">§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem</a> 
+    </li><li>
+      <a href="#ref-for-dfn-f1-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-f1-4" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-f2" aria-label="Links in this document to definition: F2 Transmit to Verifier">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-f2" aria-label="Permalink for definition: F2 Transmit to Verifier. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-f2-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-f2-2" title="§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem">§ 1.2 Data Flow Diagram for the Data Integrity Ecosystem</a> 
+    </li><li>
+      <a href="#ref-for-dfn-f2-3" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-f2-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-f2-5" title="Reference 3">(3)</a> <a href="#ref-for-dfn-f2-6" title="Reference 4">(4)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-s1" aria-label="Links in this document to definition: S1 Security Module">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-s1" aria-label="Permalink for definition: S1 Security Module. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-s1-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-s1-2" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> <a href="#ref-for-dfn-s1-3" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-s1-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-s1-5" title="Reference 2">(2)</a> <a href="#ref-for-dfn-s1-6" title="Reference 3">(3)</a> <a href="#ref-for-dfn-s1-7" title="Reference 4">(4)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-s2" aria-label="Links in this document to definition: S2 Holder Storage">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-s2" aria-label="Permalink for definition: S2 Holder Storage. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-s2-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-s2-2" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> <a href="#ref-for-dfn-s2-3" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-s2-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-s2-5" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-o1" aria-label="Links in this document to definition: O1 Input Document">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-o1" aria-label="Permalink for definition: O1 Input Document. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-o1-1" title="§ 1.1 Description">§ 1.1 Description</a> 
+    </li><li>
+      <a href="#ref-for-dfn-o1-2" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-o1-3" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-o2" aria-label="Links in this document to definition: O2 Signed Document">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-o2" aria-label="Permalink for definition: O2 Signed Document. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-o2-1" title="§ 1.1 Description">§ 1.1 Description</a> <a href="#ref-for-dfn-o2-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-o2-3" title="Reference 3">(3)</a> <a href="#ref-for-dfn-o2-4" title="Reference 4">(4)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-o2-5" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-o2-6" title="Reference 2">(2)</a> <a href="#ref-for-dfn-o2-7" title="Reference 3">(3)</a> <a href="#ref-for-dfn-o2-8" title="Reference 4">(4)</a> <a href="#ref-for-dfn-o2-9" title="Reference 5">(5)</a> <a href="#ref-for-dfn-o2-10" title="Reference 6">(6)</a> <a href="#ref-for-dfn-o2-11" title="Reference 7">(7)</a> <a href="#ref-for-dfn-o2-12" title="Reference 8">(8)</a> <a href="#ref-for-dfn-o2-13" title="Reference 9">(9)</a> <a href="#ref-for-dfn-o2-14" title="Reference 10">(10)</a> <a href="#ref-for-dfn-o2-15" title="Reference 11">(11)</a> <a href="#ref-for-dfn-o2-16" title="Reference 12">(12)</a> <a href="#ref-for-dfn-o2-17" title="Reference 13">(13)</a> <a href="#ref-for-dfn-o2-18" title="Reference 14">(14)</a> <a href="#ref-for-dfn-o2-19" title="Reference 15">(15)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-c1" aria-label="Links in this document to definition: C1 Signing System">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-c1" aria-label="Permalink for definition: C1 Signing System. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-c1-1" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> <a href="#ref-for-dfn-c1-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-c1-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-c1-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-c1-5" title="Reference 2">(2)</a> <a href="#ref-for-dfn-c1-6" title="Reference 3">(3)</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-c2" aria-label="Links in this document to definition: C2 Holder System">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-c2" aria-label="Permalink for definition: C2 Holder System. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-c2-1" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> <a href="#ref-for-dfn-c2-2" title="Reference 2">(2)</a> <a href="#ref-for-dfn-c2-3" title="Reference 3">(3)</a> 
+    </li><li>
+      <a href="#ref-for-dfn-c2-4" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-c3" aria-label="Links in this document to definition: C3 Verifier System">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-c3" aria-label="Permalink for definition: C3 Verifier System. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-c3-1" title="§ 1.3 Dictionary">§ 1.3 Dictionary</a> 
+    </li><li>
+      <a href="#ref-for-dfn-c3-2" title="§ 3.2 Threat Details">§ 3.2 Threat Details</a> <a href="#ref-for-dfn-c3-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-c3-4" title="Reference 3">(3)</a> 
+    </li>
+  </ul>
+    </div><script id="respec-highlight-vars">(() => {
+// @ts-check
+
+if (document.respec) {
+  document.respec.ready.then(setupVarHighlighter);
+} else {
+  setupVarHighlighter();
+}
+
+function setupVarHighlighter() {
+  document
+    .querySelectorAll("var")
+    .forEach(varElem => varElem.addEventListener("click", highlightListener));
+}
+
+/**
+ * @param {MouseEvent} ev
+ */
+function highlightListener(ev) {
+  ev.stopPropagation();
+  const varElem = /** @type {HTMLElement} */ (ev.target);
+  const hightligtedElems = highlightVars(varElem);
+  const resetListener = () => {
+    const hlColor = getHighlightColor(varElem);
+    hightligtedElems.forEach(el => removeHighlight(el, hlColor));
+    [...HL_COLORS.keys()].forEach(key => HL_COLORS.set(key, true));
+  };
+  if (hightligtedElems.length) {
+    document.body.addEventListener("click", resetListener, { once: true });
+  }
+}
+
+// availability of highlight colors. colors from var.css
+const HL_COLORS = new Map([
+  ["respec-hl-c1", true],
+  ["respec-hl-c2", true],
+  ["respec-hl-c3", true],
+  ["respec-hl-c4", true],
+  ["respec-hl-c5", true],
+  ["respec-hl-c6", true],
+  ["respec-hl-c7", true],
+]);
+
+/**
+ * @param {HTMLElement} target
+ */
+function getHighlightColor(target) {
+  // return current colors if applicable
+  const { value } = target.classList;
+  const re = /respec-hl-\w+/;
+  const activeClass = re.test(value) && value.match(re);
+  if (activeClass) return activeClass[0];
+
+  // first color preference
+  if (HL_COLORS.get("respec-hl-c1") === true) return "respec-hl-c1";
+
+  // otherwise get some other available color
+  return [...HL_COLORS.keys()].find(c => HL_COLORS.get(c)) || "respec-hl-c1";
+}
+
+/**
+ * @param {HTMLElement} varElem
+ */
+function highlightVars(varElem) {
+  const textContent = norm(varElem.textContent);
+  const parent = /** @type {HTMLElement} */ (
+    varElem.closest(".algorithm, section")
+  );
+  if (!parent) return [];
+  const highlightColor = getHighlightColor(varElem);
+
+  const varsToHighlight = [...parent.querySelectorAll("var")].filter(
+    el =>
+      norm(el.textContent) === textContent &&
+      el.closest(".algorithm, section") === parent
+  );
+
+  // update availability of highlight color
+  const colorStatus = varsToHighlight[0].classList.contains("respec-hl");
+  HL_COLORS.set(highlightColor, colorStatus);
+
+  // highlight vars
+  if (colorStatus) {
+    varsToHighlight.forEach(el => removeHighlight(el, highlightColor));
+    return [];
+  } else {
+    varsToHighlight.forEach(el => addHighlight(el, highlightColor));
+  }
+  return varsToHighlight;
+}
+
+/**
+ * @param {HTMLElement} el
+ * @param {string} highlightColor
+ */
+function removeHighlight(el, highlightColor) {
+  el.classList.remove("respec-hl", highlightColor);
+  // clean up empty class attributes so they don't come in export
+  if (!el.classList.length) el.removeAttribute("class");
+}
+
+/**
+ * @param {HTMLElement} elem
+ * @param {string} highlightColor
+ */
+function addHighlight(elem, highlightColor) {
+  elem.classList.add("respec-hl", highlightColor);
+}
+
+/**
+ * Same as `norm` from src/core/utils, but our build process doesn't allow
+ * imports in runtime scripts, so duplicated here.
+ * @param {string} str
+ */
+function norm(str) {
+  return str.trim().replace(/\s+/g, " ");
+}
+})()</script><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respec) {
+  document.respec.ready.then(setupPanel);
+} else {
+  setupPanel();
+}
+
+function setupPanel() {
+  const listener = panelListener();
+  document.body.addEventListener("keydown", listener);
+  document.body.addEventListener("click", listener);
+}
+
+function panelListener() {
+  /** @type {HTMLElement | null} */
+  let panel = null;
+  /**
+   * @param {KeyboardEvent|MouseEvent} event
+   */
+  return event => {
+    const { target, type } = event;
+
+    if (!(target instanceof HTMLElement)) return;
+
+    // For keys, we only care about Enter key to activate the panel
+    // otherwise it's activated via a click.
+    if (
+      type === "keydown" &&
+      /** @type {KeyboardEvent} */ (event).key !== "Enter"
+    )
+      return;
+
+    const action = deriveAction(event);
+
+    switch (action) {
+      case "show": {
+        hidePanel(panel);
+        /** @type {HTMLElement | null} */
+        const dfn = target.closest("dfn, .index-term");
+        if (!dfn?.id) break;
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        if (!panel) break;
+        const coords = deriveCoordinates(
+          /** @type {MouseEvent|KeyboardEvent} */ (event)
+        );
+        displayPanel(dfn, panel, coords);
+        break;
+      }
+      case "dock": {
+        if (panel) {
+          panel.style.left = "";
+          panel.style.top = "";
+          panel.classList.add("docked");
+        }
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        panel = null;
+        break;
+      }
+    }
+  };
+}
+
+/**
+ * @param {MouseEvent|KeyboardEvent} event
+ */
+function deriveCoordinates(event) {
+  const target = /** @type HTMLElement */ (event.target);
+
+  // We prevent synthetic AT clicks from putting
+  // the dialog in a weird place. The AT events sometimes
+  // lack coordinates, so they have clientX/Y = 0
+  const rect = target.getBoundingClientRect();
+  if (
+    event instanceof MouseEvent &&
+    event.clientX >= rect.left &&
+    event.clientY >= rect.top
+  ) {
+    // The event probably happened inside the bounding rect...
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  // Offset to the middle of the element
+  const x = rect.x + rect.width / 2;
+  // Placed at the bottom of the element
+  const y = rect.y + rect.height;
+  return { x, y };
+}
+
+/**
+ * @param {Event} event
+ */
+function deriveAction(event) {
+  const target = /** @type {HTMLElement} */ (event.target);
+  const hitALink = !!target.closest("a");
+  if (target.closest("dfn:not([data-cite]), .index-term")) {
+    return hitALink ? "none" : "show";
+  }
+  if (target.closest(".dfn-panel")) {
+    if (hitALink) {
+      return target.classList.contains("self-link") ? "hide" : "dock";
+    }
+
+    const panel = /** @type {HTMLElement} */ (target.closest(".dfn-panel"));
+    return panel.classList.contains("docked") ? "hide" : "none";
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return "none";
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement | null} */
+    const caret = panel.querySelector(".caret");
+    if (caret) caret.style.left = `${newCaretOffset}px`;
+  }
+
+  // As it's a dialog, we trap focus.
+  // TODO: when <dialog> becomes a implemented, we should really
+  // use that.
+  trapFocus(panel, dfn);
+}
+
+/**
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function trapFocus(panel, dfn) {
+  /** @type NodeListOf<HTMLAnchorElement> elements */
+  const anchors = panel.querySelectorAll("a[href]");
+  // No need to trap focus
+  if (!anchors.length) return;
+
+  // Move focus to first anchor element
+  const first = anchors.item(0);
+  first.focus();
+
+  const trapListener = createTrapListener(anchors, panel, dfn);
+  panel.addEventListener("keydown", trapListener);
+
+  // Hiding the panel releases the trap
+  const mo = new MutationObserver(records => {
+    const [record] = records;
+    const target = /** @type HTMLElement */ (record.target);
+    if (target.hidden) {
+      panel.removeEventListener("keydown", trapListener);
+      mo.disconnect();
+    }
+  });
+  mo.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+}
+
+/**
+ *
+ * @param {NodeListOf<HTMLAnchorElement>} anchors
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function createTrapListener(anchors, panel, dfn) {
+  const lastIndex = anchors.length - 1;
+  let currentIndex = 0;
+  /**
+   * @param {KeyboardEvent} event
+   */
+  return event => {
+    switch (event.key) {
+      // Hitting "Tab" traps us in a nice loop around elements.
+      case "Tab": {
+        event.preventDefault();
+        currentIndex += event.shiftKey ? -1 : +1;
+        if (currentIndex < 0) {
+          currentIndex = lastIndex;
+        } else if (currentIndex > lastIndex) {
+          currentIndex = 0;
+        }
+        anchors.item(currentIndex).focus();
+        break;
+      }
+
+      // Hitting "Enter" on an anchor releases the trap.
+      case "Enter":
+        hidePanel(panel);
+        break;
+
+      // Hitting "Escape" returns focus to dfn.
+      case "Escape":
+        hidePanel(panel);
+        dfn.focus();
+        return;
+    }
+  };
+}
+
+/** @param {HTMLElement | null} panel */
+function hidePanel(panel) {
+  if (!panel) return;
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script></body></html>
