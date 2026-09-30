@@ -38,7 +38,7 @@ dfn{cursor:pointer}
 </style>
   
   
-<title>Data Integrity Threat Model</title>
+<title>Data Integrity Threat Model v1.1</title>
   
 <style id="respec-mainstyle">
 @keyframes pop{
@@ -91,6 +91,10 @@ body:has(input[name=color-scheme][value=light]:checked),head:not(:has(meta[name=
 body:has(input[name=color-scheme][value=dark]:checked){color-scheme:dark}
 </style>
   
+  
+
+  
+  
 <link rel="stylesheet" href="threats/threat-model.css">
   
 
@@ -101,7 +105,7 @@ specification. It identifies and analyzes security and
 privacy threats specific to ecosystems that use Data Integrity proofs
 (created using cryptosuites such as ECDSA, EdDSA, and BBS) to secure the
 authenticity and integrity of documents such as verifiable credentials.">
-<link rel="canonical" href="https://www.w3.org/TR/vc-data-integrity/threat-model/">
+<link rel="canonical" href="https://www.w3.org/TR/vc-data-integrity-threat-model-1.1/">
 <style>
 var:hover{text-decoration:underline;cursor:pointer}
 var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
@@ -132,7 +136,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "publishDate": "2026-10-08",
   "group": "vc",
   "edDraftURI": "https://w3c.github.io/vc-data-integrity/threat-model/",
-  "latestVersion": "https://www.w3.org/TR/vc-data-integrity/threat-model/",
+  "latestVersion": "https://www.w3.org/TR/vc-data-integrity-threat-model-1.1/",
   "github": {
     "repoURL": "https://github.com/w3c/vc-data-integrity/",
     "branch": "main"
@@ -155,9 +159,6 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "preProcess": [
     null
   ],
-  "postProcess": [
-    null
-  ],
   "publishISODate": "2026-10-08T00:00:00.000Z",
   "generatedSubtitle": "W3C Group Note Draft 08 October 2026"
 }</script>
@@ -167,16 +168,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 <body class="h-entry informative" data-cite="VC-DATA-MODEL-2.0 CID DID VC-DATA-INTEGRITY"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
-    <h1 id="title" class="title">Data Integrity Threat Model</h1> 
+    <h1 id="title" class="title">Data Integrity Threat Model v1.1</h1> 
     <p id="w3c-state"><a href="https://www.w3.org/standards/types#DNOTE">W3C Group Note Draft</a> <time class="dt-published" datetime="2026-10-08">08 October 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                  <a class="u-url" href="https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/threat-model/">https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/threat-model/</a>
+                  <a class="u-url" href="https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/">https://www.w3.org/TR/2026/DNOTE-vc-data-integrity-threat-model-1.1-20261008/</a>
                 </dd>
         <dt>Latest published version:</dt><dd>
-                  <a href="https://www.w3.org/TR/vc-data-integrity/threat-model/">https://www.w3.org/TR/vc-data-integrity/threat-model/</a>
+                  <a href="https://www.w3.org/TR/vc-data-integrity-threat-model-1.1/">https://www.w3.org/TR/vc-data-integrity-threat-model-1.1/</a>
                 </dd>
         <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/vc-data-integrity/threat-model/">https://w3c.github.io/vc-data-integrity/threat-model/</a></dd>
         <dt>History:</dt><dd>
