@@ -31,14 +31,6 @@
       maxTocLevel: 4,
       xref: ["VC-DATA-MODEL-2.0", "CID", "DID", "VC-DATA-INTEGRITY"],
       preProcess: [window.ThreatModel.render],
-      postProcess: [(config, document) => {
-        config.thisVersion =
-          config.thisVersion.replace(/\/$/, '') + '/threat-model/';
-        const link = document.querySelector(".head a.u-url");
-        if(link) {
-          link.href = config.thisVersion;
-          link.textContent = config.thisVersion;
-      }]
     };
   </script>
   <link rel="stylesheet" href="threats/threat-model.css" />
