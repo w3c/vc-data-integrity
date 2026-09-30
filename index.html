@@ -3077,7 +3077,7 @@ We summarize the properties of these approaches in
                 <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
                 <td>list of salts, list of salted hashes, one for each claim,
                   plus one signature over these two lists.</td>
-                <td>N<sub>claims</sub> &times; (hash size) + N<sub>revealed claims</sub>  &times;  (salt  size) + signature size</td>
+                <td>N<sub>claims</sub> &times; (hash size) + N<sub>revealed claims</sub> &times; (salt size) + signature size</td>
               </tr>
               <tr>
                 <td>Multi Claim Signature, BBS</td>
@@ -3996,7 +3996,7 @@ respectively.
           <p>
 The following algorithm serializes a SHoC approach derived proof value.
 The required inputs are a base signature (|signature|), an array of filtered 
-salts (|filteredSalts|), an array of salted  hashes (|saltedHashes|), a label map
+salts (|filteredSalts|), an array of salted hashes (|saltedHashes|), a label map
 (|labelMap|), an array of mandatory indexes (|mandatoryIndexes|), and an array
 of selective indexes (|selectiveIndexes|). A single <em>derived proof</em>
 value, serialized as a UTF-8 string, is produced as output.
@@ -4095,7 +4095,7 @@ elements, using the names "signature", "salts", "saltedHashes",
           <p class="ednote">
 Should we also mention additional checks on the values of |salts|,
 |saltedHashes|, |mandatoryIndexes|, and |selectiveIndexes|? In particular, the
-length of the the |salts| and |selectiveIndexes| must be the same. The all 
+lengths of the |salts| and |selectiveIndexes| must be the same. All 
 elements of the |mandatoryIndexes| and |selectiveIndexes| should be in the 
 range of 0 to the length of |saltedHashes|. There should not be repeated 
 items in the |mandatoryIndexes| and |selectiveIndexesArrays|. Also the elements 
@@ -4142,8 +4142,8 @@ an error MUST be raised and SHOULD convey an error type of
 indicating that the selective indexes are out of bounds.
             </li>
             <li>
-Initialize |toVerify| to the byte concatenation of the values: |proofHash|,
-|mandatoryHash|, and |saltedHashes| in that order with the array values
+Initialize |toVerify| to the byte concatenation of the values of |proofHash|,
+|mandatoryHash|, and |saltedHashes|, in that order, with the array values
 themselves concatenated together.
             </li>
             <li>
