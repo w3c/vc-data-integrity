@@ -211,6 +211,28 @@
               status: "National Standard",
               publisher: "U.S. Department of Commerce"
             },
+            "RFC9162": {
+              title: "Certificate Transparency Version 2.0",
+              href: "https://www.rfc-editor.org/rfc/rfc9162",
+              authors: [
+                "B. Laurie",
+                "A. Langley",
+                "E. Kasper",
+                "E. Messeri",
+                "R. Stradling"
+              ],
+              status: "RFC",
+              publisher: "IETF"
+            },
+            "NIST-SP-800-108": {
+              title: "Recommendation for Key Derivation Using Pseudorandom Functions",
+              href: "https://csrc.nist.gov/publications/detail/sp/800-108/rev-1/final",
+              authors: [
+                "Lily Chen"
+              ],
+              status: "Rev. 1",
+              publisher: "National Institute of Standards and Technology"
+            },
             "SD-JWT": {
               title:    "Selective Disclosure for JWTs (SD-JWT)",
               href:     "https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/",
@@ -576,11 +598,13 @@ values, alongside the public key of the ephemeral key-pair.
 are large, which is the case of some quantum resistant signature schemes, and this may become prohibitive for some applications.
 An alternative approach (referred to as [=SHoC=], i.e., "Salted Hashes of Claims") may be used in this case: a salt value
 (i.e., a random nonce) is created for each [=claim=], then a hash function is applied to the salt+claim pair.
-The data structure for the [=base proof=], which is then signed, includes the list of hashes, one for each salt+claim,
-paired with the corresponding salt values. The [=SHoC=] approach has the downside
-of a more complex implementation, it can leak information about the total number of
-signed claims, and that all of the hashes have to be included in a proof, even for claims
-that are not revealed, increasing its size (but based on hash size, not signature size).
+The resulting hashes are aggregated into a Merkle tree, and the data structure for the [=base proof=],
+which is then signed, includes the root of this tree, together with a salt seed from which all salt
+values can be derived, and the number of leaves in the tree. The [=SHoC=] approach has the downside
+of a more complex implementation, and it can leak information about the total number of
+signed claims. The size of a derived proof grows with the number of claims that are not
+revealed, as the root of every maximal subtree containing no revealed claims has to be
+included (but based on hash size, not signature size).
         </li>
     </ul>
 
@@ -616,9 +640,11 @@ The [=derived proof=] data structure contains a reference to each [=claim=] that
 either [=mandatory claim|mandatory=] or is determined by the [=selective disclosure constraints=].
 The details depend on whether the [=SIC=] or [=SHoC=] approach is used.
 In the [=SIC=] case this contains the list of signed claims.
-In the [=SHoC=] case the structure is more complex; it includes the list of the selected
-salt+claim entries, their corresponding hash values, and the overall list
-of hash+salt pairs for <em>all</em> [=non-mandatory claims=] (needed for verification).
+In the [=SHoC=] case the structure is more complex; it includes the base proof's
+signature, the number of leaves in the Merkle tree, the positions of the disclosed
+[=non-mandatory claims=] in that tree, their corresponding salt values, a minimal set of
+hashes (the <em>subtree proof</em>) from which the signed Merkle root can be reconstructed,
+and the positions of the [=mandatory claims|mandatory=] statements.
 </p>
 <p>
 The selective disclosure constraints would typically be set to
@@ -3030,17 +3056,21 @@ proof. This is a nice property, not shared by the other two approaches.
           <p>
 When following the [=SHoC=] approach, a salt value (random nonce) is created for
 each claim. That salt value is concatenated with the claim, and a cryptographic
-collision-resistant hash function is applied to the list of paired salts+claims,
-to produce a list of hashes, one for each claim. The list of
-hashes is signed with a selected signature algorithm. Only one
+collision-resistant hash function is applied to each paired salt+claim,
+to produce a list of leaf hashes, one for each claim. These leaf hashes are
+arranged as the leaves of a Merkle tree [[RFC9162]] whose root is signed with a
+selected signature algorithm. Only one
 signature is needed; thus, this approach is good for signature algorithms with
-larger signature sizes. A downside of this approach is that the complete list of
-hashes must be conveyed to both holder and verifier. To verify a
-revealed claim, the verifier needs first to verify the signature for the
-list of hashes; then they need to be told the index of the claim in
-that list; and then, using the appropriate salt value from the list, they verify
-the value of the hash of the salt concatenated with the received claim and the
-hash from the table.
+larger signature sizes. The base proof carries a single salt seed from which
+the holder derives all salts, together with the number of leaves and the
+Merkle root; only the hashes of the subtrees that contain no revealed claims
+(the <em>subtree proof</em>) need to be conveyed to the verifier alongside the
+revealed claims and their salts. To verify a
+revealed claim, the verifier needs first to verify the signature over the
+Merkle root; then, using the appropriate salt value, they verify
+the value of the hash of the salt concatenated with the received claim, and
+reconstruct the Merkle root from the recomputed leaf hashes and the subtree
+proof.
           </p>
           <p>
 In one MCS signature algorithm, BBS, the produced base proof is extremely short,
@@ -3072,12 +3102,15 @@ We summarize the properties of these approaches in
               </tr>
               <tr>
                 <td>Signed Hash of Claims (SHoC)</td>
-                <td>list of salts, list of salted hashes, one for each claim,
-                  plus signature over these two lists.</td>
-                <td>N<sub>claims</sub> &times; (salt size + hash size) + signature size</td>
-                <td>list of salts, list of salted hashes, one for each claim,
-                  plus one signature over these two lists.</td>
-                <td>N<sub>claims</sub> &times; (hash size) + N<sub>revealed claims</sub> &times; (salt size) + signature size</td>
+                <td>salt seed, HMAC key, number of non-mandatory claims, Merkle
+                  root over the salted claim hashes, mandatory statement
+                  pointers, plus signature over the Merkle root.</td>
+                <td>salt seed size + HMAC key size + leaf count size + hash size + signature size</td>
+                <td>the base proof's signature, the tree size, salts for the
+                  revealed claims, the subtree proof (hashes of the maximal
+                  fully-unrevealed subtrees), and the positions of the revealed
+                  claims.</td>
+                <td>N<sub>revealed claims</sub> &times; (salt size) + at most (N<sub>claims</sub> - N<sub>revealed claims</sub>) &times; (hash size) + signature size</td>
               </tr>
               <tr>
                 <td>Multi Claim Signature, BBS</td>
@@ -3126,8 +3159,8 @@ Let |hashData| be the result of running the algorithm in
 passed as a parameters.
             </li>
             <li>
-In a SHoC approach, add to |hashData| the |saltedHash| data that results
-from running the algorithm in [[[#SaltedHashSD]]].
+In a SHoC approach, add to |hashData| the |salted hash| data that results
+from running the algorithm in [[[#MerkleizeSD]]].
             </li>
             <li>
 Let |proofBytes| be the result of running the approach-specific
@@ -3258,7 +3291,7 @@ data-cite="INFRA#nulls">Null</a>
 The following algorithm specifies how to transform an unsecured input document
 into a transformed document that is ready to be provided as input to the
 hashing algorithm in Section [[[#HashSD]]] and, depending on approach, may be
-provided as input to the salted hashing algorithm, [[[#SaltedHashSD]]].
+provided as input to the salted hashing algorithm, [[[#MerkleizeSD]]].
           </p>
 
           <p>
@@ -3437,7 +3470,7 @@ Initialize |selectiveIndexes| to an empty array.
             <li>
 For each |absoluteIndex| in the keys in |groups|.|mandatory|.|nonMatching|, convert
 the absolute index of any <em>selective</em> N-Quad to an index relative to the
-combined output that is to be revealed:
+non-mandatory output that is to be revealed:
               <ol class="algorithm">
                 <li>
 If |groups|.|selective|.|matching| has |absoluteIndex| as a key, then append
@@ -3857,11 +3890,203 @@ data-cite="INFRA#nulls">Null</a>
 
       <section>
         <h3>Salted Hash of Claims (SHoC) Specific Sub-Algorithms</h3>
-        <section id="SaltedHashSD">
-          <h4>SaltedHashSD</h4>
+        <section id="DeriveSaltsSD">
+          <h4>DeriveSaltsSD</h4>
 
           <p>
-The following algorithm specifies how to create salted hash data.
+The following algorithm derives the full salts array from a salt seed. It is
+used by the issuer when creating the base proof and by the holder when creating
+a derived proof. Verifiers never call this algorithm — verifiers consume the
+explicit salts carried in the derived proof and perform no derivation.
+          </p>
+
+          <p>
+The required inputs to this algorithm are a salt seed
+(|saltSeed|), a byte string of 16–32 bytes, and |count|, a non-negative
+integer. An array of |count| byte strings is produced as output, each of length
+equal to half the hash output length (16 bytes for SHA-256).
+          </p>
+
+          <ol class="algorithm">
+            <li>
+Initialize |salts| as an empty array.
+            </li>
+            <li>
+For each index |i| from 0 to |count| − 1, inclusive:
+              <ol class="algorithm">
+                <li>
+Compute |input| to be `uint64be(i)`, the 8-byte big-endian unsigned integer
+encoding of |i|.
+                </li>
+                <li>
+Compute |mac| to be the result of computing `HMAC-Hash(saltSeed, input)`, where
+`Hash` is the cryptosuite-specified hash function (e.g., SHA-256) and
+|saltSeed| is used as the HMAC key, per [[RFC2104]]. This construction follows
+the shape of the [[NIST-SP-800-108]] counter-mode KDF, with the counter placed
+before the Label/Context, an empty Label/Context, and the optional L parameter
+omitted; the counter here is a fixed 8-byte value, while [[NIST-SP-800-108]]
+leaves the counter length as a KDF-specified parameter. The reference is
+informative: the exact construction is fully specified by this step and does
+not normatively depend on it. For the initial SHoC suites, |salt| is set to the first 16 bytes
+of `HMAC-SHA-256(saltSeed, uint64be(i))`.
+                </li>
+                <li>
+Set |salt| to the first L bytes of |mac|, where L is half the hash output
+length (16 bytes for SHA-256), and append |salt| to |salts|.
+                </li>
+              </ol>
+            </li>
+            <li>
+Return |salts|.
+            </li>
+          </ol>
+
+          <p class="note">
+This construction is a stateless, per-index pseudorandom function (modeled on
+the [[NIST-SP-800-108]] HMAC KDF counter mode; the reference is informative).
+The fixed-width `uint64be(i)` makes the input encoding unambiguous and
+convenient for test vectors. The salt length is half the hash output (16 bytes
+for SHA-256). Because the seed is a per-proof, single-use key, no
+domain-separation label is needed. `salts[i]` depends only on
+(|saltSeed|, |i|). Salts are PRF outputs (randomized input), not signatures.
+          </p>
+          <p class="ednote">
+The choice of a plain HMAC construction over a NIST SP 800-90A HMAC-DRBG was
+settled in issue #372: the requirement is essentially a stateless, per-index
+PRF; a DRBG's state machine, reseeding, and forward-secrecy machinery are of no
+use here; HMAC_DRBG is sequential (O(i) for per-index access) while this
+construction is O(1); and HMAC is a universally available primitive across
+platforms and KMS/HSMs (e.g., PKCS#11 `CKM_SHA256_HMAC`), enabling deployment
+modes where the seed is held in a KMS. The primitive count remains 1 (HMAC is
+already required by Data Integrity).
+          </p>
+
+        </section>
+        <section id="MTH">
+          <h4>Merkle Tree Hash (MTH)</h4>
+
+          <p>
+The Merkle Tree Hash (MTH) construction is adapted from [[RFC9162]] Section
+2.1.1. Unlike the RFC text, this specification's MTH operates directly on the
+<em>leaf-hash array</em> (the output of [[[#MerkleizeSD]]], step 4), in order to
+avoid applying the leaf prefix twice. The hash function used is the
+cryptosuite-specified function.
+          </p>
+
+          <p>
+This section defines the MTH construction in full, using this specification's
+own notation. [[RFC9162]] Section 2.1.1 is referenced only to establish that
+this is the Merkle tree construction used by Certificate Transparency, and to
+justify the `0x00` and `0x01` domain-separation prefixes; no notation from
+[[RFC9162]] is required to follow the algorithms below.
+          </p>
+
+          <p>
+This and the following algorithms use two notations for contiguous ranges of an
+array. For an array |arr| and integers |i| and |j| with 0 ≤ |i| ≤ |j| ≤
+length(|arr|), `|arr|[i:j]` denotes the sub-array of |arr| consisting of the
+elements at positions |i| to |j| − 1, and `[i, j)` denotes the corresponding
+half-open range of positions. A range `[i, i)` is empty.
+          </p>
+
+          <p>
+Let |leafHashes| be an array of leaf hashes, where `|leafHashes|[0:n]` is the
+entire array and n is its length (that is, |treeSize|). `MTH(|leafHashes|[a:b])`
+is defined recursively as follows; the empty tree (b = a) and the single-leaf
+tree (b − a = 1) are the base cases.
+          </p>
+
+          <ol class="algorithm">
+            <li>
+For an empty range (b = a), `MTH(|leafHashes|[a:a])` is defined to be `H()`,
+the hash of the empty input. This occurs exactly when the tree is empty
+(|treeSize| = 0; see [[[#MerkleizeSD]]]).
+            </li>
+            <li>
+For a single-leaf range (b − a = 1), `MTH(|leafHashes|[a:a+1])` is defined to
+be `|leafHashes|[a]`: a single leaf hash is itself the root of the single-leaf
+subtree. The leaf prefix `0x00` was already applied once when computing the leaf
+hash ([[[#MerkleizeSD]]], step 4) and MUST NOT be applied again here.
+            </li>
+            <li>
+For a range with more than one leaf (b − a &gt; 1), let |k| be the largest power
+of two strictly less than b − a:
+`MTH(|leafHashes|[a:b]) = H(0x01 || MTH(|leafHashes|[a:a+k]) || MTH(|leafHashes|[a+k:b]))`.
+            </li>
+          </ol>
+
+          <p class="note">
+This composition is byte-for-byte identical to applying [[RFC9162]] Section
+2.1.1 directly to the raw leaf data. In [[RFC9162]] terms, the leaf hash is the
+hash of the `0x00` prefix followed by the raw leaf data; here that raw leaf data
+is the salt concatenated with the UTF-8 representation of the statement, as
+computed in [[[#MerkleizeSD]]], step 4. Internal nodes apply the `0x01` prefix in
+both formulations. The `0x00` (leaf) and `0x01` (internal node) domain-separation
+prefixes MUST be preserved; [[RFC9162]] notes that these prefixes are required
+for second-preimage resistance.
+          </p>
+
+        </section>
+        <section id="ComputeTreeShape">
+          <h4>ComputeTreeShape</h4>
+
+          <p>
+The following algorithm deterministically derives the shape of the Merkle tree
+from the number of leaves. Proof creation and verification MUST apply the same
+shape rules; this is what allows the positions of the emitted hashes to be
+omitted from the derived proof (see [[[#VerifySubtreeProof]]]).
+          </p>
+
+          <p>
+The required input to this algorithm is |treeSize|, a non-negative integer.
+A <em>tree shape</em> (|shape|) is produced as output. The concrete
+representation of |shape| is implementation-specific (e.g., a node-interval
+tree or a bit-manipulation stack algorithm), but the result MUST be
+functionally equivalent to the following recursive definition:
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If |treeSize| equals 0, the shape is the empty tree (a shape containing no
+nodes). No subtree hashes are derived from it; proof creation and verification
+special-case the empty tree before any shape-dependent processing (see
+[[[#CreateSubtreeProof]]] and [[[#VerifySubtreeProof]]]).
+            </li>
+            <li>
+If |treeSize| equals 1, the shape is a single leaf.
+            </li>
+            <li>
+Otherwise, let |k| be the largest power of two strictly less than |treeSize|.
+The shape is a node whose left subtree covers the leaf range `[0, k)` and is
+`ComputeTreeShape(|k|)`, and whose right subtree covers the leaf range
+`[k, treeSize)` and is `ComputeTreeShape(|treeSize| - |k|)`.
+            </li>
+          </ol>
+
+          <p class="note">
+This is consistent with [[RFC9162]] Section 2.1.1 — the shape is a function of
+the leaf count alone; there is no padding and no last-node duplication. As a
+consequence, the leaves of |treeSize| decompose into maximal subtrees whose
+leaf counts are the set bits of the binary representation of |treeSize|,
+arranged left to right (e.g., N = 21 results in 16 + 4 + 1) — each such piece
+is a perfect subtree.
+          </p>
+          <p class="note">
+Following the reference implementation, internal nodes covering the leaf range
+`[a, b)` may be written `N_a_b`, and leaves may be written `Leaf_j`. These
+names are explanatory only — implementations need not use them — but they make
+the recursive definitions above concrete (e.g., for N = 20 the root `N_0_20`
+splits into the left subtree `N_0_16` and the right subtree `N_16_20`).
+          </p>
+
+        </section>
+        <section id="MerkleizeSD">
+          <h4>MerkleizeSD</h4>
+
+          <p>
+The following algorithm specifies how to create Merkle-tree-aggregated salted
+hash data. It is called by the SHoC branch of
+<a href="#create-base-proof">Create Base Proof</a>.
           </p>
 
           <p>
@@ -3872,30 +4097,204 @@ represented as an object is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize |salts| as an empty array. For each |nonMandatory| item in the
-|transformedDocument| create a cryptographically secure random number of
-byte length half the size of the hash length, e.g., for security category 1 or 2
-using SHA-256 the length of each salt would be 16 bytes.
+Generate a fresh |saltSeed| using a cryptographically secure random number
+generator. The seed MUST be 16–32 bytes (32 RECOMMENDED) and MUST NOT be
+derived from the signing key, a DID, or the document content. The seed is a
+per-proof, single-use secret.
             </li>
             <li>
-Initialize |saltedHashes| as an empty array. For each |nonMandatory| item in the
-|transformedDocument| compute the appropriate hash (SHA-256 for security
-category 1 or 2 signature algorithms) over the concatenation of each |salt| and
-its corresponding |nonMandatory| item. Add this hash value to the |saltedHashes|
-array.
+Set |treeSize| to the number of |nonMandatory| items in the
+|transformedDocument|. An empty tree (|treeSize| = 0) is permitted: this
+preserves the ability to issue credentials whose statements are all mandatory.
+In that case |leafHashes| is empty and step 5 produces |merkleRoot| equal to
+`H()`.
             </li>
             <li>
-Add |salts| as `salts` and |saltedHashes| as  `saltedHashes` to  the |saltedHashData|
-object.
+Set |salts| to the result of running the algorithm in [[[#DeriveSaltsSD]]],
+passing |saltSeed| and |treeSize| as parameters — an array of |treeSize| salt
+values.
+            </li>
+            <li>
+Initialize |leafHashes| as an empty array. For each position |j| (zero-based,
+in |nonMandatory| order), compute |leafHash| to be the hash of the
+concatenation of `0x00`, |salts|[j], and the UTF-8 representation of
+|nonMandatory|[j], in that order,
+using the cryptosuite-specified hash function, and append |leafHash| to
+|leafHashes|. The concatenation order MUST be as stated in this step.
+            </li>
+            <li>
+Set |merkleRoot| to the result of evaluating `MTH(|leafHashes|[0:|treeSize|])`, as
+defined in [[[#MTH]]]. For an empty tree (|treeSize| = 0) this is `H()`.
+            </li>
+            <li>
+Add |saltSeed| as `saltSeed`, |treeSize| as `treeSize`, and |merkleRoot| as
+`merkleRoot` to the |saltedHashData| object.
             </li>
             <li>
 Return |saltedHashData|.
             </li>
           </ol>
+
           <p class="ednote">
 To do: provide background on <em>cryptographic random number generation</em> in the
 security considerations section. For example cite appropriate references such as
 NIST SP-800-90A,B,C documents and/or BSI AIS 20 and AIS 31 documents.
+          </p>
+
+        </section>
+        <section id="CreateSubtreeProof">
+          <h4>CreateSubtreeProof</h4>
+
+          <p>
+The following algorithm generates the <em>subtree proof</em> — the minimal set
+of hashes needed to reconstruct the Merkle root, given the set of disclosed
+leaves. It is called by the holder when creating a derived proof. In the
+literature this object is also known as a Merkle multiproof or batch proof; see
+Bitcoin's BIP 37 `PartialMerkleTree` and Ethereum's EIP-7745.
+          </p>
+
+          <p>
+The required inputs are |treeSize| (a non-negative integer), |leafIndexes| (an
+array of zero-based leaf indexes, ascending, without duplicates, identifying
+the disclosed leaves), and |leafHashes| (the full leaf-hash array, recomputed
+by the holder from the base proof's |saltSeed| via [[[#DeriveSaltsSD]]] and the
+locally rebuilt |nonMandatory| statements). An array of byte strings
+(|subtreeProof|) is produced as output. If |treeSize| is 0, |leafIndexes| and
+|leafHashes| are empty and the output is an empty |subtreeProof|.
+          </p>
+
+          <p>
+The algorithm recursively processes the leaf range `[0, treeSize)`; if
+|treeSize| is 0, the recursion is not entered and the output is the empty
+|subtreeProof| stated above. For a non-empty tree, let `Agg(a, b)` denote
+processing the subtree covering the non-empty leaf range `[a, b)` (where
+a &lt; b):
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If no element of |leafIndexes| falls within `[a, b)` (i.e., every leaf of this
+subtree is undisclosed), append the root hash of this subtree,
+`MTH(|leafHashes|[a:b])` to the output and terminate the recursion. For a
+single-leaf range this value is the leaf hash itself (see [[[#MTH]]]).
+            </li>
+            <li>
+If every leaf in `[a, b)` is disclosed (i.e., all indexes in `[a, b)` are
+members of |leafIndexes|), emit nothing and terminate the recursion.
+            </li>
+            <li>
+Otherwise (the subtree is mixed — partially disclosed), let |k| be the largest
+power of two strictly less than `b - a`. Recursively execute `Agg(a, a + k)`
+followed by `Agg(a + k, b)`.
+            </li>
+            <li>
+The output order is depth-first, left subtree before right subtree.
+            </li>
+          </ol>
+
+          <p class="note">
+The following invariants hold; implementations are encouraged to self-check
+them. Every element of |subtreeProof| is the root of a maximal
+fully-undisclosed subtree (following the tree shape of
+[[[#ComputeTreeShape]]]; leaf counts need not be powers of two — e.g., with
+N = 15 and disclosures only in the left half, the root of a 7-leaf subtree is
+emitted). The subtrees represented by these elements are pairwise disjoint, and
+their leaves union to exactly the undisclosed leaves. The number of elements is
+at most |treeSize| minus the length of |leafIndexes| (zero when everything is
+disclosed). No position information needs to accompany the proof — it is
+uniquely determined by |treeSize| and |leafIndexes|.
+          </p>
+
+        </section>
+        <section id="VerifySubtreeProof">
+          <h4>VerifySubtreeProof</h4>
+
+          <p>
+The following algorithm reconstructs the Merkle root from a subtree proof. It
+is called by the verifier in [[[#VerifyDerived-SHoC]]]. It mirrors the
+recursive traversal of [[[#CreateSubtreeProof]]], reconstructing node values
+instead of emitting them; it is functionally equivalent to a
+"recreate an empty tree and fill it in" approach, but makes the resource bounds
+explicit (see the complexity requirement below).
+          </p>
+
+          <p>
+The required inputs are |treeSize| (a non-negative integer), |leafIndexes| (the
+array of disclosed leaf indexes, ascending, without duplicates),
+|disclosedLeafHashes| (an array of leaf hashes, of length equal to
+|leafIndexes|, computed by the verifier for each disclosed claim as the hash of
+the concatenation of `0x00`, the salt from the derived proof, and the
+statement), and |subtreeProof| (an array of byte strings). A single byte string
+(|reconstructedRoot|) is produced as output, or an error. If |treeSize| is 0,
+|leafIndexes| and |subtreeProof| MUST both be empty and the
+|reconstructedRoot| is `H()` (the empty-tree case of [[[#MTH]]]).
+          </p>
+
+          <p>
+<strong>Complexity requirement</strong>: This algorithm MUST be evaluated
+sparsely. Implementations MUST NOT materialize a tree data structure whose size
+is proportional to |treeSize|. The sparse formulation touches only (a) the
+proof values in |subtreeProof|, (b) the |disclosedLeafHashes| entries, and (c)
+the internal nodes on the paths from disclosed leaves to the root. Time
+complexity is O(|subtreeProof| + |leafIndexes| · ⌈log₂ |treeSize|⌉); space
+complexity is O(⌈log₂ |treeSize|⌉) beyond the input arrays. The emptiness and
+full-disclosure tests in steps 1–2 MUST be evaluated against the sorted
+|leafIndexes| array (e.g., via binary search or interval arithmetic over
+consecutive elements) and MUST NOT scan the leaf positions within the queried
+range; the recursion depth is bounded by ⌈log₂ |treeSize|⌉. The |treeSize|
+policy bound (see [[[#ParseDerived-SHoC]]]) MUST be enforced before this
+algorithm is invoked. This requirement is security-sensitive: |treeSize| and
+|leafIndexes| originate from the unverified derived proof and are
+attacker-controlled prior to signature verification.
+          </p>
+
+          <p>
+Let |proofCursor| be an integer index into |subtreeProof|, initialized to 0.
+Let `Reconstruct(a, b)` denote processing the subtree covering the non-empty
+leaf range `[a, b)` (where a &lt; b), returning the hash of its root:
+          </p>
+
+          <ol class="algorithm">
+            <li>
+If no element of |leafIndexes| falls within `[a, b)` (every leaf of this
+subtree is undisclosed), the root of this subtree is supplied by the proof: set
+|value| to |subtreeProof|[|proofCursor|] (if |proofCursor| is beyond the end of
+|subtreeProof|, return an error), increment |proofCursor|, and return |value|.
+            </li>
+            <li>
+If every index in `[a, b)` is a member of |leafIndexes| (the subtree is fully
+disclosed), collect the corresponding leaf hashes from |disclosedLeafHashes|
+(via their positions in |leafIndexes|), compute `MTH` over this array per
+[[[#MTH]]], and return the result — the verifier recomputes the subtree root
+from disclosed leaves instead of receiving it from the proof.
+            </li>
+            <li>
+Otherwise (the subtree is mixed), let |k| be the largest power of two strictly
+less than `b - a`. Compute |left| = `Reconstruct(a, a + k)` and |right| =
+`Reconstruct(a + k, b)`, then return `H(0x01 || left || right)`.
+            </li>
+            <li>
+The entry point is `Reconstruct(0, |treeSize|)`. If |treeSize| is 0,
+`Reconstruct` is not invoked: |reconstructedRoot| is `H()` (the empty-tree case
+above), and |proofCursor| = 0 = the length of |subtreeProof| satisfies step 5.
+            </li>
+            <li>
+After `Reconstruct` returns, if |proofCursor| does not equal the length of
+|subtreeProof|, return an error — the proof was not fully consumed, indicating
+a malformed or tampered proof.
+            </li>
+            <li>
+Return the value produced by step 4 as |reconstructedRoot|.
+            </li>
+          </ol>
+
+          <p class="note">
+The correctness of emitting hashes without position information relies on two
+properties: (1) the tree shape is uniquely determined by |treeSize|
+([[[#ComputeTreeShape]]]), and (2) |treeSize| is covered by the base signature
+(see Section [[[#merkle-tree-proofs]]]). The recursion
+above implicitly follows the shape of [[[#ComputeTreeShape]]] via the "largest
+power of two" split rule, without materializing it.
           </p>
 
         </section>
@@ -3924,16 +4323,23 @@ represented as series of bytes is produced as output.
 
           <ol class="algorithm">
             <li>
-Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |salts|,
-|saltedHashes|,
-and |hmacKey| to the values associated with their property names
+Initialize |proofHash|, |mandatoryPointers|, |mandatoryHash|, |saltSeed|,
+|treeSize|, |merkleRoot|,
+and |hmacKey| to the values associated with their property names in
 |hashData|.
             </li>
             <li>
-Initialize |toSign| the hash of the concatenation of |proofHash|,
-|mandatoryHash|,and |saltedHashes| where the order of the concatenation MUST 
-be followed. The cryptographic hash algorithm is that specified for signature 
-algorithm in the |cryptosuite|.
+Initialize |toSign| to the concatenation of |proofHash|, |mandatoryHash|,
+|treeSize| (encoded as an 8-byte big-endian unsigned integer), and
+|merkleRoot|, in that order. The concatenation order MUST be as stated. The
+fixed-length encoding of |treeSize| MUST be used to avoid concatenation
+ambiguity. Note that |saltSeed| is not included in |toSign|: the verifier must
+be able to recompute |toVerify| from the data carried in the derived proof
+alone, and the |saltSeed| MUST NOT appear in any structure reaching the
+verifier (see the note in [[[#SerializeDerived-SHoC]]]). Integrity is
+preserved regardless: the salts derived from |saltSeed| are transitively bound
+to the signed |merkleRoot| through the leaf-hash computation, so any
+substitution of |saltSeed| causes root reconstruction to fail.
             </li>
             <li>
 Initialize |signature| to the result of digitally signing |toSign| using the
@@ -3941,11 +4347,14 @@ private key associated with the base proof verification method.
             </li>
             <li>
 Initialize a byte array, |proofValue|, that starts with the SHoC approach
-base proof header bytes 0xd9, 0x5d, and 0x10.
+base proof header bytes 0xd9, 0x5d, and 0x12.
             </li>
             <li>
-Initialize |components| to an array with five elements containing the values of:
-|signature|, |hmacKey|, |salts|, |saltedHashes|, and |mandatoryPointers|.
+Initialize |components| to an array with six elements containing the values of:
+|signature|, |hmacKey|, |saltSeed|, |treeSize|, |merkleRoot|, and
+|mandatoryPointers|. Note that the salts are not included — the holder
+recomputes all salts and all leaf hashes locally from |saltSeed| via
+[[[#DeriveSaltsSD]]]; |treeSize| and |merkleRoot| are carried instead.
             </li>
             <li>
 CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
@@ -3958,7 +4367,7 @@ Return |proofValue| as <em>proof bytes</em>.
           </ol>
 
           <p class="ednote">
-The SHoC approach base proof header bytes 0xd9, 0x5d, and 0x10 were chosen
+The SHoC approach base proof header bytes 0xd9, 0x5d, and 0x12 were chosen
 to not collide with any of the [[VC-DI-ECDSA]] or [[VC-DI-BBS]] values. They are
 currently tentative.
           </p>
@@ -3971,8 +4380,8 @@ currently tentative.
 The following algorithm parses the components of a SHoC approach selective
 disclosure base proof value. The required inputs are a proof value
 (|proofValue|). A single object <em>proof data</em>, containing
-five elements, using the names `signature`, `hmacKey`, `salts`
-`saltedHashes`, and `mandatoryPointers`, is produced  as output.
+six elements, using the names `signature`, `hmacKey`, `saltSeed`,
+`treeSize`, `merkleRoot`, and `mandatoryPointers`, is produced  as output.
           </p>
 
           <ol class="algorithm">
@@ -3988,19 +4397,28 @@ substring after the leading `u` in |proofValue|.
             </li>
             <li>
 If the |decodedProofValue| does not start with the SHoC approach base proof
-header bytes `0xd9`, `0x5d`, and `0x10`, an error MUST be raised and SHOULD
+header bytes `0xd9`, `0x5d`, and `0x12`, an error MUST be raised and SHOULD
 convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
             <li>
 Initialize |components| to an array that is the result of CBOR-decoding the
 bytes that follow the three-byte SHoC approach base proof header. Confirm that
-the result is an array of five elements.
+the result is an array of six elements.
             </li>
             <li>
-Return an object with properties set to the five elements, using the names
-`signature`, `hmacKey`, `salts`, `saltedHashes`, and `mandatoryPointers`,
-respectively.
+Validate the parsed values: |saltSeed| MUST be a byte string of 16–32 bytes;
+|treeSize| MUST be an integer greater than or equal to 0; |merkleRoot| MUST be
+a byte string whose length equals the hash output length; |hmacKey| MUST be a
+byte string whose length equals the hash output length; |mandatoryPointers|
+MUST be an array of strings. If any check fails, an error MUST be raised and
+SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+            </li>
+            <li>
+Return an object with properties set to the six elements, using the names
+`signature`, `hmacKey`, `saltSeed`, `treeSize`, `merkleRoot`, and
+`mandatoryPointers`, respectively.
             </li>
           </ol>
         </section>
@@ -4009,11 +4427,13 @@ respectively.
           <h4>SerializeDerived-SHoC</h4>
 
           <p>
-The following algorithm serializes a SHoC approach derived proof value.
-The required inputs are a base signature (|signature|), an array of filtered 
-salts (|filteredSalts|), an array of salted hashes (|saltedHashes|), a label map
-(|labelMap|), an array of mandatory indexes (|mandatoryIndexes|), and an array
-of selective indexes (|selectiveIndexes|). A single <em>derived proof</em>
+The following algorithm serializes a SHoC approach derived proof value. It is
+called by the approach-specific <em>SerializeDerived</em> step of the
+<a href="#add-derived-proof">Add Derived Proof</a> algorithm, passing
+|proofData| and |disclosureData| as parameters. |signature| and |treeSize| come
+from |proofData|; |labelMap| is |disclosureData|'s |verifierLabelMap|;
+|mandatoryIndexes| is |disclosureData|'s |mandatoryIndexes|; |nonMandatory| is
+|disclosureData|'s full |nonMandatory| array. A single <em>derived proof</em>
 value, serialized as a UTF-8 string, is produced as output.
           </p>
 
@@ -4023,18 +4443,38 @@ Initialize |compressedLabelMap| to the result of calling the algorithm in
 [[[#compresslabelmap]]], passing |labelMap| as the parameter.
             </li>
             <li>
+Set |leafIndexes| to |disclosureData|'s |selectiveIndexes| — the positions of
+the disclosed statements in |nonMandatory|.
+            </li>
+            <li>
+Set |salts| to the result of running the algorithm in [[[#DeriveSaltsSD]]],
+passing |proofData|.|saltSeed| and |treeSize| as parameters.
+            </li>
+            <li>
+Recompute all leaf hashes: for each position |j| in `[0, treeSize)`, compute
+the hash of the concatenation of `0x00`, |salts|[j], and the UTF-8
+representation of |nonMandatory|[j], in
+that order, using the cryptosuite-specified hash function. Collect the results
+into |leafHashes|.
+            </li>
+            <li>
+Set |subtreeProof| to the result of running the algorithm in
+[[[#CreateSubtreeProof]]], passing |treeSize|, |leafIndexes|, and |leafHashes|
+as parameters.
+            </li>
+            <li>
+Set |filteredSalts| to the array obtained by selecting the salt values from the
+|salts| array corresponding to the values in the |leafIndexes| array in
+increasing index order: for each |i|, `filteredSalts[i] = salts[leafIndexes[i]]`.
+            </li>
+            <li>
 Initialize a byte array, |proofValue|, that starts with the SHoC approach
-derived proof header bytes `0xd9`, `0x5d`, and `0x11`.
+derived proof header bytes `0xd9`, `0x5d`, and `0x13`.
             </li>
             <li>
-Let |filteredSalts| be the array obtained by selecting the salt values from the
-|salts| array corresponding to the values in the |selectiveIndexes| array in
-increasing index order.
-            </li>
-            <li>
-Initialize |components| to an array with six elements containing the values of:
-|signature|, |filteredSalts|, |saltedHashes|, |compressedLabelMap|, |mandatoryIndexes|,
-|selectiveIndexes|.
+Initialize |components| to an array with seven elements containing the values of:
+|signature|, |treeSize|, |leafIndexes|, |filteredSalts|, |subtreeProof|,
+|compressedLabelMap|, and |mandatoryIndexes|.
             </li>
             <li>
 CBOR-encode |components| per [[RFC8949]] where CBOR tagging MUST NOT be used on
@@ -4049,8 +4489,19 @@ starting with "`u`" and ending with the base64url-no-pad-encoded value of
 |proofValue|.
             </li>
           </ol>
+
+          <p class="note">
+The holder derives all salts locally from |saltSeed|. Only the salts of
+disclosed leaves (|filteredSalts|) go into the derived proof. The |saltSeed|
+itself MUST NOT appear in the derived proof or in any structure reaching the
+verifier: in the single-signature SHoC structure, giving the seed to the
+verifier would allow it to re-derive the undisclosed salts and mount offline
+dictionary attacks against low-entropy undisclosed claims. The holder MUST
+possess the full document — together with the base proof — to produce a derived
+proof.
+          </p>
           <p class="ednote">
-The SHoC approach derived proof header bytes `0xd9`, `0x5d`, and `0x11`
+The SHoC approach derived proof header bytes `0xd9`, `0x5d`, and `0x13`
 were chosen to not conflict with values used by [[VC-DI-ECDSA]] and
 [[VC-DI-BBS]] and are tentative.
           </p>
@@ -4063,8 +4514,8 @@ were chosen to not conflict with values used by [[VC-DI-ECDSA]] and
 The following algorithm parses the components of a SHoC approach derived proof
 value. The required input is a derived proof value (|proofValue|).
 A single <em>proof data</em> object is produced as output, which
-contains a set to six elements, using the names "signature", "salts",
-"saltedHashes", "labelMap", "mandatoryIndexes", and "selectiveIndexes".
+contains a set of seven elements, using the names "signature", "treeSize",
+"leafIndexes", "salts", "subtreeProof", "labelMap", and "mandatoryIndexes".
           </p>
 
           <ol class="algorithm">
@@ -4080,43 +4531,51 @@ substring after the leading `u` in |proofValue|.
             </li>
             <li>
 If the |decodedProofValue| does not start with the SHoC approach derived proof
-header bytes `0xd9`, `0x5d`, and `0x11`, an error MUST be raised
+header bytes `0xd9`, `0x5d`, and `0x13`, an error MUST be raised
 and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
             <li>
 Initialize |components| to an array that is the result of CBOR-decoding the bytes
 that follow the three-byte SHoC approach derived proof header. If the
-result is not an array of the following six elements —
+result is not an array of the following seven elements —
 a byte array of length corresponding to the signature size;
-an array of byte arrays, each of length appropriate to the <em>salt size</em>;
-an array of byte arrays, each of length corresponding to the hash size;
-a map of integers to byte arrays, each of length 32;
-an array of integers; and another array of integers — an error MUST be raised
+a non-negative integer (|treeSize|);
+an array of integers (|leafIndexes|);
+an array of byte arrays, each of length appropriate to the <em>salt size</em>
+(|filteredSalts|);
+an array of byte strings, each of length corresponding to the hash size
+(|subtreeProof|);
+a map of integers to byte arrays, each of length 32 (|compressedLabelMap|);
+and an array of integers (|mandatoryIndexes|) — an error MUST be raised
 and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
             </li>
             <li>
-Replace the fourth element in |components| using the result of calling the
+Replace the sixth element in |components| using the result of calling the
 algorithm in [[[#decompresslabelmap]]], passing the existing
-fourth element of |components| as |compressedLabelMap|.
+sixth element of |components| as |compressedLabelMap|.
             </li>
             <li>
-Return <em>proof data</em> as an object with properties set to the five
-elements, using the names "signature", "salts", "saltedHashes",
-"labelMap", "mandatoryIndexes",  and "selectiveIndexes" respectively.
+Validate the parsed values: the elements of |leafIndexes| MUST be strictly
+ascending, without duplicates, and each MUST be within the range
+`[0, treeSize)`; the length of |filteredSalts| MUST equal the length of
+|leafIndexes|; each element of |subtreeProof| MUST be a byte string whose
+length equals the hash output length. If any check fails, an error MUST be
+raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
+Implementations MUST enforce a configured policy upper bound on |treeSize|
+before any tree-dependent algorithm is invoked; the bound value is deployment
+policy and SHOULD be at most 2<sup>24</sup>. Legitimate credentials are
+expected to have far fewer non-mandatory statements; this bound is
+defense-in-depth against resource-exhaustion attacks.
+            </li>
+            <li>
+Return <em>proof data</em> as an object with properties set to the seven
+elements, using the names "signature", "treeSize", "leafIndexes", "salts",
+"subtreeProof", "labelMap", and "mandatoryIndexes", respectively.
             </li>
           </ol>
-          <p class="ednote">
-Should we also mention additional checks on the values of |salts|,
-|saltedHashes|, |mandatoryIndexes|, and |selectiveIndexes|? In particular, the
-lengths of the |salts| and |selectiveIndexes| must be the same. All 
-elements of the |mandatoryIndexes| and |selectiveIndexes| should be in the 
-range of 0 to the length of |saltedHashes|. There should not be repeated 
-items in the |mandatoryIndexes| and |selectiveIndexesArrays|. Also the elements 
-of each of these arrays should be increasing order. Note that the minimal 
-additional checks appear in [[[#VerifyDerived-SHoC]]].
-          </p>
 
         </section>
 
@@ -4138,28 +4597,60 @@ a [=verification result=]:
 Let |unsecuredDocument| be a copy of |document| with the `proof` value removed.
             </li>
             <li>
-Initialize |signature|,  |salts|, |saltedHashes|, and |selectiveIndexes| to the
+Initialize |signature|, |treeSize|, |leafIndexes|, |salts|, |subtreeProof|, and
+|mandatoryIndexes| to the
 values associated with their property names in the |proofData| parameter and
 |proofHash|, |nonMandatory|, and |mandatoryHash| to the values  associated  with
 their property names in the |verifyData| parameter.
             </li>
             <li>
-If the length of |salts| does not match the length of |selectiveIndexes|,
+If the length of |salts| does not match the length of |leafIndexes|,
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
-indicating that the salt count does not match the salted hashes count.
+indicating that the salt count does not match the number of disclosed leaves.
             </li>
             <li>
-The values of the elements of the |selectiveIndexes| array must be between 0 and
-the length of the |saltedHash| array minus one. If not,
+If the length of |subtreeProof| does not match the expected number of emitted
+hashes (determined from |treeSize| and |leafIndexes| via the traversal rules of
+[[[#CreateSubtreeProof]]]; for an empty tree, |treeSize| = 0, the expected
+number is 0),
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
-indicating that the selective indexes are out of bounds.
+indicating an invalid subtree proof length.
             </li>
             <li>
-Initialize |toVerify| to the byte concatenation of the values of |proofHash|,
-|mandatoryHash|, and |saltedHashes|, in that order, with the array values
-themselves concatenated together.
+If the length of |nonMandatory| does not equal the length of |leafIndexes|,
+an error MUST be raised and SHOULD convey an error type of
+<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
+indicating that the presented document contains non-mandatory statements that
+are not accounted for by the derived proof. Every non-mandatory statement
+obtained by canonicalizing the presented document MUST be accounted for by
+exactly one entry of |leafIndexes|; without this check, statements appended to
+the presented document would silently bypass verification while remaining in
+the returned |verifiedDocument|.
+            </li>
+            <li>
+For each |i| from 0 to the length of |leafIndexes| minus one, inclusive,
+compute |disclosedLeafHash| to be the hash of the concatenation of `0x00`,
+|salts|[i], and the UTF-8 representation of |nonMandatory|[i], in that order,
+and collect the results, in
+order, into |disclosedLeafHashes|. The pairing MUST be positional: the
+statement at position |i| of the verifier's |nonMandatory| array is hashed with
+|salts|[i]. |leafIndexes|[i] is the statement's position in the full
+non-mandatory array at issuance and is used only as the tree leaf position by
+[[[#VerifySubtreeProof]]] — it MUST NOT be used to index this |nonMandatory|.
+            </li>
+            <li>
+Set |reconstructedRoot| to the result of running the algorithm in
+[[[#VerifySubtreeProof]]], passing |treeSize|, |leafIndexes|,
+|disclosedLeafHashes|, and |subtreeProof| as parameters. If the algorithm
+returns an error, set |verified| to `false` and skip to the final step.
+            </li>
+            <li>
+Initialize |toVerify| to the concatenation of |proofHash|, |mandatoryHash|,
+|treeSize| (encoded as an 8-byte big-endian unsigned integer), and
+|reconstructedRoot|, in that order. The concatenation order MUST be identical
+to that of [[[#SerializeBase-SHoC]]].
             </li>
             <li>
 Initialize |verified| to true.
@@ -4171,24 +4662,6 @@ the "cryptosuite" property,
 with |toVerify| as the data to be verified against the |signature|.
 If |verificationCheck| is
 `false`, set |verified| to false.
-            </li>
-            <li>
-For every entry (|nq|, |index|) in |nonMandatory|, verify the salted hash
-for every selectively disclosed (non-mandatory) statement:
-              <ol class="algorithm">
-                <li>
-Let |computedHash| be the hash of the concatenation of
-|salts|[index] and |nq|.
-                </li>
-                <li>
-Initialize |verificationCheck| to the result of comparing the |computedHash|
-with the value of |saltedHashes|[|selectedIndexes|[index]].
-
-                </li>
-                <li>
-If |verificationCheck| is `false`, set |verified| to false.
-                </li>
-              </ol>
             </li>
             <li>
 Return a [=verification result=] with [=struct/items=]:
@@ -4203,6 +4676,21 @@ data-cite="INFRA#nulls">Null</a>
               </dl>
             </li>
           </ol>
+
+          <p class="note">
+The positional pairing in step 6 relies on an order-stability property: the
+relative canonical order of the disclosed non-mandatory statements in the
+presented document MUST match their relative order at issuance, so that the
+statement at verifier position |i| is the statement the issuer hashed at
+position |leafIndexes|[i]. This holds whenever the RDFC-1.0 canonical blank
+node identifiers of the remaining statements are unaffected by the removal of
+the undisclosed statements — the common case — and can fail for crafted
+documents whose blank node identifier assignment depends on the removed
+statements (RDFC-1.0 subset instability). The failure mode is fail-closed: a
+misaligned pairing produces leaf hashes that cannot reconstruct the signed
+Merkle root, so verification fails — order instability is an interoperability
+risk, not a forgery vector.
+          </p>
 
         </section>
       </section>
@@ -5653,6 +6141,37 @@ the application layer.
         </p>
       </section>
 
+      <section id="merkle-tree-proofs">
+        <h3>Merkle Tree Proofs</h3>
+
+        <p>
+Selective disclosure approaches that use Merkle trees, such as the [=SHoC=]
+approach, cover the tree size with the base proof's digital signature, as
+required by [[[#SerializeBase-SHoC]]]. A verifier must not infer the tree size
+from the derived proof alone. Under the
+tree shape rules in Section [[[#ComputeTreeShape]]], the shape of the tree is
+uniquely determined by the number of leaves, so a root hash that is not
+accompanied by a signed leaf count could be interpreted under more than one
+tree shape, which might allow a statement to be presented at an unintended leaf
+position. Implementers are urged to enforce the check required by
+[[[#ParseDerived-SHoC]]] and reject any derived
+proof whose leaf indexes fall outside the signed tree size.
+        </p>
+
+        <p>
+Reconstructing the Merkle root from a subtree proof is a
+resource-intensive operation that happens before the base proof signature is
+verified, and the tree size and leaf indexes are attacker-controlled up to that
+point. An attacker can therefore attempt to exhaust verifier resources by
+supplying an oversized tree size or an excessive number of leaf indexes.
+Implementations are required to enforce a configured policy upper bound on the
+tree size before any tree-dependent algorithm is invoked, as described in
+Section [[[#ParseDerived-SHoC]]], and to deterministically refuse proofs that
+exceed that bound.
+        </p>
+
+      </section>
+
       <section>
         <h3>Verification Method Binding</h3>
 
@@ -5894,6 +6413,20 @@ can be used for the purposes of correlation, using attributes that ensure an
 adequate level of herd privacy, and the use of cryptosuites that enable the
 entity presenting a message to regenerate new signatures while not compromising
 the trust in the message being presented.
+        </p>
+
+        <p>
+For selective disclosure approaches that use Merkle trees, such as the [=SHoC=]
+approach, each derived proof carries the base proof's digital signature
+verbatim, so a verifier that receives the same credential more than once, or
+two colluding verifiers, can correlate the presentations by that signature
+alone. The salts of any statements disclosed in both presentations, the tree
+size, and the positions of the mandatory statements are shared as well and
+provide further correlation. Implementers are urged to consider whether re-presenting
+the same base proof to multiple verifiers undermines the unlinkability that the
+deployment expects; where unlinkability is required, re-issuing the credential
+so that each presentation is protected by a fresh salt seed and a fresh base
+proof is advised.
         </p>
       </section>
 
