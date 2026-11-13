@@ -3714,7 +3714,8 @@ as a byte string, is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |compressedLabelMap| to the result of calling the algorithm in
-Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
+Section [[[#compresslabelmap]]], passing |labelMap| and |cryptosuite| as the 
+parameters.
             </li>
             <li>
 Initialize a byte array, |proofValue|, that starts with the general SIC derived
@@ -4440,7 +4441,7 @@ value, serialized as a UTF-8 string, is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |compressedLabelMap| to the result of calling the algorithm in
-[[[#compresslabelmap]]], passing |labelMap| as the parameter.
+[[[#compresslabelmap]]], passing |labelMap| and |cryptosuite| as the parameters.
             </li>
             <li>
 Set |leafIndexes| to |disclosureData|'s |selectiveIndexes| — the positions of
@@ -4554,7 +4555,8 @@ and SHOULD convey an error type of
             <li>
 Replace the sixth element in |components| using the result of calling the
 algorithm in [[[#decompresslabelmap]]], passing the existing
-sixth element of |components| as |compressedLabelMap|.
+sixth element of |components| as |compressedLabelMap| and |cryptosuite| 
+as parameters.
             </li>
             <li>
 Validate the parsed values: the elements of |leafIndexes| MUST be strictly
