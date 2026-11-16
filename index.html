@@ -3714,7 +3714,8 @@ as a byte string, is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |compressedLabelMap| to the result of calling the algorithm in
-Section [[[#compresslabelmap]]], passing |labelMap| as the parameter.
+Section [[[#compresslabelmap]]], passing |labelMap| and |cryptosuite| as the 
+parameters.
             </li>
             <li>
 Initialize a byte array, |proofValue|, that starts with the general SIC derived
@@ -4440,7 +4441,7 @@ value, serialized as a UTF-8 string, is produced as output.
           <ol class="algorithm">
             <li>
 Initialize |compressedLabelMap| to the result of calling the algorithm in
-[[[#compresslabelmap]]], passing |labelMap| as the parameter.
+[[[#compresslabelmap]]], passing |labelMap| and |cryptosuite| as the parameters.
             </li>
             <li>
 Set |leafIndexes| to |disclosureData|'s |selectiveIndexes| — the positions of
@@ -4546,7 +4547,7 @@ an array of byte arrays, each of length appropriate to the <em>salt size</em>
 (|filteredSalts|);
 an array of byte strings, each of length corresponding to the hash size
 (|subtreeProof|);
-a map of integers to byte arrays, each of length 32 (|compressedLabelMap|);
+a map of integers to integers (|compressedLabelMap|);
 and an array of integers (|mandatoryIndexes|) — an error MUST be raised
 and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>.
@@ -4554,7 +4555,8 @@ and SHOULD convey an error type of
             <li>
 Replace the sixth element in |components| using the result of calling the
 algorithm in [[[#decompresslabelmap]]], passing the existing
-sixth element of |components| as |compressedLabelMap|.
+sixth element of |components| as |compressedLabelMap| and |cryptosuite| 
+as parameters.
             </li>
             <li>
 Validate the parsed values: the elements of |leafIndexes| MUST be strictly
@@ -4608,15 +4610,6 @@ If the length of |salts| does not match the length of |leafIndexes|,
 an error MUST be raised and SHOULD convey an error type of
 <a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
 indicating that the salt count does not match the number of disclosed leaves.
-            </li>
-            <li>
-If the length of |subtreeProof| does not match the expected number of emitted
-hashes (determined from |treeSize| and |leafIndexes| via the traversal rules of
-[[[#CreateSubtreeProof]]]; for an empty tree, |treeSize| = 0, the expected
-number is 0),
-an error MUST be raised and SHOULD convey an error type of
-<a data-cite="VC-DATA-INTEGRITY#PROOF_VERIFICATION_ERROR">PROOF_VERIFICATION_ERROR</a>,
-indicating an invalid subtree proof length.
             </li>
             <li>
 If the length of |nonMandatory| does not equal the length of |leafIndexes|,
