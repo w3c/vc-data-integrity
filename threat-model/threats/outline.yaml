@@ -27,7 +27,7 @@ categories:
     threats: [T4]
   - name: Dependency Threats
     id: threat-model-dependency-threats
-    threats: [T5]
+    threats: [T5, T6]
 
 elements:
   E1: "E1: Signer"
@@ -54,3 +54,4 @@ files:
   - t3-signing-key-compromise.yaml
   - t4-cross-context-correlation.yaml
   - t5-crqc-breaks-signature-suites.yaml
+  - t6-hardware-keystore-algorithm-lock-in.yaml
