@@ -25,15 +25,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout/@v4
-      - name: Setup Node 24
+      - name: Setup Node 26
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 26
       - name: Generate Security Vocabulary
         run: |
           npm install yml2vocab
           npm update yml2vocab
-          ./node_modules/.bin/yml2vocab -v vocab/security/vocabulary.yml -t vocab/security/template.html
+          ./node_modules/.bin/yml2vocab -m -v vocab/security/vocabulary.yml -t vocab/security/template.html
           rm -rf node_modules
       - name: Setup Github Pages
         uses: actions/configure-pages@v5

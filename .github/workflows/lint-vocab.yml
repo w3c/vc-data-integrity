@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Setup environment
         uses: actions/checkout/@v5
-      - name: Setup Node 24
+      - name: Setup Node 26
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 26
       - name: Lint Security Vocabulary
         run: |
           npm install yml2vocab
           npm update yml2vocab
-          ./node_modules/.bin/yml2vocab -v vocab/security/vocabulary.yml -t vocab/security/template.html
+          ./node_modules/.bin/yml2vocab -m -v vocab/security/vocabulary.yml -t vocab/security/template.html
