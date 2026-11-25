@@ -1,3 +1,21 @@
+mermaid:
+  direction: LR
+  extras:
+    - "ProofGraph ..> Proof : graph containment"
+    - "AnyResource --> ProofGraph : proof"
+    - "style AnyResource fill:white,stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5"
+  accTitle: Diagram for the Verifiable Credentials Vocabulary v2.1
+  accDescr: |
+    Mermaid representation of the Vocabulary used to ensure the authenticity and integrity of
+    Verifiable Credentials and similar types of constrained digital documents using cryptography,
+    especially through the use of digital signatures and related
+    mathematical proofs. See the non-visual structure of the diagram on ./vocabulary.mmd:
+    classes on the diagram correspond to the RDFS classes, individuals, or
+    properties that are also used as individuals; connecting lines with labels represent
+    properties with ranges and domains defined in this vocabulary, and entries in the
+    class boxes correspond to properties on a class that have external resources or
+    datatypes as values.
+
 vocab:
   id: sec
   value: https://w3id.org/security#
@@ -64,6 +82,8 @@ class:
         url: https://www.w3.org/TR/vc-di-ecdsa/#multikey
       - label: BBS Cryptosuites
         url: https://www.w3.org/TR/vc-di-bbs/#multikey
+      - label: Quantum-resistant Cryptosuites
+        url: https://www.w3.org/TR/vc-di-quantum-resistant-1.0/#multikey
     context: [https://w3id.org/security/multikey/v1, https://www.w3.org/ns/cid/v1]
 
   - id: JsonWebKey
